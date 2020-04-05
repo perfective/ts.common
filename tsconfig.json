@@ -4,7 +4,6 @@
         "allowUmdGlobalAccess": false,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
-        "assumeChangesOnlyAffectDirectDependencies": false,
         "alwaysStrict": true,
         "charset": "utf-8",
         "checkJs": false,

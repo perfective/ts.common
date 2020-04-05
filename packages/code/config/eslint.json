@@ -1,0 +1,43 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "globalReturn": false,
+            "impliedStrict": true
+        },
+        "project": "./tsconfig.json",
+        "sourceType": "module",
+        "warnOnUnsupportedTypeScriptVersion": true
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "./eslint/possible-errors.json",
+        "./eslint/best-practices.json",
+        "./eslint/strict-mode.json",
+        "./eslint/variables.json",
+        "./eslint/node-js-and-common-js.json",
+        "./eslint/stylistic-issues.json",
+        "./eslint/ecma-script-6.json",
+        "./typescript-eslint/supported-rules.json",
+        "./typescript-eslint/extension-rules.json"
+    ],
+    "env": {
+        "es6": true
+    },
+    "overrides": [
+        {
+            "files": [
+                "src/**/*.spec.ts"
+            ],
+            "env": {
+                "jest": true
+            },
+            "rules": {
+                "max-nested-callbacks": ["error", 3]
+            }
+        }
+    ]
+}

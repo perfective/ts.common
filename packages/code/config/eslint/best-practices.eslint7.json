@@ -1,0 +1,5 @@
+{
+    "rules": {
+        "default-case-last": "error"
+    }
+}

@@ -1,8 +1,19 @@
 {
     "name": "root",
     "private": true,
+    "scripts": {
+        "lint": "lerna run --scope @perfective/code --stream --no-bail --no-prefix lint",
+        "build": "lerna run --stream build",
+        "test": "lerna run --stream --no-bail --no-prefix test"
+    },
     "devDependencies": {
+        "@types/jest": "^25.2.1",
+        "@typescript-eslint/eslint-plugin": "^2.26.0",
+        "@typescript-eslint/parser": "^2.26.0",
+        "eslint": "^6.8.0",
+        "jest": "^25.2.7",
         "lerna": "^3.20.2",
-        "typescript": "^3.7.5"
+        "ts-jest": "^25.3.1",
+        "typescript": "^3.8.3"
     }
 }

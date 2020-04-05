@@ -1,0 +1,3 @@
+= Perfective Code
+
+`@perfective/code` package provides set of linter rules for the `@perfective` packages.

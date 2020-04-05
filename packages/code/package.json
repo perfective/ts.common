@@ -1,0 +1,18 @@
+{
+    "name": "@perfective/code",
+    "version": "0.0.0",
+    "description": "Code style and formatting rules",
+    "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
+    "homepage": "https://github.com/perfective/js",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "directories": {
+        "lib": "dist"
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc"
+    }
+}

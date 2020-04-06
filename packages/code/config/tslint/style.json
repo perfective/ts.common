@@ -1,0 +1,51 @@
+{
+    "rules": {
+        "comment-type": false,
+        "completed-docs": false,
+        "encoding": true,
+        "file-header": false,
+        "file-name-casing": [
+            true,
+            "kebab-case"
+        ],
+        "match-default-export-name": false,
+        "no-redundant-jsdoc": true,
+        "no-unnecessary-callback-wrapper": true,
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "lowercase-last",
+                "named-imports-order": "lowercase-last",
+                "grouped-imports": true,
+                "groups": [
+                    {
+                        "name": "Unscoped packages",
+                        "match": "^[a-zA-Z]",
+                        "order": 0
+                    },
+                    {
+                        "name": "Scoped packages",
+                        "match": "^@",
+                        "order": 10
+                    },
+                    {
+                        "name": "Outside directory",
+                        "match": "^\\.\\./",
+                        "order": 20
+                    },
+                    {
+                        "name": "Inside directory",
+                        "match": "^\\./",
+                        "order": 30
+                    }
+                ],
+                "module-source-path": "full"
+            }
+        ],
+        "prefer-method-signature": true,
+        "prefer-switch": [true, 2],
+        "prefer-while": true,
+        "return-undefined": true,
+        "switch-final-break": [true, "always"]
+    }
+}

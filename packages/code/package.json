@@ -15,6 +15,8 @@
     ],
     "scripts": {
         "build": "tsc",
-        "lint": "eslint --ext .ts --fix ./src"
+        "lint": "npm run lint:eslint; npm run lint:tslint",
+        "lint:eslint": "eslint --ext .ts --fix ./src",
+        "lint:tslint": "tslint --fix ./src/*"
     }
 }

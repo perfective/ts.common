@@ -1,0 +1,23 @@
+{
+    "rules": {
+        "no-implicit-dependencies": true,
+        "no-inferred-empty-object-type": true,
+        "no-null-keyword": false,
+        "no-null-undefined-union": true,
+        "no-submodule-imports": false,
+        "no-tautology-expression": true,
+        "prefer-conditional-expression": [
+            true,
+            "check-else-if"
+        ],
+        "static-this": true,
+        "strict-comparisons": [
+            true,
+            {
+                "allow-object-equal-comparison": true,
+                "allow-string-order-comparison": true
+            }
+        ],
+        "strict-type-predicates": true
+    }
+}

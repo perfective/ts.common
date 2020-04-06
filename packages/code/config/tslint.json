@@ -1,0 +1,10 @@
+{
+    "extends": [
+        "./tslint/typescript-specific.json",
+        "./tslint/functionality.json",
+        "./tslint/maintainability.json",
+        "./tslint/style.json",
+        "./tslint/format.json"
+    ],
+    "defaultSeverity": "error"
+}

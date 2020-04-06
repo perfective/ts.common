@@ -1,0 +1,10 @@
+= Changelog
+
+== v0.1.0
+
+* Added https://eslint.org[ESLint] rules.
+* Added https://github.com/typescript-eslint/typescript-eslint/[TypeScript ESLint] rules.
+* Added `link:https://github.com/benmosher/eslint-plugin-import[eslint-plugin-import]` rules.
+* Added `link:https://github.com/gund/eslint-plugin-deprecation[eslint-plugin-deprecation]` rules.
+* Added https://palantir.github.io/tslint/[TSLint] rules
+that are not yet covered by ESLint or its plugins.

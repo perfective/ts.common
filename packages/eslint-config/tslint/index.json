@@ -1,0 +1,10 @@
+{
+    "extends": [
+        "./rules/typescript-specific.json",
+        "./rules/functionality.json",
+        "./rules/maintainability.json",
+        "./rules/style.json",
+        "./rules/format.json"
+    ],
+    "defaultSeverity": "error"
+}

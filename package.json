@@ -2,11 +2,13 @@
     "name": "root",
     "private": true,
     "scripts": {
-        "lint": "lerna run --scope @perfective/code --stream --no-bail --no-prefix lint",
+        "lint": "npm run build:eslint && lerna run --stream --no-bail --no-prefix lint",
         "build": "lerna run --stream build",
+        "build:eslint": "lerna run --scope @perfective/eslint-config --stream build",
         "test": "lerna run --stream --no-bail --no-prefix test"
     },
     "devDependencies": {
+        "@perfective/eslint-config": "file:packages/eslint-config",
         "@types/jest": "^25.2.1",
         "@typescript-eslint/eslint-plugin": "^2.26.0",
         "@typescript-eslint/parser": "^2.26.0",

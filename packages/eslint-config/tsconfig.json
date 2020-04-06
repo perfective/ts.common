@@ -3,7 +3,9 @@
     "compilerOptions": {
         "baseUrl": ".",
         "rootDir": "src",
-        "outDir": "dist"
+        "outDir": "dist",
+        "declaration": false,
+        "module": "commonjs"
     },
     "exclude": [
         "dist",

@@ -1,0 +1,47 @@
+= Perfective ESLint Config
+
+`@perfective/eslint-config` provides
+a https://eslint.org/docs/developer-guide/shareable-configs[shareable ESLint config]
+for the `@perfective` packages.
+
+== Setup
+
+.Require `@perfective/eslint-config` and its peer dependencies as dev dependencies
+[source,bash]
+----
+npm install --save-dev \
+    @perfective/eslint-config \
+    @typescript-eslint/eslint-plugin \
+    @typescript-eslint/parser \
+    eslint \
+    eslint-plugin-deprecation \
+    eslint-plugin-import \
+    tslint
+----
+
+.Add `.eslintrc.json` to the project root.
+[source,json]
+----
+{
+    "extends": [
+        "@perfective"
+    ]
+}
+----
+
+Customize your `.eslintignore` file.
+
+== TSLint
+
+https://palantir.github.io/tslint/[TSLint] is deprecated
+and most of its rules have already been replaced by the ESLint
+or its plugins.
+Only rules that can not be replaced yet are set up in this packages.
+
+.Add `tslint.json` to the project root.
+[source,json]
+----
+{
+    "extends": ["@perfective/eslint-config/tslint"]
+}
+----

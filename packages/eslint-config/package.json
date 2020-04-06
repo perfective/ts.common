@@ -1,0 +1,31 @@
+{
+    "name": "@perfective/eslint-config",
+    "version": "0.1.0",
+    "description": "ESLint shareable rules configuration",
+    "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
+    "homepage": "https://github.com/perfective/js",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "directories": {
+        "lib": "dist"
+    },
+    "files": [
+        "dist",
+        "tslint"
+    ],
+    "scripts": {
+        "clean": "rm -rf dist",
+        "build": "npm run clean && tsc",
+        "lint": "npm run lint:eslint; npm run lint:tslint",
+        "lint:eslint": "eslint --fix --ext .ts ./src",
+        "lint:tslint": "tslint --fix --project ./tsconfig.json"
+    },
+    "peerDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.26.0",
+        "@typescript-eslint/parser": "^2.26.0",
+        "eslint": "^6.8.0",
+        "eslint-plugin-deprecation": "^1.0.0",
+        "eslint-plugin-import": "^2.20.2",
+        "tslint": "^6.1.1"
+    }
+}

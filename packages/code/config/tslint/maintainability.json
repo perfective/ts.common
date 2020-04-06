@@ -1,6 +1,5 @@
 {
     "rules": {
-        "deprecation": true,
         "invalid-void": true,
         "no-default-export": true,
         "no-default-import": true,

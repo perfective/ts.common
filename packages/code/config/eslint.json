@@ -11,7 +11,8 @@
         "warnOnUnsupportedTypeScriptVersion": true
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "deprecation"
     ],
     "extends": [
         "./eslint/possible-errors.json",
@@ -22,7 +23,8 @@
         "./eslint/stylistic-issues.json",
         "./eslint/ecma-script-6.json",
         "./typescript-eslint/supported-rules.json",
-        "./typescript-eslint/extension-rules.json"
+        "./typescript-eslint/extension-rules.json",
+        "./deprecation/deprecation.json"
     ],
     "env": {
         "es6": true

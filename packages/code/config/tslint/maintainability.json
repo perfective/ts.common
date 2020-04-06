@@ -1,9 +1,7 @@
 {
     "rules": {
         "invalid-void": true,
-        "no-default-export": true,
         "no-default-import": true,
-        "no-duplicate-imports": true,
         "no-mergeable-namespace": true
     }
 }

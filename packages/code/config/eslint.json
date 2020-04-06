@@ -10,9 +10,13 @@
         "sourceType": "module",
         "warnOnUnsupportedTypeScriptVersion": true
     },
+    "env": {
+        "es6": true
+    },
     "plugins": [
         "@typescript-eslint",
-        "deprecation"
+        "deprecation",
+        "import"
     ],
     "extends": [
         "./eslint/possible-errors.json",
@@ -24,10 +28,22 @@
         "./eslint/ecma-script-6.json",
         "./typescript-eslint/supported-rules.json",
         "./typescript-eslint/extension-rules.json",
-        "./deprecation/deprecation.json"
+        "./deprecation/deprecation.json",
+        "./import/static-analysis.json",
+        "./import/helpful-warnings.json",
+        "./import/module-systems.json",
+        "./import/style-guide.json"
     ],
-    "env": {
-        "es6": true
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true,
+                "directory": "./tsconfig.json"
+            }
+        }
     },
     "overrides": [
         {

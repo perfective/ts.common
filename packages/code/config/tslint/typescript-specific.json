@@ -1,6 +1,5 @@
 {
     "rules": {
-        "no-import-side-effect": true,
         "only-arrow-functions": [true, "allow-declarations", "allow-named-functions"]
     }
 }

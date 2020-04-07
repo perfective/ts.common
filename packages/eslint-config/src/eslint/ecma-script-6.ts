@@ -1,36 +1,25 @@
 export = {
     rules: {
-        'arrow-body-style': [
-            'error',
-            'always'
-        ],
-        'arrow-parens': [
-            'error',
-            'always'
-        ],
-        'arrow-spacing': [
-            'error',
-            {
-                before: true,
-                after: true
-            }
-        ],
+        'arrow-body-style': ['error', 'never'],
+        'arrow-parens': ['error', 'as-needed'],
+        'arrow-spacing': ['error', {
+            before: true,
+            after: true,
+        }],
         'constructor-super': 'error',
-        'generator-star-spacing': [
-            'error',
-            {
-                before: true,
-                after: false
-            }
-        ],
+        'generator-star-spacing': ['error', {
+            before: true,
+            after: false,
+        }],
         'no-class-assign': 'error',
-        'no-confusing-arrow': 'error',
+        'no-confusing-arrow': ['error', {
+            allowParens: true,
+        }],
         'no-const-assign': 'error',
         'no-dupe-class-members': 'error',
-        'no-duplicate-imports': [
-            'error',
-            { includeExports: true }
-        ],
+        'no-duplicate-imports': ['error', {
+            includeExports: true,
+        }],
         'no-new-symbol': 'error',
         'no-restricted-exports': 'off',
         'no-restricted-imports': 'error',
@@ -39,40 +28,25 @@ export = {
         'no-useless-constructor': 'error',
         'no-useless-rename': 'error',
         'no-var': 'error',
-        'object-shorthand': [
-            'error',
-            'never'
-        ],
+        'object-shorthand': ['error', 'never'],
         'prefer-arrow-callback': 'error',
         'prefer-const': 'error',
-        'prefer-destructuring': [
-            'error',
-            {
-                object: false,
-                array: false
-            }
-        ],
+        'prefer-destructuring': ['error', {
+            object: false,
+            array: false,
+        }],
         'prefer-numeric-literals': 'error',
         'prefer-rest-params': 'error',
         'prefer-spread': 'error',
         'prefer-template': 'error',
         'require-yield': 'error',
-        'rest-spread-spacing': [
-            'error',
-            'never'
-        ],
+        'rest-spread-spacing': ['error', 'never'],
         'sort-imports': 'off',
         'symbol-description': 'error',
-        'template-curly-spacing': [
-            'error',
-            'never'
-        ],
-        'yield-star-spacing': [
-            'error',
-            {
-                before: true,
-                after: false
-            }
-        ]
-    }
+        'template-curly-spacing': ['error', 'never'],
+        'yield-star-spacing': ['error', {
+            before: true,
+            after: false,
+        }],
+    },
 };

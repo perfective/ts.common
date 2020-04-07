@@ -5,10 +5,7 @@ export = {
         'no-async-promise-executor': 'error',
         'no-await-in-loop': 'error',
         'no-compare-neg-zero': 'error',
-        'no-cond-assign': [
-            'error',
-            'always'
-        ],
+        'no-cond-assign': ['error', 'always'],
         'no-console': 'error',
         'no-constant-condition': 'error',
         'no-control-regex': 'error',
@@ -43,6 +40,6 @@ export = {
         'no-useless-backreference': 'off',
         'require-atomic-updates': 'error',
         'use-isnan': 'error',
-        'valid-typeof': 'error'
-    }
+        'valid-typeof': 'error',
+    },
 };

@@ -10,7 +10,9 @@ export = {
         sourceType: 'module',
         warnOnUnsupportedTypeScriptVersion: true,
     },
-    env: { es6: true },
+    env: {
+        es6: true,
+    },
     plugins: [
         '@typescript-eslint',
         'deprecation',
@@ -33,7 +35,12 @@ export = {
         './import/style-guide',
     ],
     settings: {
-        'import/parsers': { '@typescript-eslint/parser': [ '.ts', '.tsx' ] },
+        'import/parsers': {
+            '@typescript-eslint/parser': [
+                '.ts',
+                '.tsx',
+            ],
+        },
         'import/resolver': {
             typescript: {
                 alwaysTryTypes: true,
@@ -43,9 +50,15 @@ export = {
     },
     overrides: [
         {
-            files: [ 'src/**/*.spec.ts' ],
-            env: { jest: true },
-            rules: { 'max-nested-callbacks': [ 'error', 3 ] },
+            files: ['*.spec.ts'],
+            env: {
+                jest: true,
+            },
+            rules: {
+                'arrow-body-style': ['error', 'as-needed'],
+                'max-lines-per-function': 'off',
+                'max-nested-callbacks': ['error', 3],
+            },
         },
     ],
 };

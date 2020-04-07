@@ -1,1 +1,5 @@
-export = { rules: { strict: 'error' }};
+export = {
+    rules: {
+        strict: 'error',
+    },
+};

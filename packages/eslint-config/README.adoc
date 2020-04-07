@@ -14,6 +14,7 @@ npm install --save-dev \
     @typescript-eslint/eslint-plugin \
     @typescript-eslint/parser \
     eslint \
+    eslint-import-resolver-typescript \
     eslint-plugin-deprecation \
     eslint-plugin-import \
     tslint

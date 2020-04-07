@@ -1,1 +1,5 @@
-export = { rules: { 'deprecation/deprecation': 'error' }};
+export = {
+    rules: {
+        'deprecation/deprecation': 'error',
+    },
+};

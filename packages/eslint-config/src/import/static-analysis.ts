@@ -13,6 +13,6 @@ export = {
         'import/no-cycle': 'error',
         'import/no-useless-path-segments': 'error',
         'import/no-relative-parent-imports': 'off',
-        'import/no-unused-modules': 'error'
-    }
+        'import/no-unused-modules': 'error',
+    },
 };

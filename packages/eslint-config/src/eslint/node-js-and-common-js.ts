@@ -10,6 +10,6 @@ export = {
         'no-process-env': 'error',
         'no-process-exit': 'error',
         'no-restricted-modules': 'error',
-        'no-sync': 'error'
-    }
+        'no-sync': 'error',
+    },
 };

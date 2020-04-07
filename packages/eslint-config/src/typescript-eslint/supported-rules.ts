@@ -1,67 +1,51 @@
 export = {
     rules: {
         '@typescript-eslint/adjacent-overload-signatures': 'error',
-        '@typescript-eslint/array-type': [
-            'error',
-            { default: 'generic' }
-        ],
+        '@typescript-eslint/array-type': ['error', {
+            default: 'generic',
+        }],
         '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/ban-ts-comment': 'error',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/class-literal-property-style': 'off',
-        '@typescript-eslint/consistent-type-assertions': [
-            'error',
-            {
-                assertionStyle: 'as',
-                objectLiteralTypeAssertions: 'allow-as-parameter'
-            }
-        ],
-        '@typescript-eslint/consistent-type-definitions': [
-            'error',
-            'interface'
-        ],
+        '@typescript-eslint/consistent-type-assertions': ['error', {
+            assertionStyle: 'as',
+            objectLiteralTypeAssertions: 'allow-as-parameter',
+        }],
+        '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
         '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/explicit-member-accessibility': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'error',
         '@typescript-eslint/member-delimiter-style': 'error',
-        '@typescript-eslint/member-ordering': [
-            'error',
-            {
-                default: [
-                    'signature',
-                    'public-field',
-                    'protected-field',
-                    'private-field',
-                    'constructor',
-                    'public-method',
-                    'protected-method',
-                    'private-method'
-                ]
-            }
-        ],
+        '@typescript-eslint/member-ordering': ['error', {
+            default: [
+                'signature',
+                'public-field',
+                'protected-field',
+                'private-field',
+                'constructor',
+                'public-method',
+                'protected-method',
+                'private-method',
+            ],
+        }],
         // TODO: master
         '@typescript-eslint/method-signature-style': 'off',
-        '@typescript-eslint/naming-convention': [
-            'error',
-            {
-                selector: 'variableLike',
-                format: [ 'camelCase' ]
-            },
-            {
-                selector: 'memberLike',
-                format: [ 'camelCase' ]
-            },
-            {
-                selector: 'typeLike',
-                format: [ 'PascalCase' ]
-            }
-        ],
+        '@typescript-eslint/naming-convention': ['error', {
+            selector: 'variableLike',
+            format: ['camelCase'],
+        }, {
+            selector: 'memberLike',
+            format: ['camelCase'],
+        }, {
+            selector: 'typeLike',
+            format: ['PascalCase'],
+        }],
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-dynamic-delete': 'error',
-        '@typescript-eslint/no-empty-interface': [
-            'error',
-            { allowSingleExtends: true }
-        ],
+        '@typescript-eslint/no-empty-interface': ['error', {
+            allowSingleExtends: true,
+        }],
         '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/no-extra-non-null-assertion': 'error',
         '@typescript-eslint/no-extraneous-class': 'error',
@@ -87,10 +71,9 @@ export = {
         '@typescript-eslint/no-unsafe-call': 'error',
         '@typescript-eslint/no-unsafe-member-access': 'error',
         '@typescript-eslint/no-unsafe-return': 'error',
-        '@typescript-eslint/no-unused-vars-experimental': [
-            'error',
-            { ignoreArgsIfArgsAfterAreUsed: true }
-        ],
+        '@typescript-eslint/no-unused-vars-experimental': ['error', {
+            ignoreArgsIfArgsAfterAreUsed: true,
+        }],
         '@typescript-eslint/no-var-requires': 'error',
         '@typescript-eslint/prefer-as-const': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
@@ -111,8 +94,10 @@ export = {
         '@typescript-eslint/switch-exhaustiveness-check': 'error',
         '@typescript-eslint/triple-slash-reference': 'off',
         '@typescript-eslint/type-annotation-spacing': 'error',
-        '@typescript-eslint/typedef': 'error',
+        '@typescript-eslint/typedef': ['error', {
+            arrowParameter: false,
+        }],
         '@typescript-eslint/unbound-method': 'error',
-        '@typescript-eslint/unified-signatures': 'error'
-    }
+        '@typescript-eslint/unified-signatures': 'error',
+    },
 };

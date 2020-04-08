@@ -29,6 +29,8 @@ export = {
         '@typescript-eslint/no-extra-semi': 'error',
         'no-magic-numbers': 'off',
         '@typescript-eslint/no-magic-numbers': 'off',
+        'no-throw-literal': 'off',
+        '@typescript-eslint/no-throw-literal': 'error',
         'no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 'error',
         'no-unused-vars': 'off',

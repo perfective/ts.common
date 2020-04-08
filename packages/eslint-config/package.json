@@ -1,6 +1,6 @@
 {
     "name": "@perfective/eslint-config",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "ESLint shareable rules configuration",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
@@ -24,6 +24,7 @@
         "@typescript-eslint/eslint-plugin": "^2.26.0",
         "@typescript-eslint/parser": "^2.26.0",
         "eslint": "^6.8.0",
+        "eslint-import-resolver-typescript": "^2.0.0",
         "eslint-plugin-deprecation": "^1.0.0",
         "eslint-plugin-import": "^2.20.2",
         "tslint": "^6.1.1"

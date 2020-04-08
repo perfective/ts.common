@@ -1,6 +1,6 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Maybe monad-like container",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",

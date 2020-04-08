@@ -1,0 +1,5 @@
+= Changelog
+
+== v0.1.0
+
+* Added Maybe monad-like container with unit functions and full test coverage.

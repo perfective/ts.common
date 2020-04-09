@@ -22,7 +22,7 @@ implements Maybe<T> {
         return nothing();
     }
 
-    public then<R = T>(next: Bind<T, R>): Maybe<R> {
+    public then<R>(next: Bind<T, R>): Maybe<R> {
         if (isAbsent(this.value)) {
             return nothing();
         }
@@ -43,18 +43,18 @@ implements Maybe<T> {
         return fallbackTo(fallback);
     }
 
-    public maybe<R = T>(next: Bind<T | undefined | null, R>): Maybe<R> {
+    public maybe<R>(next: Bind<T | undefined | null, R>): Maybe<R> {
         return maybeOf(next(this.value));
     }
 
-    public optional<R = T>(next: Bind<T | undefined, R>): Maybe<R> {
+    public optional<R>(next: Bind<T | undefined, R>): Maybe<R> {
         if (isNull(this.value)) {
             return nothing();
         }
         return maybeOf(next(this.value));
     }
 
-    public nullable<R = T>(next: Bind<T | null, R>): Maybe<R> {
+    public nullable<R>(next: Bind<T | null, R>): Maybe<R> {
         if (isUndefined(this.value)) {
             return nothing();
         }

@@ -1,5 +1,16 @@
 = Changelog
 
+== v0.1.2
+
+* Export `Maybe<T>` class.
+* Include source maps.
+* Add `types` path to `package.json` to allow TypeScript import `from '@perfective/maybe'`
+instead of `from '@perfective/maybe/dist'`.
+
+== v0.1.1
+
+* Fix NPM documentation file.
+
 == v0.1.0
 
 * Added Maybe monad-like container with unit functions and full test coverage.

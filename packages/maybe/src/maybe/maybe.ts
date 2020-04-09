@@ -8,7 +8,8 @@ export type Predicate<T> = (value: T) => boolean;
 
 export type Bind<T, R = T> = Unary<T, Maybe<R>> | Unary<T, R>;
 
-export class Maybe<T> {
+export class Maybe<T>
+implements Maybe<T> {
     public constructor(
         public readonly value?: T | null,
     ) {

@@ -30,10 +30,7 @@ implements Maybe<T> {
     }
 
     public pick<K extends keyof T>(property: K): Maybe<T[K]> {
-        if (isPresent(this.value)) {
-            return maybe(this.value[property]);
-        }
-        return nothing();
+        return this.then(v => v[property]);
     }
 
     public otherwise(fallback: Fallback<T>): T {

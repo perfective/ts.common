@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.4
+
+* Fix: correct definition for the `Bind<T, R>` type to allow returning `undefined` and `null`.
+
 == v0.1.3
 
 * Fix: remove unnecessary generic type default.
@@ -8,7 +12,7 @@
 
 * Export `Maybe<T>` class.
 * Include source maps.
-* Add `types` path to `package.json` to allow TypeScript import `from '@perfective/maybe'`
+* Add `types` path to `package.json` to allow TypeScript imports `from '@perfective/maybe'`
 instead of `from '@perfective/maybe/dist'`.
 
 == v0.1.1

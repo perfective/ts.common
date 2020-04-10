@@ -6,7 +6,7 @@ export type Fallback<T> = T | Nullary<T>;
 export type Unary<T, U> = (value: T) => U;
 export type Predicate<T> = (value: T) => boolean;
 
-export type Bind<T, R = T> = Unary<T, Maybe<R>> | Unary<T, R>;
+export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
 
 export class Maybe<T>
 implements Maybe<T> {
@@ -26,7 +26,7 @@ implements Maybe<T> {
         if (isAbsent(this.value)) {
             return nothing();
         }
-        return maybeOf(next(this.value));
+        return maybeOf<R>(next(this.value));
     }
 
     public pick<K extends keyof T>(property: K): Maybe<T[K]> {
@@ -90,7 +90,7 @@ export function optional<T>(value?: T): Maybe<T> {
 /**
  * @package
  */
-export function maybeOf<T>(value: T | Maybe<T>): Maybe<T> {
+export function maybeOf<T>(value: Maybe<T> | T | undefined | null): Maybe<T> {
     if (value instanceof Maybe) {
         return value;
     }

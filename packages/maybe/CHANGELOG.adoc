@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.5
+
+* Add `Maybe.or()` method to act as the nullish coalescing operator `??`.
+
 == v0.1.4
 
 * Fix: correct definition for the `Bind<T, R>` type to allow returning `undefined` and `null`.

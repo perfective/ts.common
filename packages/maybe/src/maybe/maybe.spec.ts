@@ -141,6 +141,18 @@ describe('just', () => {
         });
     });
 
+    describe('or', () => {
+        it('returns the Maybe value instead of null', () => {
+            expect(just(3.14).or(null))
+                .toEqual(3.14);
+        });
+
+        it('returns the Maybe value instead of undefined', () => {
+            expect(just(3.14).or(undefined))
+                .toEqual(3.14);
+        });
+    });
+
     describe('maybe', () => {
         it('passes defined value as is', () => {
             expect(just(3.14).maybe(isPresent))
@@ -223,6 +235,18 @@ describe('nothing', () => {
         });
     });
 
+    describe('or', () => {
+        it('returns undefined', () => {
+            expect(nothing<number>().or(undefined))
+                .toBeUndefined();
+        });
+
+        it('returns null instead of undefined', () => {
+            expect(nothing<number>().or(null))
+                .toBeNull();
+        });
+    });
+
     describe('maybe', () => {
         it('passes the undefined value', () => {
             expect(nothing<number>().maybe(isUndefined))
@@ -302,6 +326,18 @@ describe('nil', () => {
         it('allows to throw an error', () => {
             expect(() => nil<number>().otherwise(fail('Value is not present')))
                 .toThrowError('Value is not present');
+        });
+    });
+
+    describe('or', () => {
+        it('returns undefined instead of null', () => {
+            expect(nil<number>().or(undefined))
+                .toBeUndefined();
+        });
+
+        it('returns null', () => {
+            expect(nil<number>().or(null))
+                .toBeNull();
         });
     });
 

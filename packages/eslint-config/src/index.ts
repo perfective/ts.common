@@ -48,6 +48,9 @@ export = {
             },
         },
     },
+    rules: {
+        'no-undefined': 'off',
+    },
     overrides: [
         {
             files: ['*.spec.ts'],

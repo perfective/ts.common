@@ -1,0 +1,3 @@
+= Real Numbers
+
+`@perfective/real` provides functions to work with real numbers.

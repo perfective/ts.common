@@ -90,8 +90,7 @@ describe('just', () => {
 
         it('satisfies associativity monad law', () => {
             expect(just(3.14).then(x => justDecimal(x).then(split)))
-                .toEqual(just(3.14).then(justDecimal)
-                    .then(split));
+                .toEqual(just(3.14).then(justDecimal).then(split));
         });
 
         it('wraps non-Maybe values into Maybe', () => {
@@ -189,8 +188,7 @@ describe('nothing', () => {
 
         it('satisfies associativity monad law', () => {
             expect(nothing<number>().then(x => justDecimal(x).then(split)))
-                .toEqual(maybe<number>().then(justDecimal)
-                    .then(split));
+                .toEqual(maybe<number>().then(justDecimal).then(split));
         });
 
         it('wraps non-Maybe values into Maybe', () => {
@@ -283,8 +281,7 @@ describe('nil', () => {
 
         it('satisfies associativity monad law', () => {
             expect(nil<number>().then(x => justDecimal(x).then(split)))
-                .toEqual(nil<number>().then(justDecimal)
-                    .then(split));
+                .toEqual(nil<number>().then(justDecimal).then(split));
         });
 
         it('wraps non-Maybe values into Maybe', () => {

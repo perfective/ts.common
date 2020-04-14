@@ -90,7 +90,7 @@ export = {
         }],
         'new-parens': 'error',
         'newline-per-chained-call': ['error', {
-            ignoreChainWithDepth: 2,
+            ignoreChainWithDepth: 3,
         }],
         'no-array-constructor': 'error',
         'no-bitwise': 'error',

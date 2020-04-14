@@ -1,0 +1,22 @@
+{
+    "name": "@perfective/identity",
+    "version": "0.0.0",
+    "description": "Identity monad (WIP)",
+    "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
+    "homepage": "https://github.com/perfective/js",
+    "license": "MIT",
+    "private": true,
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "clean": "rm -rf dist",
+        "build": "npm run clean && tsc",
+        "lint": "npm run lint:eslint; npm run lint:tslint",
+        "lint:eslint": "eslint --fix --ext .ts ./src",
+        "lint:tslint": "tslint --fix --project ./tsconfig.json",
+        "test": "jest"
+    }
+}

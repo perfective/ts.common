@@ -1,0 +1,8 @@
+= Perfective Identity Monad
+
+`@perfective/identity` provides an identity monad implementation.
+
+[IMPORTANT]
+====
+This package is under development and consideration.
+====

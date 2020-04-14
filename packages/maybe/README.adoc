@@ -1,4 +1,4 @@
-= Perfective Maybe
+= Perfective Maybe Monad
 
 `@perfective/maybe` package provides a Maybe monad-like container class
 and a set of unit functions (`maybe`, `just`, `nothing`, etc.) to instantiate it.

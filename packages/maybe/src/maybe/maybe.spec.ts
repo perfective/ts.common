@@ -1,4 +1,4 @@
-import { fail } from './error';
+import { panic } from './error';
 import {
     Maybe,
     Nullary,
@@ -135,7 +135,7 @@ describe('just', () => {
         });
 
         it('does not throw an error', () => {
-            expect(() => just(3.14).otherwise(fail('Value is not present')))
+            expect(() => just(3.14).otherwise(panic('Value is not present')))
                 .not.toThrowError('Value is not present');
         });
     });
@@ -228,7 +228,7 @@ describe('nothing', () => {
         });
 
         it('allows to throw an error', () => {
-            expect(() => nothing<number>().otherwise(fail('Value is not present')))
+            expect(() => nothing<number>().otherwise(panic('Value is not present')))
                 .toThrowError('Value is not present');
         });
     });
@@ -321,7 +321,7 @@ describe('nil', () => {
         });
 
         it('allows to throw an error', () => {
-            expect(() => nil<number>().otherwise(fail('Value is not present')))
+            expect(() => nil<number>().otherwise(panic('Value is not present')))
                 .toThrowError('Value is not present');
         });
     });

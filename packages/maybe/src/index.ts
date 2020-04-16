@@ -18,6 +18,5 @@ export {
 } from './maybe/value';
 
 export {
-    fail,
     panic,
 } from './maybe/error';

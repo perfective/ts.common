@@ -1,18 +1,16 @@
-import { fail, panic } from './error';
+import { panic } from './error';
 
-describe('fail', () => {
+describe('panic', () => {
     it('creates a function that throws an Error without a message', () => {
-        expect(() => fail()())
-            .toThrowError();
+        expect(() => panic()())
+            .toThrow(Error);
     });
 
     it('creates a function that throws an Error with a message', () => {
-        expect(() => fail('Failure')())
-            .toThrowError('Failure');
+        expect(() => panic('Failure')())
+            .toThrow(new Error('Failure'));
     });
-});
 
-describe('panic', () => {
     it('creates a function that throws a custom error', () => {
         expect(() => panic(new TypeError())())
             .toThrow(TypeError);

@@ -11,12 +11,14 @@ export = {
         warnOnUnsupportedTypeScriptVersion: true,
     },
     env: {
-        es6: true,
+        'es6': true,
+        'jest/globals': true,
     },
     plugins: [
         '@typescript-eslint',
         'deprecation',
         'import',
+        'jest',
     ],
     extends: [
         './eslint/possible-errors',
@@ -33,6 +35,7 @@ export = {
         './import/helpful-warnings',
         './import/module-systems',
         './import/style-guide',
+        './jest/rules',
     ],
     settings: {
         'import/parsers': {

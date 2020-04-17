@@ -27,6 +27,7 @@
         "eslint-import-resolver-typescript": "^2.0.0",
         "eslint-plugin-deprecation": "^1.0.0",
         "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-jest": "^23.8.2",
         "tslint": "^6.1.1"
     }
 }

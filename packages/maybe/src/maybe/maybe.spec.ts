@@ -48,7 +48,7 @@ describe('maybe', () => {
     });
 
     it('equals none() when value is undefined', () => {
-        expect(maybe<number>()).toEqual(nothing());
+        expect(maybe<number>(undefined)).toEqual(nothing());
     });
 
     it('equals nil() when value is null', () => {
@@ -188,7 +188,7 @@ describe('nothing', () => {
 
         it('satisfies associativity monad law', () => {
             expect(nothing<number>().then(x => justDecimal(x).then(split)))
-                .toEqual(maybe<number>().then(justDecimal).then(split));
+                .toEqual(nothing<number>().then(justDecimal).then(split));
         });
 
         it('wraps non-Maybe values into Maybe', () => {

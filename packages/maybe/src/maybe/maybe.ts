@@ -10,7 +10,7 @@ export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
 
 export class Maybe<T> {
     public constructor(
-        public readonly value?: T | null,
+        public readonly value: T | undefined | null,
     ) {
     }
 
@@ -71,7 +71,7 @@ export function just<T>(value: T): Maybe<T> {
     return new Maybe<T>(value);
 }
 
-const none: Maybe<unknown> = new Maybe<unknown>();
+const none: Maybe<unknown> = new Maybe<unknown>(undefined);
 
 export function nothing<T>(): Maybe<T> {
     return none as Maybe<T>;
@@ -83,7 +83,7 @@ export function nil<T>(): Maybe<T> {
     return naught as Maybe<T>;
 }
 
-export function maybe<T>(value?: T | null): Maybe<T> {
+export function maybe<T>(value: T | undefined | null): Maybe<T> {
     return new Maybe<T>(value);
 }
 

@@ -20,3 +20,12 @@ export {
 export {
     panic,
 } from './maybe/error';
+
+export {
+    Callback,
+    Reject,
+    Resolve,
+    Run,
+    promise,
+    result,
+} from './maybe/promise';

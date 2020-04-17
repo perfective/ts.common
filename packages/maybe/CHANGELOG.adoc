@@ -1,5 +1,14 @@
 = Changelog
 
+== v0.2.0
+
+* Remove `fail()` function.
+* Add support for a `message?: string` parameter to the `panic()`.
+* Require `value` to be explicitly passed into `new Maybe()`.
+* Add functions to work with promises:
+`promise()` to instantiate a promise,
+and `result()` as default callback to resolve or reject a promise.
+
 == v0.1.5
 
 * Add `Maybe.or()` method to act as the nullish coalescing operator `??`.

@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.2.1
+
+* Fix: use TypeScript ESLint `camelcase` rule.
+
 == v0.2.0
 
 * Upgraded https://github.com/typescript-eslint/typescript-eslint/[TypeScript ESLint] to `v2.29.0`.

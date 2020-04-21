@@ -7,6 +7,7 @@ export type Unary<T, U> = (value: T) => U;
 export type Predicate<T> = (value: T) => boolean;
 
 export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
+export type ArrayElement<T> = T extends Array<infer V> ? V : undefined;
 
 export class Maybe<T> {
     public constructor(
@@ -32,9 +33,9 @@ export class Maybe<T> {
         return this.then(v => v[property]);
     }
 
-    public index(index: number): Maybe<T extends Array<infer V> ? V : undefined> {
+    public index(index: number): Maybe<ArrayElement<T>> {
         if (Array.isArray(this.value)) {
-            return maybe(this.value[index]);
+            return maybe<ArrayElement<T>>(this.value[index]);
         }
         return nothing();
     }

@@ -4,6 +4,8 @@ export = {
         '@typescript-eslint/brace-style': ['error', 'stroustrup', {
             allowSingleLine: false,
         }],
+        'camelcase': 'off',
+        '@typescript-eslint/camelcase': 'error',
         'comma-spacing': 'off',
         '@typescript-eslint/comma-spacing': ['error', {
             before: false,

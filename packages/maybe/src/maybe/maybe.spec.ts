@@ -123,6 +123,22 @@ describe('just', () => {
         });
     });
 
+    describe('index', () => {
+        it('returns an existing element from an array', () => {
+            expect(maybe([2.71, 3.14]).index(0))
+                .toStrictEqual(just(2.71));
+            expect(maybe([2.71, 3.14]).index(1))
+                .toStrictEqual(just(3.14));
+        });
+
+        it('returns nothing for a missing elements from an array', () => {
+            expect(maybe([2.71, 3.14]).index(2))
+                .toStrictEqual(nothing());
+            expect(maybe([2.71, 3.14]).index(-1))
+                .toStrictEqual(nothing());
+        });
+    });
+
     describe('otherwise', () => {
         it('returns the Maybe value when fallback is constant', () => {
             expect(just(3.14).otherwise(2.71))
@@ -216,6 +232,13 @@ describe('nothing', () => {
         });
     });
 
+    describe('index', () => {
+        it('returns nothing for a missing elements from an array', () => {
+            expect(nothing<Array<number>>().index(0))
+                .toStrictEqual(nothing());
+        });
+    });
+
     describe('otherwise', () => {
         it('returns a fallback value when fallback is constant', () => {
             expect(nothing<number>().otherwise(2.71))
@@ -305,6 +328,13 @@ describe('nil', () => {
     describe('pick', () => {
         it('returns none for a property from on a missing object', () => {
             expect(nil<Boxed<number>>().pick('value'))
+                .toStrictEqual(nothing());
+        });
+    });
+
+    describe('index', () => {
+        it('returns nothing for a missing elements from an array', () => {
+            expect(nil<Array<number>>().index(0))
                 .toStrictEqual(nothing());
         });
     });

@@ -32,6 +32,13 @@ export class Maybe<T> {
         return this.then(v => v[property]);
     }
 
+    public index(index: number): Maybe<T extends Array<infer V> ? V : undefined> {
+        if (Array.isArray(this.value)) {
+            return maybe(this.value[index]);
+        }
+        return nothing();
+    }
+
     public otherwise(fallback: Fallback<T>): T {
         if (isPresent(this.value)) {
             return this.value;

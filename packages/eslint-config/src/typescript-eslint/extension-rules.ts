@@ -15,6 +15,13 @@ export = {
         '@typescript-eslint/func-call-spacing': ['error', 'never'],
         'indent': 'off',
         '@typescript-eslint/indent': ['error', 4],
+        'init-declarations': 'off',
+        '@typescript-eslint/init-declarations': ['error', 'always'],
+        'keyword-spacing': 'off',
+        '@typescript-eslint/keyword-spacing': ['error', {
+            before: true,
+            after: true,
+        }],
         'no-array-constructor': 'off',
         '@typescript-eslint/no-array-constructor': 'error',
         'no-dupe-class-members': 'off',

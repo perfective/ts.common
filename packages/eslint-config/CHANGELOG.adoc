@@ -1,5 +1,20 @@
 = Changelog
 
+== v0.2.0
+
+* Upgraded https://github.com/typescript-eslint/typescript-eslint/[TypeScript ESLint] to `v2.29.0`.
+* Added `link:https://github.com/jest-community/eslint-plugin-jest[eslint-plugin-jest]` rules.
+
+== v0.1.2
+
+* Increased number of allowed callbacks in tests.
+* Fix: use `@typescript-eslint/no-throw-literal` instead of `no-throw-literal`.
+
+== v0.1.1
+
+* Fix: added `link:https://github.com/alexgorbatchev/eslint-import-resolver-typescript[eslint-import-resolver-typescript]`
+as a peer dependency.
+
 == v0.1.0
 
 * Added https://eslint.org[ESLint] rules.

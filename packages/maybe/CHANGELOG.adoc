@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.2.1
+
+* Add `Maybe.index()` method to pick array elements.
+* Fix: keep the absent value in `Maybe.that()` instead of always switching to `nothing()`.
+
 == v0.2.0
 
 * Remove `fail()` function.

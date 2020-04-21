@@ -15,7 +15,7 @@ export class Maybe<T> {
     }
 
     public that(is: Predicate<T>): Maybe<T> {
-        if (isPresent(this.value) && is(this.value)) {
+        if (isAbsent(this.value) || is(this.value)) {
             return this;
         }
         return nothing();

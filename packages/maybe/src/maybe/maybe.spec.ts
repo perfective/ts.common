@@ -44,35 +44,42 @@ interface Boxed<T> {
 
 describe('maybe', () => {
     it('equals just() when value is present', () => {
-        expect(maybe(3.14)).toStrictEqual(just(3.14));
+        expect(maybe(3.14))
+            .toStrictEqual(just(3.14));
     });
 
-    it('equals none() when value is undefined', () => {
-        expect(maybe<number>(undefined)).toStrictEqual(nothing());
+    it('equals nothing() when value is undefined', () => {
+        expect(maybe<number>(undefined))
+            .toStrictEqual(nothing());
     });
 
     it('equals nil() when value is null', () => {
-        expect(maybe<number>(null)).toStrictEqual(nil());
+        expect(maybe<number>(null))
+            .toStrictEqual(nil());
     });
 });
 
 describe('optional', () => {
     it('equals just() when value is present', () => {
-        expect(optional(3.14)).toStrictEqual(just(3.14));
+        expect(optional(3.14))
+            .toStrictEqual(just(3.14));
     });
 
-    it('equals none() when value is undefined', () => {
-        expect(optional<number>()).toStrictEqual(nothing());
+    it('equals nothing() when value is undefined', () => {
+        expect(optional<number>())
+            .toStrictEqual(nothing());
     });
 });
 
 describe('nullable', () => {
     it('equals just() when value is present', () => {
-        expect(nullable(3.14)).toStrictEqual(just(3.14));
+        expect(nullable(3.14))
+            .toStrictEqual(just(3.14));
     });
 
     it('equals nil() when value is null', () => {
-        expect(nullable<number>(null)).toStrictEqual(nil());
+        expect(nullable<number>(null))
+            .toStrictEqual(nil());
     });
 });
 
@@ -117,7 +124,7 @@ describe('just', () => {
                 .toStrictEqual(just(3.14));
         });
 
-        it('returns none for a missing property from an object', () => {
+        it('returns nothing for a missing property from an object', () => {
             expect(just<Boxed<number>>({}).pick('value'))
                 .toStrictEqual(nothing());
         });
@@ -214,19 +221,19 @@ describe('nothing', () => {
     });
 
     describe('that', () => {
-        it('remains none when condition holds', () => {
-            expect(nothing<number>().that(isUndefined).value)
-                .toBeUndefined();
+        it('remains nothing when condition holds', () => {
+            expect(nothing<number>().that(isUndefined))
+                .toStrictEqual(nothing());
         });
 
-        it('keeps none when condition fails', () => {
-            expect(nothing<number>().that(isDefined).value)
-                .toBeUndefined();
+        it('remains nothing when condition fails', () => {
+            expect(nothing<number>().that(isDefined))
+                .toStrictEqual(nothing());
         });
     });
 
     describe('pick', () => {
-        it('returns none for a property from on a missing object', () => {
+        it('returns nothing for a property from on a missing object', () => {
             expect(nothing<Boxed<number>>().pick('value'))
                 .toStrictEqual(nothing());
         });
@@ -314,19 +321,19 @@ describe('nil', () => {
     });
 
     describe('that', () => {
-        it('remains none when condition holds', () => {
+        it('remains nil when condition holds', () => {
             expect(nil<number>().that(isNull))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
 
-        it('keeps none when condition fails', () => {
+        it('remains nil when condition fails', () => {
             expect(nil<number>().that(isNotNull))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
     });
 
     describe('pick', () => {
-        it('returns none for a property from on a missing object', () => {
+        it('returns nothing for a property from on a missing object', () => {
             expect(nil<Boxed<number>>().pick('value'))
                 .toStrictEqual(nothing());
         });

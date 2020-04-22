@@ -59,6 +59,7 @@ export = {
         'quotes': 'off',
         '@typescript-eslint/quotes': ['error', 'single', {
             avoidEscape: true,
+            allowTemplateLiterals: true,
         }],
         'require-await': 'off',
         '@typescript-eslint/require-await': 'error',

@@ -141,6 +141,7 @@ export = {
         'quote-props': ['error', 'consistent-as-needed'],
         'quotes': ['error', 'single', {
             avoidEscape: true,
+            allowTemplateLiterals: true,
         }],
         'semi': ['error', 'always'],
         'semi-spacing': ['error', {

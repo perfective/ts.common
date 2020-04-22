@@ -9,7 +9,10 @@ export = {
         'no-undef': 'error',
         'no-undef-init': 'error',
         'no-undefined': 'error',
-        'no-unused-vars': 'error',
+        'no-unused-vars': ['error', {
+            args: 'after-used',
+            argsIgnorePattern: '^_',
+        }],
         'no-use-before-define': ['error', {
             functions: true,
             classes: true,

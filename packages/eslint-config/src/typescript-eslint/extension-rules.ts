@@ -45,6 +45,8 @@ export = {
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': ['error', {
             args: 'after-used',
+            // TypeScript recognizes underscore for unused parameters
+            argsIgnorePattern: '^_',
         }],
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', {

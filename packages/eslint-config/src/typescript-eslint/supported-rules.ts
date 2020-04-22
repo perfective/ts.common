@@ -18,7 +18,16 @@ export = {
         }],
         '@typescript-eslint/explicit-member-accessibility': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'error',
-        '@typescript-eslint/member-delimiter-style': 'error',
+        '@typescript-eslint/member-delimiter-style': ['error', {
+            multiline: {
+                delimiter: 'semi',
+                requireLast: true,
+            },
+            singleline: {
+                delimiter: 'semi',
+                requireLast: true,
+            },
+        }],
         '@typescript-eslint/member-ordering': ['error', {
             default: [
                 'signature',

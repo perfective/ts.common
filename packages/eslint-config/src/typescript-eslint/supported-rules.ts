@@ -113,7 +113,11 @@ export = {
         '@typescript-eslint/restrict-template-expressions': 'error',
         '@typescript-eslint/strict-boolean-expressions': 'error',
         '@typescript-eslint/switch-exhaustiveness-check': 'error',
-        '@typescript-eslint/triple-slash-reference': 'off',
+        '@typescript-eslint/triple-slash-reference': ['error', {
+            path: 'never',
+            types: 'never',
+            lib: 'never',
+        }],
         '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/typedef': ['error', {
             arrowParameter: false,

@@ -28,7 +28,7 @@ export = {
         'no-useless-constructor': 'error',
         'no-useless-rename': 'error',
         'no-var': 'error',
-        'object-shorthand': ['error', 'never'],
+        'object-shorthand': ['error', 'always'],
         'prefer-arrow-callback': 'error',
         'prefer-const': 'error',
         'prefer-destructuring': ['error', {

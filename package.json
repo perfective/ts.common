@@ -2,7 +2,7 @@
     "name": "root",
     "private": true,
     "scripts": {
-        "lint": "npm run build:eslint && lerna run --stream --no-bail --no-prefix lint",
+        "lint": "npm run build:eslint && lerna run lint --no-bail --no-prefix",
         "build": "lerna run --stream build",
         "build:eslint": "lerna run --scope @perfective/eslint-config --stream build",
         "test": "lerna run --stream --no-bail --no-prefix test"

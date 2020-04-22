@@ -16,7 +16,7 @@ export = {
         'func-call-spacing': 'off',
         '@typescript-eslint/func-call-spacing': ['error', 'never'],
         'indent': 'off',
-        '@typescript-eslint/indent': ['error', 4],
+        '@typescript-eslint/indent': ['error', 4, { SwitchCase: 1 }],
         'init-declarations': 'off',
         '@typescript-eslint/init-declarations': ['error', 'always'],
         'keyword-spacing': 'off',

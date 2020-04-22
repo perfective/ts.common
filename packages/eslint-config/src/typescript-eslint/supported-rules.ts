@@ -48,14 +48,17 @@ export = {
         // TODO: master
         '@typescript-eslint/method-signature-style': 'off',
         '@typescript-eslint/naming-convention': ['error', {
+            selector: 'enumMember',
+            format: ['StrictPascalCase'],
+        }, {
             selector: 'variableLike',
-            format: ['camelCase'],
+            format: ['strictCamelCase'],
         }, {
             selector: 'memberLike',
-            format: ['camelCase'],
+            format: ['strictCamelCase'],
         }, {
             selector: 'typeLike',
-            format: ['PascalCase'],
+            format: ['StrictPascalCase'],
         }],
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-dynamic-delete': 'error',

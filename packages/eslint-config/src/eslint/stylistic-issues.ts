@@ -1,4 +1,5 @@
 export = {
+    /* eslint-disable @typescript-eslint/naming-convention */
     rules: {
         'array-bracket-newline': ['error', 'consistent'],
         'array-bracket-spacing': ['error', 'never'],
@@ -118,9 +119,7 @@ export = {
         'no-whitespace-before-property': 'error',
         'nonblock-statement-body-position': ['error', 'below'],
         'object-curly-newline': ['error', {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             ImportDeclaration: { multiline: true },
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             ExportDeclaration: 'always',
         }],
         'object-curly-spacing': ['error', 'always', {

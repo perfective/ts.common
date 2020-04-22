@@ -1,4 +1,5 @@
 export = {
+    /* eslint-disable @typescript-eslint/naming-convention */
     rules: {
         'brace-style': 'off',
         '@typescript-eslint/brace-style': ['error', 'stroustrup', {

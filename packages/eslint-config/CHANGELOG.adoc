@@ -1,5 +1,20 @@
 = Changelog
 
+== v0.2.2
+
+* Initialized `@perfective/eslint-config/basic` config with more relaxed rules,
+than the default one.
+* Allow ignoring unused variables with an underscore.
+* Allow using template literals in simple strings.
+* Use strict cases in the naming convention.
+* Require closing delimiter for single-line interfaces for consistency.
+* Fix: disabled `no-magic-numbers`.
+* Fix: always use `object-shorthand`.
+* Fix: indent `case` in `switch`.
+* Fix: specified member ordering based on `abstract`/`static` modifiers.
+* Fix: specified disallowed triple-slash references.
+* Fix: removed streaming for `npm run lint`.
+
 == v0.2.1
 
 * Fix: use TypeScript ESLint `camelcase` rule.

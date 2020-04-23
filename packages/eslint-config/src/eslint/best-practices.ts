@@ -24,7 +24,7 @@ export = {
         'no-case-declarations': 'error',
         'no-constructor-return': 'error',
         'no-div-regex': 'error',
-        'no-else-return': 'error',
+        'no-else-return': ['error', { allowElseIf: false }],
         'no-empty-function': 'error',
         'no-empty-pattern': 'error',
         'no-eq-null': 'error',

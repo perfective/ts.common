@@ -28,6 +28,7 @@ export = {
         'computed-property-spacing': ['error', 'never'],
         'consistent-this': ['error', 'self'],
         'eol-last': ['error', 'always'],
+        'function-call-argument-newline': ['error', 'consistent'],
         'func-call-spacing': ['error', 'never'],
         'func-name-matching': ['error', 'always'],
         'func-names': ['error', 'always'],

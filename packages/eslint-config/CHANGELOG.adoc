@@ -1,5 +1,11 @@
 = Changelog
 
+== v0.2.4
+
+* Disable file lines limit for specs.
+* Fix: enabled lerna stream back.
+* Fix: incorrectly provided rules parameters.
+
 == v0.2.3
 
 * Disallow linebreaks around equality-related operators.

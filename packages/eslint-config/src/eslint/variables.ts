@@ -8,7 +8,7 @@ export = {
         'no-shadow-restricted-names': 'error',
         'no-undef': 'error',
         'no-undef-init': 'error',
-        'no-undefined': 'error',
+        'no-undefined': 'off',
         'no-unused-vars': ['error', {
             args: 'after-used',
             argsIgnorePattern: '^_',

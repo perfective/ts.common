@@ -14,8 +14,8 @@ export = {
             argsIgnorePattern: '^_',
         }],
         'no-use-before-define': ['error', {
-            functions: true,
-            classes: true,
+            functions: false,
+            classes: false,
         }],
     },
 };

@@ -134,7 +134,17 @@ export = {
         'one-var': ['error', 'never'],
         'one-var-declaration-per-line': ['error', 'always'],
         'operator-assignment': ['error', 'always'],
-        'operator-linebreak': ['error', 'before'],
+        'operator-linebreak': ['error', 'before', {
+            overrides: {
+                '=': 'none',
+                '==': 'none',
+                '!=': 'none',
+                '>=': 'none',
+                '<=': 'none',
+                '===': 'none',
+                '+=': 'none',
+            }
+        }],
         'padded-blocks': ['error', 'never'],
         'padding-line-between-statements': 'off',
         'prefer-exponentiation-operator': 'error',

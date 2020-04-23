@@ -33,7 +33,7 @@ export = {
         'func-names': ['error', 'always'],
         'func-style': ['error', 'declaration'],
         'function-paren-newline': ['error', 'consistent'],
-        'id-blacklist': ['error', ['arr', 'e', 'err', 'ind']],
+        'id-blacklist': ['error', 'arr', 'e', 'err', 'ind'],
         'id-length': 'off',
         'id-match': 'off',
         'implicit-arrow-linebreak': ['error', 'beside'],
@@ -74,7 +74,11 @@ export = {
             ignoreRegExpLiterals: true,
             ignoreUrls: true,
         }],
-        'max-lines': ['error', 300, { skipBlankLines: true, skipComments: true, }],
+        'max-lines': ['error', {
+            max: 300,
+            skipBlankLines: true,
+            skipComments: true,
+        }],
         'max-lines-per-function': ['error', 25],
         'max-nested-callbacks': ['error', 2],
         'max-params': ['error', {
@@ -145,7 +149,7 @@ export = {
                 '<=': 'none',
                 '===': 'none',
                 '+=': 'none',
-            }
+            },
         }],
         'padded-blocks': ['error', 'never'],
         'padding-line-between-statements': 'off',

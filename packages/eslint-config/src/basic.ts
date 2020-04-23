@@ -23,8 +23,8 @@ export = {
         // Compatibility with "@typescript-eslint/triple-slash-reference"
         'spaced-comment': ['error', 'always', {
             line: {
-                markers: '/ <reference',
-            }
+                markers: ['/ <reference'],
+            },
         }],
         // Conflicts with decorators
         '@typescript-eslint/no-extraneous-class': 'off',

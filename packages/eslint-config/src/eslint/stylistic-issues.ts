@@ -71,6 +71,8 @@ export = {
         'max-len': ['error', {
             code: 100,
             tabWidth: 4,
+            ignoreRegExpLiterals: true,
+            ignoreUrls: true,
         }],
         'max-lines': ['error', 300, { skipBlankLines: true, skipComments: true, }],
         'max-lines-per-function': ['error', 25],

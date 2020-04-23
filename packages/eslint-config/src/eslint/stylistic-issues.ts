@@ -67,11 +67,12 @@ export = {
         'lines-between-class-members': ['error', 'always', {
             exceptAfterSingleLine: true,
         }],
-        'max-depth': 'error',
+        'max-depth': ['error', 4],
         'max-len': ['error', {
             code: 100,
             tabWidth: 4,
         }],
+        'max-lines': ['error', 300, { skipBlankLines: true, skipComments: true, }],
         'max-lines-per-function': ['error', 25],
         'max-nested-callbacks': ['error', 2],
         'max-params': ['error', {

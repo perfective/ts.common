@@ -15,8 +15,8 @@ export = {
         'dot-notation': ['error', {
             allowKeywords: true,
         }],
-        'eqeqeq': 'error',
         'grouped-accessor-pairs': 'error',
+        'eqeqeq': ['error', 'always'],
         'guard-for-in': 'error',
         'max-classes-per-file': ['error', 1],
         'no-alert': 'error',
@@ -81,7 +81,7 @@ export = {
         'require-await': 'error',
         'require-unicode-regexp': 'error',
         'vars-on-top': 'error',
-        'wrap-iife': 'error',
+        'wrap-iife': ['error', 'outside'],
         'yoda': ['error', 'never'],
     },
 };

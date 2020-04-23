@@ -1,5 +1,16 @@
 = Changelog
 
+== v0.2.3
+
+* Disallow linebreaks around equality-related operators.
+* Ignore RegEx and URLs over the line length.
+* Keep spaces between curly brackets in objects.
+* Initialize the list of blocked ids.
+* Add stylistics issues to the `@perfective/eslint-config/basic` config.
+* Fix: define abstract members before instance ones.
+* Fix: keep linter ignore comments lowercase.
+* Fix: provide rules defaults for readability.
+
 == v0.2.2
 
 * Initialized `@perfective/eslint-config/basic` config with more relaxed rules,

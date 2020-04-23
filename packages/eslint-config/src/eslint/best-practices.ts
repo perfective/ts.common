@@ -15,8 +15,8 @@ export = {
         'dot-notation': ['error', {
             allowKeywords: true,
         }],
-        'grouped-accessor-pairs': 'error',
         'eqeqeq': ['error', 'always'],
+        'grouped-accessor-pairs': ['error', 'setBeforeGet'],
         'guard-for-in': 'error',
         'max-classes-per-file': ['error', 1],
         'no-alert': 'error',

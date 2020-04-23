@@ -10,6 +10,7 @@ export = {
         }],
         'camelcase': 'error',
         'capitalized-comments': ['error', 'always', {
+            ignorePattern: 'eslint|tslint',
             ignoreConsecutiveComments: true,
         }],
         'comma-dangle': ['error', {

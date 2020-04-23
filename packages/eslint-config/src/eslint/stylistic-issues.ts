@@ -128,7 +128,7 @@ export = {
         }],
         'object-curly-spacing': ['error', 'always', {
             arraysInObjects: true,
-            objectsInObjects: false,
+            objectsInObjects: true,
         }],
         'object-property-newline': ['error', {
             allowAllPropertiesOnSameLine: false,

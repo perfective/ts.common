@@ -62,6 +62,7 @@ export = {
             },
             rules: {
                 'arrow-body-style': ['error', 'as-needed'],
+                'max-lines': 'off',
                 'max-lines-per-function': 'off',
                 'max-nested-callbacks': ['error', 4],
             },

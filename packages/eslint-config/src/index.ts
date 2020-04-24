@@ -58,6 +58,7 @@ export = {
                 jest: true,
             },
             rules: {
+                '@typescript-eslint/init-declarations': 'off',
                 'arrow-body-style': ['error', 'as-needed'],
                 'max-lines': 'off',
                 'max-lines-per-function': 'off',

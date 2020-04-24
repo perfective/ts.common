@@ -45,7 +45,7 @@
         "prefer-method-signature": true,
         "prefer-switch": [true, 2],
         "prefer-while": true,
-        "return-undefined": false,
+        "return-undefined": true,
         "switch-final-break": [true, "always"]
     }
 }

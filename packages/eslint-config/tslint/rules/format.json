@@ -3,7 +3,7 @@
         "align": [true, "arguments", "statements", "members", "parameters"],
         "import-spacing": true,
         "jsdoc-format": [true, "check-multiline-start"],
-        "number-literal-format": true,
+        "number-literal-format": false,
         "whitespace": false
     }
 }

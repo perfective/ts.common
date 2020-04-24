@@ -43,7 +43,7 @@
             }
         ],
         "prefer-method-signature": true,
-        "prefer-switch": [true, 2],
+        "prefer-switch": [true, { "min-cases": 2 }],
         "prefer-while": true,
         "return-undefined": true,
         "switch-final-break": [true, "always"]

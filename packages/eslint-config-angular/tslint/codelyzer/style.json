@@ -11,13 +11,6 @@
         "no-outputs-metadata-property": true,
         "no-queries-metadata-property": true,
         "pipe-prefix": [true, "pf"],
-        "prefer-inline-decorator": [true, {
-            "getters": false,
-            "methods": false,
-            "parameter-properties": false,
-            "parameters": false,
-            "properties": false,
-            "setters": false
-        }]
+        "prefer-inline-decorator": false
     }
 }

@@ -1,6 +1,6 @@
 {
     "rules": {
-        "component-max-inline-declarations": [true, {"animations": 0, "styles": 0, "template": 0}],
+        "component-max-inline-declarations": [true, {"animations": 0, "styles": 0, "template": 10}],
         "no-conflicting-lifecycle": true,
         "no-forward-ref": true,
         "no-input-prefix": [true, "can", "is", "on", "should"],
@@ -10,7 +10,7 @@
         "no-unused-css": true,
         "prefer-output-readonly": true,
         "relative-url-prefix": true,
-        "template-conditional-complexity": false,
+        "template-conditional-complexity": [true, 2],
         "template-cyclomatic-complexity": false,
         "template-i18n": false,
         "template-no-call-expression": true,

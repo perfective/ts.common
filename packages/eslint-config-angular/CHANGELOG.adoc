@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.1.1
+
+* Adjust Codelyzer rules.
+* Fix: Codelyzer rules directory.
+
 == v0.1.0
 
 * Initialized ESLint configs `@perfective/eslint-config-angular`

@@ -1,6 +1,6 @@
 {
     "name": "@perfective/eslint-config-angular",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "ESLint shareable rules configuration for Angular",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",

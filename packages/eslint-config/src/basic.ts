@@ -35,7 +35,5 @@ export = {
             types: 'always',
             lib: 'never',
         }],
-        // Conflicts with NestJS
-        'import/no-cycle': 'off',
     },
 };

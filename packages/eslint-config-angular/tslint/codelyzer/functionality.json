@@ -1,0 +1,26 @@
+{
+    "rules": {
+        "contextual-decorator": true,
+        "contextual-lifecycle": true,
+        "no-attribute-decorator": true,
+        "no-lifecycle-call": true,
+        "no-output-native": true,
+        "no-pipe-impure": true,
+        "prefer-on-push-component-change-detection": true,
+        "template-accessibility-alt-text": true,
+        "template-accessibility-elements-content": true,
+        "template-accessibility-label-for": true,
+        "template-accessibility-tabindex-no-positive": true,
+        "template-accessibility-table-scope": true,
+        "template-accessibility-valid-aria": true,
+        "template-banana-in-box": true,
+        "template-click-events-have-key-events": true,
+        "template-mouse-events-have-key-events": true,
+        "template-no-any": true,
+        "template-no-autofocus": true,
+        "template-no-distracting-elements": true,
+        "template-no-negated-async": true,
+        "use-injectable-provided-in": true,
+        "use-lifecycle-interface": true
+    }
+}

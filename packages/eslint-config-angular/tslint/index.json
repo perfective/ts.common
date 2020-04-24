@@ -1,0 +1,9 @@
+{
+    "rulesDirectory": ["../../../node_modules/codelyzer"],
+    "extends": [
+        "@perfective/eslint-config/tslint",
+        "./codelyzer/functionality.json",
+        "./codelyzer/maintainability.json",
+        "./codelyzer/style.json"
+    ]
+}

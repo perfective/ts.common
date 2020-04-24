@@ -1,5 +1,5 @@
 {
-    "rulesDirectory": ["../../../node_modules/codelyzer"],
+    "rulesDirectory": ["codelyzer"],
     "extends": [
         "@perfective/eslint-config/tslint",
         "./codelyzer/functionality.json",

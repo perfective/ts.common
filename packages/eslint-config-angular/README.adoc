@@ -37,6 +37,11 @@ npm install --save-dev \
 }
 ----
 
+[NOTE]
+====
+Use `@perfective/eslint-config-angular/dist/community` for a more relaxed config.
+====
+
 Customize your `.eslintignore` file.
 
 == TSLint

@@ -1,6 +1,6 @@
 {
     "rules": {
-        "align": [true, "arguments", "statements", "members", "parameters"],
+        "align": false,
         "import-spacing": true,
         "jsdoc-format": [true, "check-multiline-start"],
         "number-literal-format": false,

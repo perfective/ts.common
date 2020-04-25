@@ -34,7 +34,7 @@ export = {
         'func-names': ['error', 'always'],
         'func-style': ['error', 'declaration'],
         'function-paren-newline': ['error', 'consistent'],
-        'id-blacklist': ['error', 'arr', 'e', 'err', 'ind'],
+        'id-blacklist': ['error', 'arr', 'ctx', 'e', 'el', 'err', 'ind'],
         'id-length': 'off',
         'id-match': 'off',
         'implicit-arrow-linebreak': ['error', 'beside'],

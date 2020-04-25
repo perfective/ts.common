@@ -2,6 +2,7 @@ export = {
     /* eslint-disable @typescript-eslint/naming-convention */
     extends: './',
     rules: {
+        'arrow-body-style': ['error', 'as-needed'],
         'function-paren-newline': ['error', 'multiline-arguments'],
         'max-lines': 'off',
         'max-lines-per-function': 'off',

@@ -33,6 +33,11 @@ export = {
         '@typescript-eslint/no-extra-parens': 'off',
         // 3rd-party libraries may not provide read-only types
         '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+        // Arrow functions should be used only as parameters,
+        // so `async` keywords can be skipped for brevity.
+        '@typescript-eslint/promise-function-async': ['error', {
+            checkArrowFunctions: false,
+        }],
         '@typescript-eslint/triple-slash-reference': ['error', {
             path: 'never',
             types: 'always',

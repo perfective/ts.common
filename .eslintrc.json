@@ -1,5 +1,5 @@
 {
     "extends": [
-        "@perfective/eslint-config-angular"
+        "@perfective/eslint-config"
     ]
 }

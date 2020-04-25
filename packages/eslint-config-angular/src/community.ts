@@ -1,6 +1,7 @@
 export = {
     extends: [
-        '@perfective/eslint-config/dist/basic',
+        '@perfective/eslint-config/dist/community',
+        './',
     ],
     rules: {
         // Conflicts with NestJS

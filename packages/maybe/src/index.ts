@@ -29,3 +29,7 @@ export {
     isPresent,
     isUndefined,
 } from './maybe/value';
+
+export {
+    voidable,
+} from './maybe/void';

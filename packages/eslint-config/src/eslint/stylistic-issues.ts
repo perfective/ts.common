@@ -92,7 +92,7 @@ export = {
             max: 1,
         }],
         'multiline-comment-style': ['error', 'separate-lines'],
-        'multiline-ternary': ['error', 'always'],
+        'multiline-ternary': ['error', 'always-multiline'],
         'new-cap': ['error', {
             newIsCap: true,
             capIsNew: true,

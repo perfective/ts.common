@@ -31,6 +31,8 @@ export = {
         '@typescript-eslint/no-extraneous-class': 'off',
         // Conflicts with "no-confusing-arrow" { allowParens: true }
         '@typescript-eslint/no-extra-parens': 'off',
+        // 3rd-party libraries may not provide read-only types
+        '@typescript-eslint/prefer-readonly-parameter-types': 'off',
         '@typescript-eslint/triple-slash-reference': ['error', {
             path: 'never',
             types: 'always',

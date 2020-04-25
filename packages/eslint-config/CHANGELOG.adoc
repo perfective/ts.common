@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.2.8
+
+* Remove ‘e’, add ‘elem’, ‘ptr’ to the id blacklist.
+* Allow object literal type assertions.
+
 == v0.2.7
 
 * Rename the `basic` config into `community`.

@@ -11,7 +11,7 @@ export = {
         '@typescript-eslint/class-literal-property-style': 'off',
         '@typescript-eslint/consistent-type-assertions': ['error', {
             assertionStyle: 'as',
-            objectLiteralTypeAssertions: 'allow-as-parameter',
+            objectLiteralTypeAssertions: 'allow',
         }],
         '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
         '@typescript-eslint/explicit-function-return-type': ['error', {

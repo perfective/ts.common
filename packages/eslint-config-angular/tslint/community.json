@@ -1,0 +1,4 @@
+{
+    "extends": ["./index.json"],
+    "rules": {}
+}

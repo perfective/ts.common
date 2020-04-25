@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.2.7
+
+* Rename the `basic` config into `community`.
+* Switch to use `T[]`-like array definitions.
+* Use new lines only for multiline ternaries.
+* Disable `no-undef`.
+* Disable `no-invalid-this`.
+* Add more blacklisted ids.
+* [`community`] Allow full-body anonymous functions.
+* [`community`] Allow non-readonly parameter types.
+* [`community`] Allow skipping `async` for arrow functions.
+
 == v0.2.6
 
 * Differentiate between returning `void` and `undefined`.

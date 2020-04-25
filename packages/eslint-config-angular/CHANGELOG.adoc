@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.1.2
+
+* Add `eslint-config-angular/tslint/community` config.
+* [`tslint`] Disable `angular-whitespace` as deprecated.
+
 == v0.1.1
 
 * Adjust Codelyzer rules.

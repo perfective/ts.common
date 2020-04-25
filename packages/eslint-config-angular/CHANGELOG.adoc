@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.3
+
+* Fix: configs order.
+
 == v0.1.2
 
 * Add `eslint-config-angular/tslint/community` config.

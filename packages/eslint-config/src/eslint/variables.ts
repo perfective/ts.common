@@ -6,7 +6,8 @@ export = {
         'no-restricted-globals': 'error',
         'no-shadow': 'off',
         'no-shadow-restricted-names': 'error',
-        'no-undef': 'error',
+        // TypeScript compiler checks defined symbols
+        'no-undef': 'off',
         'no-undef-init': 'error',
         'no-undefined': 'off',
         'no-unused-vars': ['error', {

@@ -30,7 +30,7 @@ function justDecimal(value: number): Maybe<string> {
     return just(value).then(decimal);
 }
 
-function split(value: string): Maybe<Array<string>> {
+function split(value: string): Maybe<string[]> {
     return just(value.split('.'));
 }
 
@@ -241,7 +241,7 @@ describe('nothing', () => {
 
     describe('index', () => {
         it('returns nothing for a missing elements from an array', () => {
-            expect(nothing<Array<number>>().index(0))
+            expect(nothing<number[]>().index(0))
                 .toStrictEqual(nothing());
         });
     });
@@ -341,7 +341,7 @@ describe('nil', () => {
 
     describe('index', () => {
         it('returns nothing for a missing elements from an array', () => {
-            expect(nil<Array<number>>().index(0))
+            expect(nil<number[]>().index(0))
                 .toStrictEqual(nothing());
         });
     });

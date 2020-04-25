@@ -2,7 +2,8 @@ export = {
     rules: {
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/array-type': ['error', {
-            default: 'generic',
+            default: 'array',
+            readonly: 'array',
         }],
         '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/ban-ts-comment': 'error',

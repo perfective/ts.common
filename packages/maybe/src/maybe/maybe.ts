@@ -7,7 +7,7 @@ export type Unary<T, U> = (value: T) => U;
 export type Predicate<T> = (value: T) => boolean;
 
 export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
-export type ArrayElement<T> = T extends Array<infer V> ? V : undefined;
+export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;
 
 export class Maybe<T> {
     public constructor(

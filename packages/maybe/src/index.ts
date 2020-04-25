@@ -9,15 +9,6 @@ export {
 } from './maybe/maybe';
 
 export {
-    isAbsent,
-    isDefined,
-    isNotNull,
-    isNull,
-    isPresent,
-    isUndefined,
-} from './maybe/value';
-
-export {
     panic,
 } from './maybe/error';
 
@@ -29,3 +20,12 @@ export {
     promise,
     result,
 } from './maybe/promise';
+
+export {
+    isAbsent,
+    isDefined,
+    isNotNull,
+    isNull,
+    isPresent,
+    isUndefined,
+} from './maybe/value';

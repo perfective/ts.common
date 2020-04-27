@@ -163,6 +163,16 @@ describe('just', () => {
     });
 
     describe('or', () => {
+        it('returns the Maybe value when fallback is constant', () => {
+            expect(just(3.14).or(2.71))
+                .toStrictEqual(3.14);
+        });
+
+        it('returns the Maybe value when fallback is a callback', () => {
+            expect(just(3.14).or(constant(2.71)))
+                .toStrictEqual(3.14);
+        });
+
         it('returns the Maybe value instead of null', () => {
             expect(just(3.14).or(null))
                 .toStrictEqual(3.14);
@@ -171,6 +181,11 @@ describe('just', () => {
         it('returns the Maybe value instead of undefined', () => {
             expect(just(3.14).or(undefined))
                 .toStrictEqual(3.14);
+        });
+
+        it('does not throw an error', () => {
+            expect(() => just(3.14).or(panic('Value is not present')))
+                .not.toThrow('Value is not present');
         });
     });
 
@@ -263,6 +278,16 @@ describe('nothing', () => {
     });
 
     describe('or', () => {
+        it('returns a fallback value when fallback is constant', () => {
+            expect(nothing().or(2.71))
+                .toStrictEqual(2.71);
+        });
+
+        it('returns a result of the fallback callback', () => {
+            expect(nothing().or(constant(2.71)))
+                .toStrictEqual(2.71);
+        });
+
         it('returns undefined', () => {
             expect(nothing<number>().or(undefined))
                 .toBeUndefined();
@@ -271,6 +296,11 @@ describe('nothing', () => {
         it('returns null instead of undefined', () => {
             expect(nothing<number>().or(null))
                 .toBeNull();
+        });
+
+        it('allows to throw an error', () => {
+            expect(() => nothing<number>().or(panic('Value is not present')))
+                .toThrow('Value is not present');
         });
     });
 
@@ -363,6 +393,16 @@ describe('nil', () => {
     });
 
     describe('or', () => {
+        it('returns a fallback value when fallback is a constant', () => {
+            expect(nil<number>().or(2.71))
+                .toStrictEqual(2.71);
+        });
+
+        it('returns a result of the fallback callback', () => {
+            expect(nil<number>().or(constant(2.71)))
+                .toStrictEqual(2.71);
+        });
+
         it('returns undefined instead of null', () => {
             expect(nil<number>().or(undefined))
                 .toBeUndefined();
@@ -371,6 +411,11 @@ describe('nil', () => {
         it('returns null', () => {
             expect(nil<number>().or(null))
                 .toBeNull();
+        });
+
+        it('allows to throw an error', () => {
+            expect(() => nil<number>().or(panic('Value is not present')))
+                .toThrow('Value is not present');
         });
     });
 

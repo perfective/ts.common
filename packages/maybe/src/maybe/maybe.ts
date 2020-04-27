@@ -44,13 +44,17 @@ export class Maybe<T> {
         return fallbackTo(fallback);
     }
 
-    public or(nothing: null): T | null
-    public or(nothing: undefined): T | undefined
-    public or(nothing: null | undefined): T | null | undefined {
+    public or(fallback: Fallback<T>): T
+    public or(fallback: undefined): T | undefined
+    public or(fallback: null): T | null
+    public or(fallback: Fallback<T> | null | undefined): T | null | undefined {
         if (isPresent(this.value)) {
             return this.value;
         }
-        return nothing;
+        if (isPresent(fallback)) {
+            return fallbackTo(fallback);
+        }
+        return fallback;
     }
 
     public maybe<R>(next: Bind<T | undefined | null, R>): Maybe<R> {

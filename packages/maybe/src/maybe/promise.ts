@@ -15,5 +15,5 @@ export function result<T, E extends Error = Error>(
 ): Callback<T, E> {
     return (error?: E | null, data?: T | PromiseLike<T>): void => maybe(error)
         .then(reject)
-        .otherwise(() => resolve(data));
+        .or(() => resolve(data));
 }

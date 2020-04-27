@@ -2,7 +2,6 @@ import { panic } from './error';
 import {
     Maybe,
     Nullary,
-    Predicate,
     fallbackTo,
     just,
     maybe,
@@ -12,7 +11,7 @@ import {
     nullable,
     optional,
 } from './maybe';
-import { isDefined, isNotNull, isNull, isPresent, isUndefined } from './value';
+import { Predicate, isDefined, isNotNull, isNull, isPresent, isUndefined } from './value';
 
 function isGreaterThan(value: number): Predicate<number> {
     return (input: number): boolean => input > value;

@@ -1,3 +1,6 @@
+export type Unary<T, U> = (value: T) => U;
+export type Predicate<T> = (value: T) => boolean;
+
 export function isDefined<T>(value?: T): value is T {
     return typeof value !== 'undefined';
 }

@@ -22,6 +22,15 @@ export {
 } from './maybe/promise';
 
 export {
+    hasAbsentProperty,
+    hasDefinedProperty,
+    hasNotNullProperty,
+    hasNullProperty,
+    hasPresentProperty,
+    hasUndefinedProperty,
+} from './maybe/property';
+
+export {
     isAbsent,
     isDefined,
     isNotNull,

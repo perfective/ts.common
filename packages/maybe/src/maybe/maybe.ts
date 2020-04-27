@@ -1,10 +1,7 @@
-import { isAbsent, isNull, isPresent, isUndefined } from './value';
+import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from './value';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
-
-export type Unary<T, U> = (value: T) => U;
-export type Predicate<T> = (value: T) => boolean;
 
 export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
 export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;

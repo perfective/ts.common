@@ -2,11 +2,13 @@ export type Unary<T, U> = (value: T) => U;
 export type Predicate<T> = (value: T) => boolean;
 
 export function isDefined<T>(value?: T): value is T {
-    return typeof value !== 'undefined';
+    // eslint-disable-next-line no-void
+    return value !== void 0;
 }
 
 export function isUndefined<T>(value?: T): value is undefined {
-    return typeof value === 'undefined';
+    // eslint-disable-next-line no-void
+    return value === void 0;
 }
 
 export function isNotNull<T>(value: T | null): value is T {

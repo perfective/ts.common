@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.2.3
+
+* Add object properties type-guards:
+** `hasDefinedProperty()`;
+** `hasUndefinedProperty()`;
+** `hasNotNullProperty()`;
+** `hasNullProperty()`;
+** `hasPresentProperty()`;
+** `hasAbsentProperty()`.
+* Add `voidable()` function to cast `void` into `undefined | null`.
+* Use the same check for `undefined` as in the compiled JS code.
+
 == v0.2.2
 
 * Fix: failing “no-unsafe-return” linter rule.

@@ -83,6 +83,13 @@ describe('nullable', () => {
 });
 
 describe('just', () => {
+    describe('value', () => {
+        it('is a required value', () => {
+            expect(just<number>(3.14).value)
+                .toStrictEqual(3.14);
+        });
+    });
+
     describe('then', () => {
         it('satisfies left identity monad law', () => {
             expect(just(3.14).then(justDecimal))
@@ -148,12 +155,12 @@ describe('just', () => {
     describe('otherwise', () => {
         it('returns the Maybe value when fallback is constant', () => {
             expect(just(3.14).otherwise(2.71))
-                .toStrictEqual(3.14);
+                .toStrictEqual(just(3.14));
         });
 
         it('returns the Maybe value when fallback is a callback', () => {
             expect(just(3.14).otherwise(constant(2.71)))
-                .toStrictEqual(3.14);
+                .toStrictEqual(just(3.14));
         });
 
         it('does not throw an error', () => {
@@ -186,6 +193,11 @@ describe('just', () => {
         it('does not throw an error', () => {
             expect(() => just(3.14).or(panic('Value is not present')))
                 .not.toThrow('Value is not present');
+        });
+
+        it('is interchangeable with otherwise().value', () => {
+            expect(just(3.14).or(2.71))
+                .toStrictEqual(just(3.14).otherwise(2.71).value);
         });
     });
 
@@ -263,12 +275,12 @@ describe('nothing', () => {
     describe('otherwise', () => {
         it('returns a fallback value when fallback is constant', () => {
             expect(nothing<number>().otherwise(2.71))
-                .toStrictEqual(2.71);
+                .toStrictEqual(just(2.71));
         });
 
         it('returns a result of the fallback callback', () => {
             expect(nothing<number>().otherwise(constant(2.71)))
-                .toStrictEqual(2.71);
+                .toStrictEqual(just(2.71));
         });
 
         it('allows to throw an error', () => {
@@ -301,6 +313,11 @@ describe('nothing', () => {
         it('allows to throw an error', () => {
             expect(() => nothing<number>().or(panic('Value is not present')))
                 .toThrow('Value is not present');
+        });
+
+        it('is interchangeable with otherwise().value', () => {
+            expect(nothing<number>().or(2.71))
+                .toStrictEqual(nothing<number>().otherwise(2.71).value);
         });
     });
 
@@ -378,12 +395,12 @@ describe('nil', () => {
     describe('otherwise', () => {
         it('returns a fallback value when fallback is a constant', () => {
             expect(nil<number>().otherwise(2.71))
-                .toStrictEqual(2.71);
+                .toStrictEqual(just(2.71));
         });
 
         it('returns a result of the fallback callback', () => {
             expect(nil<number>().otherwise(constant(2.71)))
-                .toStrictEqual(2.71);
+                .toStrictEqual(just(2.71));
         });
 
         it('allows to throw an error', () => {
@@ -416,6 +433,11 @@ describe('nil', () => {
         it('allows to throw an error', () => {
             expect(() => nil<number>().or(panic('Value is not present')))
                 .toThrow('Value is not present');
+        });
+
+        it('is interchangeable with otherwise().value', () => {
+            expect(nil<number>().or(2.71))
+                .toStrictEqual(nil<number>().otherwise(2.71).value);
         });
     });
 

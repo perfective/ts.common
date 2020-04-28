@@ -1,4 +1,15 @@
-import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from './value';
+// Maybe<T> and Just<T> are cross-dependent, so both classes have to be declared in the same file.
+/* eslint-disable max-classes-per-file */
+import {
+    Predicate,
+    Unary,
+    isAbsent,
+    isDefined,
+    isNotNull,
+    isNull,
+    isPresent,
+    isUndefined,
+} from './value';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
@@ -37,16 +48,16 @@ export class Maybe<T> {
         return nothing();
     }
 
-    public otherwise(fallback: Fallback<T>): T {
+    public otherwise(fallback: Fallback<T>): Just<T> {
         if (isPresent(this.value)) {
-            return this.value;
+            return just(this.value);
         }
-        return fallbackTo(fallback);
+        return just(fallbackTo(fallback));
     }
 
     public or(fallback: Fallback<T>): T
-    public or(fallback: undefined): T | undefined
     public or(fallback: null): T | null
+    public or(fallback: undefined): T | undefined
     public or(fallback: Fallback<T> | null | undefined): T | null | undefined {
         if (isPresent(this.value)) {
             return this.value;
@@ -76,8 +87,16 @@ export class Maybe<T> {
     }
 }
 
-export function just<T>(value: T): Maybe<T> {
-    return new Maybe<T>(value);
+export class Just<T> extends Maybe<T> {
+    public constructor(
+        public readonly value: T,
+    ) {
+        super(value);
+    }
+}
+
+export function just<T>(value: T): Just<T> {
+    return new Just<T>(value);
 }
 
 const none: Maybe<unknown> = new Maybe<unknown>(undefined);
@@ -93,14 +112,23 @@ export function nil<T>(): Maybe<T> {
 }
 
 export function maybe<T>(value: T | undefined | null): Maybe<T> {
+    if (isPresent(value)) {
+        return new Just<T>(value);
+    }
     return new Maybe<T>(value);
 }
 
 export function nullable<T>(value: T | null): Maybe<T> {
+    if (isNotNull(value)) {
+        return new Just<T>(value);
+    }
     return new Maybe<T>(value);
 }
 
 export function optional<T>(value?: T): Maybe<T> {
+    if (isDefined(value)) {
+        return new Just<T>(value);
+    }
     return new Maybe<T>(value);
 }
 

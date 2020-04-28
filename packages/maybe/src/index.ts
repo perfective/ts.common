@@ -1,4 +1,5 @@
 export {
+    Just,
     Maybe,
     just,
     maybe,

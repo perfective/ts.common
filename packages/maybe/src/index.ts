@@ -1,6 +1,8 @@
 export {
     Just,
     Maybe,
+    Nil,
+    Nothing,
     just,
     maybe,
     nil,

@@ -1,15 +1,6 @@
-// Maybe<T> and Just<T> are cross-dependent, so both classes have to be declared in the same file.
+// Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
 /* eslint-disable max-classes-per-file */
-import {
-    Predicate,
-    Unary,
-    isAbsent,
-    isDefined,
-    isNotNull,
-    isNull,
-    isPresent,
-    isUndefined,
-} from './value';
+import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from './value';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
@@ -17,8 +8,8 @@ export type Fallback<T> = T | Nullary<T>;
 export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
 export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;
 
-export class Maybe<T> {
-    public constructor(
+export abstract class Maybe<T> {
+    protected constructor(
         public readonly value: T | undefined | null,
     ) {
     }
@@ -87,7 +78,11 @@ export class Maybe<T> {
     }
 }
 
-export class Just<T> extends Maybe<T> {
+/**
+ * @sealed
+ */
+export class Just<T>
+    extends Maybe<T> {
     public constructor(
         public readonly value: T,
     ) {
@@ -99,37 +94,64 @@ export function just<T>(value: T): Just<T> {
     return new Just<T>(value);
 }
 
-const none: Maybe<unknown> = new Maybe<unknown>(undefined);
+/**
+ * @sealed
+ */
+export class Nothing<T>
+    extends Maybe<T> {
+    public readonly value: undefined = undefined;
 
-export function nothing<T>(): Maybe<T> {
-    return none as Maybe<T>;
+    public constructor() {
+        super(undefined);
+    }
 }
 
-const naught: Maybe<unknown> = new Maybe<unknown>(null);
+const none: Nothing<unknown> = new Nothing<unknown>();
 
-export function nil<T>(): Maybe<T> {
-    return naught as Maybe<T>;
+export function nothing<T>(): Nothing<T> {
+    return none as Nothing<T>;
+}
+
+/**
+ * @sealed
+ */
+export class Nil<T>
+    extends Maybe<T> {
+    public readonly value: null = null;
+
+    public constructor() {
+        super(null);
+    }
+}
+
+const naught: Nil<unknown> = new Nil<unknown>();
+
+export function nil<T>(): Nil<T> {
+    return naught as Nil<T>;
 }
 
 export function maybe<T>(value: T | undefined | null): Maybe<T> {
-    if (isPresent(value)) {
-        return new Just<T>(value);
+    if (isUndefined(value)) {
+        return nothing();
     }
-    return new Maybe<T>(value);
+    if (isNull(value)) {
+        return nil();
+    }
+    return just(value);
 }
 
 export function nullable<T>(value: T | null): Maybe<T> {
-    if (isNotNull(value)) {
-        return new Just<T>(value);
+    if (isNull(value)) {
+        return nil();
     }
-    return new Maybe<T>(value);
+    return just(value);
 }
 
 export function optional<T>(value?: T): Maybe<T> {
-    if (isDefined(value)) {
-        return new Just<T>(value);
+    if (isUndefined(value)) {
+        return nothing();
     }
-    return new Maybe<T>(value);
+    return just(value);
 }
 
 /**

@@ -224,6 +224,13 @@ describe('just', () => {
 });
 
 describe('nothing', () => {
+    describe('value', () => {
+        it('is an undefined value', () => {
+            expect(nothing<number>().value)
+                .toBeUndefined();
+        });
+    });
+
     describe('then', () => {
         it('satisfies left identity monad law for an undefined value', () => {
             expect(nothing<number>().then(justDecimal))
@@ -291,12 +298,12 @@ describe('nothing', () => {
 
     describe('or', () => {
         it('returns a fallback value when fallback is constant', () => {
-            expect(nothing().or(2.71))
+            expect(nothing<number>().or(2.71))
                 .toStrictEqual(2.71);
         });
 
         it('returns a result of the fallback callback', () => {
-            expect(nothing().or(constant(2.71)))
+            expect(nothing<number>().or(constant(2.71)))
                 .toStrictEqual(2.71);
         });
 
@@ -344,6 +351,13 @@ describe('nothing', () => {
 });
 
 describe('nil', () => {
+    describe('value', () => {
+        it('is a null value', () => {
+            expect(nil<number>().value)
+                .toBeNull();
+        });
+    });
+
     describe('then', () => {
         it('satisfies left identity monad law for an undefined value', () => {
             expect(nil<number>().then(justDecimal))

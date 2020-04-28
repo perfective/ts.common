@@ -11,21 +11,25 @@ export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;
 export abstract class Maybe<T> {
     protected constructor(
         public readonly value: T | undefined | null,
+        private readonly none: <U>() => Nothing<U> | Nil<U>,
     ) {
     }
 
     public that(is: Predicate<T>): Maybe<T> {
-        if (isAbsent(this.value) || is(this.value)) {
-            return this;
+        if (isPresent(this.value)) {
+            if (is(this.value)) {
+                return this;
+            }
+            return this.none();
         }
-        return nothing();
+        return this;
     }
 
-    public then<R>(next: Bind<T, R>): Maybe<R> {
+    public then<U>(next: Bind<T, U>): Maybe<U> {
         if (isAbsent(this.value)) {
-            return nothing();
+            return this.none();
         }
-        return maybeOf<R>(next(this.value));
+        return maybeOf<U>(next(this.value));
     }
 
     public pick<K extends keyof T>(property: K): Maybe<T[K]> {
@@ -36,7 +40,7 @@ export abstract class Maybe<T> {
         if (Array.isArray(this.value)) {
             return maybe<ArrayElement<T>>(this.value[index]);
         }
-        return nothing();
+        return this.none();
     }
 
     public otherwise(fallback: Fallback<T>): Just<T> {
@@ -86,7 +90,7 @@ export class Just<T>
     public constructor(
         public readonly value: T,
     ) {
-        super(value);
+        super(value, nothing);
     }
 }
 
@@ -102,7 +106,7 @@ export class Nothing<T>
     public readonly value: undefined = undefined;
 
     public constructor() {
-        super(undefined);
+        super(undefined, nothing);
     }
 }
 
@@ -120,7 +124,7 @@ export class Nil<T>
     public readonly value: null = null;
 
     public constructor() {
-        super(null);
+        super(null, nil);
     }
 }
 

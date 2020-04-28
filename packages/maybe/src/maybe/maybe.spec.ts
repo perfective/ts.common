@@ -361,12 +361,12 @@ describe('nil', () => {
     describe('then', () => {
         it('satisfies left identity monad law for an undefined value', () => {
             expect(nil<number>().then(justDecimal))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
 
         it('satisfies right identity monad law', () => {
             expect(nil<number>().then(maybe))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
 
         it('satisfies associativity monad law', () => {
@@ -376,7 +376,7 @@ describe('nil', () => {
 
         it('wraps non-Maybe values into Maybe', () => {
             expect(nil<number>().then(decimal))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
     });
 
@@ -395,14 +395,14 @@ describe('nil', () => {
     describe('pick', () => {
         it('returns nothing for a property from on a missing object', () => {
             expect(nil<Boxed<number>>().pick('value'))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
     });
 
     describe('index', () => {
         it('returns nothing for a missing elements from an array', () => {
             expect(nil<number[]>().index(0))
-                .toStrictEqual(nothing());
+                .toStrictEqual(nil());
         });
     });
 

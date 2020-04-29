@@ -124,6 +124,22 @@ describe('just', () => {
         });
     });
 
+    describe('when', () => {
+        it('keeps the value when an outside condition holds', () => {
+            expect(just(3.14).when(true))
+                .toStrictEqual(just(3.14));
+            expect(just(3.14).when(() => true))
+                .toStrictEqual(just(3.14));
+        });
+
+        it('filters out the value when an outside condition fails', () => {
+            expect(just(3.14).when(false))
+                .toStrictEqual(nothing());
+            expect(just(3.14).when(() => false))
+                .toStrictEqual(nothing());
+        });
+    });
+
     describe('pick', () => {
         it('returns an existing property from an object', () => {
             expect(just<Boxed<number>>({ value: 3.14 }).pick('value'))
@@ -265,6 +281,22 @@ describe('nothing', () => {
         });
     });
 
+    describe('when', () => {
+        it('remains nothing when an outside condition holds', () => {
+            expect(nothing().when(true))
+                .toStrictEqual(nothing());
+            expect(nothing().when(() => true))
+                .toStrictEqual(nothing());
+        });
+
+        it('remains nothing when an outside condition fails', () => {
+            expect(nothing().when(false))
+                .toStrictEqual(nothing());
+            expect(nothing().when(() => false))
+                .toStrictEqual(nothing());
+        });
+    });
+
     describe('pick', () => {
         it('returns nothing for a property from on a missing object', () => {
             expect(nothing<Boxed<number>>().pick('value'))
@@ -388,6 +420,22 @@ describe('nil', () => {
 
         it('remains nil when condition fails', () => {
             expect(nil<number>().that(isNotNull))
+                .toStrictEqual(nil());
+        });
+    });
+
+    describe('when', () => {
+        it('remains nil when an outside condition holds', () => {
+            expect(nil().when(true))
+                .toStrictEqual(nil());
+            expect(nil().when(() => true))
+                .toStrictEqual(nil());
+        });
+
+        it('remains nil when an outside condition fails', () => {
+            expect(nil().when(false))
+                .toStrictEqual(nil());
+            expect(nil().when(() => false))
                 .toStrictEqual(nil());
         });
     });

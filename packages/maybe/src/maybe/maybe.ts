@@ -1,9 +1,10 @@
 // Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
 /* eslint-disable max-classes-per-file */
-import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from './value';
+import { isAbsent, isNull, isPresent, isUndefined, Predicate, Unary } from './value';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
+export type Condition = boolean | Nullary<boolean>;
 
 export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
 export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;
@@ -23,6 +24,13 @@ export abstract class Maybe<T> {
             return this.none();
         }
         return this;
+    }
+
+    public when(outside: Condition): Maybe<T> {
+        if (isPresent(this.value) && holds(outside)) {
+            return this;
+        }
+        return this.none();
     }
 
     public then<U>(next: Bind<T, U>): Maybe<U> {
@@ -176,4 +184,14 @@ export function fallbackTo<T>(fallback: Fallback<T>): T {
         return fallback();
     }
     return fallback;
+}
+
+/**
+ * @package
+ */
+export function holds(condition: Condition): boolean {
+    if (condition instanceof Function) {
+        return condition();
+    }
+    return condition;
 }

@@ -81,6 +81,9 @@ export = {
         '@typescript-eslint/no-floating-promises': 'error',
         '@typescript-eslint/no-for-in-array': 'error',
         '@typescript-eslint/no-implied-eval': 'error',
+        '@typescript-eslint/no-invalid-void-type': ['error', {
+            allowInGenericTypeArguments: false,
+        }],
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-misused-new': 'error',
         '@typescript-eslint/no-misused-promises': 'error',

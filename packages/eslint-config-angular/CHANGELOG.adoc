@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.6
+
+* Use `@perfective/eslint-config` `v0.2.10`.
+
 == v0.1.5
 
 * Use `@perfective/eslint-config` `v0.2.9`.

@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.2.10
+
+* Configure `@typescript-eslint/no-invalid-void-type` to allow `void` in generic types
+in the `eslint-config/community`.
+
 == v0.2.9
 
 * Updated `@typescript-eslint` to `2.30.0`.

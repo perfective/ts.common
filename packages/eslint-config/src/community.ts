@@ -37,6 +37,10 @@ export = {
         '@typescript-eslint/no-extraneous-class': 'off',
         // Conflicts with "no-confusing-arrow" { allowParens: true }
         '@typescript-eslint/no-extra-parens': 'off',
+        // Allow for generic types like "Nullary<void>"
+        '@typescript-eslint/no-invalid-void-type': ['error', {
+            allowInGenericTypeArguments: true,
+        }],
         // 3rd-party libraries may not provide read-only types
         '@typescript-eslint/prefer-readonly-parameter-types': 'off',
         // Arrow functions should be used only as parameters,

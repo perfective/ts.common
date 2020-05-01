@@ -14,8 +14,9 @@
         "tslint"
     ],
     "scripts": {
-        "clean": "rm -rf dist",
-        "build": "npm run clean && tsc",
+        "build": "tsc",
+        "build:clean": "npm run clean && npm run build",
+        "clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo && jest --clearCache",
         "lint": "npm run lint:eslint; npm run lint:tslint",
         "lint:eslint": "eslint --fix --ext .ts ./src",
         "lint:tslint": "tslint --fix --project ./tsconfig.json"

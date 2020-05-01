@@ -2,9 +2,11 @@
     "name": "root",
     "private": true,
     "scripts": {
-        "lint": "npm run build:eslint && lerna run lint --no-bail --no-prefix --stream",
         "build": "lerna run --stream build",
+        "build:clean": "lerna run --stream build:clean",
         "build:eslint": "lerna run --scope @perfective/eslint-config --stream build",
+        "clean": "lerna run --stream clean",
+        "lint": "npm run build:eslint && lerna run lint --no-bail --no-prefix --stream",
         "test": "lerna run --stream --no-bail --no-prefix test"
     },
     "devDependencies": {

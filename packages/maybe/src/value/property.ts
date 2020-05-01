@@ -1,68 +1,83 @@
-import { Predicate, isAbsent, isDefined, isNotNull, isNull, isPresent, isUndefined } from './value';
+import {
+    Absent,
+    Predicate,
+    isAbsent,
+    isDefined,
+    isNotNull,
+    isNull,
+    isPresent,
+    isUndefined,
+} from './value';
+
+export type WithDefined<T, K extends keyof T> = T & {
+    [P in K]-?: T[P];
+};
+
+export type WithUndefined<T, K extends keyof T> = T & {
+    [P in keyof Pick<T, K>]: undefined;
+};
+
+export type WithNotNull<T, K extends keyof T> = T & {
+    [P in keyof Pick<T, K>]: T[P] extends null ? never : T[P];
+};
+
+export type WithNull<T, K extends keyof T> = T & {
+    [P in K]: null;
+};
+
+export type WithPresent<T, K extends keyof T> = T & {
+    [P in K]: T[P] extends Absent ? never : T[P];
+};
+
+export type WithAbsent<T, K extends keyof T> = T & {
+    [P in keyof Pick<T, K>]: T[P] extends Absent ? T[P] : never;
+};
 
 export function hasDefinedProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
-): value is T & Required<Pick<T, K>> {
+): value is WithDefined<T, K> {
     return hasPropertiesThat(isDefined, value, [property].concat(and));
 }
-
-export type Undefined<T> = {
-    [P in keyof T]: undefined;
-};
 
 export function hasUndefinedProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
-): value is T & Undefined<Pick<T, K>> {
+): value is WithUndefined<T, K> {
     return hasPropertiesThat(isUndefined, value, [property].concat(and));
 }
-
-export type NotNull<T> = {
-    [P in keyof T]: T[P] extends null ? never : T[P];
-};
 
 export function hasNotNullProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
-): value is T & NotNull<Pick<T, K>> {
+): value is WithNotNull<T, K> {
     return hasPropertiesThat(isNotNull, value, [property].concat(and));
 }
-
-export type Null<T, K extends keyof T> = Required<Pick<T, K>> & {
-    [P in keyof T]: null;
-};
 
 export function hasNullProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
-): value is T & Null<Pick<T, K>, K> {
+): value is WithNull<T, K> {
     return hasPropertiesThat(isNull, value, [property].concat(and));
 }
-
-export type Present<T, K extends keyof T> = Required<Pick<T, K>> & NotNull<Pick<T, K>>;
 
 export function hasPresentProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
-): value is T & Present<Pick<T, K>, K> {
+): value is WithPresent<T, K> {
     return hasPropertiesThat(isPresent, value, [property].concat(and));
 }
-
-export type Absent<T> = {
-    [P in keyof T]: T[P] extends null | undefined ? T[P] : never;
-};
 
 export function hasAbsentProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
-): value is T & Absent<Pick<T, K>> {
+): value is WithAbsent<T, K> {
     return hasPropertiesThat(isAbsent, value, [property].concat(and));
 }
 

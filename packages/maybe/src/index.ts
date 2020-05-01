@@ -16,6 +16,14 @@ export {
     panic,
     throws,
 } from './error/error';
+export {
+    absentValueOrPanic,
+    definedValueOrPanic,
+    notNullValueOrPanic,
+    nullValueOrPanic,
+    presentValueOrPanic,
+    undefinedValueOrPanic,
+} from './error/value';
 
 export {
     Callback,

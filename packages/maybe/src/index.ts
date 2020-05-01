@@ -12,8 +12,10 @@ export {
 } from './maybe/maybe';
 
 export {
+    isError,
     panic,
-} from './maybe/error';
+    throws,
+} from './error/error';
 
 export {
     Callback,

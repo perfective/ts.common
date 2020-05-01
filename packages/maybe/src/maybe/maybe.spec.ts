@@ -1,4 +1,5 @@
-import { panic } from './error';
+import { panic } from '../error/error';
+
 import {
     Maybe,
     Nullary,

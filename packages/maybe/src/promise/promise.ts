@@ -1,4 +1,4 @@
-import { maybe } from './maybe';
+import { maybe } from '../maybe/maybe';
 
 export type Resolve<T> = (value?: T | PromiseLike<T>) => void;
 export type Reject<E extends Error = Error> = (reason?: E) => void;

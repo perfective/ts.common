@@ -32,7 +32,7 @@ export {
     Run,
     promise,
     result,
-} from './maybe/promise';
+} from './promise/promise';
 
 export {
     hasAbsentProperty,
@@ -41,7 +41,7 @@ export {
     hasNullProperty,
     hasPresentProperty,
     hasUndefinedProperty,
-} from './maybe/property';
+} from './value/property';
 
 export {
     isAbsent,
@@ -50,8 +50,8 @@ export {
     isNull,
     isPresent,
     isUndefined,
-} from './maybe/value';
+} from './value/value';
 
 export {
     voidable,
-} from './maybe/void';
+} from './value/void';

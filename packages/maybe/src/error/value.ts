@@ -7,7 +7,7 @@ import {
     isNull,
     isPresent,
     isUndefined,
-} from '../maybe/value';
+} from '../value/value';
 
 import { throws } from './error';
 

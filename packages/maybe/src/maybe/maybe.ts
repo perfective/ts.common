@@ -1,6 +1,6 @@
 // Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
 /* eslint-disable max-classes-per-file */
-import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from './value';
+import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from '../value/value';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;

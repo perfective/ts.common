@@ -1,5 +1,5 @@
 import { Nullary } from '../maybe/maybe';
-import { isDefined } from '../maybe/value';
+import { isDefined } from '../value/value';
 
 export function isError(error: Error | string): error is Error {
     return error instanceof Error;

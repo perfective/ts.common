@@ -42,6 +42,8 @@ interface Boxed<T> {
     readonly value?: T | null;
 }
 
+type Matrix = readonly (readonly (number | null | undefined)[])[];
+
 describe('maybe', () => {
     it('equals just() when value is present', () => {
         expect(maybe(3.14))
@@ -185,6 +187,21 @@ describe('just', () => {
                 .toStrictEqual(nothing());
             expect(just([2.71, 3.14]).index(-1))
                 .toStrictEqual(nothing());
+        });
+
+        it('is an equivalent of the then() chain', () => {
+            const matrix: Matrix = [[undefined, 3.14], [2.71, null]];
+            expect(
+                just(matrix)
+                    .index(0)
+                    .index(1)
+                    .then(v => v.toString(10)),
+            ).toStrictEqual(
+                just(matrix)
+                    .then(m => m[0])
+                    .then(m => m[1])
+                    .then(v => v.toString(10)),
+            );
         });
     });
 
@@ -338,6 +355,20 @@ describe('nothing', () => {
             expect(nothing<number[]>().index(0))
                 .toStrictEqual(nothing());
         });
+
+        it('is an equivalent of the then() chain', () => {
+            expect(
+                nothing<Matrix>()
+                    .index(0)
+                    .index(1)
+                    .then(v => v.toString(10)),
+            ).toStrictEqual(
+                nothing<Matrix>()
+                    .then(m => m[0])
+                    .then(m => m[1])
+                    .then(v => v.toString(10)),
+            );
+        });
     });
 
     describe('otherwise', () => {
@@ -489,6 +520,20 @@ describe('nil', () => {
         it('returns nothing for a missing elements from an array', () => {
             expect(nil<number[]>().index(0))
                 .toStrictEqual(nil());
+        });
+
+        it('is an equivalent of the then() chain', () => {
+            expect(
+                nil<Matrix>()
+                    .index(0)
+                    .index(1)
+                    .then(v => v.toString(10)),
+            ).toStrictEqual(
+                nil<Matrix>()
+                    .then(m => m[0])
+                    .then(m => m[1])
+                    .then(v => v.toString(10)),
+            );
         });
     });
 

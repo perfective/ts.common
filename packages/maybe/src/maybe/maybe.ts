@@ -15,7 +15,7 @@ export type Fallback<T> = T | Nullary<T>;
 export type Condition = boolean | Nullary<boolean>;
 
 export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | null | undefined>;
-export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;
+export type ArrayElement<T> = T extends readonly (infer V)[] ? V : undefined;
 
 export abstract class Maybe<T> {
     protected constructor(
@@ -56,9 +56,9 @@ export abstract class Maybe<T> {
         return this.then(v => v[property]) as unknown as Maybe<Present<T[K]>>;
     }
 
-    public index(index: number): Maybe<ArrayElement<T>> {
+    public index(index: number): Maybe<Present<ArrayElement<T>>> {
         if (Array.isArray(this.value)) {
-            return maybe<ArrayElement<T>>(this.value[index]);
+            return maybe<Present<ArrayElement<T>>>(this.value[index]);
         }
         return this.none();
     }

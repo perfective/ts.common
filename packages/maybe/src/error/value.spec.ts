@@ -14,14 +14,14 @@ describe('definedValueOrPanic', () => {
     });
 
     it('creates a function that throws an error when the value is undefined', () => {
-        expect(() => definedValueOrPanic()())
+        expect(() => definedValueOrPanic()(undefined))
             .toThrow(Error);
     });
 });
 
 describe('undefinedValueOrPanic', () => {
     it('creates a function that returns undefined when the value is undefined', () => {
-        expect(undefinedValueOrPanic()())
+        expect(undefinedValueOrPanic()(undefined))
             .toBeUndefined();
     });
 

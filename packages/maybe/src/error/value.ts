@@ -1,5 +1,4 @@
 import {
-    Absent,
     TypeGuard,
     isAbsent,
     isDefined,
@@ -14,13 +13,13 @@ import { throws } from './error';
 export function definedValueOrPanic<T, E extends Error>(
     error?: E | string,
 ): (value: T | undefined) => T {
-    return (value?: T): T => valueOrPanic(isDefined, value, error);
+    return (value: T | undefined): T => valueOrPanic(isDefined, value, error);
 }
 
 export function undefinedValueOrPanic<T, E extends Error>(
     error?: E | string,
 ): (value: T | undefined) => undefined {
-    return (value?: T): undefined => valueOrPanic(isUndefined, value, error);
+    return (value: T | undefined): undefined => valueOrPanic(isUndefined, value, error);
 }
 
 export function notNullValueOrPanic<T, E extends Error>(
@@ -38,13 +37,13 @@ export function nullValueOrPanic<T, E extends Error>(
 export function presentValueOrPanic<T, E extends Error>(
     error?: E | string,
 ): (value?: T | null) => T {
-    return (value: T | Absent): T => valueOrPanic(isPresent, value, error);
+    return (value: T | null | undefined): T => valueOrPanic(isPresent, value, error);
 }
 
 export function absentValueOrPanic<T, E extends Error>(
     error?: E | string,
-): (value?: T | null) => Absent {
-    return (value: T | Absent): Absent => valueOrPanic(isAbsent, value, error);
+): (value: T | null | undefined) => null | undefined {
+    return (value: T | null | undefined): null | undefined => valueOrPanic(isAbsent, value, error);
 }
 
 function valueOrPanic<T, V extends T, E extends Error>(

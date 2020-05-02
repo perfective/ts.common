@@ -6,12 +6,12 @@ export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
 export type Condition = boolean | Nullary<boolean>;
 
-export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | undefined | null>;
+export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | null | undefined>;
 export type ArrayElement<T> = T extends (infer V)[] ? V : undefined;
 
 export abstract class Maybe<T> {
     protected constructor(
-        public readonly value: T | undefined | null,
+        public readonly value: T | null | undefined,
         private readonly none: <U>() => Nothing<U> | Nil<U>,
     ) {
     }
@@ -71,7 +71,7 @@ export abstract class Maybe<T> {
         return fallback;
     }
 
-    public maybe<R>(next: Bind<T | undefined | null, R>): Maybe<R> {
+    public maybe<R>(next: Bind<T | null | undefined, R>): Maybe<R> {
         return maybeOf(next(this.value));
     }
 
@@ -142,7 +142,7 @@ export function nil<T>(): Nil<T> {
     return naught as Nil<T>;
 }
 
-export function maybe<T>(value: T | undefined | null): Maybe<T> {
+export function maybe<T>(value: T | null | undefined): Maybe<T> {
     if (isUndefined(value)) {
         return nothing();
     }
@@ -169,7 +169,7 @@ export function optional<T>(value?: T): Maybe<T> {
 /**
  * @package
  */
-export function maybeOf<T>(value: Maybe<T> | T | undefined | null): Maybe<T> {
+export function maybeOf<T>(value: Maybe<T> | T | null | undefined): Maybe<T> {
     if (value instanceof Maybe) {
         return value;
     }

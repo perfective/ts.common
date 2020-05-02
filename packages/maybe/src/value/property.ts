@@ -1,5 +1,4 @@
 import {
-    Absent,
     Predicate,
     isAbsent,
     isDefined,
@@ -26,11 +25,11 @@ export type WithNull<T, K extends keyof T> = T & {
 };
 
 export type WithPresent<T, K extends keyof T> = T & {
-    [P in K]: T[P] extends Absent ? never : T[P];
+    [P in K]: T[P] extends null | undefined ? never : T[P];
 };
 
 export type WithAbsent<T, K extends keyof T> = T & {
-    [P in keyof Pick<T, K>]: T[P] extends Absent ? T[P] : never;
+    [P in keyof Pick<T, K>]: T[P] extends null | undefined ? T[P] : never;
 };
 
 export function hasDefinedProperty<T, K extends keyof T>(

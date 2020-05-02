@@ -1,5 +1,4 @@
-export type Absent = undefined | null;
-export type Present<T> = T extends Absent ? never : T;
+export type Present<T> = T extends null | undefined ? never : T;
 
 export type Unary<T, U> = (value: T) => U;
 export type Predicate<T> = (value: T) => boolean;
@@ -23,10 +22,10 @@ export function isNull<T>(value: T | null): value is null {
     return value === null;
 }
 
-export function isPresent<T>(value: T | undefined | null): value is T {
+export function isPresent<T>(value: T | null | undefined): value is T {
     return isDefined(value) && isNotNull(value);
 }
 
-export function isAbsent<T>(value: T | undefined | null): value is undefined | null {
+export function isAbsent<T>(value: T | null | undefined): value is null | undefined {
     return isUndefined(value) || isNull(value);
 }

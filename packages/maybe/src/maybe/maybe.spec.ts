@@ -39,7 +39,7 @@ function constant<T>(value: T): Nullary<T> {
 }
 
 interface Boxed<T> {
-    value?: T;
+    readonly value?: T | null;
 }
 
 describe('maybe', () => {
@@ -151,20 +151,39 @@ describe('just', () => {
             expect(just<Boxed<number>>({}).pick('value'))
                 .toStrictEqual(nothing());
         });
+
+        it('is an equivalent of the then() chain', () => {
+            const boxed: Boxed<Boxed<number>> = {
+                value: {
+                    value: 3.14,
+                },
+            };
+            expect(
+                just(boxed)
+                    .pick('value')
+                    .pick('value')
+                    .then(v => v.toString(10)),
+            ).toStrictEqual(
+                just(boxed)
+                    .then(b => b.value)
+                    .then(v => v.value)
+                    .then(v => v.toString(10)),
+            );
+        });
     });
 
     describe('index', () => {
         it('returns an existing element from an array', () => {
-            expect(maybe([2.71, 3.14]).index(0))
+            expect(just([2.71, 3.14]).index(0))
                 .toStrictEqual(just(2.71));
-            expect(maybe([2.71, 3.14]).index(1))
+            expect(just([2.71, 3.14]).index(1))
                 .toStrictEqual(just(3.14));
         });
 
         it('returns nothing for a missing elements from an array', () => {
-            expect(maybe([2.71, 3.14]).index(2))
+            expect(just([2.71, 3.14]).index(2))
                 .toStrictEqual(nothing());
-            expect(maybe([2.71, 3.14]).index(-1))
+            expect(just([2.71, 3.14]).index(-1))
                 .toStrictEqual(nothing());
         });
     });
@@ -299,9 +318,18 @@ describe('nothing', () => {
     });
 
     describe('pick', () => {
-        it('returns nothing for a property from on a missing object', () => {
-            expect(nothing<Boxed<number>>().pick('value'))
-                .toStrictEqual(nothing());
+        it('is an equivalent of the then() chain', () => {
+            expect(
+                nothing<Boxed<Boxed<number>>>()
+                    .pick('value')
+                    .pick('value')
+                    .then(v => v.toString(10)),
+            ).toStrictEqual(
+                nothing<Boxed<Boxed<number>>>()
+                    .then(b => b.value)
+                    .then(v => v.value)
+                    .then(v => v.toString(10)),
+            );
         });
     });
 
@@ -443,8 +471,17 @@ describe('nil', () => {
 
     describe('pick', () => {
         it('returns nothing for a property from on a missing object', () => {
-            expect(nil<Boxed<number>>().pick('value'))
-                .toStrictEqual(nil());
+            expect(
+                nil<Boxed<Boxed<number>>>()
+                    .pick('value')
+                    .pick('value')
+                    .then(v => v.toString(10)),
+            ).toStrictEqual(
+                nil<Boxed<Boxed<number>>>()
+                    .then(b => b.value)
+                    .then(v => v.value)
+                    .then(v => v.toString(10)),
+            );
         });
     });
 

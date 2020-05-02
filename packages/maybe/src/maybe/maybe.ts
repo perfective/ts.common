@@ -1,6 +1,14 @@
 // Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
 /* eslint-disable max-classes-per-file */
-import { Predicate, Unary, isAbsent, isNull, isPresent, isUndefined } from '../value/value';
+import {
+    Predicate,
+    Present,
+    Unary,
+    isAbsent,
+    isNull,
+    isPresent,
+    isUndefined,
+} from '../value/value';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
@@ -33,6 +41,10 @@ export abstract class Maybe<T> {
         return this.none();
     }
 
+    // Overload can not be combined as TSC starts incorrectly infer type U
+    public then<U>(next: (value: T) => Maybe<U>): Maybe<U>
+    // eslint-disable-next-line @typescript-eslint/unified-signatures
+    public then<U>(next: (value: T) => U | null | undefined): Maybe<U>
     public then<U>(next: Bind<T, U>): Maybe<U> {
         if (isAbsent(this.value)) {
             return this.none();
@@ -40,8 +52,8 @@ export abstract class Maybe<T> {
         return maybeOf<U>(next(this.value));
     }
 
-    public pick<K extends keyof T>(property: K): Maybe<T[K]> {
-        return this.then(v => v[property]);
+    public pick<K extends keyof T>(property: K): Maybe<Present<T[K]>> {
+        return this.then(v => v[property]) as unknown as Maybe<Present<T[K]>>;
     }
 
     public index(index: number): Maybe<ArrayElement<T>> {

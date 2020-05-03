@@ -3,6 +3,7 @@
 import {
     Predicate,
     Present,
+    TypeGuard,
     Unary,
     isAbsent,
     isNull,
@@ -32,6 +33,16 @@ export abstract class Maybe<T> {
             return this.none();
         }
         return this;
+    }
+
+    public with<V extends T>(is: TypeGuard<T, V>): Maybe<V> {
+        if (isPresent(this.value)) {
+            if (is(this.value)) {
+                return this as unknown as Just<V>;
+            }
+            return this.none();
+        }
+        return this as unknown as Nothing<V> | Nil<V>;
     }
 
     public when(outside: Condition): Maybe<T> {

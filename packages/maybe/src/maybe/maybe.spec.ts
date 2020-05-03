@@ -1,4 +1,11 @@
 import { panic } from '../error/error';
+import {
+    absentProperty,
+    definedProperty,
+    notNullProperty,
+    nullProperty, presentProperty,
+    undefinedProperty,
+} from '../value/property';
 import { Predicate, isDefined, isNotNull, isNull, isPresent, isUndefined } from '../value/value';
 
 import {
@@ -39,10 +46,27 @@ function constant<T>(value: T): Nullary<T> {
 }
 
 interface Boxed<T> {
-    readonly value?: T | null;
+    readonly value?: T | null | undefined;
 }
 
 type Matrix = readonly (readonly (number | null | undefined)[])[];
+
+interface TypeGuardCheck<T> {
+    readonly required: T;
+    readonly optional?: T;
+    readonly option: T | undefined;
+    readonly nullable: T | null;
+    readonly maybe: T | null | undefined;
+    readonly possible?: T | null | undefined;
+}
+
+const check: TypeGuardCheck<number> = {
+    required: 3.14,
+    option: undefined,
+    nullable: 0,
+    maybe: 2.71,
+    possible: null,
+};
 
 describe('maybe', () => {
     it('equals just() when value is present', () => {
@@ -124,6 +148,51 @@ describe('just', () => {
         it('filters out the value when condition fails', () => {
             expect(just(3.14).that(isLessThan(2.71)))
                 .toStrictEqual(nothing());
+        });
+    });
+
+    describe('with', () => {
+        it('returns just() when value passes the type guard', () => {
+            expect(just(check).with(definedProperty('required')))
+                .toStrictEqual(just(check));
+            expect(just(check).with(undefinedProperty('optional')))
+                .toStrictEqual(just(check));
+            expect(just(check).with(notNullProperty('nullable')))
+                .toStrictEqual(just(check));
+            expect(just(check).with(nullProperty('possible')))
+                .toStrictEqual(just(check));
+            expect(just(check).with(presentProperty('maybe')))
+                .toStrictEqual(just(check));
+            expect(just(check).with(absentProperty('option')))
+                .toStrictEqual(just(check));
+        });
+
+        it('returns nothing() when value fails the type guard', () => {
+            expect(just(check).with(undefinedProperty('required')))
+                .toStrictEqual(nothing());
+            expect(just(check).with(definedProperty('optional')))
+                .toStrictEqual(nothing());
+            expect(just(check).with(nullProperty('nullable')))
+                .toStrictEqual(nothing());
+            expect(just(check).with(notNullProperty('possible')))
+                .toStrictEqual(nothing());
+            expect(just(check).with(absentProperty('maybe')))
+                .toStrictEqual(nothing());
+            expect(just(check).with(presentProperty('option')))
+                .toStrictEqual(nothing());
+        });
+
+        it('combines checked properties', () => {
+            expect(
+                just(check)
+                    .with(definedProperty('required'))
+                    .with(definedProperty('option'))
+                    .then(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
+            ).toStrictEqual(
+                just(check)
+                    .with(definedProperty('required', 'option'))
+                    .then(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
+            );
         });
     });
 
@@ -318,6 +387,13 @@ describe('nothing', () => {
         });
     });
 
+    describe('with', () => {
+        it('remains nothing() after value is checked by the type guard', () => {
+            expect(nothing<TypeGuardCheck<number>>().with(presentProperty('maybe')))
+                .toStrictEqual(nothing());
+        });
+    });
+
     describe('when', () => {
         it('remains nothing when an outside condition holds', () => {
             expect(nothing().when(true))
@@ -480,6 +556,13 @@ describe('nil', () => {
 
         it('remains nil when condition fails', () => {
             expect(nil<number>().that(isNotNull))
+                .toStrictEqual(nil());
+        });
+    });
+
+    describe('with', () => {
+        it('remains nothing() after value is checked by the type guard', () => {
+            expect(nil<TypeGuardCheck<number>>().with(presentProperty('maybe')))
                 .toStrictEqual(nil());
         });
     });

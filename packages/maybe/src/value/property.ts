@@ -1,5 +1,9 @@
 import {
+    Absent,
+    Defined,
+    NotNull,
     Predicate,
+    Present,
     isAbsent,
     isDefined,
     isNotNull,
@@ -9,15 +13,15 @@ import {
 } from './value';
 
 export type WithDefined<T, K extends keyof T> = T & {
-    [P in K]-?: T[P];
+    [P in K]-?: Defined<T[P]>;
 };
 
 export type WithUndefined<T, K extends keyof T> = T & {
-    [P in keyof Pick<T, K>]: undefined;
+    [P in K]: undefined;
 };
 
 export type WithNotNull<T, K extends keyof T> = T & {
-    [P in keyof Pick<T, K>]: T[P] extends null ? never : T[P];
+    [P in K]: NotNull<T[P]>;
 };
 
 export type WithNull<T, K extends keyof T> = T & {
@@ -25,11 +29,11 @@ export type WithNull<T, K extends keyof T> = T & {
 };
 
 export type WithPresent<T, K extends keyof T> = T & {
-    [P in K]: T[P] extends null | undefined ? never : T[P];
+    [P in K]-?: Present<T[P]>;
 };
 
 export type WithAbsent<T, K extends keyof T> = T & {
-    [P in keyof Pick<T, K>]: T[P] extends null | undefined ? T[P] : never;
+    [P in K]: Absent<T[P]>;
 };
 
 export function hasDefinedProperty<T, K extends keyof T>(
@@ -40,12 +44,30 @@ export function hasDefinedProperty<T, K extends keyof T>(
     return hasPropertiesThat(isDefined, value, [property].concat(and));
 }
 
+export function definedProperty<T, K extends keyof T>(
+    property: K,
+    ...and: readonly K[]
+): (value: T) => value is WithDefined<T, K> {
+    return (value: T): value is WithDefined<T, K> => hasDefinedProperty(value, property, ...and);
+}
+
 export function hasUndefinedProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
 ): value is WithUndefined<T, K> {
     return hasPropertiesThat(isUndefined, value, [property].concat(and));
+}
+
+export function undefinedProperty<T, K extends keyof T>(
+    property: K,
+    ...and: readonly K[]
+): (value: T) => value is WithUndefined<T, K> {
+    return (value: T): value is WithUndefined<T, K> => hasUndefinedProperty(
+        value,
+        property,
+        ...and,
+    );
 }
 
 export function hasNotNullProperty<T, K extends keyof T>(
@@ -56,12 +78,26 @@ export function hasNotNullProperty<T, K extends keyof T>(
     return hasPropertiesThat(isNotNull, value, [property].concat(and));
 }
 
+export function notNullProperty<T, K extends keyof T>(
+    property: K,
+    ...and: readonly K[]
+): (value: T) => value is WithNotNull<T, K> {
+    return (value: T): value is WithNotNull<T, K> => hasNotNullProperty(value, property, ...and);
+}
+
 export function hasNullProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
 ): value is WithNull<T, K> {
     return hasPropertiesThat(isNull, value, [property].concat(and));
+}
+
+export function nullProperty<T, K extends keyof T>(
+    property: K,
+    ...and: readonly K[]
+): (value: T) => value is WithNull<T, K> {
+    return (value: T): value is WithNull<T, K> => hasNullProperty(value, property, ...and);
 }
 
 export function hasPresentProperty<T, K extends keyof T>(
@@ -72,12 +108,26 @@ export function hasPresentProperty<T, K extends keyof T>(
     return hasPropertiesThat(isPresent, value, [property].concat(and));
 }
 
+export function presentProperty<T, K extends keyof T>(
+    property: K,
+    ...and: readonly K[]
+): (value: T) => value is WithPresent<T, K> {
+    return (value: T): value is WithPresent<T, K> => hasPresentProperty(value, property, ...and);
+}
+
 export function hasAbsentProperty<T, K extends keyof T>(
     value: T,
     property: K,
     ...and: readonly K[]
 ): value is WithAbsent<T, K> {
     return hasPropertiesThat(isAbsent, value, [property].concat(and));
+}
+
+export function absentProperty<T, K extends keyof T>(
+    property: K,
+    ...and: readonly K[]
+): (value: T) => value is WithAbsent<T, K> {
+    return (value: T): value is WithAbsent<T, K> => hasAbsentProperty(value, property, ...and);
 }
 
 function hasPropertiesThat<T, K extends keyof T>(

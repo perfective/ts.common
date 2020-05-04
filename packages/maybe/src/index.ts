@@ -18,11 +18,17 @@ export {
 } from './error/error';
 export {
     absentValueOrPanic,
+    absentValueOrThrow,
     definedValueOrPanic,
+    definedValueOrThrow,
     notNullValueOrPanic,
+    notNullValueOrThrow,
     nullValueOrPanic,
+    nullValueOrThrow,
     presentValueOrPanic,
+    presentValueOrThrow,
     undefinedValueOrPanic,
+    undefinedValueOrThrow,
 } from './error/value';
 
 export {

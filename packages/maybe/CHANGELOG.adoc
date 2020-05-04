@@ -1,5 +1,26 @@
 = Changelog
 
+== v0.3.0
+
+* Move fallback support from `Maybe.otherwise()` to `Maybe.or()`.
+* Add `Just<T>`, `Nothing<T>`, and `Nil<T>` sealed classes.
+* Provide a fallback to `Just<T>` in `Maybe.otherwise()` to allow chaining after a fallback.
+* Keep context of `Nothing<T>` and `Nil<T>` through the chain.
+* Add `Maybe.when()` method to filter based on an outside values.
+* Add `Maybe.with()` method to filter based on a provided type-guard:
+** `definedProperty()`/`undefinedProperty()`,
+** `notNullProperty()`/`nullProperty()`,
+** `presentProperty()`/`absentProperty()`.
+* Add `throws()` function.
+* Add `isError()` function.
+* Add `…ValueOrPanic()` unpacking functions:
+** `definedValueOrPanic`/`undefinedValueOrPanic`,
+** `notNullValueOrPanic`/`nullValueOrPanic`,
+** `presentValueOrPanic`/`absentValueOrPanic`.
+* Fix: explicitly use `undefined` in type guards.
+* Fix: filter out absent types from `Maybe.pick()` signature.
+* Fix: filter out absent types from `Maybe.index()` signature.
+
 == v0.2.3
 
 * Add object properties type-guards:

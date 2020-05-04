@@ -1,5 +1,13 @@
 = Changelog
 
+== v0.3.1
+
+* Add `…ValueOrThrow()` unpacking functions:
+** `definedValueOrThrow`/`undefinedValueOrThrow`,
+** `notNullValueOrThrow`/`nullValueOrThrow`,
+** `presentValueOrThrow`/`absentValueOrThrow`.
+* Fix: export functions and types added in the previous version.
+
 == v0.3.0
 
 * Move fallback support from `Maybe.otherwise()` to `Maybe.or()`.

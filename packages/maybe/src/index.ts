@@ -35,15 +35,31 @@ export {
 } from './promise/promise';
 
 export {
+    WithAbsent,
+    WithDefined,
+    WithNotNull,
+    WithNull,
+    WithPresent,
+    WithUndefined,
+    absentProperty,
+    definedProperty,
     hasAbsentProperty,
     hasDefinedProperty,
     hasNotNullProperty,
     hasNullProperty,
     hasPresentProperty,
     hasUndefinedProperty,
+    notNullProperty,
+    nullProperty,
+    presentProperty,
+    undefinedProperty,
 } from './value/property';
 
 export {
+    Absent,
+    Defined,
+    NotNull,
+    Present,
     isAbsent,
     isDefined,
     isNotNull,

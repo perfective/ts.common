@@ -3,7 +3,8 @@ import {
     absentProperty,
     definedProperty,
     notNullProperty,
-    nullProperty, presentProperty,
+    nullProperty,
+    presentProperty,
     undefinedProperty,
 } from '../value/property';
 import { Predicate, isDefined, isNotNull, isNull, isPresent, isUndefined } from '../value/value';
@@ -114,6 +115,40 @@ describe('just', () => {
         it('is a required value', () => {
             expect(just<number>(3.14).value)
                 .toStrictEqual(3.14);
+        });
+    });
+
+    describe('onto', () => {
+        it('satisfies left identity monad law', () => {
+            expect(just(3.14).onto(justDecimal))
+                .toStrictEqual(justDecimal(3.14));
+        });
+
+        it('satisfies right identity monad law', () => {
+            expect(just(3.14).onto(maybe))
+                .toStrictEqual(just(3.14));
+        });
+
+        it('satisfies associativity monad law', () => {
+            expect(just(3.14).onto(x => justDecimal(x).onto(split)))
+                .toStrictEqual(just(3.14).onto(justDecimal).onto(split));
+        });
+    });
+
+    describe('to', () => {
+        it('returns Just next value when the bind function returns a present value', () => {
+            expect(just(3.14).to(decimal))
+                .toStrictEqual(just(decimal(3.14)));
+        });
+
+        it('returns Nothing when the bind function returns undefined', () => {
+            expect(just(3.14).to(() => undefined))
+                .toStrictEqual(nothing());
+        });
+
+        it('returns Nil when the bind function returns null', () => {
+            expect(just(3.14).to(() => null))
+                .toStrictEqual(nil());
         });
     });
 
@@ -353,6 +388,30 @@ describe('nothing', () => {
         });
     });
 
+    describe('onto', () => {
+        it('satisfies left identity monad law for an undefined value', () => {
+            expect(nothing<number>().onto(justDecimal))
+                .toStrictEqual(nothing());
+        });
+
+        it('satisfies right identity monad law', () => {
+            expect(nothing<number>().onto(maybe))
+                .toStrictEqual(nothing());
+        });
+
+        it('satisfies associativity monad law', () => {
+            expect(nothing<number>().onto(x => justDecimal(x).onto(split)))
+                .toStrictEqual(nothing<number>().onto(justDecimal).onto(split));
+        });
+    });
+
+    describe('to', () => {
+        it('skips the mapping function', () => {
+            expect(nothing<number>().to<string>(decimal))
+                .toStrictEqual(nothing());
+        });
+    });
+
     describe('then', () => {
         it('satisfies left identity monad law for an undefined value', () => {
             expect(nothing<number>().then(justDecimal))
@@ -523,6 +582,30 @@ describe('nil', () => {
         it('is a null value', () => {
             expect(nil<number>().value)
                 .toBeNull();
+        });
+    });
+
+    describe('onto', () => {
+        it('satisfies left identity monad law for an undefined value', () => {
+            expect(nil<number>().onto(justDecimal))
+                .toStrictEqual(nil());
+        });
+
+        it('satisfies right identity monad law', () => {
+            expect(nil<number>().onto(maybe))
+                .toStrictEqual(nil());
+        });
+
+        it('satisfies associativity monad law', () => {
+            expect(nil<number>().onto(x => justDecimal(x).onto(split)))
+                .toStrictEqual(nil<number>().onto(justDecimal).onto(split));
+        });
+    });
+
+    describe('to', () => {
+        it('skips the mapping function', () => {
+            expect(nil<number>().to<string>(decimal))
+                .toStrictEqual(nil());
         });
     });
 

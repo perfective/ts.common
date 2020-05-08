@@ -25,6 +25,20 @@ export abstract class Maybe<T> {
     ) {
     }
 
+    public onto<U>(bind: (value: T) => Maybe<U>): Maybe<U> {
+        if (isPresent(this.value)) {
+            return bind(this.value);
+        }
+        return this.none();
+    }
+
+    public to<U>(map: (value: T) => U | null | undefined): Maybe<U> {
+        if (isPresent(this.value)) {
+            return maybe(map(this.value));
+        }
+        return this.none();
+    }
+
     public that(is: Predicate<T>): Maybe<T> {
         if (isPresent(this.value)) {
             if (is(this.value)) {

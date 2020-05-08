@@ -13,6 +13,10 @@ export class Identity<T> {
     }
 }
 
+export function identity<T>(value: T): Identity<T> {
+    return new Identity<T>(value);
+}
+
 export function take<T>(value: T): Identity<T> {
     return new Identity<T>(value);
 }

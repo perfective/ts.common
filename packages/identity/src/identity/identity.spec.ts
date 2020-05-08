@@ -1,35 +1,42 @@
-import { Identity, take } from './identity';
+import { Identity, identity, take } from './identity';
 
 function negative(x: number): Identity<number> {
-    return take(-x);
+    return identity(-x);
 }
 
 function square(x: number): Identity<number> {
-    return take(x * x);
+    return identity(x * x);
 }
 
-describe('take', () => {
+describe('identity', () => {
     describe('onto', () => {
         it('satisfies left identity monad law', () => {
-            expect(take(3.14).onto(negative))
+            expect(identity(3.14).onto(negative))
                 .toStrictEqual(negative(3.14));
         });
 
         it('satisfies right identity monad law', () => {
-            expect(take(3.14).onto(take))
-                .toStrictEqual(take(3.14));
+            expect(identity(3.14).onto(identity))
+                .toStrictEqual(identity(3.14));
         });
 
         it('satisfies associativity monad law', () => {
-            expect(take(3.14).onto(negative).onto(square))
-                .toStrictEqual(take(3.14).onto(x => negative(x).onto(square)));
+            expect(identity(3.14).onto(negative).onto(square))
+                .toStrictEqual(identity(3.14).onto(x => negative(x).onto(square)));
         });
     });
 
     describe('to', () => {
         it('maps the value', () => {
-            expect(take(3.14).to(x => -x))
-                .toStrictEqual(take(-3.14));
+            expect(identity(3.14).to(x => -x))
+                .toStrictEqual(identity(-3.14));
         });
+    });
+});
+
+describe('take', () => {
+    it('creates an Identity', () => {
+        expect(take(3.14))
+            .toStrictEqual(identity(3.14));
     });
 });

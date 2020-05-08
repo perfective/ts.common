@@ -1,5 +1,11 @@
 = Changelog
 
+== v0.3.2
+
+* Add `Maybe.onto()` as a bind operator.
+* Add `Maybe.to()` as a mapping operator.
+* Fix: require an argument in the `optional()` unit function.
+
 == v0.3.1
 
 * Add `…ValueOrThrow()` unpacking functions:

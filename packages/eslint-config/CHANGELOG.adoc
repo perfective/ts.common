@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.2.11
+
+* Updated `@typescript-eslint` to `2.31.0`:
+** Enabled the `@typescript-eslint/no-invalid-this` rule.
+** Configured sorting order for decorated fields and methods.
+** Configured the `@typescript-eslint/prefer-optional-chain` rule.
+* Updated `eslint-plugin-jest` to `23.9.0`:
+** Enabled the `jest/no-deprecated-functions` rule.
+* Updated `eslint-plugin-deprecation` to `1.0.1`.
+* Disabled the `max-statements` rule for specs.
+* [`community`] Allowed uppercase names in `describe()` for to support PascalCase class names.
+
 == v0.2.10
 
 * Configure `@typescript-eslint/no-invalid-void-type` to allow `void` in generic types

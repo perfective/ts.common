@@ -1,27 +1,18 @@
-export type Unary<T, U> = (value: T) => U;
-export type Bind<T, U> = Unary<T, Identity<U>> | Unary<T, U>;
-
 export class Identity<T> {
     public constructor(
         public readonly value: T,
     ) {
     }
 
-    public then<U>(next: Bind<T, U>): Identity<U> {
-        return identityOf(next(this.value));
+    public onto<U>(bind: (value: T) => Identity<U>): Identity<U> {
+        return bind(this.value);
+    }
+
+    public to<U>(map: (value: T) => U): Identity<U> {
+        return take(map(this.value));
     }
 }
 
 export function take<T>(value: T): Identity<T> {
     return new Identity<T>(value);
-}
-
-/**
- * @package
- */
-export function identityOf<T>(value: Identity<T> | T): Identity<T> {
-    if (value instanceof Identity) {
-        return value;
-    }
-    return take(value);
 }

@@ -92,7 +92,7 @@ describe('optional', () => {
     });
 
     it('equals nothing() when value is undefined', () => {
-        expect(optional<number>())
+        expect(optional<number>(undefined))
             .toStrictEqual(nothing());
     });
 });

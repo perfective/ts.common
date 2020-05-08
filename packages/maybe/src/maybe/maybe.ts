@@ -182,7 +182,7 @@ export function nullable<T>(value: T | null): Maybe<T> {
     return just(value);
 }
 
-export function optional<T>(value?: T): Maybe<T> {
+export function optional<T>(value: T | undefined): Maybe<T> {
     if (isUndefined(value)) {
         return nothing();
     }

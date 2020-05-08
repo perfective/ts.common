@@ -10,6 +10,7 @@ export = {
         'jest/lowercase-name': 'error',
         'jest/no-alias-methods': 'error',
         'jest/no-commented-out-tests': 'error',
+        'jest/no-deprecated-functions': 'error',
         'jest/no-disabled-tests': 'error',
         'jest/no-duplicate-hooks': 'error',
         'jest/no-expect-resolves': 'error',

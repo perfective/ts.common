@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.2.12
+
+* Fixed the `jest/lowercase-name` rule config.
+
 == v0.2.11
 
 * Updated `@typescript-eslint` to `2.31.0`:

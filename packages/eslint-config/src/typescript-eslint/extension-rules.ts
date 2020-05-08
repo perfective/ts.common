@@ -42,6 +42,8 @@ export = {
         '@typescript-eslint/no-extra-parens': 'error',
         'no-extra-semi': 'off',
         '@typescript-eslint/no-extra-semi': 'error',
+        'no-invalid-this': 'off',
+        '@typescript-eslint/no-invalid-this': 'error',
         'no-magic-numbers': 'off',
         '@typescript-eslint/no-magic-numbers': 'off',
         'no-throw-literal': 'off',

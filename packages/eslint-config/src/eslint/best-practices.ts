@@ -38,8 +38,7 @@ export = {
         'no-implicit-coercion': 'error',
         'no-implicit-globals': 'error',
         'no-implied-eval': 'error',
-        // Does not support TypeScript `this` parameter
-        'no-invalid-this': 'off',
+        'no-invalid-this': 'error',
         'no-iterator': 'error',
         'no-labels': 'error',
         'no-lone-blocks': 'error',

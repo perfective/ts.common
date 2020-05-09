@@ -11,6 +11,11 @@ export class Identity<T> {
     public to<U>(map: (value: T) => U): Identity<U> {
         return take(map(this.value));
     }
+
+    public run(procedure: (value: T) => void): Identity<T> {
+        procedure(this.value);
+        return this;
+    }
 }
 
 export function identity<T>(value: T): Identity<T> {

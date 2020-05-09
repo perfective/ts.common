@@ -32,6 +32,15 @@ describe('identity', () => {
                 .toStrictEqual(identity(-3.14));
         });
     });
+
+    describe('run', () => {
+        it('runs a given procedure', () => {
+            let a = 1;
+            // eslint-disable-next-line no-return-assign
+            identity(2.71).run(v => a += v);
+            expect(a).toStrictEqual(3.71);
+        });
+    });
 });
 
 describe('take', () => {

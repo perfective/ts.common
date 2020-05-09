@@ -9,6 +9,13 @@ function square(x: number): Identity<number> {
 }
 
 describe('identity', () => {
+    describe('value', () => {
+        it('contains a given value', () => {
+            expect(identity(3.14).value)
+                .toStrictEqual(3.14);
+        });
+    });
+
     describe('onto', () => {
         it('satisfies left identity monad law', () => {
             expect(identity(3.14).onto(negative))

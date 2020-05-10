@@ -358,23 +358,9 @@ describe('just', () => {
         });
     });
 
-    describe('maybe', () => {
-        it('passes defined value as is', () => {
-            expect(just(3.14).maybe(isPresent))
-                .toStrictEqual(just(true));
-        });
-    });
-
-    describe('optional', () => {
-        it('passes defined value as is', () => {
-            expect(just(3.14).optional(isPresent))
-                .toStrictEqual(just(true));
-        });
-    });
-
-    describe('nullable', () => {
-        it('passes defined value as is', () => {
-            expect(just(3.14).nullable(isPresent))
+    describe('lift', () => {
+        it('applies the function to the plain monadic value', () => {
+            expect(just(3.14).lift(isPresent))
                 .toStrictEqual(just(true));
         });
     });
@@ -555,24 +541,10 @@ describe('nothing', () => {
         });
     });
 
-    describe('maybe', () => {
-        it('passes the undefined value', () => {
-            expect(nothing<number>().maybe(isUndefined))
+    describe('lift', () => {
+        it('applies the function to the plain monadic value', () => {
+            expect(nothing().lift(isUndefined))
                 .toStrictEqual(just(true));
-        });
-    });
-
-    describe('optional', () => {
-        it('passes the undefined value', () => {
-            expect(nothing<number>().optional(isUndefined))
-                .toStrictEqual(just(true));
-        });
-    });
-
-    describe('nullable', () => {
-        it('skips the undefined value', () => {
-            expect(nothing<number>().nullable(isUndefined))
-                .toStrictEqual(nothing());
         });
     });
 });
@@ -752,23 +724,9 @@ describe('nil', () => {
         });
     });
 
-    describe('maybe', () => {
-        it('passes the null value', () => {
-            expect(nil<number>().maybe(isNull))
-                .toStrictEqual(just(true));
-        });
-    });
-
-    describe('optional', () => {
-        it('skips the null value', () => {
-            expect(nil<number>().optional(isNull))
-                .toStrictEqual(nothing());
-        });
-    });
-
-    describe('nullable', () => {
-        it('passes the null value', () => {
-            expect(nil<number>().nullable(isNull))
+    describe('lift', () => {
+        it('applies the function to the plain monadic value', () => {
+            expect(nil().lift(isNull))
                 .toStrictEqual(just(true));
         });
     });

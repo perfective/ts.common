@@ -108,22 +108,8 @@ export abstract class Maybe<T> {
         return fallback;
     }
 
-    public maybe<R>(next: Bind<T | null | undefined, R>): Maybe<R> {
-        return maybeOf(next(this.value));
-    }
-
-    public optional<R>(next: Bind<T | undefined, R>): Maybe<R> {
-        if (isNull(this.value)) {
-            return nothing();
-        }
-        return maybeOf(next(this.value));
-    }
-
-    public nullable<R>(next: Bind<T | null, R>): Maybe<R> {
-        if (isUndefined(this.value)) {
-            return nothing();
-        }
-        return maybeOf(next(this.value));
+    public lift<V>(lift: (value: T | null | undefined) => V): Maybe<V> {
+        return maybe(lift(this.value));
     }
 }
 

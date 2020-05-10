@@ -1,6 +1,6 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "Maybe monad-like container",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
@@ -10,6 +10,7 @@
     "files": [
         "dist"
     ],
+    "sideEffects": false,
     "scripts": {
         "build": "tsc",
         "build:clean": "npm run clean && npm run build",

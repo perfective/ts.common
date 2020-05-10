@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.3.3
+
+* Added `Maybe.lift()` method to map to the plain `Maybe` value.
+* Added `sideEffects: false` flag to ensure Webpack tree-shaking.
+
 == v0.3.2
 
 * Add `Maybe.onto()` as a bind operator.

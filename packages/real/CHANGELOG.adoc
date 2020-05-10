@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.1.1
+
+* Fixed clean up scripts.
+* Included the built `dist` code.
+
 == v0.1.0
 
 * Added base conversion functions: `decimal`, `binary`, `octal`, and `hexadecimal`.

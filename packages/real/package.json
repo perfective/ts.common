@@ -1,6 +1,6 @@
 {
     "name": "@perfective/real",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Functions to work with real numbers",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
@@ -11,8 +11,9 @@
         "dist"
     ],
     "scripts": {
-        "clean": "rm -rf dist",
-        "build": "npm run clean && tsc",
+        "build": "tsc",
+        "build:clean": "npm run clean && npm run build",
+        "clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo && jest --clearCache",
         "lint": "npm run lint:eslint; npm run lint:tslint",
         "lint:eslint": "eslint --fix --ext .ts ./src",
         "lint:tslint": "tslint --fix --project ./tsconfig.json",

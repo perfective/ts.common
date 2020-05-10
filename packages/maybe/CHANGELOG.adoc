@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.3.4
+
+* Removed `Maybe.then()` as it conflicts with `Promise.then()` and `PromiseLike<T>`.
+
 == v0.3.3
 
 * Added `Maybe.lift()` method to map to the plain `Maybe` value.

@@ -1,11 +1,10 @@
 {
     "name": "@perfective/identity",
-    "version": "0.0.0",
-    "description": "Identity monad (WIP)",
+    "version": "0.1.0",
+    "description": "Identity monad",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",
-    "private": true,
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "files": [

@@ -8,11 +8,13 @@
         "charset": "utf-8",
         "checkJs": false,
         "declaration": true,
+        "declarationMap": true,
         "downlevelIteration": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "incremental": true,
         "keyofStringsOnly": true,
+        "module": "commonjs",
         "newLine": "lf",
         "noEmitOnError": true,
         "noErrorTruncation": true,
@@ -31,12 +33,14 @@
         "removeComments": true,
         "resolveJsonModule": false,
         "skipLibCheck": false,
+        "sourceMap": true,
         "strict": true,
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
-        "strictPropertyInitialization": true,
         "strictNullChecks": true,
+        "strictPropertyInitialization": true,
         "suppressExcessPropertyErrors": false,
-        "suppressImplicitAnyIndexErrors": false
+        "suppressImplicitAnyIndexErrors": false,
+        "target": "es5"
     }
 }

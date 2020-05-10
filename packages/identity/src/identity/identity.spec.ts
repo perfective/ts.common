@@ -1,4 +1,4 @@
-import { Identity, identity, take } from './identity';
+import { Identity, identity, isIdentity, take } from './identity';
 
 function negative(x: number): Identity<number> {
     return identity(-x);
@@ -54,5 +54,17 @@ describe('take', () => {
     it('creates an Identity', () => {
         expect(take(3.14))
             .toStrictEqual(identity(3.14));
+    });
+});
+
+describe('isIdentity', () => {
+    it('returns true when value is an Identity', () => {
+        expect(isIdentity(identity(3.14)))
+            .toBe(true);
+    });
+
+    it('returns false when value is not an Identity', () => {
+        expect(isIdentity(3.14))
+            .toBe(false);
     });
 });

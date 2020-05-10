@@ -1,0 +1,9 @@
+= Changelog
+
+== v0.1.0
+
+* Added the `isFunction()` and `isNotFunction()` type guards.
+* Added `Nullary<T>` type with the `constant()`, `empty()` and `fallbackTo()` functions.
+* Added `Unary<X, T>` type with the `value()` function.
+* Declared `Binary<X, Y, T>` type.
+* Declared `Ternary<X, Y, Z, T>` type.

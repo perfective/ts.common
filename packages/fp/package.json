@@ -1,0 +1,22 @@
+{
+    "name": "@perfective/fp",
+    "version": "0.1.0",
+    "description": "Functions and types for functional programming",
+    "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
+    "homepage": "https://github.com/perfective/js",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "build:clean": "npm run clean && npm run build",
+        "clean": "rm -rf dist && rm -f tsconfig.tsbuildinfo && jest --clearCache",
+        "lint": "npm run lint:eslint; npm run lint:tslint",
+        "lint:eslint": "eslint --fix --ext .ts ./src",
+        "lint:tslint": "tslint --fix --project ./tsconfig.json",
+        "test": "jest"
+    }
+}

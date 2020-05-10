@@ -35,7 +35,7 @@ function decimal(value: number): string {
 }
 
 function justDecimal(value: number): Maybe<string> {
-    return just(value).then(decimal);
+    return just(value).to(decimal);
 }
 
 function split(value: string): Maybe<string[]> {
@@ -152,28 +152,6 @@ describe('just', () => {
         });
     });
 
-    describe('then', () => {
-        it('satisfies left identity monad law', () => {
-            expect(just(3.14).then(justDecimal))
-                .toStrictEqual(justDecimal(3.14));
-        });
-
-        it('satisfies right identity monad law', () => {
-            expect(just(3.14).then(maybe))
-                .toStrictEqual(just(3.14));
-        });
-
-        it('satisfies associativity monad law', () => {
-            expect(just(3.14).then(x => justDecimal(x).then(split)))
-                .toStrictEqual(just(3.14).then(justDecimal).then(split));
-        });
-
-        it('wraps non-Maybe values into Maybe', () => {
-            expect(just(3.14).then(decimal))
-                .toStrictEqual(just('3.14'));
-        });
-    });
-
     describe('that', () => {
         it('keeps the value when condition holds', () => {
             expect(just(3.14).that(isGreaterThan(2.71)))
@@ -222,11 +200,11 @@ describe('just', () => {
                 just(check)
                     .with(definedProperty('required'))
                     .with(definedProperty('option'))
-                    .then(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
+                    .to(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
             ).toStrictEqual(
                 just(check)
                     .with(definedProperty('required', 'option'))
-                    .then(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
+                    .to(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
             );
         });
     });
@@ -268,12 +246,12 @@ describe('just', () => {
                 just(boxed)
                     .pick('value')
                     .pick('value')
-                    .then(v => v.toString(10)),
+                    .to(v => v.toString(10)),
             ).toStrictEqual(
                 just(boxed)
-                    .then(b => b.value)
-                    .then(v => v.value)
-                    .then(v => v.toString(10)),
+                    .to(b => b.value)
+                    .to(v => v.value)
+                    .to(v => v.toString(10)),
             );
         });
     });
@@ -299,12 +277,12 @@ describe('just', () => {
                 just(matrix)
                     .index(0)
                     .index(1)
-                    .then(v => v.toString(10)),
+                    .to(v => v.toString(10)),
             ).toStrictEqual(
                 just(matrix)
-                    .then(m => m[0])
-                    .then(m => m[1])
-                    .then(v => v.toString(10)),
+                    .to(m => m[0])
+                    .to(m => m[1])
+                    .to(v => v.toString(10)),
             );
         });
     });
@@ -398,28 +376,6 @@ describe('nothing', () => {
         });
     });
 
-    describe('then', () => {
-        it('satisfies left identity monad law for an undefined value', () => {
-            expect(nothing<number>().then(justDecimal))
-                .toStrictEqual(nothing());
-        });
-
-        it('satisfies right identity monad law', () => {
-            expect(nothing<number>().then(maybe))
-                .toStrictEqual(nothing());
-        });
-
-        it('satisfies associativity monad law', () => {
-            expect(nothing<number>().then(x => justDecimal(x).then(split)))
-                .toStrictEqual(nothing<number>().then(justDecimal).then(split));
-        });
-
-        it('wraps non-Maybe values into Maybe', () => {
-            expect(nothing<number>().then<string>(decimal).value)
-                .toBeUndefined();
-        });
-    });
-
     describe('that', () => {
         it('remains nothing when condition holds', () => {
             expect(nothing<number>().that(isUndefined))
@@ -461,12 +417,12 @@ describe('nothing', () => {
                 nothing<Boxed<Boxed<number>>>()
                     .pick('value')
                     .pick('value')
-                    .then(v => v.toString(10)),
+                    .to(v => v.toString(10)),
             ).toStrictEqual(
                 nothing<Boxed<Boxed<number>>>()
-                    .then(b => b.value)
-                    .then(v => v.value)
-                    .then(v => v.toString(10)),
+                    .to(b => b.value)
+                    .to(v => v.value)
+                    .to(v => v.toString(10)),
             );
         });
     });
@@ -482,12 +438,12 @@ describe('nothing', () => {
                 nothing<Matrix>()
                     .index(0)
                     .index(1)
-                    .then(v => v.toString(10)),
+                    .to(v => v.toString(10)),
             ).toStrictEqual(
                 nothing<Matrix>()
-                    .then(m => m[0])
-                    .then(m => m[1])
-                    .then(v => v.toString(10)),
+                    .to(m => m[0])
+                    .to(m => m[1])
+                    .to(v => v.toString(10)),
             );
         });
     });
@@ -581,28 +537,6 @@ describe('nil', () => {
         });
     });
 
-    describe('then', () => {
-        it('satisfies left identity monad law for an undefined value', () => {
-            expect(nil<number>().then(justDecimal))
-                .toStrictEqual(nil());
-        });
-
-        it('satisfies right identity monad law', () => {
-            expect(nil<number>().then(maybe))
-                .toStrictEqual(nil());
-        });
-
-        it('satisfies associativity monad law', () => {
-            expect(nil<number>().then(x => justDecimal(x).then(split)))
-                .toStrictEqual(nil<number>().then(justDecimal).then(split));
-        });
-
-        it('wraps non-Maybe values into Maybe', () => {
-            expect(nil<number>().then(decimal))
-                .toStrictEqual(nil());
-        });
-    });
-
     describe('that', () => {
         it('remains nil when condition holds', () => {
             expect(nil<number>().that(isNull))
@@ -644,12 +578,12 @@ describe('nil', () => {
                 nil<Boxed<Boxed<number>>>()
                     .pick('value')
                     .pick('value')
-                    .then(v => v.toString(10)),
+                    .to(v => v.toString(10)),
             ).toStrictEqual(
                 nil<Boxed<Boxed<number>>>()
-                    .then(b => b.value)
-                    .then(v => v.value)
-                    .then(v => v.toString(10)),
+                    .to(b => b.value)
+                    .to(v => v.value)
+                    .to(v => v.toString(10)),
             );
         });
     });
@@ -665,12 +599,12 @@ describe('nil', () => {
                 nil<Matrix>()
                     .index(0)
                     .index(1)
-                    .then(v => v.toString(10)),
+                    .to(v => v.toString(10)),
             ).toStrictEqual(
                 nil<Matrix>()
-                    .then(m => m[0])
-                    .then(m => m[1])
-                    .then(v => v.toString(10)),
+                    .to(m => m[0])
+                    .to(m => m[1])
+                    .to(v => v.toString(10)),
             );
         });
     });

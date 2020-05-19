@@ -1,3 +1,5 @@
+import { isFunction } from './function';
+
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
 
@@ -10,9 +12,9 @@ export function empty(): Nullary<void> {
     return (): void => undefined;
 }
 
-export function fallbackTo<T>(fallback: Fallback<T>): T {
-    if (fallback instanceof Function) {
-        return fallback();
+export function fallbackTo<T>(value: Fallback<T>): T {
+    if (isFunction(value)) {
+        return value();
     }
-    return fallback;
+    return value;
 }

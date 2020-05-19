@@ -4,6 +4,7 @@ export {
 } from './function/function';
 
 export {
+    Fallback,
     Nullary,
     constant,
     empty,

@@ -19,5 +19,12 @@
         "lint:eslint": "eslint --fix --ext .ts ./src",
         "lint:tslint": "tslint --fix --project ./tsconfig.lint.json",
         "test": "jest"
+    },
+    "dependencies": {
+        "@perfective/error": "^0.1.0",
+        "@perfective/fp": "^0.1.3",
+        "@perfective/object": "^0.1.0",
+        "@perfective/real": "^0.2.0",
+        "@perfective/value": "^0.1.0"
     }
 }

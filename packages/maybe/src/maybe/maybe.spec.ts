@@ -1,4 +1,5 @@
-import { panic } from '../error/error';
+import { panic } from '@perfective/error';
+import { constant } from '@perfective/fp';
 import {
     absentProperty,
     definedProperty,
@@ -6,43 +7,18 @@ import {
     nullProperty,
     presentProperty,
     undefinedProperty,
-} from '../value/property';
-import { Predicate, isDefined, isNotNull, isNull, isPresent, isUndefined } from '../value/value';
+} from '@perfective/object';
+import { decimal, isGreaterThan, isLessThan } from '@perfective/real';
+import { isDefined, isNotNull, isNull, isPresent, isUndefined } from '@perfective/value';
 
-import {
-    Maybe,
-    Nullary,
-    fallbackTo,
-    just,
-    maybe,
-    nil,
-    nothing,
-    nullable,
-    optional,
-} from './maybe';
-
-function isGreaterThan(value: number): Predicate<number> {
-    return (input: number): boolean => input > value;
-}
-
-function isLessThan(value: number): Predicate<number> {
-    return (input: number): boolean => input < value;
-}
-
-function decimal(value: number): string {
-    return value.toString(10);
-}
+import { Maybe, just, maybe, nil, nothing, nullable, optional } from './maybe';
 
 function justDecimal(value: number): Maybe<string> {
-    return just(value).to(decimal);
+    return just(value).to<string>(decimal);
 }
 
-function split(value: string): Maybe<string[]> {
+function justSplit(value: string): Maybe<string[]> {
     return just(value.split('.'));
-}
-
-function constant<T>(value: T): Nullary<T> {
-    return (): T => value;
 }
 
 interface Boxed<T> {
@@ -129,14 +105,14 @@ describe('just', () => {
         });
 
         it('satisfies associativity monad law', () => {
-            expect(just(3.14).onto(x => justDecimal(x).onto(split)))
-                .toStrictEqual(just(3.14).onto(justDecimal).onto(split));
+            expect(just(3.14).onto(x => justDecimal(x).onto(justSplit)))
+                .toStrictEqual(just(3.14).onto(justDecimal).onto(justSplit));
         });
     });
 
     describe('to', () => {
         it('returns Just next value when the bind function returns a present value', () => {
-            expect(just(3.14).to(decimal))
+            expect(just(3.14).to<string>(decimal))
                 .toStrictEqual(just(decimal(3.14)));
         });
 
@@ -199,11 +175,11 @@ describe('just', () => {
                 just(check)
                     .with(definedProperty('required'))
                     .with(definedProperty('option'))
-                    .to(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
+                    .to(v => `${decimal(v.required)}:${decimal(v.option)}`),
             ).toStrictEqual(
                 just(check)
                     .with(definedProperty('required', 'option'))
-                    .to(v => `${v.required.toString(10)}:${v.option.toString(10)}`),
+                    .to(v => `${decimal(v.required)}:${decimal(v.option)}`),
             );
         });
     });
@@ -245,7 +221,7 @@ describe('just', () => {
                 just(boxed)
                     .pick('value')
                     .pick('value')
-                    .to(v => v.toString(10)),
+                    .to<string>(decimal),
             ).toStrictEqual(
                 just(boxed)
                     .to(b => b.value)
@@ -363,8 +339,8 @@ describe('nothing', () => {
         });
 
         it('satisfies associativity monad law', () => {
-            expect(nothing<number>().onto(x => justDecimal(x).onto(split)))
-                .toStrictEqual(nothing<number>().onto(justDecimal).onto(split));
+            expect(nothing<number>().onto(x => justDecimal(x).onto(justSplit)))
+                .toStrictEqual(nothing<number>().onto(justDecimal).onto(justSplit));
         });
     });
 
@@ -416,12 +392,12 @@ describe('nothing', () => {
                 nothing<Boxed<Boxed<number>>>()
                     .pick('value')
                     .pick('value')
-                    .to(v => v.toString(10)),
+                    .to<string>(decimal),
             ).toStrictEqual(
                 nothing<Boxed<Boxed<number>>>()
                     .to(b => b.value)
                     .to(v => v.value)
-                    .to(v => v.toString(10)),
+                    .to<string>(decimal),
             );
         });
     });
@@ -524,8 +500,8 @@ describe('nil', () => {
         });
 
         it('satisfies associativity monad law', () => {
-            expect(nil<number>().onto(x => justDecimal(x).onto(split)))
-                .toStrictEqual(nil<number>().onto(justDecimal).onto(split));
+            expect(nil<number>().onto(x => justDecimal(x).onto(justSplit)))
+                .toStrictEqual(nil<number>().onto(justDecimal).onto(justSplit));
         });
     });
 
@@ -577,12 +553,12 @@ describe('nil', () => {
                 nil<Boxed<Boxed<number>>>()
                     .pick('value')
                     .pick('value')
-                    .to(v => v.toString(10)),
+                    .to<string>(decimal),
             ).toStrictEqual(
                 nil<Boxed<Boxed<number>>>()
                     .to(b => b.value)
                     .to(v => v.value)
-                    .to(v => v.toString(10)),
+                    .to<string>(decimal),
             );
         });
     });
@@ -662,17 +638,5 @@ describe('nil', () => {
             expect(nil().lift(isNull))
                 .toStrictEqual(just(true));
         });
-    });
-});
-
-describe('fallbackTo', () => {
-    it('returns constant when value is constant', () => {
-        expect(fallbackTo(3.14))
-            .toStrictEqual(3.14);
-    });
-
-    it('returns result of the fallback callback', () => {
-        expect(fallbackTo(constant(3.14)))
-            .toStrictEqual(3.14);
     });
 });

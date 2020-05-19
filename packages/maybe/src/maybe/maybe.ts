@@ -1,20 +1,10 @@
 // Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
 /* eslint-disable max-classes-per-file */
-import {
-    Predicate,
-    Present,
-    TypeGuard,
-    Unary,
-    isNull,
-    isPresent,
-    isUndefined,
-} from '../value/value';
+import { Fallback, Predicate, TypeGuard, fallbackTo } from '@perfective/fp';
+import { Present, isNull, isPresent, isUndefined } from '@perfective/value';
 
-export type Nullary<T> = () => T;
-export type Fallback<T> = T | Nullary<T>;
-export type Condition = boolean | Nullary<boolean>;
+export type Condition = Fallback<boolean>;
 
-export type Bind<T, R> = Unary<T, Maybe<R>> | Unary<T, R | null | undefined>;
 export type ArrayElement<T> = T extends readonly (infer V)[] ? V : undefined;
 
 export abstract class Maybe<T> {
@@ -59,7 +49,7 @@ export abstract class Maybe<T> {
     }
 
     public when(outside: Condition): Maybe<T> {
-        if (isPresent(this.value) && holds(outside)) {
+        if (isPresent(this.value) && isTrue(outside)) {
             return this;
         }
         return this.none();
@@ -180,17 +170,7 @@ export function optional<T>(value: T | undefined): Maybe<T> {
 /**
  * @package
  */
-export function fallbackTo<T>(fallback: Fallback<T>): T {
-    if (fallback instanceof Function) {
-        return fallback();
-    }
-    return fallback;
-}
-
-/**
- * @package
- */
-export function holds(condition: Condition): boolean {
+export function isTrue(condition: Condition): boolean {
     if (condition instanceof Function) {
         return condition();
     }

@@ -180,16 +180,6 @@ export function optional<T>(value: T | undefined): Maybe<T> {
 /**
  * @package
  */
-export function maybeOf<T>(value: Maybe<T> | T | null | undefined): Maybe<T> {
-    if (value instanceof Maybe) {
-        return value;
-    }
-    return maybe(value);
-}
-
-/**
- * @package
- */
 export function fallbackTo<T>(fallback: Fallback<T>): T {
     if (fallback instanceof Function) {
         return fallback();

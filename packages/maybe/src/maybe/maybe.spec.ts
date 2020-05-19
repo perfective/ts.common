@@ -15,7 +15,6 @@ import {
     fallbackTo,
     just,
     maybe,
-    maybeOf,
     nil,
     nothing,
     nullable,
@@ -663,18 +662,6 @@ describe('nil', () => {
             expect(nil().lift(isNull))
                 .toStrictEqual(just(true));
         });
-    });
-});
-
-describe('maybeOf', () => {
-    it('returns Maybe<T> when value is not Maybe', () => {
-        expect(maybeOf(3.14))
-            .toStrictEqual(maybe(3.14));
-    });
-
-    it('returns Maybe<T> when value is Maybe', () => {
-        expect(maybeOf(maybe(3.14)))
-            .toStrictEqual(maybe(3.14));
     });
 });
 

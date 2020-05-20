@@ -1,1 +1,21 @@
 = Perfective JavaScript
+
+== Development
+
+To maintain productive development environment with the WebStorm IDE,
+this project sets a group `tsconfig.json` files.
+The base file with the TypeScript compiler configuration is `tsconfig.strict.json`.
+It contains all the default compiler settings.
+The root `tsconfig.json` contains the `paths` list,
+so WebStorm can pick them up in the packages' imports before the build.
+Packages do *not* have `tsconfig.json`,
+as the `paths` can be set only for the files included in the project.
+When `tsconfig.json` provided in the package,
+WebStorm picks it up as the default configuration,
+and breaks the `paths` option recognition.
+Instead, there is a `tslint.build.json` file for each package,
+that extends `tsconfig.strict.json` directly
+and is used for the build.
+Each package also contains an additional `tslint.lint.json` file,
+which does extend the root `tsconfig.json` to pick up the `paths` configuration,
+`.eslintrc.json` explicitly uses `tslint.lint.json` for linting configuration.

@@ -1,5 +1,15 @@
 {
     "extends": [
         "@perfective/eslint-config"
-    ]
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.lint.json"
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {
+                "directory": "tsconfig.lint.json"
+            }
+        }
+    }
 }

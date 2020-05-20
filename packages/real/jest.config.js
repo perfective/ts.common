@@ -1,8 +1,2 @@
-﻿module.exports = {
-    collectCoverage: true,
-    coverageReporters: ['text'],
-    preset: 'ts-jest',
-    rootDir: './src',
-    testEnvironment: 'node',
-    verbose: true
-};
+﻿const preset = require('../../jest.config');
+module.exports = preset;

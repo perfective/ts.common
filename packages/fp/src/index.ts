@@ -12,6 +12,7 @@ export {
 } from './function/nullary';
 
 export {
+    Predicate,
     Unary,
     value,
 } from './function/unary';

@@ -1,8 +1,12 @@
 = Changelog
 
+== v0.1.2
+
+* Add `Predicate<T>` type.
+
 == v0.1.1
 
-* Fix: exported the `Fallback<T>` interface.
+* Fix: exported the `Fallback<T>` type.
 
 == v0.1.0
 

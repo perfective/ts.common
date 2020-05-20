@@ -1,5 +1,6 @@
 import {
-    isInteger, isNegativeInteger,
+    isInteger,
+    isNegativeInteger,
     isNonNegativeInteger,
     isNonPositiveInteger,
     isPositiveInteger,

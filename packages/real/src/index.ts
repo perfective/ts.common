@@ -1,4 +1,13 @@
 export {
+    Interval,
+    interval,
+    isInInterval,
+    isInOpenInterval,
+    isInOpenMaxInterval,
+    isInOpenMinInterval,
+} from './interval/interval';
+
+export {
     binary,
     decimal,
     hexadecimal,
@@ -9,10 +18,6 @@ export {
     isEqualTo,
     isGreaterThan,
     isGreaterThanOrEqualTo,
-    isInInterval,
-    isInOpenFromInterval,
-    isInOpenInterval,
-    isInOpenToInterval,
     isLessThan,
     isLessThanOrEqualTo,
     isNotEqualTo,

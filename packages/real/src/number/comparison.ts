@@ -23,19 +23,3 @@ export function isLessThan(value: number): Predicate<number> {
 export function isLessThanOrEqualTo(value: number): Predicate<number> {
     return (variable: number): boolean => variable <= value;
 }
-
-export function isInInterval(from: number, to: number): Predicate<number> {
-    return (variable: number): boolean => from <= variable && variable <= to;
-}
-
-export function isInOpenInterval(from: number, to: number): Predicate<number> {
-    return (variable: number): boolean => from < variable && variable < to;
-}
-
-export function isInOpenFromInterval(from: number, to: number): Predicate<number> {
-    return (variable: number): boolean => from < variable && variable <= to;
-}
-
-export function isInOpenToInterval(from: number, to: number): Predicate<number> {
-    return (variable: number): boolean => from <= variable && variable < to;
-}

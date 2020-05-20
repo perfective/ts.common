@@ -26,3 +26,8 @@ export {
     isNonPositiveInteger,
     isPositiveInteger,
 } from './number/integer';
+
+export {
+    ascending,
+    descending,
+} from './number/sorting';

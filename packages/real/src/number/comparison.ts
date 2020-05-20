@@ -1,4 +1,4 @@
-type Predicate<T> = (value: T) => boolean;
+import { Predicate } from '@perfective/fp';
 
 export function isEqualTo(value: number): Predicate<number> {
     return (variable: number): boolean => variable === value;

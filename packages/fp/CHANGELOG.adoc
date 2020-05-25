@@ -1,8 +1,13 @@
 = Changelog
 
+== v0.1.3
+
+* Added the `TypeGuard<T, V>` type.
+* Fix: corrected the changelog grammar.
+
 == v0.1.2
 
-* Add `Predicate<T>` type.
+* Added the `Predicate<T>` type.
 
 == v0.1.1
 
@@ -11,7 +16,7 @@
 == v0.1.0
 
 * Added the `isFunction()` and `isNotFunction()` type guards.
-* Added `Nullary<T>` type with the `constant()`, `empty()` and `fallbackTo()` functions.
-* Added `Unary<X, T>` type with the `value()` function.
-* Declared `Binary<X, Y, T>` type.
-* Declared `Ternary<X, Y, Z, T>` type.
+* Added the `Nullary<T>` type with the `constant()`, `empty()`, and `fallbackTo()` functions.
+* Added the `Unary<X, T>` type with the `value()` function.
+* Declared the `Binary<X, Y, T>` type.
+* Declared the `Ternary<X, Y, Z, T>` type.

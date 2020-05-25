@@ -1,6 +1,6 @@
 {
     "name": "@perfective/fp",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Functions and types for functional programming",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",

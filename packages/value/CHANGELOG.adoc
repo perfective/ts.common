@@ -1,0 +1,9 @@
+= Changelog
+
+== v0.1.0
+
+* Declared the `Defined<T>`, `NotNull<T>`, `Present<T>`, and `Absent<T>` types.
+* Added the `isDefined()`/`isUndefined()`, `isNotNull()`/`isNull()`,
+and `isPresent()`/`isAbsent()` functions.
+* Added the `*ValueOrThrow()`/`*ValueOrPanic()` functions.
+* Added the `voidable()` function.

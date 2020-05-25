@@ -19,6 +19,7 @@
         "@perfective/identity": "file:packages/identity",
         "@perfective/maybe": "file:packages/maybe",
         "@perfective/real": "file:packages/real",
+        "@perfective/value": "file:packages/value",
         "@types/jest": "^25.2.1",
         "@typescript-eslint/eslint-plugin": "^2.31.0",
         "@typescript-eslint/parser": "^2.31.0",

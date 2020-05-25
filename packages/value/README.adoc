@@ -1,0 +1,3 @@
+= Value
+
+The `@perfective/value` package provides functions to check for a value presence or absence.

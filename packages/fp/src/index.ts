@@ -13,6 +13,7 @@ export {
 
 export {
     Predicate,
+    TypeGuard,
     Unary,
     value,
 } from './function/unary';

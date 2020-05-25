@@ -93,8 +93,8 @@ export abstract class Maybe<T> {
         return this;
     }
 
-    public lift<V>(lift: (value: T | null | undefined) => V): Maybe<V> {
-        return maybe(lift(this.value));
+    public lift<U>(map: (value: T | null | undefined) => U | null | undefined): Maybe<U> {
+        return maybe(map(this.value));
     }
 }
 

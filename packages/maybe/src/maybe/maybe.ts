@@ -86,6 +86,13 @@ export abstract class Maybe<T> {
         return fallback;
     }
 
+    public run(procedure: (value: T) => void): Maybe<T> {
+        if (isPresent(this.value)) {
+            procedure(this.value);
+        }
+        return this;
+    }
+
     public lift<V>(lift: (value: T | null | undefined) => V): Maybe<V> {
         return maybe(lift(this.value));
     }

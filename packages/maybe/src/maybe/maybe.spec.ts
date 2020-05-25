@@ -311,6 +311,19 @@ describe('just', () => {
         });
     });
 
+    describe('run', () => {
+        let a = 2.71;
+        it('keeps the present value the same', () => {
+            // eslint-disable-next-line no-return-assign
+            expect(just(3.14).run(pi => a = pi))
+                .toStrictEqual(just(3.14));
+        });
+
+        it('runs a procedure on the present value', () => {
+            expect(a).toStrictEqual(3.14);
+        });
+    });
+
     describe('lift', () => {
         it('applies the function to the plain monadic value', () => {
             expect(just(3.14).lift(isPresent))
@@ -472,6 +485,19 @@ describe('nothing', () => {
         });
     });
 
+    describe('run', () => {
+        let a = 2.71;
+        it('keeps nothing the same', () => {
+            // eslint-disable-next-line no-return-assign
+            expect(nothing<number>().run(none => a = none))
+                .toStrictEqual(nothing());
+        });
+
+        it('skips running the procedure on nothing', () => {
+            expect(a).toStrictEqual(2.71);
+        });
+    });
+
     describe('lift', () => {
         it('applies the function to the plain monadic value', () => {
             expect(nothing().lift(isUndefined))
@@ -630,6 +656,19 @@ describe('nil', () => {
         it('is interchangeable with otherwise().value', () => {
             expect(nil<number>().or(2.71))
                 .toStrictEqual(nil<number>().otherwise(2.71).value);
+        });
+    });
+
+    describe('run', () => {
+        let a = 2.71;
+        it('keeps nil the same', () => {
+            // eslint-disable-next-line no-return-assign
+            expect(nil<number>().run(none => a = none))
+                .toStrictEqual(nil());
+        });
+
+        it('skips running the procedure on nil', () => {
+            expect(a).toStrictEqual(2.71);
         });
     });
 

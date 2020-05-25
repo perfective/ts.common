@@ -1,0 +1,12 @@
+= Changelog
+
+== v0.1.0
+
+* Added `error()`/`isError()`/`isNotError()` for the `Error` type.
+* Added `evalError()`/`isEvalError()`/`isNotEvalError()` for the `EvalError` type.
+* Added `rangeError()`/`isRangeError()`/`isNotRangeError()` for the `RangeError` type.
+* Added `referenceError()`/`isReferenceError()`/`isNotReferenceError()`
+for the `ReferenceError` type.
+* Added `syntaxError()`/`isSyntaxError()`/`isNotSyntaxError()` for the `SyntaxError` type.
+* Added `typeError()`/`isTypeError()`/`isNotTypeError()` for the `TypeError` type.
+* Added `throws()` and `panic()` functions to throw errors.

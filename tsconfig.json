@@ -3,6 +3,7 @@
     "compilerOptions": {
         "baseUrl": "./packages",
         "paths": {
+            "@perfective/error": ["error/src/index.ts"],
             "@perfective/fp": ["fp/src/index.ts"],
             "@perfective/identity": ["identity/src/index.ts"],
             "@perfective/maybe": ["maybe/src/index.ts"],

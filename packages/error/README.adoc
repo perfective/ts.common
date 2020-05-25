@@ -1,0 +1,4 @@
+= Error
+
+The `@perfective/error` package provides functions for the `Error` type
+and other types to handle exceptions.

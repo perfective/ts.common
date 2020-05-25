@@ -1,0 +1,15 @@
+= Changelog
+
+== v0.1.0
+
+* Declared types:
+** `ObjectWithDefined<T, K>`/`ObjectWithUndefined<T, K>`;
+** `ObjectWithNotNull<T, K>`/`ObjectWithNull<T, K>`;
+** `ObjectWithPresent<T, K>`/`ObjectWithAbsent<T, K>`.
+* Added functions:
+** `hasDefinedProperty()`/`definedProperty()`;
+** `hasUndefinedProperty()`/`undefinedProperty()`;
+** `hasNotNullProperty()`/`notNullProperty()`;
+** `hasNullProperty()`/`nullProperty()`;
+** `hasPresentProperty()`/`presentProperty()`;
+** `hasAbsentProperty()`/`absentProperty()`.

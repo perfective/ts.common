@@ -18,6 +18,7 @@
         "@perfective/fp": "file:packages/fp",
         "@perfective/identity": "file:packages/identity",
         "@perfective/maybe": "file:packages/maybe",
+        "@perfective/object": "file:packages/object",
         "@perfective/real": "file:packages/real",
         "@perfective/value": "file:packages/value",
         "@types/jest": "^25.2.1",

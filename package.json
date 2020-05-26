@@ -12,6 +12,7 @@
     "devDependencies": {
         "@angular/compiler": "^9.1.4",
         "@angular/core": "^9.1.4",
+        "@perfective/array": "file:packages/array",
         "@perfective/error": "file:packages/error",
         "@perfective/eslint-config": "file:packages/eslint-config",
         "@perfective/eslint-config-angular": "file:packages/eslint-config-angular",

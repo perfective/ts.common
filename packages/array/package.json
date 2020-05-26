@@ -1,0 +1,26 @@
+{
+    "name": "@perfective/array",
+    "version": "0.1.0",
+    "description": "Functions to work with the Array type",
+    "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
+    "homepage": "https://github.com/perfective/js",
+    "license": "MIT",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "build": "tsc --project ./tsconfig.build.json",
+        "build:clean": "npm run clean && npm run build",
+        "clean": "rm -rf dist && rm -f *.tsbuildinfo && jest --clearCache",
+        "lint": "npm run lint:eslint; npm run lint:tslint",
+        "lint:eslint": "eslint --fix --ext .ts ./src",
+        "lint:tslint": "tslint --fix --project ./tsconfig.lint.json",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@perfective/fp": "^0.1.3"
+    }
+}

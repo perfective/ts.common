@@ -1,0 +1,8 @@
+= Changelog
+
+== v0.1.0
+
+* Declared the `Element<A>` type.
+* Added the `concatenated()` array unit function.
+* Added the `concat()` and `slice()` array functors.
+* Added the `head()`/`tail()`, `first()`/`last()`, and `element()` functions.

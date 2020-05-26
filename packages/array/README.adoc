@@ -1,0 +1,3 @@
+= Array
+
+The `@perfective/array` package provides functions to work with the `Array` type.

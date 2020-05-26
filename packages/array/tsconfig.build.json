@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.strict.json",
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src"
+    },
+    "exclude": [
+        "dist"
+    ]
+}

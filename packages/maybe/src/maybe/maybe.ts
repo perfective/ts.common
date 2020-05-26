@@ -28,9 +28,9 @@ export abstract class Maybe<T> {
         return this.none();
     }
 
-    public that(is: Predicate<T>): Maybe<T> {
+    public that(filter: Predicate<T>): Maybe<T> {
         if (isPresent(this.value)) {
-            if (is(this.value)) {
+            if (filter(this.value)) {
                 return this;
             }
             return this.none();
@@ -48,8 +48,8 @@ export abstract class Maybe<T> {
         return this as unknown as Nothing<U> | Nil<U>;
     }
 
-    public when(outside: Condition): Maybe<T> {
-        if (isPresent(this.value) && isTrue(outside)) {
+    public when(condition: Condition): Maybe<T> {
+        if (isPresent(this.value) && isTrue(condition)) {
             return this;
         }
         return this.none();

@@ -1,4 +1,16 @@
 export {
+    has,
+    lift,
+    onto,
+    or,
+    otherwise,
+    pick,
+    run,
+    that,
+    to,
+    when,
+} from './maybe/lift';
+export {
     Just,
     Maybe,
     Nil,

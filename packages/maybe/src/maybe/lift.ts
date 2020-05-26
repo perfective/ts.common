@@ -1,0 +1,57 @@
+import { Fallback, Predicate, TypeGuard, Unary } from '@perfective/fp';
+import { Present, isNull, isUndefined } from '@perfective/value';
+
+import { Condition, Just, Maybe } from './maybe';
+
+export function onto<T, U>(bind: (value: T) => Maybe<U>): Unary<Maybe<T>, Maybe<U>> {
+    return (maybe: Maybe<T>): Maybe<U> => maybe.onto(bind);
+}
+
+export function to<T, U>(map: (value: T) => U): Unary<Maybe<T>, Maybe<U>> {
+    return (maybe: Maybe<T>): Maybe<U> => maybe.to(map);
+}
+
+export function that<T>(filter: Predicate<T>): Unary<Maybe<T>, Maybe<T>> {
+    return (maybe: Maybe<T>): Maybe<T> => maybe.that(filter);
+}
+
+export function has<T, U extends T>(filter: TypeGuard<T, U>): Unary<Maybe<T>, Maybe<U>> {
+    return (maybe: Maybe<T>): Maybe<U> => maybe.has(filter);
+}
+
+export function when<T>(condition: Condition): Unary<Maybe<T>, Maybe<T>> {
+    return (maybe: Maybe<T>): Maybe<T> => maybe.when(condition);
+}
+
+export function pick<T, K extends keyof T>(property: K): Unary<Maybe<T>, Maybe<Present<T[K]>>> {
+    return (maybe: Maybe<T>): Maybe<Present<T[K]>> => maybe.pick(property);
+}
+
+export function otherwise<T>(fallback: Fallback<T>): Unary<Maybe<T>, Just<T>> {
+    return (maybe: Maybe<T>): Just<T> => maybe.otherwise(fallback);
+}
+
+export function or<T>(fallback: Fallback<T>): Unary<Maybe<T>, T>;
+export function or<T>(fallback: null): Unary<Maybe<T>, T | null>;
+export function or<T>(fallback: undefined): Unary<Maybe<T>, T | undefined>;
+export function or<T>(
+    fallback: Fallback<T> | null | undefined,
+): Unary<Maybe<T>, T | null | undefined> {
+    if (isNull(fallback)) {
+        return (maybe: Maybe<T>): T | null => maybe.or(null);
+    }
+    if (isUndefined(fallback)) {
+        return (maybe: Maybe<T>): T | undefined => maybe.or(undefined);
+    }
+    return (maybe: Maybe<T>): T | null | undefined => maybe.or(fallback);
+}
+
+export function run<T>(procedure: (value: T) => void): Unary<Maybe<T>, Maybe<T>> {
+    return (maybe: Maybe<T>): Maybe<T> => maybe.run(procedure);
+}
+
+export function lift<T, U>(
+    map: (value: T | null | undefined) => U | null | undefined,
+): Unary<Maybe<T>, Maybe<U>> {
+    return (maybe: Maybe<T>): Maybe<U> => maybe.lift(map);
+}

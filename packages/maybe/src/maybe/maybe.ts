@@ -5,8 +5,6 @@ import { Present, isNull, isPresent, isUndefined } from '@perfective/value';
 
 export type Condition = Fallback<boolean>;
 
-export type ArrayElement<T> = T extends readonly (infer V)[] ? V : undefined;
-
 export abstract class Maybe<T> {
     protected constructor(
         public readonly value: T | null | undefined,
@@ -57,13 +55,6 @@ export abstract class Maybe<T> {
 
     public pick<K extends keyof T>(property: K): Maybe<Present<T[K]>> {
         return this.to(v => v[property]) as unknown as Maybe<Present<T[K]>>;
-    }
-
-    public index(index: number): Maybe<Present<ArrayElement<T>>> {
-        if (Array.isArray(this.value)) {
-            return maybe<Present<ArrayElement<T>>>(this.value[index]);
-        }
-        return this.none();
     }
 
     public otherwise(fallback: Fallback<T>): Just<T> {

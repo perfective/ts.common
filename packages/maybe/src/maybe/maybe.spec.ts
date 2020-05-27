@@ -25,8 +25,6 @@ interface Boxed<T> {
     readonly value?: T | null | undefined;
 }
 
-type Matrix = readonly (readonly (number | null | undefined)[])[];
-
 interface TypeGuardCheck<T> {
     readonly required: T;
     readonly optional?: T;
@@ -231,37 +229,6 @@ describe('just', () => {
         });
     });
 
-    describe('index', () => {
-        it('returns an existing element from an array', () => {
-            expect(just([2.71, 3.14]).index(0))
-                .toStrictEqual(just(2.71));
-            expect(just([2.71, 3.14]).index(1))
-                .toStrictEqual(just(3.14));
-        });
-
-        it('returns nothing for a missing elements from an array', () => {
-            expect(just([2.71, 3.14]).index(2))
-                .toStrictEqual(nothing());
-            expect(just([2.71, 3.14]).index(-1))
-                .toStrictEqual(nothing());
-        });
-
-        it('is an equivalent of the then() chain', () => {
-            const matrix: Matrix = [[undefined, 3.14], [2.71, null]];
-            expect(
-                just(matrix)
-                    .index(0)
-                    .index(1)
-                    .to(v => v.toString(10)),
-            ).toStrictEqual(
-                just(matrix)
-                    .to(m => m[0])
-                    .to(m => m[1])
-                    .to(v => v.toString(10)),
-            );
-        });
-    });
-
     describe('otherwise', () => {
         it('returns the Maybe value when fallback is constant', () => {
             expect(just(3.14).otherwise(2.71))
@@ -415,27 +382,6 @@ describe('nothing', () => {
         });
     });
 
-    describe('index', () => {
-        it('returns nothing for a missing elements from an array', () => {
-            expect(nothing<number[]>().index(0))
-                .toStrictEqual(nothing());
-        });
-
-        it('is an equivalent of the then() chain', () => {
-            expect(
-                nothing<Matrix>()
-                    .index(0)
-                    .index(1)
-                    .to(v => v.toString(10)),
-            ).toStrictEqual(
-                nothing<Matrix>()
-                    .to(m => m[0])
-                    .to(m => m[1])
-                    .to(v => v.toString(10)),
-            );
-        });
-    });
-
     describe('otherwise', () => {
         it('returns a fallback value when fallback is constant', () => {
             expect(nothing<number>().otherwise(2.71))
@@ -585,27 +531,6 @@ describe('nil', () => {
                     .to(b => b.value)
                     .to(v => v.value)
                     .to<string>(decimal),
-            );
-        });
-    });
-
-    describe('index', () => {
-        it('returns nothing for a missing elements from an array', () => {
-            expect(nil<number[]>().index(0))
-                .toStrictEqual(nil());
-        });
-
-        it('is an equivalent of the then() chain', () => {
-            expect(
-                nil<Matrix>()
-                    .index(0)
-                    .index(1)
-                    .to(v => v.toString(10)),
-            ).toStrictEqual(
-                nil<Matrix>()
-                    .to(m => m[0])
-                    .to(m => m[1])
-                    .to(v => v.toString(10)),
             );
         });
     });

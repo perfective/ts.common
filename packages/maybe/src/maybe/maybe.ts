@@ -38,14 +38,14 @@ export abstract class Maybe<T> {
         return this;
     }
 
-    public with<V extends T>(is: TypeGuard<T, V>): Maybe<V> {
+    public has<U extends T>(filter: TypeGuard<T, U>): Maybe<U> {
         if (isPresent(this.value)) {
-            if (is(this.value)) {
-                return this as unknown as Just<V>;
+            if (filter(this.value)) {
+                return this as unknown as Just<U>;
             }
             return this.none();
         }
-        return this as unknown as Nothing<V> | Nil<V>;
+        return this as unknown as Nothing<U> | Nil<U>;
     }
 
     public when(outside: Condition): Maybe<T> {

@@ -1,5 +1,16 @@
 = Changelog
 
+== v0.4.0
+
+* Extracted auxiliary functions and types into the `@perfective/fp`, `@perfective/error`,
+`@perfective/value`, `@perfective/real`, and `@perfective/object` packages.
+* Renamed the `Maybe.with()` into `Maybe.has()`.
+* Removed the `Maybe.index()` method
+(use functions from the `@perfective/array` package instead).
+* Added the `Maybe.run()` method.
+* Added functors for each `Maybe` method
+(can be used in the `map()`/`lift()` methods).
+
 == v0.3.4
 
 * Removed `Maybe.then()` as it conflicts with `Promise.then()` and `PromiseLike<T>`.

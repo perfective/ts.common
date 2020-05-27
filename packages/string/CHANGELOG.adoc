@@ -1,0 +1,8 @@
+= Changelog
+
+== v0.1.0
+
+* Declared the `Output` interface.
+* Added the `output()` function.
+* Added the `isString()`/`isNotString()` and `isEmpty()`/`isNotEmpty()` functions.
+* Added the `lowerCase`/`upperCase()`, `split()`, and `trim()` functors.

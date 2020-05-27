@@ -1,0 +1,3 @@
+= String
+
+The `@perfective/string` package provides functions to work with the `String` type.

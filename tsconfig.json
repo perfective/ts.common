@@ -10,6 +10,7 @@
             "@perfective/maybe": ["maybe/src/index.ts"],
             "@perfective/object": ["object/src/index.ts"],
             "@perfective/real": ["real/src/index.ts"],
+            "@perfective/string": ["string/src/index.ts"],
             "@perfective/value": ["value/src/index.ts"]
         }
     }

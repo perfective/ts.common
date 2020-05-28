@@ -1,6 +1,6 @@
 {
     "name": "@perfective/array",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Functions to work with the Array type",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
@@ -21,6 +21,6 @@
         "test": "jest"
     },
     "dependencies": {
-        "@perfective/fp": "^0.1.3"
+        "@perfective/fp": "^0.2.0"
     }
 }

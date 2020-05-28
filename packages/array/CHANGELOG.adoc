@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.1
+
+* Added the `includes()`/`includedIn()` array predicates.
+
 == v0.1.0
 
 * Declared the `Element<A>` type.

@@ -13,5 +13,10 @@ export {
 
 export {
     concat,
+    includes,
     slice,
 } from './array/lift';
+
+export {
+    includedIn,
+} from './array/predicate';

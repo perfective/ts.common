@@ -12,6 +12,19 @@ export {
 } from './function/nullary';
 
 export {
+    Predicate,
+    all,
+    atLeast,
+    atMost,
+    either,
+    exactly,
+    is,
+    isNot,
+    neither,
+    not,
+} from './function/predicate';
+
+export {
     Proposition,
     always,
     isFalse,
@@ -20,7 +33,6 @@ export {
 } from './function/proposition';
 
 export {
-    Predicate,
     TypeGuard,
     Unary,
     value,

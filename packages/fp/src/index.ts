@@ -12,6 +12,14 @@ export {
 } from './function/nullary';
 
 export {
+    Proposition,
+    always,
+    isFalse,
+    isTrue,
+    never,
+} from './function/proposition';
+
+export {
     Predicate,
     TypeGuard,
     Unary,

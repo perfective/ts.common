@@ -18,6 +18,7 @@
         "@perfective/eslint-config-angular": "file:packages/eslint-config-angular",
         "@perfective/fp": "file:packages/fp",
         "@perfective/identity": "file:packages/identity",
+        "@perfective/match": "file:packages/match",
         "@perfective/maybe": "file:packages/maybe",
         "@perfective/object": "file:packages/object",
         "@perfective/real": "file:packages/real",

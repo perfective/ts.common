@@ -1,0 +1,3 @@
+= Match
+
+The `@perfective/match` package provides functions and types for the pattern matching.

@@ -1,0 +1,6 @@
+= Changelog
+
+== v0.1.0
+
+* Declared the `Match<T>`, `When<T>`, and `Statement<T, U>` types.
+* Added the `match()` and `when()` functions.

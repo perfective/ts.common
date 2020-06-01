@@ -6,9 +6,10 @@
  *
  * @param value - Value to be casted as undefined when it's void.
  */
-// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable no-void */
 export function voidable<T>(value: T | void): T | null | undefined {
-    // eslint-disable-next-line no-void
     if (value === void 0) {
         return undefined;
     }

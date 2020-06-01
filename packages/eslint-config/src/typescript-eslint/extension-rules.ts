@@ -5,8 +5,6 @@ export = {
         '@typescript-eslint/brace-style': ['error', 'stroustrup', {
             allowSingleLine: false,
         }],
-        'camelcase': 'off',
-        '@typescript-eslint/camelcase': 'error',
         'comma-spacing': 'off',
         '@typescript-eslint/comma-spacing': ['error', {
             before: false,
@@ -29,6 +27,11 @@ export = {
         '@typescript-eslint/keyword-spacing': ['error', {
             before: true,
             after: true,
+        }],
+        'lines-between-class-members': 'off',
+        '@typescript-eslint/lines-between-class-members': ['error', 'always', {
+            exceptAfterSingleLine: false,
+            exceptAfterOverload: true,
         }],
         'no-array-constructor': 'off',
         '@typescript-eslint/no-array-constructor': 'error',

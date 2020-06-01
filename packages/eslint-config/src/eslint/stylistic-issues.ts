@@ -8,7 +8,7 @@ export = {
         'brace-style': ['error', 'stroustrup', {
             allowSingleLine: false,
         }],
-        'camelcase': 'error',
+        'camelcase': 'off',
         'capitalized-comments': ['error', 'always', {
             ignorePattern: 'eslint|tslint',
             ignoreConsecutiveComments: true,

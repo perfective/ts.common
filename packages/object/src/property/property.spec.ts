@@ -17,7 +17,7 @@ interface Example {
     a?: number | null;
     b?: string | null;
     c?: boolean | null;
-    d?: object | null;
+    d?: Record<string, unknown> | null;
 }
 
 const optional: Example = {

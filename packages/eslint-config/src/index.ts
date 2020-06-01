@@ -19,13 +19,13 @@ export = {
         'deprecation',
         'import',
         'jest',
+        'node',
     ],
     extends: [
         './eslint/possible-errors',
         './eslint/best-practices',
         './eslint/strict-mode',
         './eslint/variables',
-        './eslint/node-js-and-common-js',
         './eslint/stylistic-issues',
         './eslint/ecma-script-6',
         './typescript-eslint/supported-rules',
@@ -36,6 +36,9 @@ export = {
         './import/module-systems',
         './import/style-guide',
         './jest/rules',
+        './node/possible-errors',
+        './node/best-practices',
+        './node/stylistic-issues',
     ],
     settings: {
         'import/parsers': {

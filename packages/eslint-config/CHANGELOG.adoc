@@ -1,5 +1,13 @@
 = Changelog
 
+== v0.3.0
+
+* Upgraded `eslint` to `7.1.0`.
+* Upgraded `@typescript-eslint` to `3.1.0`.
+* Upgraded `eslint-plugin-jest` to `23.13.2`.
+* Added `eslint-plugin-node`.
+* Disabled the `@typescript-eslint/prefer-readonly-parameter-types` rule.
+
 == v0.2.12
 
 * Fixed the `jest/lowercase-name` rule config.

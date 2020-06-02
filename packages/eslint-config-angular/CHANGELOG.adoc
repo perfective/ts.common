@@ -1,24 +1,29 @@
 = Changelog
 
+== v0.1.9
+
+* Use `@perfective/eslint-config@0.3.0`.
+* Update the `CHANGELOG` format.
+
 == v0.1.8
 
-* Use `@perfective/eslint-config` `v0.2.12`.
+* Use `@perfective/eslint-config@0.2.12`.
 
 == v0.1.7
 
-* Use `@perfective/eslint-config` `v0.2.11`.
+* Use `@perfective/eslint-config@0.2.11`.
 
 == v0.1.6
 
-* Use `@perfective/eslint-config` `v0.2.10`.
+* Use `@perfective/eslint-config@0.2.10`.
 
 == v0.1.5
 
-* Use `@perfective/eslint-config` `v0.2.9`.
+* Use `@perfective/eslint-config@0.2.9`.
 
 == v0.1.4
 
-* Use `@perfective/eslint-config` `v0.2.8`.
+* Use `@perfective/eslint-config@0.2.8`.
 
 == v0.1.3
 

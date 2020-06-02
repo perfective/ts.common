@@ -20,6 +20,7 @@ export = {
         'import',
         'jest',
         'node',
+        'sonarjs',
         'unicorn',
     ],
     extends: [
@@ -40,6 +41,8 @@ export = {
         './node/possible-errors',
         './node/best-practices',
         './node/stylistic-issues',
+        './sonarjs/bug-detection',
+        './sonarjs/code-smell-detection',
         './unicorn/rules',
     ],
     settings: {
@@ -70,6 +73,7 @@ export = {
                 'max-nested-callbacks': ['error', 4],
                 // Each "describe" or "it" is counted as a separated statement
                 'max-statements': 'off',
+                'sonarjs/no-duplicate-string': 'off',
             },
         },
     ],

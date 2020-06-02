@@ -1,5 +1,6 @@
 export = {
     /* eslint-disable @typescript-eslint/naming-convention */
+    /* eslint-disable sonarjs/no-duplicate-string */
     rules: {
         'array-bracket-newline': ['error', 'consistent'],
         'array-bracket-spacing': ['error', 'never'],

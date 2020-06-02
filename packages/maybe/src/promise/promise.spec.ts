@@ -19,6 +19,6 @@ describe('result', () => {
             .toStrictEqual('example')));
 
     it('rejects promise when error is defined', async () => promiseForward(new Error('Fail'))
-        .catch((reason: Readonly<Error>) => expect(reason)
+        .catch((error: Readonly<Error>) => expect(error)
             .toStrictEqual(new Error('Fail'))));
 });

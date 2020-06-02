@@ -4,7 +4,7 @@ export function decimal(value: number): string;
 export function decimal(value: string): number;
 export function decimal(value: number | string): string | number {
     if (typeof value === 'string') {
-        return parseFloat(value);
+        return Number.parseFloat(value);
     }
     return value.toString(10);
 }
@@ -31,7 +31,7 @@ type Base = 2 | 8 | 16;
 
 function base(base: Base, value: Integer | string): string | Integer {
     if (typeof value === 'string') {
-        return parseInt(value, base);
+        return Number.parseInt(value, base);
     }
     return Math.floor(value).toString(base);
 }

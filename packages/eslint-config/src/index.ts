@@ -20,6 +20,7 @@ export = {
         'import',
         'jest',
         'node',
+        'unicorn',
     ],
     extends: [
         './eslint/possible-errors',
@@ -39,6 +40,7 @@ export = {
         './node/possible-errors',
         './node/best-practices',
         './node/stylistic-issues',
+        './unicorn/rules',
     ],
     settings: {
         'import/parsers': {

@@ -1,7 +1,9 @@
 export = {
     rules: {
         'accessor-pairs': 'error',
-        'array-callback-return': 'error',
+        'array-callback-return': ['error', {
+            allowImplicit: true,
+        }],
         'block-scoped-var': 'error',
         'class-methods-use-this': 'off',
         'complexity': ['error', 3],

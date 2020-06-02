@@ -32,11 +32,11 @@ describe('decimal', () => {
 
     it('fails to parse a string that does not start with a digit', () => {
         expect(decimal('example'))
-            .toStrictEqual(NaN);
+            .toStrictEqual(Number.NaN);
         expect(decimal('.example'))
-            .toStrictEqual(NaN);
+            .toStrictEqual(Number.NaN);
         expect(decimal('-example'))
-            .toStrictEqual(NaN);
+            .toStrictEqual(Number.NaN);
     });
 });
 
@@ -75,7 +75,7 @@ describe('binary', () => {
 
     it('fails to parse a string that does not start with characters "0" or "1"', () => {
         expect(binary('example'))
-            .toStrictEqual(NaN);
+            .toStrictEqual(Number.NaN);
     });
 });
 
@@ -112,13 +112,13 @@ describe('octal', () => {
 
     it('fails to parse a string that does not start with characters from "0" to "7"', () => {
         expect(octal('example'))
-            .toStrictEqual(NaN);
+            .toStrictEqual(Number.NaN);
     });
 });
 
 describe('hexadecimal', () => {
     it('converts an integer into its hexadecimal representation', () => {
-        expect(hexadecimal(0xf))
+        expect(hexadecimal(0xF))
             .toStrictEqual('f');
         expect(hexadecimal(16))
             .toStrictEqual('10');
@@ -151,6 +151,6 @@ describe('hexadecimal', () => {
 
     it('fails to parse a string that does not start with characters from "0" to "f"', () => {
         expect(hexadecimal('sample'))
-            .toStrictEqual(NaN);
+            .toStrictEqual(Number.NaN);
     });
 });

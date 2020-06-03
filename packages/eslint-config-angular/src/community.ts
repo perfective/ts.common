@@ -6,5 +6,7 @@ export = {
     rules: {
         // Conflicts with NestJS
         'import/no-cycle': 'off',
+        // Conflicts with the Angular file suffixes: .module, .component, etc.
+        'node/file-extension-in-import': 'off',
     },
 };

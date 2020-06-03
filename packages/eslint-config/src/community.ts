@@ -55,5 +55,31 @@ export = {
         'jest/lowercase-name': ['error', {
             ignore: ['describe'],
         }],
+        // Unclear if it's always useful to extract strings into constants
+        'sonarjs/no-duplicate-string': 'off',
+        'unicorn/no-keyword-prefix': ['error', {
+            blacklist: ['class'],
+            checkProperties: true,
+            onlyCamelCase: false,
+        }],
+        'unicorn/prevent-abbreviations': ['error', {
+            // Common descriptive abbreviations
+            replacements: {
+                db: false,
+                env: false,
+            },
+            extendDefaultWhitelist: true,
+            checkDefaultAndNamespaceImports: true,
+            checkShorthandImports: false,
+            checkShorthandProperties: false,
+            // Does not check for properties on external types
+            checkProperties: false,
+            checkVariables: true,
+            checkFilenames: true,
+        }],
+        // Requires research on level of effort in writing safer regular expressions
+        'unicorn/no-unsafe-regex': 'off',
+        // Requires research on compatibility with TS
+        'unicorn/prefer-spread': 'off',
     },
 };

@@ -4,10 +4,6 @@
         "completed-docs": false,
         "encoding": true,
         "file-header": false,
-        "file-name-casing": [
-            true,
-            "kebab-case"
-        ],
         "match-default-export-name": false,
         "no-redundant-jsdoc": true,
         "no-unnecessary-callback-wrapper": true,

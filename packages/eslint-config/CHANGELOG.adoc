@@ -1,5 +1,11 @@
 = Changelog
 
+== v0.4.0
+
+* Added `eslint-plugin-promise`.
+* Added `eslint-plugin-sonarjs`.
+* Added `eslint-plugin-unicorn`.
+
 == v0.3.0
 
 * Upgraded `eslint` to `7.1.0`.

@@ -30,7 +30,7 @@ export = {
         }],
         'lines-between-class-members': 'off',
         '@typescript-eslint/lines-between-class-members': ['error', 'always', {
-            exceptAfterSingleLine: false,
+            exceptAfterSingleLine: true,
             exceptAfterOverload: true,
         }],
         'no-array-constructor': 'off',

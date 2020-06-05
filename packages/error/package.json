@@ -1,6 +1,6 @@
 {
     "name": "@perfective/error",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Functions for the Error and other types to handle exceptions",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",

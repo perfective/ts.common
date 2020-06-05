@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.1
+
+* Added documentation.
+
 == v0.1.0
 
 * Added `error()`/`isError()`/`isNotError()` for the `Error` type.

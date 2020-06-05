@@ -1,4 +1,5 @@
 export = {
+    /* eslint-disable unicorn/prevent-abbreviations */
     rules: {
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/array-type': ['error', {

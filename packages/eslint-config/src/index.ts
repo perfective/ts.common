@@ -1,4 +1,6 @@
 export = {
+    /* eslint-disable unicorn/no-keyword-prefix */
+    /* eslint-disable unicorn/prevent-abbreviations */
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 6,

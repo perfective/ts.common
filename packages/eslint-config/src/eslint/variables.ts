@@ -1,4 +1,6 @@
 export = {
+    /* eslint-disable unicorn/no-keyword-prefix */
+    /* eslint-disable unicorn/prevent-abbreviations */
     rules: {
         'init-declarations': ['error', 'always'],
         'no-delete-var': 'error',

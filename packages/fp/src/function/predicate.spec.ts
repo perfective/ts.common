@@ -2,6 +2,7 @@ import { all, atLeast, atMost, either, exactly, is, isNot, neither, not } from '
 
 const list = [2.71, 3.14];
 const irrational = {
+    /* eslint-disable unicorn/prevent-abbreviations */
     e: 2.71,
     pi: 3.14,
 };

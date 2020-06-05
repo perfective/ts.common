@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.4.1
+
+* Fixed linting errors.
+
 == v0.4.0
 
 * Added `eslint-plugin-promise`.

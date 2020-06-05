@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.1.11
+
+* Upgraded to `@perfective/eslint-config@0.4.1`.
+
 == v0.1.10
 
 * Upgraded to `@perfective/eslint-config@0.4.0`.

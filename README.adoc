@@ -1,21 +1,148 @@
 = Perfective JavaScript
 
+[WARNING]
+====
+This project is under active development.
+Each package has major version `0` and an independent minor version.
+A change of a minor version would contain breaking changes.
+Patch versions may provide non-breaking features and patches.
+When the packages are ready for the `1.0.0-alpha` release,
+they will be switched to a common version.
+====
+
+[IMPORTANT]
+====
+http://typescriptlang.org[TypeScript] is the JavaScript that scales,
+and all the code provided by this project relies heavily on strict TypeScript compiler checks.
+Use of these packages in the regular JS projects may produce unexpected behavior
+and is undocumented.
+For example,
+a function that declares an argument as required relies on strict TSC `null` checks
+and does not check value for `null` additionally.
+====
+
+While JavaScript supports the object-oriented paradigm,
+the functional programming style allows writing more readable code in JS.
+Hence, all provided data types (interfaces) are immutable,
+and classes are used only to build fluent method chains
+(considering methods as infix operators).
+
+One of the base patterns used is to provide a unit (constructor) function named after each class
+to discourage the use of the new operator
+(for readability and consistency with the method chains).
+Classes should only be used in function types declaration.
+All non-abstract classes should be considered final even TypeScript does not allow to limit that.
+
+This repo currently contains the following JavaScript packages (in order of types/dependencies):
+
+* `link:https://github.com/perfective/js/tree/master/packages/eslint-config[@perfective/eslint-config]`
+— the default and community configurations for
+https://eslint.org[ESLint] and
+https://palantir.github.io/tslint/[TSLint]
+(until all the rules will be possible to replace by ESLint).
+* `link:https://github.com/perfective/js/tree/master/packages/eslint-config-angular[@perfective/eslint-config-angular]`
+— the default and community linters configurations for Angular projects.
+* `link:https://github.com/perfective/js/tree/master/packages/fp[@perfective/fp]`
+— functions and types for functional programming and logical operations.
+* `link:https://github.com/perfective/js/tree/master/packages/error[@perfective/error]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`
+and related classes.
+* `link:https://github.com/perfective/js/tree/master/packages/value[@perfective/value]`
+— functions to separate generic values from `undefined` and `null`.
+* `link:https://github.com/perfective/js/tree/master/packages/array[@perfective/array]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]`
+class.
+* `link:https://github.com/perfective/js/tree/master/packages/object[@perfective/object]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]`
+class.
+* `link:https://github.com/perfective/js/tree/master/packages/real[@perfective/real]`
+— functions and types to work with the real numbers.
+* `link:https://github.com/perfective/js/tree/master/packages/string[@perfective/string]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]`
+class.
+* `link:https://github.com/perfective/js/tree/master/packages/identity[@perfective/identity]`
+— https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad[Identity monad]
+implementation.
+* `link:https://github.com/perfective/js/tree/master/packages/maybe[@perfective/maybe]`
+— https://en.wikipedia.org/wiki/Option_type[Maybe type] (monadic container) implementation.
+* `link:https://github.com/perfective/js/tree/master/packages/match[@perfective/match]`
+— functions to support https://en.wikipedia.org/wiki/Pattern_matching[pattern matching]
+(a functional switch-case).
+
+All the packages have a 100% unit test coverage.
+
+== Roadmap
+
+The primary development focus is to provide convenient functions
+and detailed documentation in the existing packages.
+
+Additional packages to be certainly developed before version `1.0` can be released:
+
+* `@perfective/either`
+— Either type (monadic container) to support a functional Result/Error return type.
+* `@perfective/url`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/API/URL[URL]` and related classes.
+* `@perfective/regexp`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp[RegExp]` class.
+* `@perfective/rxjs`
+— additional operators for the https://rxjs.dev[RxJS].
+
+== Terminology
+
+* _Unit function_ — a function that creates a new object or a function.
+Term used as distinguished from `constructor` and `new` keywords.
+
 == Development
 
-To maintain productive development environment with the WebStorm IDE,
-this project sets a group `tsconfig.json` files.
-The base file with the TypeScript compiler configuration is `tsconfig.strict.json`.
+=== Common patterns
+
+* For each declared `interface` or `class`,
+there is at least one unit function to instantiate it.
+This function has the same name as the interface/class but in camelCase.
+* For each declared class,
+there are two https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types[type-guards] to check
+if a given value is an instance of that class or not.
+These functions have prefixes `is` and `isNot`.
+* Declared interfaces and types may have other predicates
+with the `is`/`isNot` prefixes
+(e.g., `string` has `isEmpty` and `isNotEmpty` functions).
+
+=== TypeScript configuration
+
+The project contains a group of TSConfig files to maintain a productive development environment
+with the WebStorm IDE:
+
+* The base file with the TypeScript compiler configuration is `tsconfig.strict.json`.
 It contains all the default compiler settings.
-The root `tsconfig.json` contains the `paths` list,
-so WebStorm can pick them up in the packages' imports before the build.
-Packages do *not* have `tsconfig.json`,
-as the `paths` can be set only for the files included in the project.
-When `tsconfig.json` provided in the package,
-WebStorm picks it up as the default configuration,
-and breaks the `paths` option recognition.
-Instead, there is a `tslint.build.json` file for each package,
-that extends `tsconfig.strict.json` directly
-and is used for the build.
-Each package also contains an additional `tslint.lint.json` file,
-which does extend the root `tsconfig.json` to pick up the `paths` configuration,
-`.eslintrc.json` explicitly uses `tslint.lint.json` for linting configuration.
+* The root `tsconfig.json` includes the list of paths
+so that WebStorm can pick them up in the packages' imports before the build.
+* Packages do not have `tsconfig.json`,
+as the paths can be set only for the files included in the project.
+* WebStorm picks up the `tsconfig.json` provided in the package as the default configuration,
+which breaks the paths option recognition.
+Thus, instead, builds use the `tslint.build.json` in each package,
+which extends the `tsconfig.strict.json` directly.
+* Linters use an additional `tslint.lint.json` in each package,
+which does extend the root `tsconfig.json` to pick up the `compilerOptions.paths`.
+
+=== Documentation
+
+This project uses the AsciiDoc format for its documentation.
+Each package has a `README.adoc` file with the list of the exported types and functions,
+examples their usages,
+and other helpful information.
+Github renders these README files by default.
+
+Unfortunately, https://www.npmjs.com[npm] does not support the AsciiDoc
+and only supports Markdown.
+Markdown format is less expressive
+and is not as convenient to provide examples and build complex lists.
+As a result,
+each package also has a `README.md` file that only lists the exported types and functions,
+but directs to the Github for the full documentation.

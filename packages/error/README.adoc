@@ -1,4 +1,121 @@
 = Error
 
-The `@perfective/error` package provides functions for the `Error` type
-and other types to handle exceptions.
+The `@perfective/error` package provides functions for the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]` class
+and other error types.
+
+== Throws and Panic
+
+The package declares two functions to throw errors.
+
+* `throws<E extends Error>(error?: E | string): never`
++
+The `throws` function is a syntax sugar around the `throw` operator
+that checks if the input is an `Error` or a `string`
+and throws an exception immediately.
+It may be used instead of the `throw new Error()`
+to handle a union type of `E extends Error | string`,
+to throw an exception in a one-line arrow function,
+or to avoid issues with the `@typescript-eslint/no-throw-literal` linter rule.
++
+* `panic<E extends Error>(error?: E | string): () => never`
++
+The `panic` function creates a new function that throws an error.
+It is used for lazy evaluation,
+e.g. when an exceptional situation is optional.
++
+[source,typescript]
+----
+import { panic } from '@perfective/error';
+import { maybe } from '@perfective/maybe';
+
+export function example(input?: string | null): string {
+    return maybe(input)
+        .or(panic('Input is not present')); // <.>
+}
+----
+<.> Must use `panic()`,
+as the fallback in `Maybe.or()` is called only when the `input` is not present.
+Using `throws()` will result in throwing an exception every time a function is called.
+
+Throughout the packages,
+functions and methods that allow passing a custom error have the same naming patterns:
+
+* If a function possibly throws an error during its execution,
+it would end with the `orThrow` suffix.
+* If a function creates a function that may throw an error,
+it would have the `orPanic` suffix.
+
+[NOTE]
+====
+While the original function is `throws()`
+because of the conflict with the `throw` keyword,
+the suffix for all other functions and methods is `orThrow`
+for consistency and readability.
+====
+
+== Standard built-in JS Error types
+
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`:
+** `error(message?: string): Error`
+— instantiates a new `Error`.
+** `isError<T>(value: Error | T): value is Error`
+— returns `true` when the value is an instance of `Error`.
+** `isNotError<T>(value: Error | T): value is T`
+— returns `true` when the value is not an instance of `Error`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError[EvalError]`:
+** `evalError(message?: string): EvalError`
+— instantiates a new `EvalError`.
+** `isEvalError<T>(value: EvalError | T): value is EvalError`
+— returns `true` when the value is an instance of `EvalError`.
+** `isNotEvalError<T>(value: EvalError | T): value is T`
+— returns `true` when the value is not an instance of `EvalError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError[RangeError]`:
+** `rangeError(message?: string): RangeError`
+— instantiates a new `RangeError`.
+** `isRangeError<T>(value: RangeError | T): value is RangeError`
+— returns `true` when the value is an instance of `RangeError`.
+** `isNotRangeError<T>(value: RangeError | T): value is T`
+— returns `true` when the value is not an instance of `RangeError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError[ReferenceError]`:
+** `referenceError(message?: string): ReferenceError`
+— instantiates a new `ReferenceError`.
+** `isReferenceError<T>(value: ReferenceError | T): value is ReferenceError`
+— returns `true` when the value is an instance of `ReferenceError`.
+** `isNotReferenceError<T>(value: ReferenceError | T): value is T`
+— returns `true` when the value is not an instance of `ReferenceError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError[SyntaxError]`:
+** `syntaxError(message?: string): SyntaxError`
+— instantiates a new `SyntaxError`.
+** `isSyntaxError<T>(value: SyntaxError | T): value is SyntaxError`
+— returns `true` when the value is an instance of `SyntaxError`.
+** `isNotSyntaxError<T>(value: SyntaxError | T): value is T`
+— returns `true` when the value is not an instance of `SyntaxError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError[TypeError]`:
+** `typeError(message?: string): TypeError`
+— instantiates a new `TypeError`.
+** `isTypeError<T>(value: TypeError | T): value is TypeError`
+— returns `true` when the value is an instance of `TypeError`.
+** `isNotTypeError<T>(value: TypeError | T): value is T`
+— returns `true` when the value is not an instance of `TypeError`.
+
+[NOTE]
+====
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError[InternalError]`
+is non-standard and won't be supported.
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError[URIError]`
+will be supported in the `@perfective/url` package.
+====
+
+== Roadmap
+
+* Require an error message in all functions.
+* Provide functions to parse
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/[standard error messages]
+and predicates to check for them.
+* Add support for error chaining.

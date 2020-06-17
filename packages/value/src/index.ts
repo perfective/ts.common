@@ -1,28 +1,16 @@
 export {
-    absentValueOrPanic,
-    absentValueOrThrow,
-    definedValueOrPanic,
-    definedValueOrThrow,
-    notNullValueOrPanic,
-    notNullValueOrThrow,
-    nullValueOrPanic,
-    nullValueOrThrow,
-    presentValueOrPanic,
-    presentValueOrThrow,
-    undefinedValueOrPanic,
-    undefinedValueOrThrow,
-} from './value/error';
-export {
-    Absent,
-    Defined,
-    NotNull,
-    Present,
     isAbsent,
     isDefined,
     isNotNull,
     isNull,
     isPresent,
     isUndefined,
+} from './value/type-guard';
+export {
+    Absent,
+    Defined,
+    NotNull,
+    Present,
 } from './value/value';
 
 export {

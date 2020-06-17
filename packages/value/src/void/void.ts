@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable no-void */
+
 /**
  * Voidable() function allows to convert a `void`-able type into a `maybe`-acceptable type.
  *
@@ -6,9 +10,6 @@
  *
  * @param value - Value to be casted as undefined when it's void.
  */
-/* eslint-disable @typescript-eslint/no-invalid-void-type */
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-/* eslint-disable no-void */
 export function voidable<T>(value: T | void): T | null | undefined {
     if (value === void 0) {
         return undefined;

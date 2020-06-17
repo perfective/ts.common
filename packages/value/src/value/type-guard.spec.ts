@@ -1,4 +1,4 @@
-import { isAbsent, isDefined, isNotNull, isNull, isPresent, isUndefined } from './value';
+import { isAbsent, isDefined, isNotNull, isNull, isPresent, isUndefined } from './type-guard';
 
 describe('isDefined', () => {
     it('returns true when value is defined', () => {

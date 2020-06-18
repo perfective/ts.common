@@ -137,46 +137,46 @@ describe('just', () => {
         });
     });
 
-    describe('has', () => {
+    describe('which', () => {
         it('returns just() when value passes the type guard', () => {
-            expect(just(check).has(hasDefinedProperty('required')))
+            expect(just(check).which(hasDefinedProperty('required')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(hasUndefinedProperty('optional')))
+            expect(just(check).which(hasUndefinedProperty('optional')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(hasNotNullProperty('nullable')))
+            expect(just(check).which(hasNotNullProperty('nullable')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(hasNullProperty('possible')))
+            expect(just(check).which(hasNullProperty('possible')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(hasPresentProperty('maybe')))
+            expect(just(check).which(hasPresentProperty('maybe')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(hasAbsentProperty('option')))
+            expect(just(check).which(hasAbsentProperty('option')))
                 .toStrictEqual(just(check));
         });
 
         it('returns nothing() when value fails the type guard', () => {
-            expect(just(check).has(hasUndefinedProperty('required')))
+            expect(just(check).which(hasUndefinedProperty('required')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(hasDefinedProperty('optional')))
+            expect(just(check).which(hasDefinedProperty('optional')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(hasNullProperty('nullable')))
+            expect(just(check).which(hasNullProperty('nullable')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(hasNotNullProperty('possible')))
+            expect(just(check).which(hasNotNullProperty('possible')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(hasAbsentProperty('maybe')))
+            expect(just(check).which(hasAbsentProperty('maybe')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(hasPresentProperty('option')))
+            expect(just(check).which(hasPresentProperty('option')))
                 .toStrictEqual(nothing());
         });
 
         it('combines checked properties', () => {
             expect(
                 just(check)
-                    .has(hasDefinedProperty('required'))
-                    .has(hasDefinedProperty('option'))
+                    .which(hasDefinedProperty('required'))
+                    .which(hasDefinedProperty('option'))
                     .to(v => `${decimal(v.required)}:${decimal(v.option)}`),
             ).toStrictEqual(
                 just(check)
-                    .has(hasDefinedProperty('required', 'option'))
+                    .which(hasDefinedProperty('required', 'option'))
                     .to(v => `${decimal(v.required)}:${decimal(v.option)}`),
             );
         });
@@ -345,9 +345,9 @@ describe('nothing', () => {
         });
     });
 
-    describe('has', () => {
+    describe('which', () => {
         it('remains nothing() after value is checked by the type guard', () => {
-            expect(nothing<TypeGuardCheck<number>>().has(hasPresentProperty('maybe')))
+            expect(nothing<TypeGuardCheck<number>>().which(hasPresentProperty('maybe')))
                 .toStrictEqual(nothing());
         });
     });
@@ -499,9 +499,9 @@ describe('nil', () => {
         });
     });
 
-    describe('has', () => {
+    describe('which', () => {
         it('remains nothing() after value is checked by the type guard', () => {
-            expect(nil<TypeGuardCheck<number>>().has(hasPresentProperty('maybe')))
+            expect(nil<TypeGuardCheck<number>>().which(hasPresentProperty('maybe')))
                 .toStrictEqual(nil());
         });
     });

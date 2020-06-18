@@ -15,8 +15,8 @@ export function that<T>(filter: Predicate<T>): Unary<Maybe<T>, Maybe<T>> {
     return (maybe: Maybe<T>): Maybe<T> => maybe.that(filter);
 }
 
-export function has<T, U extends T>(filter: TypeGuard<T, U>): Unary<Maybe<T>, Maybe<U>> {
-    return (maybe: Maybe<T>): Maybe<U> => maybe.has(filter);
+export function which<T, U extends T>(filter: TypeGuard<T, U>): Unary<Maybe<T>, Maybe<U>> {
+    return (maybe: Maybe<T>): Maybe<U> => maybe.which(filter);
 }
 
 export function when<T>(condition: Proposition): Unary<Maybe<T>, Maybe<T>> {

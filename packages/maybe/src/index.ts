@@ -1,5 +1,4 @@
 export {
-    has,
     lift,
     onto,
     or,

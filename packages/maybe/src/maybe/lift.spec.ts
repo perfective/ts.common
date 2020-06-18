@@ -10,7 +10,7 @@ import {
 import { decimal, isGreaterThan } from '@perfective/real';
 import { isPresent } from '@perfective/value';
 
-import { has, lift, onto, or, otherwise, pick, run, that, to, when } from './lift';
+import { lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
 import { Maybe, just, nil, nothing } from './maybe';
 
 const list: Maybe<number>[] = [just(2.71), just(3.14), nothing<number>(), nil<number>()];
@@ -68,31 +68,31 @@ describe('that', () => {
     });
 });
 
-describe('has', () => {
-    it('lifts the filter function to the Maybe.has()', () => {
-        expect(checks.map(has(hasPresentProperty('required'))).map(pick('required')))
+describe('which', () => {
+    it('lifts the filter function to the Maybe.which()', () => {
+        expect(checks.map(which(hasPresentProperty('required'))).map(pick('required')))
             .toStrictEqual([just(2.71), just(3.14), nothing(), nil()]);
-        expect(checks.map(has(hasAbsentProperty('required'))).map(pick('required')))
+        expect(checks.map(which(hasAbsentProperty('required'))).map(pick('required')))
             .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
-        expect(checks.map(has(hasDefinedProperty('option'))).map(pick('required')))
+        expect(checks.map(which(hasDefinedProperty('option'))).map(pick('required')))
             .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
-        expect(checks.map(has(hasUndefinedProperty('option'))).map(pick('required')))
+        expect(checks.map(which(hasUndefinedProperty('option'))).map(pick('required')))
             .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
-        expect(checks.map(has(hasDefinedProperty('optional'))).map(pick('required')))
+        expect(checks.map(which(hasDefinedProperty('optional'))).map(pick('required')))
             .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
-        expect(checks.map(has(hasUndefinedProperty('optional'))).map(pick('required')))
+        expect(checks.map(which(hasUndefinedProperty('optional'))).map(pick('required')))
             .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
-        expect(checks.map(has(hasNotNullProperty('nullable'))).map(pick('required')))
+        expect(checks.map(which(hasNotNullProperty('nullable'))).map(pick('required')))
             .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
-        expect(checks.map(has(hasNullProperty('nullable'))).map(pick('required')))
+        expect(checks.map(which(hasNullProperty('nullable'))).map(pick('required')))
             .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
-        expect(checks.map(has(hasPresentProperty('maybe'))).map(pick('maybe')))
+        expect(checks.map(which(hasPresentProperty('maybe'))).map(pick('maybe')))
             .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
-        expect(checks.map(has(hasAbsentProperty('maybe'))).map(pick('maybe')))
+        expect(checks.map(which(hasAbsentProperty('maybe'))).map(pick('maybe')))
             .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
-        expect(checks.map(has(hasPresentProperty('possible'))).map(pick('required')))
+        expect(checks.map(which(hasPresentProperty('possible'))).map(pick('required')))
             .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
-        expect(checks.map(has(hasAbsentProperty('possible'))).map(pick('required')))
+        expect(checks.map(which(hasAbsentProperty('possible'))).map(pick('required')))
             .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
     });
 });

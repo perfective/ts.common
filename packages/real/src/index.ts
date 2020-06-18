@@ -33,6 +33,11 @@ export {
 } from './number/integer';
 
 export {
+    isNotNumber,
+    isNumber,
+} from './number/number';
+
+export {
     ascending,
     descending,
 } from './number/sorting';

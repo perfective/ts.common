@@ -33,6 +33,12 @@ export {
 } from './function/proposition';
 
 export {
+    Type,
+    isInstanceOf,
+    isNotInstanceOf,
+} from './function/type';
+
+export {
     TypeGuard,
     Unary,
     value,

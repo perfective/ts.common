@@ -10,8 +10,7 @@ export = {
         'consistent-return': 'error',
         'curly': ['error', 'all'],
         'default-case': 'error',
-        // TODO: ESLint 7
-        'default-case-last': 'off',
+        'default-case-last': 'error',
         'default-param-last': 'error',
         'dot-location': ['error', 'property'],
         'dot-notation': ['error', {

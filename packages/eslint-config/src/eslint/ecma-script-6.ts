@@ -1,18 +1,18 @@
 export = {
     rules: {
-        'arrow-body-style': ['error', 'never'],
-        'arrow-parens': ['error', 'as-needed'],
-        'arrow-spacing': ['error', {
+        'arrow-body-style': ['warn', 'never'],
+        'arrow-parens': ['warn', 'as-needed'],
+        'arrow-spacing': ['warn', {
             before: true,
             after: true,
         }],
         'constructor-super': 'error',
-        'generator-star-spacing': ['error', {
+        'generator-star-spacing': ['warn', {
             before: true,
             after: false,
         }],
         'no-class-assign': 'error',
-        'no-confusing-arrow': ['error', {
+        'no-confusing-arrow': ['warn', {
             allowParens: true,
         }],
         'no-const-assign': 'error',
@@ -24,27 +24,27 @@ export = {
         'no-restricted-exports': 'off',
         'no-restricted-imports': 'error',
         'no-this-before-super': 'error',
-        'no-useless-computed-key': 'error',
+        'no-useless-computed-key': 'warn',
         'no-useless-constructor': 'error',
-        'no-useless-rename': 'error',
-        'no-var': 'error',
-        'object-shorthand': ['error', 'always'],
-        'prefer-arrow-callback': 'error',
-        'prefer-const': 'error',
-        'prefer-destructuring': ['error', {
+        'no-useless-rename': 'warn',
+        'no-var': 'warn',
+        'object-shorthand': ['warn', 'always'],
+        'prefer-arrow-callback': 'warn',
+        'prefer-const': 'warn',
+        'prefer-destructuring': ['warn', {
             object: false,
             array: false,
         }],
-        'prefer-numeric-literals': 'error',
+        'prefer-numeric-literals': 'warn',
         'prefer-rest-params': 'error',
         'prefer-spread': 'error',
-        'prefer-template': 'error',
+        'prefer-template': 'warn',
         'require-yield': 'error',
-        'rest-spread-spacing': ['error', 'never'],
+        'rest-spread-spacing': ['warn', 'never'],
         'sort-imports': 'off',
         'symbol-description': 'error',
-        'template-curly-spacing': ['error', 'never'],
-        'yield-star-spacing': ['error', {
+        'template-curly-spacing': ['warn', 'never'],
+        'yield-star-spacing': ['warn', {
             before: true,
             after: false,
         }],

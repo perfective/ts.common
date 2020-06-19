@@ -1,5 +1,5 @@
 export = {
     rules: {
-        strict: 'error',
+        strict: 'warn',
     },
 };

@@ -13,7 +13,7 @@ export = {
         'import/no-cycle': ['error', {
             ignoreExternal: true,
         }],
-        'import/no-useless-path-segments': 'error',
+        'import/no-useless-path-segments': 'warn',
         'import/no-relative-parent-imports': 'off',
         'import/no-unused-modules': 'error',
     },

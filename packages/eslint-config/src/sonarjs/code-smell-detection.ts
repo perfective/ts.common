@@ -15,9 +15,9 @@ export = {
         'sonarjs/no-small-switch': 'error',
         'sonarjs/no-unused-collection': 'error',
         'sonarjs/no-useless-catch': 'error',
-        'sonarjs/prefer-immediate-return': 'error',
+        'sonarjs/prefer-immediate-return': 'warn',
         'sonarjs/prefer-object-literal': 'error',
         'sonarjs/prefer-single-boolean-return': 'error',
-        'sonarjs/prefer-while': 'error',
+        'sonarjs/prefer-while': 'warn',
     },
 };

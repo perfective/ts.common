@@ -2,7 +2,7 @@ export = {
     rules: {
         'import/first': 'off',
         'import/exports-last': 'off',
-        'import/no-duplicates': ['error', {
+        'import/no-duplicates': ['warn', {
             considerQueryString: true,
         }],
         'import/no-namespace': 'off',
@@ -15,7 +15,7 @@ export = {
                 caseInsensitive: false,
             },
         }],
-        'import/newline-after-import': 'error',
+        'import/newline-after-import': 'warn',
         'import/prefer-default-export': 'off',
         'import/max-dependencies': 'off',
         'import/no-unassigned-import': 'error',

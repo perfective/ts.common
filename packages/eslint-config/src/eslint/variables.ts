@@ -10,7 +10,7 @@ export = {
         'no-shadow-restricted-names': 'error',
         // TypeScript compiler checks defined symbols
         'no-undef': 'off',
-        'no-undef-init': 'error',
+        'no-undef-init': 'warn',
         'no-undefined': 'off',
         'no-unused-vars': ['error', {
             args: 'after-used',

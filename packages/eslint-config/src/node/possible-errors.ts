@@ -19,6 +19,6 @@ export = {
         'node/no-unsupported-features/es-syntax': 'off',
         'node/no-unsupported-features/node-builtins': 'error',
         'node/process-exit-as-throw': 'error',
-        'node/shebang': 'error',
+        'node/shebang': 'warn',
     },
 };

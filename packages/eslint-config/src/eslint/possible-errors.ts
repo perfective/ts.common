@@ -36,8 +36,7 @@ export = {
         'no-unreachable': 'error',
         'no-unsafe-finally': 'error',
         'no-unsafe-negation': 'error',
-        // TODO: ESLint 7
-        'no-useless-backreference': 'off',
+        'no-useless-backreference': 'error',
         'require-atomic-updates': 'error',
         'use-isnan': 'error',
         'valid-typeof': 'error',

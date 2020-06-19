@@ -1,7 +1,19 @@
 {
     "name": "@perfective/eslint-config",
-    "version": "0.4.1",
+    "version": "0.5.0-beta",
     "description": "ESLint shareable rules configuration",
+    "keywords": [
+        "code quality",
+        "code standard",
+        "code style",
+        "eslint",
+        "eslint-config",
+        "lint",
+        "perfective",
+        "tslint",
+        "tslint-config",
+        "typescript"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",

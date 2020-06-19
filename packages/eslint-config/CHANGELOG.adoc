@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.5.0 (beta)
+
+* Upgraded `eslint` to `7.2.0`.
+* Upgraded `@typescript-eslint` to `3.3.0`.
+* Upgraded `eslint-plugin-import` to `2.21.2`.
+* Set fixable ESLint rules as warnings (`warn` severity).
+* Fix: added `eslint-plugin-node` as a peer dependency.
+* Fix: configured `no-mixed-operators` to ignore arithmetic operations.
+* Fix: enabled the `default-case-last` rule.
+* Fix: enabled the `no-useless-backreference` rule.
+* Fix: enabled the `@typescript-eslint/method-signature-style` rule.
+
 == v0.4.1
 
 * Fixed linting errors.

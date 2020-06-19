@@ -8,6 +8,7 @@ export = {
         }],
         '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/ban-ts-comment': 'error',
+        '@typescript-eslint/ban-tslint-comment': 'error',
         '@typescript-eslint/ban-types': 'error',
         '@typescript-eslint/class-literal-property-style': 'off',
         '@typescript-eslint/consistent-type-assertions': ['error', {
@@ -78,6 +79,7 @@ export = {
             format: ['StrictPascalCase'],
         }],
         '@typescript-eslint/no-base-to-string': 'error',
+        '@typescript-eslint/no-confusing-non-null-assertion': 'error',
         '@typescript-eslint/no-dynamic-delete': 'error',
         '@typescript-eslint/no-empty-interface': ['error', {
             allowSingleExtends: true,
@@ -129,7 +131,9 @@ export = {
         '@typescript-eslint/prefer-string-starts-ends-with': 'error',
         '@typescript-eslint/prefer-ts-expect-error': 'error',
         '@typescript-eslint/promise-function-async': 'error',
-        '@typescript-eslint/require-array-sort-compare': 'error',
+        '@typescript-eslint/require-array-sort-compare': ['error', {
+            ignoreStringArrays: true,
+        }],
         '@typescript-eslint/restrict-plus-operands': 'error',
         '@typescript-eslint/restrict-template-expressions': ['error', {
             allowNumber: false,

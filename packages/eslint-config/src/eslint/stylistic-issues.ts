@@ -109,7 +109,17 @@ export = {
         'no-continue': 'error',
         'no-inline-comments': 'error',
         'no-lonely-if': 'error',
-        'no-mixed-operators': 'error',
+        'no-mixed-operators': ['error', {
+            groups: [
+                ['+', '-'],
+                ['*', '/', '%', '**'],
+                ['&', '|', '^', '~', '<<', '>>', '>>>'],
+                ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+                ['&&', '||', '?:', '??'],
+                ['in', 'instanceof'],
+            ],
+            allowSamePrecedence: true,
+        }],
         'no-mixed-spaces-and-tabs': 'error',
         'no-multi-assign': 'error',
         'no-multiple-empty-lines': ['error', {

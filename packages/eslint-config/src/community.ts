@@ -80,7 +80,5 @@ export = {
         }],
         // Requires research on level of effort in writing safer regular expressions
         'unicorn/no-unsafe-regex': 'off',
-        // Requires research on compatibility with TS
-        'unicorn/prefer-spread': 'off',
     },
 };

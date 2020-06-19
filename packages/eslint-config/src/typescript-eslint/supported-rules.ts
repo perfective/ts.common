@@ -63,8 +63,7 @@ export = {
                 'method',
             ],
         }],
-        // TODO: master
-        '@typescript-eslint/method-signature-style': 'off',
+        '@typescript-eslint/method-signature-style': ['error', 'property'],
         '@typescript-eslint/naming-convention': ['error', {
             selector: 'enumMember',
             format: ['StrictPascalCase'],

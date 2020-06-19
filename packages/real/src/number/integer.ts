@@ -4,6 +4,10 @@ export function isInteger(value: number): boolean {
     return Number.isInteger(value);
 }
 
+export function isSafeInteger(value: number): boolean {
+    return Number.isSafeInteger(value);
+}
+
 export function isNonNegativeInteger(value: number): boolean {
     return value >= 0 && isInteger(value);
 }

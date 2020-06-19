@@ -4,6 +4,7 @@ import {
     isNonNegativeInteger,
     isNonPositiveInteger,
     isPositiveInteger,
+    isSafeInteger,
 } from './integer';
 
 describe('isInteger', () => {
@@ -25,6 +26,21 @@ describe('isInteger', () => {
         expect(isInteger(Number.POSITIVE_INFINITY)).toBe(false);
         expect(isInteger(Number.MIN_VALUE)).toBe(false);
         expect(isInteger(Number.EPSILON)).toBe(false);
+    });
+});
+
+describe('isSafeInteger', () => {
+    it('returns true when value precision is safe', () => {
+        expect(isSafeInteger(3)).toBe(true);
+        expect(isSafeInteger(3.0)).toBe(true);
+        expect(isSafeInteger(2 ** 53 - 1)).toBe(true);
+    });
+
+    it('returns false when value precision may be lost', () => {
+        expect(isSafeInteger(3.1)).toBe(false);
+        expect(isSafeInteger(2 ** 53)).toBe(false);
+        expect(isSafeInteger(Number.NaN)).toBe(false);
+        expect(isSafeInteger(Infinity)).toBe(false);
     });
 });
 

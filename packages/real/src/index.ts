@@ -30,6 +30,7 @@ export {
     isNonNegativeInteger,
     isNonPositiveInteger,
     isPositiveInteger,
+    isSafeInteger,
 } from './number/integer';
 
 export {

@@ -1,12 +1,31 @@
 = Perfective ESLint Config
 
 `@perfective/eslint-config` provides
-a https://eslint.org/docs/developer-guide/shareable-configs[shareable ESLint config]
-for the `@perfective` packages.
+a https://eslint.org/docs/developer-guide/shareable-configs[shareable ESLint configuration]
+that is used for the development of the `@perfective` packages.
+As the `@perfective` library itself,
+these rules are configured for the TypeScript projects only.
+
+In addition to the core https://eslint.org/docs/rules/[ESLint rules]
+and the `link:https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin[@typescript-eslint]` plugin rules,
+`@perfective/eslint-config` configures:
+
+* `link:https://github.com/benmosher/eslint-plugin-import[eslint-plugin-import]`;
+* `link:https://github.com/jest-community/eslint-plugin-jest[eslint-plugin-jest]`;
+* `link:https://github.com/mysticatea/eslint-plugin-node[eslint-plugin-node]`;
+* `link:https://github.com/xjamundx/eslint-plugin-promise[eslint-plugin-promise]`;
+* `link:https://github.com/SonarSource/eslint-plugin-sonarjs[eslint-plugin-sonarjs]`;
+* `link:https://github.com/sindresorhus/eslint-plugin-unicorn[eslint-plugin-unicorn]`.
+
+To simplify configuring ESLint support in the IDEs and editors,
+the severity of all fixable rules is `warning`.
+That allows to visually distinguish errors that have to be fixed manually
+from issues that will be fixed automatically.
 
 == Setup
 
-.Require `@perfective/eslint-config` and its peer dependencies as dev dependencies
+. Require `@perfective/eslint-config` and its peer dependencies as dev dependencies
++
 [source,bash]
 ----
 npm install --save-dev \
@@ -24,30 +43,59 @@ npm install --save-dev \
     eslint-plugin-unicorn \
     tslint
 ----
-
-.Add `.eslintrc.json` to the project root.
++
+. Require the configuration in your root `.eslintrc.js` or `.eslintrc.json`.
++
 [source,json]
 ----
 {
-    "extends": [
-        "@perfective"
-    ]
+    "extends": ["@perfective"]
+}
+----
++
+. Configure your `.eslintignore` file.
+
+== Community Configuration
+
+As the default config may seem too strict,
+the package also provides the slightly relaxed `community` configuration.
+Its rules, like the line length,
+provide more common in open source communities settings.
+Some of these setting may eventually be used in the default config.
+
+.Using community config in the `.eslintrc.json`.
+[source,json]
+----
+{
+    "extends": ["@perfective/eslint-config/dist/community"]
 }
 ----
 
-Customize your `.eslintignore` file.
-
 == TSLint
 
-https://palantir.github.io/tslint/[TSLint] is deprecated
-and most of its rules have already been replaced by the ESLint
-or its plugins.
-Only rules that can not be replaced yet are set up in this packages.
+ESLint and its plugins replace most of the https://palantir.github.io/tslint/[TSLint] rules.
+Yet, there are plenty of rules that need to be supported.
+Until then, it's recommended to also use the TSLint and its configuration.
 
-.Add `tslint.json` to the project root.
+.Adding `tslint.json` to the project root.
 [source,json]
 ----
 {
     "extends": ["@perfective/eslint-config/tslint"]
 }
 ----
+
+[NOTE]
+====
+There is no `community` edition of the TSLint config.
+====
+
+== Roadmap
+
+* Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
+* Research `link:https://github.com/dangreenisrael/eslint-plugin-jest-formatting[eslint-plugin-jest-formatting]`.
+* Research `link:https://github.com/cartant/eslint-plugin-rxjs[eslint-plugin-rxjs]`.
+* Research `link:https://github.com/TristonJ/eslint-plugin-prefer-arrow[eslint-plugin-prefer-arrow]`.
+* Research `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`.
+* Research `link:https://github.com/lydell/eslint-plugin-simple-import-sort[eslint-plugin-simple-import-sort]`.
+* Replace all TSLint rules with ESLint rules from plugins; drop TSLint support.

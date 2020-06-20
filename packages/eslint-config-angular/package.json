@@ -25,6 +25,8 @@
         "@perfective/eslint-config": "^0.4.1"
     },
     "peerDependencies": {
+        "@angular-eslint/eslint-plugin": "^0.0.1-alpha.32",
+        "@angular-eslint/eslint-plugin-template": "^0.0.1-alpha.32",
         "codelyzer": "^5.2.2"
     }
 }

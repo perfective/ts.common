@@ -4,6 +4,7 @@ export = {
         '@perfective/eslint-config/dist/community',
     ],
     rules: {
+        '@angular-eslint/use-injectable-provided-in': 'off',
         // Conflicts with NestJS
         'import/no-cycle': 'off',
         // Conflicts with the Angular file suffixes: .module, .component, etc.

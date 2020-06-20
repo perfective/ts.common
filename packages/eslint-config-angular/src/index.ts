@@ -1,12 +1,14 @@
 export = {
     plugins: [
         '@angular-eslint',
+        'jest-dom',
     ],
     extends: [
         '@perfective/eslint-config',
         './angular/functionality',
         './angular/maintainability',
         './angular/style',
+        './jest-dom/rules',
     ],
     rules: {
         // Conflicts with the Angular file suffixes: .module, .component, etc.

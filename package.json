@@ -10,8 +10,8 @@
         "test": "lerna run --stream --no-bail --no-prefix test"
     },
     "devDependencies": {
-        "@angular/compiler": "^9.1.4",
-        "@angular/core": "^9.1.4",
+        "@angular/compiler": "^9.1.11",
+        "@angular/core": "^9.1.11",
         "@perfective/array": "file:packages/array",
         "@perfective/error": "file:packages/error",
         "@perfective/eslint-config": "file:packages/eslint-config",

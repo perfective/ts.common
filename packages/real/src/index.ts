@@ -2,9 +2,9 @@ export {
     Interval,
     interval,
     isInInterval,
+    isInLeftOpenInterval,
     isInOpenInterval,
-    isInOpenMaxInterval,
-    isInOpenMinInterval,
+    isInRightOpenInterval,
 } from './interval/interval';
 
 export {
@@ -13,15 +13,6 @@ export {
     hexadecimal,
     octal,
 } from './number/base';
-
-export {
-    isEqualTo,
-    isGreaterThan,
-    isGreaterThanOrEqualTo,
-    isLessThan,
-    isLessThanOrEqualTo,
-    isNotEqualTo,
-} from './number/comparison';
 
 export {
     Integer,
@@ -34,7 +25,10 @@ export {
 } from './number/integer';
 
 export {
+    Digits,
     Precision,
+    exponential,
+    fixed,
     precision,
 } from './number/lift';
 
@@ -46,4 +40,10 @@ export {
 export {
     ascending,
     descending,
-} from './number/sorting';
+    isEqualTo,
+    isGreaterThan,
+    isGreaterThanOrEqualTo,
+    isLessThan,
+    isLessThanOrEqualTo,
+    isNotEqualTo,
+} from './number/order';

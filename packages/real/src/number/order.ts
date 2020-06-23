@@ -23,3 +23,11 @@ export function isLessThan(value: number): Predicate<number> {
 export function isLessThanOrEqualTo(value: number): Predicate<number> {
     return (variable: number): boolean => variable <= value;
 }
+
+export function ascending(a: number, b: number): number {
+    return a - b;
+}
+
+export function descending(a: number, b: number): number {
+    return b - a;
+}

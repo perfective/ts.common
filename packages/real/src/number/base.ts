@@ -10,19 +10,19 @@ export function decimal(value: number | string): string | number {
 }
 
 export function binary(value: Integer): string;
-export function binary(value: string): number;
+export function binary(value: string): Integer;
 export function binary(value: Integer | string): string | Integer {
     return base(2, value);
 }
 
 export function octal(value: Integer): string;
-export function octal(value: string): number;
+export function octal(value: string): Integer;
 export function octal(value: Integer | string): string | Integer {
     return base(8, value);
 }
 
 export function hexadecimal(value: Integer): string;
-export function hexadecimal(value: string): number;
+export function hexadecimal(value: string): Integer;
 export function hexadecimal(value: Integer | string): string | Integer {
     return base(16, value);
 }

@@ -30,10 +30,10 @@ export function isInOpenInterval(interval: Interval): Predicate<number> {
     return (variable: number): boolean => interval.min < variable && variable < interval.max;
 }
 
-export function isInOpenMinInterval(interval: Interval): Predicate<number> {
+export function isInLeftOpenInterval(interval: Interval): Predicate<number> {
     return (variable: number): boolean => interval.min < variable && variable <= interval.max;
 }
 
-export function isInOpenMaxInterval(interval: Interval): Predicate<number> {
+export function isInRightOpenInterval(interval: Interval): Predicate<number> {
     return (variable: number): boolean => interval.min <= variable && variable < interval.max;
 }

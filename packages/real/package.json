@@ -1,7 +1,16 @@
 {
     "name": "@perfective/real",
-    "version": "0.2.1",
-    "description": "Functions to work with real numbers",
+    "version": "0.3.0",
+    "description": "Types and functions to work with real numbers",
+    "keywords": [
+        "integer",
+        "interval",
+        "number",
+        "perfective",
+        "radix",
+        "real",
+        "typescript"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",
@@ -21,6 +30,6 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/fp": "^0.1.2"
+        "@perfective/fp": "^0.3.0"
     }
 }

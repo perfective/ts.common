@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.3.0
+
+* Added the package documentation.
+* Added the `Precision` type:
+** added the `precision` function.
+* Added the `Digits` type:
+** added the `exponential` function;
+** added the `fixed` function.
+* Added the `isSafeInteger` function.
+* Renamed the `isInOpenMinInterval` function into `isInLeftOpenInterval`.
+* Renamed the `isInOpenMaxInterval` function into `isInRightOpenInterval`.
+
 == v0.2.1
 
 * Fix: exported `isNumber`/`isNotNumber` functions.

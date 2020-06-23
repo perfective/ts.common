@@ -48,6 +48,8 @@ export = {
         'no-extra-semi': 'off',
         '@typescript-eslint/no-extra-semi': 'warn',
         'no-invalid-this': 'off',
+        'no-loss-of-precision': 'off',
+        '@typescript-eslint/no-loss-of-precision': 'error',
         '@typescript-eslint/no-invalid-this': 'error',
         'no-magic-numbers': 'off',
         '@typescript-eslint/no-magic-numbers': 'off',

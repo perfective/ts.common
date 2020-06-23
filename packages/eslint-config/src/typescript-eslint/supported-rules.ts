@@ -105,7 +105,10 @@ export = {
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/no-this-alias': 'error',
         '@typescript-eslint/no-type-alias': 'off',
-        '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': ['warn', {
+            allowComparingNullableBooleansToTrue: true,
+            allowComparingNullableBooleansToFalse: true,
+        }],
         '@typescript-eslint/no-unnecessary-condition': 'warn',
         '@typescript-eslint/no-unnecessary-qualifier': 'warn',
         '@typescript-eslint/no-unnecessary-type-arguments': 'warn',

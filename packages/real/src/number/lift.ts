@@ -10,6 +10,10 @@ export function exponential(fraction: Digits): Unary<number, string> {
     return (value: number): string => value.toExponential(fraction);
 }
 
+export function fixed(fraction: Digits): Unary<number, string> {
+    return (value: number): string => value.toFixed(fraction);
+}
+
 export function precision(precision: Precision): Unary<number, string> {
     return (value: number): string => value.toPrecision(precision);
 }

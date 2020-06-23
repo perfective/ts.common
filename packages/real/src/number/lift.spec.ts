@@ -1,4 +1,4 @@
-import { exponential, precision } from './lift';
+import { exponential, fixed, precision } from './lift';
 
 describe('exponential', () => {
     describe('exponential(n)', () => {
@@ -23,6 +23,38 @@ describe('exponential', () => {
                 .toStrictEqual('3.14159265358979311600e+0');
             expect(exponential(20)(3_141_592_653_589_793_238_46))
                 .toStrictEqual('3.14159265358979334144e+20');
+        });
+        /* eslint-enable @typescript-eslint/no-loss-of-precision */
+    });
+});
+
+describe('fixed', () => {
+    describe('fixed(n)', () => {
+        it('returns a string representation of a number in fixed-point notation', () => {
+            expect(fixed(0)(3.141_592_653_589_793))
+                .toStrictEqual('3');
+            expect(fixed(0)(3_141_592_653_589_793_2))
+                .toStrictEqual('31415926535897932');
+            expect(fixed(15)(3.141_592_653_589_793))
+                .toStrictEqual('3.141592653589793');
+            expect(fixed(15)(3_141_592_653_589_793_2))
+                .toStrictEqual('31415926535897932.000000000000000');
+            expect(fixed(20)(3_141_592_653_589_793_2))
+                .toStrictEqual('31415926535897932.00000000000000000000');
+        });
+
+        /* eslint-disable @typescript-eslint/no-loss-of-precision -- precision failure test */
+        it('only keeps about 17 decimal places of precision', () => {
+            expect(fixed(16)(3.141_592_653_589_793_2))
+                .toStrictEqual('3.1415926535897931');
+            expect(fixed(17)(3_141_592_653_589_793_23))
+                .toStrictEqual('314159265358979328.00000000000000000');
+            expect(fixed(20)(3.141_592_653_589_793))
+                .toStrictEqual('3.14159265358979311600');
+            expect(fixed(20)(3.141_592_653_589_793_238_46))
+                .toStrictEqual('3.14159265358979311600');
+            expect(fixed(20)(3_141_592_653_589_793_238_46))
+                .toStrictEqual('314159265358979334144.00000000000000000000');
         });
         /* eslint-enable @typescript-eslint/no-loss-of-precision */
     });

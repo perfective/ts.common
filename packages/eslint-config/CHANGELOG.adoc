@@ -2,15 +2,28 @@
 
 == v0.5.0 (beta)
 
-* Upgraded `eslint` to `7.3.0`.
-* Upgraded `@typescript-eslint` to `3.3.0`.
+* Upgraded `eslint` to `7.3.1`.
+** Enabled the new `no-promise-executor-return` rule.
+** Enabled the new `no-unreachable-loop` rule.
+** Fix: configured `no-mixed-operators` to ignore arithmetic operations.
+** Fix: enabled the `default-case-last` rule.
+** Fix: enabled the `no-useless-backreference` rule.
+* Upgraded `@typescript-eslint` to `3.4.0`.
+** Enabled the new `@typescript-eslint/ban-tslint-comment` rule.
+** Enabled the new `@typescript-eslint/no-confusing-non-null-assertion` rule.
+** Enabled the new `@typescript-eslint/no-loss-of-precision` rule
+(disabled the default `no-loss-of-precision` rule).
+** Enabled the new `ignoreStringArrays` configuration flag
+for the `@typescript-eslint/require-array-sort-compare` rule.
+** Fix: enabled the `@typescript-eslint/method-signature-style` rule.
 * Upgraded `eslint-plugin-import` to `2.21.2`.
+** Enabled the new `ignoreExternal` configuration flag for the `import/no-cycle` rule.
+* Upgraded `eslint-plugin-jest` to `23.16.0`.
+** Enabled the new `jest/no-conditional-expect` rule.
+** Removed the deprecated `jest/no-try-expect` rule.
 * Set fixable ESLint rules as warnings (`warn` severity).
+* Updated the package documentation.
 * Fix: added `eslint-plugin-node` as a peer dependency.
-* Fix: configured `no-mixed-operators` to ignore arithmetic operations.
-* Fix: enabled the `default-case-last` rule.
-* Fix: enabled the `no-useless-backreference` rule.
-* Fix: enabled the `@typescript-eslint/method-signature-style` rule.
 
 == v0.4.1
 

@@ -1,33 +1,45 @@
 = Perfective ESLint Config for Angular
 
 `@perfective/eslint-config-angular` provides
-a https://eslint.org/docs/developer-guide/shareable-configs[shareable ESLint config]
-for the `@perfective` https://angular.io[Angular] packages.
+a https://eslint.org/docs/developer-guide/shareable-configs[shareable ESLint configuration]
+that is used for the development of the `@perfective` https://angular.io[Angular] packages.
+This package is based on the
+`link:https://www.npmjs.com/package/@perfective/eslint-config[@perfective/eslint-config]` package.
 
-[NOTE]
-====
-This configuration adjusts rules for https://nestjs.com[NestJS],
-as its often used with Angular.
-====
+`@perfective/eslint-config-angular` uses the following ESLint plugins:
+
+* `link:https://github.com/angular-eslint/angular-eslint[@angular-eslint/eslint-plugin]`;
+* `link:https://github.com/testing-library/eslint-plugin-jest-dom[eslint-plugin-jest-dom]`.
 
 == Setup
 
-.Require `@perfective/eslint-config-angular` and its peer dependencies as dev dependencies
+. Require `@perfective/eslint-config-angular` and its peer dependencies as dev dependencies:
++
 [source,bash]
 ----
 npm install --save-dev \
     @perfective/eslint-config-angular \
+    @angular-eslint/eslint-plugin \
+    @angular-eslint/eslint-plugin-template \
+    @angular-eslint/template-parser \
     @typescript-eslint/eslint-plugin \
     @typescript-eslint/parser \
-    codelyzer \
     eslint \
     eslint-import-resolver-typescript \
     eslint-plugin-deprecation \
     eslint-plugin-import \
-    tslint
+    eslint-plugin-jest \
+    eslint-plugin-jest-dom \
+    eslint-plugin-node \
+    eslint-plugin-promise \
+    eslint-plugin-sonarjs \
+    eslint-plugin-unicorn \
+    tslint \
+    codelyzer
 ----
-
-.Add `.eslintrc.json` to the project root.
++
+. Require the configuration in your root `.eslintrc.js` or `.eslintrc.json`.
++
 [source,json]
 ----
 {
@@ -36,18 +48,21 @@ npm install --save-dev \
     ]
 }
 ----
-
++
 [NOTE]
 ====
-Use `@perfective/eslint-config-angular/dist/community` for a more relaxed config.
+Use `@perfective/eslint-config-angular/dist/community` for a less strict configuration,
+based on the `@perfective/eslint-config/dist/community`.
 ====
-
-Customize your `.eslintignore` file.
++
+. Configure your `.eslintignore` file.
 
 == TSLint
 
-https://palantir.github.io/tslint/[TSLint] is deprecated,
-but it's used to provide https://github.com/mgechev/codelyzer[Codelyzer] support.
+While the `link:https://github.com/angular-eslint/angular-eslint[@angular-eslint/eslint-plugin]` is
+still in active development,
+https://github.com/mgechev/codelyzer[Codelyzer] is used to increase the quality coverage.
+It's based on the deprecated https://palantir.github.io/tslint/[TSLint].
 
 .Add `tslint.json` to the project root.
 [source,json]
@@ -56,3 +71,7 @@ but it's used to provide https://github.com/mgechev/codelyzer[Codelyzer] support
     "extends": ["@perfective/eslint-config-angular/tslint"]
 }
 ----
+
+== Roadmap
+
+* Remove TSLint and Codelyzer support.

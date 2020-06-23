@@ -24,7 +24,7 @@ from issues that will be fixed automatically.
 
 ## Setup
 
-1. Require `@perfective/eslint-config` and its peer dependencies as dev dependencies
+Require `@perfective/eslint-config` and its peer dependencies as dev dependencies.
 ```bash
 npm install --save-dev \
     @perfective/eslint-config \
@@ -42,8 +42,7 @@ npm install --save-dev \
     tslint
 ```
 
-2. Require the configuration in your root `.eslintrc.js` or `.eslintrc.json`.
-
+Require the configuration in your root `.eslintrc.js` or `.eslintrc.json`.
 ```json
 {
     "extends": ["@perfective"]

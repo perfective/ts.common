@@ -1,20 +1,13 @@
-import { isFunction } from './function';
-import { Nullary } from './nullary';
+import { Value, valueOf } from './nullary';
 
-export type Proposition = boolean | Nullary<boolean>;
+export type Proposition = Value<boolean>;
 
 export function isTrue(proposition: Proposition): boolean {
-    if (isFunction(proposition)) {
-        return proposition();
-    }
-    return proposition;
+    return valueOf(proposition);
 }
 
 export function isFalse(proposition: Proposition): boolean {
-    if (isFunction(proposition)) {
-        return !proposition();
-    }
-    return !proposition;
+    return !valueOf(proposition);
 }
 
 export function always(): boolean {

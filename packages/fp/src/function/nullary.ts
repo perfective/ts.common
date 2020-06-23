@@ -2,6 +2,7 @@ import { isFunction } from './function';
 
 export type Nullary<T> = () => T;
 export type Fallback<T> = T | Nullary<T>;
+export type Value<T> = T | Nullary<T>;
 
 export function constant<T>(value: T): Nullary<T> {
     return (): T => value;
@@ -17,4 +18,8 @@ export function fallbackTo<T>(value: Fallback<T>): T {
         return value();
     }
     return value;
+}
+
+export function valueOf<T>(value: Value<T>): T {
+    return isFunction(value) ? value() : value;
 }

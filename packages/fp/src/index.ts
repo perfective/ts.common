@@ -6,9 +6,11 @@ export {
 export {
     Fallback,
     Nullary,
+    Value,
     constant,
     empty,
     fallbackTo,
+    valueOf,
 } from './function/nullary';
 
 export {

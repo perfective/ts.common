@@ -98,4 +98,5 @@ There is no `community` edition of the TSLint config.
 * Research `link:https://github.com/TristonJ/eslint-plugin-prefer-arrow[eslint-plugin-prefer-arrow]`.
 * Research `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`.
 * Research `link:https://github.com/lydell/eslint-plugin-simple-import-sort[eslint-plugin-simple-import-sort]`.
+* Research `link:https://mysticatea.github.io/eslint-plugin-eslint-comments[eslint-plugin-eslint-comments]`.
 * Replace all TSLint rules with ESLint rules from plugins; drop TSLint support.

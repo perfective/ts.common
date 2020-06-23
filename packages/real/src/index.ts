@@ -33,6 +33,11 @@ export {
 } from './number/integer';
 
 export {
+    Precision,
+    precision,
+} from './number/lift';
+
+export {
     isNotNumber,
     isNumber,
 } from './number/number';

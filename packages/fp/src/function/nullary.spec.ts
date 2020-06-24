@@ -1,4 +1,4 @@
-import { constant, empty, fallbackTo, valueOf } from './nullary';
+import { constant, empty, valueOf } from './nullary';
 
 describe('constant', () => {
     it('creates a function that returns a constant value', () => {
@@ -9,18 +9,6 @@ describe('constant', () => {
 describe('empty', () => {
     it('creates an empty function', () => {
         expect(empty()()).toBeUndefined();
-    });
-});
-
-describe('fallbackTo', () => {
-    it('returns a constant when value is constant', () => {
-        expect(fallbackTo(3.14))
-            .toStrictEqual(3.14);
-    });
-
-    it('returns a result of the fallback function when value is a function', () => {
-        expect(fallbackTo(constant(3.14)))
-            .toStrictEqual(3.14);
     });
 });
 

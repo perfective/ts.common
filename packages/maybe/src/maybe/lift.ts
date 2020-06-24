@@ -1,4 +1,4 @@
-import { Fallback, Predicate, TypeGuard, Unary } from '@perfective/fp';
+import { Predicate, TypeGuard, Unary, Value } from '@perfective/fp';
 import { Present, isNull, isUndefined } from '@perfective/value';
 
 import { Condition, Just, Maybe } from './maybe';
@@ -27,15 +27,15 @@ export function pick<T, K extends keyof T>(property: K): Unary<Maybe<T>, Maybe<P
     return (maybe: Maybe<T>): Maybe<Present<T[K]>> => maybe.pick(property);
 }
 
-export function otherwise<T>(fallback: Fallback<T>): Unary<Maybe<T>, Just<T>> {
+export function otherwise<T>(fallback: Value<T>): Unary<Maybe<T>, Just<T>> {
     return (maybe: Maybe<T>): Just<T> => maybe.otherwise(fallback);
 }
 
-export function or<T>(fallback: Fallback<T>): Unary<Maybe<T>, T>;
+export function or<T>(fallback: Value<T>): Unary<Maybe<T>, T>;
 export function or<T>(fallback: null): Unary<Maybe<T>, T | null>;
 export function or<T>(fallback: undefined): Unary<Maybe<T>, T | undefined>;
 export function or<T>(
-    fallback: Fallback<T> | null | undefined,
+    fallback: Value<T> | null | undefined,
 ): Unary<Maybe<T>, T | null | undefined> {
     if (isNull(fallback)) {
         return (maybe: Maybe<T>): T | null => maybe.or(null);

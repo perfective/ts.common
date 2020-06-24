@@ -40,6 +40,9 @@ export {
 
 export {
     TypeGuard,
+} from './function/type-guard';
+
+export {
     Unary,
     value,
 } from './function/unary';

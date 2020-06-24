@@ -7,7 +7,8 @@
         "build:eslint": "lerna run --scope @perfective/eslint-config --stream build",
         "clean": "lerna run --stream clean",
         "lint": "npm run build:eslint && lerna run lint --no-bail --no-prefix --stream",
-        "test": "lerna run --stream --no-bail --no-prefix test"
+        "test": "lerna run --stream --no-bail --no-prefix test",
+        "test:verbose": "lerna run --stream --no-bail --no-prefix test:verbose"
     },
     "devDependencies": {
         "@angular-eslint/eslint-plugin": "^0.0.1-alpha.32",

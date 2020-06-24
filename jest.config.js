@@ -13,5 +13,5 @@
     },
     collectCoverage: true,
     coverageReporters: ['text'],
-    verbose: true
+    verbose: false
 };

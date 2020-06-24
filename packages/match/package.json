@@ -18,7 +18,8 @@
         "lint": "npm run lint:eslint; npm run lint:tslint",
         "lint:eslint": "eslint --fix --ext .ts ./src",
         "lint:tslint": "tslint --fix --project ./tsconfig.lint.json",
-        "test": "jest"
+        "test": "jest",
+        "test:verbose": "jest --verbose"
     },
     "dependencies": {
         "@perfective/fp": "^0.2.0",

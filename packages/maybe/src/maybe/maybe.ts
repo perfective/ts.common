@@ -1,9 +1,7 @@
 // Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
 /* eslint-disable max-classes-per-file */
-import { Predicate, TypeGuard, Value, valueOf } from '@perfective/fp';
+import { Predicate, Proposition, TypeGuard, Value, isTrue, valueOf } from '@perfective/fp';
 import { Present, isNull, isPresent, isUndefined } from '@perfective/value';
-
-export type Condition = Value<boolean>;
 
 export abstract class Maybe<T> {
     protected constructor(
@@ -46,7 +44,7 @@ export abstract class Maybe<T> {
         return this as unknown as Nothing<U> | Nil<U>;
     }
 
-    public when(condition: Condition): Maybe<T> {
+    public when(condition: Proposition): Maybe<T> {
         if (isPresent(this.value) && isTrue(condition)) {
             return this;
         }
@@ -163,14 +161,4 @@ export function optional<T>(value: T | undefined): Maybe<T> {
         return nothing();
     }
     return just(value);
-}
-
-/**
- * @package
- */
-export function isTrue(condition: Condition): boolean {
-    if (condition instanceof Function) {
-        return condition();
-    }
-    return condition;
 }

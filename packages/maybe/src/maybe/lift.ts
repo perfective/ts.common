@@ -1,7 +1,7 @@
-import { Predicate, TypeGuard, Unary, Value } from '@perfective/fp';
+import { Predicate, Proposition, TypeGuard, Unary, Value } from '@perfective/fp';
 import { Present, isNull, isUndefined } from '@perfective/value';
 
-import { Condition, Just, Maybe } from './maybe';
+import { Just, Maybe } from './maybe';
 
 export function onto<T, U>(bind: (value: T) => Maybe<U>): Unary<Maybe<T>, Maybe<U>> {
     return (maybe: Maybe<T>): Maybe<U> => maybe.onto(bind);
@@ -19,7 +19,7 @@ export function has<T, U extends T>(filter: TypeGuard<T, U>): Unary<Maybe<T>, Ma
     return (maybe: Maybe<T>): Maybe<U> => maybe.has(filter);
 }
 
-export function when<T>(condition: Condition): Unary<Maybe<T>, Maybe<T>> {
+export function when<T>(condition: Proposition): Unary<Maybe<T>, Maybe<T>> {
     return (maybe: Maybe<T>): Maybe<T> => maybe.when(condition);
 }
 

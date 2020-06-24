@@ -1,5 +1,16 @@
 = Changelog
 
+== v0.3.0
+
+* Added the `Type<T>` type.
+** Added the `isInstanceOf` function.
+** Added the `isNotInstanceOf` function.
+* Added the `Value<T>` type.
+** Added `valueOf` function.
+* Removed the `Fallback<T>` type.
+** Removed the `fallbackTo` function.
+* Added the package documentation.
+
 == v0.2.1
 
 * Fixed linting errors.

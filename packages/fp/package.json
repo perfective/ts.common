@@ -1,7 +1,16 @@
 {
     "name": "@perfective/fp",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "Functions and types for functional programming",
+    "keywords": [
+        "fp",
+        "functional-programming",
+        "perfective",
+        "predicate",
+        "proposition",
+        "type",
+        "type-guard"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",

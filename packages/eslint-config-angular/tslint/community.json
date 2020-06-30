@@ -1,6 +1,4 @@
 {
     "extends": ["./index.json"],
-    "rules": {
-        "use-injectable-provided-in": false
-    }
+    "rules": {}
 }

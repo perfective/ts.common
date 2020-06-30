@@ -13,14 +13,18 @@ export = {
     rules: {},
     overrides: [
         {
+            // TODO: Overrides conflicts with @typescript-eslint
+            //  Requires a separate .eslintrc file
             files: ['*.component.html'],
             parser: '@angular-eslint/template-parser',
             plugins: ['@angular-eslint/template'],
             rules: {
                 '@angular-eslint/template/banana-in-a-box': 'error',
-                '@angular-eslint/template/cyclomatic-complexity': 'error',
-                '@angular-eslint/template/no-call-expression': 'error',
-                '@angular-eslint/template/no-negated-async': 'error',
+                '@angular-eslint/template/cyclomatic-complexity': 'off',
+                // TODO: Fails with "Cannot read property 'start' of undefined
+                '@angular-eslint/template/no-call-expression': 'off',
+                // TODO: Fails with "Cannot read property 'start' of undefined
+                '@angular-eslint/template/no-negated-async': 'off',
             },
         },
     ],

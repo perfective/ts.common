@@ -19,6 +19,7 @@ npm install --save-dev \
     @perfective/eslint-config-angular \
     @angular-eslint/eslint-plugin \
     @angular-eslint/eslint-plugin-template \
+    @angular-eslint/template-parser \
     @typescript-eslint/eslint-plugin \
     @typescript-eslint/parser \
     eslint \

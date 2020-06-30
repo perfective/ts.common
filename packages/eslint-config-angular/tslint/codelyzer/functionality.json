@@ -1,12 +1,6 @@
 {
     "rules": {
         "contextual-decorator": true,
-        "contextual-lifecycle": true,
-        "no-attribute-decorator": true,
-        "no-lifecycle-call": true,
-        "no-output-native": true,
-        "no-pipe-impure": true,
-        "prefer-on-push-component-change-detection": true,
         "template-accessibility-alt-text": true,
         "template-accessibility-elements-content": true,
         "template-accessibility-label-for": true,
@@ -19,8 +13,6 @@
         "template-no-any": true,
         "template-no-autofocus": true,
         "template-no-distracting-elements": true,
-        "template-no-negated-async": true,
-        "use-injectable-provided-in": true,
-        "use-lifecycle-interface": true
+        "template-no-negated-async": true
     }
 }

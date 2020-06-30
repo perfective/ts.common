@@ -1,23 +1,9 @@
 {
     "rules": {
-        "component-max-inline-declarations": [true, {"animations": 0, "styles": 0, "template": 10}],
-        "no-conflicting-lifecycle": true,
-        "no-forward-ref": true,
-        "no-input-prefix": [true, "can", "is", "on", "should"],
-        "no-input-rename": false,
-        "no-output-on-prefix": true,
-        "no-output-rename": true,
         "no-unused-css": true,
-        "prefer-output-readonly": true,
-        "relative-url-prefix": true,
         "template-conditional-complexity": [true, 2],
-        "template-cyclomatic-complexity": false,
         "template-i18n": false,
-        "template-no-call-expression": true,
-        "template-use-track-by-function": true,
-        "use-component-selector": true,
-        "use-component-view-encapsulation": true,
-        "use-pipe-decorator": true,
-        "use-pipe-transform-interface": true
+//        "template-no-call-expression": true,
+        "template-use-track-by-function": true
     }
 }

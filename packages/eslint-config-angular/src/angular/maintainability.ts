@@ -14,9 +14,8 @@ export = {
         '@angular-eslint/no-output-on-prefix': 'error',
         '@angular-eslint/no-output-rename': 'error',
         '@angular-eslint/prefer-output-readonly': 'error',
+        // TODO: Does not support outside directory paths (e.g. ../common.scss)
         '@angular-eslint/relative-url-prefix': 'error',
-        // '@angular-eslint/template/cyclomatic-complexity': 'off',
-        // '@angular-eslint/template/no-call-expression': 'error',
         '@angular-eslint/use-component-selector': 'error',
         '@angular-eslint/use-component-view-encapsulation': 'error',
         '@angular-eslint/use-pipe-decorator': 'error',

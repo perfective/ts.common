@@ -7,6 +7,7 @@ export = {
             style: 'camelCase',
         }],
         '@angular-eslint/directive-class-suffix': 'error',
+        // TODO: Does not support tag-specific selector
         '@angular-eslint/directive-selector': ['error', {
             type: 'attribute',
             prefix: 'pf',

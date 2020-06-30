@@ -5,7 +5,5 @@ export = {
     ],
     rules: {
         '@angular-eslint/use-injectable-provided-in': 'off',
-        // Conflicts with the Angular file suffixes: .module, .component, etc.
-        'node/file-extension-in-import': 'off',
     },
 };

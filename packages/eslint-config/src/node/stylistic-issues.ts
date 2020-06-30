@@ -2,7 +2,8 @@ export = {
     rules: {
         'node/callback-return': 'error',
         'node/exports-style': ['error', 'module.exports', { allowBatchAssign: false }],
-        'node/file-extension-in-import': ['warn', 'never'],
+        // Conflicts with the file suffixes like: .module, .component, .mock, etc.
+        'node/file-extension-in-import': 'off',
         'node/global-require': 'error',
         'node/no-mixed-requires': 'error',
         'node/no-process-env': 'error',

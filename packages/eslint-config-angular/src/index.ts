@@ -10,10 +10,7 @@ export = {
         './angular/style',
         './jest-dom/rules',
     ],
-    rules: {
-        // Conflicts with the Angular file suffixes: .module, .component, etc.
-        'node/file-extension-in-import': 'off',
-    },
+    rules: {},
     overrides: [
         {
             files: ['*.component.html'],

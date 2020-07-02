@@ -2,7 +2,7 @@
 
 `@perfective/eslint-config-angular` provides
 a [shareable ESLint configuration](https://eslint.org/docs/developer-guide/shareable-configs)
-that is used for the development of the `@perfective` https://angular.io[Angular] packages.
+that is used for the development of the `@perfective` [Angular](https://angular.io) packages.
 This package is based on the
 [`@perfective/eslint-config`](https://www.npmjs.com/package/@perfective/eslint-config) package.
 

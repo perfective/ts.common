@@ -1,8 +1,13 @@
 = Changelog
 
-== v0.2.0 (alpha)
+== v0.2.0
 
 * Upgraded to `@perfective/eslint-config@0.5.0`.
+** Removed the `import/no-cycle` rule customization.
+* Added `@angular-eslint` plugin support.
+** Removed `codelyzer` rules, covered by `@angular-eslint`
+(except template-specific rules).
+* Added `eslint-plugin-jest-dom` plugin support.
 
 == v0.1.11
 

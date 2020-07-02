@@ -1,6 +1,6 @@
 {
     "name": "@perfective/eslint-config-angular",
-    "version": "0.2.0-alpha",
+    "version": "0.2.0",
     "description": "ESLint shareable rules configuration for Angular",
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
@@ -22,7 +22,7 @@
         "lint:tslint": "tslint --fix --project ./tsconfig.lint.json"
     },
     "dependencies": {
-        "@perfective/eslint-config": "^0.5.0-beta.2"
+        "@perfective/eslint-config": "^0.5.0"
     },
     "peerDependencies": {
         "@angular-eslint/eslint-plugin": "^0.0.1-alpha.32",

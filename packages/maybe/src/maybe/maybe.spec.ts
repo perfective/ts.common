@@ -200,12 +200,24 @@ describe('just', () => {
 
     describe('pick', () => {
         it('returns an existing property from an object', () => {
-            expect(just<Boxed<number>>({ value: 3.14 }).pick('value'))
+            const boxed: Boxed<number> = { value: 3.14 };
+
+            expect(just(boxed).pick('value'))
+                .toStrictEqual(just(3.14));
+            expect(just(boxed).pick(() => 'value'))
+                .toStrictEqual(just(3.14));
+            expect(just(boxed).pick(constant<keyof Boxed<number>>('value')))
                 .toStrictEqual(just(3.14));
         });
 
         it('returns nothing for a missing property from an object', () => {
-            expect(just<Boxed<number>>({}).pick('value'))
+            const value: Boxed<number> = {};
+
+            expect(just(value).pick('value'))
+                .toStrictEqual(nothing());
+            expect(just(value).pick(() => 'value'))
+                .toStrictEqual(nothing());
+            expect(just(value).pick(constant<keyof Boxed<number>>('value')))
                 .toStrictEqual(nothing());
         });
 
@@ -219,7 +231,7 @@ describe('just', () => {
             expect(
                 just(boxed)
                     .pick('value')
-                    .pick('value')
+                    .pick(() => 'value')
                     .to<string>(decimal),
             ).toStrictEqual(
                 just(boxed)
@@ -393,7 +405,7 @@ describe('nothing', () => {
             expect(
                 nothing<Boxed<Boxed<number>>>()
                     .pick('value')
-                    .pick('value')
+                    .pick(() => 'value')
                     .to<string>(decimal),
             ).toStrictEqual(
                 nothing<Boxed<Boxed<number>>>()
@@ -565,7 +577,7 @@ describe('nil', () => {
             expect(
                 nil<Boxed<Boxed<number>>>()
                     .pick('value')
-                    .pick('value')
+                    .pick(() => 'value')
                     .to<string>(decimal),
             ).toStrictEqual(
                 nil<Boxed<Boxed<number>>>()

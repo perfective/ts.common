@@ -108,6 +108,10 @@ describe('pick', () => {
     it('lifts the property selector to the Maybe.pick()', () => {
         expect(checks.map(pick('maybe')))
             .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
+        expect(checks.map(pick(() => 'maybe')))
+            .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
+        expect(checks.map(pick(constant<keyof TypeGuardCheck<number>>('maybe'))))
+            .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
     });
 });
 

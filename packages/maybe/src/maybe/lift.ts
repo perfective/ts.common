@@ -23,7 +23,9 @@ export function when<T>(condition: Proposition): Unary<Maybe<T>, Maybe<T>> {
     return (maybe: Maybe<T>): Maybe<T> => maybe.when(condition);
 }
 
-export function pick<T, K extends keyof T>(property: K): Unary<Maybe<T>, Maybe<Present<T[K]>>> {
+export function pick<T, K extends keyof T>(
+    property: Value<K>,
+): Unary<Maybe<T>, Maybe<Present<T[K]>>> {
     return (maybe: Maybe<T>): Maybe<Present<T[K]>> => maybe.pick(property);
 }
 

@@ -50,8 +50,8 @@ export abstract class Maybe<T> {
         return this.none();
     }
 
-    public pick<K extends keyof T>(property: K): Maybe<Present<T[K]>> {
-        return this.to(v => v[property]) as unknown as Maybe<Present<T[K]>>;
+    public pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>> {
+        return this.to(v => v[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
     }
 
     public otherwise(fallback: Value<T>): Just<T> {

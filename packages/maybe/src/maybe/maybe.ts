@@ -62,9 +62,10 @@ export abstract class Maybe<T> {
     }
 
     public or(fallback: Value<T>): T
-    public or(fallback: null): T | null
-    public or(fallback: undefined): T | undefined
-    public or(fallback: Value<T> | null | undefined): T | null | undefined {
+    public or(fallback: Value<T | null> | null): T | null
+    public or(fallback: Value<T | undefined> | undefined): T | undefined
+    public or(fallback: Value<T | null | undefined>): T | null | undefined
+    public or(fallback: Value<T | null | undefined> | null | undefined): T | null | undefined {
         if (isPresent(this.value)) {
             return this.value;
         }

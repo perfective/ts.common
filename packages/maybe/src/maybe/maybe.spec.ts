@@ -253,18 +253,36 @@ describe('just', () => {
                 .toStrictEqual(3.14);
         });
 
-        it('returns the Maybe value when fallback is a callback', () => {
+        it('returns the Maybe value when fallback is a function', () => {
             expect(just(3.14).or(constant(2.71)))
+                .toStrictEqual(3.14);
+            expect(just(3.14).or((): number | null | undefined => 2.71))
+                .toStrictEqual(3.14);
+            expect(just(3.14).or((): number | null => 2.71))
+                .toStrictEqual(3.14);
+            expect(just(3.14).or((): number | undefined => 2.71))
                 .toStrictEqual(3.14);
         });
 
-        it('returns the Maybe value instead of null', () => {
+        it('returns the Maybe value when fallback is null', () => {
             expect(just(3.14).or(null))
                 .toStrictEqual(3.14);
         });
 
-        it('returns the Maybe value instead of undefined', () => {
+        it('returns the Maybe value when fallback is a function returning null', () => {
+            expect(just(3.14).or((): null | undefined => null))
+                .toStrictEqual(3.14);
+            expect(just(3.14).or((): null => null))
+                .toStrictEqual(3.14);
+        });
+
+        it('returns the Maybe value when fallback is undefined', () => {
             expect(just(3.14).or(undefined))
+                .toStrictEqual(3.14);
+        });
+
+        it('returns the Maybe value when fallback is a function returning undefined', () => {
+            expect(just(3.14).or(() => undefined))
                 .toStrictEqual(3.14);
         });
 
@@ -273,9 +291,11 @@ describe('just', () => {
                 .not.toThrow('Value is not present');
         });
 
-        it('is interchangeable with otherwise().value', () => {
+        it('is interchangeable with Maybe.otherwise().value', () => {
             expect(just(3.14).or(2.71))
                 .toStrictEqual(just(3.14).otherwise(2.71).value);
+            expect(just(3.14).or(constant(2.71)))
+                .toStrictEqual(just(3.14).otherwise(constant(2.71)).value);
         });
     });
 
@@ -407,19 +427,37 @@ describe('nothing', () => {
                 .toStrictEqual(2.71);
         });
 
-        it('returns a result of the fallback callback', () => {
+        it('returns a result of the fallback when fallback is a function', () => {
             expect(nothing<number>().or(constant(2.71)))
+                .toStrictEqual(2.71);
+            expect(nothing<number>().or((): number | null | undefined => 2.71))
+                .toStrictEqual(2.71);
+            expect(nothing<number>().or((): number | null => 2.71))
+                .toStrictEqual(2.71);
+            expect(nothing<number>().or((): number | undefined => 2.71))
                 .toStrictEqual(2.71);
         });
 
-        it('returns undefined', () => {
+        it('returns null when fallback is null', () => {
+            expect(nothing<number>().or(null))
+                .toBeNull();
+        });
+
+        it('returns null when fallback is a function returning null', () => {
+            expect(nothing<number>().or((): null | undefined => null))
+                .toBeNull();
+            expect(nothing<number>().or((): null => null))
+                .toBeNull();
+        });
+
+        it('returns undefined when fallback is undefined', () => {
             expect(nothing<number>().or(undefined))
                 .toBeUndefined();
         });
 
-        it('returns null instead of undefined', () => {
-            expect(nothing<number>().or(null))
-                .toBeNull();
+        it('returns undefined when fallback is a function returning undefined', () => {
+            expect(nothing<number>().or(undefined))
+                .toBeUndefined();
         });
 
         it('allows to throw an error', () => {
@@ -427,7 +465,7 @@ describe('nothing', () => {
                 .toThrow('Value is not present');
         });
 
-        it('is interchangeable with otherwise().value', () => {
+        it('is interchangeable with Maybe.otherwise().value', () => {
             expect(nothing<number>().or(2.71))
                 .toStrictEqual(nothing<number>().otherwise(2.71).value);
         });
@@ -556,24 +594,42 @@ describe('nil', () => {
     });
 
     describe('or', () => {
-        it('returns a fallback value when fallback is a constant', () => {
+        it('returns a fallback value when fallback is constant', () => {
             expect(nil<number>().or(2.71))
                 .toStrictEqual(2.71);
         });
 
-        it('returns a result of the fallback callback', () => {
+        it('returns a result of the fallback when fallback is a function', () => {
             expect(nil<number>().or(constant(2.71)))
+                .toStrictEqual(2.71);
+            expect(nil<number>().or((): number | null | undefined => 2.71))
+                .toStrictEqual(2.71);
+            expect(nil<number>().or((): number | null => 2.71))
+                .toStrictEqual(2.71);
+            expect(nil<number>().or((): number | undefined => 2.71))
                 .toStrictEqual(2.71);
         });
 
-        it('returns undefined instead of null', () => {
+        it('returns null when fallback is null', () => {
+            expect(nil<number>().or(null))
+                .toBeNull();
+        });
+
+        it('returns null when fallback is a function returning null', () => {
+            expect(nil<number>().or((): null | undefined => null))
+                .toBeNull();
+            expect(nil<number>().or((): null => null))
+                .toBeNull();
+        });
+
+        it('returns undefined when fallback is undefined', () => {
             expect(nil<number>().or(undefined))
                 .toBeUndefined();
         });
 
-        it('returns null', () => {
-            expect(nil<number>().or(null))
-                .toBeNull();
+        it('returns undefined when fallback is a function returning undefined', () => {
+            expect(nil<number>().or(undefined))
+                .toBeUndefined();
         });
 
         it('allows to throw an error', () => {

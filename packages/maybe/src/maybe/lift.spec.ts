@@ -124,24 +124,42 @@ describe('otherwise', () => {
 });
 
 describe('or', () => {
-    it('lifts a fallback function to the Maybe.or()', () => {
-        expect(list.map(or(constant(Infinity))))
-            .toStrictEqual([2.71, 3.14, Infinity, Infinity]);
-    });
-
     it('lifts a fallback constant to the Maybe.or()', () => {
         expect(list.map(or(-0)))
             .toStrictEqual([2.71, 3.14, -0, -0]);
     });
 
-    it('lifts an undefined to the Maybe.or()', () => {
+    it('lifts a fallback function to the Maybe.or()', () => {
+        expect(list.map(or(constant(Infinity))))
+            .toStrictEqual([2.71, 3.14, Infinity, Infinity]);
+        expect(list.map(or((): number | null | undefined => Infinity)))
+            .toStrictEqual([2.71, 3.14, Infinity, Infinity]);
+        expect(list.map(or((): number | null => Infinity)))
+            .toStrictEqual([2.71, 3.14, Infinity, Infinity]);
+        expect(list.map(or((): number | undefined => Infinity)))
+            .toStrictEqual([2.71, 3.14, Infinity, Infinity]);
+    });
+
+    it('lifts a fallback to null to the Maybe.or()', () => {
+        expect(list.map(or<number>(null)))
+            .toStrictEqual([2.71, 3.14, null, null]);
+    });
+
+    it('lifts a fallback that returns null to the Maybe.or()', () => {
+        expect(list.map(or<number>((): null | undefined => null)))
+            .toStrictEqual([2.71, 3.14, null, null]);
+        expect(list.map(or<number>(() => null)))
+            .toStrictEqual([2.71, 3.14, null, null]);
+    });
+
+    it('lifts a fallback to undefined to the Maybe.or()', () => {
         expect(list.map(or<number>(undefined)))
             .toStrictEqual([2.71, 3.14, undefined, undefined]);
     });
 
-    it('lifts a null to the Maybe.or()', () => {
-        expect(list.map(or<number>(null)))
-            .toStrictEqual([2.71, 3.14, null, null]);
+    it('lifts a fallback that returns undefined to the Maybe.or()', () => {
+        expect(list.map(or<number>(() => undefined)))
+            .toStrictEqual([2.71, 3.14, undefined, undefined]);
     });
 });
 

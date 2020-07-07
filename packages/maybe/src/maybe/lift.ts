@@ -1,5 +1,5 @@
 import { Predicate, Proposition, TypeGuard, Unary, Value } from '@perfective/fp';
-import { Present, isNull, isUndefined } from '@perfective/value';
+import { Present } from '@perfective/value';
 
 import { Just, Maybe } from './maybe';
 
@@ -32,17 +32,12 @@ export function otherwise<T>(fallback: Value<T>): Unary<Maybe<T>, Just<T>> {
 }
 
 export function or<T>(fallback: Value<T>): Unary<Maybe<T>, T>;
-export function or<T>(fallback: null): Unary<Maybe<T>, T | null>;
-export function or<T>(fallback: undefined): Unary<Maybe<T>, T | undefined>;
+export function or<T>(fallback: Value<T | null> | null): Unary<Maybe<T>, T | null>;
+export function or<T>(fallback: Value<T | undefined> | undefined): Unary<Maybe<T>, T | undefined>;
+export function or<T>(fallback: Value<T | null | undefined>): Unary<Maybe<T>, T | null | undefined>;
 export function or<T>(
-    fallback: Value<T> | null | undefined,
+    fallback: Value<T | null | undefined> | null | undefined,
 ): Unary<Maybe<T>, T | null | undefined> {
-    if (isNull(fallback)) {
-        return (maybe: Maybe<T>): T | null => maybe.or(null);
-    }
-    if (isUndefined(fallback)) {
-        return (maybe: Maybe<T>): T | undefined => maybe.or(undefined);
-    }
     return (maybe: Maybe<T>): T | null | undefined => maybe.or(fallback);
 }
 

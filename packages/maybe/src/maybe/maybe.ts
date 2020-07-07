@@ -98,6 +98,12 @@ export class Just<T>
         super(value, nothing);
     }
 
+    public onto<U>(bind: (value: T) => Just<Present<U>>): Just<U>
+    public onto<U>(bind: (value: T) => Maybe<U>): Maybe<U>
+    public onto<U>(bind: (value: T) => Maybe<U> | Just<U>): Maybe<U> | Just<U> {
+        return super.onto(bind);
+    }
+
     public to<U>(map: (value: T) => Present<U>): Just<U>
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U>
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> {

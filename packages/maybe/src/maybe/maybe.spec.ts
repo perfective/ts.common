@@ -11,13 +11,13 @@ import {
 import { decimal, isGreaterThan, isLessThan } from '@perfective/real';
 import { isDefined, isNotNull, isNull, isPresent, isUndefined } from '@perfective/value';
 
-import { Maybe, just, maybe, nil, nothing, nullable, optional } from './maybe';
+import { Just, Maybe, just, maybe, nil, nothing, nullable, optional } from './maybe';
 
-function justDecimal(value: number): Maybe<string> {
+function justDecimal(value: number): Just<string> {
     return just(value).to<string>(decimal);
 }
 
-function justSplit(value: string): Maybe<string[]> {
+function maybeSplit(value: string): Maybe<string[]> {
     return just(value.split('.'));
 }
 
@@ -103,8 +103,13 @@ describe('just', () => {
         });
 
         it('satisfies associativity monad law', () => {
-            expect(just(3.14).onto(x => justDecimal(x).onto(justSplit)))
-                .toStrictEqual(just(3.14).onto(justDecimal).onto(justSplit));
+            expect(just(3.14).onto(x => justDecimal(x).onto(maybeSplit)))
+                .toStrictEqual(just(3.14).onto(justDecimal).onto(maybeSplit));
+        });
+
+        it('keeps context of Just when all binds are defined', () => {
+            expect(just(3.14).onto(pi => just(-pi)).onto(justDecimal))
+                .toStrictEqual(just('-3.14'));
         });
     });
 
@@ -362,8 +367,8 @@ describe('nothing', () => {
         });
 
         it('satisfies associativity monad law', () => {
-            expect(nothing<number>().onto(x => justDecimal(x).onto(justSplit)))
-                .toStrictEqual(nothing<number>().onto(justDecimal).onto(justSplit));
+            expect(nothing<number>().onto(x => justDecimal(x).onto(maybeSplit)))
+                .toStrictEqual(nothing<number>().onto(justDecimal).onto(maybeSplit));
         });
     });
 
@@ -534,8 +539,8 @@ describe('nil', () => {
         });
 
         it('satisfies associativity monad law', () => {
-            expect(nil<number>().onto(x => justDecimal(x).onto(justSplit)))
-                .toStrictEqual(nil<number>().onto(justDecimal).onto(justSplit));
+            expect(nil<number>().onto(x => justDecimal(x).onto(maybeSplit)))
+                .toStrictEqual(nil<number>().onto(justDecimal).onto(maybeSplit));
         });
     });
 

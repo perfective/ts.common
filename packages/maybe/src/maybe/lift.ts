@@ -7,7 +7,7 @@ export function onto<T, U>(bind: (value: T) => Maybe<U>): Unary<Maybe<T>, Maybe<
     return (maybe: Maybe<T>): Maybe<U> => maybe.onto(bind);
 }
 
-export function to<T, U>(map: (value: T) => U): Unary<Maybe<T>, Maybe<U>> {
+export function to<T, U>(map: (value: T) => U | null | undefined): Unary<Maybe<T>, Maybe<U>> {
     return (maybe: Maybe<T>): Maybe<U> => maybe.to(map);
 }
 

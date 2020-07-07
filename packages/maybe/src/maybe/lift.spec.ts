@@ -58,6 +58,10 @@ describe('to', () => {
     it('lifts the map function to the Maybe.to()', () => {
         expect(list.map(to<number, string>(decimal)))
             .toStrictEqual([just('2.71'), just('3.14'), nothing(), nil()]);
+        expect(list.map(to((): string | undefined => undefined)))
+            .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
+        expect(list.map(to((): string | null => null)))
+            .toStrictEqual([nil(), nil(), nothing(), nil()]);
     });
 });
 

@@ -2,6 +2,7 @@
     "extends": "./tsconfig.strict.json",
     "compilerOptions": {
         "baseUrl": "./packages",
+        "module": "commonjs",
         "paths": {
             "@perfective/array": ["array/src/index.ts"],
             "@perfective/error": ["error/src/index.ts"],

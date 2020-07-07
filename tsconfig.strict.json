@@ -14,7 +14,8 @@
         "forceConsistentCasingInFileNames": true,
         "incremental": true,
         "keyofStringsOnly": true,
-        "module": "commonjs",
+        "module": "es2015",
+        "moduleResolution": "node",
         "newLine": "lf",
         "noEmitOnError": true,
         "noErrorTruncation": true,
@@ -41,6 +42,6 @@
         "strictPropertyInitialization": true,
         "suppressExcessPropertyErrors": false,
         "suppressImplicitAnyIndexErrors": false,
-        "target": "es5"
+        "target": "es2015"
     }
 }

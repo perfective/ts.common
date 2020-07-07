@@ -109,6 +109,10 @@ export class Just<T>
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> {
         return super.to(map);
     }
+
+    public run(procedure: (value: T) => void): Just<T> {
+        return super.run(procedure) as Just<T>;
+    }
 }
 
 export function just<T>(value: T): Just<T> {

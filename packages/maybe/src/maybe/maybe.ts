@@ -97,6 +97,12 @@ export class Just<T>
     ) {
         super(value, nothing);
     }
+
+    public to<U>(map: (value: T) => Present<U>): Just<U>
+    public to<U>(map: (value: T) => U | null | undefined): Maybe<U>
+    public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> {
+        return super.to(map);
+    }
 }
 
 export function just<T>(value: T): Just<T> {

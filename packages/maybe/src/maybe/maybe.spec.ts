@@ -123,6 +123,15 @@ describe('just', () => {
             expect(just(3.14).to(() => null))
                 .toStrictEqual(nil());
         });
+
+        it('keeps context of Just when all types are defined and not null', () => {
+            expect(just(3.14).to(pi => -pi))
+                .toStrictEqual(just(-3.14));
+            expect(just(3.14).to((): number => 2.71).value.toString(10))
+                .toStrictEqual('2.71');
+            expect(just(3.14).to<string>(decimal).value.split('.'))
+                .toStrictEqual(['3', '14']);
+        });
     });
 
     describe('that', () => {

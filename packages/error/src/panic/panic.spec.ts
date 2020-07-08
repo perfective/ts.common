@@ -1,11 +1,6 @@
 import { panic, throws } from './panic';
 
 describe('throws', () => {
-    it('throws an Error without a message', () => {
-        expect(throws)
-            .toThrow(Error);
-    });
-
     it('throws an Error with a message', () => {
         expect(() => throws('Failure'))
             .toThrow(new Error('Failure'));
@@ -18,11 +13,6 @@ describe('throws', () => {
 });
 
 describe('panic', () => {
-    it('creates a function that throws an Error without a message', () => {
-        expect(() => panic()())
-            .toThrow(Error);
-    });
-
     it('creates a function that throws an Error with a message', () => {
         expect(() => panic('Failure')())
             .toThrow(new Error('Failure'));

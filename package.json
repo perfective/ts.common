@@ -8,6 +8,7 @@
         "clean": "lerna run --stream clean",
         "lint": "npm run build:eslint && lerna run lint --no-bail --no-prefix --stream",
         "test": "lerna run --stream --no-bail --no-prefix test",
+        "test:clean": "lerna run --stream test:clean",
         "test:verbose": "lerna run --stream --no-bail --no-prefix test:verbose"
     },
     "devDependencies": {

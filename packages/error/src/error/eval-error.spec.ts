@@ -5,11 +5,6 @@ describe('evalError', () => {
         expect(evalError('Exception'))
             .toStrictEqual(new EvalError('Exception'));
     });
-
-    it('creates a new EvalError without a message', () => {
-        expect(evalError())
-            .toStrictEqual(new EvalError());
-    });
 });
 
 describe('isEvalError', () => {

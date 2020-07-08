@@ -5,11 +5,6 @@ describe('typeError', () => {
         expect(typeError('Exception'))
             .toStrictEqual(new TypeError('Exception'));
     });
-
-    it('creates a new TypeError without a message', () => {
-        expect(typeError())
-            .toStrictEqual(new TypeError());
-    });
 });
 
 describe('isTypeError', () => {

@@ -1,4 +1,4 @@
-export function typeError(message?: string): TypeError {
+export function typeError(message: string): TypeError {
     return new TypeError(message);
 }
 

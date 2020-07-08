@@ -1,4 +1,4 @@
-export function referenceError(message?: string): ReferenceError {
+export function referenceError(message: string): ReferenceError {
     return new ReferenceError(message);
 }
 

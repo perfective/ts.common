@@ -1,4 +1,4 @@
-export function syntaxError(message?: string): SyntaxError {
+export function syntaxError(message: string): SyntaxError {
     return new SyntaxError(message);
 }
 

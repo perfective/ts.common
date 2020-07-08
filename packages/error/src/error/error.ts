@@ -1,4 +1,4 @@
-export function error(message?: string): Error {
+export function error(message: string): Error {
     return new Error(message);
 }
 

@@ -1,4 +1,4 @@
-export function rangeError(message?: string): RangeError {
+export function rangeError(message: string): RangeError {
     return new RangeError(message);
 }
 

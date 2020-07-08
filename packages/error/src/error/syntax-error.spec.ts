@@ -5,11 +5,6 @@ describe('syntaxError', () => {
         expect(syntaxError('Exception'))
             .toStrictEqual(new SyntaxError('Exception'));
     });
-
-    it('creates a new SyntaxError without a message', () => {
-        expect(syntaxError())
-            .toStrictEqual(new SyntaxError());
-    });
 });
 
 describe('isSyntaxError', () => {

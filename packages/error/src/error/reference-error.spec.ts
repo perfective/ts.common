@@ -5,11 +5,6 @@ describe('referenceError', () => {
         expect(referenceError('Exception'))
             .toStrictEqual(new ReferenceError('Exception'));
     });
-
-    it('creates a new ReferenceError without a message', () => {
-        expect(referenceError())
-            .toStrictEqual(new ReferenceError());
-    });
 });
 
 describe('isReferenceError', () => {

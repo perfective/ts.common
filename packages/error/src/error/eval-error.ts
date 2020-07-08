@@ -1,4 +1,4 @@
-export function evalError(message?: string): EvalError {
+export function evalError(message: string): EvalError {
     return new EvalError(message);
 }
 

@@ -5,11 +5,6 @@ describe('rangeError', () => {
         expect(rangeError('Exception'))
             .toStrictEqual(new RangeError('Exception'));
     });
-
-    it('creates a new RangeError without a message', () => {
-        expect(rangeError())
-            .toStrictEqual(new RangeError());
-    });
 });
 
 describe('isRangeError', () => {

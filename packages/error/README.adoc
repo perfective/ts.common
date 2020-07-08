@@ -57,7 +57,7 @@ for consistency and readability.
 == Standard built-in JS Error types
 
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`:
-** `error(message?: string): Error`
+** `error(message: string): Error`
 — instantiates a new `Error`.
 ** `isError<T>(value: Error | T): value is Error`
 — returns `true` when the value is an instance of `Error`.
@@ -65,7 +65,7 @@ for consistency and readability.
 — returns `true` when the value is not an instance of `Error`.
 +
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError[EvalError]`:
-** `evalError(message?: string): EvalError`
+** `evalError(message: string): EvalError`
 — instantiates a new `EvalError`.
 ** `isEvalError<T>(value: EvalError | T): value is EvalError`
 — returns `true` when the value is an instance of `EvalError`.
@@ -73,7 +73,7 @@ for consistency and readability.
 — returns `true` when the value is not an instance of `EvalError`.
 +
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError[RangeError]`:
-** `rangeError(message?: string): RangeError`
+** `rangeError(message: string): RangeError`
 — instantiates a new `RangeError`.
 ** `isRangeError<T>(value: RangeError | T): value is RangeError`
 — returns `true` when the value is an instance of `RangeError`.
@@ -81,7 +81,7 @@ for consistency and readability.
 — returns `true` when the value is not an instance of `RangeError`.
 +
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError[ReferenceError]`:
-** `referenceError(message?: string): ReferenceError`
+** `referenceError(message: string): ReferenceError`
 — instantiates a new `ReferenceError`.
 ** `isReferenceError<T>(value: ReferenceError | T): value is ReferenceError`
 — returns `true` when the value is an instance of `ReferenceError`.
@@ -89,7 +89,7 @@ for consistency and readability.
 — returns `true` when the value is not an instance of `ReferenceError`.
 +
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError[SyntaxError]`:
-** `syntaxError(message?: string): SyntaxError`
+** `syntaxError(message: string): SyntaxError`
 — instantiates a new `SyntaxError`.
 ** `isSyntaxError<T>(value: SyntaxError | T): value is SyntaxError`
 — returns `true` when the value is an instance of `SyntaxError`.
@@ -97,7 +97,7 @@ for consistency and readability.
 — returns `true` when the value is not an instance of `SyntaxError`.
 +
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError[TypeError]`:
-** `typeError(message?: string): TypeError`
+** `typeError(message: string): TypeError`
 — instantiates a new `TypeError`.
 ** `isTypeError<T>(value: TypeError | T): value is TypeError`
 — returns `true` when the value is an instance of `TypeError`.

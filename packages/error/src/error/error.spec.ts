@@ -5,11 +5,6 @@ describe('error', () => {
         expect(error('Exception'))
             .toStrictEqual(new Error('Exception'));
     });
-
-    it('creates a new Error without a message', () => {
-        expect(error())
-            .toStrictEqual(new Error());
-    });
 });
 
 describe('isError', () => {

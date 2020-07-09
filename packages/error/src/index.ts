@@ -32,6 +32,18 @@ export {
 } from './error/type-error';
 
 export {
+    Exception,
+    causedBy,
+    chainStack,
+    exception,
+    fault,
+    isException,
+    isNotException,
+    rethrow,
+    rethrows,
+} from './exception/exception';
+
+export {
     panic,
     throws,
 } from './panic/panic';

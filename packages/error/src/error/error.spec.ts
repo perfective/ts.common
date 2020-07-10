@@ -1,4 +1,4 @@
-import { error, isError, isNotError } from './error';
+import { error, errorOutput, isError, isNotError } from './error';
 
 describe('error', () => {
     it('creates a new Error with a message', () => {
@@ -28,5 +28,14 @@ describe('isNotError', () => {
     it('returns true when value is not an Error', () => {
         expect(isNotError('Error'))
             .toBe(true);
+    });
+});
+
+describe('errorOutput', () => {
+    it('returns human-readable string matching Error.toString() on Node.js', () => {
+        expect(errorOutput(new Error('Failure!')))
+            .toStrictEqual('Error: Failure!');
+        expect(errorOutput(new TypeError('Invalid type')))
+            .toStrictEqual('TypeError: Invalid type');
     });
 });

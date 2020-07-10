@@ -1,5 +1,6 @@
 export {
     error,
+    errorOutput,
     isError,
     isNotError,
 } from './error/error';

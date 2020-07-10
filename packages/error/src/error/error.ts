@@ -9,3 +9,10 @@ export function isError<T>(value: Error | T): value is Error {
 export function isNotError<T>(value: Error | T): value is T {
     return !(value instanceof Error);
 }
+
+/**
+ * Returns the same string as Error.toString() on Node.js
+ */
+export function errorOutput(error: Error): string {
+    return `${error.name}: ${error.message}`;
+}

@@ -1,4 +1,4 @@
-import { error, errorOutput, isError, isNotError } from './error';
+import { error, errorOutput, isError, isNotError, stack } from './error';
 
 describe('error', () => {
     it('creates a new Error with a message', () => {
@@ -37,5 +37,20 @@ describe('errorOutput', () => {
             .toStrictEqual('Error: Failure!');
         expect(errorOutput(new TypeError('Invalid type')))
             .toStrictEqual('TypeError: Invalid type');
+    });
+});
+
+describe('errorStack', () => {
+    it('returns stack when Error.stack property present', () => {
+        const error = new Error('Stack');
+        expect(stack(error))
+            .toMatch('Error: Stack\n    at Object.<anonymous>');
+    });
+
+    it('returns message with "at <unknown>" stack, when Error.stack property is undefined', () => {
+        const error = new Error('No Stack');
+        error.stack = undefined;
+        expect(stack(error))
+            .toStrictEqual('No Stack\n    at <unknown>');
     });
 });

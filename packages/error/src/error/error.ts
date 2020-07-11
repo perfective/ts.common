@@ -16,3 +16,11 @@ export function isNotError<T>(value: Error | T): value is T {
 export function errorOutput(error: Error): string {
     return `${error.name}: ${error.message}`;
 }
+
+export function stack(error: Error): string {
+    // eslint-disable-next-line no-void
+    if (error.stack !== void 0) {
+        return error.stack;
+    }
+    return [error.message, 'at <unknown>'].join('\n    ');
+}

@@ -3,6 +3,7 @@ export {
     errorOutput,
     isError,
     isNotError,
+    stack,
 } from './error/error';
 export {
     evalError,

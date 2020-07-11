@@ -32,6 +32,12 @@ export {
 } from './error/type-error';
 
 export {
+    Trace,
+    stackTrace,
+    trace,
+} from './error/trace/trace';
+
+export {
     Exception,
     causedBy,
     chainStack,

@@ -1,5 +1,19 @@
 = Changelog
 
+== v0.2.0 (next)
+
+* Compiled into `ES6`.
+* Required the error message argument in all functions.
+* Added `errorOutput` function to emulate Node.js `Error.toString()`.
+* Added `Exception` base class:
+** added `exception` and `causedBy` unit functions;
+** added `rethrow`/`rethrows`, `chainStack`, and `fault` functions for error chaining support;
+** added `isException`/`isNotException` type-guards;
+** added `ExceptionContext` for exception message template and context support.
+* Added the `Trace` type:
+** added `stackTrace` and `trace` functions for stack trace data parsing.
+* Switched the `throws`/`panic` functions to use `Exception`.
+
 == v0.1.1
 
 * Added documentation.

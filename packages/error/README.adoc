@@ -1,24 +1,128 @@
 = Error
 
-The `@perfective/error` package provides functions for the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]` class
-and other error types.
+The `@perfective/error` package helps organize exceptions and error handling.
+It defines an `Exception`, based on the JS
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]` class,
+that supports localizable error messages and error chaining;
+and provides functions to handle error stack output.
+
+== Exception
+
+.`Exception` type definition.
+[source,typescript]
+----
+class Exception extends Error {
+    public readonly name: string = 'Exception';
+    public message: string; // <.>
+
+    public readonly template: string; // <.>
+    public readonly context: ExceptionContext; // <.>
+    public readonly previous: Error | null; // <.>
+
+    public toString(): string; // <.>
+}
+----
+<1> Inherited from `Error`, message is generated from the `template` and `context`.
+<2> Message template with tokens wrapped in `{{ }}`.
+<3> Record of context information.
+Context data can be rendered in the template as part of the message.
+<4> It's possible to provide a previous error.
+<5> Human-readable output of all the errors.
+
+.Using the `Exception`.
+[source,typescript]
+----
+import { causedBy, chainStack, exception, rethrows, throws } from '@perfective/error';
+
+function positive(input: number): string {
+    if (number <= 0) {
+        return throws(exception('Invalid input {{input}}', { // <.>
+            input
+        }));
+    }
+    return number.toString(10);
+}
+
+function field(name: string, value: number): string {
+    try {
+        return `${name} = ${positive(value)}`;
+    }
+    catch (error) {
+        return throws(causedBy(error, 'Failed to output field {{field}}', { // <.>
+            field: name,
+        }));
+    }
+}
+
+function record(): Record<string, string> {
+    try {
+        return {
+            username: field('username', -42),
+        }
+    }
+    catch (error) {
+        return rethrows(error, 'Failed to build a record'); // <.>
+    }
+}
+
+try {
+    record();
+}
+catch (error) {
+    console.error(error.toString()); // <.>
+    // Outputs:
+    //  Exception: Failed to build a record
+    //      - Exception: Failed to output field `username`
+    //      - Exception: Invalid input `-42`
+
+    console.error(chainStack(error)); // <.>
+    // Outputs:
+    //  Exception: Failed to build a record
+    //      at Object.rethrows (...)
+    //      at Object.record (...)
+    //      ...
+    //  Caused by: Exception: Failed to output field `username`
+    //      at Object.causedBy (...)
+    //      at Object.throws (...)
+    //      at Object.field (...)
+    //      ...
+    //  Caused by: Exception: Invalid input `-42`
+    //      at Object.exception (...)
+    //      at Object.throws (...)
+    //      at Object.positive (...)
+    //      ...
+}
+----
+<1> `throws` can be used with any `Error` type,
+but `Exception` supports passing context information separately,
+which can be convenient for localization or handling purposes.
+<2> `causedBy` is a function to create an `Exception` with a present `Exception.previous` property.
+<3> `rethrows` is a shortcut for the `throws(causedBy())` call.
+It supports message context as well.
+<4> `error.toString()` is explicitly re-defined on `Exception` to output all error messages.
+<5> `chainStack()` allows to output all errors with their stack information
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack[platform dependent]).
+
 
 == Throws and Panic
 
-The package declares two functions to throw errors.
+The package declares two functions to throw errors and two functions to rethrow them.
 
 * `throws<E extends Error>(error: E | string): never`
++
+`throws<E extends Error>(message: string, context?: ExceptionContext): never`
 +
 The `throws` function is a syntax sugar around the `throw` operator
 that checks if the input is an `Error` or a `string`
 and throws an exception immediately.
-It may be used instead of the `throw new Error()`
+It may be used instead of the `throw new Exception()`,
 to handle a union type of `E extends Error | string`,
 to throw an exception in a one-line arrow function,
 or to avoid issues with the `@typescript-eslint/no-throw-literal` linter rule.
 +
 * `panic<E extends Error>(error: E | string): () => never`
++
+`panic<E extends Error>(message: string, context?: ExceptionContext): () => never`
 +
 The `panic` function creates a new function that throws an error.
 It is used for lazy evaluation,
@@ -37,22 +141,16 @@ export function example(input?: string | null): string {
 <.> Must use `panic()`,
 as the fallback in `Maybe.or()` is called only when the `input` is not present.
 Using `throws()` will result in throwing an exception every time a function is called.
++
+* `rethrows(previous: Error, message: string, context: ExceptionContext = {}): never`
++
+Similar to `throws`, but requires to provide a previous error.
++
+* `rethrow( message: string, context: ExceptionContext = {}): (previous: Error) => never`
++
+Similar to `panic`: creates a function that will wrap up an error with additional context.
+Can be useful working with promises or RxJS `catchError`.
 
-Throughout the packages,
-functions and methods that allow passing a custom error have the same naming patterns:
-
-* If a function possibly throws an error during its execution,
-it would end with the `orThrow` suffix.
-* If a function creates a function that may throw an error,
-it would have the `orPanic` suffix.
-
-[NOTE]
-====
-While the original function is `throws()`
-because of the conflict with the `throw` keyword,
-the suffix for all other functions and methods is `orThrow`
-for consistency and readability.
-====
 
 == Standard built-in JS Error types
 
@@ -114,8 +212,6 @@ will be supported in the `@perfective/url` package.
 
 == Roadmap
 
-* Require an error message in all functions.
 * Provide functions to parse
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/[standard error messages]
 and predicates to check for them.
-* Add support for error chaining.

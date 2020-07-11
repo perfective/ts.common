@@ -1,13 +1,43 @@
 # Error
 
-The `@perfective/error` package provides functions for the
+The `@perfective/error` package helps organize exceptions and error handling.
+It defines an `Exception`, based on the JS
 [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) class
-and other error types.
+that supports localizable error messages and error chaining;
+and provides functions to handle error stack output.
 
-* `throws<E extends Error>(error?: E | string): never` 
-— throws a provided error.
-* `panic<E extends Error>(error?: E | string): () => never`
-— creates a function that throws a provided error.
+Read the [full documentation](https://github.com/perfective/js/blob/master/packages/error/README.adoc) 
+in the repository.
+
+* `Exception`:
+    * `Exception.toString()`
+    — outputs the stack of all error messages.
+    * `exception(message: string, context: ExceptionContext = {}): Exception`
+    — creates a new `Exception` without a previous error.
+    * `causedBy(previous: Error, message: string, context: ExceptionContext = {}): Exception`
+    — creates a new `Exception` with a previous error.
+    * `isException<T>(value: Exception | T): value is Exception`
+    — returns `true` when value is an `Exception`.
+    * `isNotException<T>(value: Exception | T): value is T`
+    — returns `true` when value is not an `Exception`.
+    * `chainStack(error: Error): string`
+    — outputs the stack of all errors with their stack trace.
+    * `fault(error: Error): Error`
+    — returns the first error in the chain.
+* Throwing errors:
+    * `throws<E extends Error>(error: E): never` 
+    — throws a provided error.
+    * `throws<E extends Error>(message: string, context: ExceptionContext = {}): never`
+    — creates and throws an `Exception` with the given `message` and `context`.
+    * `panic<E extends Error>(error: E): () => never`
+    — creates a function that throws a provided error.
+    * `panic<E extends Error>(message: string, context: ExceptionContext = {}): () => never`
+    — creates a function that throws an `Exception` with the given `message` and `context`.
+    * `rethrows(previous: Error, message: string, context: ExceptionContext = {}): never`
+    — creates and throws an exception with the given `message`, `context`, and `previous` error.
+    * `rethrow(message: string, context: ExceptionContext = {}): (previous: Error) => never`
+    — creates a function that throws an exception with the given `message`, `context`, 
+    and `previous` error.
 * [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error):
     * `error(message?: string): Error` 
     — instantiates a new `Error`.
@@ -50,6 +80,3 @@ and other error types.
     — returns `true` when the value is an instance of `TypeError`.
     * `isNotTypeError<T>(value: TypeError | T): value is T` 
     — returns `true` when the value is not an instance of `TypeError`.
-
-Read the [full documentation](https://github.com/perfective/js/blob/master/packages/error/README.adoc) 
-in the repository.

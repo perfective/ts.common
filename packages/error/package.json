@@ -1,7 +1,20 @@
 {
     "name": "@perfective/error",
-    "version": "0.1.1",
+    "version": "0.2.0-alpha",
     "description": "Functions for the Error and other types to handle exceptions",
+    "keywords": [
+        "error",
+        "error chaining",
+        "error handling",
+        "exception",
+        "exception chaining",
+        "exception handling",
+        "panic",
+        "stack trace",
+        "throwable",
+        "es6",
+        "es2015"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",

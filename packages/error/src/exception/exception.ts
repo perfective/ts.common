@@ -1,5 +1,4 @@
 import { errorOutput, stack } from '../error/error';
-import { throws } from '../panic/panic';
 
 import { ExceptionContext, exceptionMessage } from './exception-context';
 
@@ -38,17 +37,6 @@ export function causedBy(
     context: ExceptionContext = {},
 ): Exception {
     return new Exception(message, context, previous);
-}
-
-export function rethrows(previous: Error, message: string, context: ExceptionContext = {}): never {
-    throw new Exception(message, context, previous);
-}
-
-export function rethrow(
-    message: string,
-    context: ExceptionContext = {},
-): (previous: Error) => never {
-    return (error: Error): never => throws(causedBy(error, message, context));
 }
 
 export function isException<T>(value: Exception | T): value is Exception {

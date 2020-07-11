@@ -45,11 +45,11 @@ export {
     fault,
     isException,
     isNotException,
-    rethrow,
-    rethrows,
 } from './exception/exception';
 
 export {
     panic,
+    rethrow,
+    rethrows,
     throws,
 } from './panic/panic';

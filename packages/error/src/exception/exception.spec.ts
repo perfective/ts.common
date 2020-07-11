@@ -1,19 +1,8 @@
 import { error } from '../error/error';
-import { rangeError } from '../error/range-error';
-import { referenceError } from '../error/reference-error';
 import { syntaxError } from '../error/syntax-error';
 import { typeError } from '../error/type-error';
 
-import {
-    causedBy,
-    chainStack,
-    exception,
-    fault,
-    isException,
-    isNotException,
-    rethrow,
-    rethrows,
-} from './exception';
+import { causedBy, chainStack, exception, fault, isException, isNotException } from './exception';
 
 describe('exception', () => {
     const error = exception('User not found');
@@ -137,33 +126,6 @@ describe('isNotException', () => {
             .toStrictEqual(true);
         expect(isNotException('Previous'))
             .toStrictEqual(true);
-    });
-});
-
-describe('rethrows', () => {
-    it('throws a Exception with the previous error', () => {
-        expect(() => rethrows(rangeError('Invalid code point -1'), 'Failed to process input'))
-            .toThrow('Failed to process input');
-        expect(() => rethrows(
-            rangeError('Invalid code point -1'), 'Failed to process input {{value}}', {
-                value: '-1',
-            },
-        )).toThrow('Failed to process input `-1`');
-    });
-});
-
-describe('rethrow', () => {
-    describe('rethrow(message)', () => {
-        it('throws a Exception with the previous error', () => {
-            expect(() => rethrow('Unknown property')(
-                referenceError('reference to undefined property "x"'),
-            )).toThrow('Unknown property');
-            expect(() => rethrow('Unknown property {{key}}', {
-                key: 'x',
-            })(
-                referenceError('reference to undefined property "x"'),
-            )).toThrow('Unknown property `x`');
-        });
     });
 });
 

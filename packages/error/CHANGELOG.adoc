@@ -7,7 +7,8 @@
 * Added `errorOutput` function to emulate Node.js `Error.toString()`.
 * Added `Exception` base class:
 ** added `exception` and `causedBy` unit functions;
-** added `rethrow`/`rethrows`, `chainStack`, and `fault` functions for error chaining support;
+** added `rethrow`/`rethrows`, `unchained`, `chainStack`,
+and `fault` functions for error chaining support;
 ** added `isException`/`isNotException` type-guards;
 ** added `ExceptionContext` for exception message template and context support.
 * Added the `Trace` type:

@@ -1,8 +1,17 @@
 import { error } from '../error/error';
+import { rangeError } from '../error/range-error';
 import { syntaxError } from '../error/syntax-error';
 import { typeError } from '../error/type-error';
 
-import { causedBy, chainStack, exception, fault, isException, isNotException } from './exception';
+import {
+    causedBy,
+    chainStack,
+    exception,
+    fault,
+    isException,
+    isNotException,
+    unchained,
+} from './exception';
 
 describe('exception', () => {
     const error = exception('User not found');
@@ -155,5 +164,22 @@ describe('fault', () => {
     it('returns the original error in the error chain', () => {
         expect(fault(causedBy(syntaxError('missing variable name'), 'Build failed')))
             .toStrictEqual(syntaxError('missing variable name'));
+    });
+});
+
+describe('unchained', () => {
+    it('returns an array with the error itself for a single error', () => {
+        expect(unchained(rangeError('The precision is out of range')))
+            .toStrictEqual([rangeError('The precision is out of range')]);
+    });
+
+    it('returns an array with all the errors in the chain, starting from the latest', () => {
+        expect(unchained(causedBy(
+            rangeError('The precision is out of range'),
+            'Failed to output a float',
+        ))).toStrictEqual([
+            exception('Failed to output a float'),
+            rangeError('The precision is out of range'),
+        ]);
     });
 });

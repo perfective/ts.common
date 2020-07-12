@@ -18,7 +18,7 @@ export class Exception
     }
 
     public toString(): string {
-        return chain(this)
+        return unchained(this)
             .map(errorOutput)
             .join('\n\t- ');
     }
@@ -50,19 +50,19 @@ export function isNotException<T>(value: Exception | T): value is T {
 }
 
 export function chainStack(error: Error): string {
-    return chain(error)
+    return unchained(error)
         .map(stack)
         .join('\nCaused by: ');
 }
 
 export function fault(error: Error): Error {
-    const errors = chain(error);
+    const errors = unchained(error);
     return errors[errors.length - 1];
 }
 
-function chain(error: Error): Error[] {
+export function unchained(error: Error): Error[] {
     if (isException(error) && error.previous !== null) {
-        return [error as Error].concat(chain(error.previous));
+        return [error as Error].concat(unchained(error.previous));
     }
     return [error];
 }

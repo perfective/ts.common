@@ -45,7 +45,11 @@ export {
     fault,
     isException,
     isNotException,
+    unchained,
 } from './exception/exception';
+export {
+    ExceptionContext,
+} from './exception/exception-context';
 
 export {
     panic,

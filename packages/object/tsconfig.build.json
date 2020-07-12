@@ -5,6 +5,7 @@
         "rootDir": "src"
     },
     "exclude": [
-        "dist"
+        "dist",
+        "src/**/*.spec.ts"
     ]
 }

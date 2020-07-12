@@ -1,6 +1,24 @@
 # Value
 
-The `@perfective/value` package provides functions to check for a value presence or absence.
+The `@perfective/value` package provides functions to work with `undefined` and `null` values
+and utility types
+(similar to the TS [`NonNullable<T>`](https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullablet)
+to describe some of such values.
 
-Read the [full documentation](https://github.com/perfective/js/blob/master/packages/value/README.adoc) 
-in the repository.
+* Utility types:
+    * `type Defined<T> = T extends undefined ? never : T`
+    * `type NotNull<T> = T extends null ? never : T`
+    * `type Present<T> = T extends null | undefined ? never : T`
+    * `type Absent<T> = T extends null | undefined ? T : never`
+* Type Guards:
+    * `isDefined<T>(value: T | undefined): value is T`
+    * `isUndefined<T>(value: T | undefined): value is undefined`
+    * `isNotNull<T>(value: T | null): value is T`
+    * `isNull<T>(value: T | null): value is null`
+    * `isPresent<T>(value: T | null | undefined): value is T`
+    * `isAbsent<T>(value: T | null | undefined): value is null | undefined`
+* Handling `void`:
+    * `voidable<T>(value: T | void): T | null | undefined`
+
+[Full documentation](https://github.com/perfective/js/blob/master/packages/value/README.adoc) 
+is available in the repository.

@@ -1,7 +1,19 @@
 {
     "name": "@perfective/value",
-    "version": "0.1.0",
-    "description": "Functions to check a value presence",
+    "version": "0.2.0-alpha",
+    "description": "Functions to work with `undefined` and `null` values",
+    "keywords": [
+        "value",
+        "present",
+        "absent",
+        "nullable",
+        "null",
+        "not null",
+        "optional",
+        "defined",
+        "undefined",
+        "void"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",

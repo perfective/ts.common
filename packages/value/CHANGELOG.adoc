@@ -1,5 +1,11 @@
 = Changelog
 
+== v0.2.0 (next)
+
+* Compiled into `ES6`.
+* Added documentation.
+* Removed the `*ValueOrThrow()`/`*ValueOrPanic()` functions.
+
 == v0.1.0
 
 * Declared the `Defined<T>`, `NotNull<T>`, `Present<T>`, and `Absent<T>` types.

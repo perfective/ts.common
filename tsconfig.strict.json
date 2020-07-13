@@ -14,7 +14,7 @@
         "forceConsistentCasingInFileNames": true,
         "incremental": true,
         "keyofStringsOnly": true,
-        "module": "es2015",
+        "module": "commonjs",
         "moduleResolution": "node",
         "newLine": "lf",
         "noEmitOnError": true,

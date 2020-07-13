@@ -2,7 +2,7 @@
 
 == v0.2.0 (next)
 
-* Compiled into `ES6`.
+* Compiled into `ES6` with `CommonJS` module resolution.
 * Added documentation.
 * Removed the `*ValueOrThrow()`/`*ValueOrPanic()` functions.
 

@@ -17,6 +17,7 @@ describe('exception', () => {
     const error = exception('User not found');
     const contextError = exception('User {{id}} not found', {
         id: '42',
+        user: {},
     });
 
     it('creates an instance of an Exception', () => {
@@ -33,6 +34,7 @@ describe('exception', () => {
         expect(contextError.template).toStrictEqual('User {{id}} not found');
         expect(contextError.context).toStrictEqual({
             id: '42',
+            user: {},
         });
     });
 

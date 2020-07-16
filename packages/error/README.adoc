@@ -16,31 +16,36 @@ class Exception extends Error {
     public message: string; // <.>
 
     public readonly template: string; // <.>
+    public readonly tokens: ExceptionTokens; // <.>
     public readonly context: ExceptionContext; // <.>
     public readonly previous: Error | null; // <.>
 
     public toString(): string; // <.>
 }
 ----
-<1> Inherited from `Error`, message is generated from the `template` and `context`.
-<2> Message template with tokens wrapped in `{{ }}`.
-<3> Record of context information.
-Context data can be rendered in the template as part of the message.
-<4> It's possible to provide a previous error.
-<5> Human-readable output of all the errors.
+<1> Inherited from `Error`, message is generated from the `template` and `tokens`.
+<2> Message template with tokens wrapped in `{{ }}`,
+e.g. `User ID {{id}}` or `User {{user_id}}`.
+<3> Token/Value map to be used in the error message.
+<4> Additional context information.
+Context is not rendered by default,
+but may be useful in applications.
+<5> Provide a previous error, if exists.
+<6> Human-readable output of all the errors.
 
 .Using the `Exception`.
 [source,typescript]
 ----
 import { causedBy, chainStack, exception, rethrows, throws } from '@perfective/error';
+import { decimal } from '@perfective/real';
 
 function positive(input: number): string {
-    if (number <= 0) {
+    if (input <= 0) {
         return throws(exception('Invalid input {{input}}', { // <.>
-            input
+            input: decimal(input);
         }));
     }
-    return number.toString(10);
+    return decimal(10);
 }
 
 function field(name: string, value: number): string {
@@ -95,7 +100,7 @@ catch (error) {
 ----
 <1> `throws` can be used with any `Error` type,
 but `Exception` supports passing context information separately,
-which can be convenient for localization or handling purposes.
+which can be convenient for localization or logging purposes.
 <2> `causedBy` is a function to create an `Exception` with a present `Exception.previous` property.
 <3> `rethrows` is a shortcut for the `throws(causedBy())` call.
 It supports message context as well.

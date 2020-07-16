@@ -1,20 +1,24 @@
 import { errorOutput, stack } from '../error/error';
 
-import { ExceptionContext, exceptionMessage } from './exception-context';
+import { ExceptionContext } from './exception-context';
+import { ExceptionMessage, exceptionMessage, exceptionMessageOutput } from './exception-message';
+import { ExceptionTokens } from './exception-tokens';
 
 // eslint-disable-next-line unicorn/custom-error-definition -- base class for user-defined errors
 export class Exception
     extends Error {
     public readonly name: string = 'Exception';
     public readonly template: string;
+    public readonly tokens: ExceptionTokens;
 
     public constructor(
-        message: string,
+        message: ExceptionMessage,
         public readonly context: ExceptionContext,
         public readonly previous: Error | null,
     ) {
-        super(exceptionMessage(message, context));
-        this.template = message;
+        super(exceptionMessageOutput(message));
+        this.template = message.template;
+        this.tokens = message.tokens;
     }
 
     public toString(): string {
@@ -24,19 +28,18 @@ export class Exception
     }
 }
 
-export function exception(
-    message: string,
-    context: ExceptionContext = {},
-): Exception {
-    return new Exception(message, context, null);
+export function exception(message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception {
+    return new Exception(exceptionMessage(message, tokens), context, null);
 }
 
+// eslint-disable-next-line max-params -- shorthand unit function
 export function causedBy(
     previous: Error,
     message: string,
+    tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
 ): Exception {
-    return new Exception(message, context, previous);
+    return new Exception(exceptionMessage(message, tokens), context, previous);
 }
 
 export function isException<T>(value: Exception | T): value is Exception {

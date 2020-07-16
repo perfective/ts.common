@@ -17,6 +17,7 @@ describe('exception', () => {
     const error = exception('User not found');
     const contextError = exception('User {{id}} not found', {
         id: '42',
+    }, {
         user: {},
     });
 
@@ -24,6 +25,7 @@ describe('exception', () => {
         expect(error.name).toStrictEqual('Exception');
         expect(error.message).toStrictEqual('User not found');
         expect(error.template).toStrictEqual('User not found');
+        expect(error.tokens).toStrictEqual({});
         expect(error.context).toStrictEqual({});
         expect(error.previous).toBeNull();
     });
@@ -32,8 +34,10 @@ describe('exception', () => {
         expect(contextError.name).toStrictEqual('Exception');
         expect(contextError.message).toStrictEqual('User `42` not found');
         expect(contextError.template).toStrictEqual('User {{id}} not found');
-        expect(contextError.context).toStrictEqual({
+        expect(contextError.tokens).toStrictEqual({
             id: '42',
+        });
+        expect(contextError.context).toStrictEqual({
             user: {},
         });
     });
@@ -52,6 +56,10 @@ describe('causedBy', () => {
     const chain = causedBy(error('Resource not found'), 'API request failed');
     const contextChain = causedBy(error('Resource not found'), '{{api}} request failed', {
         api: 'User API',
+    }, {
+        user: {
+            id: '42',
+        },
     });
 
     it('creates an instance of an Exception', () => {
@@ -66,8 +74,13 @@ describe('causedBy', () => {
         expect(contextChain.name).toStrictEqual('Exception');
         expect(contextChain.message).toStrictEqual('`User API` request failed');
         expect(contextChain.template).toStrictEqual('{{api}} request failed');
-        expect(contextChain.context).toStrictEqual({
+        expect(contextChain.tokens).toStrictEqual({
             api: 'User API',
+        });
+        expect(contextChain.context).toStrictEqual({
+            user: {
+                id: '42',
+            },
         });
         expect(chain.previous).toStrictEqual(error('Resource not found'));
     });

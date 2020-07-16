@@ -12,10 +12,10 @@ in the repository.
 * `Exception`:
     * `Exception.toString()`
     — outputs the stack of all error messages.
-    * `exception(message: string, context: ExceptionContext = {}): Exception`
-    — creates a new `Exception` without a previous error.
-    * `causedBy(previous: Error, message: string, context: ExceptionContext = {}): Exception`
-    — creates a new `Exception` with a previous error.
+    * `exception(message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception`
+    — creates an `Exception` without a previous error.
+    * `causedBy(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception`
+    — creates an `Exception` with a previous error.
     * `isException<T>(value: Exception | T): value is Exception`
     — returns `true` when value is an `Exception`.
     * `isNotException<T>(value: Exception | T): value is T`
@@ -24,6 +24,11 @@ in the repository.
     — outputs the stack of all errors with their stack trace.
     * `fault(error: Error): Error`
     — returns the first error in the chain.
+* `ExceptionMessage`:
+    * `exceptionMessage(template: string, tokens?: ExceptionTokens): ExceptionMessage`
+    — creates an `ExceptionMessage` with an empty tokens object if the argument not provided.
+    * `exceptionMessageOutput(message: ExceptionMessage): string`
+    — creates a string to output an `ExceptionMessage`.
 * Throwing errors:
     * `throws<E extends Error>(error: E): never` 
     — throws a provided error.

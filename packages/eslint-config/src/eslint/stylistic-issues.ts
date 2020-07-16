@@ -70,7 +70,7 @@ export = {
         }],
         'max-depth': ['error', 4],
         'max-len': ['error', {
-            code: 100,
+            code: 120,
             tabWidth: 4,
             ignoreRegExpLiterals: true,
             ignoreUrls: true,

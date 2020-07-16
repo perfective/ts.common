@@ -56,8 +56,6 @@ export = {
         'jest/lowercase-name': ['error', {
             ignore: ['describe'],
         }],
-        // Unclear if it's always useful to extract strings into constants
-        'sonarjs/no-duplicate-string': 'off',
         'unicorn/no-keyword-prefix': ['error', {
             blacklist: ['class'],
             checkProperties: true,

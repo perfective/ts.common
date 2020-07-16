@@ -5,7 +5,8 @@ export = {
         'sonarjs/max-switch-cases': 'off',
         'sonarjs/no-collapsible-if': 'error',
         'sonarjs/no-collection-size-mischeck': 'error',
-        'sonarjs/no-duplicate-string': 'error',
+        // This rule fails to recognize string-based properties, like element['property-a']
+        'sonarjs/no-duplicate-string': 'off',
         'sonarjs/no-duplicated-branches': 'error',
         'sonarjs/no-identical-functions': 'error',
         'sonarjs/no-inverted-boolean-check': 'error',

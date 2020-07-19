@@ -27,11 +27,15 @@ npm install --save-dev \
     eslint \
     eslint-import-resolver-typescript \
     eslint-plugin-deprecation \
+    eslint-plugin-eslint-comments \
     eslint-plugin-import \
     eslint-plugin-jest \
     eslint-plugin-jest-dom \
+    eslint-plugin-jest-formatting \
     eslint-plugin-node \
+    eslint-plugin-prefer-arrow \
     eslint-plugin-promise \
+    eslint-plugin-rxjs \
     eslint-plugin-sonarjs \
     eslint-plugin-unicorn \
     tslint \

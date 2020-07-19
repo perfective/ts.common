@@ -2,6 +2,7 @@ export = {
     plugins: [
         '@angular-eslint',
         'jest-dom',
+        'rxjs-angular',
     ],
     extends: [
         '@perfective/eslint-config',
@@ -9,6 +10,7 @@ export = {
         './angular/maintainability',
         './angular/style',
         './jest-dom/rules',
+        './rxjs-angular/rules',
     ],
     rules: {},
     overrides: [

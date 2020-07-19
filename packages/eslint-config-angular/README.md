@@ -9,7 +9,8 @@ This package is based on the
 `@perfective/eslint-config-angular` uses the following ESLint plugins:
 
 * [`@angular-eslint/eslint-plugin`](https://github.com/angular-eslint/angular-eslint);
-* [`eslint-plugin-jest-dom`](https://github.com/testing-library/eslint-plugin-jest-dom).
+* [`eslint-plugin-jest-dom`](https://github.com/testing-library/eslint-plugin-jest-dom);
+* [`eslint-plugin-rxjs-angular`](https://github.com/cartant/eslint-plugin-rxjs-angular).
 
 ## Setup
 
@@ -34,6 +35,7 @@ npm install --save-dev \
     eslint-plugin-prefer-arrow \
     eslint-plugin-promise \
     eslint-plugin-rxjs \
+    eslint-plugin-rxjs-angular \
     eslint-plugin-sonarjs \
     eslint-plugin-unicorn \
     tslint \

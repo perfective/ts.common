@@ -93,8 +93,9 @@ export = {
         '@typescript-eslint/no-for-in-array': 'error',
         '@typescript-eslint/no-implied-eval': 'error',
         '@typescript-eslint/no-inferrable-types': 'off',
+        // Allow for generic types like "Nullary<void>" (as "(value: T) => void" declaration is already valid)
         '@typescript-eslint/no-invalid-void-type': ['error', {
-            allowInGenericTypeArguments: false,
+            allowInGenericTypeArguments: true,
         }],
         '@typescript-eslint/no-misused-new': 'error',
         '@typescript-eslint/no-misused-promises': 'error',

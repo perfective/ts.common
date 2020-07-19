@@ -7,7 +7,6 @@ export function constant<T>(value: T): Nullary<T> {
     return (): T => value;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-invalid-void-type -- placeholder
 export function empty(): Nullary<void> {
     return (): void => undefined;
 }

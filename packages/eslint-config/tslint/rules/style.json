@@ -34,7 +34,6 @@
                 "module-source-path": "full"
             }
         ],
-        "prefer-method-signature": true,
         "prefer-switch": [true, { "min-cases": 2 }],
         "prefer-while": true,
         "return-undefined": true,

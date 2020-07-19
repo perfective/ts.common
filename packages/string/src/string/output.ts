@@ -1,5 +1,5 @@
 export interface Output {
-    toString(): string;
+    toString: () => string;
 }
 
 export function output<T extends Output>(value: T): string {

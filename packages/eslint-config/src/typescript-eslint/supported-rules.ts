@@ -125,6 +125,7 @@ export = {
         '@typescript-eslint/prefer-for-of': 'error',
         '@typescript-eslint/prefer-function-type': 'warn',
         '@typescript-eslint/prefer-includes': 'warn',
+        '@typescript-eslint/prefer-literal-enum-member': 'error',
         '@typescript-eslint/prefer-namespace-keyword': 'warn',
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
         '@typescript-eslint/prefer-optional-chain': 'error',

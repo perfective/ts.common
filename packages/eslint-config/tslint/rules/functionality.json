@@ -1,8 +1,6 @@
 {
     "rules": {
         "no-inferred-empty-object-type": true,
-        "no-null-keyword": false,
-        "no-null-undefined-union": false,
         "no-tautology-expression": true,
         "prefer-conditional-expression": [
             true,

@@ -1,9 +1,6 @@
 {
     "rules": {
-        "align": false,
         "import-spacing": true,
-        "jsdoc-format": [true, "check-multiline-start"],
-        "number-literal-format": false,
-        "whitespace": false
+        "jsdoc-format": [true, "check-multiline-start"]
     }
 }

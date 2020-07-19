@@ -1,10 +1,6 @@
 {
     "rules": {
-        "comment-type": false,
-        "completed-docs": false,
         "encoding": true,
-        "file-header": false,
-        "match-default-export-name": false,
         "no-redundant-jsdoc": true,
         "no-unnecessary-callback-wrapper": true,
         "ordered-imports": [

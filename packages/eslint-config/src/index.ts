@@ -25,6 +25,7 @@ export = {
         'node',
         'prefer-arrow',
         'promise',
+        'rxjs',
         'sonarjs',
         'unicorn',
     ],
@@ -51,6 +52,7 @@ export = {
         './node/stylistic-issues',
         './prefer-arrow/rules',
         './promise/rules',
+        './rxjs/rules',
         './sonarjs/bug-detection',
         './sonarjs/code-smell-detection',
         './unicorn/rules',
@@ -84,6 +86,8 @@ export = {
                 'max-nested-callbacks': ['error', 4],
                 // Each "describe" or "it" is counted as a separated statement
                 'max-statements': 'off',
+                // Passing promise is required for async testing
+                'rxjs/no-topromise': 'off',
             },
         },
     ],

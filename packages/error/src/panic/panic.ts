@@ -6,7 +6,7 @@ export function throws<E extends Error>(message: string, context?: ExceptionCont
 export function throws<E extends Error>(error: E | string): never;
 export function throws<E extends Error>(error: E | string, context: ExceptionContext = {}): never {
     if (isError(error)) {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal -- fails without an error type
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal, rxjs/throw-error -- fails without an error type
         throw error;
     }
     throw new Exception(error, context, null);

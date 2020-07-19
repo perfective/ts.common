@@ -10,6 +10,7 @@ In addition to the core https://eslint.org/docs/rules/[ESLint rules]
 and the `link:https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin[@typescript-eslint]` plugin rules,
 `@perfective/eslint-config` configures:
 
+* `link:https://github.com/gund/eslint-plugin-deprecation[eslint-plugin-deprecation]`;
 * `link:https://mysticatea.github.io/eslint-plugin-eslint-comments[eslint-plugin-eslint-comments]`;
 * `link:https://github.com/benmosher/eslint-plugin-import[eslint-plugin-import]`;
 * `link:https://github.com/jest-community/eslint-plugin-jest[eslint-plugin-jest]`;

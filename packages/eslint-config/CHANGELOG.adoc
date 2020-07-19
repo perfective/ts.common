@@ -1,5 +1,20 @@
 = Changelog
 
+== v0.6.0 (next)
+
+* Upgraded `eslint` to `7.5.0`.
+* Upgraded `@typescript-eslint` to `3.6.1`.
+* Upgraded `eslint-plugin-jest` to `23.18.0`.
+* Upgraded `eslint-plugin-unicorn` to `21.0.0`.
+* Added `eslint-plugin-prefer-arrow` support.
+** Removed TSLint `only-arrow-functions` rule.
+* Added `eslint-plugin-jest-formatting` support.
+* Added `eslint-plugin-eslint-comments` support.
+* Increased line `max-len` to `120` characters.
+* Disabled the `sonarjs/no-duplicate-string` rule.
+* Allowed `void` generic type arguments in the `@typescript-eslint/no-invalid-void-type`.
+* Fix: removed TSLint `prefer-method-signature` rule.
+
 == v0.5.0
 
 * Upgraded `eslint` to `7.3.1`.

@@ -8,6 +8,7 @@ export = {
         'brace-style': ['warn', 'stroustrup', {
             allowSingleLine: false,
         }],
+        // See @typescript-eslint/naming-convention
         'camelcase': 'off',
         'capitalized-comments': ['warn', 'always', {
             ignorePattern: 'eslint|tslint',
@@ -34,7 +35,7 @@ export = {
         'func-style': ['error', 'declaration'],
         'function-call-argument-newline': ['warn', 'consistent'],
         'function-paren-newline': ['warn', 'consistent'],
-        'id-blacklist': ['error', 'arr', 'ctx', 'el', 'elem', 'err', 'ind', 'ptr'],
+        'id-denylist': ['error', 'arr', 'ctx', 'el', 'elem', 'err', 'ind', 'ptr'],
         'id-length': 'off',
         'id-match': 'off',
         'implicit-arrow-linebreak': ['warn', 'beside'],

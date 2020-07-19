@@ -18,7 +18,7 @@ export function errorOutput(error: Error): string {
 }
 
 export function stack(error: Error): string {
-    // eslint-disable-next-line no-void
+    // eslint-disable-next-line no-void -- check for "undefined"
     if (error.stack !== void 0) {
         return error.stack;
     }

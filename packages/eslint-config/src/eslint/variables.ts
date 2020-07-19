@@ -1,6 +1,4 @@
 export = {
-    /* eslint-disable unicorn/no-keyword-prefix */
-    /* eslint-disable unicorn/prevent-abbreviations */
     rules: {
         'init-declarations': ['error', 'always'],
         'no-delete-var': 'error',
@@ -13,11 +11,14 @@ export = {
         'no-undef-init': 'warn',
         'no-undefined': 'off',
         'no-unused-vars': ['error', {
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             args: 'after-used',
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             argsIgnorePattern: '^_',
         }],
         'no-use-before-define': ['error', {
             functions: false,
+            // eslint-disable-next-line unicorn/no-keyword-prefix -- option name
             classes: false,
         }],
     },

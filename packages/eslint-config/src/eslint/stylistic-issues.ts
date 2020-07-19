@@ -1,5 +1,4 @@
 export = {
-    /* eslint-disable @typescript-eslint/naming-convention */
     rules: {
         'array-bracket-newline': ['warn', 'consistent'],
         'array-bracket-spacing': ['warn', 'never'],
@@ -39,7 +38,10 @@ export = {
         'id-length': 'off',
         'id-match': 'off',
         'implicit-arrow-linebreak': ['warn', 'beside'],
-        'indent': ['warn', 4, { SwitchCase: 1 }],
+        'indent': ['warn', 4, {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
+            SwitchCase: 1,
+        }],
         'jsx-quotes': ['warn', 'prefer-double'],
         'key-spacing': ['warn', {
             beforeColon: false,
@@ -95,7 +97,7 @@ export = {
         'multiline-comment-style': ['warn', 'separate-lines'],
         'multiline-ternary': ['error', 'always-multiline'],
         'new-cap': ['error', {
-            // eslint-disable-next-line unicorn/no-keyword-prefix
+            // eslint-disable-next-line unicorn/no-keyword-prefix -- option name
             newIsCap: true,
             capIsNew: true,
             properties: true,
@@ -124,7 +126,9 @@ export = {
         'no-multi-assign': 'error',
         'no-multiple-empty-lines': ['warn', {
             max: 1,
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
             maxEOF: 0,
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
             maxBOF: 0,
         }],
         'no-negated-condition': 'error',
@@ -140,7 +144,9 @@ export = {
         'no-whitespace-before-property': 'warn',
         'nonblock-statement-body-position': ['warn', 'below'],
         'object-curly-newline': ['warn', {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
             ImportDeclaration: { multiline: true },
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
             ExportDeclaration: 'always',
         }],
         'object-curly-spacing': ['warn', 'always', {

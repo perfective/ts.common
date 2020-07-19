@@ -1,5 +1,4 @@
 export = {
-    /* eslint-disable unicorn/prevent-abbreviations */
     rules: {
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/array-type': ['warn', {
@@ -85,6 +84,7 @@ export = {
         }],
         '@typescript-eslint/no-explicit-any': ['error', {
             fixToUnknown: false,
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             ignoreRestArgs: false,
         }],
         '@typescript-eslint/no-extra-non-null-assertion': 'warn',
@@ -118,6 +118,7 @@ export = {
         '@typescript-eslint/no-unsafe-member-access': 'error',
         '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/no-unused-vars-experimental': ['error', {
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             ignoreArgsIfArgsAfterAreUsed: true,
         }],
         '@typescript-eslint/no-var-requires': 'error',
@@ -160,6 +161,7 @@ export = {
         '@typescript-eslint/triple-slash-reference': ['error', {
             path: 'never',
             types: 'never',
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             lib: 'never',
         }],
         '@typescript-eslint/type-annotation-spacing': 'warn',

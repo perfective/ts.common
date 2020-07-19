@@ -1,7 +1,4 @@
 export = {
-    /* eslint-disable @typescript-eslint/naming-convention */
-    /* eslint-disable unicorn/no-keyword-prefix */
-    /* eslint-disable unicorn/prevent-abbreviations */
     rules: {
         'brace-style': 'off',
         '@typescript-eslint/brace-style': ['warn', 'stroustrup', {
@@ -22,7 +19,10 @@ export = {
         'func-call-spacing': 'off',
         '@typescript-eslint/func-call-spacing': ['warn', 'never'],
         'indent': 'off',
-        '@typescript-eslint/indent': ['warn', 4, { SwitchCase: 1 }],
+        '@typescript-eslint/indent': ['warn', 4, {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
+            SwitchCase: 1,
+        }],
         'init-declarations': 'off',
         '@typescript-eslint/init-declarations': ['error', 'always'],
         'keyword-spacing': 'off',
@@ -59,13 +59,16 @@ export = {
         '@typescript-eslint/no-unused-expressions': 'error',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': ['error', {
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             args: 'after-used',
             // TypeScript recognizes underscore for unused parameters
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             argsIgnorePattern: '^_',
         }],
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error', {
             functions: false,
+            // eslint-disable-next-line unicorn/no-keyword-prefix -- option name
             classes: false,
             typedefs: false,
         }],

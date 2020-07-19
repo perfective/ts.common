@@ -6,8 +6,7 @@ export function throws<E extends Error>(message: string, context?: ExceptionCont
 export function throws<E extends Error>(error: E | string): never;
 export function throws<E extends Error>(error: E | string, context: ExceptionContext = {}): never {
     if (isError(error)) {
-        // @typescript-eslint/no-throw-literal rule fails without type casting
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal -- fails without an error type
         throw error;
     }
     throw new Exception(error, context, null);
@@ -19,7 +18,7 @@ export function panic<E extends Error>(
     error: E | string,
     context: ExceptionContext = {},
 ): () => never {
-    // eslint-disable-next-line @typescript-eslint/no-extra-parens
+    // eslint-disable-next-line @typescript-eslint/no-extra-parens -- conflicts with no-confusing-arrow
     return (): never => (isError(error) ? throws(error) : throws(error, context));
 }
 

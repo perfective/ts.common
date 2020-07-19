@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the only way to describe variadic arguments
 export type Type<T> = new(...args: any[]) => T;
 
 export function isInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T {

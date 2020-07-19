@@ -1,6 +1,4 @@
 export = {
-    /* eslint-disable unicorn/no-keyword-prefix */
-    /* eslint-disable unicorn/prevent-abbreviations */
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 6,
@@ -12,6 +10,7 @@ export = {
         sourceType: 'module',
         warnOnUnsupportedTypeScriptVersion: true,
     },
+    // eslint-disable-next-line unicorn/prevent-abbreviations -- property name
     env: {
         'es6': true,
         'jest/globals': true,
@@ -19,6 +18,7 @@ export = {
     plugins: [
         '@typescript-eslint',
         'deprecation',
+        'eslint-comments',
         'import',
         'jest',
         'jest-formatting',
@@ -38,6 +38,8 @@ export = {
         './typescript-eslint/supported-rules',
         './typescript-eslint/extension-rules',
         './deprecation/deprecation',
+        './eslint-comments/best-practices',
+        './eslint-comments/stylistic-issues',
         './import/static-analysis',
         './import/helpful-warnings',
         './import/module-systems',
@@ -70,6 +72,7 @@ export = {
     overrides: [
         {
             files: ['*.spec.ts'],
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- property name
             env: {
                 jest: true,
             },

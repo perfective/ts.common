@@ -1,6 +1,4 @@
 export = {
-    /* eslint-disable @typescript-eslint/naming-convention */
-    /* eslint-disable unicorn/prevent-abbreviations */
     extends: './',
     rules: {
         'arrow-body-style': ['error', 'as-needed'],
@@ -16,7 +14,9 @@ export = {
         // Traditionally is used to avoid conflicts between property and method name
         'no-underscore-dangle': 'off',
         'object-curly-newline': ['error', {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
             ImportDeclaration: { multiline: true },
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
             ExportDeclaration: { multiline: true },
         }],
         'object-property-newline': ['error', {
@@ -44,6 +44,7 @@ export = {
         '@typescript-eslint/triple-slash-reference': ['error', {
             path: 'never',
             types: 'always',
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             lib: 'never',
         }],
         // Allow uppercase in describe() as it can be used for the class name in PascalCase
@@ -56,11 +57,12 @@ export = {
             onlyCamelCase: false,
         }],
         'unicorn/prevent-abbreviations': ['error', {
-            // Common descriptive abbreviations
+            /* eslint-disable unicorn/prevent-abbreviations -- disable check for common abbreviations */
             replacements: {
                 db: false,
                 env: false,
             },
+            /* eslint-enable unicorn/prevent-abbreviations */
             extendDefaultWhitelist: true,
             checkDefaultAndNamespaceImports: true,
             checkShorthandImports: false,

@@ -1,4 +1,4 @@
-/* eslint-disable max-classes-per-file -- example classes are required for testing */
+// eslint-disable-next-line max-classes-per-file -- provide example classes required for testing
 import { isInstanceOf, isNotInstanceOf } from './type';
 
 class Base {

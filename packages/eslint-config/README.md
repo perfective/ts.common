@@ -10,6 +10,7 @@ In addition to the core [ESLint rules](https://eslint.org/docs/rules/)
 and the [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin) plugin rules,
 `@perfective/eslint-config` configures:
 
+* [`eslint-plugin-eslint-comments`](https://mysticatea.github.io/eslint-plugin-eslint-comments);
 * [`eslint-plugin-import`](https://github.com/benmosher/eslint-plugin-import);
 * [`eslint-plugin-jest`](https://github.com/jest-community/eslint-plugin-jest);
 * [`eslint-plugin-jest-formatting`](https://github.com/dangreenisrael/eslint-plugin-jest-formatting);
@@ -35,6 +36,7 @@ npm install --save-dev \
     eslint \
     eslint-import-resolver-typescript \
     eslint-plugin-deprecation \
+    eslint-plugin-eslint-comments \
     eslint-plugin-import \
     eslint-plugin-jest \
     eslint-plugin-jest-formatting \

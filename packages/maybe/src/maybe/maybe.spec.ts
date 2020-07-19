@@ -283,7 +283,7 @@ describe('just', () => {
         let a = 2.71;
 
         it('keeps the present value the same', () => {
-            // eslint-disable-next-line no-return-assign
+            // eslint-disable-next-line no-return-assign -- testing a procedure
             expect(just(3.14).run(pi => a = pi))
                 .toStrictEqual(just(3.14));
         });
@@ -437,7 +437,7 @@ describe('nothing', () => {
         let a = 2.71;
 
         it('keeps nothing the same', () => {
-            // eslint-disable-next-line no-return-assign
+            // eslint-disable-next-line no-return-assign -- testing a procedure
             expect(nothing<number>().run(none => a = none))
                 .toStrictEqual(nothing());
         });
@@ -591,7 +591,7 @@ describe('nil', () => {
         let a = 2.71;
 
         it('keeps nil the same', () => {
-            // eslint-disable-next-line no-return-assign
+            // eslint-disable-next-line no-return-assign -- testing a procedure
             expect(nil<number>().run(none => a = none))
                 .toStrictEqual(nil());
         });

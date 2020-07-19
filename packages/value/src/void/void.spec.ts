@@ -2,7 +2,7 @@ import { voidable } from './void';
 
 describe('voidable', () => {
     it('returns undefined when value is void', () => {
-        // eslint-disable-next-line no-void
+        // eslint-disable-next-line no-void -- testing void behavior
         expect(voidable(void 0)).toBeUndefined();
     });
 

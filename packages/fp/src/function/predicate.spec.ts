@@ -2,8 +2,7 @@ import { all, atLeast, atMost, either, exactly, is, isNot, neither, not } from '
 
 const list = [2.71, 3.14];
 const irrational = {
-    /* eslint-disable unicorn/prevent-abbreviations */
-    e: 2.71,
+    euler: 2.71,
     pi: 3.14,
 };
 
@@ -21,7 +20,7 @@ describe('is', () => {
             expect(is('2.71')('3.14')).toBe(false);
             expect(is(list)([2.71, 3.14])).toBe(false);
             expect(is(irrational)({
-                e: 2.71,
+                euler: 2.71,
                 pi: 3.14,
             })).toBe(false);
         });
@@ -42,7 +41,7 @@ describe('isNot', () => {
             expect(isNot('2.71')('3.14')).toBe(true);
             expect(isNot(list)([2.71, 3.14])).toBe(true);
             expect(isNot(irrational)({
-                e: 2.71,
+                euler: 2.71,
                 pi: 3.14,
             })).toBe(true);
         });

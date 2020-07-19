@@ -1,5 +1,4 @@
-// Maybe<T>, Just<T>, Null<T>, Nothing<T> are cross-dependent and create cyclic dependency.
-/* eslint-disable max-classes-per-file */
+// eslint-disable-next-line max-classes-per-file -- Maybe<T>, Just<T>, Null<T>, Nothing<T> create cyclic dependency
 import { Predicate, Proposition, TypeGuard, Value, isTrue, valueOf } from '@perfective/fp';
 import { Present, isNull, isPresent, isUndefined } from '@perfective/value';
 

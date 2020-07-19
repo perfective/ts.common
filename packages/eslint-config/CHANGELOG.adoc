@@ -10,6 +10,7 @@
 ** Removed TSLint `only-arrow-functions` rule.
 * Added `eslint-plugin-jest-formatting` support.
 * Added `eslint-plugin-eslint-comments` support.
+* Added `eslint-plugin-rxjs` support.
 * Increased line `max-len` to `120` characters.
 * Disabled the `sonarjs/no-duplicate-string` rule.
 * Allowed `void` generic type arguments in the `@typescript-eslint/no-invalid-void-type`.

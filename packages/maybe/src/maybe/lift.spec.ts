@@ -148,6 +148,7 @@ describe('or', () => {
 describe('run', () => {
     it('lifts a procedure to the Maybe.run()', () => {
         const a: (number | null | undefined)[] = [];
+
         expect(list.map(run(v => a.push(v))))
             .toStrictEqual([just(2.71), just(3.14), nothing(), nil()]);
         expect(a)

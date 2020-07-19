@@ -12,6 +12,7 @@ describe('stackTrace', () => {
             '    at new Promise (<anonymous>)',
             '    at mapper (/node_modules/jest-jasmine2/build/queueRunner.js:30:19)',
         ].join('\n');
+
         expect(stackTrace(example))
             .toStrictEqual([
                 {
@@ -37,10 +38,12 @@ describe('stackTrace', () => {
                     column: 19,
                 },
             ] as Trace[]);
+
         example.stack = [
             'Error: Failure',
             '    at <unknown>',
         ].join('\n');
+
         expect(stackTrace(example))
             .toStrictEqual([
                 {

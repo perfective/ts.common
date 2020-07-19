@@ -150,6 +150,7 @@ describe('chainStack', () => {
         const trace: string = chainStack(
             causedBy(typeError('"x" is not a function'), 'Failed to process input'),
         );
+
         expect(trace)
             .toMatch(/^Exception: Failed to process input\n {4}at Object.causedBy \(/u);
         expect(trace)

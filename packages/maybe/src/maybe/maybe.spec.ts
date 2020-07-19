@@ -215,6 +215,7 @@ describe('just', () => {
                     value: 3.14,
                 },
             };
+
             expect(
                 just(boxed)
                     .pick('value')
@@ -280,6 +281,7 @@ describe('just', () => {
 
     describe('run', () => {
         let a = 2.71;
+
         it('keeps the present value the same', () => {
             // eslint-disable-next-line no-return-assign
             expect(just(3.14).run(pi => a = pi))
@@ -433,6 +435,7 @@ describe('nothing', () => {
 
     describe('run', () => {
         let a = 2.71;
+
         it('keeps nothing the same', () => {
             // eslint-disable-next-line no-return-assign
             expect(nothing<number>().run(none => a = none))
@@ -586,6 +589,7 @@ describe('nil', () => {
 
     describe('run', () => {
         let a = 2.71;
+
         it('keeps nil the same', () => {
             // eslint-disable-next-line no-return-assign
             expect(nil<number>().run(none => a = none))

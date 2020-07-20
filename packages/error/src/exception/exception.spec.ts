@@ -3,15 +3,7 @@ import { rangeError } from '../error/range-error';
 import { syntaxError } from '../error/syntax-error';
 import { typeError } from '../error/type-error';
 
-import {
-    causedBy,
-    chainStack,
-    exception,
-    fault,
-    isException,
-    isNotException,
-    unchained,
-} from './exception';
+import { causedBy, chainStack, exception, fault, isException, isNotException, unchained } from './exception';
 
 describe('exception', () => {
     const error = exception('User not found');

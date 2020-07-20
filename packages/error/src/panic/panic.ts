@@ -30,7 +30,9 @@ export function panic<E extends Error>(
     context: ExceptionContext = {},
 ): () => never {
     // eslint-disable-next-line @typescript-eslint/no-extra-parens -- conflicts with no-confusing-arrow
-    return (): never => (isError(error) ? throws(error) : throws(error, tokens, context));
+    return (): never => (
+        isError(error) ? throws(error) : throws(error, tokens, context)
+    );
 }
 
 // eslint-disable-next-line max-params -- shorthand signature does not add complexity

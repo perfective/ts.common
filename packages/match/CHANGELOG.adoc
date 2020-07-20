@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.2.0 (next)
+
+* Compiled `ES6` and `CommonsJS` modules.
+
 == v0.1.0
 
 * Declared the `Match<T>`, `When<T>`, and `Statement<T, U>` types.

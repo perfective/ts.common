@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.2.0 (next)
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Removed `has*Property()` functions; renamed `*Property()` functions into `has*Property()`.
+
 == v0.1.0
 
 * Declared types:

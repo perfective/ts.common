@@ -1,18 +1,39 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.4.0",
+    "version": "0.5.0-alpha",
     "description": "Maybe monad-like container",
+    "keywords": [
+        "maybe",
+        "optional",
+        "nullable",
+        "just",
+        "nothing",
+        "some",
+        "none",
+        "monad"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/perfective/js.git",
+        "directory": "packages/maybe"
+    },
     "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/cjs/index.js",
+    "module": "dist/mjs/index.js",
+    "types": "dist/mjs/index.d.ts",
+    "exports": {
+        "import": "dist/mjs/index.js",
+        "require": "dist/cjs/index.js"
+    },
     "files": [
-        "dist"
+        "dist/cjs",
+        "dist/mjs"
     ],
     "sideEffects": false,
     "scripts": {
-        "build": "tsc --project ./tsconfig.build.json",
+        "build": "tsc --project ./tsconfig.build.cjs.json && tsc --project ./tsconfig.build.mjs.json",
         "build:clean": "npm run clean && npm run build",
         "clean": "rm -rf dist && rm -f *.tsbuildinfo",
         "lint": "npm run lint:eslint; npm run lint:tslint",
@@ -23,10 +44,12 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/error": "^0.1.0",
-        "@perfective/fp": "^0.1.3",
-        "@perfective/object": "^0.1.0",
-        "@perfective/real": "^0.2.0",
-        "@perfective/value": "^0.1.0"
+        "@perfective/fp": "^0.4.0-alpha",
+        "@perfective/value": "^0.2.0-beta"
+    },
+    "devDependencies": {
+        "@perfective/error": "^0.2.0-beta",
+        "@perfective/object": "^0.2.0-alpha",
+        "@perfective/real": "^0.4.0-alpha"
     }
 }

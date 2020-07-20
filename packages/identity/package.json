@@ -1,17 +1,33 @@
 {
     "name": "@perfective/identity",
-    "version": "0.1.0",
+    "version": "0.2.0-alpha",
     "description": "Identity monad",
+    "keywords": [
+        "identity monad",
+        "monad"
+    ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/perfective/js.git",
+        "directory": "packages/identity"
+    },
     "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/cjs/index.js",
+    "module": "dist/mjs/index.js",
+    "types": "dist/mjs/index.d.ts",
+    "exports": {
+        "import": "dist/mjs/index.js",
+        "require": "dist/cjs/index.js"
+    },
     "files": [
-        "dist"
+        "dist/cjs",
+        "dist/mjs"
     ],
+    "sideEffects": false,
     "scripts": {
-        "build": "tsc --project ./tsconfig.build.json",
+        "build": "tsc --project ./tsconfig.build.cjs.json && tsc --project ./tsconfig.build.mjs.json",
         "build:clean": "npm run clean && npm run build",
         "clean": "rm -rf dist && rm -f *.tsbuildinfo",
         "lint": "npm run lint:eslint; npm run lint:tslint",

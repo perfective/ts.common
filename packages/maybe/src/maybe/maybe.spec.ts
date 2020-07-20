@@ -1,12 +1,12 @@
 import { panic } from '@perfective/error';
 import { constant } from '@perfective/fp';
 import {
-    absentProperty,
-    definedProperty,
-    notNullProperty,
-    nullProperty,
-    presentProperty,
-    undefinedProperty,
+    hasAbsentProperty,
+    hasDefinedProperty,
+    hasNotNullProperty,
+    hasNullProperty,
+    hasPresentProperty,
+    hasUndefinedProperty,
 } from '@perfective/object';
 import { decimal, isGreaterThan, isLessThan } from '@perfective/real';
 import { isDefined, isNotNull, isNull, isPresent, isUndefined } from '@perfective/value';
@@ -139,44 +139,44 @@ describe('just', () => {
 
     describe('has', () => {
         it('returns just() when value passes the type guard', () => {
-            expect(just(check).has(definedProperty('required')))
+            expect(just(check).has(hasDefinedProperty('required')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(undefinedProperty('optional')))
+            expect(just(check).has(hasUndefinedProperty('optional')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(notNullProperty('nullable')))
+            expect(just(check).has(hasNotNullProperty('nullable')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(nullProperty('possible')))
+            expect(just(check).has(hasNullProperty('possible')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(presentProperty('maybe')))
+            expect(just(check).has(hasPresentProperty('maybe')))
                 .toStrictEqual(just(check));
-            expect(just(check).has(absentProperty('option')))
+            expect(just(check).has(hasAbsentProperty('option')))
                 .toStrictEqual(just(check));
         });
 
         it('returns nothing() when value fails the type guard', () => {
-            expect(just(check).has(undefinedProperty('required')))
+            expect(just(check).has(hasUndefinedProperty('required')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(definedProperty('optional')))
+            expect(just(check).has(hasDefinedProperty('optional')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(nullProperty('nullable')))
+            expect(just(check).has(hasNullProperty('nullable')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(notNullProperty('possible')))
+            expect(just(check).has(hasNotNullProperty('possible')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(absentProperty('maybe')))
+            expect(just(check).has(hasAbsentProperty('maybe')))
                 .toStrictEqual(nothing());
-            expect(just(check).has(presentProperty('option')))
+            expect(just(check).has(hasPresentProperty('option')))
                 .toStrictEqual(nothing());
         });
 
         it('combines checked properties', () => {
             expect(
                 just(check)
-                    .has(definedProperty('required'))
-                    .has(definedProperty('option'))
+                    .has(hasDefinedProperty('required'))
+                    .has(hasDefinedProperty('option'))
                     .to(v => `${decimal(v.required)}:${decimal(v.option)}`),
             ).toStrictEqual(
                 just(check)
-                    .has(definedProperty('required', 'option'))
+                    .has(hasDefinedProperty('required', 'option'))
                     .to(v => `${decimal(v.required)}:${decimal(v.option)}`),
             );
         });
@@ -347,7 +347,7 @@ describe('nothing', () => {
 
     describe('has', () => {
         it('remains nothing() after value is checked by the type guard', () => {
-            expect(nothing<TypeGuardCheck<number>>().has(presentProperty('maybe')))
+            expect(nothing<TypeGuardCheck<number>>().has(hasPresentProperty('maybe')))
                 .toStrictEqual(nothing());
         });
     });
@@ -501,7 +501,7 @@ describe('nil', () => {
 
     describe('has', () => {
         it('remains nothing() after value is checked by the type guard', () => {
-            expect(nil<TypeGuardCheck<number>>().has(presentProperty('maybe')))
+            expect(nil<TypeGuardCheck<number>>().has(hasPresentProperty('maybe')))
                 .toStrictEqual(nil());
         });
     });

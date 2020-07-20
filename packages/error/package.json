@@ -1,6 +1,6 @@
 {
     "name": "@perfective/error",
-    "version": "0.2.0-alpha.3",
+    "version": "0.2.0-alpha.4",
     "description": "Functions for the Error and other types to handle exceptions",
     "keywords": [
         "error",
@@ -18,15 +18,22 @@
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",
     "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/cjs/index.js",
+    "module": "dist/mjs/index.mjs",
+    "types": "dist/mjs/index.d.ts",
+    "exports": {
+        "import": "dist/mjs/index.mjs",
+        "require": "dist/cjs/index.cjs"
+    },
     "files": [
         "dist"
     ],
     "sideEffects": false,
     "scripts": {
-        "build": "tsc --project ./tsconfig.build.json",
+        "build": "npm run build:cjs && npm run build:mjs",
         "build:clean": "npm run clean && npm run build",
+        "build:cjs": "tsc --project tsconfig.build.cjs.json",
+        "build:mjs": "tsc --project ./tsconfig.build.mjs.json && mv dist/mjs/index.js dist/mjs/index.mjs",
         "clean": "rm -rf dist && rm -f *.tsbuildinfo",
         "lint": "npm run lint:eslint; npm run lint:tslint",
         "lint:eslint": "eslint --fix --ext .ts ./src",

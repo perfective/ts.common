@@ -2,7 +2,7 @@
 
 == v0.2.0 (next)
 
-* Compiled into `ES6` with `CommonJS` module resolution.
+* Compiled `ES6` and `CommonsJS` modules.
 * Required the error message argument in all functions.
 * Added `errorOutput` function to emulate Node.js `Error.toString()`.
 * Added `Exception` base class:

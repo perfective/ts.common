@@ -3,7 +3,7 @@
         "no-unused-css": true,
         "template-conditional-complexity": [true, 2],
         "template-i18n": false,
-//        "template-no-call-expression": true,
+        "template-no-call-expression": true,
         "template-use-track-by-function": true
     }
 }

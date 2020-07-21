@@ -1,6 +1,6 @@
 export = {
     rules: {
-        'prefer-arrow/prefer-arrow-functions': ['warn', {
+        'prefer-arrow/prefer-arrow-functions': ['error', {
             allowStandaloneDeclarations: true,
             // eslint-disable-next-line unicorn/no-keyword-prefix -- option name
             classPropertiesAllowed: false,

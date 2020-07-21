@@ -5,6 +5,7 @@
 * Upgraded `@perfective/eslint-config` to `0.6.0`.
 * Upgraded `eslint-plugin-jest-dom` to `3.1.4`.
 * Added `eslint-plugin-rxjs-angular` support.
+* Fix: enabled the `template-no-call-expression` Codelyzer rule.
 
 == v0.2.0
 

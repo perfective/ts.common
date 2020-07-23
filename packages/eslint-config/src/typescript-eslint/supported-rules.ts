@@ -8,7 +8,7 @@ export = {
         '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/ban-ts-comment': 'error',
         '@typescript-eslint/ban-tslint-comment': 'warn',
-        '@typescript-eslint/ban-types': 'warn',
+        '@typescript-eslint/ban-types': 'error',
         '@typescript-eslint/class-literal-property-style': 'off',
         '@typescript-eslint/consistent-type-assertions': ['error', {
             assertionStyle: 'as',

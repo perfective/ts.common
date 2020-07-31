@@ -3,6 +3,7 @@
 == v0.2.0 (next)
 
 * Compiled `ES6` and `CommonsJS` modules.
+* Added the `flipped()` array to object function.
 
 == v0.1.1
 

@@ -20,3 +20,7 @@ export {
 export {
     includedIn,
 } from './array/predicate';
+
+export {
+    flipped,
+} from './array/record';

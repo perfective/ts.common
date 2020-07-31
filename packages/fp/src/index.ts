@@ -44,7 +44,7 @@ export {
 
 export {
     Unary,
-    value,
+    same,
 } from './function/unary';
 
 export {

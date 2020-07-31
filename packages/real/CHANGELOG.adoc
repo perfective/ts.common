@@ -1,6 +1,6 @@
 = Changelog
 
-== v0.4.0-alpha
+== v0.4.0 (next)
 
 * Compiled `ES6` and `CommonsJS` modules.
 
@@ -24,7 +24,7 @@
 
 * Required `@perfective/fp`.
 * Added `ascending`/`descending` sorting functions.
-* Added `isNumber`/`isNotNumber` type guards.
+* Added `isNumber`/`isNotNumber` type guards.
 * Added the `Interval` type.
 
 == v0.1.1

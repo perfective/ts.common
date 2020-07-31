@@ -1,6 +1,6 @@
 {
     "name": "@perfective/real",
-    "version": "0.4.0-alpha",
+    "version": "0.4.0-alpha.1",
     "description": "Types and functions to work with real numbers",
     "keywords": [
         "integer",
@@ -43,6 +43,6 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/fp": "^0.4.0-alpha"
+        "@perfective/fp": "^0.4.0"
     }
 }

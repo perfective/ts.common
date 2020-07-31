@@ -1,6 +1,6 @@
 {
     "name": "@perfective/match",
-    "version": "0.2.0-alpha",
+    "version": "0.2.0-alpha.1",
     "description": "Functions and types for the pattern matching",
     "keywords": [
         "match",
@@ -38,7 +38,7 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/fp": "^0.4.0-alpha",
-        "@perfective/maybe": "^0.5.0-alpha"
+        "@perfective/fp": "^0.4.0",
+        "@perfective/maybe": "^0.5.0-alpha.1"
     }
 }

@@ -46,6 +46,7 @@ export {
     isException,
     isNotException,
     unchained,
+    unknownError,
 } from './exception/exception';
 export {
     ExceptionContext,

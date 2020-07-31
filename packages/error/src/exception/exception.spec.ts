@@ -3,7 +3,16 @@ import { rangeError } from '../error/range-error';
 import { syntaxError } from '../error/syntax-error';
 import { typeError } from '../error/type-error';
 
-import { causedBy, chainStack, exception, fault, isException, isNotException, unchained } from './exception';
+import {
+    causedBy,
+    chainStack,
+    exception,
+    fault,
+    isException,
+    isNotException,
+    unchained,
+    unknownError,
+} from './exception';
 
 describe('exception', () => {
     const error = exception('User not found');
@@ -114,6 +123,26 @@ describe('causedBy', () => {
             '\t- Exception: Failed to output user `John Doe`',
             `\t- TypeError: Cannot read property 'toString' of undefined`,
         ].join('\n'));
+    });
+});
+
+describe('unknownError', () => {
+    it('returns the passed value as is when the value is an Error', () => {
+        const error = exception('Failure');
+
+        expect(unknownError(error) === error)
+            .toStrictEqual(true);
+    });
+
+    it('returns an exception with the passed value in context when the value is not an Error', () => {
+        expect(unknownError('Failure'))
+            .toStrictEqual(exception('Literal error', {}, {
+                error: 'Failure',
+            }));
+        expect(unknownError(404))
+            .toStrictEqual(exception('Literal error', {}, {
+                error: 404,
+            }));
     });
 });
 

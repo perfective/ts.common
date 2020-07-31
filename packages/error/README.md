@@ -16,6 +16,8 @@ in the repository.
     — creates an `Exception` without a previous error.
     * `causedBy(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception`
     — creates an `Exception` with a previous error.
+    * `unknownError(error: unknown): Error | Exception`
+    — returns a passed `Error` or creates a new `Literal error` `Exception`.
     * `isException<T>(value: Exception | T): value is Exception`
     — returns `true` when value is an `Exception`.
     * `isNotException<T>(value: Exception | T): value is T`

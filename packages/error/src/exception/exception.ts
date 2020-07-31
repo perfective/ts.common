@@ -1,4 +1,4 @@
-import { errorOutput, stack } from '../error/error';
+import { errorOutput, isError, stack } from '../error/error';
 
 import { ExceptionContext } from './exception-context';
 import { ExceptionMessage, exceptionMessage, exceptionMessageOutput } from './exception-message';
@@ -40,6 +40,12 @@ export function causedBy(
     context: ExceptionContext = {},
 ): Exception {
     return new Exception(exceptionMessage(message, tokens), context, previous);
+}
+
+export function unknownError(error: unknown): Error | Exception {
+    return isError(error)
+        ? error
+        : exception('Literal error', {}, { error });
 }
 
 export function isException<T>(value: Exception | T): value is Exception {

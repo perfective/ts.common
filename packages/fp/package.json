@@ -1,6 +1,6 @@
 {
     "name": "@perfective/fp",
-    "version": "0.4.0-alpha",
+    "version": "0.4.0",
     "description": "Functions and types for functional programming",
     "keywords": [
         "fp",

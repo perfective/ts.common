@@ -2,7 +2,7 @@
 
 The `@perfective/error` package helps organize exceptions and error handling.
 It defines an `Exception`, based on the JS
-[`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) class
+[`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) class,
 that supports localizable error messages and error chaining;
 and provides functions to handle error stack output.
 

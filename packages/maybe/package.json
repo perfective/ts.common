@@ -1,6 +1,6 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.5.0-alpha",
+    "version": "0.5.0-alpha.1",
     "description": "Maybe monad-like container",
     "keywords": [
         "maybe",
@@ -44,12 +44,12 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/fp": "^0.4.0-alpha",
-        "@perfective/value": "^0.2.0-beta"
+        "@perfective/fp": "^0.4.0",
+        "@perfective/value": "^0.2.0"
     },
     "devDependencies": {
-        "@perfective/error": "^0.2.0-beta",
-        "@perfective/object": "^0.2.0-alpha",
-        "@perfective/real": "^0.4.0-alpha"
+        "@perfective/error": "^0.2.0",
+        "@perfective/object": "^0.2.0-alpha.1",
+        "@perfective/real": "^0.4.0-alpha.1"
     }
 }

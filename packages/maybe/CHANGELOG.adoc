@@ -1,10 +1,10 @@
 = Changelog
 
-== v0.5.0-alpha
+== v0.5.0 (next)
 
 * Compiled `ES6` and `CommonsJS` modules.
 * Renamed `Maybe.has()` into `Maybe.which()`.
-* Added support for a function argument type in `Maybe.pick()`.
+* Added support for a function argument type in `Maybe.pick()`.
 * Added custom `Just.to()` signature to preserve the `Just` chain.
 * Added custom `Just.onto()` signature to preserve the `Just` chain.
 * Changed `Just.run()` signature to return `Just`.
@@ -71,7 +71,7 @@
 ** `hasDefinedProperty()`;
 ** `hasUndefinedProperty()`;
 ** `hasNotNullProperty()`;
-** `hasNullProperty()`;
+** `hasNullProperty()`;
 ** `hasPresentProperty()`;
 ** `hasAbsentProperty()`.
 * Add `voidable()` function to cast `void` into `null | undefined`.

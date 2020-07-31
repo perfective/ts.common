@@ -1,6 +1,6 @@
 {
     "name": "@perfective/string",
-    "version": "0.2.0-alpha",
+    "version": "0.2.0-alpha.1",
     "description": "Functions to work with the String type",
     "keywords": [
         "string",
@@ -38,6 +38,6 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/fp": "^0.4.0-alpha"
+        "@perfective/fp": "^0.4.0"
     }
 }

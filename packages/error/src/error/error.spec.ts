@@ -32,6 +32,11 @@ describe('isNotError', () => {
 });
 
 describe('errorOutput', () => {
+    it('returns only error name when message is undefined', () => {
+        expect(errorOutput(new ReferenceError()))
+            .toStrictEqual('ReferenceError');
+    });
+
     it('returns human-readable string matching Error.toString() on Node.js', () => {
         expect(errorOutput(new Error('Failure!')))
             .toStrictEqual('Error: Failure!');

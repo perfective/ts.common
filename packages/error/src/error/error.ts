@@ -14,7 +14,7 @@ export function isNotError<T>(value: Error | T): value is T {
  * Returns the same string as Error.toString() on Node.js
  */
 export function errorOutput(error: Error): string {
-    return `${error.name}: ${error.message}`;
+    return `${error.name}: ${error.message}`.replace(/: $/u, '');
 }
 
 export function stack(error: Error): string {

@@ -5,6 +5,7 @@
 * Compiled `ES6` and `CommonsJS` modules.
 * Renamed `Maybe.has()` into `Maybe.which()`.
 * Added support for a function argument type in `Maybe.pick()`.
+* Added support for an optional/nullable values in `Maybe.otherwise()`.
 * Added custom `Just.to()` signature to preserve the `Just` chain.
 * Added custom `Just.onto()` signature to preserve the `Just` chain.
 * Changed `Just.run()` signature to return `Just`.

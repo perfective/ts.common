@@ -260,10 +260,18 @@ describe('just', () => {
         it('returns the Maybe value when fallback is constant', () => {
             expect(just(3.14).otherwise(2.71))
                 .toStrictEqual(just(3.14));
+            expect(just(3.14).otherwise(null))
+                .toStrictEqual(just(3.14));
+            expect(just(3.14).otherwise(undefined))
+                .toStrictEqual(just(3.14));
         });
 
         it('returns the Maybe value when fallback is a callback', () => {
             expect(just(3.14).otherwise(constant(2.71)))
+                .toStrictEqual(just(3.14));
+            expect(just(3.14).otherwise(constant(null)))
+                .toStrictEqual(just(3.14));
+            expect(just(3.14).otherwise(constant(undefined)))
                 .toStrictEqual(just(3.14));
         });
 
@@ -434,11 +442,19 @@ describe('nothing', () => {
         it('returns a fallback value when fallback is constant', () => {
             expect(nothing<number>().otherwise(2.71))
                 .toStrictEqual(just(2.71));
+            expect(nothing<number>().otherwise(null))
+                .toStrictEqual(nil());
+            expect(nothing<number>().otherwise(undefined))
+                .toStrictEqual(nothing());
         });
 
         it('returns a result of the fallback callback', () => {
             expect(nothing<number>().otherwise(constant(2.71)))
                 .toStrictEqual(just(2.71));
+            expect(nothing<number>().otherwise(constant(null)))
+                .toStrictEqual(nil());
+            expect(nothing<number>().otherwise(constant(undefined)))
+                .toStrictEqual(nothing());
         });
 
         it('allows to throw an error', () => {
@@ -606,11 +622,19 @@ describe('nil', () => {
         it('returns a fallback value when fallback is a constant', () => {
             expect(nil<number>().otherwise(2.71))
                 .toStrictEqual(just(2.71));
+            expect(nil<number>().otherwise(null))
+                .toStrictEqual(nil());
+            expect(nil<number>().otherwise(undefined))
+                .toStrictEqual(nothing());
         });
 
         it('returns a result of the fallback callback', () => {
             expect(nil<number>().otherwise(constant(2.71)))
                 .toStrictEqual(just(2.71));
+            expect(nil<number>().otherwise(constant(null)))
+                .toStrictEqual(nil());
+            expect(nil<number>().otherwise(constant(undefined)))
+                .toStrictEqual(nothing());
         });
 
         it('allows to throw an error', () => {

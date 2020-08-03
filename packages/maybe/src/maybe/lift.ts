@@ -29,8 +29,10 @@ export function pick<T, K extends keyof T>(
     return (maybe: Maybe<T>): Maybe<Present<T[K]>> => maybe.pick(property);
 }
 
-export function otherwise<T>(fallback: Value<T>): Unary<Maybe<T>, Just<T>> {
-    return (maybe: Maybe<T>): Just<T> => maybe.otherwise(fallback);
+export function otherwise<T>(fallback: Value<T>): Unary<Maybe<T>, Just<T>>;
+export function otherwise<T>(fallback: Value<T | null | undefined>): Unary<Maybe<T>, Maybe<T>>;
+export function otherwise<T>(fallback: Value<T | null | undefined>): Unary<Maybe<T>, Just<T> | Maybe<T>> {
+    return (maybe: Maybe<T>): Just<T> | Maybe<T> => maybe.otherwise(fallback);
 }
 
 export function or<T>(fallback: Value<T>): Unary<Maybe<T>, T>;

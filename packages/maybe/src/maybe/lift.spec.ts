@@ -123,11 +123,19 @@ describe('otherwise', () => {
     it('lifts a fallback function to the Maybe.otherwise()', () => {
         expect(list.map(otherwise(constant(Number.NEGATIVE_INFINITY))).map(v => v.value))
             .toStrictEqual([2.71, 3.14, Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY]);
+        expect(list.map(otherwise<number>(constant(null))).map(v => v.value))
+            .toStrictEqual([2.71, 3.14, null, null]);
+        expect(list.map(otherwise<number>(constant(undefined))).map(v => v.value))
+            .toStrictEqual([2.71, 3.14, undefined, undefined]);
     });
 
     it('lifts a fallback constant to the Maybe.otherwise()', () => {
         expect(list.map(otherwise(Number.POSITIVE_INFINITY)).map(v => v.value))
             .toStrictEqual([2.71, 3.14, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
+        expect(list.map(otherwise<number>(null)).map(v => v.value))
+            .toStrictEqual([2.71, 3.14, null, null]);
+        expect(list.map(otherwise<number>(undefined)).map(v => v.value))
+            .toStrictEqual([2.71, 3.14, undefined, undefined]);
     });
 });
 

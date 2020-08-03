@@ -54,11 +54,13 @@ export abstract class Maybe<T> {
         return this.to(v => v[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
     }
 
-    public otherwise(fallback: Value<T>): Just<T> {
+    public otherwise(fallback: Value<T>): Just<T>
+    public otherwise(fallback: Value<T | null | undefined>): Maybe<T>
+    public otherwise(fallback: Value<T | null | undefined>): Just<T> | Maybe<T> {
         if (isPresent(this.value)) {
             return just(this.value);
         }
-        return just(valueOf(fallback));
+        return maybe(valueOf(fallback));
     }
 
     public or(fallback: Value<T>): T
@@ -108,6 +110,13 @@ export class Just<T>
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U>
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> {
         return super.to(map);
+    }
+
+    public otherwise(fallback: Value<T>): Just<T>
+    // eslint-disable-next-line @typescript-eslint/unified-signatures -- unified signature causes compiler errors
+    public otherwise(fallback: Value<T | null | undefined>): Just<T>
+    public otherwise(fallback: Value<T | null | undefined>): Just<T> {
+        return super.otherwise(fallback) as Just<T>;
     }
 
     public run(procedure: (value: T) => void): Just<T> {

@@ -1,3 +1,7 @@
 = Array
 
 The `@perfective/array` package provides functions to work with the `Array` type.
+
+== Roadmap
+
+* Add `Index` type for readability.

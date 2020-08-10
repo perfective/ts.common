@@ -98,6 +98,7 @@ and `to()` method requires a type parameter to compile.
 ** `ascending(a: number, b: number): number`
 ** `descending(a: number, b: number): number`
 
+
 == Interval
 
 `Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
@@ -120,6 +121,7 @@ Input values are ordered into `Interval.min` and `Interval.max`.
 ** `isInRightOpenInterval(interval: Interval): Predicate<number>`
 — returns a predicate to check if a number is in a right-open (and left-closed) interval.
 
+
 == Roadmap
 
 * Add support for the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]` object.
@@ -133,3 +135,4 @@ Input values are ordered into `Interval.min` and `Interval.max`.
 ** `isStrictSubInterval()`.
 ** verify correct behavior with `Infinity`.
 ** consider adding negated functions, like `isNotInInterval()`.
+* Add `Positive`, `Negative`, and other nominal types to be used for readability.

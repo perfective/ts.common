@@ -1,3 +1,19 @@
 = String
 
 The `@perfective/string` package provides functions to work with the `String` type.
+
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll[String.prototype.replaceAll]`
+is not supported due to lack of platforms support.
+
+== Roadmap
+
+* Implement with the `@perfective/locale` package:
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare[String.prototype.localeCompare]`;
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase[String.prototype.toLocaleLowerCase]`;
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase[String.prototype.toLocaleUpperCase]`.
+* Implement with the `@perfective/regexp` package:
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match[String.prototype.match]`;
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll[String.prototype.matchAll]`;
+* Implement with a polyfill:
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd[String.prototype.trimEnd]`;
+** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd[String.prototype.trimStart]`.

@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.2.2
+
+* Added `Panic` type.
+
 == v0.2.1
 
 * Fix: export `unknownError` function.

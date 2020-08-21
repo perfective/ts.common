@@ -125,9 +125,9 @@ to handle a union type of `E extends Error | string`,
 to throw an exception in a one-line arrow function,
 or to avoid issues with the `@typescript-eslint/no-throw-literal` linter rule.
 +
-* `panic<E extends Error>(error: E | string): () => never`
+* `panic<E extends Error>(error: E | string): Panic`
 +
-`panic<E extends Error>(message: string, context?: ExceptionContext): () => never`
+`panic<E extends Error>(message: string, context?: ExceptionContext): Panic`
 +
 The `panic` function creates a new function that throws an error.
 It is used for lazy evaluation,

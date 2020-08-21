@@ -4,6 +4,8 @@ import { ExceptionContext } from '../exception/exception-context';
 import { exceptionMessage } from '../exception/exception-message';
 import { ExceptionTokens } from '../exception/exception-tokens';
 
+export type Panic = () => never;
+
 export function throws<E extends Error>(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
 export function throws<E extends Error>(error: E | string): never;
 export function throws<E extends Error>(
@@ -22,13 +24,13 @@ export function panic<E extends Error>(
     message: string,
     tokens?: ExceptionTokens,
     context?: ExceptionContext,
-): () => never;
-export function panic<E extends Error>(error: E | string): () => never;
+): Panic;
+export function panic<E extends Error>(error: E | string): Panic;
 export function panic<E extends Error>(
     error: E | string,
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
-): () => never {
+): Panic {
     // eslint-disable-next-line @typescript-eslint/no-extra-parens -- conflicts with no-confusing-arrow
     return (): never => (
         isError(error) ? throws(error) : throws(error, tokens, context)

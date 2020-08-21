@@ -61,6 +61,7 @@ export {
 } from './exception/exception-tokens';
 
 export {
+    Panic,
     panic,
     rethrow,
     rethrows,

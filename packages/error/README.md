@@ -36,15 +36,15 @@ in the repository.
     — throws a provided error.
     * `throws<E extends Error>(message: string, context: ExceptionContext = {}): never`
     — creates and throws an `Exception` with the given `message` and `context`.
-    * `panic<E extends Error>(error: E): () => never`
-    — creates a function that throws a provided error.
-    * `panic<E extends Error>(message: string, context: ExceptionContext = {}): () => never`
-    — creates a function that throws an `Exception` with the given `message` and `context`.
     * `rethrows(previous: Error, message: string, context: ExceptionContext = {}): never`
     — creates and throws an exception with the given `message`, `context`, and `previous` error.
     * `rethrow(message: string, context: ExceptionContext = {}): (previous: Error) => never`
-    — creates a function that throws an exception with the given `message`, `context`, 
-    and `previous` error.
+    — creates a function that throws an exception with the given `message`, `context`, and `previous` error.
+    * `type Panic = () => never` — a type for functions that throw an error when executed: 
+        * `panic<E extends Error>(error: E): Panic`
+        — creates a function that throws a provided error.
+        * `panic<E extends Error>(message: string, context: ExceptionContext = {}): Panic`
+        — creates a function that throws an `Exception` with the given `message` and `context`.
 * [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error):
     * `error(message?: string): Error` 
     — instantiates a new `Error`.

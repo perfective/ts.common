@@ -139,7 +139,10 @@ export = {
         'no-tabs': 'error',
         'no-ternary': 'off',
         'no-trailing-spaces': 'warn',
-        'no-underscore-dangle': 'error',
+        'no-underscore-dangle': ['error', {
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
+            allowFunctionParams: false,
+        }],
         'no-unneeded-ternary': 'warn',
         'no-whitespace-before-property': 'warn',
         'nonblock-statement-body-position': ['warn', 'below'],

@@ -19,6 +19,7 @@ export = {
         'jest/no-hooks': 'off',
         'jest/no-identical-title': 'error',
         'jest/no-if': 'error',
+        'jest/no-interpolation-in-snapshots': 'error',
         'jest/no-jasmine-globals': 'warn',
         'jest/no-jest-import': 'error',
         'jest/no-large-snapshots': 'error',

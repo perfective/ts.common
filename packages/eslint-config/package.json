@@ -49,6 +49,6 @@
         "eslint-plugin-rxjs": "^0.0.2-beta.28",
         "eslint-plugin-sonarjs": "^0.5.0",
         "eslint-plugin-unicorn": "^21.0.0",
-        "tslint": "^6.1.2"
+        "tslint": "^6.1.3"
     }
 }

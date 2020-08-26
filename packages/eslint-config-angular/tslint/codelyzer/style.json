@@ -2,7 +2,6 @@
     "rules": {
         "angular-whitespace": false,
         "import-destructuring-spacing": true,
-        "pipe-prefix": [true, "pf"],
         "prefer-inline-decorator": false
     }
 }

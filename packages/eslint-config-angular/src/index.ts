@@ -6,6 +6,7 @@ export = {
     ],
     extends: [
         '@perfective/eslint-config',
+        './angular/rules',
         './angular/functionality',
         './angular/maintainability',
         './angular/style',

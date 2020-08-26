@@ -17,5 +17,8 @@ export = {
         '@angular-eslint/no-inputs-metadata-property': 'error',
         '@angular-eslint/no-outputs-metadata-property': 'error',
         '@angular-eslint/no-queries-metadata-property': 'error',
+        '@angular-eslint/pipe-prefix': ['error', {
+            prefixes: ['pf'],
+        }],
     },
 };

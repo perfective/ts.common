@@ -14,8 +14,7 @@ export function throws<E extends Error>(
     context: ExceptionContext = {},
 ): never {
     if (isError(error)) {
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal, rxjs/throw-error -- fails without an error type
-        throw error;
+        throw error as Error;
     }
     throw new Exception(exceptionMessage(error, tokens), context, null);
 }

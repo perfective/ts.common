@@ -64,17 +64,11 @@ export = {
         }],
         '@typescript-eslint/method-signature-style': ['warn', 'property'],
         '@typescript-eslint/naming-convention': ['error', {
-            selector: 'enumMember',
+            selector: ['enumMember', 'typeLike'],
             format: ['StrictPascalCase'],
         }, {
-            selector: 'variableLike',
+            selector: ['memberLike', 'variableLike'],
             format: ['strictCamelCase'],
-        }, {
-            selector: 'memberLike',
-            format: ['strictCamelCase'],
-        }, {
-            selector: 'typeLike',
-            format: ['StrictPascalCase'],
         }],
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-confusing-non-null-assertion': 'warn',
@@ -91,6 +85,9 @@ export = {
         '@typescript-eslint/no-extraneous-class': 'error',
         '@typescript-eslint/no-floating-promises': 'error',
         '@typescript-eslint/no-for-in-array': 'error',
+        '@typescript-eslint/no-implicit-any-catch': ['error', {
+            allowExplicitAny: false,
+        }],
         '@typescript-eslint/no-implied-eval': 'error',
         '@typescript-eslint/no-inferrable-types': 'off',
         // Allow for generic types like "Nullary<void>" (as "(value: T) => void" declaration is already valid)
@@ -124,6 +121,7 @@ export = {
         }],
         '@typescript-eslint/no-var-requires': 'error',
         '@typescript-eslint/prefer-as-const': 'warn',
+        '@typescript-eslint/prefer-enum-initializers': 'error',
         '@typescript-eslint/prefer-for-of': 'error',
         '@typescript-eslint/prefer-function-type': 'warn',
         '@typescript-eslint/prefer-includes': 'warn',

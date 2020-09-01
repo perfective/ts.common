@@ -4,13 +4,14 @@ The `@perfective/real` package declares types and functions to work with real nu
 including the JavaScript
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[Number]` class.
 
+
 == Number
 
-* TypeGuards:
+* Type guards:
 ** `isNumber<T>(value: number | T): value is number`
 ** `isNotNumber<T>(value: number | T): value is T`
 +
-* `Number` methods:
+* `Number` methods:
 ** `exponential(fraction: Digits): Unary<number, string>`
 — returns a function that
 returns a number in the exponential notation with the given digits after the decimal point.
@@ -20,6 +21,13 @@ returns a number in the fixed-point notation with the given digits after the dec
 ** `precision(precision: Precision): Unary<number, string>`
 — returns a function that
 returns a number in the exponential or fixed-point notation with the given precision.
++
+* Arithmetic functions:
+** `sum(augend: number, addend: number): number`
+** `difference(minuend: number, subtrahend: number): number`
+** `product(multiplier: number, multiplicand: number): number`
+** `quotient(dividend: number, divisor: number): number`
+** `remainder(dividend: number, divisor: number): number`.
 
 [WARNING]
 ====
@@ -28,6 +36,7 @@ while `Digit` is an integer from `0` to `20`,
 and `Precision` is an integer from `1` to `21`.
 So passing digits or precision over 15 requires careful consideration and thorough testing.
 ====
+
 
 == Integer
 
@@ -43,6 +52,7 @@ when an integer is expected.
 ** `isNonPositiveInteger(value: number): boolean`
 ** `isNegativeInteger(value: number): boolean`
 
+
 == Base (Radix)
 
 The `parseFloat()`, `parseInt()`, and `Number.prototype.toString()` functions are combined
@@ -55,15 +65,15 @@ into polymorphic shortcuts for readability:
 * `binary(value: Integer): string`
 — returns a binary representation of an integer.
 * `binary(value: string): Integer`
-— parses a binary string into an integer.
+— parses a binary string into an integer.
 * `octal(value: Integer): string`
 — returns an octal representation of an integer.
 * `octal(value: string): Integer`
-— parses an octal string into an integer.
+— parses an octal string into an integer.
 * `hexadecimal(value: Integer): string`
 — returns a hexadecimal representation of an integer.
 * `hexadecimal(value: string): Integer`
-— parses a hexadecimal string into an integer.
+— parses a hexadecimal string into an integer.
 
 [NOTE]
 ====
@@ -85,6 +95,7 @@ and `to()` method does not require a type parameter.
 and `to()` method requires a type parameter to compile.
 ====
 
+
 == Order
 
 * Predicates:
@@ -94,6 +105,7 @@ and `to()` method requires a type parameter to compile.
 ** `isGreaterThanOrEqualTo(value: number): Predicate<number>`
 ** `isLessThan(value: number): Predicate<number>`
 ** `isLessThanOrEqualTo(value: number): Predicate<number>`
++
 * Sorting:
 ** `ascending(a: number, b: number): number`
 ** `descending(a: number, b: number): number`
@@ -101,7 +113,7 @@ and `to()` method requires a type parameter to compile.
 
 == Interval
 
-`Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
+`Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
 
 * Unit functions:
 ** `interval(a: number, b: number): Interval`

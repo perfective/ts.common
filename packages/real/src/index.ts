@@ -8,6 +8,14 @@ export {
 } from './interval/interval';
 
 export {
+    difference,
+    product,
+    quotient,
+    remainder,
+    sum,
+} from './math/arithmetic';
+
+export {
     binary,
     decimal,
     hexadecimal,

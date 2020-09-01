@@ -9,13 +9,19 @@ on the Github.
 
 ## Number
 
-* TypeGuards:
+* Type guards:
     * `isNumber<T>(value: number | T): value is number`
     * `isNotNumber<T>(value: number | T): value is T`
-* `Number` methods:
+* `Number` methods:
     * `exponential(fraction: Digits): Unary<number, string>`
     * `fixed(fraction: Digits): Unary<number, string>`
     * `precision(precision: Precision): Unary<number, string>`
+* Arithmetic functions:
+    * `sum(augend: number, addend: number): number`
+    * `difference(minuend: number, subtrahend: number): number`
+    * `product(multiplier: number, multiplicand: number): number`
+    * `quotient(dividend: number, divisor: number): number`
+    * `remainder(dividend: number, divisor: number): number`
 
 ## Integer
 
@@ -63,7 +69,7 @@ into polymorphic shortcuts for readability:
 ## Interval
 
 * Types:
-    * `Interval` — represents a range from `Interval.min` to `Interval.max`.
+    * `Interval` represents a range from `Interval.min` to `Interval.max`.
 * Unit functions:
     * `interval(a: number, b: number): Interval`
     * `intervalFromPair(pair: readonly [number, number]): Interval`

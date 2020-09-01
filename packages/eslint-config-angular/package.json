@@ -1,6 +1,6 @@
 {
     "name": "@perfective/eslint-config-angular",
-    "version": "0.4.0-alpha",
+    "version": "0.4.0-alpha.1",
     "description": "ESLint shareable rules configuration for Angular",
     "keywords": [
         "angular",
@@ -20,7 +20,8 @@
     "homepage": "https://github.com/perfective/js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/perfective/js"
+        "url": "https://github.com/perfective/js",
+        "directory": "packages/eslint-config-angular"
     },
     "license": "MIT",
     "main": "dist/index.js",
@@ -40,7 +41,7 @@
         "lint:tslint": "tslint --fix --project ./tsconfig.lint.json"
     },
     "dependencies": {
-        "@perfective/eslint-config": "^0.7.0-alpha"
+        "@perfective/eslint-config": "^0.7.0-alpha.1"
     },
     "peerDependencies": {
         "@angular-eslint/eslint-plugin": "^0.2.0-beta.1",

@@ -38,6 +38,7 @@ export {
     isNotEmpty,
     isNotString,
     isString,
+    length,
     stringFromCharCode,
     stringFromCodePoint,
 } from './string/string';

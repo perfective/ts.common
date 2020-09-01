@@ -14,6 +14,10 @@ export function isNotEmpty(value: string): boolean {
     return value !== '';
 }
 
+export function length(value: string): number {
+    return value.length;
+}
+
 export type Utf16CodeUnit = number;
 
 export function stringFromCharCode(...codes: Utf16CodeUnit[]): string {

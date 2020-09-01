@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty, isNotString, isString, stringFromCharCode, stringFromCodePoint } from './string';
+import { isEmpty, isNotEmpty, isNotString, isString, length, stringFromCharCode, stringFromCodePoint } from './string';
 
 describe('isString', () => {
     it('returns true when value is a string', () => {
@@ -63,6 +63,15 @@ describe('isNotEmpty', () => {
         expect(isNotEmpty('undefined')).toBe(true);
         expect(isNotEmpty('[]')).toBe(true);
         expect(isNotEmpty('{}')).toBe(true);
+    });
+});
+
+describe('length', () => {
+    it('returns a string length', () => {
+        expect(length(''))
+            .toStrictEqual(0);
+        expect(length('ABC'))
+            .toStrictEqual(3);
     });
 });
 

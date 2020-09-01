@@ -3,6 +3,7 @@
 == v0.4.0 (next)
 
 * Compiled `ES6` and `CommonsJS` modules.
+* Add arithmetic functions: `sum`, `difference`, `product`, `quotient`, and `remainder`.
 
 == v0.3.0
 

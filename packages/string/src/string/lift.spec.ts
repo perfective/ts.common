@@ -221,11 +221,9 @@ describe('lastIndexOf', () => {
 });
 
 describe('lowerCase', () => {
-    describe('lowerCase()', () => {
-        it('returns a string with all characters in lower case', () => {
-            expect(lowerCase()('Example String'))
-                .toStrictEqual('example string');
-        });
+    it('returns a string with all characters in lower case', () => {
+        expect(lowerCase('Example String'))
+            .toStrictEqual('example string');
     });
 });
 
@@ -477,19 +475,15 @@ describe('startsWith', () => {
 });
 
 describe('trim', () => {
-    describe('trim()', () => {
-        it('removes the leading and trailing white spaces, line terminators from a string', () => {
-            expect(trim()(' \tabc\u00A0\n'))
-                .toStrictEqual('abc');
-        });
+    it('removes the leading and trailing white spaces, line terminators from a string', () => {
+        expect(trim(' \tabc\u00A0\n'))
+            .toStrictEqual('abc');
     });
 });
 
 describe('upperCase', () => {
-    describe('upperCase()', () => {
-        it('returns a string with all characters in upper case', () => {
-            expect(upperCase()('Example String'))
-                .toStrictEqual('EXAMPLE STRING');
-        });
+    it('returns a string with all characters in upper case', () => {
+        expect(upperCase('Example String'))
+            .toStrictEqual('EXAMPLE STRING');
     });
 });

@@ -34,8 +34,8 @@ export function lastIndexOf(search: string, from?: number): Unary<string, number
     return (value: string): number => value.lastIndexOf(search, from);
 }
 
-export function lowerCase(): Unary<string, string> {
-    return (value: string): string => value.toLowerCase();
+export function lowerCase(value: string): string {
+    return value.toLowerCase();
 }
 
 export type UnicodeCanonicalEquivalenceNormalization = 'NFC' | 'NFD';
@@ -87,10 +87,10 @@ export function startsWith(search: string, from: number = 0): Unary<string, bool
     return (value: string): boolean => value.startsWith(search, from);
 }
 
-export function trim(): Unary<string, string> {
-    return (value: string): string => value.trim();
+export function trim(value: string): string {
+    return value.trim();
 }
 
-export function upperCase(): Unary<string, string> {
-    return (value: string): string => value.toUpperCase();
+export function upperCase(value: string): string {
+    return value.toUpperCase();
 }

@@ -1,5 +1,7 @@
 export {
     concatenated,
+    isArray,
+    isNotArray,
     length,
 } from './array/array';
 

@@ -1,5 +1,6 @@
 export {
     concatenated,
+    length,
 } from './array/array';
 
 export {

@@ -1,14 +1,16 @@
 import { Unary } from '@perfective/fp';
 
+import { CodePoint, Utf16CodeUnit } from './string';
+
 export function charAt(index: number): Unary<string, string> {
     return (value: string): string => value.charAt(index);
 }
 
-export function charCodeAt(index: number): Unary<string, number> {
+export function charCodeAt(index: number): Unary<string, Utf16CodeUnit> {
     return (value: string): number => value.charCodeAt(index);
 }
 
-export function codePointAt(position: number): Unary<string, number | undefined> {
+export function codePointAt(position: number): Unary<string, CodePoint | undefined> {
     return (value: string): number | undefined => value.codePointAt(position);
 }
 

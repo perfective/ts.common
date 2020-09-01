@@ -32,8 +32,12 @@ export {
 } from './string/output';
 
 export {
+    CodePoint,
+    Utf16CodeUnit,
     isEmpty,
     isNotEmpty,
     isNotString,
     isString,
+    stringFromCharCode,
+    stringFromCodePoint,
 } from './string/string';

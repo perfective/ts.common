@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty, isNotString, isString } from './string';
+import { isEmpty, isNotEmpty, isNotString, isString, stringFromCharCode, stringFromCodePoint } from './string';
 
 describe('isString', () => {
     it('returns true when value is a string', () => {
@@ -63,5 +63,19 @@ describe('isNotEmpty', () => {
         expect(isNotEmpty('undefined')).toBe(true);
         expect(isNotEmpty('[]')).toBe(true);
         expect(isNotEmpty('{}')).toBe(true);
+    });
+});
+
+describe('stringFromCharCode', () => {
+    it('creates a string from the given UTF-16 code units', () => {
+        expect(stringFromCharCode(65, 66, 67))
+            .toStrictEqual('ABC');
+    });
+});
+
+describe('stringFromCodePoint', () => {
+    it('creates a string from the given code points', () => {
+        expect(stringFromCodePoint(0x1F1FA, 0x1F1F8))
+            .toStrictEqual('🇺🇸');
     });
 });

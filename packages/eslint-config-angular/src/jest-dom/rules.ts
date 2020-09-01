@@ -6,6 +6,7 @@ export = {
         'jest-dom/prefer-focus': 'warn',
         'jest-dom/prefer-required': 'warn',
         'jest-dom/prefer-to-have-attribute': 'warn',
+        'jest-dom/prefer-to-have-style': 'warn',
         'jest-dom/prefer-to-have-text-content': 'warn',
     },
 };

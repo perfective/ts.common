@@ -1,13 +1,15 @@
+import { Statement } from '@perfective/match';
+
 import { match } from './match';
 import { when } from './when';
 
-const roots = [
+const roots: Statement<number, number>[] = [
     when(1.41).then(() => 2),
     when(1.73).then(() => 3),
     when(2.23).then(() => 5),
 ];
 
-const powers = [
+const powers: Statement<number, number>[] = [
     when<number>(v => v < 0).then(v => v ** 2),
     when<number>(v => v === 0).then(0),
     when<number>(v => v > 0).then(v => v ** 3),

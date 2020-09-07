@@ -4,6 +4,7 @@ import { syntaxError } from '../error/syntax-error';
 import { typeError } from '../error/type-error';
 
 import {
+    Exception,
     causedBy,
     chainStack,
     exception,
@@ -15,8 +16,8 @@ import {
 } from './exception';
 
 describe('exception', () => {
-    const error = exception('User not found');
-    const contextError = exception('User {{id}} not found', {
+    const error: Exception = exception('User not found');
+    const contextError: Exception = exception('User {{id}} not found', {
         id: '42',
     }, {
         user: {},
@@ -54,8 +55,8 @@ describe('exception', () => {
 });
 
 describe('causedBy', () => {
-    const chain = causedBy(error('Resource not found'), 'API request failed');
-    const contextChain = causedBy(error('Resource not found'), '{{api}} request failed', {
+    const chain: Exception = causedBy(error('Resource not found'), 'API request failed');
+    const contextChain: Exception = causedBy(error('Resource not found'), '{{api}} request failed', {
         api: 'User API',
     }, {
         user: {
@@ -128,7 +129,7 @@ describe('causedBy', () => {
 
 describe('unknownError', () => {
     it('returns the passed value as is when the value is an Error', () => {
-        const error = exception('Failure');
+        const error: Exception = exception('Failure');
 
         expect(unknownError(error) === error)
             .toStrictEqual(true);

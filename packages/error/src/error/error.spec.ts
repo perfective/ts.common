@@ -47,14 +47,14 @@ describe('errorOutput', () => {
 
 describe('errorStack', () => {
     it('returns stack when Error.stack property present', () => {
-        const error = new Error('Stack');
+        const error: Error = new Error('Stack');
 
         expect(stack(error))
             .toMatch('Error: Stack\n    at Object.<anonymous>');
     });
 
     it('returns message with "at <unknown>" stack, when Error.stack property is undefined', () => {
-        const error = new Error('No Stack');
+        const error: Error = new Error('No Stack');
         error.stack = undefined;
 
         expect(stack(error))

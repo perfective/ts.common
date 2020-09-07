@@ -46,6 +46,17 @@ export = {
             // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             lib: 'never',
         }],
+        // Using the established defaults in typescript-eslint v3.x
+        '@typescript-eslint/typedef': ['error', {
+            arrayDestructuring: false,
+            arrowParameter: false,
+            memberVariableDeclaration: true,
+            objectDestructuring: false,
+            parameter: true,
+            propertyDeclaration: true,
+            variableDeclaration: false,
+            variableDeclarationIgnoreFunction: false,
+        }],
         // Allow uppercase in describe() as it can be used for the class name in PascalCase
         'jest/lowercase-name': ['error', {
             ignore: ['describe'],
@@ -56,12 +67,6 @@ export = {
             onlyCamelCase: false,
         }],
         'unicorn/prevent-abbreviations': ['error', {
-            /* eslint-disable unicorn/prevent-abbreviations -- disable check for common abbreviations */
-            replacements: {
-                db: false,
-                env: false,
-            },
-            /* eslint-enable unicorn/prevent-abbreviations */
             extendDefaultWhitelist: true,
             checkDefaultAndNamespaceImports: true,
             checkShorthandImports: false,

@@ -42,7 +42,7 @@ describe('identity', () => {
 
     describe('run', () => {
         it('runs a given procedure', () => {
-            let a = 1;
+            let a: number = 1;
             // eslint-disable-next-line no-return-assign -- testing a procedure
             identity(2.71).run(v => a += v);
 

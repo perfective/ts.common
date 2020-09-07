@@ -6,7 +6,7 @@ import { ExceptionTokens } from '../exception/exception-tokens';
 
 export type Panic = () => never;
 
-export function throws<E extends Error>(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
+export function throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
 export function throws<E extends Error>(error: E | string): never;
 export function throws<E extends Error>(
     error: E | string,
@@ -19,11 +19,7 @@ export function throws<E extends Error>(
     throw new Exception(exceptionMessage(error, tokens), context, null);
 }
 
-export function panic<E extends Error>(
-    message: string,
-    tokens?: ExceptionTokens,
-    context?: ExceptionContext,
-): Panic;
+export function panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic;
 export function panic<E extends Error>(error: E | string): Panic;
 export function panic<E extends Error>(
     error: E | string,

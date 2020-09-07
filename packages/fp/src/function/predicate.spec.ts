@@ -1,7 +1,7 @@
 import { all, atLeast, atMost, either, exactly, is, isNot, neither, not } from './predicate';
 
-const list = [2.71, 3.14];
-const irrational = {
+const list: number[] = [2.71, 3.14];
+const irrational: Record<string, number> = {
     euler: 2.71,
     pi: 3.14,
 };

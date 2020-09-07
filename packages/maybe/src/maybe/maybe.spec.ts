@@ -334,7 +334,7 @@ describe('just', () => {
     });
 
     describe('run', () => {
-        let a = 2.71;
+        let a: number = 2.71;
 
         it('keeps the present value the same', () => {
             // eslint-disable-next-line no-return-assign -- testing a procedure
@@ -514,7 +514,7 @@ describe('nothing', () => {
     });
 
     describe('run', () => {
-        let a = 2.71;
+        let a: number = 2.71;
 
         it('keeps nothing the same', () => {
             // eslint-disable-next-line no-return-assign -- testing a procedure
@@ -694,7 +694,7 @@ describe('nil', () => {
     });
 
     describe('run', () => {
-        let a = 2.71;
+        let a: number = 2.71;
 
         it('keeps nil the same', () => {
             // eslint-disable-next-line no-return-assign -- testing a procedure

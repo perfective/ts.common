@@ -65,7 +65,7 @@ export function chainStack(error: Error): string {
 }
 
 export function fault(error: Error): Error {
-    const errors = unchained(error);
+    const errors: Error[] = unchained(error);
     return errors[errors.length - 1];
 }
 

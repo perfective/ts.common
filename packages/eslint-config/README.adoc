@@ -102,6 +102,7 @@ There is no `community` edition of the TSLint config.
 == Roadmap
 
 * Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
+* Enable `@typescript-eslint/consistent-type-imports` with `prefer: 'type-imports'` option.
 * Research `link:https://github.com/freaktechnik/eslint-plugin-array-func[eslint-plugin-array-func]`.
 * Research `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`.
 * Research `link:https://github.com/lydell/eslint-plugin-simple-import-sort[eslint-plugin-simple-import-sort]`.

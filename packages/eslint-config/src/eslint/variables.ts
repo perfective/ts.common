@@ -11,9 +11,7 @@ export = {
         'no-undef-init': 'warn',
         'no-undefined': 'off',
         'no-unused-vars': ['error', {
-            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             args: 'after-used',
-            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             argsIgnorePattern: '^_',
         }],
         'no-use-before-define': ['error', {

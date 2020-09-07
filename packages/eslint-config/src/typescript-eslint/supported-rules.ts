@@ -15,6 +15,11 @@ export = {
             objectLiteralTypeAssertions: 'allow',
         }],
         '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
+        '@typescript-eslint/consistent-type-imports': ['warn', {
+            // TODO: Switch to "type-imports" as soon as conflict with "no-duplicate-imports" can be resolved
+            prefer: 'no-type-imports',
+            disallowTypeAnnotations: true,
+        }],
         '@typescript-eslint/explicit-function-return-type': ['error', {
             allowConciseArrowFunctionExpressionsStartingWithVoid: true,
         }],
@@ -78,7 +83,6 @@ export = {
         }],
         '@typescript-eslint/no-explicit-any': ['error', {
             fixToUnknown: false,
-            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             ignoreRestArgs: false,
         }],
         '@typescript-eslint/no-extra-non-null-assertion': 'warn',
@@ -116,7 +120,6 @@ export = {
         '@typescript-eslint/no-unsafe-member-access': 'error',
         '@typescript-eslint/no-unsafe-return': 'error',
         '@typescript-eslint/no-unused-vars-experimental': ['error', {
-            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             ignoreArgsIfArgsAfterAreUsed: true,
         }],
         '@typescript-eslint/no-var-requires': 'error',
@@ -165,7 +168,14 @@ export = {
         }],
         '@typescript-eslint/type-annotation-spacing': 'warn',
         '@typescript-eslint/typedef': ['error', {
+            arrayDestructuring: true,
             arrowParameter: false,
+            memberVariableDeclaration: true,
+            objectDestructuring: true,
+            parameter: true,
+            propertyDeclaration: true,
+            variableDeclaration: true,
+            variableDeclarationIgnoreFunction: false,
         }],
         '@typescript-eslint/unbound-method': 'error',
         '@typescript-eslint/unified-signatures': 'error',

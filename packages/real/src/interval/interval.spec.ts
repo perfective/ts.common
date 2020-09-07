@@ -8,7 +8,7 @@ import {
     isInRightOpenInterval,
 } from './interval';
 
-const range = interval(2.71, 3.14);
+const range: Interval = interval(2.71, 3.14);
 
 describe('interval', () => {
     it('creates an Interval from two numbers', () => {

@@ -66,6 +66,11 @@ export = {
             checkProperties: true,
             checkVariables: true,
             checkFilenames: true,
+            replacements: {
+                args: false,
+                db: false,
+                env: false,
+            },
         }],
         'unicorn/string-content': 'off',
         'unicorn/throw-new-error': 'warn',

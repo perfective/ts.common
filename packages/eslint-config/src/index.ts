@@ -10,7 +10,6 @@ export = {
         sourceType: 'module',
         warnOnUnsupportedTypeScriptVersion: true,
     },
-    // eslint-disable-next-line unicorn/prevent-abbreviations -- property name
     env: {
         'es6': true,
         'jest/globals': true,
@@ -74,11 +73,13 @@ export = {
     overrides: [
         {
             files: ['*.spec.ts'],
-            // eslint-disable-next-line unicorn/prevent-abbreviations -- property name
             env: {
                 jest: true,
             },
             rules: {
+                '@typescript-eslint/ban-ts-comment': ['error', {
+                    'ts-expect-error': 'allow-with-description',
+                }],
                 '@typescript-eslint/init-declarations': 'off',
                 'arrow-body-style': ['error', 'as-needed'],
                 'max-lines': 'off',

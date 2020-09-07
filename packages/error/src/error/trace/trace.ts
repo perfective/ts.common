@@ -26,7 +26,7 @@ const tracers: Tracer[] = [
 ];
 
 export function trace(line: string): Trace {
-    const traces = tracers
+    const traces: Trace[] = tracers
         .map(tracer => tracer(line))
         .filter((trace: Trace | null): trace is Trace => trace !== null);
     if (traces.length > 0) {
@@ -37,10 +37,10 @@ export function trace(line: string): Trace {
     };
 }
 
-const objectTracePattern = /^([\w$]+)\.?([\w$<>]+) \((.*)(?::(\d+))(?::(\d+))\)$/u;
+const objectTracePattern: RegExp = /^([\w$]+)\.?([\w$<>]+) \((.*)(?::(\d+))(?::(\d+))\)$/u;
 
 function objectTrace(line: string): Trace | null {
-    const matches = objectTracePattern.exec(line);
+    const matches: RegExpExecArray | null = objectTracePattern.exec(line);
     if (matches !== null) {
         return {
             class: matches[1],
@@ -53,10 +53,10 @@ function objectTrace(line: string): Trace | null {
     return null;
 }
 
-const functionTracePattern = /^([\w<>]+) \((.*)(?::(\d+))(?::(\d+))\)$/u;
+const functionTracePattern: RegExp = /^([\w<>]+) \((.*)(?::(\d+))(?::(\d+))\)$/u;
 
 function functionTrace(line: string): Trace | null {
-    const matches = functionTracePattern.exec(line);
+    const matches: RegExpExecArray | null = functionTracePattern.exec(line);
     if (matches !== null) {
         return {
             method: matches[1],
@@ -68,10 +68,10 @@ function functionTrace(line: string): Trace | null {
     return null;
 }
 
-const fileTracePattern = /^(.*)(?::(\d+))(?::(\d+))$/u;
+const fileTracePattern: RegExp = /^(.*)(?::(\d+))(?::(\d+))$/u;
 
 function fileTrace(line: string): Trace | null {
-    const matches = fileTracePattern.exec(line);
+    const matches: RegExpExecArray | null = fileTracePattern.exec(line);
     if (matches !== null) {
         return {
             filename: matches[1],
@@ -82,10 +82,10 @@ function fileTrace(line: string): Trace | null {
     return null;
 }
 
-const promiseTracePattern = /^new (\w+) \(([\w<>]+)\)$/u;
+const promiseTracePattern: RegExp = /^new (\w+) \(([\w<>]+)\)$/u;
 
 function promiseTrace(line: string): Trace | null {
-    const matches = promiseTracePattern.exec(line);
+    const matches: RegExpExecArray | null = promiseTracePattern.exec(line);
     if (matches !== null) {
         return {
             class: matches[1],
@@ -95,10 +95,10 @@ function promiseTrace(line: string): Trace | null {
     return null;
 }
 
-const traceLinePattern = /^ {4}at (.*)$/u;
+const traceLinePattern: RegExp = /^ {4}at (.*)$/u;
 
 function traceLine(line: string): string | null {
-    const trace = traceLinePattern.exec(line);
+    const trace: RegExpExecArray | null = traceLinePattern.exec(line);
     if (trace !== null) {
         return trace[1];
     }

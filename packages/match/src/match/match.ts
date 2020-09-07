@@ -10,7 +10,7 @@ export class Match<T> {
     }
 
     public that<U>(...statements: Statement<T, U>[]): Maybe<U> {
-        const value = valueOf(this.value);
+        const value: T = valueOf(this.value);
         for (const statement of statements) {
             if (statement.condition(value)) {
                 return just(statement.evaluate(value));

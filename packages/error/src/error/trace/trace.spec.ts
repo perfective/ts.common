@@ -4,7 +4,7 @@ import { Trace, stackTrace, trace } from './trace';
 
 describe('stackTrace', () => {
     it('parses an error stack into Trace stack', () => {
-        const example = error('Failure');
+        const example: Error = error('Failure');
         example.stack = [
             'Error: Failure',
             '    at Object.exception (/error/src/exception/exception.ts:18:12)',

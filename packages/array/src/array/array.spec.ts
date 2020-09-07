@@ -1,10 +1,19 @@
-import { concatenated, isArray, isEmpty, isNotArray, isNotEmpty, length } from './array';
+import { concatenated, flatten, isArray, isEmpty, isNotArray, isNotEmpty, length } from './array';
 
 describe('concatenated', () => {
-    it('creates a new array from a list of array', () => {
+    it('creates a new array from a list of arrays', () => {
         expect(concatenated([]))
             .toStrictEqual([]);
         expect(concatenated(['a', 'b', 'c'], ['d', 'e'], ['f']))
+            .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+    });
+});
+
+describe('flatten', () => {
+    it('creates a new array from an array of arrays', () => {
+        expect(flatten([]))
+            .toStrictEqual([]);
+        expect(flatten([['a', 'b', 'c'], ['d', 'e'], ['f']]))
             .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
     });
 });

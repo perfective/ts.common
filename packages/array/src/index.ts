@@ -1,5 +1,6 @@
 export {
     concatenated,
+    flatten,
     isArray,
     isEmpty,
     isNotArray,

@@ -2,6 +2,10 @@ export function concatenated<T>(initial: T[], ...arrays: T[][]): T[] {
     return arrays.reduce((result, array) => result.concat(array), initial);
 }
 
+export function flatten<T>(arrays: T[][]): T[] {
+    return arrays.reduce((result, array) => result.concat(array), []);
+}
+
 export function isArray<T, V = unknown>(value: T[] | V): value is T[] {
     return Array.isArray(value);
 }

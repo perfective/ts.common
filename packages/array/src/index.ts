@@ -15,9 +15,38 @@ export {
 } from './array/element';
 
 export {
+    Compare,
+    Reducer,
     concat,
+    copyWithin,
+    entries,
+    every,
+    fill,
+    filter,
+    find,
+    findIndex,
+    forEach,
     includes,
+    indexOf,
+    join,
+    keys,
+    lastIndexOf,
+    map,
+    pop,
+    push,
+    reduce,
+    reduceRight,
+    reduceRightTo,
+    reduceTo,
+    reverse,
+    shift,
     slice,
+    some,
+    sort,
+    splice,
+    spliceWith,
+    unshift,
+    values,
 } from './array/lift';
 
 export {

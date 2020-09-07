@@ -48,6 +48,6 @@
         "@angular-eslint/eslint-plugin-template": "^0.3.0-beta.1",
         "codelyzer": "^5.2.2",
         "eslint-plugin-jest-dom": "^3.2.2",
-        "eslint-plugin-rxjs-angular": "^0.0.1-beta.5"
+        "eslint-plugin-rxjs-angular": "^0.0.2-beta.6"
     }
 }

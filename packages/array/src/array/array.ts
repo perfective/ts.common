@@ -10,6 +10,14 @@ export function isNotArray<T, V = unknown>(value: T[] | V): value is V {
     return !Array.isArray(value);
 }
 
+export function isEmpty<T>(array: T[]): boolean {
+    return array.length === 0;
+}
+
+export function isNotEmpty<T>(array: T[]): boolean {
+    return array.length > 0;
+}
+
 export function length<T>(array: T[]): number {
     return array.length;
 }

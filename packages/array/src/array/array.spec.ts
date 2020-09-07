@@ -1,4 +1,4 @@
-import { concatenated, isArray, isNotArray, length } from './array';
+import { concatenated, isArray, isEmpty, isNotArray, isNotEmpty, length } from './array';
 
 describe('concatenated', () => {
     it('creates a new array from a list of array', () => {
@@ -29,6 +29,30 @@ describe('isNotArray', () => {
 
     it('returns false when value is an array', () => {
         expect(isNotArray(['0', 0]))
+            .toStrictEqual(false);
+    });
+});
+
+describe('isEmpty', () => {
+    it('returns true when an array is empty', () => {
+        expect(isEmpty([]))
+            .toStrictEqual(true);
+    });
+
+    it('returns false when an array is not empty', () => {
+        expect(isEmpty([0]))
+            .toStrictEqual(false);
+    });
+});
+
+describe('isNotEmpty', () => {
+    it('returns true when an array is not empty', () => {
+        expect(isNotEmpty([false]))
+            .toStrictEqual(true);
+    });
+
+    it('returns false when an array is empty', () => {
+        expect(isNotEmpty([]))
             .toStrictEqual(false);
     });
 });

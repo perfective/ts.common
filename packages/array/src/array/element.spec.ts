@@ -1,4 +1,4 @@
-import { element, first, head, last, tail } from './element';
+import { append, element, first, head, insert, last, prepend, remove, tail } from './element';
 
 describe('head', () => {
     it('returns the first element of a non-empty array', () => {
@@ -104,6 +104,56 @@ describe('last', () => {
         it('returns an empty array when an input array is empty', () => {
             expect(last(3)([]))
                 .toStrictEqual([]);
+        });
+    });
+});
+
+describe('append', () => {
+    describe('append(element)', () => {
+        it('creates a new array with the "element" added to the end of the array', () => {
+            expect(append(3.14)([]))
+                .toStrictEqual([3.14]);
+            expect(append(3.14)([2.71]))
+                .toStrictEqual([2.71, 3.14]);
+        });
+    });
+});
+
+describe('prepend', () => {
+    describe('prepend(element)', () => {
+        it('creates a new array with the "element" added to the beginning of the array', () => {
+            expect(prepend(3.14)([]))
+                .toStrictEqual([3.14]);
+            expect(prepend(3.14)([2.71]))
+                .toStrictEqual([3.14, 2.71]);
+        });
+    });
+});
+
+describe('insert', () => {
+    describe('insert(element, index)', () => {
+        it('creates a new array with the "element" inserted in the given index', () => {
+            expect(insert(3.14, 0)([]))
+                .toStrictEqual([3.14]);
+            expect(insert(3.14, 1)([]))
+                .toStrictEqual([3.14]);
+            expect(insert(3.14, 2)([2.71]))
+                .toStrictEqual([2.71, 3.14]);
+            expect(insert(3.14, 0)([2.71]))
+                .toStrictEqual([3.14, 2.71]);
+        });
+    });
+});
+
+describe('remove', () => {
+    describe('remove(index)', () => {
+        it('creates a new array with removed element in the given "index"', () => {
+            expect(remove(1)([]))
+                .toStrictEqual([]);
+            expect(remove(0)([3.14]))
+                .toStrictEqual([]);
+            expect(remove(1)([2.23, 2.71, 3.14]))
+                .toStrictEqual([2.23, 3.14]);
         });
     });
 });

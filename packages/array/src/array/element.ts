@@ -21,3 +21,32 @@ export function first<T>(count: number = 1): Unary<T[], T[]> {
 export function last<T>(count: number = 1): Unary<T[], T[]> {
     return (array: T[]): T[] => array.slice(-count);
 }
+
+export function append<T>(element: T): Unary<T[], T[]> {
+    return (array: T[]): T[] => [
+        ...array,
+        element,
+    ];
+}
+
+export function prepend<T>(element: T): Unary<T[], T[]> {
+    return (array: T[]): T[] => [
+        element,
+        ...array,
+    ];
+}
+
+export function insert<T>(element: T, index: number): Unary<T[], T[]> {
+    return (array: T[]): T[] => [
+        ...array.slice(0, index),
+        element,
+        ...array.slice(index),
+    ];
+}
+
+export function remove<T>(index: number): Unary<T[], T[]> {
+    return (array: T[]): T[] => [
+        ...array.slice(0, index),
+        ...array.slice(index + 1),
+    ];
+}

@@ -9,10 +9,14 @@ export {
 
 export {
     Element,
+    append,
     element,
     first,
     head,
+    insert,
     last,
+    prepend,
+    remove,
     tail,
 } from './array/element';
 

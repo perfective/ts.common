@@ -24,6 +24,7 @@ export {
     last,
     prepend,
     remove,
+    replace,
     tail,
 } from './array/element';
 

@@ -36,11 +36,19 @@ export function prepend<T>(element: T): Unary<T[], T[]> {
     ];
 }
 
-export function insert<T>(element: T, index: number): Unary<T[], T[]> {
+export function insert<T>(index: number, element: T): Unary<T[], T[]> {
     return (array: T[]): T[] => [
         ...array.slice(0, index),
         element,
         ...array.slice(index),
+    ];
+}
+
+export function replace<T>(index: number, element: T): Unary<T[], T[]> {
+    return (array: T[]): T[] => [
+        ...array.slice(0, index),
+        element,
+        ...array.slice(index + 1),
     ];
 }
 

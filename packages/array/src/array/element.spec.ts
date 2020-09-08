@@ -1,4 +1,4 @@
-import { append, element, first, head, insert, last, prepend, remove, tail } from './element';
+import { append, element, first, head, insert, last, prepend, remove, replace, tail } from './element';
 
 describe('head', () => {
     it('returns the first element of a non-empty array', () => {
@@ -131,16 +131,29 @@ describe('prepend', () => {
 });
 
 describe('insert', () => {
-    describe('insert(element, index)', () => {
+    describe('insert(index, element)', () => {
         it('creates a new array with the "element" inserted in the given index', () => {
-            expect(insert(3.14, 0)([]))
+            expect(insert(0, 3.14)([]))
                 .toStrictEqual([3.14]);
-            expect(insert(3.14, 1)([]))
+            expect(insert(1, 3.14)([]))
                 .toStrictEqual([3.14]);
-            expect(insert(3.14, 2)([2.71]))
+            expect(insert(2, 3.14)([2.71]))
                 .toStrictEqual([2.71, 3.14]);
-            expect(insert(3.14, 0)([2.71]))
+            expect(insert(0, 3.14)([2.71]))
                 .toStrictEqual([3.14, 2.71]);
+        });
+    });
+});
+
+describe('replace', () => {
+    describe('replace(index, element)', () => {
+        it('creates a new array with the given "index" replaced by the "element"', () => {
+            expect(replace(1, 3.14)([]))
+                .toStrictEqual([3.14]);
+            expect(replace(1, 3.14)([1, 2, 3]))
+                .toStrictEqual([1, 3.14, 3]);
+            expect(replace(2, 3.14)([1, 2, 3]))
+                .toStrictEqual([1, 2, 3.14]);
         });
     });
 });

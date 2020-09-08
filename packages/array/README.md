@@ -64,8 +64,10 @@ The `@perfective/array` package provides functions for the standard JS
     — returns an array with an element inserted in the end of the original array.
     * `prepend<T>(element: T): Unary<T[], T[]>`
     — returns an array with an element inserted in the beginning of the original array.
-    * `insert<T>(element: T, index: number): Unary<T[], T[]>`
+    * `insert<T>(index: number, element: T): Unary<T[], T[]>`
     — returns an array with an element inserted into the given `index`.
+    * `replace<T>(index: number, element: T): Unary<T[], T[]>`
+    — returns an array with an element replaced in the given `index`.
     * `remove<T>(index: number): Unary<T[], T[]>`
     — returns an array with an element removed from the given `index`.
     * `concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]>`

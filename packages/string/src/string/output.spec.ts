@@ -7,7 +7,11 @@ describe('output', () => {
     });
 
     it('returns a result of the object toString() method', () => {
-        expect(String(3.14))
+        expect(output(undefined))
+            .toStrictEqual('undefined');
+        expect(output(null))
+            .toStrictEqual('null');
+        expect(output(String(3.14)))
             .toStrictEqual('3.14');
         expect(output(3.14))
             .toStrictEqual('3.14');
@@ -21,11 +25,9 @@ describe('output', () => {
             .toStrictEqual('a,b,c');
         expect(output({}))
             .toStrictEqual('[object Object]');
-        expect(
-            output({
-                a: 'a',
-                b: 'b',
-            }),
-        ).toStrictEqual('[object Object]');
+        expect(output({
+            a: 'a',
+            b: 'b',
+        })).toStrictEqual('[object Object]');
     });
 });

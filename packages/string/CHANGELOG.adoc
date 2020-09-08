@@ -15,6 +15,7 @@
 `endsWith`, `includes`, `indexOf`, `lastIndexOf`, `normalize`, `padEnd`, `padStart`, `repeat`, `replace`, `replaceWith`,
 `search`, `slice`, `startsWith`.
 * Added `length` function.
+* Added support for `null` and `undefined` arguments in the `output` function.
 * Removed unnecessary construction of unary functions: `lowerCase`, `upperCase`, `trim`.
 
 

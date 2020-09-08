@@ -33,7 +33,7 @@ It provides the following functions and additional types.
     * `lastIndexOf(search: string, from?: number): Unary<string, number>`
     * `search(search: RegExp): Unary<string, number | -1>`
 * `Output` — an interface to explicitly require `toString()` method implementation
-    * `output<T extends Output>(value: T | string): string`
+    * `output<T extends Output>(value: T | string | null | undefined): string`
 * `Utf16CodeUnit`:
     * `stringFromCharCode(...codes: Utf16CodeUnit[]): string`
     * `charCodeAt(index: number): Unary<string, Utf16CodeUnit>`

@@ -38,6 +38,7 @@
         "test:verbose": "jest --verbose"
     },
     "dependencies": {
-        "@perfective/fp": "^0.4.0"
+        "@perfective/fp": "^0.4.0",
+        "@perfective/value": "^0.2.0"
     }
 }

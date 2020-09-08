@@ -4,6 +4,9 @@ The `@perfective/string` package works with the standard JS
 [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) type.
 It provides the following functions and additional types.
 
+* Unit functions:
+    * `lines(value: string): string[]`
+    — creates an array from string split by the newline characters.
 * Type guards:
     * `isString<T>(value: T | string): value is string`
     * `isNotString<T>(value: T | string): value is T`

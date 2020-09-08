@@ -1,4 +1,8 @@
 export {
+    lines,
+} from './string/array';
+
+export {
     Replacement,
     UnicodeCanonicalEquivalenceNormalization,
     UnicodeCompatibilityNormalization,

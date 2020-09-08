@@ -3,6 +3,19 @@
 == v0.2.0 (next)
 
 * Compiled `ES6` and `CommonsJS` modules.
+* Added package documentation.
+* Added types:
+** `Compare`,
+** `Reducer`.
+* Added unit functions: `array`, `arrayFromArrayLike`, `arrayFromIterable`, `copy`, `flatten`, `reversed`, and `sorted`.
+* Added type guards: `isArray`/`isNotArray`.
+* Added predicates: `isEmpty`/`isNotEmpty`.
+* Added property function: `length`.
+* Added element functions: `append`/`prepend`, `insert/replace/remove`.
+* Added functions and operators based on `Array.prototype`: `copyWithin`, `entries`, `every`, `fill`, `filter`, `find`,
+`findIndex`, `forEach`, `includes`, `indexOf`, `join`, `keys`, `lastIndexOf`, `map`, `pop`, `push`, `reduce`,
+`reduceTo`, `reduceRight`, `reduceRightTo`, `reverse`, `shift`, `some`, `sort`, `splice`, `spliceWith`, `unshift`,
+and `values`.
 * Added the `flipped()` array to object function.
 
 == v0.1.1

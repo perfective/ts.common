@@ -1,6 +1,76 @@
 # Array
 
-The `@perfective/array` package provides functions to work with the `Array` type.
+The `@perfective/array` package provides functions for the standard JS
+[`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) class:
+
+* Unit functions:
+    * `concatenated<T>(initial: T[], ...arrays: T[][]): T[]`
+    * `flatten<T>(arrays: T[][]): T[]`
+* Type guards:
+    * `isArray<T, V = unknown>(value: T[] | V): value is T[]`
+    * `isNotArray<T, V = unknown>(value: T[] | V): value is V`
+* Predicates:
+    * `isEmpty<T>(array: T[]): boolean`
+    * `isNotEmpty<T>(array: T[]): boolean`
+    * `includes<T>(search: T, from?: number): Predicate<T[]>`
+    * `includedIn<T>(array: T[], from?: number): Predicate<T>`
+    * `every<T>(condition: Predicate<T>): Predicate<T[]>`
+    * `some<T>(condition: Predicate<T>): Predicate<T[]>`
+* Properties:
+    * `length<T>(array: T[]): number`
+* Iterators:
+    * `entries<T>(array: T[]): IterableIterator<[number, T]>`
+    * `keys<T>(array: T[]): IterableIterator<number>`
+    * `values<T>(array: T[]): IterableIterator<T>`
+* Map/Reduce:
+    * `map<T, V>(lift: Unary<T, V>): Unary<T[], V[]>`
+    * `reduce<T, V>(reducer: Reducer<T, V>, initial: V): Unary<T[], V>`
+    * `reduceTo<T>(reducer: Reducer<T, T>): Unary<T[], T>`
+    * `reduceRight<T, V>(reducer: Reducer<T, V>, initial: V): Unary<T[], V>`
+    * `reduceRightTo<T>(reducer: Reducer<T, T>): Unary<T[], T>`
+    * `join<T>(separator: string = ','): Unary<T[], string>`
+* Immutable element operators:
+    * `head<T>(array: T[]): T | undefined`
+    — returns the first (head) element;
+    * `tail<T>(array: T[]): T | undefined`
+    — returns the last (tail) element;
+    * `element<T>(index: number): Unary<T[], T | undefined>`
+    — returns the element by its index;
+    * `find<T>(condition: Predicate<T>): Unary<T[], T | undefined>`
+* Mutable element operators:
+    * `pop<T>(array: T[]): T | undefined`
+    * `push<T>(...items: T[]): Unary<T[], number>`
+    * `shift<T>(array: T[]): T | undefined`
+    * `unshift<T>(...items: T[]): Unary<T[], number>`
+* Index operators:
+    * `findIndex<T>(condition: Predicate<T>): Unary<T[], number | -1>`
+    * `indexOf<T>(search: T, from?: number): Unary<T[], number | -1>`
+    * `lastIndexOf<T>(search: T, from?: number): Unary<T[], number | -1>`
+* Immutable array operators:
+    * `first<T>(count: number = 1): Unary<T[], T[]>`
+    — returns an array of the first `count` of elements.
+    * `last<T>(count: number = 1): Unary<T[], T[]>`
+    — returns an array of the last `count` of elements.
+    * `append<T>(element: T): Unary<T[], T[]>`
+    — returns an array with an element inserted in the end of the original array.
+    * `prepend<T>(element: T): Unary<T[], T[]>`
+    — returns an array with an element inserted in the beginning of the original array.
+    * `insert<T>(element: T, index: number): Unary<T[], T[]>`
+    — returns an array with an element inserted into the given `index`.
+    * `remove<T>(index: number): Unary<T[], T[]>`
+    — returns an array with an element removed from the given `index`.
+    * `concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]>`
+    * `filter<T>(condition: Predicate<T>): Unary<T[], T[]>`
+    * `slice<T>(start?: number, end?: number): Unary<T[], T[]>`
+* Mutable (_in-place_) array operators:
+    * `copyWithin<T>(target: number, start: number = 0, end?: number): Unary<T[], T[]>`
+    * `fill<T>(value: T, start?: number, end?: number): Unary<T[], T[]>`
+    * `reverse<T>(array: T[]): T[]`
+    * `sort<T>(order?: Compare<T>): Unary<T[], T[]>`
+    * `splice<T>(start: number, deleteCount?: number): Unary<T[], T[]>`
+    * `spliceWith<T>(start: number, deleteCount: number, ...items: T[]): Unary<T[], T[]>`
+* Procedures:
+    * `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/array/README.adoc) 
 in the repository.

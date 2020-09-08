@@ -4,8 +4,14 @@ The `@perfective/array` package provides functions for the standard JS
 [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) class:
 
 * Unit functions:
+    * `copy<T>(array: T[]): T[]`
+    — creates a shallow copy of an array
     * `concatenated<T>(initial: T[], ...arrays: T[][]): T[]`
     * `flatten<T>(arrays: T[][]): T[]`
+    * `reversed<T>(array: T[]): T[]`
+    — creates a shallow _reversed_ copy of an array
+    * `sorted<T>(array: T[], order?: Compare<T>): T[]`
+    — creates a shallow _sorted_ copy of an array
 * Type guards:
     * `isArray<T, V = unknown>(value: T[] | V): value is T[]`
     * `isNotArray<T, V = unknown>(value: T[] | V): value is V`
@@ -62,6 +68,7 @@ The `@perfective/array` package provides functions for the standard JS
     * `concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]>`
     * `filter<T>(condition: Predicate<T>): Unary<T[], T[]>`
     * `slice<T>(start?: number, end?: number): Unary<T[], T[]>`
+    * `sorted<T>(order?: Compare<T>): Unary<T[], T[]>`
 * Mutable (_in-place_) array operators:
     * `copyWithin<T>(target: number, start: number = 0, end?: number): Unary<T[], T[]>`
     * `fill<T>(value: T, start?: number, end?: number): Unary<T[], T[]>`

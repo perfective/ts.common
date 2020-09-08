@@ -1,11 +1,14 @@
 export {
     concatenated,
+    copy,
     flatten,
     isArray,
     isEmpty,
     isNotArray,
     isNotEmpty,
     length,
+    reversed,
+    sorted,
 } from './array/array';
 
 export {

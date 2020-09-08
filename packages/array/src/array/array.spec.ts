@@ -1,11 +1,35 @@
-import { concatenated, flatten, isArray, isEmpty, isNotArray, isNotEmpty, length } from './array';
+import { descending } from '@perfective/real';
+
+import {
+    concatenated,
+    copy,
+    flatten,
+    isArray,
+    isEmpty,
+    isNotArray,
+    isNotEmpty,
+    length,
+    reversed,
+    sorted,
+} from './array';
+
+const alphabet: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+
+describe('copy', () => {
+    it('creates a shallow copy of an array', () => {
+        expect(copy(alphabet))
+            .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+        expect(copy(alphabet))
+            .not.toBe(alphabet);
+    });
+});
 
 describe('concatenated', () => {
     it('creates a new array from a list of arrays', () => {
         expect(concatenated([]))
             .toStrictEqual([]);
         expect(concatenated(['a', 'b', 'c'], ['d', 'e'], ['f']))
-            .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+            .toStrictEqual(alphabet);
     });
 });
 
@@ -14,7 +38,52 @@ describe('flatten', () => {
         expect(flatten([]))
             .toStrictEqual([]);
         expect(flatten([['a', 'b', 'c'], ['d', 'e'], ['f']]))
-            .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+            .toStrictEqual(alphabet);
+    });
+});
+
+describe('reversed', () => {
+    it('creates a reversed shallow copy of an array', () => {
+        expect(reversed(alphabet))
+            .toStrictEqual(['f', 'e', 'd', 'c', 'b', 'a']);
+        expect(reversed(alphabet))
+            .not.toBe(alphabet);
+    });
+});
+
+describe('sorted', () => {
+    describe('sorted(array)', () => {
+        it('creates a sorted shallow copy of an array', () => {
+            expect(sorted(alphabet))
+                .toStrictEqual(alphabet);
+            expect(sorted(alphabet))
+                .not.toBe(alphabet);
+            expect(sorted([1, 2, 10, 20]))
+                .toStrictEqual([1, 10, 2, 20]);
+        });
+    });
+
+    describe('sorted(array, order)', () => {
+        it('creates a sorted shallow copy of an array ordered by the given compare function', () => {
+            expect(sorted([1, 2, 10, 20], descending))
+                .toStrictEqual([20, 10, 2, 1]);
+        });
+    });
+
+    describe('sorted()', () => {
+        it('returns a shallow copy of a given array', () => {
+            expect(sorted()(alphabet))
+                .not.toBe(alphabet);
+            expect(sorted()([1, 2, 10, 20]))
+                .toStrictEqual([1, 10, 2, 20]);
+        });
+    });
+
+    describe('sorted(order)', () => {
+        it('returns a shallow copy of a given array ordered by the given "order" function', () => {
+            expect(sorted(descending)([1, 2, 10, 20]))
+                .toStrictEqual([20, 10, 2, 1]);
+        });
     });
 });
 

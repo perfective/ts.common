@@ -16,6 +16,8 @@
 `search`, `slice`, `startsWith`.
 * Added `length` function.
 * Added support for `null` and `undefined` arguments in the `output` function.
+* Added `isOutput/`isNotOutput` type guards.
+* Added `lines` unit function.
 * Removed unnecessary construction of unary functions: `lowerCase`, `upperCase`, `trim`.
 
 

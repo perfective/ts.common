@@ -1,4 +1,4 @@
-export function flipped(array: string[]): Record<string, number> {
+export function recordFromArray(array: string[]): Record<string, number> {
     return array.reduce<Record<string, number>>(indexByValue, {});
 }
 

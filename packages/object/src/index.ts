@@ -1,4 +1,8 @@
 export {
+    recordFromArray,
+} from './object/record';
+
+export {
     ObjectWithAbsent,
     ObjectWithDefined,
     ObjectWithNotNull,

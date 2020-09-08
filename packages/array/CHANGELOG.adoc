@@ -16,7 +16,6 @@
 `findIndex`, `forEach`, `includes`, `indexOf`, `join`, `keys`, `lastIndexOf`, `map`, `pop`, `push`, `reduce`,
 `reduceTo`, `reduceRight`, `reduceRightTo`, `reverse`, `shift`, `some`, `sort`, `splice`, `spliceWith`, `unshift`,
 and `values`.
-* Added the `flipped()` array to object function.
 
 == v0.1.1
 

@@ -1,13 +1,13 @@
-import { flipped } from './record';
+import { recordFromArray } from './record';
 
-describe('flipped', () => {
+describe('recordFromArray', () => {
     it('creates an empty object from an empty array', () => {
-        expect(flipped([]))
+        expect(recordFromArray([]))
             .toStrictEqual({});
     });
 
     it('flips a given array of string into an object', () => {
-        expect(flipped(['a', 'b', 'c']))
+        expect(recordFromArray(['a', 'b', 'c']))
             .toStrictEqual({
                 a: 0,
                 b: 1,

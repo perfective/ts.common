@@ -4,6 +4,7 @@
 
 * Compiled `ES6` and `CommonsJS` modules.
 * Removed `has*Property()` functions; renamed `*Property()` functions into `has*Property()`.
+* Added the `recordFromArray()` unit function.
 
 == v0.1.0
 

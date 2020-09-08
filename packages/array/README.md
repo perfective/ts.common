@@ -4,6 +4,9 @@ The `@perfective/array` package provides functions for the standard JS
 [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) class:
 
 * Unit functions:
+    * `array<T>(...elements: T[]): T[]`
+    * `arrayFromIterable<T>(elements: Iterable<T>): T[]`
+    * `arrayFromArrayLike<T>(elements: ArrayLike<T>): T[]`
     * `copy<T>(array: T[]): T[]`
     — creates a shallow copy of an array
     * `concatenated<T>(initial: T[], ...arrays: T[][]): T[]`

@@ -2,6 +2,18 @@ import { Unary } from '@perfective/fp';
 
 import { Compare } from './lift';
 
+export function array<T>(...elements: T[]): T[] {
+    return Array.of(...elements);
+}
+
+export function arrayFromIterable<T>(elements: Iterable<T>): T[] {
+    return Array.from(elements);
+}
+
+export function arrayFromArrayLike<T>(elements: ArrayLike<T>): T[] {
+    return Array.from(elements);
+}
+
 export function copy<T>(array: T[]): T[] {
     return [...array];
 }

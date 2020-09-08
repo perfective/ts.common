@@ -1,6 +1,9 @@
 import { descending } from '@perfective/real';
 
 import {
+    array,
+    arrayFromArrayLike,
+    arrayFromIterable,
     concatenated,
     copy,
     flatten,
@@ -14,6 +17,39 @@ import {
 } from './array';
 
 const alphabet: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
+
+describe('array', () => {
+    it('creates an array of given elements', () => {
+        expect(array('a', 'b', 'c'))
+            .toStrictEqual(['a', 'b', 'c']);
+    });
+});
+
+describe('arrayFromIterable', () => {
+    it('creates an array from an iterable object', () => {
+        expect(arrayFromIterable(new Map([
+            ['a', 'x'],
+            ['b', 'y'],
+            ['c', 'z'],
+        ]))).toStrictEqual([
+            ['a', 'x'],
+            ['b', 'y'],
+            ['c', 'z'],
+        ]);
+        expect(arrayFromIterable(new Set([
+            'a',
+            'b',
+            'c',
+        ]))).toStrictEqual(['a', 'b', 'c']);
+    });
+});
+
+describe('arrayFromArrayLike', () => {
+    it('creates an array from an array-like object', () => {
+        expect(arrayFromArrayLike('alphabet'))
+            .toStrictEqual(['a', 'l', 'p', 'h', 'a', 'b', 'e', 't']);
+    });
+});
 
 describe('copy', () => {
     it('creates a shallow copy of an array', () => {

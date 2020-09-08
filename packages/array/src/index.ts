@@ -1,4 +1,7 @@
 export {
+    array,
+    arrayFromArrayLike,
+    arrayFromIterable,
     concatenated,
     copy,
     flatten,

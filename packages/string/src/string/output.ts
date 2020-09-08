@@ -1,4 +1,4 @@
-import { isNull, isUndefined } from '@perfective/value';
+import { isAbsent, isNull, isPresent, isUndefined } from '@perfective/value';
 
 export interface Output {
     toString: () => string;
@@ -16,3 +16,16 @@ export function output<T extends Output>(value: T | string | null | undefined): 
     }
     return value.toString();
 }
+
+/* eslint-disable
+    @typescript-eslint/no-explicit-any,
+    @typescript-eslint/no-unsafe-member-access
+    -- check if method is defined */
+export function isOutput<T>(value: Output | T): value is Output {
+    return isPresent(value) && typeof (value as any).toString === 'function';
+}
+
+export function isNotOutput<T>(value: Output | T): value is T {
+    return isAbsent(value) || typeof (value as any).toString !== 'function';
+}
+/* eslint-enable @typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-member-access */

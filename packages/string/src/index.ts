@@ -29,6 +29,8 @@ export {
 export {
     Output,
     output,
+    isOutput,
+    isNotOutput,
 } from './string/output';
 
 export {

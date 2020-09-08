@@ -34,6 +34,8 @@ It provides the following functions and additional types.
     * `search(search: RegExp): Unary<string, number | -1>`
 * `Output` — an interface to explicitly require `toString()` method implementation
     * `output<T extends Output>(value: T | string | null | undefined): string`
+    * `isOutput<T>(value: Output | T): value is Output`
+    * `isNotOutput<T>(value: Output | T): value is T`
 * `Utf16CodeUnit`:
     * `stringFromCharCode(...codes: Utf16CodeUnit[]): string`
     * `charCodeAt(index: number): Unary<string, Utf16CodeUnit>`

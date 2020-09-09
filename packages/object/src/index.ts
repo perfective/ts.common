@@ -9,6 +9,7 @@ export {
     ObjectWithNull,
     ObjectWithPresent,
     ObjectWithUndefined,
+    by,
     hasAbsentProperty,
     hasDefinedProperty,
     hasNotNullProperty,

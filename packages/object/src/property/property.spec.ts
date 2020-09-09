@@ -1,4 +1,7 @@
+import { ascending } from '@perfective/real';
+
 import {
+    by,
     hasAbsentProperty,
     hasDefinedProperty,
     hasNotNullProperty,
@@ -25,6 +28,15 @@ describe('property', () => {
         it('picks an existing property value from an object', () => {
             expect(property<Example, 'a'>('a')(optional))
                 .toStrictEqual(0);
+        });
+    });
+});
+
+describe('by', () => {
+    describe('by(property, ordering)', () => {
+        it('returns a comparator based on a comparator for the given property', () => {
+            expect([{ value: 1 }, { value: 0 }, { value: -1 }].sort(by('value', ascending)))
+                .toStrictEqual([{ value: -1 }, { value: 0 }, { value: 1 }]);
         });
     });
 });

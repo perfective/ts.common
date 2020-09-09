@@ -39,6 +39,7 @@
     },
     "dependencies": {
         "@perfective/fp": "^0.4.0",
+        "@perfective/real": "^0.4.0-beta",
         "@perfective/value": "^0.2.0"
     }
 }

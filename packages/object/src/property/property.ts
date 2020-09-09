@@ -40,6 +40,12 @@ export function property<T, K extends keyof T>(property: K): Unary<T, T[K]> {
     return (value: T): T[K] => value[property];
 }
 
+type Compare<T> = (a: T, b: T) => number;
+
+export function by<T, K extends keyof T>(property: K, ordering: Compare<T[K]>): Compare<T> {
+    return (a: T, b: T): number => ordering(a[property], b[property]);
+}
+
 export function hasDefinedProperty<T, K extends keyof T>(
     property: K,
     ...and: readonly K[]

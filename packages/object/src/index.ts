@@ -15,4 +15,5 @@ export {
     hasNullProperty,
     hasPresentProperty,
     hasUndefinedProperty,
+    property,
 } from './property/property';

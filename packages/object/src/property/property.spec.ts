@@ -5,6 +5,7 @@ import {
     hasNullProperty,
     hasPresentProperty,
     hasUndefinedProperty,
+    property,
 } from './property';
 
 interface Example {
@@ -18,6 +19,15 @@ const optional: Example = {
     a: 0,
     b: '',
 };
+
+describe('property', () => {
+    describe('property(property)', () => {
+        it('picks an existing property value from an object', () => {
+            expect(property<Example, 'a'>('a')(optional))
+                .toStrictEqual(0);
+        });
+    });
+});
 
 describe('hasDefinedProperty', () => {
     it('returns a function that returns true when object property is defined', () => {

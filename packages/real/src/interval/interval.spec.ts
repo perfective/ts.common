@@ -6,9 +6,10 @@ import {
     isInLeftOpenInterval,
     isInOpenInterval,
     isInRightOpenInterval,
+    range,
 } from './interval';
 
-const range: Interval = interval(2.71, 3.14);
+const segment: Interval = interval(2.71, 3.14);
 
 describe('interval', () => {
     it('creates an Interval from two numbers', () => {
@@ -49,23 +50,23 @@ describe('intervalFromPair', () => {
 describe('isInInterval', () => {
     describe('isInInterval(Interval)', () => {
         it('is false when the value is less than Interval.min', () => {
-            expect(isInInterval(range)(2)).toBe(false);
+            expect(isInInterval(segment)(2)).toBe(false);
         });
 
         it('is true when the value is equal to Interval.min', () => {
-            expect(isInInterval(range)(2.71)).toBe(true);
+            expect(isInInterval(segment)(2.71)).toBe(true);
         });
 
         it('is true when the value is greater than Interval.min and less than Interval.max', () => {
-            expect(isInInterval(range)(3)).toBe(true);
+            expect(isInInterval(segment)(3)).toBe(true);
         });
 
         it('is true when the value is equal to Interval.max', () => {
-            expect(isInInterval(range)(3.14)).toBe(true);
+            expect(isInInterval(segment)(3.14)).toBe(true);
         });
 
         it('is false when the value is greater than Interval.max', () => {
-            expect(isInInterval(range)(4)).toBe(false);
+            expect(isInInterval(segment)(4)).toBe(false);
         });
     });
 });
@@ -73,23 +74,23 @@ describe('isInInterval', () => {
 describe('isInOpenInterval', () => {
     describe('isInOpenInterval(interval)', () => {
         it('is false when the value is less than Interval.min', () => {
-            expect(isInOpenInterval(range)(2)).toBe(false);
+            expect(isInOpenInterval(segment)(2)).toBe(false);
         });
 
         it('is false when the value is equal to Interval.min', () => {
-            expect(isInOpenInterval(range)(2.71)).toBe(false);
+            expect(isInOpenInterval(segment)(2.71)).toBe(false);
         });
 
         it('is true when the value is greater than Interval.min and less than Interval.max', () => {
-            expect(isInOpenInterval(range)(3)).toBe(true);
+            expect(isInOpenInterval(segment)(3)).toBe(true);
         });
 
         it('is false when the value is equal to Interval.max', () => {
-            expect(isInOpenInterval(range)(3.14)).toBe(false);
+            expect(isInOpenInterval(segment)(3.14)).toBe(false);
         });
 
         it('is false when the value is greater than Interval.max', () => {
-            expect(isInOpenInterval(range)(4)).toBe(false);
+            expect(isInOpenInterval(segment)(4)).toBe(false);
         });
     });
 });
@@ -97,23 +98,23 @@ describe('isInOpenInterval', () => {
 describe('isInLeftOpenInterval', () => {
     describe('isInLeftOpenInterval(interval)', () => {
         it('is false when the value is less than Interval.min', () => {
-            expect(isInLeftOpenInterval(range)(2)).toBe(false);
+            expect(isInLeftOpenInterval(segment)(2)).toBe(false);
         });
 
         it('is false when the value is equal to Interval.min', () => {
-            expect(isInLeftOpenInterval(range)(2.71)).toBe(false);
+            expect(isInLeftOpenInterval(segment)(2.71)).toBe(false);
         });
 
         it('is true when the value is greater than Interval.min and less than Interval.max', () => {
-            expect(isInLeftOpenInterval(range)(3)).toBe(true);
+            expect(isInLeftOpenInterval(segment)(3)).toBe(true);
         });
 
         it('is true when the value is equal to Interval.max', () => {
-            expect(isInLeftOpenInterval(range)(3.14)).toBe(true);
+            expect(isInLeftOpenInterval(segment)(3.14)).toBe(true);
         });
 
         it('is false when the value is greater than Interval.max', () => {
-            expect(isInLeftOpenInterval(range)(4)).toBe(false);
+            expect(isInLeftOpenInterval(segment)(4)).toBe(false);
         });
     });
 });
@@ -121,23 +122,37 @@ describe('isInLeftOpenInterval', () => {
 describe('isInRightOpenInterval', () => {
     describe('isInRightOpenInterval(interval)', () => {
         it('is false when the value is less than Interval.min', () => {
-            expect(isInRightOpenInterval(range)(2)).toBe(false);
+            expect(isInRightOpenInterval(segment)(2)).toBe(false);
         });
 
         it('is true when the value is equal to Interval.min', () => {
-            expect(isInRightOpenInterval(range)(2.71)).toBe(true);
+            expect(isInRightOpenInterval(segment)(2.71)).toBe(true);
         });
 
         it('is true when the value is greater than Interval.min and less than Interval.max', () => {
-            expect(isInRightOpenInterval(range)(3)).toBe(true);
+            expect(isInRightOpenInterval(segment)(3)).toBe(true);
         });
 
         it('is false when the value is equal to Interval.max', () => {
-            expect(isInRightOpenInterval(range)(3.14)).toBe(false);
+            expect(isInRightOpenInterval(segment)(3.14)).toBe(false);
         });
 
         it('is false when the value is greater than Interval.max', () => {
-            expect(isInRightOpenInterval(range)(4)).toBe(false);
+            expect(isInRightOpenInterval(segment)(4)).toBe(false);
         });
+    });
+});
+
+describe('range', () => {
+    it('returns an interval with minimum and maximum elements in a non-empty array', () => {
+        expect(range([0]))
+            .toStrictEqual(interval(0, 0));
+        expect(range([-1, 0, 1, 3, 5, 7, 11]))
+            .toStrictEqual(interval(-1, 11));
+    });
+
+    it('returns undefined for an empty array', () => {
+        expect(range([]))
+            .toBeUndefined();
     });
 });

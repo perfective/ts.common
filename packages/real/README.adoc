@@ -122,6 +122,9 @@ Input values are ordered into `Interval.min` and `Interval.max`.
 ** `intervalFromPair(pair: readonly [number, number]): Interval`
 — creates a new `Interval` from a pair (tuple).
 Input values are ordered into `Interval.min` and `Interval.max`.
+** `range(values: number[]): Interval | undefined`
+— creates a new `Interval` for a non-empty array (minimum and maximum elements),
+or returns `undefined` for an empty array.
 +
 * Predicates:
 ** `isInInterval(interval: Interval): Predicate<number>`
@@ -142,7 +145,7 @@ Input values are ordered into `Interval.min` and `Interval.max`.
 * `Interval`:
 ** `midpoint()`;
 ** `radius()`;
-** `range()` (or `size`);
+** `size`;
 ** `isSubInterval()`;
 ** `isStrictSubInterval()`.
 ** verify correct behavior with `Infinity`.

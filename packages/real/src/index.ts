@@ -1,10 +1,12 @@
 export {
     Interval,
     interval,
+    intervalFromPair,
     isInInterval,
     isInLeftOpenInterval,
     isInOpenInterval,
     isInRightOpenInterval,
+    range,
 } from './interval/interval';
 
 export {

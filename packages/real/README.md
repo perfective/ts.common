@@ -73,6 +73,7 @@ into polymorphic shortcuts for readability:
 * Unit functions:
     * `interval(a: number, b: number): Interval`
     * `intervalFromPair(pair: readonly [number, number]): Interval`
+    * `range(values: number[]): Interval | undefined`
 * Predicates:
     * `isInInterval(interval: Interval): Predicate<number>`
     * `isInOpenInterval(interval: Interval): Predicate<number>`

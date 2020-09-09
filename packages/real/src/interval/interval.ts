@@ -37,3 +37,13 @@ export function isInLeftOpenInterval(interval: Interval): Predicate<number> {
 export function isInRightOpenInterval(interval: Interval): Predicate<number> {
     return (variable: number): boolean => interval.min <= variable && variable < interval.max;
 }
+
+export function range(values: number[]): Interval | undefined {
+    if (values.length === 0) {
+        return undefined;
+    }
+    return {
+        min: Math.min(...values),
+        max: Math.max(...values),
+    };
+}

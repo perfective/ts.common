@@ -12,6 +12,7 @@ export {
     length,
     reversed,
     sorted,
+    unique,
 } from './array/array';
 
 export {

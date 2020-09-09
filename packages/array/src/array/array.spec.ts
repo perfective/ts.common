@@ -14,6 +14,7 @@ import {
     length,
     reversed,
     sorted,
+    unique,
 } from './array';
 
 const alphabet: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -120,6 +121,22 @@ describe('sorted', () => {
             expect(sorted(descending)([1, 2, 10, 20]))
                 .toStrictEqual([20, 10, 2, 1]);
         });
+    });
+});
+
+describe('unique', () => {
+    it('creates an array with all unique elements keeping the order of the first elements', () => {
+        expect(unique([]))
+            .toStrictEqual([]);
+        expect(unique([0, 0, 0]))
+            .toStrictEqual([0]);
+        expect(unique(['a', 'b', 'c', 'd', 'd', 'c', 'b', 'a']))
+            .toStrictEqual(['a', 'b', 'c', 'd']);
+    });
+
+    it('filters values with the strict check', () => {
+        expect(unique([{}, {}]))
+            .toStrictEqual([{}, {}]);
     });
 });
 

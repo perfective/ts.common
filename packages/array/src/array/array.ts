@@ -39,6 +39,10 @@ export function sorted<T>(args1?: T[] | Compare<T>, args2?: Compare<T>): Unary<T
     return (array: T[]): T[] => [...array].sort(args1);
 }
 
+export function unique<T>(array: T[]): T[] {
+    return array.filter((value: T, index: number, values: T[]) => index === values.indexOf(value));
+}
+
 export function isArray<T, V = unknown>(value: T[] | V): value is T[] {
     return Array.isArray(value);
 }

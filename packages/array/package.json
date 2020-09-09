@@ -1,6 +1,6 @@
 {
     "name": "@perfective/array",
-    "version": "0.2.0-alpha.3",
+    "version": "0.2.0-beta",
     "description": "Functions to work with the Array type",
     "keywords": [
         "array",
@@ -44,6 +44,6 @@
         "@perfective/value": "^0.2.0"
     },
     "devDependencies": {
-        "@perfective/real": "^0.4.0-alpha.2"
+        "@perfective/real": "^0.4.0-beta"
     }
 }

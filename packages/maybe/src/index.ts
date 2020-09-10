@@ -8,6 +8,7 @@ export {
     that,
     to,
     when,
+    which,
 } from './maybe/lift';
 export {
     Just,

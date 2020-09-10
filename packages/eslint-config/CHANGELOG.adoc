@@ -11,6 +11,10 @@
 * Upgraded `eslint-plugin-rxjs` to `0.0.3-beta.30`.
 * Upgraded `eslint-import-resolver-typescript` to `2.3.0`.
 * Upgraded `tslint` to `6.1.3`.
+* Disabled 'rxjs/finnish' in the community config.
+* Allowed `args`, `db`, and `env` abbreviations.
+** Allowed `params` abbreviation in the community config.
+
 
 == v0.6.0
 

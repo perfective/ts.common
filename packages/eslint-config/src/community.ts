@@ -66,7 +66,7 @@ export = {
             checkProperties: true,
             onlyCamelCase: false,
         }],
-        'unicorn/prevent-abbreviations': ['error', {
+        'unicorn/prevent-abbreviations': ['warn', {
             extendDefaultWhitelist: true,
             checkDefaultAndNamespaceImports: true,
             checkShorthandImports: false,
@@ -75,6 +75,14 @@ export = {
             checkProperties: false,
             checkVariables: true,
             checkFilenames: true,
+            /* eslint-disable unicorn/prevent-abbreviations -- additional abbreviations */
+            replacements: {
+                args: false,
+                db: false,
+                env: false,
+                params: false,
+            },
+            /* eslint-enable unicorn/prevent-abbreviations */
         }],
         // Requires research on level of effort in writing safer regular expressions
         'unicorn/no-unsafe-regex': 'off',

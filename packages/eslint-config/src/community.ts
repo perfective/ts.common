@@ -61,6 +61,8 @@ export = {
         'jest/lowercase-name': ['error', {
             ignore: ['describe'],
         }],
+        // Undesired behavior in functions like forkJoin
+        'rxjs/finnish': 'off',
         'unicorn/no-keyword-prefix': ['error', {
             blacklist: ['class'],
             checkProperties: true,

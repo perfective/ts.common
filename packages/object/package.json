@@ -1,6 +1,6 @@
 {
     "name": "@perfective/object",
-    "version": "0.2.0-alpha.2",
+    "version": "0.2.0-beta",
     "description": "Functions to work with the Object type",
     "keywords": [
         "object",

@@ -6,6 +6,9 @@
 * Added package documentation.
 * Removed `has*Property()` functions; renamed `*Property()` functions into `has*Property()`.
 * Added the `recordFromArray()` unit function.
+* Added `property` function to pick a property or create a predicate for the object,
+based on the given property.
+* Added `by` function to create a comparison function for a given property.
 
 == v0.1.0
 

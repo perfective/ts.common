@@ -21,6 +21,7 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `hasAbsentProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithAbsent<T, K>`
 * Property functions:
     * `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`
+    * `property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>`
     * `by<T, K extends keyof T>(property: K, ordering: Compare<T[K]>): Compare<T>`
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/object/README.adoc) 

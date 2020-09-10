@@ -1,4 +1,4 @@
-import { Predicate, Unary } from '@perfective/fp';
+import { Predicate, Unary, isFunction } from '@perfective/fp';
 import {
     Absent,
     Defined,
@@ -36,7 +36,15 @@ export type ObjectWithAbsent<T, K extends keyof T> = T & {
     [P in K]: Absent<T[P]>;
 };
 
-export function property<T, K extends keyof T>(property: K): Unary<T, T[K]> {
+export function property<T, K extends keyof T>(property: K): Unary<T, T[K]>;
+export function property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>;
+export function property<T, K extends keyof T>(
+    property: K,
+    condition?: Predicate<T[K]>,
+): Unary<T, T[K]> | Predicate<T> {
+    if (isFunction(condition)) {
+        return (value: T): boolean => condition(value[property]);
+    }
     return (value: T): T[K] => value[property];
 }
 

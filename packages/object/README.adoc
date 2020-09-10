@@ -24,4 +24,5 @@ The `@perfective/object` package provides functions to work with the standard JS
 +
 * Property functions:
 ** `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`
+** `property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>`
 ** `by<T, K extends keyof T>(property: K, ordering: Compare<T[K]>): Compare<T>`

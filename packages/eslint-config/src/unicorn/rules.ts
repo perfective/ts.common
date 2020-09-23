@@ -12,6 +12,7 @@ export = {
             case: 'kebabCase',
         }],
         'unicorn/import-index': 'warn',
+        'unicorn/import-style': 'off',
         'unicorn/new-for-builtins': 'warn',
         'unicorn/no-abusive-eslint-disable': 'error',
         'unicorn/no-array-instanceof': 'warn',

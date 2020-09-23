@@ -1,6 +1,6 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.5.0-beta",
+    "version": "0.5.0-beta.1",
     "description": "Maybe monad-like container",
     "keywords": [
         "maybe",
@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "@perfective/error": "^0.2.2",
-        "@perfective/object": "^0.2.0-beta",
-        "@perfective/real": "^0.4.0-beta"
+        "@perfective/object": "^0.2.0",
+        "@perfective/real": "^0.4.0"
     }
 }

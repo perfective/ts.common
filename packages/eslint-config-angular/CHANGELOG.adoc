@@ -3,8 +3,8 @@
 == v0.4.0 (next)
 
 * Upgraded `@perfective/eslint-config` to `0.7.0`.
-* Upgraded `@angular-eslint` to `0.3.0-beta.1`.
-* Upgraded `eslint-plugin-jest-dom` to `3.2.2`.
+* Upgraded `@angular-eslint` to `0.4.0-beta.2`.
+* Upgraded `eslint-plugin-jest-dom` to `3.2.3`.
 * Upgraded `eslint-plugin-rxjs-angular` to `0.0.2-beta.6`.
 
 == v0.3.0

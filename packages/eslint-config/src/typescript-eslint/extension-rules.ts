@@ -4,6 +4,17 @@ export = {
         '@typescript-eslint/brace-style': ['warn', 'stroustrup', {
             allowSingleLine: false,
         }],
+        'comma-dangle': 'off',
+        '@typescript-eslint/comma-dangle': ['warn', {
+            arrays: 'always-multiline',
+            enums: 'always-multiline',
+            exports: 'always-multiline',
+            functions: 'always-multiline',
+            generics: 'always-multiline',
+            imports: 'always-multiline',
+            objects: 'always-multiline',
+            tuples: 'always-multiline',
+        }],
         'comma-spacing': 'off',
         '@typescript-eslint/comma-spacing': ['warn', {
             before: false,

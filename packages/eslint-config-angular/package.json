@@ -47,7 +47,7 @@
         "@angular-eslint/eslint-plugin": "^0.4.0-beta.2",
         "@angular-eslint/eslint-plugin-template": "^0.4.0-beta.2",
         "codelyzer": "^5.2.2",
-        "eslint-plugin-jest-dom": "^3.2.2",
+        "eslint-plugin-jest-dom": "^3.2.3",
         "eslint-plugin-rxjs-angular": "^0.0.2-beta.6"
     }
 }

@@ -1,16 +1,21 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.5.0-beta.1",
-    "description": "Maybe monad-like container",
+    "version": "0.5.0",
+    "description": "Maybe monadic container implementation",
     "keywords": [
-        "maybe",
+        "maybe monad",
+        "maybe type",
+        "option type",
+        "undefined",
         "optional",
+        "optional chaining",
+        "null",
         "nullable",
+        "nil",
         "just",
         "nothing",
         "some",
-        "none",
-        "monad"
+        "none"
     ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
     "homepage": "https://github.com/perfective/js",

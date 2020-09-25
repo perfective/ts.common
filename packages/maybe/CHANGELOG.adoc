@@ -1,8 +1,9 @@
 = Changelog
 
-== v0.5.0 (next)
+== v0.5.0
 
 * Compiled `ES6` and `CommonsJS` modules.
+* Added package documentation.
 * Renamed `Maybe.has()` into `Maybe.which()`.
 * Added support for a function argument type in `Maybe.pick()`.
 * Added support for an optional/nullable values in `Maybe.otherwise()`.

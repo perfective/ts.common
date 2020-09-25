@@ -1,8 +1,9 @@
 = Changelog
 
-== v0.2.0 (next)
+== v0.2.0
 
 * Compiled `ES6` and `CommonsJS` modules.
+* Add package documentation.
 
 == v0.1.0
 

@@ -23,6 +23,10 @@ export abstract class Maybe<T> {
         return this.none();
     }
 
+    public pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>> {
+        return this.to(v => v[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
+    }
+
     public that(filter: Predicate<T>): Maybe<T> {
         if (isPresent(this.value)) {
             if (filter(this.value)) {
@@ -48,10 +52,6 @@ export abstract class Maybe<T> {
             return this;
         }
         return this.none();
-    }
-
-    public pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>> {
-        return this.to(v => v[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
     }
 
     public otherwise(fallback: Value<T>): Just<T>

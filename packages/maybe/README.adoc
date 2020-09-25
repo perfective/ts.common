@@ -1,7 +1,78 @@
-= Perfective Maybe Monad
+= Perfective Maybe (Monad)
 
-`@perfective/maybe` package provides a Maybe monad-like container class
-and a set of unit functions (`maybe`, `just`, `nothing`, etc.) to instantiate it.
+`@perfective/maybe` package provides an https://en.wikipedia.org/wiki/Option_type[Option type] implementation.
+It is inspired by the Haskell
+`link:https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe[Maybe]` monad,
+and is following the https://en.wikipedia.org/wiki/Monad_(functional_programming)#Analysis[monad laws]
+as close as possible given the limitations of JavaScript and TypeScript
+(exceptions and solutions are described below).
+
+The purpose of the `Maybe` type is to simplify handling of values that may not be initialized
+by provide a set of operators that will be called only when value is present.
+In JavaScript there two different types that represent "nothing": `undefined` and `null`.
+This means, that the standard dichotomy like `Just | Nothing`,
+or `Some | None` does not fit precisely,
+and requires additional logic to cover all the cases: `T | null | undefined`.
+For example, when you create a new `Maybe<T>` with a `null` value,
+it has to maintain this value as `null` and not switch it to `undefined`.
+
+.`Maybe<T>` maintains the original value.
+[source,typescript]
+----
+import { maybe, nil, nothing } from '@perfective/maybe';
+
+maybe(undefined).value === undefined;
+nothing().value === undefined; // <1>
+
+maybe(null).value === null;
+nil().value === null; // <2>
+
+maybe(3.14).value === 3.14;
+----
+<1> Use the `nothing()` function instead of `maybe(undefined)`,
+as `nothing` does not create a new object.
+<2> The `nil()` function can be used instead of `maybe(null)`,
+but it is not an exact equivalent.
+`nil().to(() => undefined).value === null`,
+while `maybe(null).to(() => undefined).value === undefined`.
+
+Additionally, it may not always be desired to have both `undefined` and `null` excluded.
+Consider you have a JSON data coming from an API.
+If this API has JSON schema attached
+and that schema says that all fields will be returned,
+it is not correct to treat them as `T | null | undefined`,
+but rather only as `T | null`
+(or even just `T`, if the field is also not nullable).
+Using `maybe` will hide a problem with the API,
+as a field that is not returned will be treated as it was returned as `null`.
+To handle such cases,
+in addition to the `maybe<T>(value: T | null | undefined): Maybe<T>` function,
+there are two more unit functions:
+
+* `nullable<T>(value: T | null): Maybe<T>`
+* `optional<T>(value: T | undefined): Maybe<T>`
+
+Note, that the original value (`null` or `undefined`) will be preserved through filtering operations.
+`maybe` and `just` fall back to `undefined`.
+
+.`nullable` maintains the original `null` value context.
+[source,typescript]
+----
+import { just, nullable, optional } from '@perfective/maybe';
+import { isGreaterThan } from '@perfective/real';
+
+nullable(3.14)
+    .that(isGreaterThan(4))
+    .value === null;
+
+optional(3.14)
+    .that(isGreaterThan(4))
+    .value === undefined;
+
+just(3.14)
+    .that(isGreaterThan(4))
+    .value === undefined;
+----
 
 == Installation
 
@@ -10,18 +81,351 @@ and a set of unit functions (`maybe`, `just`, `nothing`, etc.) to instantiate it
 npm install @perfective/maybe
 ----
 
-== Example
+== Usage
+
+=== `Maybe.onto()`
+
+`Maybe.onto()` is a _bind_ operator (`>>=`),
+that (almost) satisfies three https://wiki.haskell.org/Monad_laws[monad laws]:
+
+* _Unit_ is a _left-identity_ for _bind_
+(`maybe(x).onto(f) === f(x)`)
++
+This means that for any value in the `Maybe<T>` container,
+applying a function through the `Maybe.onto()`
+results in the same value,
+as if that function was applied directly.
++
+* _Unit_ function is a _right-identity_ for _bind_
+(`maybe(x).onto(maybe) === maybe(x)`)
++
+This means, that applying a unit function to the bound value
+results in the same `Maybe<T>` value.
++
+* _Bind_ operator is associative
+(`maybe(x).onto(x => f(x).onto(g)) === maybe(x).onto(f).onto(g)`)
++
+This means that nested functions can be flattened into one chain.
+
+[WARNING]
+====
+The _left-identity_ and _associativity_ laws are not satisfied
+when the provided function has custom handling
+of `null` or `undefined` values.
+
+If the result of the function is critical,
+use the `Maybe.lift()` function as it executes the given function even when the value is absent.
+====
+
+.Consider a legacy function `decimal` is provided by a 3rd-party JS package
+that has to handle different cases that were possible in JavaScript code.
+[source,typescript]
+----
+import { isAbsent } from '@perfective/value';
+import { Just, just, maybe, nil, nothing } from '@perfective/maybe';
+
+function decimal(value?: number | null): Just<string> {
+    if (isAbsent(value)) {
+        return just('0');
+    }
+    return just(value.toString(10));
+}
+
+maybe(3.14).onto(decimal) == decimal(3.14); // <.>
+maybe(0).onto(decimal) == decimal(0);
+maybe(-1).onto(decimal) == decimal(-1);
+
+nothing().onto(decimal) != decimal(undefined);
+nil().onto(decimal) != decimal(null); // <.>
+----
+<1> Applying `decimal` to a present `number` satisfies the first law.
+<2> When value is absent, `onto` does not execute `decimal` at all,
+so the result is not the same, as by applying `decimal` directly.
+The _left-identity law_ is *not* satisfied.
+
+[NOTE]
+====
+This method is similar to the `mergeMap`/`switchMap` operator in `rxjs`
+and the `flatMap` method in `java.util.Optional`.
+====
+
+=== `Maybe.to()`
+
+`Maybe.to()` is a mapping method,
+that applies the provided mapping function only when the value is present
+and wraps up the result into a new `Maybe` value.
+
+[IMPORTANT]
+====
+`Maybe.to` is not a _bind_ operator and is not required to satisfy the monad laws.
+====
+
+.Using `Maybe.to()` to chain computations
+[source,typescript]
+----
+import { Maybe, maybe } from '@perfective/maybe';
+import { lowercase } from '@perfective/string';
+
+interface Name {
+    first: string;
+    last: string;
+}
+
+interface User {
+    id?: number;
+    name?: Name;
+}
+
+function nameOutput(name?: Name): string | undefined {
+    return maybe(name)
+        .to(name => `${name.first} ${name.last}`)
+        .or(undefined);
+}
+
+function usernameOutput(user?: User): Maybe<string> {
+    return maybe(user)
+        .to(user => nameOutput(user.name)) // <.>
+        .to(lowercase);
+}
+----
+<1> This example can be simplified be using `Maybe.pick()`.
+
+[NOTE]
+====
+This method is similar to the `map` operator in `rxjs`
+and the `map` method in `java.util.Optional`.
+====
+
+=== `Maybe.pick()`
+
+`Maybe.pick()` is a shortcut for the `Maybe.to()`
+that allows to provide a property name to pick from an object.
+The property _must_ be defined on the object type.
+
+It is similar to the https://devblogs.microsoft.com/typescript/announcing-typescript-3-7/#optional-chaining[optional chaining]
+that was introduced in TypeScript 3.7,
+but does not generate excessive JS code for each `null` and `undefined` check in the chain.
+
+.Using `Maybe.pick()` for optional chaining
+[source,typescript]
+----
+import { panic } from '@perfective/error';
+import { maybe } from '@perfective/maybe';
+
+interface Name {
+    first?: string;
+    last?: string;
+}
+
+interface User {
+    id?: number;
+    name?: Name;
+}
+
+function firstName(user?: User): string {
+    return maybe(user).pick('name').pick('first').or(panic('First name unknown')); // <.>
+}
+----
+<1> `maybe(user).pick('email')` will not compile,
+as, in this example, the `User` type does not have an `email` property.
+
+[NOTE]
+====
+This method is similar to the `pluck` operator in `rxjs`.
+====
+
+=== `Maybe.that()`
+
+`Maybe.that()` is a filter method.
+It allows to pass a predicate,
+that will be used if the value is present.
+
+.Using `Maybe.that()` to filter out a value
+[source,typescript]
+----
+import { isNot } from '@perfective/fp';
+import { Maybe, just } from '@perfective/maybe';
+
+function quotient(dividend: number, divisor: number): Maybe<number> {
+    return just(divisor)
+        .that(isNot(0)) // <.>
+        .to(divisor => dividend / divisor);
+}
+----
+<1> Returns `Nothing`, so `to()` will not be running its function.
+
+[NOTE]
+====
+This method is similar to the `filter` operator in `rxjs`
+and the `filter` method in `java.util.Optional`.
+====
+
+=== `Maybe.which()`
+
+`Maybe.which()` is a filter method that allows to use a type guard.
+It recognizes the result type,
+so it can be used inside the binding operators.
+
+.Using `Maybe.which()` to filter out values with absent properties.
+[source,typescript]
+----
+import { Maybe, just } from '@perfective/maybe';
+import { hasDefinedProperty } from '@perfective/object';
+
+interface Name {
+    first: string;
+    last: string;
+}
+
+interface Username {
+    first?: string;
+    middle?: string;
+    last?: string;
+}
+
+function nameOutput(name: Name): string {
+    return `${name.first} ${name.last}`;
+}
+
+function usernameOutput(user: User): Maybe<string> {
+    return just(user)
+        .which(hasDefinedProperty('first', 'last')) // <.>
+        .to(nameOutput); // <.>
+}
+----
+<1> A broader `hasPresentProperty('first', 'last')` can be used as well,
+to guarantee that these properties _value_ are not `null` too.
+It is not required for the TS compiler `strictNullCheck`,
+as these properties only _optional_,
+but are not _nullable_.
+<2> `Name` type requires both `first` and `last` properties to be defined and not null,
+so  without the `which` filter (with TS `strictNullChecks` enabled),
+this code will not compile.
+
+=== `Maybe.when()`
+
+`Maybe.when()` is a filter method that allows to use a proposition
+(a `boolean` value, or a nullary function that returns `boolean`)
+to describe condition that is not related to the value inside `Maybe`.
+
+[NOTE]
+====
+`Maybe.when()` should be used to increase readability,
+as a nullary function can be passed into the `Maybe.that()`.
+====
+
+.Using `Maybe.when()` to filter out values based on a global condition.
+[source,typescript]
+----
+import { just } from '@perfective/maybe';
+
+function tokenLogOutput(token: string, isLog: boolean): Maybe<string> {
+    return just(token)
+        .when(isLog) // <.>
+        .to(token => '***');
+}
+----
+<1> Can be `when(() => isLog)`,
+if we want to run computation only when the value is present.
+
+=== `Maybe.otherwise()`
+
+`Maybe.otherwise()` method allows to provide a fallback value or to throw an error.
+
+.Using `Maybe.otherwise()` to continue the chain after the fallback.
+[source,typescript]
+----
+import { panic } from '@perfective/error';
+import { isNot } from '@perfective/fp';
+import { maybe } from '@perfective/maybe';
+
+function range(min?: number, max?: number): number {
+    return maybe(min)
+        .otherwise(max)
+        .that(isNot(0))
+        .otherwise(panic('Invalid range'));
+}
+----
+
+=== `Maybe.or()`
+
+`Maybe.or()` method allows to get the value of the monad, the provided fallback,
+or to throw an error.
+
+.Using `Maybe.or()`
+[source,typescript]
+----
+import { panic } from '@perfective/error';
+import { maybe } from '@perfective/maybe';
+
+interface Name {
+    first: string;
+    last: string;
+}
+
+interface User {
+    name?: Name;
+}
+
+function nameOutput(name?: Name): string {
+    return maybe(name)
+        .to(name => `${name.first} ${name.last}`)
+        .or('Unknown name');
+}
+
+function userOutput(user?: User): string {
+    return maybe(user)
+        .pick('name')
+        .to(nameOutput)
+        .or(panic('Undefined user'));
+}
+----
+
+[NOTE]
+====
+This method is similar to the `orElse`, `orElseGet`, and `orElseThrow` methods in `java.util.Optional`.
+====
+
+=== `Maybe.run()`
+
+`Maybe.run()` method allows to run a procedure with the value when it is present.
+
+[NOTE]
+====
+This method is similar to the `tap` operator in `rxjs`
+and `ifPresent` method in `java.util.Optional`.
+====
+
+=== `Maybe.lift()`
+
+`Maybe.lift()` method allows to pass a function that maps the value even when it is absent.
 
 [source,typescript]
 ----
-import { fail, just } from '@perfective/maybe';
+import { isAbsent } from '@perfective/value';
+import { maybe } from '@perfective/maybe';
 
-function quotient(dividend: number, divisor: number): number {
-    return just(divisor)
-        .that(divisor => divisor !== 0)
-        .then(divisor => dividend / divisor) // <.>
-        .otherwise(fail('Division by zero')); // <.>
+function decimal(value?: number | null): string {
+    if (isAbsent(value)) {
+        return '0';
+    }
+    return value.toString(10);
 }
+
+maybe(undefined).lift(decimal) === decimal(undefined);
+maybe(null).lift(decimal) === decimal(null); // <.>
 ----
-<1> `divisor` is guaranteed to be non-zero.
-<2> Returns the result or throws an `Error`.
+
+=== Mapping functions
+
+Each method has a corresponding mapping function that can be used in the `Array.prototype.map`
+(or any other mapping method or operator).
+
+[source,typescript]
+----
+import { Maybe, just, nil, nothing, or } from '@perfective/maybe';
+
+const numbers: Maybe<number>[] = [just(2.71), just(3.14), nothing<number>(), nil<number>()];
+
+numbers.map(or(0)) === [2.71, 3.14, 0, 0];
+----

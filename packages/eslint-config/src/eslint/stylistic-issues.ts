@@ -52,7 +52,10 @@ export = {
             before: true,
             after: true,
         }],
-        'line-comment-position': ['error', 'above'],
+        'line-comment-position': ['error', {
+            position: 'above',
+            ignorePattern: '^ == .+',
+        }],
         'linebreak-style': ['warn', 'unix'],
         'lines-around-comment': ['warn', {
             beforeBlockComment: true,
@@ -109,7 +112,9 @@ export = {
         'no-array-constructor': 'error',
         'no-bitwise': 'error',
         'no-continue': 'error',
-        'no-inline-comments': 'error',
+        'no-inline-comments': ['error', {
+            ignorePattern: '^ == .+',
+        }],
         'no-lonely-if': 'warn',
         'no-mixed-operators': ['error', {
             groups: [

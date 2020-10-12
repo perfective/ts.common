@@ -10,6 +10,7 @@ In addition to the core https://eslint.org/docs/rules/[ESLint rules]
 and the `link:https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin[@typescript-eslint]` plugin rules,
 `@perfective/eslint-config` configures:
 
+* `link:https://github.com/freaktechnik/eslint-plugin-array-func[eslint-plugin-array-func]`;
 * `link:https://github.com/gund/eslint-plugin-deprecation[eslint-plugin-deprecation]`;
 * `link:https://mysticatea.github.io/eslint-plugin-eslint-comments[eslint-plugin-eslint-comments]`;
 * `link:https://github.com/benmosher/eslint-plugin-import[eslint-plugin-import]`;
@@ -39,6 +40,7 @@ npm install --save-dev \
     @typescript-eslint/parser \
     eslint \
     eslint-import-resolver-typescript \
+    eslint-plugin-array-func \
     eslint-plugin-deprecation \
     eslint-plugin-eslint-comments \
     eslint-plugin-import \
@@ -102,7 +104,6 @@ There is no `community` edition of the TSLint config.
 == Roadmap
 
 * Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
-* Research `link:https://github.com/freaktechnik/eslint-plugin-array-func[eslint-plugin-array-func]`.
 * Research `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`.
 * Research `link:https://github.com/lydell/eslint-plugin-simple-import-sort[eslint-plugin-simple-import-sort]`.
 * Research `link:https://github.com/selaux/eslint-plugin-filenames[eslint-plugin-filenames]`.

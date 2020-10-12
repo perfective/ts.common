@@ -15,7 +15,7 @@ export function arrayFromArrayLike<T>(elements: ArrayLike<T>): T[] {
 }
 
 export function copy<T>(array: T[]): T[] {
-    return [...array];
+    return Array.from(array);
 }
 
 export function concatenated<T>(initial: T[], ...arrays: T[][]): T[] {
@@ -27,16 +27,16 @@ export function flatten<T>(arrays: T[][]): T[] {
 }
 
 export function reversed<T>(array: T[]): T[] {
-    return [...array].reverse();
+    return Array.from(array).reverse();
 }
 
 export function sorted<T>(order?: Compare<T>): Unary<T[], T[]>;
 export function sorted<T>(array: T[], order?: Compare<T>): T[];
 export function sorted<T>(args1?: T[] | Compare<T>, args2?: Compare<T>): Unary<T[], T[]> | T[] {
     if (Array.isArray(args1)) {
-        return [...args1].sort(args2);
+        return Array.from(args1).sort(args2);
     }
-    return (array: T[]): T[] => [...array].sort(args1);
+    return (array: T[]): T[] => Array.from(array).sort(args1);
 }
 
 export function unique<T>(array: T[]): T[] {

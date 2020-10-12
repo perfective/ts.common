@@ -16,6 +16,7 @@ export = {
     },
     plugins: [
         '@typescript-eslint',
+        'array-func',
         'deprecation',
         'eslint-comments',
         'import',
@@ -37,6 +38,7 @@ export = {
         './eslint/ecma-script-6',
         './typescript-eslint/supported-rules',
         './typescript-eslint/extension-rules',
+        './array-func/rules',
         './deprecation/deprecation',
         './eslint-comments/best-practices',
         './eslint-comments/stylistic-issues',

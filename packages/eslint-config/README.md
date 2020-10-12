@@ -10,6 +10,7 @@ In addition to the core [ESLint rules](https://eslint.org/docs/rules/)
 and the [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin) plugin rules,
 `@perfective/eslint-config` configures:
 
+* [`eslint-plugin-array-func`](https://github.com/freaktechnik/eslint-plugin-array-func);
 * [`eslint-plugin-deprecation`](https://github.com/gund/eslint-plugin-deprecation);
 * [`eslint-plugin-eslint-comments`](https://mysticatea.github.io/eslint-plugin-eslint-comments);
 * [`eslint-plugin-import`](https://github.com/benmosher/eslint-plugin-import);
@@ -37,6 +38,7 @@ npm install --save-dev \
     @typescript-eslint/parser \
     eslint \
     eslint-import-resolver-typescript \
+    eslint-plugin-array-func \
     eslint-plugin-deprecation \
     eslint-plugin-eslint-comments \
     eslint-plugin-import \

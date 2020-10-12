@@ -80,4 +80,5 @@ It's based on the deprecated https://palantir.github.io/tslint/[TSLint].
 
 == Roadmap
 
+* Research `link:https://github.com/testing-library/eslint-plugin-testing-library[eslint-plugin-testing-library]`.
 * Remove TSLint and Codelyzer support.

@@ -108,8 +108,4 @@ There is no `community` edition of the TSLint config.
 == Roadmap
 
 * Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
-* Research `link:https://github.com/selaux/eslint-plugin-filenames[eslint-plugin-filenames]`.
-* Research `link:https://github.com/nodesecurity/eslint-plugin-security[eslint-plugin-security]`.
-* Research `link:https://github.com/testing-library/eslint-plugin-testing-library[eslint-plugin-testing-library]`.
-* Research `link:https://github.com/jonaskello/eslint-plugin-functional[eslint-plugin-functional]`.
 * Replace all TSLint rules with ESLint rules from plugins; drop TSLint support.

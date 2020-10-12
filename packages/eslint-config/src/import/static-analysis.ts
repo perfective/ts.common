@@ -15,6 +15,5 @@ export = {
         }],
         'import/no-useless-path-segments': 'warn',
         'import/no-relative-parent-imports': 'off',
-        'import/no-unused-modules': 'error',
     },
 };

@@ -50,6 +50,10 @@ export = {
         '@typescript-eslint/no-array-constructor': 'warn',
         'no-dupe-class-members': 'off',
         '@typescript-eslint/no-dupe-class-members': 'error',
+        'no-duplicate-imports': 'off',
+        '@typescript-eslint/no-duplicate-imports': ['error', {
+            includeExports: true,
+        }],
         'no-empty-function': 'off',
         '@typescript-eslint/no-empty-function': ['error', {
             allow: ['protected-constructors', 'private-constructors'],

@@ -10,13 +10,13 @@ export = {
         '@typescript-eslint/ban-tslint-comment': 'warn',
         '@typescript-eslint/ban-types': 'error',
         '@typescript-eslint/class-literal-property-style': 'off',
+        '@typescript-eslint/consistent-indexed-object-style': ['warn', 'record'],
         '@typescript-eslint/consistent-type-assertions': ['error', {
             assertionStyle: 'as',
             objectLiteralTypeAssertions: 'allow',
         }],
         '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
         '@typescript-eslint/consistent-type-imports': ['warn', {
-            // TODO: Switch to "type-imports" as soon as conflict with "no-duplicate-imports" can be resolved
             prefer: 'no-type-imports',
             disallowTypeAnnotations: true,
         }],

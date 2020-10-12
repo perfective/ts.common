@@ -26,17 +26,20 @@ npm install --save-dev \
     @typescript-eslint/parser \
     eslint \
     eslint-import-resolver-typescript \
+    eslint-plugin-array-func \
     eslint-plugin-deprecation \
     eslint-plugin-eslint-comments \
     eslint-plugin-import \
     eslint-plugin-jest \
     eslint-plugin-jest-dom \
     eslint-plugin-jest-formatting \
+    eslint-plugin-jsdoc \
     eslint-plugin-node \
     eslint-plugin-prefer-arrow \
     eslint-plugin-promise \
     eslint-plugin-rxjs \
     eslint-plugin-rxjs-angular \
+    eslint-plugin-simple-import-sort \
     eslint-plugin-sonarjs \
     eslint-plugin-testing-library \
     eslint-plugin-unicorn \

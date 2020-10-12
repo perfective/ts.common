@@ -16,6 +16,7 @@ and the [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-e
 * [`eslint-plugin-import`](https://github.com/benmosher/eslint-plugin-import);
 * [`eslint-plugin-jest`](https://github.com/jest-community/eslint-plugin-jest);
 * [`eslint-plugin-jest-formatting`](https://github.com/dangreenisrael/eslint-plugin-jest-formatting);
+* [`eslint-plugin-jsdoc`](https://github.com/gajus/eslint-plugin-jsdoc);
 * [`eslint-plugin-node`](https://github.com/mysticatea/eslint-plugin-node);
 * [`eslint-plugin-prefer-arrow`](https://github.com/TristonJ/eslint-plugin-prefer-arrow);
 * [`eslint-plugin-promise`](https://github.com/xjamundx/eslint-plugin-promise);
@@ -45,6 +46,7 @@ npm install --save-dev \
     eslint-plugin-import \
     eslint-plugin-jest \
     eslint-plugin-jest-formatting \
+    eslint-plugin-jsdoc \
     eslint-plugin-node \
     eslint-plugin-prefer-arrow \
     eslint-plugin-promise \

@@ -1,6 +1,5 @@
 {
     "rules": {
-        "import-spacing": true,
-        "jsdoc-format": [true, "check-multiline-start"]
+        "import-spacing": true
     }
 }

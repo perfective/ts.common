@@ -1,7 +1,6 @@
 {
     "rules": {
         "encoding": true,
-        "no-redundant-jsdoc": true,
         "no-unnecessary-callback-wrapper": true,
         "prefer-switch": [true, { "min-cases": 2 }],
         "prefer-while": true,

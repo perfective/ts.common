@@ -11,7 +11,11 @@ export function isNotError<T>(value: Error | T): value is T {
 }
 
 /**
- * Returns the same string as Error.toString() on Node.js
+ * A generic output for an Error.
+ *
+ * @param error - Error to output.
+ *
+ * @returns The same string as Error.toString() on Node.js.
  */
 export function errorOutput(error: Error): string {
     return `${error.name}: ${error.message}`.replace(/: $/u, '');

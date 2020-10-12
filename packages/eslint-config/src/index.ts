@@ -22,6 +22,7 @@ export = {
         'import',
         'jest',
         'jest-formatting',
+        'jsdoc',
         'node',
         'prefer-arrow',
         'promise',
@@ -49,6 +50,7 @@ export = {
         './import/style-guide',
         './jest/rules',
         './jest-formatting/rules',
+        './jsdoc/rules',
         './node/possible-errors',
         './node/best-practices',
         './node/stylistic-issues',
@@ -72,6 +74,26 @@ export = {
                 alwaysTryTypes: true,
                 project: './tsconfig.json',
             },
+        },
+        'jsdoc': {
+            mode: 'typescript',
+            tagNamePreference: {
+                augments: {
+                    message: '@extends is to be used over @augments as it is more evocative of classes than @augments',
+                    replacement: 'extends',
+                },
+                todo: {
+                    message: "We expect immediate perfection, so don't leave to-dos in your code.",
+                },
+                fires: {
+                    replacement: 'emits',
+                },
+            },
+            /* eslint-disable unicorn/prevent-abbreviations -- configuration properties */
+            overrideReplacesDocs: true,
+            augmentsExtendsReplacesDocs: false,
+            implementsReplacesDoc: false,
+            /* eslint-enable */
         },
     },
     overrides: [

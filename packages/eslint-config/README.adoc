@@ -16,6 +16,7 @@ and the `link:https://github.com/typescript-eslint/typescript-eslint/tree/master
 * `link:https://github.com/benmosher/eslint-plugin-import[eslint-plugin-import]`;
 * `link:https://github.com/jest-community/eslint-plugin-jest[eslint-plugin-jest]`;
 * `link:https://github.com/dangreenisrael/eslint-plugin-jest-formatting[eslint-plugin-jest-formatting]`;
+* `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`;
 * `link:https://github.com/mysticatea/eslint-plugin-node[eslint-plugin-node]`;
 * `link:https://github.com/TristonJ/eslint-plugin-prefer-arrow[eslint-plugin-prefer-arrow]`;
 * `link:https://github.com/xjamundx/eslint-plugin-promise[eslint-plugin-promise]`;
@@ -47,6 +48,7 @@ npm install --save-dev \
     eslint-plugin-import \
     eslint-plugin-jest \
     eslint-plugin-jest-formatting \
+    eslint-plugin-jsdoc \
     eslint-plugin-node \
     eslint-plugin-prefer-arrow \
     eslint-plugin-promise \
@@ -106,7 +108,6 @@ There is no `community` edition of the TSLint config.
 == Roadmap
 
 * Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
-* Research `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`.
 * Research `link:https://github.com/selaux/eslint-plugin-filenames[eslint-plugin-filenames]`.
 * Research `link:https://github.com/nodesecurity/eslint-plugin-security[eslint-plugin-security]`.
 * Research `link:https://github.com/testing-library/eslint-plugin-testing-library[eslint-plugin-testing-library]`.

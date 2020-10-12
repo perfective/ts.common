@@ -2,6 +2,13 @@
 import { isTrue, Predicate, Proposition, TypeGuard, Value, valueOf } from '@perfective/fp';
 import { isNull, isPresent, isUndefined, Present } from '@perfective/value';
 
+/**
+ * @sealed
+ *
+ * @see Just
+ * @see Nothing
+ * @see Nil
+ */
 export abstract class Maybe<T> {
     protected constructor(
         public readonly value: T | null | undefined,
@@ -90,7 +97,7 @@ export abstract class Maybe<T> {
 }
 
 /**
- * @sealed
+ * @final
  */
 export class Just<T>
     extends Maybe<T> {
@@ -129,7 +136,7 @@ export function just<T>(value: T): Just<T> {
 }
 
 /**
- * @sealed
+ * @final
  */
 export class Nothing<T>
     extends Maybe<T> {
@@ -147,7 +154,7 @@ export function nothing<T>(): Nothing<T> {
 }
 
 /**
- * @sealed
+ * @final
  */
 export class Nil<T>
     extends Maybe<T> {

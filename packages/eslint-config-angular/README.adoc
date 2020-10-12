@@ -10,7 +10,8 @@ This package is based on the
 
 * `link:https://github.com/angular-eslint/angular-eslint[@angular-eslint/eslint-plugin]`;
 * `link:https://github.com/testing-library/eslint-plugin-jest-dom[eslint-plugin-jest-dom]`;
-* `link:https://github.com/cartant/eslint-plugin-rxjs-angular[eslint-plugin-rxjs-angular]`.
+* `link:https://github.com/cartant/eslint-plugin-rxjs-angular[eslint-plugin-rxjs-angular]`;
+* `link:https://github.com/testing-library/eslint-plugin-testing-library[eslint-plugin-testing-library]`.
 
 == Setup
 
@@ -39,6 +40,7 @@ npm install --save-dev \
     eslint-plugin-rxjs \
     eslint-plugin-rxjs-angular \
     eslint-plugin-sonarjs \
+    eslint-plugin-testing-library \
     eslint-plugin-unicorn \
     tslint \
     codelyzer
@@ -80,5 +82,4 @@ It's based on the deprecated https://palantir.github.io/tslint/[TSLint].
 
 == Roadmap
 
-* Research `link:https://github.com/testing-library/eslint-plugin-testing-library[eslint-plugin-testing-library]`.
 * Remove TSLint and Codelyzer support.

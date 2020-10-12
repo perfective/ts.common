@@ -10,7 +10,8 @@ This package is based on the
 
 * [`@angular-eslint/eslint-plugin`](https://github.com/angular-eslint/angular-eslint);
 * [`eslint-plugin-jest-dom`](https://github.com/testing-library/eslint-plugin-jest-dom);
-* [`eslint-plugin-rxjs-angular`](https://github.com/cartant/eslint-plugin-rxjs-angular).
+* [`eslint-plugin-rxjs-angular`](https://github.com/cartant/eslint-plugin-rxjs-angular);
+* [`eslint-plugin-testing-library`](https://github.com/testing-library/eslint-plugin-testing-library).
 
 ## Setup
 
@@ -37,6 +38,7 @@ npm install --save-dev \
     eslint-plugin-rxjs \
     eslint-plugin-rxjs-angular \
     eslint-plugin-sonarjs \
+    eslint-plugin-testing-library \
     eslint-plugin-unicorn \
     tslint \
     codelyzer

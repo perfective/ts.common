@@ -3,6 +3,7 @@ export = {
         '@angular-eslint',
         'jest-dom',
         'rxjs-angular',
+        'testing-library',
     ],
     extends: [
         '@perfective/eslint-config',

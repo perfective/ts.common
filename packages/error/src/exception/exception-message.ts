@@ -1,4 +1,4 @@
-import { ExceptionTokens, exceptionToken } from './exception-tokens';
+import { exceptionToken, ExceptionTokens } from './exception-tokens';
 
 export interface ExceptionMessage {
     readonly template: string;

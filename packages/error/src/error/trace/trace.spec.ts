@@ -1,6 +1,6 @@
 import { error } from '../error';
 
-import { Trace, stackTrace, trace } from './trace';
+import { stackTrace, Trace, trace } from './trace';
 
 describe('stackTrace', () => {
     it('parses an error stack into Trace stack', () => {

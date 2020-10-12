@@ -11,7 +11,7 @@ import {
 import { decimal, isGreaterThan, isLessThan } from '@perfective/real';
 import { isDefined, isNotNull, isNull, isPresent, isUndefined } from '@perfective/value';
 
-import { Just, Maybe, just, maybe, nil, nothing, nullable, optional } from './maybe';
+import { Just, just, Maybe, maybe, nil, nothing, nullable, optional } from './maybe';
 
 function justDecimal(value: number): Just<string> {
     return just(value).to<string>(decimal);

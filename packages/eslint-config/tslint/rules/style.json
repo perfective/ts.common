@@ -3,37 +3,6 @@
         "encoding": true,
         "no-redundant-jsdoc": true,
         "no-unnecessary-callback-wrapper": true,
-        "ordered-imports": [
-            true,
-            {
-                "import-sources-order": "lowercase-last",
-                "named-imports-order": "lowercase-last",
-                "grouped-imports": true,
-                "groups": [
-                    {
-                        "name": "Unscoped packages",
-                        "match": "^[a-zA-Z]",
-                        "order": 0
-                    },
-                    {
-                        "name": "Scoped packages",
-                        "match": "^@",
-                        "order": 10
-                    },
-                    {
-                        "name": "Outside directory",
-                        "match": "^\\.\\./",
-                        "order": 20
-                    },
-                    {
-                        "name": "Inside directory",
-                        "match": "^\\./",
-                        "order": 30
-                    }
-                ],
-                "module-source-path": "full"
-            }
-        ],
         "prefer-switch": [true, { "min-cases": 2 }],
         "prefer-while": true,
         "return-undefined": true,

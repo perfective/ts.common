@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file -- Maybe<T>, Just<T>, Null<T>, Nothing<T> create cyclic dependency
-import { Predicate, Proposition, TypeGuard, Value, isTrue, valueOf } from '@perfective/fp';
-import { Present, isNull, isPresent, isUndefined } from '@perfective/value';
+import { isTrue, Predicate, Proposition, TypeGuard, Value, valueOf } from '@perfective/fp';
+import { isNull, isPresent, isUndefined, Present } from '@perfective/value';
 
 export abstract class Maybe<T> {
     protected constructor(

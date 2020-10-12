@@ -4,9 +4,9 @@ import { syntaxError } from '../error/syntax-error';
 import { typeError } from '../error/type-error';
 
 import {
-    Exception,
     causedBy,
     chainStack,
+    Exception,
     exception,
     fault,
     isException,

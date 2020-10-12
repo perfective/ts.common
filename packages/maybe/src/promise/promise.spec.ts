@@ -1,4 +1,4 @@
-import { Callback, Reject, Resolve, promise, result } from './promise';
+import { Callback, promise, Reject, Resolve, result } from './promise';
 
 function forward<T>(data: T | Error, callback: Callback<T>): void {
     if (data instanceof Error) {

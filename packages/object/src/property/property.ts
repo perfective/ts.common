@@ -1,15 +1,15 @@
-import { Predicate, Unary, isFunction } from '@perfective/fp';
+import { isFunction, Predicate, Unary } from '@perfective/fp';
 import {
     Absent,
     Defined,
-    NotNull,
-    Present,
     isAbsent,
     isDefined,
     isNotNull,
     isNull,
     isPresent,
     isUndefined,
+    NotNull,
+    Present,
 } from '@perfective/value';
 
 export type ObjectWithDefined<T, K extends keyof T> = T & {

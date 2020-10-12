@@ -20,6 +20,7 @@ and the [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-e
 * [`eslint-plugin-prefer-arrow`](https://github.com/TristonJ/eslint-plugin-prefer-arrow);
 * [`eslint-plugin-promise`](https://github.com/xjamundx/eslint-plugin-promise);
 * [`eslint-plugin-rxjs`](https://github.com/cartant/eslint-plugin-rxjs);
+* [`eslint-plugin-simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort#sort-order);
 * [`eslint-plugin-sonarjs`](https://github.com/SonarSource/eslint-plugin-sonarjs);
 * [`eslint-plugin-unicorn`](https://github.com/sindresorhus/eslint-plugin-unicorn).
 
@@ -48,6 +49,7 @@ npm install --save-dev \
     eslint-plugin-prefer-arrow \
     eslint-plugin-promise \
     eslint-plugin-rxjs \
+    eslint-plugin-simple-import-sort \
     eslint-plugin-sonarjs \
     eslint-plugin-unicorn \
     tslint

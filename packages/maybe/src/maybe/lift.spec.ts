@@ -11,7 +11,7 @@ import { decimal, isGreaterThan } from '@perfective/real';
 import { isPresent } from '@perfective/value';
 
 import { lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
-import { Maybe, just, nil, nothing } from './maybe';
+import { just, Maybe, nil, nothing } from './maybe';
 
 const list: Maybe<number>[] = [just(2.71), just(3.14), nothing<number>(), nil<number>()];
 

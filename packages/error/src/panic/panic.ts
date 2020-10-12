@@ -1,5 +1,5 @@
 import { isError } from '../error/error';
-import { Exception, causedBy } from '../exception/exception';
+import { causedBy, Exception } from '../exception/exception';
 import { ExceptionContext } from '../exception/exception-context';
 import { exceptionMessage } from '../exception/exception-message';
 import { ExceptionTokens } from '../exception/exception-tokens';

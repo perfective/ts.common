@@ -1,5 +1,5 @@
 import { Nullary, Value, valueOf } from '@perfective/fp';
-import { Maybe, just, nothing } from '@perfective/maybe';
+import { just, Maybe, nothing } from '@perfective/maybe';
 
 import { Statement } from './statement';
 

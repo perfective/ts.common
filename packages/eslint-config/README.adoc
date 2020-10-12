@@ -20,6 +20,7 @@ and the `link:https://github.com/typescript-eslint/typescript-eslint/tree/master
 * `link:https://github.com/TristonJ/eslint-plugin-prefer-arrow[eslint-plugin-prefer-arrow]`;
 * `link:https://github.com/xjamundx/eslint-plugin-promise[eslint-plugin-promise]`;
 * `link:https://github.com/cartant/eslint-plugin-rxjs[eslint-plugin-rxjs]`;
+* `link:https://github.com/lydell/eslint-plugin-simple-import-sort#sort-order[eslint-plugin-simple-import-sort]`;
 * `link:https://github.com/SonarSource/eslint-plugin-sonarjs[eslint-plugin-sonarjs]`;
 * `link:https://github.com/sindresorhus/eslint-plugin-unicorn[eslint-plugin-unicorn]`.
 
@@ -50,6 +51,7 @@ npm install --save-dev \
     eslint-plugin-prefer-arrow \
     eslint-plugin-promise \
     eslint-plugin-rxjs \
+    eslint-plugin-simple-import-sort \
     eslint-plugin-sonarjs \
     eslint-plugin-unicorn \
     tslint
@@ -105,7 +107,6 @@ There is no `community` edition of the TSLint config.
 
 * Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
 * Research `link:https://github.com/gajus/eslint-plugin-jsdoc[eslint-plugin-jsdoc]`.
-* Research `link:https://github.com/lydell/eslint-plugin-simple-import-sort[eslint-plugin-simple-import-sort]`.
 * Research `link:https://github.com/selaux/eslint-plugin-filenames[eslint-plugin-filenames]`.
 * Research `link:https://github.com/nodesecurity/eslint-plugin-security[eslint-plugin-security]`.
 * Research `link:https://github.com/testing-library/eslint-plugin-testing-library[eslint-plugin-testing-library]`.

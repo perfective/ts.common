@@ -1,4 +1,4 @@
-import { Predicate, Unary, constant, is, isFunction } from '@perfective/fp';
+import { constant, is, isFunction, Predicate, Unary } from '@perfective/fp';
 
 import { Statement } from './statement';
 

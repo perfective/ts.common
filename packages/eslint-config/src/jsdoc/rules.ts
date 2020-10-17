@@ -13,8 +13,6 @@ export = {
             allowExtraTrailingParamDocs: false,
             checkDestructured: true,
             checkRestProperty: false,
-            // TODO
-            // checkTypesPattern: false,
             enableFixer: true,
         }],
         'jsdoc/check-property-names': ['error', {

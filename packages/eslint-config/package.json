@@ -44,7 +44,7 @@
         "eslint-plugin-import": "^2.22.0",
         "eslint-plugin-jest": "^24.0.2",
         "eslint-plugin-jest-formatting": "^2.0.0",
-        "eslint-plugin-jsdoc": "^30.6.4",
+        "eslint-plugin-jsdoc": "^30.6.5",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prefer-arrow": "^1.2.2",
         "eslint-plugin-promise": "^4.2.1",

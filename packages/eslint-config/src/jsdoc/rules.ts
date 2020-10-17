@@ -5,7 +5,7 @@ export = {
         'jsdoc/check-alignment': 'error',
         // TODO: Determine if it can be configured to work with TypeScript
         'jsdoc/check-examples': 'off',
-        'jsdoc/check-indentation': 'error',
+        'jsdoc/check-indentation': 'off',
         // NOTE: "never" is not implemented yet by the plugin
         'jsdoc/check-line-alignment': ['off', 'never'],
         'jsdoc/check-param-names': ['error', {

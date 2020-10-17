@@ -83,7 +83,7 @@ export = {
                     replacement: 'extends',
                 },
                 todo: {
-                    message: "We expect immediate perfection, so don't leave to-dos in your code.",
+                    message: 'Use TODO for comments',
                 },
                 fires: {
                     replacement: 'emits',

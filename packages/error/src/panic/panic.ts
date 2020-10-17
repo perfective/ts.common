@@ -7,29 +7,33 @@ import { ExceptionTokens } from '../exception/exception-tokens';
 export type Panic = () => never;
 
 export function throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
-export function throws<E extends Error>(error: E | string): never;
+export function throws<E extends Error>(error: E | (() => E) | string): never;
 export function throws<E extends Error>(
-    error: E | string,
+    error: E | (() => E) | string,
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
 ): never {
     if (isError(error)) {
         throw error as Error;
     }
+    if (typeof error === 'function') {
+        throw error() as Error;
+    }
     throw new Exception(exceptionMessage(error, tokens), context, null);
 }
 
 export function panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic;
-export function panic<E extends Error>(error: E | string): Panic;
+export function panic<E extends Error>(error: E | (() => E) | string): Panic;
 export function panic<E extends Error>(
-    error: E | string,
+    error: E | (() => E) | string,
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
 ): Panic {
-    // eslint-disable-next-line @typescript-eslint/no-extra-parens -- conflicts with no-confusing-arrow
+    /* eslint-disable @typescript-eslint/no-extra-parens -- conflicts with no-confusing-arrow */
     return (): never => (
-        isError(error) ? throws(error) : throws(error, tokens, context)
+        (isError(error) || typeof error === 'function') ? throws(error) : throws(error, tokens, context)
     );
+    /* eslint-enable @typescript-eslint/no-extra-parens */
 }
 
 // eslint-disable-next-line max-params -- shorthand signature does not add complexity

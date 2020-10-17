@@ -22,6 +22,11 @@ describe('throws', () => {
         expect(() => throws(new TypeError()))
             .toThrow(TypeError);
     });
+
+    it('throws a custom error created by the passed function', () => {
+        expect(() => throws(() => new ReferenceError()))
+            .toThrow(ReferenceError);
+    });
 });
 
 describe('panic', () => {
@@ -41,6 +46,11 @@ describe('panic', () => {
     it('creates a function that throws a custom error', () => {
         expect(panic(new TypeError()))
             .toThrow(TypeError);
+    });
+
+    it('creates a function that throws a custom error created by the passed function', () => {
+        expect(panic(() => new RangeError()))
+            .toThrow(RangeError);
     });
 });
 

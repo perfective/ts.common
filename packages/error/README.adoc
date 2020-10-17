@@ -113,19 +113,19 @@ It supports message context as well.
 
 The package declares two functions to throw errors and two functions to rethrow them.
 
-* `throws<E extends Error>(error: E | string): never`
+* `throws<E extends Error>(error: E | (() => E) | string): never`
 +
 `throws<E extends Error>(message: string, context?: ExceptionContext): never`
 +
 The `throws` function is a syntax sugar around the `throw` operator
-that checks if the input is an `Error` or a `string`
+that checks if the input is an `Error`, a function that returns an `Error`, or a `string`,
 and throws an exception immediately.
 It may be used instead of the `throw new Exception()`,
 to handle a union type of `E extends Error | string`,
 to throw an exception in a one-line arrow function,
 or to avoid issues with the `@typescript-eslint/no-throw-literal` linter rule.
 +
-* `panic<E extends Error>(error: E | string): Panic`
+* `panic<E extends Error>(error: E | (() => E) | string): Panic`
 +
 `panic<E extends Error>(message: string, context?: ExceptionContext): Panic`
 +

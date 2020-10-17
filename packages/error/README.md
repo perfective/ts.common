@@ -34,6 +34,8 @@ in the repository.
 * Throwing errors:
     * `throws<E extends Error>(error: E): never` 
     — throws a provided error.
+    * `throws<E extends Error>(error: () => E): never` 
+    — throws an error created by the provided function.
     * `throws<E extends Error>(message: string, context: ExceptionContext = {}): never`
     — creates and throws an `Exception` with the given `message` and `context`.
     * `rethrows(previous: Error, message: string, context: ExceptionContext = {}): never`
@@ -43,6 +45,8 @@ in the repository.
     * `type Panic = () => never` — a type for functions that throw an error when executed: 
         * `panic<E extends Error>(error: E): Panic`
         — creates a function that throws a provided error.
+        * `panic<E extends Error>(error: () => E): Panic`
+        — creates a function that throws an error created by the provided function.
         * `panic<E extends Error>(message: string, context: ExceptionContext = {}): Panic`
         — creates a function that throws an `Exception` with the given `message` and `context`.
 * [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error):

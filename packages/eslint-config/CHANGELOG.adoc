@@ -3,13 +3,14 @@
 == v0.8.0 (next)
 
 * Upgraded `eslint` to `7.11.0`.
-* Upgraded `@typescript-eslint` to `4.4.0`.
+* Upgraded `@typescript-eslint` to `4.4.1`.
 * Upgraded `eslint-plugin-jest` to `24.1.0`.
 * Upgraded `eslint-plugin-import` to `2.22.1`.
+* Upgraded `eslint-plugin-unicorn` to `23.0.0`.
 * Added `eslint-plugin-array-func` support (`3.1.7`).
 * Added `eslint-plugin-simple-import-sort` support (`5.0.3`).
 ** Removed TSLint `ordered-imports` rule.
-* Added `eslint-plugin-jsdoc` support (`30.6.4`):
+* Added `eslint-plugin-jsdoc` support (`30.6.5`):
 ** Removed TSLint `jsdoc-format` and `no-redundant-jsdoc` rules.
 
 

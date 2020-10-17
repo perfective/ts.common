@@ -93,7 +93,7 @@ export = {
             overrideReplacesDocs: true,
             augmentsExtendsReplacesDocs: false,
             implementsReplacesDoc: false,
-            /* eslint-enable */
+            /* eslint-enable unicorn/prevent-abbreviations */
         },
     },
     overrides: [

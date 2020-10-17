@@ -12,9 +12,9 @@ describe('decimal', () => {
 
     it('parses a sequence of digits, "-", and "." into a real number', () => {
         expect(decimal('1234567890'))
-            .toStrictEqual(1234567890);
+            .toStrictEqual(1_234_567_890);
         expect(decimal('-123450.6789'))
-            .toStrictEqual(-123450.6789);
+            .toStrictEqual(-123_450.6789);
     });
 
     it('parses a string until the first character that is not a digit, ".", or "-"', () => {

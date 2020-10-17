@@ -1,6 +1,7 @@
 export = {
     rules: {
         'jest/consistent-test-it': ['warn', {
+            // eslint-disable-next-line unicorn/prevent-abbreviations -- option name
             fn: 'test',
             withinDescribe: 'it',
         }],

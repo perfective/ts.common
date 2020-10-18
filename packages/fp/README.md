@@ -56,10 +56,6 @@ in the repository.
 * `Proposition = Value<boolean>`:
     * `isTrue(proposition: Proposition): boolean`
     * `isFalse(proposition: Proposition): boolean`
-    * `always(): boolean`
-— a function that returns `true`.
-    * `never(): boolean`
-    — a function that returns `false.
 * `Predicate<T> = (value: T) => boolean`
 — a predicate on type T:
     * `is<T>(input: T): Predicate<T>`

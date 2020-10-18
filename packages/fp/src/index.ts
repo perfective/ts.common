@@ -26,10 +26,8 @@ export {
 
 export {
     Proposition,
-    always,
     isFalse,
     isTrue,
-    never,
 } from './function/proposition';
 
 export {

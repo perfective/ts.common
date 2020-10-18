@@ -9,11 +9,3 @@ export function isTrue(proposition: Proposition): boolean {
 export function isFalse(proposition: Proposition): boolean {
     return !valueOf(proposition);
 }
-
-export function always(): boolean {
-    return true;
-}
-
-export function never(): boolean {
-    return false;
-}

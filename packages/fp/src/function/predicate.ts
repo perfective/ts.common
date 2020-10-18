@@ -1,4 +1,5 @@
-import { isFalse, isTrue } from './proposition';
+import { valueOf } from './nullary';
+import { isFalse, isTrue, Proposition } from './proposition';
 import { Unary } from './unary';
 
 export type Predicate<T> = (value: T) => boolean;
@@ -9,6 +10,13 @@ export function is<T>(input: T): Predicate<T> {
 
 export function isNot<T>(input: T): Predicate<T> {
     return (value: T): boolean => value !== input;
+}
+
+/**
+ * Negates the given proposition value.
+ */
+export function negative(value: Proposition): boolean {
+    return !valueOf(value);
 }
 
 export function not<T>(predicate: Predicate<T>): Predicate<T> {

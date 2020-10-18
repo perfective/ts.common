@@ -20,6 +20,7 @@ export {
     exactly,
     is,
     isNot,
+    negative,
     neither,
     not,
 } from './function/predicate';

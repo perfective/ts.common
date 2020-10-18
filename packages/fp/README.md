@@ -62,6 +62,8 @@ in the repository.
     — creates a predicate that is `true` when its argument is the same as the `input`.
     * `isNot<T>(input: T): Predicate<T>`
     — creates a predicate that is `true` when its argument is not the same as the `input`.
+    * `negative(value: Proposition): boolean`
+    — negates the given proposition value.
     * `not<T>(predicate: Predicate<T>): Predicate<T>`
     — creates a predicate that negates the given predicate.
     * `all<T>(...predicates: Predicate<T>[]): Predicate<T>`

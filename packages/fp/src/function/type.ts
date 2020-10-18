@@ -5,6 +5,6 @@ export function isInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => v
     return (value: T | V): value is T => value instanceof type;
 }
 
-export function isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T {
-    return (value: T | V): value is T => !(value instanceof type);
+export function isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is V {
+    return (value: T | V): value is V => !(value instanceof type);
 }

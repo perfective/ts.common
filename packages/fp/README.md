@@ -18,7 +18,7 @@ in the repository.
 * `Type<T> = new(...args: any[]) => T`
 — definition for a type reference:
     * `isInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T`
-    * `isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T`
+    * `isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is V`
 
 ## Nullary functions
 

@@ -15,7 +15,7 @@ The functions of higher arity is unlikely to be added to the package.
 * `Type<T> = new(...args: any[]) => T`
 — definition for a type reference:
 ** `isInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T`
-** `isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T`
+** `isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is V`
 
 [WARNING]
 ====

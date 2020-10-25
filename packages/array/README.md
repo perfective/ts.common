@@ -21,6 +21,8 @@ The `@perfective/array` package provides functions for the standard JS
     — creates a shallow _sorted_ copy of an array
     * `unique<T>(array: T[]): T[]`
     — creates a shallow copy with all duplicate elements removed
+    * `wrapped<T>(value: T | T[]): T[]`
+    — if value is an array, returns the original array; otherwise returns an array with that value.
 * Type guards:
     * `isArray<T, V = unknown>(value: T[] | V): value is T[]`
     * `isNotArray<T, V = unknown>(value: T[] | V): value is V`

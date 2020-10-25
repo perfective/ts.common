@@ -14,6 +14,7 @@ export {
     reversed,
     sorted,
     unique,
+    wrapped,
 } from './array/array';
 
 export {

@@ -16,6 +16,7 @@ import {
     reversed,
     sorted,
     unique,
+    wrapped,
 } from './array';
 
 const alphabet: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -186,6 +187,20 @@ describe('unique', () => {
     it('filters values with the strict check', () => {
         expect(unique([{}, {}]))
             .toStrictEqual([{}, {}]);
+    });
+});
+
+describe('wrapped', () => {
+    it('returns the original array when the value is an array', () => {
+        expect(wrapped(['a', 'b', 'c']))
+            .toStrictEqual(['a', 'b', 'c']);
+    });
+
+    it('returns an array with a single element when the value is not an array', () => {
+        expect(wrapped({}))
+            .toStrictEqual([{}]);
+        expect(wrapped(0))
+            .toStrictEqual([0]);
     });
 });
 

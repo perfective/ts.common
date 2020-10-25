@@ -1,7 +1,7 @@
 import { Unary } from '@perfective/fp';
+import { isPresent } from '@perfective/value';
 
 import { Compare } from './lift';
-import { isPresent } from '@perfective/value';
 
 export function array<T>(...elements: T[]): T[] {
     return Array.of(...elements);
@@ -54,7 +54,7 @@ export function replicated<T>(argument1: T | number, argument2?: number): T[] | 
         /* eslint-enable array-func/prefer-array-from */
         /* eslint-enable @typescript-eslint/no-unsafe-assignment */
     }
-    return (value: T): T[] => [...new Array(argument1)].map(() => value);
+    return (value: T): T[] => Array.from(new Array(argument1), () => value);
 }
 
 export function reversed<T>(array: T[]): T[] {
@@ -72,6 +72,16 @@ export function sorted<T>(args1?: T[] | Compare<T>, args2?: Compare<T>): Unary<T
 
 export function unique<T>(array: T[]): T[] {
     return array.filter((value: T, index: number, values: T[]) => index === values.indexOf(value));
+}
+
+/**
+ * If value is an array, returns the original array; otherwise returns an array with that value.
+ */
+export function wrapped<T>(value: T | T[]): T[] {
+    if (Array.isArray(value)) {
+        return value;
+    }
+    return [value];
 }
 
 export function isArray<T, V = unknown>(value: T[] | V): value is T[] {

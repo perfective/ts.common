@@ -3,9 +3,10 @@
 == v0.5.0 (next)
 
 * Upgraded `@perfective/eslint-config` to `0.8.0`.
-* Upgraded `@angular-eslint` to `0.5.0-beta.4`.
-* Upgraded `angular` to `10.1.15`.
+* Upgraded `@angular-eslint` to `0.5.0-beta.5`.
 * Upgraded `codelyzer` to `6.0.1`.
+* Upgraded `eslint-plugin-jest-dom` to `3.2.4`.
+* Upgraded `eslint-plugin-rxjs-angular` to `1.0.1`.
 * Added `eslint-plugin-testing-library` support (`3.9.2`).
 
 == v0.4.0

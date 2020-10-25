@@ -77,5 +77,5 @@ Adding `tslint.json` to the project root:
 }
 ```
 
-Read the [full documentation](https://github.com/perfective/js/blob/master/packages/estlint-config/README.adoc) 
+Read the [full documentation](https://github.com/perfective/js/blob/master/packages/eslint-config/README.adoc) 
 in the repository.

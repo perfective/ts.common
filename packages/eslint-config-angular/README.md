@@ -70,5 +70,5 @@ Add `tslint.json` to the project root.
 }
 ```
 
-Read the [full documentation](https://github.com/perfective/js/blob/master/packages/estlint-config-angular/README.adoc) 
+Read the [full documentation](https://github.com/perfective/js/blob/master/packages/eslint-config-angular/README.adoc) 
 in the repository.

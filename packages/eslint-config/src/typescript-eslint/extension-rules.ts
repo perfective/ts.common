@@ -26,6 +26,7 @@ export = {
         '@typescript-eslint/dot-notation': ['warn', {
             allowKeywords: true,
             allowPrivateClassPropertyAccess: false,
+            allowProtectedClassPropertyAccess: false,
         }],
         'func-call-spacing': 'off',
         '@typescript-eslint/func-call-spacing': ['warn', 'never'],

@@ -14,7 +14,22 @@ export = {
         './jest-dom/rules',
         './rxjs-angular/rules',
     ],
-    rules: {},
+    rules: {
+        // The default, Angular-friendly, configuration
+        'rxjs/finnish': ['error', {
+            functions: true,
+            methods: true,
+            names: {
+                '^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate)$': false,
+            },
+            parameters: true,
+            properties: true,
+            types: {
+                '^EventEmitter$': false,
+            },
+            variables: true,
+        }],
+    },
     overrides: [
         {
             // TODO: Overrides conflicts with @typescript-eslint

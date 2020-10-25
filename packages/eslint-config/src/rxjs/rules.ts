@@ -1,8 +1,18 @@
 export = {
     rules: {
         'rxjs/ban-observables': 'error',
-        'rxjs/ban-operators': 'error',
-        'rxjs/finnish': 'error',
+        'rxjs/ban-operators': ['error', {
+            tap: false,
+        }],
+        'rxjs/finnish': ['error', {
+            functions: true,
+            methods: true,
+            names: {},
+            parameters: true,
+            properties: true,
+            types: {},
+            variables: true,
+        }],
         'rxjs/just': 'off',
         'rxjs/no-async-subscribe': 'error',
         'rxjs/no-compat': 'error',
@@ -31,7 +41,8 @@ export = {
         'rxjs/no-subclass': 'error',
         'rxjs/no-subject-unsubscribe': 'error',
         'rxjs/no-subject-value': 'error',
-        'rxjs/no-tap': 'error',
+        // Deprecated
+        'rxjs/no-tap': 'off',
         'rxjs/no-topromise': 'error',
         // See https://ncjamieson.com/avoiding-switchmap-related-bugs/
         'rxjs/no-unbound-methods': 'error',

@@ -12,6 +12,7 @@ import {
     isNotArray,
     isNotEmpty,
     length,
+    replicated,
     reversed,
     sorted,
     unique,
@@ -76,6 +77,54 @@ describe('flatten', () => {
             .toStrictEqual([]);
         expect(flatten([['a', 'b', 'c'], ['d', 'e'], ['f']]))
             .toStrictEqual(alphabet);
+    });
+});
+
+describe('replicated', () => {
+    describe('replicated(value, length)', () => {
+        it('creates an array of the given "length" with each elements equal the given "value"', () => {
+            expect(replicated(true, 3))
+                .toStrictEqual([true, true, true]);
+            expect(replicated(false, 0))
+                .toStrictEqual([]);
+        });
+
+        it('throws a RangeError for a negative "length"', () => {
+            expect(() => replicated(true, -3))
+                .toThrow(RangeError);
+            expect(() => replicated(true, -1))
+                .toThrow('Invalid array length');
+        });
+
+        it('throws a RangeError for a real "length"', () => {
+            expect(() => replicated(true, 3.14))
+                .toThrow(RangeError);
+            expect(() => replicated(true, 2.71))
+                .toThrow('Invalid array length');
+        });
+    });
+
+    describe('replicated(length)', () => {
+        it('creates an array of the given "length" with each elements equal the given "value"', () => {
+            expect(replicated(3)(false))
+                .toStrictEqual([false, false, false]);
+            expect(replicated(0)(null))
+                .toStrictEqual([]);
+        });
+
+        it('throws a RangeError for a negative "length"', () => {
+            expect(() => replicated(-3)(3.14))
+                .toThrow(RangeError);
+            expect(() => replicated(-1)(3.14))
+                .toThrow('Invalid array length');
+        });
+
+        it('throws a RangeError for a real "length"', () => {
+            expect(() => replicated(3.14)(0))
+                .toThrow(RangeError);
+            expect(() => replicated(2.71)(0))
+                .toThrow('Invalid array length');
+        });
     });
 });
 

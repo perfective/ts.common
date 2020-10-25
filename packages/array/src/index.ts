@@ -10,6 +10,7 @@ export {
     isNotArray,
     isNotEmpty,
     length,
+    replicated,
     reversed,
     sorted,
     unique,

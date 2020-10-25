@@ -11,6 +11,10 @@ The `@perfective/array` package provides functions for the standard JS
 — creates a shallow copy of an array
 ** `concatenated<T>(initial: T[], ...arrays: T[][]): T[]`
 ** `flatten<T>(arrays: T[][]): T[]`
+** `replicated<T>(value: T, length: number): T[]`
+— creates a new array of the given value replicated the given number of times.
+** `replicated<T>(length: number): Unary<T, T[]>`
+— creates a new function that replicates a given value the given number of times.
 ** `reversed<T>(array: T[]): T[]`
 — creates a shallow _reversed_ copy of an array
 ** `sorted<T>(array: T[], order?: Compare<T>): T[]`

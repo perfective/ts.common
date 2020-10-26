@@ -5,9 +5,6 @@ tsconfig.tsbuildinfo
 # Dependencies
 node_modules
 
-# Configuration
-jest.config.js
-
 # WebStorm
 *.iml
 *.launch

@@ -202,7 +202,9 @@ export = {
             asyncArrow: 'always',
         }],
         'space-in-parens': ['warn', 'never'],
-        'space-infix-ops': 'warn',
+        'space-infix-ops': ['warn', {
+            int32Hint: false,
+        }],
         'space-unary-ops': ['warn', {
             words: true,
             nonwords: false,

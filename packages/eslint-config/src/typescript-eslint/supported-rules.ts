@@ -115,6 +115,7 @@ export = {
         '@typescript-eslint/no-unnecessary-qualifier': 'warn',
         '@typescript-eslint/no-unnecessary-type-arguments': 'warn',
         '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+        '@typescript-eslint/no-unnecessary-type-constraint': 'warn',
         '@typescript-eslint/no-unsafe-assignment': 'error',
         '@typescript-eslint/no-unsafe-call': 'error',
         '@typescript-eslint/no-unsafe-member-access': 'error',

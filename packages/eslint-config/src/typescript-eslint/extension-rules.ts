@@ -111,5 +111,9 @@ export = {
             named: 'never',
             asyncArrow: 'always',
         }],
+        'space-infix-ops': 'off',
+        '@typescript-eslint/space-infix-ops': ['warn', {
+            int32Hint: false,
+        }],
     },
 };

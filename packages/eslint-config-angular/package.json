@@ -49,6 +49,6 @@
         "codelyzer": "^6.0.1",
         "eslint-plugin-jest-dom": "^3.2.4",
         "eslint-plugin-rxjs-angular": "^1.0.1",
-        "eslint-plugin-testing-library": "^3.9.2"
+        "eslint-plugin-testing-library": "^3.10.0"
     }
 }

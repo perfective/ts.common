@@ -8,6 +8,7 @@ export = {
             testIdPattern: '^[a-z0-9]+(-[a-z0-9]+)*$',
             testIdAttribute: 'data-testId',
         }],
+        'testing-library/no-await-sync-events': 'error',
         'testing-library/no-await-sync-query': 'error',
         'testing-library/no-debug': 'error',
         'testing-library/no-dom-import': 'warn',

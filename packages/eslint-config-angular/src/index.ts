@@ -13,6 +13,7 @@ export = {
         './angular/style',
         './jest-dom/rules',
         './rxjs-angular/rules',
+        './testing-library/rules',
     ],
     rules: {
         // The default, Angular-friendly, configuration

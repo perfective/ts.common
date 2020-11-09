@@ -18,6 +18,7 @@ export = {
         'rxjs/no-compat': 'error',
         'rxjs/no-connectable': 'error',
         'rxjs/no-create': 'error',
+        'rxjs/no-cyclic-action': 'error',
         // Fails for nullable and optional subjects, e.g.:
         //  new BehaviorSubject(null) != new BehaviorSubject<T | null>(null);
         'rxjs/no-explicit-generics': 'off',

@@ -6,7 +6,7 @@
 * Upgraded `@angular-eslint` to `0.6.0-beta.0`.
 * Upgraded `codelyzer` to `6.0.1`.
 * Upgraded `eslint-plugin-jest-dom` to `3.2.4`.
-* Upgraded `eslint-plugin-rxjs-angular` to `1.0.1`.
+* Upgraded `eslint-plugin-rxjs-angular` to `1.0.2`.
 * Added `eslint-plugin-testing-library` support (`3.10.0`).
 
 == v0.4.0

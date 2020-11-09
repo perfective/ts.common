@@ -11,7 +11,7 @@ describe('head', () => {
     });
 
     it('returns undefined when an array is empty', () => {
-        expect(head([]))
+        expect(head<string>([]))
             .toBeUndefined();
     });
 });
@@ -27,7 +27,7 @@ describe('tail', () => {
     });
 
     it('returns undefined when an array is empty', () => {
-        expect(tail([]))
+        expect(tail<string>([]))
             .toBeUndefined();
     });
 });

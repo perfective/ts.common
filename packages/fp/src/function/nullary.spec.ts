@@ -8,6 +8,7 @@ describe('constant', () => {
 
 describe('empty', () => {
     it('creates an empty function', () => {
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
         expect(empty()()).toBeUndefined();
     });
 });

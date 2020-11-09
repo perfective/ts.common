@@ -170,6 +170,7 @@ describe('forEach', () => {
         it('calls the "procedure" for each element of the array', () => {
             const copy: number[] = [];
 
+            // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
             expect(forEach<number>(value => copy.push(value))(irrational))
                 .toBeUndefined();
             expect(copy)
@@ -307,7 +308,7 @@ describe('pop', () => {
     });
 
     it('returns undefined when array is empty', () => {
-        expect(pop([]))
+        expect(pop<string>([]))
             .toBeUndefined();
     });
 });
@@ -403,7 +404,7 @@ describe('shift', () => {
     });
 
     it('returns undefined when array is empty', () => {
-        expect(shift([]))
+        expect(shift<string>([]))
             .toBeUndefined();
     });
 });

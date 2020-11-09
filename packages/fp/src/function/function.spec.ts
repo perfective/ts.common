@@ -8,6 +8,7 @@ describe('isFunction', () => {
     });
 
     it('returns false when value is not a function', () => {
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
         expect(isFunction(empty()())).toBe(false);
     });
 });
@@ -19,6 +20,7 @@ describe('isNotFunction', () => {
     });
 
     it('returns true when value is not a function', () => {
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
         expect(isNotFunction(empty()())).toBe(true);
     });
 });

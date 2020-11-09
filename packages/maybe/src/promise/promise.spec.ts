@@ -2,9 +2,10 @@ import { Callback, promise, Reject, Resolve, result } from './promise';
 
 function forward<T>(data: T | Error, callback: Callback<T>): void {
     if (data instanceof Error) {
-        return callback(data, undefined);
+        callback(data, undefined);
+        return;
     }
-    return callback(null, data);
+    callback(null, data);
 }
 
 async function promiseForward<T>(data: T | Error): Promise<T> {

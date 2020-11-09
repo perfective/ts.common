@@ -77,6 +77,10 @@ export = {
         }],
         '@typescript-eslint/no-base-to-string': 'error',
         '@typescript-eslint/no-confusing-non-null-assertion': 'warn',
+        '@typescript-eslint/no-confusing-void-expression': ['warn', {
+            ignoreArrowShorthand: true,
+            ignoreVoidOperator: false,
+        }],
         '@typescript-eslint/no-dynamic-delete': 'warn',
         '@typescript-eslint/no-empty-interface': ['warn', {
             allowSingleExtends: true,

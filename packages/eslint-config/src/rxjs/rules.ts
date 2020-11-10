@@ -31,7 +31,8 @@ export = {
         'rxjs/no-ignored-subscribe': 'error',
         'rxjs/no-ignored-subscription': 'error',
         'rxjs/no-ignored-takewhile-value': 'error',
-        'rxjs/no-implicit-any-catch': ['error', {
+        // TODO: Enable once the autofix bug is fixed.
+        'rxjs/no-implicit-any-catch': ['off', {
             allowExplicitAny: false,
         }],
         'rxjs/no-index': 'error',

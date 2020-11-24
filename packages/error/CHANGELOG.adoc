@@ -1,5 +1,10 @@
 = Changelog
 
+== v0.2.3
+
+* Support lazy error creation in the `panic` and `throws` functions.
+* Fix: invalid "exports" main target.
+
 == v0.2.2
 
 * Added `Panic` type.

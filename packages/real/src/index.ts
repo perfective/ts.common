@@ -1,3 +1,4 @@
+// ./interval
 export {
     Interval,
     interval,
@@ -9,6 +10,7 @@ export {
     range,
 } from './interval/interval';
 
+// ./math
 export {
     difference,
     product,
@@ -17,13 +19,13 @@ export {
     sum,
 } from './math/arithmetic';
 
+// ./number
 export {
     binary,
     decimal,
     hexadecimal,
     octal,
 } from './number/base';
-
 export {
     Integer,
     isInteger,
@@ -33,20 +35,17 @@ export {
     isPositiveInteger,
     isSafeInteger,
 } from './number/integer';
-
 export {
     Digits,
-    Precision,
     exponential,
     fixed,
+    Precision,
     precision,
 } from './number/lift';
-
 export {
     isNotNumber,
     isNumber,
 } from './number/number';
-
 export {
     ascending,
     descending,

@@ -1,14 +1,10 @@
+// ./object
 export {
     recordFromArray,
 } from './object/record';
 
+// ./property
 export {
-    ObjectWithAbsent,
-    ObjectWithDefined,
-    ObjectWithNotNull,
-    ObjectWithNull,
-    ObjectWithPresent,
-    ObjectWithUndefined,
     by,
     hasAbsentProperty,
     hasDefinedProperty,
@@ -16,5 +12,11 @@ export {
     hasNullProperty,
     hasPresentProperty,
     hasUndefinedProperty,
+    ObjectWithAbsent,
+    ObjectWithDefined,
+    ObjectWithNotNull,
+    ObjectWithNull,
+    ObjectWithPresent,
+    ObjectWithUndefined,
     property,
 } from './property/property';

@@ -1,3 +1,4 @@
+// ./error
 export {
     error,
     errorOutput,
@@ -31,16 +32,18 @@ export {
     typeError,
 } from './error/type-error';
 
+// ./error/trace
 export {
-    Trace,
     stackTrace,
+    Trace,
     trace,
 } from './error/trace/trace';
 
+// ./exception
 export {
-    Exception,
     causedBy,
     chainStack,
+    Exception,
     exception,
     fault,
     isException,
@@ -60,6 +63,7 @@ export {
     ExceptionTokens,
 } from './exception/exception-tokens';
 
+// ./panic
 export {
     Panic,
     panic,

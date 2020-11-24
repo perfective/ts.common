@@ -16,10 +16,9 @@ export {
     unique,
     wrapped,
 } from './array/array';
-
 export {
-    Element,
     append,
+    Element,
     element,
     first,
     head,
@@ -30,10 +29,8 @@ export {
     replace,
     tail,
 } from './array/element';
-
 export {
     Compare,
-    Reducer,
     concat,
     copyWithin,
     entries,
@@ -52,6 +49,7 @@ export {
     pop,
     push,
     reduce,
+    Reducer,
     reduceRight,
     reduceRightTo,
     reduceTo,
@@ -65,7 +63,6 @@ export {
     unshift,
     values,
 } from './array/lift';
-
 export {
     includedIn,
 } from './array/predicate';

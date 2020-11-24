@@ -1,3 +1,4 @@
+// ./maybe
 export {
     lift,
     onto,
@@ -12,22 +13,23 @@ export {
 } from './maybe/lift';
 export {
     Just,
-    Maybe,
-    Nil,
-    Nothing,
     just,
+    Maybe,
     maybe,
+    Nil,
     nil,
+    Nothing,
     nothing,
     nullable,
     optional,
 } from './maybe/maybe';
 
+// ./promise
 export {
     Callback,
+    promise,
     Reject,
     Resolve,
-    Run,
-    promise,
     result,
+    Run,
 } from './promise/promise';

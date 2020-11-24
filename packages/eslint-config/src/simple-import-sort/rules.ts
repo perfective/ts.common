@@ -1,6 +1,7 @@
 export = {
     rules: {
-        'simple-import-sort/sort': ['warn', {
+        'simple-import-sort/exports': 'warn',
+        'simple-import-sort/imports': ['warn', {
             groups: [
                 // Side effect imports
                 ['^\\u0000'],

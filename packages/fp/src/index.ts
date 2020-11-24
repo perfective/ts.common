@@ -1,18 +1,18 @@
 export {
+    Binary,
+} from './function/binary';
+export {
     isFunction,
     isNotFunction,
 } from './function/function';
-
 export {
-    Nullary,
-    Value,
     constant,
     empty,
+    Nullary,
+    Value,
     valueOf,
 } from './function/nullary';
-
 export {
-    Predicate,
     all,
     atLeast,
     atMost,
@@ -23,33 +23,25 @@ export {
     negative,
     neither,
     not,
+    Predicate,
 } from './function/predicate';
-
 export {
-    Proposition,
     isFalse,
     isTrue,
+    Proposition,
 } from './function/proposition';
-
-export {
-    Type,
-    isInstanceOf,
-    isNotInstanceOf,
-} from './function/type';
-
-export {
-    TypeGuard,
-} from './function/type-guard';
-
-export {
-    Unary,
-    same,
-} from './function/unary';
-
-export {
-    Binary,
-} from './function/binary';
-
 export {
     Ternary,
 } from './function/ternary';
+export {
+    isInstanceOf,
+    isNotInstanceOf,
+    Type,
+} from './function/type';
+export {
+    TypeGuard,
+} from './function/type-guard';
+export {
+    same,
+    Unary,
+} from './function/unary';

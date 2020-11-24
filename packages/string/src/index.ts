@@ -1,12 +1,7 @@
 export {
     lines,
 } from './string/array';
-
 export {
-    Replacement,
-    UnicodeCanonicalEquivalenceNormalization,
-    UnicodeCompatibilityNormalization,
-    UnicodeNormalizationForm,
     charAt,
     charCodeAt,
     codePointAt,
@@ -21,25 +16,26 @@ export {
     padStart,
     repeat,
     replace,
+    Replacement,
     replaceWith,
     search,
     slice,
     split,
     startsWith,
     trim,
+    UnicodeCanonicalEquivalenceNormalization,
+    UnicodeCompatibilityNormalization,
+    UnicodeNormalizationForm,
     upperCase,
 } from './string/lift';
-
 export {
+    isNotOutput,
+    isOutput,
     Output,
     output,
-    isOutput,
-    isNotOutput,
 } from './string/output';
-
 export {
     CodePoint,
-    Utf16CodeUnit,
     isEmpty,
     isNotEmpty,
     isNotString,
@@ -47,4 +43,5 @@ export {
     length,
     stringFromCharCode,
     stringFromCodePoint,
+    Utf16CodeUnit,
 } from './string/string';

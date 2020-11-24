@@ -1,6 +1,6 @@
 {
     "name": "@perfective/value",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Functions to work with `undefined` and `null` values",
     "keywords": [
         "value",
@@ -26,8 +26,8 @@
     "module": "dist/mjs/index.js",
     "types": "dist/mjs/index.d.ts",
     "exports": {
-        "import": "dist/mjs/index.js",
-        "require": "dist/cjs/index.js"
+        "import": "./dist/mjs/index.js",
+        "require": "./dist/cjs/index.js"
     },
     "files": [
         "dist/cjs",

@@ -25,7 +25,9 @@ export = {
         'no-case-declarations': 'error',
         'no-constructor-return': 'error',
         'no-div-regex': 'warn',
-        'no-else-return': ['warn', { allowElseIf: false }],
+        'no-else-return': ['warn', {
+            allowElseIf: false,
+        }],
         'no-empty-function': 'error',
         'no-empty-pattern': 'error',
         'no-eq-null': 'error',
@@ -50,6 +52,7 @@ export = {
         'no-new': 'error',
         'no-new-func': 'error',
         'no-new-wrappers': 'error',
+        'no-nonoctal-decimal-escape': 'error',
         'no-octal': 'error',
         'no-octal-escape': 'error',
         'no-param-reassign': 'error',

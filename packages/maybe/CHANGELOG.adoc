@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.5.1
+
+* Fix: invalid "exports" main target.
+
 == v0.5.0
 
 * Compiled `ES6` and `CommonsJS` modules.

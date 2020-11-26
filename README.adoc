@@ -126,16 +126,16 @@ so that WebStorm can pick them up in the packages' imports before the build.
 as the paths can be set only for the files included in the project.
 * WebStorm picks up the `tsconfig.json` provided in the package as the default configuration,
 which breaks the paths option recognition.
-Thus, instead, builds use the `tslint.build.json` in each package,
+Thus, instead, builds use the `tsconfig.build.mjs.json` and `tsconfig.build.cjs.json` in each package,
 which extends the `tsconfig.strict.json` directly.
-* As WebStorm does not recognize `tsconfig.build.json` in each package as the source of truth,
+* As WebStorm does not recognize package-based `tsconfig.build.*.json` as the source of truth,
 it reports errors in the `eslint-config` and `eslint-config-angular` packages,
 which must use CommonJS exports.
 To work around this issue,
-the root `tsconfig.json` contains provides `compilerOptions.module: "commonjs"` override.
+the root `tsconfig.json` provides `compilerOptions.module: "commonjs"` override.
 It does not affect anything, except the WebStorm.
-* Linters use an additional `tslint.lint.json` in each package,
-which does extend the root `tsconfig.json` to pick up the `compilerOptions.paths`.
+* Linters use an additional `tsconfig.lint.json` in each package,
+which _do_ extend the root `tsconfig.json` to pick up the `compilerOptions.paths`.
 
 === Documentation
 

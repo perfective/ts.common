@@ -1,6 +1,0 @@
-{
-    "rules": {
-        "no-default-import": true,
-        "no-mergeable-namespace": true
-    }
-}

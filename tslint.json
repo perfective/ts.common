@@ -1,3 +1,0 @@
-{
-    "extends": ["@perfective/eslint-config/tslint"]
-}

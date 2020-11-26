@@ -1,3 +1,5 @@
+import { tslint } from './tslint';
+
 export = {
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -16,6 +18,7 @@ export = {
     },
     plugins: [
         '@typescript-eslint',
+        '@typescript-eslint/tslint',
         'array-func',
         'deprecation',
         'eslint-comments',
@@ -95,6 +98,11 @@ export = {
             implementsReplacesDoc: false,
             /* eslint-enable unicorn/prevent-abbreviations */
         },
+    },
+    rules: {
+        '@typescript-eslint/tslint/config': ['warn', {
+            rules: tslint,
+        }],
     },
     overrides: [
         {

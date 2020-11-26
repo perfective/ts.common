@@ -1,7 +1,0 @@
-{
-    "rules": {
-        "angular-whitespace": false,
-        "import-destructuring-spacing": true,
-        "prefer-inline-decorator": false
-    }
-}

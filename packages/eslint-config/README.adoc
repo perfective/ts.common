@@ -21,7 +21,7 @@ and the `link:https://github.com/typescript-eslint/typescript-eslint/tree/master
 * `link:https://github.com/TristonJ/eslint-plugin-prefer-arrow[eslint-plugin-prefer-arrow]`;
 * `link:https://github.com/xjamundx/eslint-plugin-promise[eslint-plugin-promise]`;
 * `link:https://github.com/cartant/eslint-plugin-rxjs[eslint-plugin-rxjs]`;
-* `link:https://github.com/lydell/eslint-plugin-simple-import-sort#sort-order[eslint-plugin-simple-import-sort]`;
+* `link:https://github.com/lydell/eslint-plugin-simple-import-sort[eslint-plugin-simple-import-sort]`;
 * `link:https://github.com/SonarSource/eslint-plugin-sonarjs[eslint-plugin-sonarjs]`;
 * `link:https://github.com/sindresorhus/eslint-plugin-unicorn[eslint-plugin-unicorn]`.
 
@@ -39,6 +39,7 @@ from issues that will be fixed automatically.
 npm install --save-dev \
     @perfective/eslint-config \
     @typescript-eslint/eslint-plugin \
+    @typescript-eslint/eslint-plugin-tslint \
     @typescript-eslint/parser \
     eslint \
     eslint-import-resolver-typescript \
@@ -73,10 +74,8 @@ npm install --save-dev \
 == Community Configuration
 
 As the default config may seem too strict,
-the package also provides the slightly relaxed `community` configuration.
-Its rules, like the line length,
-provide more common in open source communities settings.
-Some of these setting may eventually be used in the default config.
+the package also provides a slightly relaxed `community` configuration.
+Some settings used in the `community` config may be eventually migrated into the default config.
 
 .Using community config in the `.eslintrc.json`.
 [source,json]
@@ -89,23 +88,34 @@ Some of these setting may eventually be used in the default config.
 == TSLint
 
 ESLint and its plugins replace most of the https://palantir.github.io/tslint/[TSLint] rules.
-Yet, there are plenty of rules that need to be supported.
-Until then, it's recommended to also use the TSLint and its configuration.
+Yet, there are few rules that still need to be supported.
+TSLint rules are executed using the
+https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin-tslint[ESLint Plugin TSLint].
 
-.Adding `tslint.json` to the project root.
-[source,json]
+`eslint-plugin-tslint` provides only one rule `@typescript-eslint/tslint/config`
+that configures all the remaining TSLint rules,
+so in order to override some of them,
+first import the original set of rules and then re-configure the `@typescript-eslint/tslint/config` rule:
+
+[source,typescript]
 ----
-{
-    "extends": ["@perfective/eslint-config/tslint"]
+import { tslint } from '@perfective/eslint-config/dist/tslint';
+
+export = {
+    rules: {
+        '@typescript-eslint/tslint/config': ['error', {
+            rules: {
+                ...tslint,
+                'no-default-import': false, // <.>
+            },
+        }],
+    }
 }
 ----
-
-[NOTE]
-====
-There is no `community` edition of the TSLint config.
-====
+<1> Overriding only one of the rules,
+while keeping all others set by default.
 
 == Roadmap
 
 * Add `@perfective/eslint-plugin` with the rules for working with the `@perfective` library.
-* Replace all TSLint rules with ESLint rules from plugins; drop TSLint support.
+* Replace all TSLint rules with ESLint rules.

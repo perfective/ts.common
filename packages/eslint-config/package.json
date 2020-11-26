@@ -22,19 +22,18 @@
         "lib": "dist"
     },
     "files": [
-        "dist",
-        "tslint"
+        "dist"
     ],
     "scripts": {
         "build": "tsc --project ./tsconfig.build.json",
         "build:clean": "npm run clean && npm run build",
         "clean": "rm -rf dist && rm -f *.tsbuildinfo",
-        "lint": "npm run lint:eslint; npm run lint:tslint",
-        "lint:eslint": "eslint --fix --ext .ts ./src",
-        "lint:tslint": "tslint --fix --project ./tsconfig.lint.json"
+        "lint": "npm run lint:eslint",
+        "lint:eslint": "eslint --fix --ext .ts ./src"
     },
     "peerDependencies": {
         "@typescript-eslint/eslint-plugin": "^4.8.2",
+        "@typescript-eslint/eslint-plugin-tslint": "^4.8.2",
         "@typescript-eslint/parser": "^4.8.2",
         "eslint": "^7.14.0",
         "eslint-import-resolver-typescript": "^2.3.0",

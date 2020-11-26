@@ -1,3 +1,7 @@
+import { tslint } from '@perfective/eslint-config/dist/tslint';
+
+import { codelyzer } from './codelyzer';
+
 export = {
     plugins: [
         '@angular-eslint',
@@ -16,6 +20,16 @@ export = {
         './testing-library/rules',
     ],
     rules: {
+        // Legacy rules for TSLint and Codelyzer
+        '@typescript-eslint/tslint/config': ['warn', {
+            rules: {
+                ...tslint,
+                ...codelyzer,
+            },
+            rulesDirectory: [
+                'codelyzer',
+            ],
+        }],
         // The default, Angular-friendly, configuration
         'rxjs/finnish': ['error', {
             functions: true,

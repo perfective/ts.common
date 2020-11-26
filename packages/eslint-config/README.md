@@ -21,7 +21,7 @@ and the [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-e
 * [`eslint-plugin-prefer-arrow`](https://github.com/TristonJ/eslint-plugin-prefer-arrow);
 * [`eslint-plugin-promise`](https://github.com/xjamundx/eslint-plugin-promise);
 * [`eslint-plugin-rxjs`](https://github.com/cartant/eslint-plugin-rxjs);
-* [`eslint-plugin-simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort#sort-order);
+* [`eslint-plugin-simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort);
 * [`eslint-plugin-sonarjs`](https://github.com/SonarSource/eslint-plugin-sonarjs);
 * [`eslint-plugin-unicorn`](https://github.com/sindresorhus/eslint-plugin-unicorn).
 
@@ -37,6 +37,7 @@ Require `@perfective/eslint-config` and its peer dependencies as dev dependencie
 npm install --save-dev \
     @perfective/eslint-config \
     @typescript-eslint/eslint-plugin \
+    @typescript-eslint/eslint-plugin-tslint \
     @typescript-eslint/parser \
     eslint \
     eslint-import-resolver-typescript \
@@ -66,16 +67,10 @@ Require the configuration in your root `.eslintrc.js` or `.eslintrc.json`.
 
 ## TSLint
 
-ESLint and its plugins replace most of the [TSLint](https://palantir.github.io/tslint/) rules.
-Yet, there are plenty of rules that need to be supported.
-Until then, it's recommended to also use the TSLint and its configuration.
-
-Adding `tslint.json` to the project root:
-```json
-{
-    "extends": ["@perfective/eslint-config/tslint"]
-}
-```
+ESLint and its plugins replace most of the https://palantir.github.io/tslint/[TSLint] rules.
+Yet, there are few rules that still need to be supported.
+TSLint rules are executed using the
+https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin-tslint[ESLint Plugin TSLint].
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/eslint-config/README.adoc) 
 in the repository.

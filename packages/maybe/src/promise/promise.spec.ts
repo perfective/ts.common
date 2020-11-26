@@ -2,7 +2,7 @@ import { Callback, promise, Reject, Resolve, result } from './promise';
 
 function forward<T>(data: T | Error, callback: Callback<T>): void {
     if (data instanceof Error) {
-        callback(data, undefined);
+        callback(data, null as unknown as T);
         return;
     }
     callback(null, data);

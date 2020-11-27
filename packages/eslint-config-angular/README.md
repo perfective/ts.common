@@ -23,6 +23,7 @@ npm install --save-dev \
     @angular-eslint/eslint-plugin-template \
     @angular-eslint/template-parser \
     @typescript-eslint/eslint-plugin \
+    @typescript-eslint/eslint-plugin-tslint \
     @typescript-eslint/parser \
     eslint \
     eslint-import-resolver-typescript \
@@ -62,13 +63,8 @@ While the [`@angular-eslint/eslint-plugin`](https://github.com/angular-eslint/an
 still in active development,
 [Codelyzer](https://github.com/mgechev/codelyzer) is used to increase the quality coverage.
 It's based on the deprecated [TSLint](https://palantir.github.io/tslint/).
-
-Add `tslint.json` to the project root.
-```json
-{
-    "extends": ["@perfective/eslint-config-angular/tslint"]
-}
-```
+TSLint rules are executed using the
+[ESLint Plugin TSLint](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin-tslint).
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/eslint-config-angular/README.adoc) 
 in the repository.

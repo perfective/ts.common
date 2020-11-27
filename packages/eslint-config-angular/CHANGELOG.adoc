@@ -1,5 +1,16 @@
 = Changelog
 
+== v0.6.0 (next)
+
+* Added `@typescript-eslint/eslint-plugin-tslint` to run TSLint Codelyzer rules.
+** Added `@perfective/eslint-config-angular/codelyzer` subpackage to export the default Codelyzer rules.
+** Removed TSLint Codelyzer configuration.
+* Moved the community config into the `@perfective/eslint-config-angular/community` subpackage.
+* Upgraded `@perfective/eslint-config` to `0.9.0`.
+* Upgraded `@angular-eslint` to `0.8.0-beta.2`.
+* Upgraded `eslint-plugin-testing-library` to `3.10.1`.
+* Upgraded `eslint-plugin-jest-dom` to `3.3.0`.
+
 == v0.5.0
 
 * Upgraded `@perfective/eslint-config` to `0.8.0`.

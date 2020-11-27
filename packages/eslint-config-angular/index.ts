@@ -11,13 +11,13 @@ export = {
     ],
     extends: [
         '@perfective/eslint-config',
-        './angular/rules',
-        './angular/functionality',
-        './angular/maintainability',
-        './angular/style',
-        './jest-dom/rules',
-        './rxjs-angular/rules',
-        './testing-library/rules',
+        './rules/angular/best-practices',
+        './rules/angular/functionality',
+        './rules/angular/maintainability',
+        './rules/angular/style',
+        './rules/jest-dom',
+        './rules/rxjs-angular',
+        './rules/testing-library',
     ],
     rules: {
         // Legacy rules for TSLint and Codelyzer

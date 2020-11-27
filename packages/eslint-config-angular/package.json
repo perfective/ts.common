@@ -24,19 +24,20 @@
         "directory": "packages/eslint-config-angular"
     },
     "license": "MIT",
-    "main": "dist/index.js",
+    "main": "./index.js",
     "directories": {
-        "lib": "dist"
+        "lib": "."
     },
     "files": [
-        "dist"
+        "**/*.js",
+        "codelyzer/index.d.ts"
     ],
     "scripts": {
         "build": "tsc --project ./tsconfig.build.json",
         "build:clean": "npm run clean && npm run build",
-        "clean": "rm -rf dist && rm -f *.tsbuildinfo",
+        "clean": "rimraf *.tsbuildinfo **/*.d.ts **/*.js **/*.map",
         "lint": "npm run lint:eslint",
-        "lint:eslint": "eslint --fix --ext .ts ./src"
+        "lint:eslint": "eslint --fix --ext .ts ./"
     },
     "dependencies": {
         "@perfective/eslint-config": "^0.8.0"

@@ -1,0 +1,4 @@
+{
+    "name": "@perfective/eslint-config-angular/community",
+    "main": "./index.js"
+}

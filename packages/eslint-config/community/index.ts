@@ -1,5 +1,5 @@
 export = {
-    extends: './',
+    extends: '../',
     rules: {
         'arrow-body-style': ['error', 'as-needed'],
         'function-paren-newline': ['error', 'multiline-arguments'],

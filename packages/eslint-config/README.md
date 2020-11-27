@@ -67,10 +67,10 @@ Require the configuration in your root `.eslintrc.js` or `.eslintrc.json`.
 
 ## TSLint
 
-ESLint and its plugins replace most of the https://palantir.github.io/tslint/[TSLint] rules.
+ESLint and its plugins replace most of the [TSLint](https://palantir.github.io/tslint/) rules.
 Yet, there are few rules that still need to be supported.
 TSLint rules are executed using the
-https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin-tslint[ESLint Plugin TSLint].
+[ESLint Plugin TSLint](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin-tslint).
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/eslint-config/README.adoc) 
 in the repository.

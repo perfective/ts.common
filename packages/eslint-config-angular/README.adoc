@@ -62,8 +62,8 @@ npm install --save-dev \
 +
 [NOTE]
 ====
-Use `@perfective/eslint-config-angular/dist/community` for a less strict configuration,
-based on the `@perfective/eslint-config/dist/community`.
+Use `@perfective/eslint-config-angular/community` for a less strict configuration,
+based on the `@perfective/eslint-config/community`.
 ====
 +
 . Configure your `.eslintignore` file.

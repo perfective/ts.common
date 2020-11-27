@@ -1,4 +1,4 @@
-import { Rules } from '@perfective/eslint-config/dist/tslint';
+import { Rules } from '@perfective/eslint-config/tslint';
 
 const functionality: Rules = {
     'contextual-decorator': true,

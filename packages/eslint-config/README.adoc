@@ -81,7 +81,7 @@ Some settings used in the `community` config may be eventually migrated into the
 [source,json]
 ----
 {
-    "extends": ["@perfective/eslint-config/dist/community"]
+    "extends": ["@perfective/eslint-config/community"]
 }
 ----
 
@@ -99,7 +99,7 @@ first import the original set of rules and then re-configure the `@typescript-es
 
 [source,typescript]
 ----
-import { tslint } from '@perfective/eslint-config/dist/tslint';
+import { tslint } from '@perfective/eslint-config/tslint';
 
 export = {
     rules: {

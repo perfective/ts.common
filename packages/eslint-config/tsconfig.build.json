@@ -4,11 +4,9 @@
         "declaration": true,
         "declarationMap": true,
         "module": "commonjs",
-        "outDir": "dist",
-        "rootDir": "src"
+        "rootDir": "./"
     },
     "exclude": [
-        "dist",
-        "src/**/*.spec.ts"
+        "./**/*.spec.ts"
     ]
 }

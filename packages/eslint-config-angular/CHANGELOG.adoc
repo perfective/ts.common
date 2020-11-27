@@ -82,6 +82,6 @@
 == v0.1.0
 
 * Initialized ESLint configs `@perfective/eslint-config-angular`
-and `@perfective/eslint-config-angular/dist/community`.
+and `@perfective/eslint-config-angular/community`.
 * Initialized TSLint config `@perfective/eslint-config-angular/tslint`
 based on https://github.com/mgechev/codelyzer[Codelyzer].

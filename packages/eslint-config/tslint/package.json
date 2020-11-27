@@ -1,0 +1,4 @@
+{
+    "name": "@perfective/eslint-config/tslint",
+    "main": "./index.js"
+}

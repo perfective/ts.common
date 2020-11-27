@@ -1,7 +1,7 @@
 export = {
     extends: [
         './',
-        '@perfective/eslint-config/dist/community',
+        '@perfective/eslint-config/community',
     ],
     rules: {},
 };

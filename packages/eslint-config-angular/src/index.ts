@@ -1,4 +1,4 @@
-import { tslint } from '@perfective/eslint-config/dist/tslint';
+import { tslint } from '@perfective/eslint-config/tslint';
 
 import { codelyzer } from './codelyzer';
 

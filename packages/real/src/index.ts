@@ -18,6 +18,10 @@ export {
     remainder,
     sum,
 } from './math/arithmetic';
+export {
+    maximum,
+    minimum,
+} from './math/set';
 
 // ./number
 export {

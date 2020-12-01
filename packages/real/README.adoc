@@ -22,13 +22,6 @@ returns a number in the fixed-point notation with the given digits after the dec
 — returns a function that
 returns a number in the exponential or fixed-point notation with the given precision.
 +
-* Arithmetic functions:
-** `sum(augend: number, addend: number): number`
-** `difference(minuend: number, subtrahend: number): number`
-** `product(multiplier: number, multiplicand: number): number`
-** `quotient(dividend: number, divisor: number): number`
-** `remainder(dividend: number, divisor: number): number`.
-
 [WARNING]
 ====
 In JavaScript, a `Number` only keeps 17 decimal places of precision,
@@ -36,6 +29,19 @@ while `Digit` is an integer from `0` to `20`,
 and `Precision` is an integer from `1` to `21`.
 So passing digits or precision over 15 requires careful consideration and thorough testing.
 ====
++
+* Arithmetic functions:
+** `sum(augend: number, addend: number): number`
+** `difference(minuend: number, subtrahend: number): number`
+** `product(multiplier: number, multiplicand: number): number`
+** `quotient(dividend: number, divisor: number): number`
+** `remainder(dividend: number, divisor: number): number`.
++
+* Set functions:
+** `maximum(values: readonly number[]): number | null`
+— returns the maximum number if array contains numbers, `null` otherwise.
+** `minimum(values: readonly number[]): number | null`
+— returns the minimum number if array contains numbers, `null` otherwise.
 
 
 == Integer

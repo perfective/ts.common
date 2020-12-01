@@ -22,6 +22,9 @@ on the Github.
     * `product(multiplier: number, multiplicand: number): number`
     * `quotient(dividend: number, divisor: number): number`
     * `remainder(dividend: number, divisor: number): number`
+* Set functions:
+    * `maximum(values: readonly number[]): number | null`
+    * `minimum(values: readonly number[]): number | null`
 
 ## Integer
 

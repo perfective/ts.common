@@ -12,9 +12,9 @@
         "test:verbose": "lerna run --stream --no-bail --no-prefix test:verbose"
     },
     "devDependencies": {
-        "@angular-eslint/eslint-plugin": "^0.8.0-beta.3",
-        "@angular-eslint/eslint-plugin-template": "^0.8.0-beta.3",
-        "@angular-eslint/template-parser": "^0.8.0-beta.3",
+        "@angular-eslint/eslint-plugin": "^0.8.0-beta.5",
+        "@angular-eslint/eslint-plugin-template": "^0.8.0-beta.5",
+        "@angular-eslint/template-parser": "^0.8.0-beta.5",
         "@angular/compiler": "^10.2.0",
         "@angular/core": "^10.2.0",
         "@jest/types": "^26.6.2",

@@ -61,6 +61,7 @@ export = {
                 '@angular-eslint/template/no-call-expression': 'off',
                 // TODO: Fails with "Cannot read property 'start' of undefined
                 '@angular-eslint/template/no-negated-async': 'off',
+                '@angular-eslint/template/use-track-by-functions': 'error',
             },
         },
     ],

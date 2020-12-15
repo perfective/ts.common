@@ -128,6 +128,7 @@ export = {
             ignoreArgsIfArgsAfterAreUsed: true,
         }],
         '@typescript-eslint/no-var-requires': 'error',
+        '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
         '@typescript-eslint/prefer-as-const': 'warn',
         '@typescript-eslint/prefer-enum-initializers': 'error',
         '@typescript-eslint/prefer-for-of': 'error',

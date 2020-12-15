@@ -9,7 +9,9 @@ export = {
         'jest-dom/prefer-in-document': 'off',
         'jest-dom/prefer-required': 'warn',
         'jest-dom/prefer-to-have-attribute': 'warn',
+        'jest-dom/prefer-to-have-class': 'warn',
         'jest-dom/prefer-to-have-style': 'warn',
         'jest-dom/prefer-to-have-text-content': 'warn',
+        'jest-dom/prefer-to-have-value': 'warn',
     },
 };

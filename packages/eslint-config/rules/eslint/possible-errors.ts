@@ -39,6 +39,7 @@ export = {
         'no-unreachable-loop': 'error',
         'no-unsafe-finally': 'error',
         'no-unsafe-negation': 'error',
+        'no-unsafe-optional-chaining': 'error',
         'no-useless-backreference': 'error',
         'require-atomic-updates': 'error',
         'use-isnan': 'error',

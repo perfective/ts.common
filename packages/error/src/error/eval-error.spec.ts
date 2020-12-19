@@ -9,7 +9,7 @@ describe('evalError', () => {
 
 describe('isEvalError', () => {
     it('returns true when value is an EvalError', () => {
-        expect(isEvalError(new EvalError()))
+        expect(isEvalError(new EvalError('Error')))
             .toBe(true);
     });
 
@@ -21,7 +21,7 @@ describe('isEvalError', () => {
 
 describe('isNotEvalError', () => {
     it('returns false when value is an EvalError', () => {
-        expect(isNotEvalError(new EvalError()))
+        expect(isNotEvalError(new EvalError('Error')))
             .toBe(false);
     });
 

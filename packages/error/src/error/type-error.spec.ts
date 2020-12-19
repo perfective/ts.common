@@ -9,7 +9,7 @@ describe('typeError', () => {
 
 describe('isTypeError', () => {
     it('returns true when value is an TypeError', () => {
-        expect(isTypeError(new TypeError()))
+        expect(isTypeError(new TypeError('Error')))
             .toBe(true);
     });
 
@@ -21,7 +21,7 @@ describe('isTypeError', () => {
 
 describe('isNotTypeError', () => {
     it('returns false when value is an TypeError', () => {
-        expect(isNotTypeError(new TypeError()))
+        expect(isNotTypeError(new TypeError('Error')))
             .toBe(false);
     });
 

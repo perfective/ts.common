@@ -82,9 +82,9 @@ describe('quotient', () => {
 
     it('returns Infinity when divisor is 0', () => {
         expect(quotient(5, 0))
-            .toStrictEqual(Infinity);
+            .toStrictEqual(Number.POSITIVE_INFINITY);
         expect(quotient(-5, 0))
-            .toStrictEqual(-Infinity);
+            .toStrictEqual(Number.NEGATIVE_INFINITY);
     });
 });
 

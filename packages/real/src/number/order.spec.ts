@@ -13,7 +13,7 @@ describe('isEqualTo', () => {
     describe('isEqualTo(Number)', () => {
         it('is true when a value is equal to the Number', () => {
             expect(isEqualTo(0)(0)).toBe(true);
-            expect(isEqualTo(Infinity)(Infinity)).toBe(true);
+            expect(isEqualTo(Number.POSITIVE_INFINITY)(Number.POSITIVE_INFINITY)).toBe(true);
             expect(isEqualTo(Number.MAX_VALUE)(Number.MAX_VALUE)).toBe(true);
             expect(isEqualTo(Number.MIN_VALUE)(Number.MIN_VALUE)).toBe(true);
             expect(isEqualTo(Number.POSITIVE_INFINITY)(Number.POSITIVE_INFINITY)).toBe(true);

@@ -13,8 +13,7 @@ export abstract class Maybe<T> {
     protected constructor(
         public readonly value: T | null | undefined,
         private readonly none: <U>() => Nothing<U> | Nil<U>,
-    ) {
-    }
+    ) {}
 
     public onto<U>(bind: (value: T) => Maybe<U>): Maybe<U> {
         if (isPresent(this.value)) {

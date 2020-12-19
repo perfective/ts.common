@@ -1,8 +1,7 @@
 export class Identity<T> {
     public constructor(
         public readonly value: T,
-    ) {
-    }
+    ) {}
 
     public onto<U>(bind: (value: T) => Identity<U>): Identity<U> {
         return bind(this.value);

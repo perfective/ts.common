@@ -9,7 +9,7 @@ describe('rangeError', () => {
 
 describe('isRangeError', () => {
     it('returns true when value is an RangeError', () => {
-        expect(isRangeError(new RangeError()))
+        expect(isRangeError(new RangeError('Error')))
             .toBe(true);
     });
 
@@ -21,7 +21,7 @@ describe('isRangeError', () => {
 
 describe('isNotRangeError', () => {
     it('returns false when value is an RangeError', () => {
-        expect(isNotRangeError(new RangeError()))
+        expect(isNotRangeError(new RangeError('Error')))
             .toBe(false);
     });
 

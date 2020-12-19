@@ -9,7 +9,7 @@ describe('referenceError', () => {
 
 describe('isReferenceError', () => {
     it('returns true when value is an ReferenceError', () => {
-        expect(isReferenceError(new ReferenceError()))
+        expect(isReferenceError(new ReferenceError('Error')))
             .toBe(true);
     });
 
@@ -21,7 +21,7 @@ describe('isReferenceError', () => {
 
 describe('isNotReferenceError', () => {
     it('returns false when value is an ReferenceError', () => {
-        expect(isNotReferenceError(new ReferenceError()))
+        expect(isNotReferenceError(new ReferenceError('Error')))
             .toBe(false);
     });
 

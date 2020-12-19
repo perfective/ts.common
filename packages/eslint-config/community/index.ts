@@ -83,8 +83,11 @@ export = {
                 db: false,
                 env: false,
                 params: false,
+                i: false,
+                j: false,
             },
             /* eslint-enable unicorn/prevent-abbreviations */
+            ignore: [],
         }],
         // Requires research on level of effort in writing safer regular expressions
         'unicorn/no-unsafe-regex': 'off',

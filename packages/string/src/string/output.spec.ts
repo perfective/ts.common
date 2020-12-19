@@ -17,7 +17,7 @@ describe('output', () => {
             .toStrictEqual('3.14');
         expect(output(Number.NaN))
             .toStrictEqual('NaN');
-        expect(output(Infinity))
+        expect(output(Number.POSITIVE_INFINITY))
             .toStrictEqual('Infinity');
         expect(output(Number.NEGATIVE_INFINITY))
             .toStrictEqual('-Infinity');
@@ -79,7 +79,7 @@ describe('isNotOutput', () => {
     });
 
     it('returns false when value implements toString()', () => {
-        expect(isOutput(Infinity))
+        expect(isOutput(Number.POSITIVE_INFINITY))
             .toStrictEqual(true);
         expect(isOutput(Symbol('$')))
             .toStrictEqual(true);

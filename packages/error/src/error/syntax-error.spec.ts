@@ -9,7 +9,7 @@ describe('syntaxError', () => {
 
 describe('isSyntaxError', () => {
     it('returns true when value is an SyntaxError', () => {
-        expect(isSyntaxError(new SyntaxError()))
+        expect(isSyntaxError(new SyntaxError('Error')))
             .toBe(true);
     });
 
@@ -21,7 +21,7 @@ describe('isSyntaxError', () => {
 
 describe('isNotSyntaxError', () => {
     it('returns false when value is an SyntaxError', () => {
-        expect(isNotSyntaxError(new SyntaxError()))
+        expect(isNotSyntaxError(new SyntaxError('Error')))
             .toBe(false);
     });
 

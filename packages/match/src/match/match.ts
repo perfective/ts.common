@@ -6,8 +6,7 @@ import { Statement } from './statement';
 export class Match<T> {
     public constructor(
         public readonly value: Value<T>,
-    ) {
-    }
+    ) {}
 
     public that<U>(...statements: Statement<T, U>[]): Maybe<U> {
         const value: T = valueOf(this.value);

@@ -5,8 +5,7 @@ import { Statement } from './statement';
 class When<T> {
     public constructor(
         private readonly condition: Predicate<T>,
-    ) {
-    }
+    ) {}
 
     public then<U>(value: U | Unary<T, U>): Statement<T, U> {
         return {

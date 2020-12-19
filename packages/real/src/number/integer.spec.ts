@@ -20,7 +20,7 @@ describe('isInteger', () => {
     it('returns false when value is not an integer', () => {
         expect(isInteger(3.14)).toBe(false);
         expect(isInteger(-2.71)).toBe(false);
-        expect(isInteger(Infinity)).toBe(false);
+        expect(isInteger(Number.POSITIVE_INFINITY)).toBe(false);
         expect(isInteger(Number.NaN)).toBe(false);
         expect(isInteger(Number.NEGATIVE_INFINITY)).toBe(false);
         expect(isInteger(Number.POSITIVE_INFINITY)).toBe(false);
@@ -40,7 +40,7 @@ describe('isSafeInteger', () => {
         expect(isSafeInteger(3.1)).toBe(false);
         expect(isSafeInteger(2 ** 53)).toBe(false);
         expect(isSafeInteger(Number.NaN)).toBe(false);
-        expect(isSafeInteger(Infinity)).toBe(false);
+        expect(isSafeInteger(Number.POSITIVE_INFINITY)).toBe(false);
     });
 });
 

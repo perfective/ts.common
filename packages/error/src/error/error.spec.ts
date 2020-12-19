@@ -9,7 +9,7 @@ describe('error', () => {
 
 describe('isError', () => {
     it('returns true when value is an Error', () => {
-        expect(isError(new Error()))
+        expect(isError(new Error('Error')))
             .toBe(true);
     });
 
@@ -21,7 +21,7 @@ describe('isError', () => {
 
 describe('isNotError', () => {
     it('returns false when value is an Error', () => {
-        expect(isNotError(new Error()))
+        expect(isNotError(new Error('Error')))
             .toBe(false);
     });
 
@@ -33,6 +33,7 @@ describe('isNotError', () => {
 
 describe('errorOutput', () => {
     it('returns only error name when message is undefined', () => {
+        // eslint-disable-next-line unicorn/error-message -- testing undefined message
         expect(errorOutput(new ReferenceError()))
             .toStrictEqual('ReferenceError');
     });

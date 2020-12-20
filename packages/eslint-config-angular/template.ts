@@ -31,6 +31,7 @@ export = {
                 }],
                 '@angular-eslint/template/cyclomatic-complexity': 'off',
                 '@angular-eslint/template/i18n': 'off',
+                // TODO: Does not report "mouseover" events
                 '@angular-eslint/template/mouse-events-have-key-events': 'error',
                 // TODO: Definition for rule "@angular-eslint/template/no-any" was not found
                 '@angular-eslint/template/no-any': 'off',

@@ -57,6 +57,15 @@ npm install --save-dev \
 }
 ```
 
+3. Use a separate `.eslintrc.html.js` to lint Angular templates.
+```js
+module.exports = {
+    extends: ['@perfective/eslint-config-angular/template'],
+}
+```
+
+Run `eslint --config .eslintrc.html.js --no-eslintrc .` to lint Angular templates.
+
 ## TSLint
 
 While the [`@angular-eslint/eslint-plugin`](https://github.com/angular-eslint/angular-eslint) is

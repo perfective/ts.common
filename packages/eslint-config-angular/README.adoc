@@ -68,6 +68,17 @@ based on the `@perfective/eslint-config/community`,
 for a less strict configuration.
 ====
 +
+. Use a separate `.eslintrc.html.js` to lint Angular templates.
++
+[source,js]
+----
+module.exports = {
+    extends: ['@perfective/eslint-config-angular/template'], // <.>
+} // <.>
+----
+<1> Use `@perfective/eslint-config-angular/community` for a less strict configuration.
+<2> Run `eslint --config .eslintrc.html.js --no-eslintrc .` to lint Angular templates.
++
 . Configure your `.eslintignore` file.
 
 == TSLint

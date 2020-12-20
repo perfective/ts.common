@@ -7,7 +7,7 @@ export = {
             files: ['*.component.html'],
             rules: {
                 '@angular-eslint/template/conditional-complexity': ['error', {
-                    maxComplexity: 5,
+                    maxComplexity: 3,
                 }],
             },
         },

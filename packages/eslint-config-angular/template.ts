@@ -23,6 +23,10 @@ export = {
                 '@angular-eslint/template/accessibility-valid-aria': 'error',
                 '@angular-eslint/template/banana-in-box': 'error',
                 '@angular-eslint/template/conditional-complexity': ['error', {
+                    // Max complexity 2 allows *ngIf to have only two conditions.
+                    //  Passes: *ngIf="isPublished && hasAccess"
+                    //  Fails:  *ngIf="isPublished && hasAccess && isMobile"
+                    // Use pipes to extract conditions logic
                     maxComplexity: 2,
                 }],
                 '@angular-eslint/template/cyclomatic-complexity': 'off',

@@ -8,13 +8,19 @@ const functionality: Rules = {
 
     /** @deprecated - see @angular-eslint/template/accessibility-tabindex-no-positive. */
     'template-accessibility-tabindex-no-positive': true,
+
+    /** @deprecated - see @angular-eslint/template/accessibility-table-scope. */
     'template-accessibility-table-scope': true,
+
+    /** @deprecated - see @angular-eslint/template/accessibility-valid-aria. */
     'template-accessibility-valid-aria': true,
 
     /** @deprecated - see @angular-eslint/template/banana-in-a-box. */
     'template-banana-in-box': true,
     'template-click-events-have-key-events': true,
     'template-mouse-events-have-key-events': true,
+
+    /** @deprecated - see @angular-eslint/template/no-any. */
     'template-no-any': true,
 
     /** @deprecated - see @angular-eslint/template/no-autofocus. */
@@ -27,6 +33,8 @@ const functionality: Rules = {
 
 const maintainability: Rules = {
     'no-unused-css': true,
+
+    /** @deprecated - see @angular-eslint/template/conditional-complexity. */
     'template-conditional-complexity': [true, 2],
     'template-i18n': false,
 

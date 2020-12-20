@@ -54,8 +54,14 @@ export = {
             plugins: ['@angular-eslint/template'],
             rules: {
                 '@angular-eslint/template/accessibility-tabindex-no-positive': 'error',
+                '@angular-eslint/template/accessibility-table-scope': 'error',
+                '@angular-eslint/template/accessibility-valid-aria': 'error',
                 '@angular-eslint/template/banana-in-a-box': 'error',
+                '@angular-eslint/template/conditional-complexity': ['error', {
+                    maxComplexity: 2,
+                }],
                 '@angular-eslint/template/cyclomatic-complexity': 'off',
+                '@angular-eslint/template/no-any': 'error',
                 '@angular-eslint/template/no-autofocus': 'error',
                 // TODO: Fails with "Cannot read property 'start' of undefined
                 '@angular-eslint/template/no-call-expression': 'off',

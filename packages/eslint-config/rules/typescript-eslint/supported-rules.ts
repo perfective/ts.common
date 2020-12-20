@@ -128,7 +128,9 @@ export = {
             ignoreArgsIfArgsAfterAreUsed: true,
         }],
         '@typescript-eslint/no-var-requires': 'error',
-        '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
+        // This rule is fixable, but
+        //  an autofix will create a conflict with the @typescript-eslint/no-non-null-assertion rule
+        '@typescript-eslint/non-nullable-type-assertion-style': 'error',
         '@typescript-eslint/prefer-as-const': 'warn',
         '@typescript-eslint/prefer-enum-initializers': 'error',
         '@typescript-eslint/prefer-for-of': 'error',

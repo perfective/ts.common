@@ -1,6 +1,8 @@
 # Build
 dist
 tsconfig.tsbuildinfo
+*.d.ts
+*.js
 
 # Dependencies
 node_modules

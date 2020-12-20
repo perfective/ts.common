@@ -18,7 +18,7 @@ export = {
             files: ['*.component.html'],
             parser: '@angular-eslint/template-parser',
             rules: {
-                '@angular-eslint/template/accessibility-tabindex-no-positive': 'error',
+                '@angular-eslint/template/accessibility-elements-content': 'error',
                 '@angular-eslint/template/accessibility-table-scope': 'error',
                 '@angular-eslint/template/accessibility-valid-aria': 'error',
                 '@angular-eslint/template/banana-in-box': 'error',
@@ -26,14 +26,18 @@ export = {
                     maxComplexity: 2,
                 }],
                 '@angular-eslint/template/cyclomatic-complexity': 'off',
+                '@angular-eslint/template/i18n': 'off',
+                '@angular-eslint/template/mouse-events-have-key-events': 'error',
                 // TODO: Definition for rule "@angular-eslint/template/no-any" was not found
                 '@angular-eslint/template/no-any': 'off',
                 '@angular-eslint/template/no-autofocus': 'error',
                 // TODO: Fails with "Cannot read property 'start' of undefined
                 '@angular-eslint/template/no-call-expression': 'off',
+                '@angular-eslint/template/no-distracting-elements': 'error',
                 // TODO: Fails with "Cannot read property 'start' of undefined
                 '@angular-eslint/template/no-negated-async': 'off',
-                '@angular-eslint/template/use-track-by-functions': 'error',
+                '@angular-eslint/template/no-positive-tabindex': 'error',
+                '@angular-eslint/template/use-track-by-function': 'error',
             },
         },
         {

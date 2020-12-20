@@ -21,7 +21,7 @@ export = {
                 '@angular-eslint/template/accessibility-elements-content': 'error',
                 '@angular-eslint/template/accessibility-table-scope': 'error',
                 '@angular-eslint/template/accessibility-valid-aria': 'error',
-                '@angular-eslint/template/banana-in-box': 'error',
+                '@angular-eslint/template/banana-in-box': 'warn',
                 '@angular-eslint/template/conditional-complexity': ['error', {
                     // Max complexity 2 allows *ngIf to have only two conditions.
                     //  Passes: *ngIf="isPublished && hasAccess"

@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.strict.json",
+    "compilerOptions": {
+        "declaration": true,
+        "declarationMap": false,
+        "module": "commonjs",
+        "rootDir": "./"
+    },
+    "exclude": [
+        "**/*.spec.ts"
+    ]
+}

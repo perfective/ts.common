@@ -1,0 +1,45 @@
+{
+    "name": "@perfective/eslint-config-react",
+    "version": "0.0.0",
+    "description": "ESLint shareable rules configuration for React",
+    "keywords": [
+        "react",
+        "code quality",
+        "code standard",
+        "code style",
+        "eslint",
+        "eslint-config",
+        "lint",
+        "perfective",
+        "typescript"
+    ],
+    "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",
+    "homepage": "https://github.com/perfective/js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/perfective/js",
+        "directory": "packages/eslint-config-react"
+    },
+    "license": "MIT",
+    "main": "./index.js",
+    "directories": {
+        "lib": "."
+    },
+    "files": [
+        "**/*.js"
+    ],
+    "scripts": {
+        "build": "tsc --project ./tsconfig.build.json",
+        "build:clean": "npm run clean && npm run build",
+        "clean": "rimraf *.tsbuildinfo **/*.d.ts **/*.js **/*.map",
+        "lint": "npm run lint:eslint",
+        "lint:eslint": "eslint --fix --ext .ts ./"
+    },
+    "dependencies": {
+        "@perfective/eslint-config": "^0.10.0-beta"
+    },
+    "peerDependencies": {
+        "eslint-plugin-jest-dom": "^3.6.4",
+        "eslint-plugin-testing-library": "^3.10.1"
+    }
+}

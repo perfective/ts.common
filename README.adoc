@@ -42,6 +42,8 @@ https://palantir.github.io/tslint/[TSLint]
 (until all the rules will be possible to replace by ESLint).
 * `link:https://github.com/perfective/js/tree/master/packages/eslint-config-angular[@perfective/eslint-config-angular]`
 — the default and community linters configurations for Angular projects.
+* `link:https://github.com/perfective/js/tree/master/packages/eslint-config-react[@perfective/eslint-config-react]`
+— the default and community linters configurations for React projects.
 * `link:https://github.com/perfective/js/tree/master/packages/fp[@perfective/fp]`
 — functions and types for functional programming and logical operations.
 * `link:https://github.com/perfective/js/tree/master/packages/error[@perfective/error]`

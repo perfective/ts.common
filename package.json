@@ -22,6 +22,7 @@
         "@perfective/error": "file:packages/error",
         "@perfective/eslint-config": "file:packages/eslint-config",
         "@perfective/eslint-config-angular": "file:packages/eslint-config-angular",
+        "@perfective/eslint-config-react": "file:packages/eslint-config-react",
         "@perfective/fp": "file:packages/fp",
         "@perfective/identity": "file:packages/identity",
         "@perfective/match": "file:packages/match",

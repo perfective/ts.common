@@ -47,6 +47,14 @@ export = {
                 ...tslint,
             },
         }],
+        '@typescript-eslint/indent': ['warn', 4, {
+            // eslint-disable-next-line @typescript-eslint/naming-convention -- option name
+            SwitchCase: 1,
+            // Use 'react/jsx-indent-props' instead
+            ignoredNodes: [
+                'JSXAttribute',
+            ],
+        }],
         // TODO: Resolve duplication/override problem
         'unicorn/prevent-abbreviations': ['warn', {
             extendDefaultWhitelist: true,

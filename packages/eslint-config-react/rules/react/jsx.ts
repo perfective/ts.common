@@ -1,0 +1,48 @@
+export = {
+    rules: {
+        'react/jsx-boolean-value': 'warn',
+        'react/jsx-child-element-spacing': 'error',
+        'react/jsx-closing-bracket-location': 'warn',
+        'react/jsx-closing-tag-location': 'warn',
+        'react/jsx-curly-brace-presence': 'warn',
+        'react/jsx-curly-newline': 'warn',
+        'react/jsx-curly-spacing': 'warn',
+        'react/jsx-equals-spacing': 'warn',
+        'react/jsx-filename-extension': ['error', {
+            extensions: ['.jsx', '.tsx'],
+        }],
+        'react/jsx-first-prop-new-line': 'warn',
+        'react/jsx-fragments': 'warn',
+        'react/jsx-handler-names': 'error',
+        'react/jsx-indent': 'warn',
+        'react/jsx-indent-props': 'warn',
+        'react/jsx-key': 'error',
+        'react/jsx-max-depth': 'error',
+        'react/jsx-max-props-per-line': 'warn',
+        // TODO: Enable in the next version
+        // 'react/jsx-newline': 'error',
+        'react/jsx-no-bind': 'error',
+        'react/jsx-no-comment-textnodes': 'error',
+        // TODO: Enable in the next version
+        // 'react/jsx-no-constructed-context-values': 'error',
+        'react/jsx-no-duplicate-props': 'error',
+        'react/jsx-no-literals': 'error',
+        'react/jsx-no-script-url': 'error',
+        'react/jsx-no-target-blank': 'error',
+        'react/jsx-no-undef': 'error',
+        'react/jsx-no-useless-fragment': 'warn',
+        'react/jsx-one-expression-per-line': 'warn',
+        'react/jsx-pascal-case': 'error',
+        'react/jsx-props-no-multi-spaces': 'warn',
+        'react/jsx-props-no-spreading': 'error',
+        'react/jsx-sort-default-props': 'error',
+        'react/jsx-sort-props': 'warn',
+
+        /** @deprecated */
+        'react/jsx-space-before-closing': 'off',
+        'react/jsx-tag-spacing': 'warn',
+        'react/jsx-uses-react': 'error',
+        'react/jsx-uses-vars': 'error',
+        'react/jsx-wrap-multilines': 'warn',
+    },
+};

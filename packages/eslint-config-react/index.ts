@@ -4,6 +4,7 @@ export = {
     plugins: [
         'jest-dom',
         'react',
+        'react-hooks',
         'testing-library',
     ],
     extends: [
@@ -11,6 +12,7 @@ export = {
         './rules/jest-dom',
         './rules/react',
         './rules/react/jsx',
+        './rules/react-hooks',
         './rules/testing-library',
     ],
     env: {

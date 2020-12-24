@@ -4,9 +4,11 @@ export = {
         'import/named': 'error',
         'import/default': 'error',
         'import/namespace': 'error',
+        // TODO: Research usage
         'import/no-restricted-paths': 'off',
         'import/no-absolute-path': 'error',
         'import/no-dynamic-require': 'error',
+        // TODO: Research usage
         'import/no-internal-modules': 'off',
         'import/no-webpack-loader-syntax': 'error',
         'import/no-self-import': 'error',

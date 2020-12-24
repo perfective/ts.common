@@ -3,7 +3,7 @@
 == v0.10.0 (next)
 
 * Upgraded `eslint` to `7.16.0`.
-* Upgraded `@typescript-eslint` to `4.10.0`.
+* Upgraded `@typescript-eslint` to `4.11.0`.
 * Upgraded `eslint-plugin-deprecation` to `1.2.0`.
 * Upgraded `eslint-plugin-simple-import-sort` to `7.0.0`.
 * Upgraded `eslint-plugin-unicorn` to `24.0.0`.

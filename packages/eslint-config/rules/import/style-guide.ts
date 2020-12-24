@@ -24,6 +24,7 @@ export = {
         'import/no-named-export': 'off',
         'import/no-anonymous-default-export': 'error',
         'import/group-exports': 'off',
+        // TODO: Research usage
         'import/dynamic-import-chunkname': 'off',
     },
 };

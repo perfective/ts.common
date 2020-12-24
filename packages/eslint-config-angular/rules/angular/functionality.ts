@@ -1,5 +1,6 @@
 export = {
     rules: {
+        '@angular-eslint/contextual-decorator': 'error',
         '@angular-eslint/contextual-lifecycle': 'error',
         '@angular-eslint/no-attribute-decorator': 'error',
         '@angular-eslint/no-lifecycle-call': 'error',

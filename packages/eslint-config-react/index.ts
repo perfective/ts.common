@@ -3,6 +3,7 @@ import { tslint } from '@perfective/eslint-config/tslint';
 export = {
     plugins: [
         'jest-dom',
+        'jsx-a11y',
         'react',
         'react-hooks',
         'testing-library',
@@ -10,6 +11,7 @@ export = {
     extends: [
         '@perfective/eslint-config',
         './rules/jest-dom',
+        './rules/jsx-a11y',
         './rules/react',
         './rules/react/jsx',
         './rules/react-hooks',

@@ -147,7 +147,7 @@ export = {
         '@typescript-eslint/prefer-regexp-exec': 'error',
         '@typescript-eslint/prefer-string-starts-ends-with': 'warn',
         '@typescript-eslint/prefer-ts-expect-error': 'warn',
-        '@typescript-eslint/promise-function-async': 'error',
+        '@typescript-eslint/promise-function-async': 'warn',
         '@typescript-eslint/require-array-sort-compare': ['error', {
             ignoreStringArrays: true,
         }],

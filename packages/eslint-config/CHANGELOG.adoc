@@ -1,6 +1,6 @@
 = Changelog
 
-== v0.10.0 (next)
+== v0.10.0
 
 * Upgraded `eslint` to `7.16.0`.
 * Upgraded `@typescript-eslint` to `4.11.0`.

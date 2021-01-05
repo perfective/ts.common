@@ -4,9 +4,8 @@
     "scripts": {
         "build": "lerna run --stream build",
         "build:clean": "lerna run --stream build:clean",
-        "build:eslint": "lerna run --scope @perfective/eslint-config --stream build",
         "clean": "lerna run --stream clean",
-        "lint": "npm run build:eslint && lerna run lint --no-bail --no-prefix --stream",
+        "lint": "lerna run lint --no-bail --no-prefix --stream",
         "test": "lerna run --stream --no-bail --no-prefix test",
         "test:clean": "lerna run --stream test:clean",
         "test:verbose": "lerna run --stream --no-bail --no-prefix test:verbose"
@@ -20,7 +19,7 @@
         "@jest/types": "^26.6.2",
         "@perfective/array": "file:packages/array",
         "@perfective/error": "file:packages/error",
-        "@perfective/eslint-config": "file:packages/eslint-config",
+        "@perfective/eslint-config": "^0.10.0",
         "@perfective/eslint-config-angular": "file:packages/eslint-config-angular",
         "@perfective/eslint-config-react": "file:packages/eslint-config-react",
         "@perfective/fp": "file:packages/fp",

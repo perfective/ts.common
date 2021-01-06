@@ -1,7 +1,0 @@
-{
-    "name": "@perfective/eslint-config-angular/codelyzer",
-    "main": "./index.js",
-    "dependencies": {
-        "@perfective/eslint-config": "^0.8.0"
-    }
-}

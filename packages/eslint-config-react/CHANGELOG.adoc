@@ -1,9 +1,0 @@
-= Changelog
-
-== v0.1.0 (next)
-
-* Added `eslint-plugin-react` support (`7.21.5`);
-* Added `eslint-plugin-react-hooks` support (`4.2.0`);
-* Added `eslint-plugin-jsx-a11y` support (`6.4.1`);
-* Added `eslint-plugin-jest-dom` support (`3.6.4`);
-* Added `eslint-plugin-testing-library` support (`3.10.1`).

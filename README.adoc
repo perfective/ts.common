@@ -35,8 +35,6 @@ All non-abstract classes should be considered final even TypeScript does not all
 
 This repo currently contains the following JavaScript packages (in order of types/dependencies):
 
-* `link:https://github.com/perfective/js/tree/master/packages/eslint-config-react[@perfective/eslint-config-react]`
-— the default and community linters configurations for React projects.
 * `link:https://github.com/perfective/js/tree/master/packages/fp[@perfective/fp]`
 — functions and types for functional programming and logical operations.
 * `link:https://github.com/perfective/js/tree/master/packages/error[@perfective/error]`
@@ -124,8 +122,7 @@ which breaks the paths option recognition.
 Thus, instead, builds use the `tsconfig.build.mjs.json` and `tsconfig.build.cjs.json` in each package,
 which extends the `tsconfig.strict.json` directly.
 * As WebStorm does not recognize package-based `tsconfig.build.*.json` as the source of truth,
-it reports errors in the `eslint-config-react` package,
-which must use CommonJS exports.
+it reports errors in the packages that must use CommonJS exports.
 To work around this issue,
 the root `tsconfig.json` provides `compilerOptions.module: "commonjs"` override.
 It does not affect anything, except the WebStorm.

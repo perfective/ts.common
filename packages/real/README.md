@@ -45,16 +45,16 @@ into polymorphic shortcuts for readability:
 
 * Decimal (radix = 10):
     * `decimal(value: number): string`
-    * `decimal(value: string): number`
+    * `decimal(value: string): number | null`
 * Binary (radix = 2):
     * `binary(value: Integer): string`
-    * `binary(value: string): Integer`
+    * `binary(value: string): Integer | null`
 * Octal (radix = 8):
     * `octal(value: Integer): string`
-    * `octal(value: string): Integer`
+    * `octal(value: string): Integer | null`
 * Hexadecimal (radix = 16):
     * `hexadecimal(value: Integer): string`
-    * `hexadecimal(value: string): Integer`
+    * `hexadecimal(value: string): Integer | null`
 
 ## Order
 

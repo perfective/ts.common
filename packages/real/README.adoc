@@ -9,7 +9,9 @@ including the JavaScript
 
 * Type guards:
 ** `isNumber<T>(value: number | T): value is number`
+— value is a `number` and is not `NaN`.
 ** `isNotNumber<T>(value: number | T): value is T`
+— value is of type `T` or `NaN`.
 +
 * `Number` methods:
 ** `exponential(fraction: Digits): Unary<number, string>`
@@ -66,20 +68,24 @@ into polymorphic shortcuts for readability:
 
 * `decimal(value: number): string`
 — returns a decimal representation of a number.
-* `decimal(value: string): number`
-— parses a decimal (float) string into a number.
+* `decimal(value: string): number | null`
+— parses a decimal (float) string into a number;
+returns `null` if parsing failed or returned `NaN`.
 * `binary(value: Integer): string`
 — returns a binary representation of an integer.
-* `binary(value: string): Integer`
-— parses a binary string into an integer.
+* `binary(value: string): Integer | null`
+— parses a binary string into an integer;
+returns `null` if parsing failed or returned `NaN`.
 * `octal(value: Integer): string`
 — returns an octal representation of an integer.
-* `octal(value: string): Integer`
-— parses an octal string into an integer.
+* `octal(value: string): Integer | null`
+— parses an octal string into an integer;
+returns `null` if parsing failed or returned `NaN`.
 * `hexadecimal(value: Integer): string`
 — returns a hexadecimal representation of an integer.
-* `hexadecimal(value: string): Integer`
-— parses a hexadecimal string into an integer.
+* `hexadecimal(value: string): Integer | null`
+— parses a hexadecimal string into an integer;
+returns `null` if parsing failed or returned `NaN`.
 
 [NOTE]
 ====

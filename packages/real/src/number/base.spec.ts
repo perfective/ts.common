@@ -32,11 +32,11 @@ describe('decimal', () => {
 
     it('fails to parse a string that does not start with a digit', () => {
         expect(decimal('example'))
-            .toStrictEqual(Number.NaN);
+            .toBeNull();
         expect(decimal('.example'))
-            .toStrictEqual(Number.NaN);
+            .toBeNull();
         expect(decimal('-example'))
-            .toStrictEqual(Number.NaN);
+            .toBeNull();
     });
 });
 
@@ -75,7 +75,7 @@ describe('binary', () => {
 
     it('fails to parse a string that does not start with characters "0" or "1"', () => {
         expect(binary('example'))
-            .toStrictEqual(Number.NaN);
+            .toBeNull();
     });
 });
 
@@ -112,7 +112,7 @@ describe('octal', () => {
 
     it('fails to parse a string that does not start with characters from "0" to "7"', () => {
         expect(octal('example'))
-            .toStrictEqual(Number.NaN);
+            .toBeNull();
     });
 });
 
@@ -151,6 +151,6 @@ describe('hexadecimal', () => {
 
     it('fails to parse a string that does not start with characters from "0" to "f"', () => {
         expect(hexadecimal('sample'))
-            .toStrictEqual(Number.NaN);
+            .toBeNull();
     });
 });

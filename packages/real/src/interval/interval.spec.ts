@@ -9,10 +9,13 @@ import {
     range,
 } from './interval';
 
-const segment: Interval = interval(2.71, 3.14);
+const segment: Interval = {
+    min: 2.71,
+    max: 3.14,
+};
 
 describe('interval', () => {
-    it('creates an Interval from two numbers', () => {
+    it('returns an Interval when the first argument is less or equal to the second one', () => {
         expect(interval(2.71, 3.14))
             .toStrictEqual({
                 min: 2.71,
@@ -20,12 +23,9 @@ describe('interval', () => {
             } as Interval);
     });
 
-    it('creates an Interval when the first argument is greater than the second one', () => {
+    it('returns null when the first argument is greater than the second one', () => {
         expect(interval(3.14, 2.71))
-            .toStrictEqual({
-                min: 2.71,
-                max: 3.14,
-            } as Interval);
+            .toBeNull();
     });
 });
 
@@ -38,12 +38,10 @@ describe('intervalFromPair', () => {
             } as Interval);
     });
 
-    it('creates an Interval from an unsorted tuple', () => {
+    it('returns null for an unsorted tuple', () => {
         expect(intervalFromPair([3.14, 2.71]))
-            .toStrictEqual({
-                min: 2.71,
-                max: 3.14,
-            } as Interval);
+            .toBeNull();
+    });
     });
 });
 

@@ -5,20 +5,17 @@ export interface Interval {
     readonly max: number;
 }
 
-export function interval(a: number, b: number): Interval {
-    if (a > b) {
-        return {
-            min: b,
-            max: a,
-        };
+export function interval(min: number, max: number): Interval | null {
+    if (min > max) {
+        return null;
     }
     return {
-        min: a,
-        max: b,
+        min,
+        max,
     };
 }
 
-export function intervalFromPair(pair: readonly [number, number]): Interval {
+export function intervalFromPair(pair: readonly [number, number]): Interval | null {
     return interval(pair[0], pair[1]);
 }
 

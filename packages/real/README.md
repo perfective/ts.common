@@ -72,11 +72,11 @@ into polymorphic shortcuts for readability:
 ## Interval
 
 * Types:
-    * `Interval` represents a range from `Interval.min` to `Interval.max`.
+    * `Interval` represents an interval from `Interval.min` to `Interval.max`.
 * Unit functions:
-    * `interval(a: number, b: number): Interval`
-    * `intervalFromPair(pair: readonly [number, number]): Interval`
-    * `range(values: number[]): Interval | undefined`
+    * `interval(min: number, max: number): Interval | null`
+    * `intervalFromPair(pair: readonly [number, number]): Interval | null`
+    * `intervalFromValues(values: number[]): Interval | null`
 * Predicates:
     * `isInInterval(interval: Interval): Predicate<number>`
     * `isInOpenInterval(interval: Interval): Predicate<number>`

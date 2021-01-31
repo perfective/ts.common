@@ -128,6 +128,9 @@ and `to()` method requires a type parameter to compile.
 — returns an `Interval` for an ordered pair.
 ** `intervalFromValues(values: number[]): Interval | null`
 — returns an `Interval` for a non-empty array.
+** `intervalFromNullable(min: number | null, max: number | null): Interval | null`
+— returns an `Interval` from nullable values, replacing them with `-Infinity` and `Infinity`;
+returns `null` if `min > max`.
 +
 * Predicates:
 ** `isInInterval(interval: Interval): Predicate<number>`

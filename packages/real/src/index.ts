@@ -2,12 +2,13 @@
 export {
     Interval,
     interval,
+    intervalFromNullable,
     intervalFromPair,
+    intervalFromValues,
     isInInterval,
     isInLeftOpenInterval,
     isInOpenInterval,
     isInRightOpenInterval,
-    range,
 } from './interval/interval';
 
 // ./math

@@ -1,12 +1,13 @@
 import {
     Interval,
     interval,
+    intervalFromNullable,
     intervalFromPair,
+    intervalFromValues,
     isInInterval,
     isInLeftOpenInterval,
     isInOpenInterval,
     isInRightOpenInterval,
-    range,
 } from './interval';
 
 const segment: Interval = {
@@ -42,6 +43,61 @@ describe('intervalFromPair', () => {
         expect(intervalFromPair([3.14, 2.71]))
             .toBeNull();
     });
+});
+
+describe('intervalFromValues', () => {
+    it('returns an interval with minimum and maximum elements in a non-empty array', () => {
+        expect(intervalFromValues([0]))
+            .toStrictEqual(interval(0, 0));
+        expect(intervalFromValues([-1, 0, 1, 3, 5, 7, 11]))
+            .toStrictEqual(interval(-1, 11));
+    });
+
+    it('returns null for an empty array', () => {
+        expect(intervalFromValues([]))
+            .toBeNull();
+    });
+});
+
+describe('intervalFromNullable', () => {
+    it('returns left-unbounded interval when min is null', () => {
+        expect(intervalFromNullable(null, 0))
+            .toStrictEqual(interval(Number.NEGATIVE_INFINITY, 0));
+    });
+
+    it('returns left-unbounded interval when min is NaN', () => {
+        expect(intervalFromNullable(Number.NaN, 0))
+            .toStrictEqual(interval(Number.NEGATIVE_INFINITY, 0));
+    });
+
+    it('returns right-unbounded interval when max is null', () => {
+        expect(intervalFromNullable(0, null))
+            .toStrictEqual(interval(0, Number.POSITIVE_INFINITY));
+    });
+
+    it('returns right-unbounded interval when max is NaN', () => {
+        expect(intervalFromNullable(0, Number.NaN))
+            .toStrictEqual(interval(0, Number.POSITIVE_INFINITY));
+    });
+
+    it('returns unbounded interval when both min and max are null', () => {
+        expect(intervalFromNullable(null, null))
+            .toStrictEqual(interval(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY));
+    });
+
+    it('returns unbounded interval when both min and max are NaN', () => {
+        expect(intervalFromNullable(Number.NaN, Number.NaN))
+            .toStrictEqual(interval(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY));
+    });
+
+    it('returns null when min and max are numbers and min is greater than max', () => {
+        expect(intervalFromNullable(3.14, 2.71))
+            .toBeNull();
+    });
+
+    it('returns a bounded interval when both min and max are numbers and min is less or equal to max', () => {
+        expect(intervalFromNullable(2.71, 3.14))
+            .toStrictEqual(interval(2.71, 3.14));
     });
 });
 
@@ -138,19 +194,5 @@ describe('isInRightOpenInterval', () => {
         it('is false when the value is greater than Interval.max', () => {
             expect(isInRightOpenInterval(segment)(4)).toBe(false);
         });
-    });
-});
-
-describe('range', () => {
-    it('returns an interval with minimum and maximum elements in a non-empty array', () => {
-        expect(range([0]))
-            .toStrictEqual(interval(0, 0));
-        expect(range([-1, 0, 1, 3, 5, 7, 11]))
-            .toStrictEqual(interval(-1, 11));
-    });
-
-    it('returns undefined for an empty array', () => {
-        expect(range([]))
-            .toBeUndefined();
     });
 });

@@ -77,6 +77,7 @@ into polymorphic shortcuts for readability:
     * `interval(min: number, max: number): Interval | null`
     * `intervalFromPair(pair: readonly [number, number]): Interval | null`
     * `intervalFromValues(values: number[]): Interval | null`
+    * `intervalFromNullable(min: number | null, max: number | null): Interval | null`
 * Predicates:
     * `isInInterval(interval: Interval): Predicate<number>`
     * `isInOpenInterval(interval: Interval): Predicate<number>`

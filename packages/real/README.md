@@ -29,7 +29,7 @@ on the Github.
 ## Integer
 
 * Types:
-    * `Integer` — an alias to the `number` type
+    * `Integer` — a nominal type based on the `number` type.
 * Predicates:
     * `isInteger(value: number): boolean`
     * `isSafeInteger(value: number): boolean`
@@ -37,6 +37,14 @@ on the Github.
     * `isPositiveInteger(value: number): boolean`
     * `isNonPositiveInteger(value: number): boolean`
     * `isNegativeInteger(value: number): boolean`
+
+## Natural
+
+* Types:
+    * `Natural` — a nominal type based on the `number` type.
+* Type Guards:
+    * `isNatural<T>(value: number | T): value is Natural`.
+
 
 ## Base (Radix)
 

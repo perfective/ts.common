@@ -61,6 +61,14 @@ when an integer is expected.
 ** `isNegativeInteger(value: number): boolean`
 
 
+== Natural
+
+`Natural` type is a nominal type based on the `number` type.
+
+* Type Guards:
+** `isNatural<T>(value: number | T): value is Natural`.
+
+
 == Base (Radix)
 
 The `parseFloat()`, `parseInt()`, and `Number.prototype.toString()` functions are combined

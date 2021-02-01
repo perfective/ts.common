@@ -48,6 +48,10 @@ export {
     precision,
 } from './number/lift';
 export {
+    isNatural,
+    Natural,
+} from './number/natural';
+export {
     isNotNumber,
     isNumber,
 } from './number/number';

@@ -104,6 +104,12 @@ The `@perfective/array` package provides functions for the standard JS
 +
 * Procedures:
 ** `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
++
+* Filters:
+** `isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean`
+— filters an array keeping the first occurrence of each value;
+** `isLastOccurrence<T>(value: T, index: number, array: T[]): boolean`
+— filters an array keeping the last occurrence of each value.
 
 
 == Roadmap

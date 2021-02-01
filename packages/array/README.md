@@ -93,6 +93,9 @@ The `@perfective/array` package provides functions for the standard JS
     * `spliceWith<T>(start: number, deleteCount: number, ...items: T[]): Unary<T[], T[]>`
 * Procedures:
     * `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
+* Filters:
+    * `isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean`
+    * `isLastOccurrence<T>(value: T, index: number, array: T[]): boolean`
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/array/README.adoc) 
 in the repository.

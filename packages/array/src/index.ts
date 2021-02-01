@@ -31,6 +31,10 @@ export {
     tail,
 } from './array/element';
 export {
+    isFirstOccurrence,
+    isLastOccurrence,
+} from './array/filter';
+export {
     Compare,
     concat,
     copyWithin,

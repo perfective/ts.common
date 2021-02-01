@@ -1,4 +1,4 @@
-import { append, element, first, head, insert, last, prepend, remove, replace, tail } from './element';
+import { append, element, first, head, insert, insertInto, last, prepend, remove, replace, tail } from './element';
 
 describe('head', () => {
     it('returns the first element of a non-empty array', () => {
@@ -141,6 +141,19 @@ describe('insert', () => {
                 .toStrictEqual([2.71, 3.14]);
             expect(insert(0, 3.14)([2.71]))
                 .toStrictEqual([3.14, 2.71]);
+        });
+    });
+});
+
+describe('insertInto', () => {
+    describe('insert(array, index)', () => {
+        it('creates a new array with an element inserted into the given "array" in the given "index"', () => {
+            expect(insertInto<number>([], 0)(2.71)).toStrictEqual([2.71]);
+            expect(insertInto<number>([], 1)(2.71)).toStrictEqual([2.71]);
+            expect(insertInto([0, 3.14], 0)(2.71)).toStrictEqual([2.71, 0, 3.14]);
+            expect(insertInto([0, 3.14], 1)(2.71)).toStrictEqual([0, 2.71, 3.14]);
+            expect(insertInto([0, 3.14], 2)(2.71)).toStrictEqual([0, 3.14, 2.71]);
+            expect(insertInto([0, 3.14], 3)(2.71)).toStrictEqual([0, 3.14, 2.71]);
         });
     });
 });

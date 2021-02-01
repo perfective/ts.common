@@ -44,6 +44,10 @@ export function insert<T>(index: number, element: T): Unary<T[], T[]> {
     ];
 }
 
+export function insertInto<T>(array: T[], index: number): Unary<T, T[]> {
+    return (element: T): T[] => insert(index, element)(array);
+}
+
 export function replace<T>(index: number, element: T): Unary<T[], T[]> {
     return (array: T[]): T[] => [
         ...array.slice(0, index),

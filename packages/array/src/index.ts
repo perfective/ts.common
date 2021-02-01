@@ -23,6 +23,7 @@ export {
     first,
     head,
     insert,
+    insertInto,
     last,
     prepend,
     remove,

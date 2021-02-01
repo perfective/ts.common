@@ -1,5 +1,13 @@
 = Changelog
 
+== v0.5.0
+
+* Added `minimum` and `maximum` functions.
+* Added check for `min` be less or equal to `max` in `Interval`.
+* Renamed `range` into `intervalFromValues`.
+* Added `null` (instead of `NaN`) as a return type from `decimal`, `binary`, `octal`, and `hexadecimal`.
+* Added `Natural` type and `isNatural` function.
+
 == v0.4.1
 
 * Fix: invalid "exports" main target.

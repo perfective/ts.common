@@ -2,6 +2,9 @@
 export {
     recordFromArray,
 } from './object/record';
+export {
+    RecursivePartial,
+} from './object/recursive-partial';
 
 // ./property
 export {

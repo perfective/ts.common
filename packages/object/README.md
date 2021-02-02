@@ -10,6 +10,7 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `ObjectWithNull<T, K extends keyof T>`
     * `ObjectWithPresent<T, K extends keyof T>`
     * `ObjectWithAbsent<T, K extends keyof T>`
+    * `RecursivePartial<T>`
 * Unit functions:
     * `recordFromArray(array: string[]): Record<string, number>`
 * Type guards:

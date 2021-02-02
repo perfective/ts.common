@@ -106,10 +106,20 @@ The `@perfective/array` package provides functions for the standard JS
 ** `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
 +
 * Filters:
+** `Filter<T, S extends T>`
+— array `filter` function type.
 ** `isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean`
 — filters an array keeping the first occurrence of each value;
 ** `isLastOccurrence<T>(value: T, index: number, array: T[]): boolean`
 — filters an array keeping the last occurrence of each value.
++
+* Mappers:
+** `Map<T, U>`
+— array `map` function type.
++
+* Reducers:
+** `Reduce<T, V>`
+— array `reduce` function type.
 
 
 == Roadmap

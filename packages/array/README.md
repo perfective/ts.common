@@ -94,8 +94,13 @@ The `@perfective/array` package provides functions for the standard JS
 * Procedures:
     * `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
 * Filters:
+    * `Filter<T, S extends T>`
     * `isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean`
     * `isLastOccurrence<T>(value: T, index: number, array: T[]): boolean`
+* Mappers:
+    * `Map<T, U>`
+* Reducers:
+    * `Reduce<T, V>`
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/array/README.adoc) 
 in the repository.

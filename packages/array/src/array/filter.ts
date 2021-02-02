@@ -1,3 +1,8 @@
+/**
+ * Array filter function type that can be passed into Array.prototype.filter().
+ */
+export type Filter<T, S extends T> = (value: T, index: number, array: T[]) => value is S;
+
 export function isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean {
     return array.indexOf(value) === index;
 }

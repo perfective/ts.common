@@ -31,6 +31,7 @@ export {
     tail,
 } from './array/element';
 export {
+    Filter,
     isFirstOccurrence,
     isLastOccurrence,
 } from './array/filter';
@@ -69,5 +70,11 @@ export {
     values,
 } from './array/lift';
 export {
+    Map,
+} from './array/map';
+export {
     includedIn,
 } from './array/predicate';
+export {
+    Reduce,
+} from './array/reduce';

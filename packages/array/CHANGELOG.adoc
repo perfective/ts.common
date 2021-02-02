@@ -1,5 +1,11 @@
 = Changelog
 
+== v0.3.0
+
+* Added `Filter`, `Map`, and `Reduct` function types.
+* Added `insertInto` function.
+* Added `isFirstOccurrence`/`isLastOccurrence` filter functions.
+
 == v0.2.2
 
 * Fix: invalid "exports" main target.

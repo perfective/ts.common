@@ -1,5 +1,6 @@
 // ./object
 export {
+    isEmpty,
     isFalsy,
     isObject,
     isTruthy,

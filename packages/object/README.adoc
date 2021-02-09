@@ -27,6 +27,8 @@ The `@perfective/object` package provides functions to work with the standard JS
 ** `isObject<T>(value: T | null): boolean`
 ** `isTruthy<T>(value: T): boolean`
 ** `isFalsy<T>(value: T): boolean`
+** `isEmpty<T>(value: T): boolean`
+— returns `true` when the value is truthy or is a non-empty array or object.
 +
 * Property functions:
 ** `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`

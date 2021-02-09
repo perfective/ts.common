@@ -1,7 +1,8 @@
 // ./object
 export {
     isObject,
-} from './object/object';
+    isTruthy,
+} from './object/predicate';
 export {
     recordFromArray,
 } from './object/record';

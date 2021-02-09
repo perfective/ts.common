@@ -1,5 +1,8 @@
 // ./object
 export {
+    isObject,
+} from './object/object';
+export {
     recordFromArray,
 } from './object/record';
 export {

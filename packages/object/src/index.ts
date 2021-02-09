@@ -1,5 +1,6 @@
 // ./object
 export {
+    isFalsy,
     isObject,
     isTruthy,
 } from './object/predicate';

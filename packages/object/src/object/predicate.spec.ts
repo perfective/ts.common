@@ -1,4 +1,4 @@
-import { isObject, isTruthy } from './predicate';
+import { isFalsy, isObject, isTruthy } from './predicate';
 
 describe('isObject', () => {
     it('is true when the given value is an plain object', () => {
@@ -127,6 +127,80 @@ describe('isTruthy', () => {
 
     it('is false when the given value is NaN', () => {
         expect(isTruthy(Number.NaN))
+            .toBe(false);
+    });
+});
+
+describe('isFalsy', () => {
+    it('is true when the given value is undefined', () => {
+        expect(isFalsy(undefined))
+            .toBe(true);
+    });
+
+    it('is true when the given value is null', () => {
+        expect(isFalsy(null))
+            .toBe(true);
+    });
+
+    it('is true when the given value is an empty string', () => {
+        expect(isFalsy(''))
+            .toBe(true);
+    });
+
+    it('is true when the given value is zero', () => {
+        expect(isFalsy(0))
+            .toBe(true);
+    });
+
+    it('is true when the given value is zero BigInt', () => {
+        expect(isFalsy(BigInt(0)))
+            .toBe(true);
+    });
+
+    it('is true when the given value is NaN', () => {
+        expect(isFalsy(Number.NaN))
+            .toBe(true);
+    });
+
+    it('is false when the given value is a non-empty string', () => {
+        expect(isFalsy('undefined'))
+            .toBe(false);
+        expect(isFalsy('null'))
+            .toBe(false);
+        expect(isFalsy('0'))
+            .toBe(false);
+    });
+
+    it('is false when the given value is a non-zero number', () => {
+        expect(isFalsy(Number.MAX_SAFE_INTEGER))
+            .toBe(false);
+        expect(isFalsy(Number.MAX_VALUE))
+            .toBe(false);
+        expect(isFalsy(Number.MIN_VALUE))
+            .toBe(false);
+        expect(isFalsy(Number.POSITIVE_INFINITY))
+            .toBe(false);
+        expect(isFalsy(Number.NEGATIVE_INFINITY))
+            .toBe(false);
+    });
+
+    it('is false when the given value is non-zero BigInt', () => {
+        expect(isFalsy(BigInt(Number.MAX_SAFE_INTEGER)))
+            .toBe(false);
+    });
+
+    it('is false when the given value is an (empty) object', () => {
+        expect(isFalsy({}))
+            .toBe(false);
+    });
+
+    it('is false when the given value is an (empty) array', () => {
+        expect(isFalsy([]))
+            .toBe(false);
+    });
+
+    it('is false when the given value is an (empty) RegExp', () => {
+        expect(isFalsy(new RegExp('', 'u')))
             .toBe(false);
     });
 });

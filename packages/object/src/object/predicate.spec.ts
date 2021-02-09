@@ -1,51 +1,51 @@
 import { isEmpty, isFalsy, isObject, isTruthy } from './predicate';
 
 describe('isObject', () => {
-    it('is true when the given value is an plain object', () => {
+    it('is true when the value is an plain object', () => {
         expect(isObject({}))
             .toBe(true);
     });
 
-    it('is true when the given value is an array', () => {
+    it('is true when the value is an array', () => {
         expect(isObject(['a', 'b', 'c']))
             .toBe(true);
         expect(isObject(new Array(3)))
             .toBe(true);
     });
 
-    it('is true when the given value is a Date', () => {
+    it('is true when the value is a Date', () => {
         expect(isObject(new Date()))
             .toBe(true);
     });
 
-    it('is true when the given value is a RegExp', () => {
+    it('is true when the value is a RegExp', () => {
         expect(isObject(/^/u))
             .toBe(true);
     });
 
-    it('is false when the given value is undefined', () => {
+    it('is false when the value is undefined', () => {
         expect(isObject(undefined))
             .toBe(false);
     });
 
-    it('is false when the given value is null', () => {
+    it('is false when the value is null', () => {
         expect(isObject(null))
             .toBe(false);
     });
 
-    it('is false when the given value is boolean', () => {
+    it('is false when the value is boolean', () => {
         expect(isObject(false))
             .toBe(false);
         expect(isObject(true))
             .toBe(false);
     });
 
-    it('is false when the given value is a string', () => {
+    it('is false when the value is a string', () => {
         expect(isObject(''))
             .toBe(false);
     });
 
-    it('is false when the given value is a number', () => {
+    it('is false when the value is a number', () => {
         expect(isObject(0))
             .toBe(false);
         expect(isObject(Number.NaN))
@@ -58,12 +58,12 @@ describe('isObject', () => {
 });
 
 describe('isTruthy', () => {
-    it('is false when the given value is true', () => {
+    it('is false when the value is true', () => {
         expect(isTruthy(true))
             .toBe(true);
     });
 
-    it('is true when the given value is a non-empty string', () => {
+    it('is true when the value is a non-empty string', () => {
         expect(isTruthy('undefined'))
             .toBe(true);
         expect(isTruthy('null'))
@@ -72,7 +72,7 @@ describe('isTruthy', () => {
             .toBe(true);
     });
 
-    it('is true when the given value is a non-zero number', () => {
+    it('is true when the value is a non-zero number', () => {
         expect(isTruthy(Number.MAX_SAFE_INTEGER))
             .toBe(true);
         expect(isTruthy(Number.MAX_VALUE))
@@ -85,104 +85,104 @@ describe('isTruthy', () => {
             .toBe(true);
     });
 
-    it('is false when the given value is non-zero BigInt', () => {
+    it('is false when the value is non-zero BigInt', () => {
         expect(isTruthy(BigInt(Number.MAX_SAFE_INTEGER)))
             .toBe(true);
     });
 
-    it('is true when the given value is an (empty) object', () => {
+    it('is true when the value is an (empty) object', () => {
         expect(isTruthy({}))
             .toBe(true);
     });
 
-    it('is true when the given value is an (empty) array', () => {
+    it('is true when the value is an (empty) array', () => {
         expect(isTruthy([]))
             .toBe(true);
     });
 
-    it('is true when the given value is an (empty) RegExp', () => {
+    it('is true when the value is an (empty) RegExp', () => {
         expect(isTruthy(new RegExp('', 'u')))
             .toBe(true);
     });
 
-    it('is false when the given value is undefined', () => {
+    it('is false when the value is undefined', () => {
         expect(isTruthy(undefined))
             .toBe(false);
     });
 
-    it('is false when the given value is null', () => {
+    it('is false when the value is null', () => {
         expect(isTruthy(null))
             .toBe(false);
     });
 
-    it('is false when the given value is false', () => {
+    it('is false when the value is false', () => {
         expect(isTruthy(false))
             .toBe(false);
     });
 
-    it('is false when the given value is an empty string', () => {
+    it('is false when the value is an empty string', () => {
         expect(isTruthy(''))
             .toBe(false);
     });
 
-    it('is false when the given value is zero', () => {
+    it('is false when the value is zero', () => {
         expect(isTruthy(0))
             .toBe(false);
     });
 
-    it('is false when the given value is zero BigInt', () => {
+    it('is false when the value is zero BigInt', () => {
         expect(isTruthy(BigInt(0)))
             .toBe(false);
     });
 
-    it('is false when the given value is NaN', () => {
+    it('is false when the value is NaN', () => {
         expect(isTruthy(Number.NaN))
             .toBe(false);
     });
 });
 
 describe('isFalsy', () => {
-    it('is true when the given value is undefined', () => {
+    it('is true when the value is undefined', () => {
         expect(isFalsy(undefined))
             .toBe(true);
     });
 
-    it('is true when the given value is null', () => {
+    it('is true when the value is null', () => {
         expect(isFalsy(null))
             .toBe(true);
     });
 
-    it('is true when the given value is false', () => {
+    it('is true when the value is false', () => {
         expect(isFalsy(false))
             .toBe(true);
     });
 
-    it('is true when the given value is an empty string', () => {
+    it('is true when the value is an empty string', () => {
         expect(isFalsy(''))
             .toBe(true);
     });
 
-    it('is true when the given value is zero', () => {
+    it('is true when the value is zero', () => {
         expect(isFalsy(0))
             .toBe(true);
     });
 
-    it('is true when the given value is zero BigInt', () => {
+    it('is true when the value is zero BigInt', () => {
         expect(isFalsy(BigInt(0)))
             .toBe(true);
     });
 
-    it('is true when the given value is NaN', () => {
+    it('is true when the value is NaN', () => {
         expect(isFalsy(Number.NaN))
             .toBe(true);
     });
 
-    it('is false when the given value is true', () => {
+    it('is false when the value is true', () => {
         expect(isFalsy(true))
             .toBe(false);
     });
 
-    it('is false when the given value is a non-empty string', () => {
+    it('is false when the value is a non-empty string', () => {
         expect(isFalsy('undefined'))
             .toBe(false);
         expect(isFalsy('null'))
@@ -191,7 +191,7 @@ describe('isFalsy', () => {
             .toBe(false);
     });
 
-    it('is false when the given value is a non-zero number', () => {
+    it('is false when the value is a non-zero number', () => {
         expect(isFalsy(Number.MAX_SAFE_INTEGER))
             .toBe(false);
         expect(isFalsy(Number.MAX_VALUE))
@@ -204,22 +204,22 @@ describe('isFalsy', () => {
             .toBe(false);
     });
 
-    it('is false when the given value is non-zero BigInt', () => {
+    it('is false when the value is non-zero BigInt', () => {
         expect(isFalsy(BigInt(Number.MAX_SAFE_INTEGER)))
             .toBe(false);
     });
 
-    it('is false when the given value is an (empty) object', () => {
+    it('is false when the value is an (empty) object', () => {
         expect(isFalsy({}))
             .toBe(false);
     });
 
-    it('is false when the given value is an (empty) array', () => {
+    it('is false when the value is an (empty) array', () => {
         expect(isFalsy([]))
             .toBe(false);
     });
 
-    it('is false when the given value is an (empty) RegExp', () => {
+    it('is false when the value is an (empty) RegExp', () => {
         expect(isFalsy(new RegExp('', 'u')))
             .toBe(false);
     });

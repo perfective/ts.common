@@ -13,9 +13,11 @@ export {
 export {
     Entry,
     omit,
+    pick,
     recordFromArray,
     recordFromEntries,
     recordWithOmitted,
+    recordWithPicked,
     toRecordFromEntries,
 } from './object/record';
 export {

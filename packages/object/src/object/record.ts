@@ -31,6 +31,26 @@ export function toRecordFromEntries(record: Record<string, unknown>, value: Entr
 }
 
 /**
+ * Creates a copy of the record only with the given properties.
+ *
+ * @see Pick
+ */
+export function pick<T, K extends keyof T>(record: T, ...property: readonly K[]): Pick<T, K> {
+    return Object.entries(record)
+        .filter(([key]: Entry) => property.includes(key as K))
+        .reduce(toRecordFromEntries, {}) as Pick<T, K>;
+}
+
+/**
+ * Curries the pick() function for the given properties.
+ *
+ * @see pick()
+ */
+export function recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<T, Pick<T, K>> {
+    return (value: T): Pick<T, K> => pick<T, K>(value, ...property);
+}
+
+/**
  * Creates a copy of the record without the given properties.
  *
  * @see Omit

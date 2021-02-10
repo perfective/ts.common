@@ -1,4 +1,4 @@
-import { recordFromArray, recordFromEntries, recordWithOmitted } from './record';
+import { recordFromArray, recordFromEntries, recordWithOmitted, recordWithPicked } from './record';
 
 describe('recordFromArray', () => {
     it('creates an empty object from an empty array', () => {
@@ -37,13 +37,29 @@ describe('recordFromEntries', () => {
     });
 });
 
-describe('recordWithOmitted', () => {
-    interface User {
-        a: string;
-        b: number;
-        c: boolean;
-    }
+interface User {
+    a: string;
+    b: number;
+    c: boolean;
+}
 
+describe('recordWithPicked', () => {
+    it('creates a copy of a record with the given properties', () => {
+        const input: User = {
+            a: '',
+            b: 0,
+            c: false,
+        };
+        const output: Omit<User, 'c'> = recordWithPicked<User, 'a' | 'b'>('a', 'b')(input);
+
+        expect(output).toStrictEqual({
+            a: '',
+            b: 0,
+        });
+    });
+});
+
+describe('recordWithOmitted', () => {
     it('creates a copy of a record without the given properties', () => {
         const input: User = {
             a: '',

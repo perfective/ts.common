@@ -1,3 +1,5 @@
+import { Unary } from '@perfective/fp';
+
 export function recordFromArray(array: string[]): Record<string, number> {
     return array.reduce<Record<string, number>>(indexByValue, {});
 }
@@ -7,7 +9,7 @@ function indexByValue(record: Record<string, number>, value: string, index: numb
     return record;
 }
 
-export type Entry<T = unknown> = [string, T];
+export type Entry<K = string, V = unknown> = [K, V];
 
 /**
  * Creates an plain object from an array of pairs (entries).
@@ -26,4 +28,24 @@ export function recordFromEntries(entries: Entry[]): Record<string, unknown> {
 export function toRecordFromEntries(record: Record<string, unknown>, value: Entry): Record<string, unknown> {
     record[value[0]] = value[1];
     return record;
+}
+
+/**
+ * Creates a copy of the record without the given properties.
+ *
+ * @see Omit
+ */
+export function omit<T, K extends keyof T>(record: T, ...property: readonly K[]): Omit<T, K> {
+    return Object.entries(record)
+        .filter(([key]: Entry) => !property.includes(key as K))
+        .reduce(toRecordFromEntries, {}) as Omit<T, K>;
+}
+
+/**
+ * Curries the omit() function for the given properties.
+ *
+ * @see omit()
+ */
+export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<T, Omit<T, K>> {
+    return (value: T): Omit<T, K> => omit<T, K>(value, ...property);
 }

@@ -12,8 +12,10 @@ export {
 } from './object/predicate';
 export {
     Entry,
+    omit,
     recordFromArray,
     recordFromEntries,
+    recordWithOmitted,
     toRecordFromEntries,
 } from './object/record';
 export {

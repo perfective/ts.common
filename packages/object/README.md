@@ -17,8 +17,12 @@ The `@perfective/object` package provides functions to work with the standard JS
     — creates a shallow copy of the given value. (Experimental).
     * `clone<T>(value: T): T`
     — creates a clone (deep copy) of the given value. (Experimental).
+    * `omit<T, K extends keyof T>(record: T, ...property: readonly K[]): Omit<T, K>`
+    — creates a copy of the `record` without the given `property`.
     * `recordFromArray(array: string[]): Record<string, number>`
     * `recordFromEntries(entries: Entry[]): Record<string, unknown>`
+    * `recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<T, Omit<T, K>>`
+    — curries the `omit()` function for the given `property`.
 * Type guards:
     * `hasDefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`
     * `hasUndefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithUndefined<T, K>`

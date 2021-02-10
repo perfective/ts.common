@@ -1,5 +1,6 @@
 // ./object
 export {
+    clone,
     copy,
 } from './object/object';
 export {

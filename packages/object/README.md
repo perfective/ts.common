@@ -14,7 +14,9 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `Entry<T = unknown>`
 * Unit functions:
     * `copy<T>(value: T): T`
-      — Creates a shallow copy of the given value. (Experimental).
+    — creates a shallow copy of the given value. (Experimental).
+    * `clone<T>(value: T): T`
+    — creates a clone (deep copy) of the given value. (Experimental).
     * `recordFromArray(array: string[]): Record<string, number>`
     * `recordFromEntries(entries: Entry[]): Record<string, unknown>`
 * Type guards:

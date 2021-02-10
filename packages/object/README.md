@@ -12,6 +12,8 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `ObjectWithAbsent<T, K extends keyof T>`
     * `RecursivePartial<T>`
 * Unit functions:
+    * `copy<T>(value: T): T`
+      — Creates a shallow copy of the given value. (Experimental).
     * `recordFromArray(array: string[]): Record<string, number>`
 * Type guards:
     * `hasDefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`

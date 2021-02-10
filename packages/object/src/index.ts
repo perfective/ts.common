@@ -1,5 +1,8 @@
 // ./object
 export {
+    copy,
+} from './object/object';
+export {
     isEmpty,
     isFalsy,
     isObject,

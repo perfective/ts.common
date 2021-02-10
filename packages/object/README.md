@@ -11,10 +11,12 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `ObjectWithPresent<T, K extends keyof T>`
     * `ObjectWithAbsent<T, K extends keyof T>`
     * `RecursivePartial<T>`
+    * `Entry<T = unknown>`
 * Unit functions:
     * `copy<T>(value: T): T`
       — Creates a shallow copy of the given value. (Experimental).
     * `recordFromArray(array: string[]): Record<string, number>`
+    * `recordFromEntries(entries: Entry[]): Record<string, unknown>`
 * Type guards:
     * `hasDefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`
     * `hasUndefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithUndefined<T, K>`
@@ -28,6 +30,8 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `isTruthy<T>(value: T): boolean`
     * `isFalsy<T>(value: T): boolean`
     * `isEmpty<T>(value: T): boolean`
+* Reducers:
+    * `toRecordFromEntries(record: Record<string, unknown>, value: Entry): Record<string, unknown>`
 * Property functions:
     * `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`
     * `property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>`

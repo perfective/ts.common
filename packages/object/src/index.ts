@@ -10,7 +10,10 @@ export {
     isTruthy,
 } from './object/predicate';
 export {
+    Entry,
     recordFromArray,
+    recordFromEntries,
+    toRecordFromEntries,
 } from './object/record';
 export {
     RecursivePartial,

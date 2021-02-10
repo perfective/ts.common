@@ -1,4 +1,4 @@
-import { Unary } from '@perfective/fp';
+import { Predicate, Unary } from '@perfective/fp';
 
 export function recordFromArray(array: string[]): Record<string, number> {
     return array.reduce<Record<string, number>>(indexByValue, {});
@@ -42,7 +42,7 @@ export function pick<T, K extends keyof T>(record: T, ...property: readonly K[])
 }
 
 /**
- * Curries the pick() function for the given properties.
+ * Partially applies the pick() function for the given properties.
  *
  * @see pick()
  */
@@ -62,10 +62,28 @@ export function omit<T, K extends keyof T>(record: T, ...property: readonly K[])
 }
 
 /**
- * Curries the omit() function for the given properties.
+ * Partially applies the omit() function for the given properties.
  *
  * @see omit()
  */
 export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<T, Omit<T, K>> {
     return (value: T): Omit<T, K> => omit<T, K>(value, ...property);
+}
+
+/**
+ * Creates a copy of the record where each value meets the condition.
+ */
+export function keepValues<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T> {
+    return Object.entries(record)
+        .filter(([, value]: Entry) => condition(value as T[K]))
+        .reduce(toRecordFromEntries, {}) as Partial<T>;
+}
+
+/**
+ * Partially applies the keepValues() function for the given condition.
+ *
+ * @see keepValues()
+ */
+export function recordWithValues<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>> {
+    return (record: T): Partial<T> => keepValues(record, condition);
 }

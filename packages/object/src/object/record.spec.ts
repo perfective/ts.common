@@ -1,4 +1,5 @@
-import { recordFromArray, recordFromEntries, recordWithOmitted, recordWithPicked } from './record';
+import { isTruthy } from './predicate';
+import { recordFromArray, recordFromEntries, recordWithOmitted, recordWithPicked, recordWithValues } from './record';
 
 describe('recordFromArray', () => {
     it('creates an empty object from an empty array', () => {
@@ -43,13 +44,14 @@ interface User {
     c: boolean;
 }
 
+const input: User = {
+    a: '',
+    b: 0,
+    c: false,
+};
+
 describe('recordWithPicked', () => {
     it('creates a copy of a record with the given properties', () => {
-        const input: User = {
-            a: '',
-            b: 0,
-            c: false,
-        };
         const output: Omit<User, 'c'> = recordWithPicked<User, 'a' | 'b'>('a', 'b')(input);
 
         expect(output).toStrictEqual({
@@ -61,15 +63,18 @@ describe('recordWithPicked', () => {
 
 describe('recordWithOmitted', () => {
     it('creates a copy of a record without the given properties', () => {
-        const input: User = {
-            a: '',
-            b: 0,
-            c: false,
-        };
         const output: Pick<User, 'c'> = recordWithOmitted<User, 'a' | 'b'>('a', 'b')(input);
 
         expect(output).toStrictEqual({
             c: false,
         });
+    });
+});
+
+describe('recordWithValues', () => {
+    it('keeps only values that pass the filter', () => {
+        const output: Partial<User> = recordWithValues<User>(isTruthy)(input);
+
+        expect(output).toStrictEqual({});
     });
 });

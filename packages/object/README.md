@@ -21,12 +21,16 @@ The `@perfective/object` package provides functions to work with the standard JS
       — creates a copy of the `record` only with the given `property`.
     * `omit<T, K extends keyof T>(record: T, ...property: readonly K[]): Omit<T, K>`
     — creates a copy of the `record` without the given `property`.
+    * `keepValues<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T>`
+    — creates a copy of the `record` where each value meets the `condition`.
     * `recordFromArray(array: string[]): Record<string, number>`
     * `recordFromEntries(entries: Entry[]): Record<string, unknown>`
     * `recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<T, Pick<T, K>>`
-      — curries the `pick()` function for the given `property`.
+    — partially applies the `pick()` function for the given `property`.
     * `recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<T, Omit<T, K>>`
-    — curries the `omit()` function for the given `property`.
+    — partially applies the `omit()` function for the given `property`.
+    * `recordWithValues<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>>`
+    — partially applies the `keepValues()` function for the given `condition`.
 * Type guards:
     * `hasDefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`
     * `hasUndefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithUndefined<T, K>`

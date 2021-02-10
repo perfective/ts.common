@@ -1,4 +1,4 @@
-import { isEmpty, isFalsy, isObject, isTruthy } from './predicate';
+import { isEmpty, isFalsy, isObject, isRecord, isTruthy } from './predicate';
 
 describe('isObject', () => {
     it('is true when the value is an plain object', () => {
@@ -53,6 +53,42 @@ describe('isObject', () => {
         expect(isObject(Number.POSITIVE_INFINITY))
             .toBe(false);
         expect(isObject(Number.NEGATIVE_INFINITY))
+            .toBe(false);
+    });
+});
+
+describe('isRecord', () => {
+    it('is true when the value is a plain object', () => {
+        expect(isRecord({}))
+            .toBe(true);
+        expect(isRecord({
+            pi: 3.14,
+            euler: 2.71,
+        })).toBe(true);
+    });
+
+    it('is false when the value is not a plain object', () => {
+        expect(isRecord(Object.create(null)))
+            .toBe(false);
+        expect(isRecord(new Date()))
+            .toBe(false);
+        expect(isRecord(new RegExp('', 'u')))
+            .toBe(false);
+    });
+
+    it('is false when the value is an array', () => {
+        expect(isRecord([]))
+            .toBe(false);
+    });
+
+    it('is false when the value type is not object', () => {
+        expect(isRecord(undefined))
+            .toBe(false);
+        expect(isRecord(null))
+            .toBe(false);
+        expect(isRecord(''))
+            .toBe(false);
+        expect(isRecord(0))
             .toBe(false);
     });
 });

@@ -22,6 +22,7 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `hasAbsentProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithAbsent<T, K>`
 * Predicates:
     * `isObject<T>(value: T | null): boolean`
+    * `isRecord<T>(value: T): boolean`
     * `isTruthy<T>(value: T): boolean`
     * `isFalsy<T>(value: T): boolean`
     * `isEmpty<T>(value: T): boolean`

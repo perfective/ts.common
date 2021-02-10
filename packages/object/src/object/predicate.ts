@@ -1,8 +1,16 @@
-import { hasPresentProperty } from '../property/property';
+import { isPresent } from '@perfective/value';
 
 export function isObject<T>(value: T | null): boolean {
     return value !== null
         && typeof value === 'object';
+}
+
+/**
+ * Returns true when the value is an object created from the Object class (not an Array, Date, etc.).
+ */
+export function isRecord<T>(value: T): boolean {
+    return isObject(value)
+        && hasConstructor(Object.name)(value);
 }
 
 /**
@@ -42,16 +50,12 @@ function isEmptyRecord<T>(value: T): boolean {
         && Object.keys(value).length === 0;
 }
 
-function isRecord<T>(value: T): boolean {
-    return isObject(value)
-        && hasConstructor('Object')(value);
-}
-
 /* eslint-disable @typescript-eslint/no-explicit-any -- low-level function to work with JS */
 function hasConstructor<T>(name: string): (value: T) => boolean {
     // eslint-disable-next-line arrow-body-style -- function body is all inside the arrow function
     return (value: T): boolean => {
-        if (hasPresentProperty<any, 'constructor'>('constructor')(value)) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- property presence is checked
+        if (isPresent((value as any).constructor)) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- property presence is checked
             return (value as any).constructor.name === name;
         }

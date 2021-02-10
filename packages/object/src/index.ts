@@ -3,6 +3,7 @@ export {
     isEmpty,
     isFalsy,
     isObject,
+    isRecord,
     isTruthy,
 } from './object/predicate';
 export {

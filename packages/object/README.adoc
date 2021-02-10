@@ -25,6 +25,8 @@ The `@perfective/object` package provides functions to work with the standard JS
 +
 * Predicates:
 ** `isObject<T>(value: T | null): boolean`
+** `isRecord<T>(value: T): boolean`
+— returns `true` when the value is an object created from the `Object` class (not an `Array`, `Date`, etc.).
 ** `isTruthy<T>(value: T): boolean`
 ** `isFalsy<T>(value: T): boolean`
 ** `isEmpty<T>(value: T): boolean`

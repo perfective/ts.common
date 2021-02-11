@@ -5,6 +5,7 @@ import { exceptionMessage } from '../exception/exception-message';
 import { ExceptionTokens } from '../exception/exception-tokens';
 
 export type Panic = () => never;
+export type Rethrow<E extends Error = Error> = (previous: E) => never;
 
 export function throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
 export function throws<E extends Error>(error: E | (() => E) | string): never;
@@ -50,6 +51,6 @@ export function rethrow(
     message: string,
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
-): (previous: Error) => never {
-    return (error: Error): never => throws(causedBy(error, message, tokens, context));
+): Rethrow {
+    return (previous: Error): never => throws(causedBy(previous, message, tokens, context));
 }

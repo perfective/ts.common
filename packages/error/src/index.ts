@@ -67,6 +67,7 @@ export {
 export {
     Panic,
     panic,
+    Rethrow,
     rethrow,
     rethrows,
     throws,

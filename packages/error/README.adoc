@@ -151,7 +151,7 @@ Using `throws()` will result in throwing an exception every time a function is c
 +
 Similar to `throws`, but requires to provide a previous error.
 +
-* `rethrow( message: string, context: ExceptionContext = {}): (previous: Error) => never`
+* `rethrow( message: string, context: ExceptionContext = {}): Rethrow`
 +
 Similar to `panic`: creates a function that will wrap up an error with additional context.
 Can be useful working with promises or RxJS `catchError`.

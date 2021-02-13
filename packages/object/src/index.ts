@@ -12,14 +12,14 @@ export {
 } from './object/predicate';
 export {
     Entry,
-    keepValues,
+    filter,
     omit,
     pick,
+    recordFiltered,
     recordFromArray,
     recordFromEntries,
     recordWithOmitted,
     recordWithPicked,
-    recordWithValues,
     toRecordFromEntries,
 } from './object/record';
 export {

@@ -73,17 +73,17 @@ export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[
 /**
  * Creates a copy of the record where each value meets the condition.
  */
-export function keepValues<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T> {
+export function filter<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T> {
     return Object.entries(record)
         .filter(([, value]: Entry) => condition(value as T[K]))
         .reduce(toRecordFromEntries, {}) as Partial<T>;
 }
 
 /**
- * Partially applies the keepValues() function for the given condition.
+ * Partially applies the filter() function for the given condition.
  *
- * @see keepValues()
+ * @see filter()
  */
-export function recordWithValues<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>> {
-    return (record: T): Partial<T> => keepValues(record, condition);
+export function recordFiltered<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>> {
+    return (record: T): Partial<T> => filter(record, condition);
 }

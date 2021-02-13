@@ -1,5 +1,14 @@
 import { isTruthy } from './predicate';
-import { recordFromArray, recordFromEntries, recordWithOmitted, recordWithPicked, recordWithValues } from './record';
+import {
+    filter,
+    omit,
+    pick,
+    recordFiltered,
+    recordFromArray,
+    recordFromEntries,
+    recordWithOmitted,
+    recordWithPicked,
+} from './record';
 
 describe('recordFromArray', () => {
     it('creates an empty object from an empty array', () => {
@@ -38,43 +47,82 @@ describe('recordFromEntries', () => {
     });
 });
 
-interface User {
+interface Example {
     a: string;
     b: number;
     c: boolean;
+    d: string[];
 }
 
-const input: User = {
+const input: Example = {
     a: '',
     b: 0,
     c: false,
+    d: [],
 };
 
-describe('recordWithPicked', () => {
+describe('pick', () => {
     it('creates a copy of a record with the given properties', () => {
-        const output: Omit<User, 'c'> = recordWithPicked<User, 'a' | 'b'>('a', 'b')(input);
+        const output: Pick<Example, 'a' | 'b'> = pick(input, 'a', 'b');
 
         expect(output).toStrictEqual({
             a: '',
             b: 0,
-        });
+        } as Omit<Example, 'c' | 'd'>);
+    });
+});
+
+describe('recordWithPicked', () => {
+    it('creates a copy of a record with the given properties', async () => {
+        const output: Pick<Example, 'a' | 'b'> = await Promise.resolve(input).then(recordWithPicked('a', 'b'));
+
+        expect(output).toStrictEqual({
+            a: '',
+            b: 0,
+        } as Omit<Example, 'c' | 'd'>);
+    });
+});
+
+describe('omit', () => {
+    it('creates a copy of a record without the given properties', () => {
+        const output: Omit<Example, 'a' | 'b'> = omit(input, 'a', 'b');
+
+        expect(output).toStrictEqual({
+            c: false,
+            d: [],
+        } as Pick<Example, 'c' | 'd'>);
     });
 });
 
 describe('recordWithOmitted', () => {
-    it('creates a copy of a record without the given properties', () => {
-        const output: Pick<User, 'c'> = recordWithOmitted<User, 'a' | 'b'>('a', 'b')(input);
+    it('creates a copy of a record without the given properties', async () => {
+        const output: Omit<Example, 'a' | 'b'> = await Promise.resolve(input).then(recordWithOmitted('a', 'b'));
 
         expect(output).toStrictEqual({
             c: false,
-        });
+            d: [],
+        } as Pick<Example, 'c' | 'd'>);
     });
 });
 
-describe('recordWithValues', () => {
+describe('filter', () => {
     it('keeps only values that pass the filter', () => {
-        const output: Partial<User> = recordWithValues<User>(isTruthy)(input);
+        const output: Partial<Example> = filter(input, isTruthy);
 
-        expect(output).toStrictEqual({});
+        expect(output)
+            .toStrictEqual({
+                d: [],
+            } as Partial<Example>);
+    });
+});
+
+describe('recordFiltered', () => {
+    it('keeps only values that pass the filter', async () => {
+        const output: Partial<Example> = await Promise.resolve(input).then(recordFiltered(isTruthy));
+
+        expect(output)
+            .toStrictEqual({
+                d: [],
+            } as Partial<Example>);
     });
 });

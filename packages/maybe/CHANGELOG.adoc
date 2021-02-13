@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.5.2
+
+* Return `Just` value from `Just.pick()` when property is required.
+
 == v0.5.1
 
 * Fix: invalid "exports" main target.

@@ -27,14 +27,10 @@ The `@perfective/array` package provides functions for the standard JS
     * `isArray<T, V = unknown>(value: T[] | V): value is T[]`
     * `isNotArray<T, V = unknown>(value: T[] | V): value is V`
 * Predicates:
-    * `isEmpty<T>(array: T[]): boolean`
-    * `isNotEmpty<T>(array: T[]): boolean`
     * `includes<T>(search: T, from?: number): Predicate<T[]>`
     * `includedIn<T>(array: T[], from?: number): Predicate<T>`
     * `every<T>(condition: Predicate<T>): Predicate<T[]>`
     * `some<T>(condition: Predicate<T>): Predicate<T[]>`
-* Properties:
-    * `length<T>(array: T[]): number`
 * Iterators:
     * `entries<T>(array: T[]): IterableIterator<[number, T]>`
     * `keys<T>(array: T[]): IterableIterator<number>`
@@ -103,6 +99,20 @@ The `@perfective/array` package provides functions for the standard JS
     * `Map<T, U>`
 * Reducers:
     * `Reduce<T, V>`
+
+## Length
+
+`Length` type defines a kind of objects that have "length" (arrays, strings, etc).
+
+* Unit functions:
+    * `length<L extends Length>(value: L): number`
+* Predicates:
+    * `isNotEmpty<L extends Length>(value: L): boolean`
+    * `isEmpty<L extends Length>(value: L): boolean`
+* Reducers:
+    * `toShortest<T extends Length>(shortest: T, value: T): T`
+    * `toLongest<T extends Length>(longest: T, array: T): T`
+
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/array/README.adoc) 
 in the repository.

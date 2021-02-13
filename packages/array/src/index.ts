@@ -6,10 +6,7 @@ export {
     copy,
     flatten,
     isArray,
-    isEmpty,
     isNotArray,
-    isNotEmpty,
-    length,
     replicated,
     reversed,
     sorted,
@@ -79,3 +76,11 @@ export {
 export {
     Reduce,
 } from './array/reduce';
+export {
+    isEmpty,
+    isNotEmpty,
+    Length,
+    length,
+    toLongest,
+    toShortest,
+} from './length/length';

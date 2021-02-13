@@ -8,10 +8,7 @@ import {
     copy,
     flatten,
     isArray,
-    isEmpty,
     isNotArray,
-    isNotEmpty,
-    length,
     replicated,
     reversed,
     sorted,
@@ -225,38 +222,5 @@ describe('isNotArray', () => {
     it('returns false when value is an array', () => {
         expect(isNotArray(['0', 0]))
             .toStrictEqual(false);
-    });
-});
-
-describe('isEmpty', () => {
-    it('returns true when an array is empty', () => {
-        expect(isEmpty([]))
-            .toStrictEqual(true);
-    });
-
-    it('returns false when an array is not empty', () => {
-        expect(isEmpty([0]))
-            .toStrictEqual(false);
-    });
-});
-
-describe('isNotEmpty', () => {
-    it('returns true when an array is not empty', () => {
-        expect(isNotEmpty([false]))
-            .toStrictEqual(true);
-    });
-
-    it('returns false when an array is empty', () => {
-        expect(isNotEmpty([]))
-            .toStrictEqual(false);
-    });
-});
-
-describe('length', () => {
-    it('returns the length of an array', () => {
-        expect(length([]))
-            .toStrictEqual(0);
-        expect(length(['a', 'b', 'c']))
-            .toStrictEqual(3);
     });
 });

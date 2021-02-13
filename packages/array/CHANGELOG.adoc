@@ -1,8 +1,12 @@
 = Changelog
 
+== v0.3.1
+
+* Added `by(property)` filter function.
+
 == v0.3.0
 
-* Added `Filter`, `Map`, and `Reduct` function types.
+* Added `Filter`, `Map`, and `Reduce` function types.
 * Added `insertInto` function.
 * Added `isFirstOccurrence`/`isLastOccurrence` filter functions.
 

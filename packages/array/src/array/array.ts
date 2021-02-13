@@ -3,6 +3,7 @@ import { isPresent } from '@perfective/value';
 
 import { toLongest, toShortest } from '../length/length';
 
+import { isFirstOccurrence } from './filter';
 import { Compare } from './lift';
 
 export function array<T>(...elements: T[]): T[] {
@@ -27,6 +28,14 @@ export function concatenated<T>(initial: T[], ...arrays: T[][]): T[] {
 
 export function flatten<T>(arrays: T[][]): T[] {
     return arrays.reduce((result, array) => result.concat(array), []);
+}
+
+export function intersection<T>(array1: T[], array2: T[]): T[] {
+    const longest: T[] = [array1, array2].reduce(toLongest);
+    const shortest: T[] = [array1, array2].reduce(toShortest);
+    return longest
+        .filter(value => shortest.includes(value))
+        .filter(isFirstOccurrence);
 }
 
 /**
@@ -73,7 +82,7 @@ export function sorted<T>(args1?: T[] | Compare<T>, args2?: Compare<T>): Unary<T
 }
 
 export function unique<T>(array: T[]): T[] {
-    return array.filter((value: T, index: number, values: T[]) => index === values.indexOf(value));
+    return array.filter(isFirstOccurrence);
 }
 
 /**

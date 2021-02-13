@@ -5,6 +5,7 @@ export {
     concatenated,
     copy,
     flatten,
+    intersection,
     isArray,
     isNotArray,
     replicated,

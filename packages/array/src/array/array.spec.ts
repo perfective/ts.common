@@ -7,6 +7,7 @@ import {
     concatenated,
     copy,
     flatten,
+    intersection,
     isArray,
     isNotArray,
     replicated,
@@ -75,6 +76,22 @@ describe('flatten', () => {
             .toStrictEqual([]);
         expect(flatten([['a', 'b', 'c'], ['d', 'e'], ['f']]))
             .toStrictEqual(alphabet);
+    });
+});
+
+describe('intersection', () => {
+    it('returns an array of values that included in both arrays', () => {
+        expect(intersection(
+            [0, 1, 2, 3],
+            [5, 4, 3, 2, 1, 2, 3, 4, 5],
+        )).toStrictEqual([3, 2, 1]);
+    });
+
+    it('returns an empty array when one of the inputs is empty', () => {
+        expect(intersection(
+            [1, 2, 3],
+            [],
+        )).toStrictEqual([]);
     });
 });
 

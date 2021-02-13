@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.2.2
+
+* Bump `@perfective/maybe` to `0.5.2`.
+
 == v0.2.1
 
 * Fix: invalid "exports" main target.

@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.5.1
+
+* Renamed `negative` into `negated`.
+
 == v0.5.0
 
 * Remove `always()` and `never()` functions.

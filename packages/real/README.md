@@ -12,6 +12,8 @@ on the Github.
 * Type guards:
     * `isNumber<T>(value: number | T): value is number`
     * `isNotNumber<T>(value: number | T): value is T`
+* Unit functions:
+    * `negative(value: number): number`
 * `Number` methods:
     * `exponential(fraction: Digits): Unary<number, string>`
     * `fixed(fraction: Digits): Unary<number, string>`

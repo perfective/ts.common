@@ -1,4 +1,4 @@
-import { isNotNumber, isNumber } from './number';
+import { isNotNumber, isNumber, negative } from './number';
 
 describe('isNumber', () => {
     it('returns true when value is a number', () => {
@@ -21,5 +21,26 @@ describe('isNotNumber', () => {
         expect(isNotNumber(Number.NaN)).toBe(true);
         expect(isNotNumber('3.14')).toBe(true);
         expect(isNotNumber(false)).toBe(true);
+    });
+});
+
+describe('negative', () => {
+    it('returns 0 when given  0', () => {
+        expect(negative(0)).toBe(0);
+        expect(negative(-0)).toBe(0);
+    });
+
+    it('returns negative value for the given value', () => {
+        expect(negative(3.14)).toBe(-3.14);
+        expect(negative(-42)).toBe(42);
+    });
+
+    it('returns negative for infinity', () => {
+        expect(negative(Number.POSITIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+        expect(negative(Number.NEGATIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+    });
+
+    it('returns NaN when given NaN', () => {
+        expect(negative(Number.NaN)).toBe(Number.NaN);
     });
 });

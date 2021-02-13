@@ -13,6 +13,9 @@ including the JavaScript
 ** `isNotNumber<T>(value: number | T): value is T`
 — value is of type `T` or `NaN`.
 +
+* Unit functions:
+** `negative(value: number): number`
++
 * `Number` methods:
 ** `exponential(fraction: Digits): Unary<number, string>`
 — returns a function that

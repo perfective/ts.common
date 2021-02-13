@@ -54,6 +54,7 @@ export {
 export {
     isNotNumber,
     isNumber,
+    negative,
 } from './number/number';
 export {
     ascending,

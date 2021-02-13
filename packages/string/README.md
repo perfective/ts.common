@@ -21,6 +21,7 @@ It provides the following functions and additional types.
 * Operators:
     * `charAt(index: number): Unary<string, string>`
     * `concat(...strings: string[]): Unary<string, string>`
+    * `concatTo(value: string): Unary<string | string[], string>`
     * `lowerCase(value: string): string`
     * `padEnd(length: number, fill?: string): Unary<string, string>`
     * `padStart(length: number, fill?: string): Unary<string, string>`

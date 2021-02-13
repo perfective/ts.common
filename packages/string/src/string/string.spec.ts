@@ -1,4 +1,12 @@
-import { isEmpty, isNotEmpty, isNotString, isString, length, stringFromCharCode, stringFromCodePoint } from './string';
+import {
+    isEmpty,
+    isNotEmpty,
+    isNotString,
+    isString,
+    length,
+    stringFromCharCode,
+    stringFromCodePoint,
+} from './string';
 
 describe('isString', () => {
     it('returns true when value is a string', () => {

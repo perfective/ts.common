@@ -18,6 +18,11 @@ export function concat(...strings: string[]): Unary<string, string> {
     return (value: string): string => value.concat(...strings);
 }
 
+export function concatTo(value: string): Unary<string | string[], string> {
+    return (input: string | string[]): string => value
+        .concat(...Array.isArray(input) ? input : [input]);
+}
+
 export function endsWith(search: string, length?: number): Unary<string, boolean> {
     return (value: string): boolean => value.endsWith(search, length);
 }

@@ -6,6 +6,7 @@ export {
     charCodeAt,
     codePointAt,
     concat,
+    concatTo,
     endsWith,
     includes,
     indexOf,

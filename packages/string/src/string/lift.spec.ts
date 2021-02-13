@@ -3,6 +3,7 @@ import {
     charCodeAt,
     codePointAt,
     concat,
+    concatTo,
     endsWith,
     includes,
     indexOf,
@@ -88,6 +89,21 @@ describe('concat', () => {
             expect(concat('!')('Hello')).toStrictEqual('Hello!');
             expect(concat(' ', 'World', '!')('Hello')).toStrictEqual('Hello World!');
             expect(concat(...[' ', 'World', '!'])('Hello')).toStrictEqual('Hello World!');
+        });
+    });
+});
+
+describe('concatTo', () => {
+    describe('concatTo(value)', () => {
+        it('concatenates input strings to the given value', () => {
+            expect(concatTo('Hello')('!')).toStrictEqual('Hello!');
+            expect(concatTo('Hello')([' ', 'World', '!'])).toStrictEqual('Hello World!');
+        });
+
+        it('concatenates input string when passed into the unary', async () => {
+            const output: string = await Promise.resolve([' ', 'World', '!']).then(concatTo('Hello'));
+
+            expect(output).toStrictEqual('Hello World!');
         });
     });
 });

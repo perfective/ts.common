@@ -20,7 +20,6 @@ export {
     exactly,
     is,
     isNot,
-    negative,
     neither,
     not,
     Predicate,
@@ -28,6 +27,7 @@ export {
 export {
     isFalse,
     isTrue,
+    negated,
     Proposition,
 } from './function/proposition';
 export {

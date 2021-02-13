@@ -9,3 +9,10 @@ export function isTrue(proposition: Proposition): boolean {
 export function isFalse(proposition: Proposition): boolean {
     return !valueOf(proposition);
 }
+
+/**
+ * Negates the given proposition value.
+ */
+export function negated(value: Proposition): boolean {
+    return !valueOf(value);
+}

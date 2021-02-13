@@ -1,5 +1,4 @@
-import { constant } from './nullary';
-import { all, atLeast, atMost, either, exactly, is, isNot, negative, neither, not } from './predicate';
+import { all, atLeast, atMost, either, exactly, is, isNot, neither, not } from './predicate';
 
 const list: number[] = [2.71, 3.14];
 const irrational: Record<string, number> = {
@@ -46,18 +45,6 @@ describe('isNot', () => {
                 pi: 3.14,
             })).toBe(true);
         });
-    });
-});
-
-describe('negative', () => {
-    it('negates the given boolean value', () => {
-        expect(negative(true)).toStrictEqual(false);
-        expect(negative(false)).toStrictEqual(true);
-    });
-
-    it('negates the given proposition value', () => {
-        expect(negative(constant(true))).toStrictEqual(false);
-        expect(negative(constant(false))).toStrictEqual(true);
     });
 });
 

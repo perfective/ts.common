@@ -1,5 +1,17 @@
 import { constant } from './nullary';
-import { isFalse, isTrue } from './proposition';
+import { isFalse, isTrue, negated } from './proposition';
+
+describe('negated', () => {
+    it('negates the given boolean value', () => {
+        expect(negated(true)).toStrictEqual(false);
+        expect(negated(false)).toStrictEqual(true);
+    });
+
+    it('negates the given proposition value', () => {
+        expect(negated(constant(true))).toStrictEqual(false);
+        expect(negated(constant(false))).toStrictEqual(true);
+    });
+});
 
 describe('isTrue', () => {
     it('returns true when value is true', () => {

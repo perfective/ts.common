@@ -18,14 +18,11 @@ as close as possible given the limitations of JavaScript and TypeScript
     * `just<T>(value: T): Just<T>`
 * `Nothing<T>`
     * `nothing<T>(): Nothing<T>`
-    — optimized, returns the same instance, unlike `maybe(undefined)`.
+    — optimized, returns the same instance.
 * `Nil<T>`
     * `nil<T>(): Nil<T>`
-    — optimized, returns the same instance, unlike `maybe(null)`.
-    Also, `nil() !== maybe(null)` 
-    as `nil().to(() => undefined).value === null`,
-    but `maybe(null).to(() => undefined).value === undefined`.
-    
+    — optimized, returns the same instance.
+
 ## Methods
 
 * `Maybe.onto<U>(bind: (value: T) => Maybe<U>): Maybe<U>`
@@ -46,6 +43,9 @@ otherwise return an empty `Maybe`.
 — when a value is present,
 return  the value of the given property wrapped in `Maybe`;
 otherwise return an empty `Maybe`.
+    * `Just.pick<K extends keyof T>(property: Value<K>): T[K] extends Present<T[K]> ? Just<Present<T[K]>> : Maybe<Present<T[K]>>`
+    — when a value is `Just`, and the picked property is _required_, returns `Just`;
+      otherwise returns `Maybe`.
 * `Maybe.that(filter: Predicate<T>): Maybe<T>`
 — when a value is present,
 and the value matches the given predicate,

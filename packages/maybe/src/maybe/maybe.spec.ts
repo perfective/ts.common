@@ -215,13 +215,31 @@ describe('just', () => {
     describe('pick', () => {
         it('returns an existing property from an object', () => {
             const boxed: Boxed<number> = { value: 3.14 };
+            let output: Maybe<number> = just(boxed).pick('value');
 
-            expect(just(boxed).pick('value'))
-                .toStrictEqual(just(3.14));
-            expect(just(boxed).pick(() => 'value'))
-                .toStrictEqual(just(3.14));
-            expect(just(boxed).pick(constant<keyof Boxed<number>>('value')))
-                .toStrictEqual(just(3.14));
+            expect(output).toStrictEqual(just(3.14));
+
+            output = just(boxed).pick(() => 'value');
+
+            expect(output).toStrictEqual(just(3.14));
+
+            output = just(boxed).pick(constant<keyof Boxed<number>>('value'));
+
+            expect(output).toStrictEqual(just(3.14));
+        });
+
+        it('returns a Just property when the given property is required on an object', () => {
+            let output: Just<number> = just(check).pick('required');
+
+            expect(output).toStrictEqual(just(3.14));
+
+            output = just(check).pick(() => 'required');
+
+            expect(output).toStrictEqual(just(3.14));
+
+            output = just(check).pick(constant<'required'>('required'));
+
+            expect(output).toStrictEqual(just(3.14));
         });
 
         it('returns nothing for a missing property from an object', () => {

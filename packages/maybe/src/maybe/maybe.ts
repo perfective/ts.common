@@ -118,6 +118,13 @@ export class Just<T>
         return super.to(map);
     }
 
+    public pick<K extends keyof T>(
+        property: Value<K>,
+    ): T[K] extends Present<T[K]> ? Just<Present<T[K]>> : Maybe<Present<T[K]>>;
+    public pick<K extends keyof T>(property: Value<K>): Just<Present<T[K]>> | Maybe<Present<T[K]>> {
+        return super.pick(property);
+    }
+
     public otherwise(fallback: Value<T>): Just<T>
     // eslint-disable-next-line @typescript-eslint/unified-signatures -- unified signature causes compiler errors
     public otherwise(fallback: Value<T | null | undefined>): Just<T>

@@ -218,16 +218,24 @@ interface Name {
 }
 
 interface User {
-    id?: number;
+    id: number;
     name?: Name;
 }
 
 function firstName(user?: User): string {
     return maybe(user).pick('name').pick('first').or(panic('First name unknown')); // <.>
 }
+
+function userId(user: User): number {
+    return just(user).pick('id').value; // <.>
+}
 ----
 <1> `maybe(user).pick('email')` will not compile,
 as, in this example, the `User` type does not have an `email` property.
+<2> When value is `Just` and a required property is picked,
+the result is `Just<U>` (where `U` is the type of that property).
+Hence, it's strongly recommended starting a `maybe`-chain with `Just`
+if the value is already present.
 
 [NOTE]
 ====

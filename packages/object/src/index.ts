@@ -11,6 +11,7 @@ export {
     isTruthy,
 } from './object/predicate';
 export {
+    assigned,
     Entry,
     filter,
     omit,
@@ -18,6 +19,7 @@ export {
     recordFiltered,
     recordFromArray,
     recordFromEntries,
+    recordWithAssigned,
     recordWithOmitted,
     recordWithPicked,
     toRecordFromEntries,

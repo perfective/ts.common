@@ -1,11 +1,13 @@
 import { isTruthy } from './predicate';
 import {
+    assigned,
     filter,
     omit,
     pick,
     recordFiltered,
     recordFromArray,
     recordFromEntries,
+    recordWithAssigned,
     recordWithOmitted,
     recordWithPicked,
 } from './record';
@@ -124,5 +126,133 @@ describe('recordFiltered', () => {
             .toStrictEqual({
                 d: [],
             } as Partial<Example>);
+    });
+});
+
+describe('assigned', () => {
+    interface ExampleA {
+        a: number;
+        b: number;
+    }
+    const input: ExampleA = {
+        a: 0,
+        b: 1,
+    };
+
+    it('creates a shallow copy of the given value with the given overrides', () => {
+        const output: ExampleA = assigned(input, {
+            a: -1,
+        });
+
+        expect(output).toStrictEqual({
+            a: -1,
+            b: 1,
+        } as ExampleA);
+        expect(output).not.toBe(input);
+    });
+
+    it('creates a record instead of the original object', () => {
+        const output: Date & ExampleA = assigned(new Date(), {
+            a: 0,
+            b: 1,
+        } as ExampleA);
+
+        expect(output).toBeInstanceOf(Object);
+        expect(output).not.toBeInstanceOf(Date);
+        expect(output).toStrictEqual({
+            a: 0,
+            b: 1,
+        });
+    });
+
+    interface ExampleB {
+        a: string;
+        c: string;
+    }
+
+    it('extends a shallow copy of the given value with the given overrides', () => {
+        const output: ExampleA & ExampleB = assigned(input, {
+            a: '0',
+            c: '1',
+        } as ExampleB);
+
+        expect(output).toStrictEqual({
+            a: '0',
+            b: 1,
+            c: '1',
+        } as ExampleA & ExampleB);
+    });
+
+    it('extends a shallow copy of the given value with the given multiple overrides', () => {
+        const output: ExampleA & ExampleB = assigned(input, {
+            a: '0',
+            c: '1',
+        } as ExampleB, {
+            b: -1,
+        } as Partial<ExampleA>);
+
+        expect(output).toStrictEqual({
+            a: '0',
+            b: -1,
+            c: '1',
+        } as ExampleA & ExampleB);
+    });
+});
+
+describe('recordWithAssigned', () => {
+    interface ExampleA {
+        a: number;
+        b: number;
+    }
+    const input: ExampleA = {
+        a: 0,
+        b: 1,
+    };
+
+    describe('recordWithAssigned(...overrides)', () => {
+        it('creates a shallow copy of the given value with the given overrides', () => {
+            const output: ExampleA = recordWithAssigned<ExampleA>({
+                a: -1,
+            })(input);
+
+            expect(output).toStrictEqual({
+                a: -1,
+                b: 1,
+            } as ExampleA);
+            expect(output).not.toBe(input);
+        });
+
+        interface ExampleB {
+            a: string;
+            c: string;
+        }
+
+        it('extends a shallow copy of the given value with the given overrides', () => {
+            const output: ExampleA & ExampleB = recordWithAssigned<ExampleA, ExampleB>({
+                a: '0',
+                c: '1',
+            } as ExampleB)(input);
+
+            expect(output).toStrictEqual({
+                a: '0',
+                b: 1,
+                c: '1',
+            } as ExampleA & ExampleB);
+        });
+
+        it('extends a shallow copy of the given value with the given multiple overrides', () => {
+            const output: ExampleA & ExampleB = recordWithAssigned<ExampleA, ExampleB>({
+                a: '0',
+                c: '1',
+            } as ExampleB, {
+                b: -1,
+            } as Partial<ExampleA>)(input);
+
+            expect(output).toStrictEqual({
+                a: '0',
+                b: -1,
+                c: '1',
+            } as ExampleA & ExampleB);
+        });
     });
 });

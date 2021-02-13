@@ -87,3 +87,26 @@ export function filter<T, K extends keyof T>(record: T, condition: Predicate<T[K
 export function recordFiltered<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>> {
     return (record: T): Partial<T> => filter(record, condition);
 }
+
+/**
+ * Creates a shallow copy of the given value with the given overrides.
+ *
+ * @see Object.assign()
+ */
+export function assigned<T, V = Partial<T>>(value: T, ...overrides: (V | Partial<T>)[]): T & V {
+    return overrides.reduce<T & V>(
+        (result: T & V, current: V | Partial<T>) => ({
+            ...result,
+            ...current,
+        }),
+        // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter -- TSC errors without type casting.
+        value as T & V,
+    );
+}
+
+/**
+ * Partially applies the assign() with the given overrides.
+ */
+export function recordWithAssigned<T, V = Partial<T>>(...overrides: (V | Partial<T>)[]): (value: T) => T & V {
+    return (value: T): T & V => assigned(value, ...overrides);
+}

@@ -23,6 +23,8 @@ The `@perfective/object` package provides functions to work with the standard JS
     — creates a copy of the `record` without the given `property`.
     * `filter<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T>`
     — creates a copy of the `record` where each value meets the `condition`.
+    * `assign<T, V = Partial<T>>(value: T, ...overrides: (V | Partial<T>)[]): T & V`
+      — creates a shallow copy of the given value with the given overrides.
     * `recordFromArray(array: string[]): Record<string, number>`
     * `recordFromEntries(entries: Entry[]): Record<string, unknown>`
     * `recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<T, Pick<T, K>>`

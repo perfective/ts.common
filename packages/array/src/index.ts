@@ -31,6 +31,7 @@ export {
     tail,
 } from './array/element';
 export {
+    by,
     Filter,
     isFirstOccurrence,
     isLastOccurrence,

@@ -108,6 +108,8 @@ The `@perfective/array` package provides functions for the standard JS
 * Filters:
 ** `Filter<T, S extends T>`
 — array `filter` function type.
+** `by<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Filter<T, T>`
+— filters an array keeping elements with the `property` that satisfies the `condition`.
 ** `isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean`
 — filters an array keeping the first occurrence of each value;
 ** `isLastOccurrence<T>(value: T, index: number, array: T[]): boolean`

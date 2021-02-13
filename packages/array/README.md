@@ -95,6 +95,8 @@ The `@perfective/array` package provides functions for the standard JS
     * `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
 * Filters:
     * `Filter<T, S extends T>`
+    * `by<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Filter<T, T>`
+    — filters an array keeping elements with the `property` that satisfies the `condition`.
     * `isFirstOccurrence<T>(value: T, index: number, array: T[]): boolean`
     * `isLastOccurrence<T>(value: T, index: number, array: T[]): boolean`
 * Mappers:

@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.3.0
+
+* Added `RecursivePartial` type.
+* Added `Entry` type, `recordFromEntries` function, and `toRecordFromEntries` reducer.
+* Added `isObject`, `isRecord`, `isTruthy`, `isFalsy`, `isEmpty` predicates.
+* Added _experimental_ (shallow) `copy` and (deep) `clone` functions.
+* Added `omit` and `recordWithOmitted` functions.
+* Added `pick` and `recordWithPicked` functions.
+* Added `filter` and `recordFiltered` functions.
+* Added `assigned` and `recordWithAssigned` functions.
+
+
 == v0.2.1
 
 * Fix: invalid "exports" main target.

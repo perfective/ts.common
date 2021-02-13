@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.2.3
+
+* Added the `concatTo` function.
+
 == v0.2.2
 
 * Fix: invalid "exports" main target.

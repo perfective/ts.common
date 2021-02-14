@@ -30,14 +30,14 @@ export function panic<E extends Error>(
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
 ): Panic {
-    /* eslint-disable @typescript-eslint/no-extra-parens -- conflicts with no-confusing-arrow */
-    return (): never => (
-        (isError(error) || typeof error === 'function') ? throws(error) : throws(error, tokens, context)
-    );
-    /* eslint-enable @typescript-eslint/no-extra-parens */
+    return (): never => {
+        if (isError(error) || typeof error === 'function') {
+            return throws(error);
+        }
+        return throws(error, tokens, context);
+    };
 }
 
-// eslint-disable-next-line max-params -- shorthand signature does not add complexity
 export function rethrows(
     previous: Error,
     message: string,

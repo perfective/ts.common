@@ -56,14 +56,14 @@ export function replicated<T>(value: T, length: number): T[];
 export function replicated<T>(length: number): Unary<T, T[]>;
 
 export function replicated<T>(argument1: T | number, argument2?: number): T[] | Unary<T, T[]> {
+    /* eslint-disable array-func/prefer-array-from,unicorn/no-new-array -- custom use of new Array to  */
     if (isPresent(argument2)) {
         /* eslint-disable @typescript-eslint/no-unsafe-assignment -- spread array to allocate elements */
-        /* eslint-disable array-func/prefer-array-from -- custom use of new Array to  */
         return [...new Array(argument2)].map<T>(() => argument1 as T);
-        /* eslint-enable array-func/prefer-array-from */
         /* eslint-enable @typescript-eslint/no-unsafe-assignment */
     }
     return (value: T): T[] => Array.from(new Array(argument1), () => value);
+    /* eslint-enable array-func/prefer-array-from,unicorn/no-new-array */
 }
 
 export function reversed<T>(array: T[]): T[] {

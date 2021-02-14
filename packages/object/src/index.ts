@@ -24,9 +24,7 @@ export {
     recordWithPicked,
     toRecordFromEntries,
 } from './object/record';
-export {
-    RecursivePartial,
-} from './object/recursive-partial';
+export { RecursivePartial } from './object/recursive-partial';
 
 // ./property
 export {

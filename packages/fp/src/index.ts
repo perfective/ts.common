@@ -50,9 +50,7 @@ export {
     isTernary,
     Ternary,
 } from './function/ternary';
-export {
-    TypeGuard,
-} from './function/type-guard';
+export { TypeGuard } from './function/type-guard';
 export {
     isUnary,
     same,

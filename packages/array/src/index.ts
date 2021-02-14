@@ -70,14 +70,10 @@ export {
     unshift,
     values,
 } from './array/lift';
-export {
-    Map,
-} from './array/map';
+export { Map } from './array/map';
 export {
     includedIn,
     isEmpty,
     isNotEmpty,
 } from './array/predicate';
-export {
-    Reduce,
-} from './array/reduce';
+export { Reduce } from './array/reduce';

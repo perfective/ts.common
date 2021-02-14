@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports -- to keep it in devDependencies */
-/* eslint-disable node/no-unpublished-import -- false-positive, the package is public */
+// eslint-disable-next-line node/no-unpublished-import -- the package is in devDependencies
 import type { Config } from '@jest/types';
-/* eslint-enable node/no-unpublished-import */
 /* eslint-enable @typescript-eslint/consistent-type-imports */
 
 const config: Config.InitialOptions = {
     testEnvironment: 'node',
     preset: 'ts-jest',
-    // eslint-disable-next-line unicorn/prevent-abbreviations -- configuration option
     rootDir: './src', // == ./packages/*/src
     globals: {
         'ts-jest': {

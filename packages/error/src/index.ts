@@ -51,17 +51,13 @@ export {
     unchained,
     unknownError,
 } from './exception/exception';
-export {
-    ExceptionContext,
-} from './exception/exception-context';
+export { ExceptionContext } from './exception/exception-context';
 export {
     ExceptionMessage,
     exceptionMessage,
     exceptionMessageOutput,
 } from './exception/exception-message';
-export {
-    ExceptionTokens,
-} from './exception/exception-tokens';
+export { ExceptionTokens } from './exception/exception-tokens';
 
 // ./failure
 export {

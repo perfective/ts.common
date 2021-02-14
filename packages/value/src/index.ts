@@ -23,6 +23,4 @@ export {
 } from './value/type-of';
 
 // ./void
-export {
-    voidable,
-} from './void/void';
+export { voidable } from './void/void';

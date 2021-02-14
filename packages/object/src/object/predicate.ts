@@ -52,9 +52,8 @@ function isEmptyRecord<T>(value: T): boolean {
 
 /* eslint-disable @typescript-eslint/no-explicit-any -- low-level function to work with JS */
 function hasConstructor<T>(name: string): (value: T) => boolean {
-    // eslint-disable-next-line arrow-body-style -- function body is all inside the arrow function
     return (value: T): boolean => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- property presence is checked
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- checked property presence
         if (isPresent((value as any).constructor)) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- property presence is checked
             return (value as any).constructor.name === name;

@@ -1,6 +1,4 @@
-export {
-    lines,
-} from './string/array';
+export { lines } from './string/array';
 export {
     charAt,
     charCodeAt,

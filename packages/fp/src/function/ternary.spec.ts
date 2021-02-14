@@ -16,7 +16,6 @@ describe('isTernary', () => {
     });
 
     it('returns false when the given function accepts more than three arguments', () => {
-        // eslint-disable-next-line max-params -- testing arity
         expect(isTernary((a: number, b: number, c: number, d: number): number => a + b + c + d))
             .toBe(false);
     });

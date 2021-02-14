@@ -9,7 +9,7 @@ describe('isObject', () => {
     it('is true when the value is an array', () => {
         expect(isObject(['a', 'b', 'c']))
             .toBe(true);
-        expect(isObject(new Array(3)))
+        expect(isObject(Array.from({ length: 3 })))
             .toBe(true);
     });
 
@@ -297,7 +297,7 @@ describe('isEmpty', () => {
     it('is true when the value is an empty array', () => {
         expect(isEmpty([]))
             .toBe(true);
-        expect(isEmpty(new Array(0)))
+        expect(isEmpty(Array.from({ length: 0 })))
             .toBe(true);
     });
 
@@ -314,7 +314,7 @@ describe('isEmpty', () => {
     it('is false when the value is a non-empty array', () => {
         expect(isEmpty([0]))
             .toBe(false);
-        expect(isEmpty(new Array(1)))
+        expect(isEmpty(Array.from({ length: 1 })))
             .toBe(false);
     });
 

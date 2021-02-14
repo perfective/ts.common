@@ -32,7 +32,6 @@ export function exception(message: string, tokens: ExceptionTokens = {}, context
     return new Exception(exceptionMessage(message, tokens), context, null);
 }
 
-// eslint-disable-next-line max-params -- shorthand unit function
 export function causedBy(
     previous: Error,
     message: string,

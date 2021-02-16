@@ -1,11 +1,17 @@
 // ./value
 export {
+    Absent,
+    Defined,
     isAbsent,
     isDefined,
     isNotNull,
     isNull,
     isPresent,
     isUndefined,
+    NotNull,
+    Null,
+    Present,
+    Undefined,
 } from './value/type-guard';
 export {
     isNotTypeOf,
@@ -13,12 +19,6 @@ export {
     TypeOf,
     typeOf,
 } from './value/type-of';
-export {
-    Absent,
-    Defined,
-    NotNull,
-    Present,
-} from './value/value';
 
 // ./void
 export {

@@ -6,24 +6,27 @@ and utility types
 to describe some of such values.
 
 * Utility types:
-    * `type Defined<T> = T extends undefined ? never : T`
-    * `type NotNull<T> = T extends null ? never : T`
+    * `type Defined<T> = T extends undefined ? never : T`;
+    * `type Undefined<T> = T extends undefined ? T : never`;
+    * `type NotNull<T> = T extends null ? never : T`;
+    * `type Null<T> = T extends null ? T : never`;
     * `type Present<T> = T extends null | undefined ? never : T`
-    * `type Absent<T> = T extends null | undefined ? T : never`
+    — same as `NonNullable<T>`, but is used in the project for consistency with the type guards;
+    * `type Absent<T> = T extends null | undefined ? T : never`.
 * Type Guards:
-    * `isDefined<T>(value: T | undefined): value is T`
-    * `isUndefined<T>(value: T | undefined): value is undefined`
-    * `isNotNull<T>(value: T | null): value is T`
-    * `isNull<T>(value: T | null): value is null`
-    * `isPresent<T>(value: T | null | undefined): value is T`
-    * `isAbsent<T>(value: T | null | undefined): value is null | undefined`
+    * `isDefined<T>(value: T | undefined): value is T`;
+    * `isUndefined<T>(value: T | undefined): value is undefined`;
+    * `isNotNull<T>(value: T | null): value is T`;
+    * `isNull<T>(value: T | null): value is null`;
+    * `isPresent<T>(value: T | null | undefined): value is T`;
+    * `isAbsent<T>(value: T | null | undefined): value is null | undefined`.
 * `TypeOf` is an extended type for the `typeof` operator to distinguish `null` and `array` from the `object` type:
     * `type TypeOf = 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'array' | 'object'`;
     * `typeOf<T>(value: T | null | undefined): TypeOf`;
     * `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
     * `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
 * Handling `void`:
-    * `voidable<T>(value: T | void): T | null | undefined`
+    * `voidable<T>(value: T | void): T | null | undefined`.
 
 
 [Full documentation](https://github.com/perfective/js/blob/master/packages/value/README.adoc) 

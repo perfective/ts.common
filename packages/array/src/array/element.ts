@@ -6,8 +6,8 @@ export function head<T>(array: T[]): T | undefined {
     return array[0];
 }
 
-export function tail<T>(array: T[]): T | undefined {
-    return array[array.length - 1];
+export function tail<T>(array: T[]): T[] {
+    return array.slice(1);
 }
 
 export function element<T>(index: number): Unary<T[], T | undefined> {

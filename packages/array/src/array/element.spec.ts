@@ -17,18 +17,23 @@ describe('head', () => {
 });
 
 describe('tail', () => {
-    it('returns the last element of a non-empty array', () => {
-        expect(tail([2.71, 3.14]))
-            .toStrictEqual(3.14);
+    it('returns a sub-array of the given array without the first element when array has at least 2 elements', () => {
+        expect(tail([0, 1, 2.71, 3.14]))
+            .toStrictEqual([1, 2.71, 3.14]);
         expect(tail([2.71, null]))
-            .toBeNull();
+            .toStrictEqual([null]);
         expect(tail([2.71, undefined]))
-            .toBeUndefined();
+            .toStrictEqual([undefined]);
     });
 
-    it('returns undefined when an array is empty', () => {
+    it('returns an empty array when the given array is empty', () => {
         expect(tail<string>([]))
-            .toBeUndefined();
+            .toStrictEqual([]);
+    });
+
+    it('returns an empty array when the given array has one element', () => {
+        expect(tail<number>([0]))
+            .toStrictEqual([]);
     });
 });
 

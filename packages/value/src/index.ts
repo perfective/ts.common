@@ -8,6 +8,8 @@ export {
     isUndefined,
 } from './value/type-guard';
 export {
+    isNotTypeOf,
+    isTypeOf,
     TypeOf,
     typeOf,
 } from './value/type-of';

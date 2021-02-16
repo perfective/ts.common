@@ -36,7 +36,9 @@ while TS compiler keeps checks `typeof value === 'undefined'` and `value === und
 `TypeOf` can be `undefined`, `null`, `boolean`, `number`, `bigint`, `string`, `symbol`, `function`, `array`,
 or `object`.
 
-* `typeOf<T>(value: T | null | undefined): TypeOf`.
+* `typeOf<T>(value: T | null | undefined): TypeOf`;
+* `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
+* `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
 
 
 == Handling `void`

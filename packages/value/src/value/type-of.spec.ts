@@ -1,4 +1,4 @@
-import { TypeOf, typeOf } from './type-of';
+import { isNotTypeOf, isTypeOf, TypeOf, typeOf } from './type-of';
 
 describe('typeof', () => {
     it('returns "undefined" when value is undefined', () => {
@@ -49,9 +49,66 @@ describe('typeof', () => {
 
     it('returns "object" when value is a non-null object and not an array', () => {
         expect(typeOf({})).toBe('object' as TypeOf);
+        expect(typeOf(Object.create(null))).toBe('object' as TypeOf);
     });
 
     it('returns "array" when value is an array', () => {
         expect(typeOf([])).toBe('array' as TypeOf);
+    });
+});
+
+describe('isTypeOf', () => {
+    describe('isTypeOf(type)', () => {
+        it('returns true when the type of the given value matches the given type', async () => {
+            const isNull: boolean = await Promise.resolve(null).then(isTypeOf('null'));
+
+            expect(isNull).toBe(true);
+
+            const isArray: boolean = await Promise.resolve(Array.from({ length: 1 })).then(isTypeOf('array'));
+
+            expect(isArray).toBe(true);
+
+            const isObject: boolean = await Promise.resolve(new Date()).then(isTypeOf('object'));
+
+            expect(isObject).toBe(true);
+        });
+
+        it('returns false when the type of the given value matches the given type', async () => {
+            const isUndefined: boolean = await Promise.resolve(null).then(isTypeOf('undefined'));
+
+            expect(isUndefined).toBe(false);
+
+            const isString: boolean = await Promise.resolve(0).then(isTypeOf('string'));
+
+            expect(isString).toBe(false);
+        });
+    });
+});
+
+describe('isNotTypeOf', () => {
+    describe('isNotTypeOf(type)', () => {
+        it('returns false when the type of the given value matches the given type', async () => {
+            const isNull: boolean = await Promise.resolve(null).then(isNotTypeOf('null'));
+
+            expect(isNull).toBe(false);
+
+            const isArray: boolean = await Promise.resolve(Array.from({ length: 1 })).then(isNotTypeOf('array'));
+
+            expect(isArray).toBe(false);
+
+            const isObject: boolean = await Promise.resolve(new Date()).then(isNotTypeOf('object'));
+
+            expect(isObject).toBe(false);
+        });
+
+        it('returns true when the type of the given value matches the given type', async () => {
+            const isUndefined: boolean = await Promise.resolve(null).then(isNotTypeOf('undefined'));
+
+            expect(isUndefined).toBe(true);
+
+            const isString: boolean = await Promise.resolve(0).then(isNotTypeOf('string'));
+
+            expect(isString).toBe(true);
+        });
     });
 });

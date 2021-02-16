@@ -18,3 +18,11 @@ export function typeOf<T>(value: T | null | undefined): TypeOf {
     }
     return typeof value;
 }
+
+export function isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean {
+    return (value: T | null | undefined): boolean => typeOf(value) === type;
+}
+
+export function isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean {
+    return (value: T | null | undefined): boolean => typeOf(value) !== type;
+}

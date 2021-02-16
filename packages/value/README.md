@@ -19,7 +19,9 @@ to describe some of such values.
     * `isAbsent<T>(value: T | null | undefined): value is null | undefined`
 * `TypeOf` is an extended type for the `typeof` operator to distinguish `null` and `array` from the `object` type:
     * `type TypeOf = 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'array' | 'object'`;
-    * `typeOf<T>(value: T | null | undefined): TypeOf`
+    * `typeOf<T>(value: T | null | undefined): TypeOf`;
+    * `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
+    * `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
 * Handling `void`:
     * `voidable<T>(value: T | void): T | null | undefined`
 

@@ -17,8 +17,12 @@ to describe some of such values.
     * `isNull<T>(value: T | null): value is null`
     * `isPresent<T>(value: T | null | undefined): value is T`
     * `isAbsent<T>(value: T | null | undefined): value is null | undefined`
+* `TypeOf` is an extended type for the `typeof` operator to distinguish `null` and `array` from the `object` type:
+    * `type TypeOf = 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'array' | 'object'`;
+    * `typeOf<T>(value: T | null | undefined): TypeOf`
 * Handling `void`:
     * `voidable<T>(value: T | void): T | null | undefined`
+
 
 [Full documentation](https://github.com/perfective/js/blob/master/packages/value/README.adoc) 
 is available in the repository.

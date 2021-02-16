@@ -30,6 +30,15 @@ https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#o
 while TS compiler keeps checks `typeof value === 'undefined'` and `value === undefined` as is.
 ====
 
+== Type Of
+
+`TypeOf` is an extended type for the `typeof` operator to distinguish `null` and `array` from the `object` type.
+`TypeOf` can be `undefined`, `null`, `boolean`, `number`, `bigint`, `string`, `symbol`, `function`, `array`,
+or `object`.
+
+* `typeOf<T>(value: T | null | undefined): TypeOf`.
+
+
 == Handling `void`
 
 In TypeScript, `link:https://www.typescriptlang.org/docs/handbook/basic-types.html#void[void]` type

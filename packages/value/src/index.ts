@@ -8,6 +8,10 @@ export {
     isUndefined,
 } from './value/type-guard';
 export {
+    TypeOf,
+    typeOf,
+} from './value/type-of';
+export {
     Absent,
     Defined,
     NotNull,

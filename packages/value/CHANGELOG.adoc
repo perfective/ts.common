@@ -1,5 +1,13 @@
 = Changelog
 
+== v0.3.0
+
+* Declared the `EcmaType`, `TsType`, and `TypeOf<T>` types with:
+** `typeOf` unit function;
+** `isTypeOf`/`isNotTypeOf` predicates.
++
+* Declared the `Undefined<T>` and `Null<T>` types.
+
 == v0.2.1
 
 * Fix: invalid "exports" main target.

@@ -1,6 +1,6 @@
 {
     "name": "@perfective/value",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "Functions to work with `undefined` and `null` values",
     "keywords": [
         "value",

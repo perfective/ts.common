@@ -6,6 +6,11 @@ export {
     isNotFunction,
 } from './function/function';
 export {
+    Instance,
+    isInstanceOf,
+    isNotInstanceOf,
+} from './function/instance';
+export {
     isEmpty,
     isNotEmpty,
     Length,
@@ -41,11 +46,6 @@ export {
 export {
     Ternary,
 } from './function/ternary';
-export {
-    isInstanceOf,
-    isNotInstanceOf,
-    Type,
-} from './function/type';
 export {
     TypeGuard,
 } from './function/type-guard';

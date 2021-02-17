@@ -15,10 +15,10 @@ in the repository.
 — a function type to check if the value is of a certain type:
     * `isFunction<T>(value: Function | T): value is Function`
     * `isNotFunction<T>(value: Function | T): value is T`
-* `Type<T> = new(...args: any[]) => T`
+* `Instance<T> = new(...args: any[]) => T`
 — definition for a type reference:
-    * `isInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is T`
-    * `isNotInstanceOf<T, V = unknown>(type: Type<T>): (value: T | V) => value is V`
+    * `isInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is T`
+    * `isNotInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is V`
 
 ## Nullary functions
 

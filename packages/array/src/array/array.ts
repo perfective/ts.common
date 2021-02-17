@@ -1,7 +1,5 @@
-import { Unary } from '@perfective/fp';
+import { toLongest, toShortest, Unary } from '@perfective/fp';
 import { isPresent } from '@perfective/value';
-
-import { toLongest, toShortest } from '../length/length';
 
 import { isFirstOccurrence } from './filter';
 import { Compare } from './lift';

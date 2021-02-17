@@ -1,25 +1,33 @@
-import { isEmpty, isNotEmpty, length, toLongest, toShortest } from './length';
+import { isEmpty, isNotEmpty, Length, length, toLongest, toShortest } from './length';
 
 describe('isEmpty', () => {
-    it('returns true when an array is empty', () => {
-        expect(isEmpty([]))
+    it('returns true when value length is less or equal to 0', () => {
+        expect(isEmpty({ length: 0 } as Length))
+            .toStrictEqual(true);
+        expect(isEmpty(() => null))
             .toStrictEqual(true);
     });
 
-    it('returns false when an array is not empty', () => {
-        expect(isEmpty([0]))
+    it('returns false when value length is greater than 0', () => {
+        expect(isEmpty({ length: 1 } as Length))
+            .toStrictEqual(false);
+        expect(isEmpty((value: number) => value))
             .toStrictEqual(false);
     });
 });
 
 describe('isNotEmpty', () => {
-    it('returns true when an array is not empty', () => {
-        expect(isNotEmpty([false]))
+    it('returns true when value length is greater than 0', () => {
+        expect(isNotEmpty({ length: 1 } as Length))
+            .toStrictEqual(true);
+        expect(isNotEmpty((value: number) => value))
             .toStrictEqual(true);
     });
 
-    it('returns false when an array is empty', () => {
-        expect(isNotEmpty([]))
+    it('returns false when value length is less or equal to 0', () => {
+        expect(isNotEmpty({ length: 0 } as Length))
+            .toStrictEqual(false);
+        expect(isNotEmpty(() => null))
             .toStrictEqual(false);
     });
 });

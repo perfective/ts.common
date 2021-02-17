@@ -1,4 +1,28 @@
-import { includedIn } from './predicate';
+import { includedIn, isEmpty, isNotEmpty } from './predicate';
+
+describe('isEmpty', () => {
+    it('returns true when an array is empty', () => {
+        expect(isEmpty([]))
+            .toStrictEqual(true);
+    });
+
+    it('returns false when an array is not empty', () => {
+        expect(isEmpty([0]))
+            .toStrictEqual(false);
+    });
+});
+
+describe('isNotEmpty', () => {
+    it('returns true when an array is not empty', () => {
+        expect(isNotEmpty([false]))
+            .toStrictEqual(true);
+    });
+
+    it('returns false when an array is empty', () => {
+        expect(isNotEmpty([]))
+            .toStrictEqual(false);
+    });
+});
 
 describe('includedIn', () => {
     it('creates a predicate that is true when a value is in the given array', () => {

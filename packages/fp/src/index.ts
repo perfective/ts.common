@@ -6,6 +6,14 @@ export {
     isNotFunction,
 } from './function/function';
 export {
+    isEmpty,
+    isNotEmpty,
+    Length,
+    length,
+    toLongest,
+    toShortest,
+} from './function/length';
+export {
     constant,
     empty,
     Nullary,

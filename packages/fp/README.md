@@ -78,3 +78,16 @@ in the repository.
     — creates a predicate that is `true` when at most the `maximum` number of predicates are `true`.
     * `exactly<T>(count: number, ...predicates: Predicate<T>[]): Predicate<T>`
     — creates a predicate that is `true` when exact `count` of predicates are `true`.
+
+## Length
+
+`Length` type defines a kind of objects that have "length" (arrays, strings, etc).
+
+* Unit functions:
+    * `length<L extends Length>(value: L): number`
+* Predicates:
+    * `isNotEmpty<L extends Length>(value: L): boolean`
+    * `isEmpty<L extends Length>(value: L): boolean`
+* Reducers:
+    * `toShortest<T extends Length>(shortest: T, value: T): T`
+    * `toLongest<T extends Length>(longest: T, array: T): T`

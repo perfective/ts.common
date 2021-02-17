@@ -6,6 +6,10 @@ export function length<L extends Length>(value: L): number {
     return value.length;
 }
 
+export function hasLength<L extends Length>(length: number): (value: L) => boolean {
+    return (value: L): boolean => value.length === length;
+}
+
 export function isEmpty<L extends Length>(value: L): boolean {
     return value.length <= 0;
 }

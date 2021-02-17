@@ -11,6 +11,7 @@ export {
     isNotInstanceOf,
 } from './function/instance';
 export {
+    hasLength,
     isEmpty,
     isNotEmpty,
     Length,

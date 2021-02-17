@@ -1,4 +1,4 @@
-import { isEmpty, isNotEmpty, Length, length, toLongest, toShortest } from './length';
+import { hasLength, isEmpty, isNotEmpty, Length, length, toLongest, toShortest } from './length';
 
 describe('isEmpty', () => {
     it('returns true when value length is less or equal to 0', () => {
@@ -38,6 +38,24 @@ describe('length', () => {
             .toStrictEqual(0);
         expect(length(['a', 'b', 'c']))
             .toStrictEqual(3);
+    });
+});
+
+describe('hasLength', () => {
+    describe('hasLength(length)', () => {
+        it('returns true when the value has the given length', () => {
+            expect(hasLength(0)(''))
+                .toBe(true);
+            expect(hasLength(1)(['']))
+                .toBe(true);
+        });
+
+        it('returns false when the value does not have the given length', () => {
+            expect(hasLength(0)(['']))
+                .toBe(false);
+            expect(hasLength(1)(''))
+                .toBe(false);
+        });
     });
 });
 

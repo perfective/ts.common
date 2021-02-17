@@ -86,6 +86,7 @@ in the repository.
 * Unit functions:
     * `length<L extends Length>(value: L): number`
 * Predicates:
+    * `hasLength<L extends Length>(length: number): (value: L) => boolean`
     * `isNotEmpty<L extends Length>(value: L): boolean`
     * `isEmpty<L extends Length>(value: L): boolean`
 * Reducers:

@@ -10,6 +10,17 @@ export function tail<T>(array: T[]): T[] {
     return array.slice(1);
 }
 
+export function end<T>(array: T[]): T | undefined {
+    return array[array.length - 1];
+}
+
+export function init<T>(array: T[]): T[] {
+    if (array.length === 0) {
+        return [];
+    }
+    return array.slice(0, -1);
+}
+
 export function element<T>(index: number): Unary<T[], T | undefined> {
     return (array: T[]): T | undefined => array[index];
 }

@@ -48,6 +48,10 @@ The `@perfective/array` package provides functions for the standard JS
     — returns the first (head) element of an array;
     * `tail<T>(array: T[]): T[]`
     — returns an array without the first element;
+    * `end<T>(array: T[]): T | undefined`
+    — returns the last (end) element of an array;
+    * `init<T>(array: T[]): T[]`
+    — returns an array without the last element;
     * `element<T>(index: number): Unary<T[], T | undefined>`
     — returns the element by its index;
     * `find<T>(condition: Predicate<T>): Unary<T[], T | undefined>`

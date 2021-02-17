@@ -1,4 +1,18 @@
-import { append, element, first, head, insert, insertInto, last, prepend, remove, replace, tail } from './element';
+import {
+    append,
+    element,
+    end,
+    first,
+    head,
+    init,
+    insert,
+    insertInto,
+    last,
+    prepend,
+    remove,
+    replace,
+    tail,
+} from './element';
 
 describe('head', () => {
     it('returns the first element of a non-empty array', () => {
@@ -33,6 +47,43 @@ describe('tail', () => {
 
     it('returns an empty array when the given array has one element', () => {
         expect(tail<number>([0]))
+            .toStrictEqual([]);
+    });
+});
+
+describe('end', () => {
+    it('returns the last element of a non-empty array', () => {
+        expect(end([3.14]))
+            .toStrictEqual(3.14);
+        expect(end([3.14, null]))
+            .toBeNull();
+        expect(end([3.14, 2.71, undefined]))
+            .toBeUndefined();
+    });
+
+    it('returns undefined when an array is empty', () => {
+        expect(end<string>([]))
+            .toBeUndefined();
+    });
+});
+
+describe('init', () => {
+    it('returns a sub-array of the given array without the last element when array has at least 2 elements', () => {
+        expect(init([0, 1, 2.71, 3.14]))
+            .toStrictEqual([0, 1, 2.71]);
+        expect(init([null, 2.71]))
+            .toStrictEqual([null]);
+        expect(init([undefined, 2.71]))
+            .toStrictEqual([undefined]);
+    });
+
+    it('returns an empty array when the given array is empty', () => {
+        expect(init<string>([]))
+            .toStrictEqual([]);
+    });
+
+    it('returns an empty array when the given array has one element', () => {
+        expect(init<number>([0]))
             .toStrictEqual([]);
     });
 });

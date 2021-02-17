@@ -24,8 +24,11 @@ in the repository.
 
 * `Nullary<T>`
 — a function without arguments:
+    * `isNullary<F extends Function>(f: F): boolean`
+      — returns `true` when function accepts no arguments
+      (does not count a variadic argument).
     * `constant<T>(value: T): Nullary<T>`
-    — creates a function that returns that same value.
+    — creates a function that returns the given value.
     * `empty(): Nullary<void>`
     — creates a function that always returns `void` (`undefined`).
 * `Value<T> = T | Nullary<T>`
@@ -38,18 +41,27 @@ in the repository.
 
 * `Unary<X, V>`
 — a function with one argument:
+    * `isUnary<F extends Function>(f: F): boolean`
+      — returns `true` when function accepts only one argument
+      (does not count a variadic argument).
     * `value<T>(): Unary<T, T>`
 — creates a function that returns its argument.
 
 ## Binary functions
 
 * `Binary<X, Y, V>`
-— a function with two arguments (`X` and `Y`).
+— a function with two arguments (`X` and `Y`):
+    * `isBinary<F extends Function>(f: F): boolean`
+      — returns `true` when function accepts exactly two arguments
+      (does not count a variadic argument).
 
 ## Ternary functions
 
 * `Ternary<X, Y, Z, V>`
-— a function with three arguments (`X`, `Y`, and `Z`).
+— a function with three arguments (`X`, `Y`, and `Z`):
+    * `isTernary<F extends Function>(f: F): boolean`
+      — returns `true` when function accepts exactly three arguments
+      (does not count a variadic argument).
 
 ## Logic types and functions
 

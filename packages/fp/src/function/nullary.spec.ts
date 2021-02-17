@@ -1,4 +1,16 @@
-import { constant, empty, valueOf } from './nullary';
+import { constant, empty, isNullary, valueOf } from './nullary';
+
+describe('isNullary', () => {
+    it('returns true when the given function accepts three arguments', () => {
+        expect(isNullary(() => null))
+            .toBe(true);
+    });
+
+    it('returns false when the given function accepts at least one argument', () => {
+        expect(isNullary((a: number): number => a))
+            .toBe(false);
+    });
+});
 
 describe('constant', () => {
     it('creates a function that returns a constant value', () => {

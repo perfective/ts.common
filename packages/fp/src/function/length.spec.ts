@@ -38,6 +38,8 @@ describe('length', () => {
             .toStrictEqual(0);
         expect(length(['a', 'b', 'c']))
             .toStrictEqual(3);
+        expect(length((...a: number[]): number[] => a))
+            .toBe(0);
     });
 });
 

@@ -1,5 +1,6 @@
 export {
     Binary,
+    isBinary,
 } from './function/binary';
 export {
     isFunction,
@@ -22,6 +23,7 @@ export {
 export {
     constant,
     empty,
+    isNullary,
     Nullary,
     Value,
     valueOf,
@@ -45,12 +47,14 @@ export {
     Proposition,
 } from './function/proposition';
 export {
+    isTernary,
     Ternary,
 } from './function/ternary';
 export {
     TypeGuard,
 } from './function/type-guard';
 export {
+    isUnary,
     same,
     Unary,
 } from './function/unary';

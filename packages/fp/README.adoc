@@ -58,10 +58,14 @@ even explicit type parameter does not work.
 The function works correctly.
 ====
 
+
 == Nullary functions
 
 * `Nullary<T>`
 — a function without arguments:
+** `isNullary<F extends Function>(f: F): boolean`
+— returns `true` when function accepts no arguments
+(does not count a variadic argument).
 ** `constant<T>(value: T): Nullary<T>`
 — creates a function that returns that same value.
 ** `empty(): Nullary<void>`
@@ -72,22 +76,35 @@ The function works correctly.
 ** `valueOf<T>(value: Value<T>): T`
 — evaluates the given value.
 
+
 == Unary functions
 
 * `Unary<X, V>`
 — a function with one argument:
+** `isUnary<F extends Function>(f: F): boolean`
+— returns `true` when function accepts only one argument
+(does not count a variadic argument).
 ** `value<T>(): Unary<T, T>`
 — creates a function that returns its argument.
+
 
 == Binary functions
 
 * `Binary<X, Y, V>`
 — a function with two arguments (`X` and `Y`).
+** `isBinary<F extends Function>(f: F): boolean`
+— returns `true` when function accepts exactly two arguments
+(does not count a variadic argument).
+
 
 == Ternary functions
 
 * `Ternary<X, Y, Z, V>`
 — a function with three arguments (`X`, `Y`, and `Z`).
+** `isTernary<F extends Function>(f: F): boolean`
+— returns `true` when function accepts exactly three arguments
+(does not count a variadic argument).
+
 
 == Logic types and functions
 

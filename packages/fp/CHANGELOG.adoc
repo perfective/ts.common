@@ -1,5 +1,17 @@
 = Changelog
 
+== v0.6.0
+
+* Added `Length` type with:
+** unit function `length`;
+** predicates `hasLength`, `isEmpty`, and `isNotEmpty`;
+** reducers `toShortest` and `toLongest`.
++
+* Added the `isNullary`, `isUnary`, `isBinary`, and `isTernary` predicates for functions.
++
+* Renamed `Type<T>` into `Instance<T>` to match the corresponding `isInstanceOf`/`isNotInstanceOf` functions.
+
+
 == v0.5.1
 
 * Renamed `negative` into `negated`.

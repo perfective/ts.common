@@ -20,9 +20,14 @@ to describe some of such values.
     * `isNull<T>(value: T | null): value is null`;
     * `isPresent<T>(value: T | null | undefined): value is T`;
     * `isAbsent<T>(value: T | null | undefined): value is null | undefined`.
-* `TypeOf` is an extended type for the `typeof` operator to distinguish `null` and `array` from the `object` type:
-    * `type TypeOf = 'undefined' | 'null' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'array' | 'object'`;
-    * `typeOf<T>(value: T | null | undefined): TypeOf`;
+* `typeof` types and functions:
+    * `EcmaType`
+    — is one of `undefined`, `boolean`, `number`, `bigint`, `string`, `symbol`, `function`, or `object`.
+    * `TsType`
+    — is one of `EcmaType` or `null`, `array`, and `unknown`.
+    * `TypeOf<T>`
+    — a conditional type that returns `TsType` dynamically.
+    * `typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType`.
     * `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
     * `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
 * Handling `void`:

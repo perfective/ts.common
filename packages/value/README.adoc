@@ -34,15 +34,26 @@ while TS compiler keeps checks `typeof value === 'undefined'` and `value === und
 ====
 
 
-== Type Of
+== ECMA and TypeScript types
 
-`TypeOf` is an extended type for the `typeof` operator to distinguish `null` and `array` from the `object` type.
-`TypeOf` can be `undefined`, `null`, `boolean`, `number`, `bigint`, `string`, `symbol`, `function`, `array`,
-or `object`.
+JavaScript provides the `typeof` operator that returns 'object' for arrays and `null`.
+This results in additional checks needed using this operator.
+To reduce this complexity, the `typeOf<T>` function is provided with the conditional `TypeOf<T>` type.
 
-* `typeOf<T>(value: T | null | undefined): TypeOf`;
-* `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
-* `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
+* Types
+** `EcmaType`
+— is one of `undefined`, `boolean`, `number`, `bigint`, `string`, `symbol`, `function`, or `object`.
+** `TsType`
+— is one of `EcmaType` or `null`, `array`, and `unknown`.
+** `TypeOf<T>`
+— a conditional type that returns `TsType` dynamically.
++
+* Unit function:
+** `typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType`.
++
+* Predicates:
+** `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
+** `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
 
 
 == Handling `void`

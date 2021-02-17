@@ -14,8 +14,10 @@ export {
     Undefined,
 } from './value/type-guard';
 export {
+    EcmaType,
     isNotTypeOf,
     isTypeOf,
+    TsType,
     TypeOf,
     typeOf,
 } from './value/type-of';

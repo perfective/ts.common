@@ -1,59 +1,168 @@
-import { isNotTypeOf, isTypeOf, TypeOf, typeOf } from './type-of';
+import { isNotTypeOf, isTypeOf, TsType, typeOf } from './type-of';
 
+// NOTE: Explicitly defining each constant with a type to verify correct TypeOf<T> type
 describe('typeof', () => {
-    it('returns "undefined" when value is undefined', () => {
-        expect(typeOf(undefined)).toBe('undefined' as TypeOf);
-        // eslint-disable-next-line no-void -- testing undefined value
-        expect(typeOf(void 0)).toBe('undefined' as TypeOf);
+    describe('typeOf<T>', () => {
+        it('is of type TsType for the "any" type', () => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- testing types
+            const output: TsType = typeOf<any>({});
+
+            expect(output).toBe('object' as TsType);
+        });
+
+        it('is of type "unknown" for the "unknown" type', () => {
+            const output: 'unknown' = typeOf<unknown>(null);
+
+            expect(output).toBe('null' as TsType);
+        });
+
+        it('returns union type for a union type', () => {
+            const output: 'undefined' | 'null' = typeOf<undefined | null>(undefined);
+
+            expect(output).toBe('undefined' as TsType);
+        });
+
+        it('cannot be assigned to a different Type', () => {
+            // @ts-expect-error -- Type '"undefined" | "null"' is not assignable to type '"null"'.
+            const output: 'null' = typeOf<undefined | null>(undefined);
+
+            expect(output).toBe('undefined' as TsType);
+        });
     });
 
-    it('returns "null" when value is null', () => {
-        expect(typeOf(null)).toBe('null' as TypeOf);
+    describe('typeOf(undefined)', () => {
+        it('returns "undefined" when value is undefined', () => {
+            const output: 'undefined' = typeOf(undefined);
+
+            expect(output).toBe('undefined' as TsType);
+        });
+
+        it('returns "undefined" when value is void', () => {
+            // eslint-disable-next-line no-void -- testing undefined value
+            const output: 'undefined' = typeOf(void 0);
+
+            expect(output).toBe('undefined' as TsType);
+        });
     });
 
-    it('returns "boolean" when value is false', () => {
-        expect(typeOf(false)).toBe('boolean' as TypeOf);
+    describe('typeOf(null)', () => {
+        it('returns "null" when value is null', () => {
+            const output: 'null' = typeOf(null);
+
+            expect(output).toBe('null' as TsType);
+        });
     });
 
-    it('returns "boolean" when value is true', () => {
-        expect(typeOf(true)).toBe('boolean' as TypeOf);
+    describe('typeOf(boolean)', () => {
+        it('returns "boolean" when value is false', () => {
+            const output: 'boolean' = typeOf(false);
+
+            expect(output).toBe('boolean' as TsType);
+        });
+
+        it('returns "boolean" when value is true', () => {
+            const output: 'boolean' = typeOf(true);
+
+            expect(output).toBe('boolean' as TsType);
+        });
     });
 
-    it('returns "number" when value is a number', () => {
-        expect(typeOf(0)).toBe('number' as TypeOf);
-        expect(typeOf(Number.NaN)).toBe('number' as TypeOf);
-        expect(typeOf(Number.POSITIVE_INFINITY)).toBe('number' as TypeOf);
-        expect(typeOf(Number.NEGATIVE_INFINITY)).toBe('number' as TypeOf);
-        expect(typeOf(Number.MAX_SAFE_INTEGER)).toBe('number' as TypeOf);
-        expect(typeOf(Number.MIN_SAFE_INTEGER)).toBe('number' as TypeOf);
-        expect(typeOf(Number.MIN_VALUE)).toBe('number' as TypeOf);
-        expect(typeOf(Number.MAX_VALUE)).toBe('number' as TypeOf);
-        expect(typeOf(Number.EPSILON)).toBe('number' as TypeOf);
+    describe('typeOf(number)', () => {
+        it('returns "number" when value is NaN', () => {
+            const output: 'number' = typeOf(Number.NaN);
+
+            expect(output).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is a number', () => {
+            const output: 'number' = typeOf(0);
+
+            expect(output).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is +Infinity', () => {
+            const output: 'number' = typeOf(Number.POSITIVE_INFINITY);
+
+            expect(output).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is -Infinity', () => {
+            expect(typeOf(Number.NEGATIVE_INFINITY)).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is MIN_SAFE_INTEGER', () => {
+            expect(typeOf(Number.MIN_SAFE_INTEGER)).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is MAX_SAFE_INTEGER', () => {
+            expect(typeOf(Number.MAX_SAFE_INTEGER)).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is MIN_VALUE', () => {
+            expect(typeOf(Number.MIN_VALUE)).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is MAX_VALUE', () => {
+            expect(typeOf(Number.MAX_VALUE)).toBe('number' as TsType);
+        });
+
+        it('returns "number" when value is EPSILON', () => {
+            expect(typeOf(Number.EPSILON)).toBe('number' as TsType);
+        });
     });
 
-    it('returns "bigint" when value is a BigInt', () => {
-        expect(typeOf(BigInt(0))).toBe('bigint' as TypeOf);
+    describe('typeOf(bigint)', () => {
+        it('returns "bigint" when value is a BigInt', () => {
+            const output: 'bigint' = typeOf(BigInt(0));
+
+            expect(output).toBe('bigint' as TsType);
+        });
     });
 
-    it('returns "string" when value is a string', () => {
-        expect(typeOf('')).toBe('string' as TypeOf);
+    describe('typeOf(string)', () => {
+        it('returns "string" when value is a string', () => {
+            const output: 'string' = typeOf('');
+
+            expect(output).toBe('string' as TsType);
+        });
     });
 
-    it('returns "symbol" when value is a symbol', () => {
-        expect(typeOf(Symbol('TypeOf'))).toBe('symbol' as TypeOf);
+    describe('typeOf(symbol)', () => {
+        it('returns "symbol" when value is a symbol', () => {
+            const output: 'symbol' = typeOf(Symbol('TypeOf'));
+
+            expect(output).toBe('symbol' as TsType);
+        });
     });
 
-    it('returns "function" when value is a function', () => {
-        expect(typeOf(typeOf)).toBe('function' as TypeOf);
+    describe('typeOf(function)', () => {
+        it('returns "function" when value is a function', () => {
+            const output: 'function' = typeOf(typeOf);
+
+            expect(output).toBe('function' as TsType);
+        });
     });
 
-    it('returns "object" when value is a non-null object and not an array', () => {
-        expect(typeOf({})).toBe('object' as TypeOf);
-        expect(typeOf(Object.create(null))).toBe('object' as TypeOf);
+    describe('typeOf(array)', () => {
+        it('returns "array" when value is an array', () => {
+            const output: 'array' = typeOf([]);
+
+            expect(output).toBe('array' as TsType);
+        });
     });
 
-    it('returns "array" when value is an array', () => {
-        expect(typeOf([])).toBe('array' as TypeOf);
+    describe('typeOf(object)', () => {
+        it('returns "object" when value is not an array', () => {
+            const output: 'object' = typeOf(new Date());
+
+            expect(output).toBe('object' as TsType);
+        });
+
+        it('returns TsType when value is a null object', () => {
+            const output: TsType = typeOf(Object.create(null));
+
+            expect(output).toBe('object' as TsType);
+        });
     });
 });
 

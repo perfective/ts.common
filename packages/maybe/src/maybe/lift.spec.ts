@@ -29,7 +29,7 @@ interface TypeGuardCheck<T> {
 }
 
 const checks: Maybe<TypeGuardCheck<number>>[] = [
-    just({
+    just<TypeGuardCheck<number>>({
         required: 2.71,
         optional: 2.71828,
         option: undefined,
@@ -42,7 +42,7 @@ const checks: Maybe<TypeGuardCheck<number>>[] = [
         nullable: null,
         maybe: 3.1415,
         possible: 3.14159,
-    }),
+    } as TypeGuardCheck<number>),
     nothing(),
     nil(),
 ];

@@ -31,6 +31,9 @@ in the repository.
     — creates an `ExceptionMessage` with an empty tokens object if the argument not provided.
     * `exceptionMessageOutput(message: ExceptionMessage): string`
     — creates a string to output an `ExceptionMessage`.
+* `Failure` — a record type to serialize errors and exceptions:
+    * `failure<E extends Error>(error: E): Failure`
+    — convert and `Error` or an `Exception` into a `Failure` record.
 * Throwing errors:
     * `throws<E extends Error>(error: E): never` 
     — throws a provided error.

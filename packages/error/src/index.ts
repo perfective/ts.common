@@ -63,6 +63,12 @@ export {
     ExceptionTokens,
 } from './exception/exception-tokens';
 
+// ./failure
+export {
+    Failure,
+    failure,
+} from './failure/failure';
+
 // ./panic
 export {
     Panic,

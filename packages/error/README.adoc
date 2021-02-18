@@ -157,6 +157,19 @@ Similar to `panic`: creates a function that will wrap up an error with additiona
 Can be useful working with promises or RxJS `catchError`.
 
 
+== Failure
+
+The default JS `Error` class does not have `toJSON` method
+and is serialized as an empty object by `JSON.stringify`.
+This creates a problem for any attempt to transfer error information.
+Type `Failure` solved this problem by providing a record type to "serialize" `Error` and `Exception`.
+It omits stack information, but keeps the list of previous errors.
+
+* `Failure`
+** `failure<E extends Error>(error: E): Failure`
+— convert and `Error` or an `Exception` into a `Failure` record.
+
+
 == Standard built-in JS Error types
 
 * `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`:

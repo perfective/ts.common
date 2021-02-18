@@ -1,6 +1,6 @@
 {
     "name": "@perfective/error",
-    "version": "0.2.4",
+    "version": "0.3.0",
     "description": "Functions for the Error and other types to handle exceptions",
     "keywords": [
         "error",

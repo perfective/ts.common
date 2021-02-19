@@ -1,3 +1,18 @@
+// ./input
+export {
+    arrayInput,
+    booleanInput,
+    Input,
+    input,
+    InputArray,
+    InputObject,
+    InputPrimitive,
+    nullInput,
+    numberInput,
+    objectInput,
+    stringInput,
+} from './input/input';
+
 // ./object
 export {
     clone,

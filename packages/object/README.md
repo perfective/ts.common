@@ -52,6 +52,22 @@ The `@perfective/object` package provides functions to work with the standard JS
     * `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`
     * `property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>`
     * `by<T, K extends keyof T>(property: K, ordering: Compare<T[K]>): Compare<T>`
+* Input:
+    * `Input<T>`
+    * `InputArray<T>`
+    * `InputObject<T>`
+    * `InputPrimitive<T>`
+    * `input<T>(input: unknown): Input<T>`
+    — type cast to `Input<T>`.
+    * `stringInput(input: Input<string>): string | undefined`
+    * `numberInput(input: Input<number>): number | undefined`
+    * `booleanInput(input: Input<boolean>): boolean | undefined`
+    * `arrayInput<T>(input: Input<T[]>): Input<T>[] | undefined`
+    — checks that the `input` is an array and returns it as an array of _unvalidated_ elements.
+    * `objectInput<T>(input: Input<T>): InputObject<T> | undefined`
+    — checks that the `input` is a non-null, non-array object, and returns it as an object with _unvalidated_ properties.
+    * `nullInput(input: Input<null>): null | undefined`.
+
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/object/README.adoc) 
 in the repository.

@@ -1,6 +1,7 @@
 import { isPresent } from '@perfective/value';
 
-export function isObject<T>(value: T | null): boolean {
+// eslint-disable-next-line @typescript-eslint/ban-types -- type guard
+export function isObject<T>(value: T | null): value is T & object {
     return value !== null
         && typeof value === 'object';
 }

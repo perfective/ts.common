@@ -59,3 +59,81 @@ The `@perfective/object` package provides functions to work with the standard JS
 ** `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`
 ** `property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>`
 ** `by<T, K extends keyof T>(property: K, ordering: Compare<T[K]>): Compare<T>`
+
+
+== Input
+
+One of the challenges in API development is declaring type of requests (inputs).
+On the client side these types need to be as strict as possible
+(e.g., all fields that are required must be marked as required).
+On the server side the same type need to be treated as completely unknown, unvalidated data.
+If the type is written for the client side, compiler will not be able to enforce any checks on the server side.
+At the same time, server side cannot just use the plain `unknown` type,
+as any access to properties will be prohibited (with strict compiler settings).
+
+To resolve this issue, the `Input<T>` type is introduced.
+It recursively adds `unknown`, `null`, and `undefined` to the type of every field or value.
+That allows to enforce validation of input data,
+while declaring the original type `T` can be declared in strict mode for the client side.
+
+Validation functions and additional input types cover default https://www.json.org/json-en.html[JSON] types:
+`object`, `array`, `string`, `number`, `boolean`, and `null`.
+
+* Types:
+** `Input<T>`
+** `InputArray<T>`
+** `InputObject<T>`
+** `InputPrimitive<T>`
++
+* Unit function:
+** `input<T>(input: unknown): Input<T>`
+— type cast to `Input<T>`.
++
+* Basic validation functions:
+** `stringInput(input: Input<string>): string | undefined`
+** `numberInput(input: Input<number>): number | undefined`
+** `booleanInput(input: Input<boolean>): boolean | undefined`
+** `arrayInput<T>(input: Input<T[]>): Input<T>[] | undefined`
+— checks that the `input` is an array and returns it as an array of _unvalidated_ elements.
+** `objectInput<T>(input: Input<T>): InputObject<T> | undefined`
+— checks that the `input` is a non-null, non-array object, and returns it as an object with _unvalidated_ properties.
+** `nullInput(input: Input<null>): null | undefined`.
+
+.Use `Maybe` chain to validate inputs
+[source,typescript]
+----
+import { panic } from '@perfective/error';
+import { maybe } from '@perfective/maybe';
+import { Input, InputObject, numberInput, objectInput } from '@perfective/object';
+import { isNatural, Natural } from '@perfective/real';
+
+interface ExampleParams {
+    id: number;
+}
+
+interface Example {
+    params: ExampleParams;
+}
+
+function userId(request: Input<Example>): Natural {
+    return maybe(request) // <.>
+        .to<InputObject<Example>>(objectInput) // <.>
+        .pick('params')
+        .to<InputObject<ExampleParams>>(objectInput)
+        .pick('id')
+        .to(numberInput) // <.>
+        .otherwise(panic('User ID is not defined'))
+        .that(isNatural) // <.>
+        .or(panic('User ID is invalid'));
+}
+----
+<1> `request` may be `undefined`.
+<2> At the moment type transformations are not inferred correctly,
+so explicit type need to provided for `objectInput`.
+<3> Last validation of the input structure.
+<4> Final validation of the input, specific for the function.
+
+[NOTE]
+====
+A custom validation monad may be added later to allow "collecting" all validation errors and warnings.
+====

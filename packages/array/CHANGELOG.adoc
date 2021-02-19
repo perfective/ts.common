@@ -1,5 +1,12 @@
 = Changelog
 
+== v0.4.0
+
+* Added array `intersection` function.
+* Added array `init`/`end` functions.
+* Changed `tail` to return an array, not the last element
+(use `end` instead).
+
 == v0.3.1
 
 * Added `by(property)` filter function.

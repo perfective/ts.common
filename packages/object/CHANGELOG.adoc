@@ -1,5 +1,11 @@
 = Changelog
 
+== v0.4.0
+
+* Added `Input`, `InputPrimitive`, `InputArray` and `InputObject` types.
+* Added `input`, `stringInput`, `numberInput`, `booleanInput`, `arrayInput`, `objectInput`, and `nullInput` functions.
+
+
 == v0.3.0
 
 * Added `RecursivePartial` type.
@@ -16,6 +22,7 @@
 
 * Fix: invalid "exports" main target.
 
+
 == v0.2.0
 
 * Compiled `ES6` and `CommonsJS` modules.
@@ -25,6 +32,7 @@
 * Added `property` function to pick a property or create a predicate for the object,
 based on the given property.
 * Added `by` function to create a comparison function for a given property.
+
 
 == v0.1.0
 

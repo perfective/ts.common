@@ -1,6 +1,6 @@
 import { Enum } from '../enum/enum';
 
-import { Bitmask, bitmask, hasFlagOn, isFlagOn } from './bitmask';
+import { Bitmask, bitmask, hasFlagOn, isFlagOn, raisedFlags } from './bitmask';
 
 enum BitBool {
     True = 0b1111_1111,
@@ -51,6 +51,13 @@ describe('bitmask', () => {
             .toBe(0b0100_1001);
         expect(bitmask([Style.None, Style.Solid, Style.Groove, Style.Ridge, Style.Onset]))
             .toBe(0b1011_0100);
+    });
+});
+
+describe('raisedFlags', () => {
+    it('returns flags that are raised on the given bitmask', () => {
+        expect(raisedFlags(Style, 0b0100_1001))
+            .toStrictEqual(['Dotted', 'Double', 'Inset']);
     });
 });
 

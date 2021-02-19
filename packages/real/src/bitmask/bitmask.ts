@@ -2,13 +2,18 @@ import { Unary } from '@perfective/fp';
 
 import { Enum } from '../enum/enum';
 
-export type Bitmask<T extends Enum<number> | number = number> = T extends Enum<number> ? T[keyof T] : number;
+export type Flags = Enum<number>;
+export type Flag<T extends Flags> = T[keyof T] & number;
+
+export type Bitmask<T extends Flags | number = number> = T extends Flags ? Flag<T> : number;
+
+/* eslint-disable no-bitwise -- bitmask operations require bitwise operators */
 
 /**
  * Creates a bitmask by raising all given flags.
  */
-export function bitmask<T extends Bitmask = Bitmask>(flags: T[]): number {
-    return flags.reduce(withFlagOn, 0);
+export function bitmask<T extends Flags | number = number>(flags: Bitmask<T>[]): Bitmask {
+    return flags.reduce((bitmask: number, flag: number) => bitmask | flag, 0b0);
 }
 
 /**
@@ -16,25 +21,14 @@ export function bitmask<T extends Bitmask = Bitmask>(flags: T[]): number {
  *
  * @see isFlagOn()
  */
-export function hasFlagOn<T extends Bitmask = number>(flag: T): Unary<T, boolean> {
-    return (bitmask: T): boolean => isFlagOn(bitmask, flag);
-}
-
-/* eslint-disable no-bitwise -- bitmask operations require bitwise operators */
-
-/**
- * Raises a bit flag on a given bitmask.
- */
-export function withFlagOn<T extends Bitmask = Bitmask>(bitmask: T, flag: T): number {
-    // TBD: Return type of the function has to be "number",
-    //  because a particular combination of flags may not exist on the Enum<number>
-    return bitmask | flag;
+export function hasFlagOn<T extends Flags | number>(flag: Bitmask<T>): Unary<Bitmask<T>, boolean> {
+    return (bitmask: Bitmask<T>): boolean => isFlagOn(bitmask, flag);
 }
 
 /**
  * Returns true when given flags are raised on a bitmask.
  */
-export function isFlagOn<T extends Bitmask = Bitmask>(bitmask: T, flag: T): boolean {
+export function isFlagOn<T extends Flags | number>(bitmask: Bitmask<T>, flag: Bitmask<T>): boolean {
     /* eslint-disable @typescript-eslint/tslint/config -- flag is a number */
     return (bitmask & flag) === flag
         && flag !== 0;

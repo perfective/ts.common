@@ -56,9 +56,9 @@ describe('bitmask', () => {
 
 describe('isFlagOn', () => {
     it('returns true when all of the given flags are raised on the bitmask', () => {
-        expect(isFlagOn(0b0000_0010, 0b0000_0010))
-            .toBe(true);
         expect(isFlagOn(0b0110_0011, 0b0110_0010))
+            .toBe(true);
+        expect(isFlagOn<Style>(0b0100_1001, Style.Dotted))
             .toBe(true);
     });
 

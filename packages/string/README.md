@@ -40,6 +40,14 @@ It provides the following functions and additional types.
     * `output<T extends Output>(value: T | string | null | undefined): string`
     * `isOutput<T>(value: Output | T): value is Output`
     * `isNotOutput<T>(value: Output | T): value is T`
+* `Format`:
+    * `format(template: string, tokens: Tokens | Output[] = {}): Format`
+    — creates a `Format` record converting positional tokens into named.
+    * `formatted(input: Format): string`
+    — replaces input tokens in the input template.
+* `Tokens`:
+    * `tokens(tokens: Output[] | Tokens): Tokens`
+    — converts positional tokens (an array of `Output` values) into named `Tokens`.
 * `Utf16CodeUnit`:
     * `stringFromCharCode(...codes: Utf16CodeUnit[]): string`
     * `charCodeAt(index: number): Unary<string, Utf16CodeUnit>`

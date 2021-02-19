@@ -59,6 +59,19 @@ It provides the following functions and additional types.
 ** `normalize(form: UnicodeNormalizationForm = 'NFC'): Unary<string, string>`
 
 
+== Format
+
+* `Format`:
+** `format(template: string, tokens: Tokens | Output[] = {}): Format`
+— creates a `Format` record converting positional tokens into named.
+** `formatted(input: Format): string`
+— replaces input tokens in the input template.
++
+* `Tokens`:
+** `tokens(tokens: Output[] | Tokens): Tokens`
+— converts positional tokens (an array of `Output` values) into named `Tokens`.
+
+
 == Roadmap
 
 * Implement with the `@perfective/locale` package:

@@ -1,3 +1,15 @@
+// ./format
+export {
+    Format,
+    format,
+    formatted,
+} from './format/format';
+export {
+    Tokens,
+    tokens,
+} from './format/tokens';
+
+// ./string
 export { lines } from './string/array';
 export {
     charAt,

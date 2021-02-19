@@ -94,3 +94,30 @@ into polymorphic shortcuts for readability:
     * `isInLeftOpenInterval(interval: Interval): Predicate<number>`
     * `isInRightOpenInterval(interval: Interval): Predicate<number>`
 
+## Enum
+
+* Types:
+    * `Enum<T extends number | string>` — a record generated based on the `enum` keyword;
+    * `Member<T extends number | string>` — key of an enum.
+* Functions:
+    * `members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[]`
+    — returns a list of `enum` keys.
+
+
+## Bitmasks
+
+* Types:
+    * `Flags<T extends number = number>` — an `enum` with `number` values;
+    * `Flag<T extends Flags>` — a key of a `Flags` enum.
+    * `Bitmask<T extends Flags | number = number>` — a combination of bits.
+* Unit function:
+    * `bitmask<T extends Flags | number = number>(flags: Bitmask<T>[]): Bitmask`
+    — creates a bitmask by raising all given flags.
+* Predicates:
+    * `isFlagOn<T extends Flags | number>(bitmask: Bitmask<T>, flag: Bitmask<T>): boolean`
+    — returns true when given flags are raised on a bitmask.
+    * `hasFlagOn<T extends Flags | number>(flag: Bitmask<T>): Unary<Bitmask<T>, boolean>`
+    — creates a curried version of the hasRaised() function.
+* Other:
+    * `raisedFlags<T extends number>(type: object, bitmask: Bitmask<T>): Member<T>[]`
+    — returns flags that are raised on the given bitmask.

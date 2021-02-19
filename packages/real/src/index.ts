@@ -1,3 +1,21 @@
+// ./bitmask
+export {
+    Bitmask,
+    bitmask,
+    Flag,
+    Flags,
+    hasFlagOn,
+    isFlagOn,
+    raisedFlags,
+} from './bitmask/bitmask';
+
+// ./enum
+export {
+    Enum,
+    Member,
+    members,
+} from './enum/enum';
+
 // ./interval
 export {
     Interval,

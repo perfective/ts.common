@@ -30,8 +30,13 @@ on the Github.
 
 ## Integer
 
-* Types:
-    * `Integer` — a nominal type based on the `number` type.
+* Nominal types (aliases of `number`):
+    * `Integer`
+    * `SafeInteger`
+    * `PositiveInteger`
+    * `NonNegativeInteger`
+    * `NonPositiveInteger`
+    * `NegativeInteger`
 * Predicates:
     * `isInteger(value: number): boolean`
     * `isSafeInteger(value: number): boolean`

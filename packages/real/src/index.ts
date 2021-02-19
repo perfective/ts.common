@@ -57,6 +57,11 @@ export {
     isNonPositiveInteger,
     isPositiveInteger,
     isSafeInteger,
+    NegativeInteger,
+    NonNegativeInteger,
+    NonPositiveInteger,
+    PositiveInteger,
+    SafeInteger,
 } from './number/integer';
 export {
     Digits,

@@ -51,17 +51,21 @@ So passing digits or precision over 15 requires careful consideration and thorou
 
 == Integer
 
-`Integer` type is defined as an alias to the `number` type,
-so it can be used in the function signatures,
-when an integer is expected.
-
+* Nominal types (aliases of `number`):
+** `Integer`;
+** `SafeInteger`;
+** `PositiveInteger`;
+** `NonNegativeInteger`;
+** `NonPositiveInteger`;
+** `NegativeInteger`.
++
 * Predicates:
-** `isInteger(value: number): boolean`
-** `isSafeInteger(value: number): boolean`
-** `isNonNegativeInteger(value: number): boolean`
-** `isPositiveInteger(value: number): boolean`
-** `isNonPositiveInteger(value: number): boolean`
-** `isNegativeInteger(value: number): boolean`
+** `isInteger(value: number): value is Integer`
+** `isSafeInteger(value: number): value is SafeInteger`
+** `isNonNegativeInteger(value: number): value is NonNegativeInteger`
+** `isPositiveInteger(value: number): value is PositiveInteger`
+** `isNonPositiveInteger(value: number): value is NonPositiveInteger`
+** `isNegativeInteger(value: number): value is NegativeInteger`
 
 
 == Natural
@@ -202,4 +206,3 @@ returns `null` if `min > max`.
 ** `isStrictSubInterval()`.
 ** verify correct behavior with `Infinity`.
 ** consider adding negated functions, like `isNotInInterval()`.
-* Add `Positive`, `Negative`, and other nominal types to be used for readability.

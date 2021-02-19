@@ -1,25 +1,35 @@
 export type Integer = number;
 
-export function isInteger(value: number): boolean {
+export function isInteger(value: number): value is Integer {
     return Number.isInteger(value);
 }
 
-export function isSafeInteger(value: number): boolean {
+export type SafeInteger = number;
+
+export function isSafeInteger(value: number): value is SafeInteger {
     return Number.isSafeInteger(value);
 }
 
-export function isNonNegativeInteger(value: number): boolean {
+export type NonNegativeInteger = number;
+
+export function isNonNegativeInteger(value: number): value is NonNegativeInteger {
     return value >= 0 && isInteger(value);
 }
 
-export function isPositiveInteger(value: number): boolean {
+export type PositiveInteger = number;
+
+export function isPositiveInteger(value: number): value is PositiveInteger {
     return value > 0 && isInteger(value);
 }
 
-export function isNonPositiveInteger(value: number): boolean {
+export type NonPositiveInteger = number;
+
+export function isNonPositiveInteger(value: number): value is NonPositiveInteger {
     return value <= 0 && isInteger(value);
 }
 
-export function isNegativeInteger(value: number): boolean {
+export type NegativeInteger = number;
+
+export function isNegativeInteger(value: number): value is NegativeInteger {
     return value < 0 && isInteger(value);
 }

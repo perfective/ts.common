@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.3.0
+
+* Declared `Format` and `Tokens` types with `format`, `formatted` and `tokens` functions.
+
 == v0.2.3
 
 * Added the `concatTo` function.

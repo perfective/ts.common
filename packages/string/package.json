@@ -1,6 +1,6 @@
 {
     "name": "@perfective/string",
-    "version": "0.2.3",
+    "version": "0.3.0",
     "description": "Functions to work with the String type",
     "keywords": [
         "string",

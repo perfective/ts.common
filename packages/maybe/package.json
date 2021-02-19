@@ -54,6 +54,6 @@
     "devDependencies": {
         "@perfective/error": "^0.3.0",
         "@perfective/object": "^0.3.0",
-        "@perfective/real": "^0.5.1"
+        "@perfective/real": "^0.6.0"
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "@perfective/real",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "description": "Types and functions to work with real numbers",
     "keywords": [
         "arithmetic",

@@ -1,5 +1,13 @@
 = Changelog
 
+== v0.6.0
+
+* Declared `Enum<T>` and `Member<T>` enum types with `members` function.
+* Declared `Flags<T>`, `Flag<T>`, and `Bitmask<T>` bitmask types with:
+** `bitmask` and `raisedFlags` functions;
+** `isFlagOn` and `hasFlagOn` predicates.
+
+
 == v0.5.1
 * Added the `negative` function.
 

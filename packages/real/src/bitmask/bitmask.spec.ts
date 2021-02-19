@@ -1,6 +1,6 @@
 import { Enum } from '../enum/enum';
 
-import { Bitmask, hasFlagOn, isFlagOn } from './bitmask';
+import { Bitmask, bitmask, hasFlagOn, isFlagOn } from './bitmask';
 
 enum BitBool {
     True = 0b1111_1111,
@@ -10,6 +10,18 @@ enum BitBool {
 enum CharBool {
     True = 't',
     False = 'f',
+}
+
+enum Style {
+    None = 0,
+    Dotted = 1,
+    Dashed = 2,
+    Solid = 4,
+    Double = 8,
+    Groove = 16,
+    Ridge = 32,
+    Inset = 64,
+    Onset = 128,
 }
 
 describe('bitmask<T>', () => {
@@ -30,6 +42,15 @@ describe('bitmask<T>', () => {
         const truth: Bitmask<Enum<CharBool>> = CharBool.True;
 
         expect(truth).toBe('t');
+    });
+});
+
+describe('bitmask', () => {
+    it('creates a bitmask with the given flags on', () => {
+        expect(bitmask([Style.Dotted, Style.Double, Style.Inset]))
+            .toBe(0b0100_1001);
+        expect(bitmask([Style.None, Style.Solid, Style.Groove, Style.Ridge, Style.Onset]))
+            .toBe(0b1011_0100);
     });
 });
 

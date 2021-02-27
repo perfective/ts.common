@@ -1,5 +1,18 @@
 = Changelog
 
+== v0.6.0 (next)
+
+* Added `Nullable<T>` as `Solum<T>` or `Nil<T>`
+to cover `T | null` only (using `isNotNull` check)
+with the unit functions `nullable`, `solum`, and `nil`.
+** `nil` for `Maybe` is renamed  into `naught`.
+* Added `Optional<T>` as `Some<T>` or `None<T>`
+to cover `T | undefined` only (using `isDefined` check)
+with the unit functions `optional`, `some`, and `none`.
+* Improve type context for `Just`/`Nothing`, `Solum`/`Nil`, and `Some`/`None`.
+* Increased test coverage by adding types declaration/assignment verification.
+
+
 == v0.5.2
 
 * Return `Just` value from `Just.pick()` when property is required.

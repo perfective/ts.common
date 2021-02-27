@@ -1,6 +1,6 @@
 {
     "name": "@perfective/maybe",
-    "version": "0.5.2",
+    "version": "0.6.0-alpha",
     "description": "Maybe monadic container implementation",
     "keywords": [
         "maybe monad",

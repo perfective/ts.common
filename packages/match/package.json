@@ -38,6 +38,6 @@
     },
     "dependencies": {
         "@perfective/fp": "^0.6.0",
-        "@perfective/maybe": "^0.5.2"
+        "@perfective/maybe": "^0.6.0-alpha"
     }
 }

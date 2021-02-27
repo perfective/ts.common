@@ -1,5 +1,9 @@
 = Changelog
 
+== v0.3.0 (next)
+
+* Add `statements` function to create `Statement` array from an array of `StatementEntry` tuples.
+
 == v0.2.2
 
 * Bump `@perfective/maybe` to `0.5.2`.

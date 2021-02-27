@@ -11,6 +11,8 @@ The `@perfective/match` package provides functions and types for the pattern mat
 * `when<T>(condition: T | Predicate<T>): When<T>`
 — `Statement<T, U>` builder;
     * `then<U>(value: U | Unary<T, U>): Statement<T, U>`
+* `statements<T, U>(entries: StatementEntry<T, U>[]): Statement<T, U>[]`
+— creates statements from an array of tuples `[Predicate<T>, Unary<T, U>]`.
 
 Read the [full documentation](https://github.com/perfective/js/blob/master/packages/match/README.adoc) 
 in the repository.

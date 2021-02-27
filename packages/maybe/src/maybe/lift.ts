@@ -1,12 +1,12 @@
 import { Predicate, Proposition, TypeGuard, Unary, Value } from '@perfective/fp';
 import { Present } from '@perfective/value';
 
-import { Just, Maybe, Nothing } from './maybe';
+import { Just, Maybe } from './maybe';
 
 export function onto<T, U>(
-    flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>,
-): Unary<Maybe<T>, Maybe<U> | Just<U> | Nothing<U>> {
-    return (maybe: Maybe<T>): Maybe<U> | Just<U> | Nothing<U> => maybe.onto(flatMap);
+    flatMap: (value: T) => Maybe<Present<U>>,
+): Unary<Maybe<T>, Maybe<Present<U>>> {
+    return (maybe: Maybe<T>): Maybe<Present<U>> => maybe.onto(flatMap);
 }
 
 export function to<T, U>(

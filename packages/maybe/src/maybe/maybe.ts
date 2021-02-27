@@ -15,8 +15,8 @@ export abstract class Maybe<T> implements Option<T, null | undefined> {
     public abstract readonly value: T | null | undefined;
 
     public abstract onto<U>(
-        flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>,
-    ): Maybe<U>;
+        flatMap: (value: T) => Maybe<Present<U>>,
+    ): Maybe<Present<U>>;
 
     public abstract to<U>(
         map: (value: T) => U | null | undefined,
@@ -52,10 +52,12 @@ export class Just<T> implements Maybe<T> {
         public readonly value: T,
     ) {}
 
-    public onto<U>(flatMap: (value: T) => Just<U>): Just<U>
-    public onto<U>(flatMap: (value: T) => Nothing<U>): Nothing<U>
-    public onto<U>(flatMap: (value: T) => Maybe<U>): Maybe<U>
-    public onto<U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Maybe<U> | Just<U> | Nothing<U> {
+    public onto<U>(flatMap: (value: T) => Just<Present<U>>): Just<Present<U>>
+    public onto<U>(flatMap: (value: T) => Nothing<Present<U>>): Nothing<Present<U>>
+    public onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Maybe<Present<U>>
+    public onto<U>(
+        flatMap: (value: T) => Maybe<Present<U>>,
+    ): Maybe<Present<U>> {
         return flatMap(this.value);
     }
 
@@ -126,7 +128,9 @@ export class Nothing<T> implements Maybe<T> {
         public readonly value: null | undefined,
     ) {}
 
-    public onto<U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Nothing<U>
+    public onto<U>(
+        flatMap: (value: T) => Maybe<Present<U>>,
+    ): Nothing<Present<U>>
     public onto<U>(): Nothing<U> {
         return this as unknown as Nothing<U>;
     }

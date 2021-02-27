@@ -8,8 +8,8 @@ export abstract class Optional<T> implements Option<T, undefined> {
     public abstract readonly value: T | undefined;
 
     public abstract onto<U>(
-        flatMap: (value: T) => Optional<U> | Some<U> | None<U>,
-    ): Optional<U>;
+        flatMap: (value: T) => Optional<Defined<U>>,
+    ): Optional<Defined<U>>;
 
     public abstract to<U>(
         map: (value: T) => U | undefined,
@@ -42,10 +42,12 @@ export class Some<T> implements Optional<T> {
         public readonly value: T,
     ) {}
 
-    public onto<U>(flatMap: (value: T) => Some<U>): Some<U>
-    public onto<U>(flatMap: (value: T) => None<U>): None<U>
-    public onto<U>(flatMap: (value: T) => Optional<U>): Optional<U>
-    public onto<U>(flatMap: (value: T) => Optional<U> | Some<U> | None<U>): Optional<U> | Some<U> | None<U> {
+    public onto<U>(flatMap: (value: T) => Some<Defined<U>>): Some<Defined<U>>
+    public onto<U>(flatMap: (value: T) => None<Defined<U>>): None<Defined<U>>
+    public onto<U>(flatMap: (value: T) => Optional<Defined<U>>): Optional<Defined<U>>
+    public onto<U>(
+        flatMap: (value: T) => Optional<Defined<U>>,
+    ): Optional<Defined<U>> {
         return flatMap(this.value);
     }
 
@@ -111,9 +113,9 @@ export class Some<T> implements Optional<T> {
 export class None<T> implements Optional<T> {
     public readonly value: undefined;
 
-    public onto<U>(flatMap: (value: T) => Optional<U> | Some<U> | None<U>): None<U>
-    public onto<U>(): None<U> {
-        return this as unknown as None<U>;
+    public onto<U>(flatMap: (value: T) => Optional<Defined<U>>): None<Defined<U>>
+    public onto<U>(): None<Defined<U>> {
+        return this as unknown as None<Defined<U>>;
     }
 
     public to<U>(map: (value: T) => (U | undefined)): None<U>

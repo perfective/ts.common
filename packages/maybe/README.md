@@ -32,14 +32,14 @@ Both `Nullable` and `Optional` have the same methods as `Maybe`,
 but for their corresponding types `Solum`/`Nil` and `Some`/`None`.
 These references are omitted for brevity.
 
-* `Maybe.onto<U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Maybe<U>`
+* `Maybe.onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Maybe<Present<U>>`
 — when a value is present, 
   apply the provided function and return its result;
   otherwise return an empty `Maybe`.
-    * `Just.onto<U>(flatMap: (value: T) => Just<U>): Just<U>`
-    * `Just.onto<U>(flatMap: (value: T) => Just<U>): Just<U>`
-    * `Just.onto<U>(flatMap: (value: T) => Maybe<U>): Maybe<U>`
-    * `Nothing.onto<U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Nothing<U>`
+    * `Just.onto<U>(flatMap: (value: T) => Just<Present<U>>): Just<Present<U>>`
+    * `Just.onto<U>(flatMap: (value: T) => Just<Present<U>>): Just<Present<U>>`
+    * `Just.onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Maybe<Present<U>>`
+    * `Nothing.onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Nothing<Present<U>>`
 
 * `Maybe.to<U>(map: (value: T) => U | null | undefined): Maybe<U>`
 — when a value is present, 
@@ -131,7 +131,7 @@ return the result wrapped in a new `Maybe`.
 Each method has a corresponding mapping function that can be used in the `Array.prototype.map`
 (or any other mapping method or operator).
 
-* `onto<T, U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Unary<Maybe<T>, Maybe<U> | Just<U> | Nothing<U>>`
+* `onto<T, U>(flatMap: (value: T) => Maybe<Present<U>>): Unary<Maybe<T>, Maybe<Present<U>>>`
 * `to<T, U>(map: (value: T) => U | null | undefined): Unary<Maybe<T>, Maybe<U>>`
 * `pick<T, K extends keyof T>(property: Value<K>): Unary<Maybe<T>, Maybe<Present<T[K]>>>`
 * `that<T>(filter: Predicate<T>): Unary<Maybe<T>, Maybe<T>>`

@@ -8,8 +8,8 @@ export abstract class Nullable<T> implements Option<T, null> {
     public abstract readonly value: T | null;
 
     public abstract onto<U>(
-        flatMap: (value: T) => Nullable<U> | Solum<U> | Nil<U>,
-    ): Nullable<U>;
+        flatMap: (value: T) => Nullable<NotNull<U>>,
+    ): Nullable<NotNull<U>>;
 
     public abstract to<U>(
         map: (value: T) => U | null,
@@ -43,10 +43,12 @@ export class Solum<T> implements Nullable<T> {
 
     ) {}
 
-    public onto<U>(flatMap: (value: T) => Solum<U>): Solum<U>
-    public onto<U>(flatMap: (value: T) => Nil<U>): Nil<U>
-    public onto<U>(flatMap: (value: T) => Nullable<U>): Nullable<U>
-    public onto<U>(flatMap: (value: T) => Nullable<U> | Solum<U> | Nil<U>): Nullable<U> | Solum<U> | Nil<U> {
+    public onto<U>(flatMap: (value: T) => Solum<NotNull<U>>): Solum<NotNull<U>>
+    public onto<U>(flatMap: (value: T) => Nil<NotNull<U>>): Nil<NotNull<U>>
+    public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nullable<NotNull<U>>
+    public onto<U>(
+        flatMap: (value: T) => Nullable<NotNull<U>>,
+    ): Nullable<NotNull<U>> {
         return flatMap(this.value);
     }
 
@@ -116,9 +118,9 @@ export class Nil<T>
 implements Nullable<T> {
     public readonly value: null = null;
 
-    public onto<U>(flatMap: (value: T) => Nullable<U> | Solum<U> | Nil<U>): Nil<U>
-    public onto<U>(): Nil<U> {
-        return this as unknown as Nil<U>;
+    public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nil<NotNull<U>>
+    public onto<U>(): Nil<NotNull<U>> {
+        return this as unknown as Nil<NotNull<U>>;
     }
 
     public to<U>(map: (value: T) => (U | null)): Nil<U>

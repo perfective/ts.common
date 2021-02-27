@@ -1,6 +1,8 @@
-// eslint-disable-next-line max-classes-per-file -- Maybe<T>, Just<T>, Null<T>, Nothing<T> create cyclic dependency
+// eslint-disable-next-line max-classes-per-file -- Maybe<T>, Just<T>, and Nothing<T> are co-dependent
 import { isTrue, Predicate, Proposition, TypeGuard, Value, valueOf } from '@perfective/fp';
-import { isNull, isPresent, isUndefined, Present } from '@perfective/value';
+import { isNull, isPresent, Present } from '@perfective/value';
+
+import { Option } from '../option';
 
 /**
  * @sealed
@@ -9,88 +11,107 @@ import { isNull, isPresent, isUndefined, Present } from '@perfective/value';
  * @see Nothing
  * @see Nil
  */
-export abstract class Maybe<T> {
-    protected constructor(
-        public readonly value: T | null | undefined,
-        private readonly none: <U>() => Nothing<U> | Nil<U>,
+export abstract class Maybe<T> implements Option<T, null | undefined> {
+    public abstract readonly value: T | null | undefined;
+
+    public abstract onto<U>(
+        flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>,
+    ): Maybe<U>;
+
+    public abstract to<U>(
+        map: (value: T) => U | null | undefined,
+    ): Maybe<U>;
+
+    // Using Present<T[K]> to exclude null | undefined from the type
+    public abstract pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>>;
+
+    public abstract that(filter: Predicate<T>): Maybe<T>;
+
+    public abstract which<U extends T>(filter: TypeGuard<T, U>): Maybe<U>;
+
+    public abstract when(condition: Proposition): Maybe<T>;
+
+    public abstract otherwise(fallback: Value<T>): Just<T>;
+    public abstract otherwise(fallback: Value<T | null | undefined>): Maybe<T>;
+
+    public abstract or(fallback: Value<T>): T;
+    public abstract or(fallback: Value<T> | Value<T | null | undefined>): T | null | undefined;
+
+    public abstract run(procedure: (value: T) => void): Maybe<T>;
+
+    public abstract lift<U>(map: (value: T | null | undefined) => U | null | undefined): Maybe<U>;
+}
+
+/**
+ * @final
+ */
+export class Just<T> implements Maybe<T> {
+    public constructor(
+        public readonly value: T,
     ) {}
 
-    public onto<U>(bind: (value: T) => Maybe<U>): Maybe<U> {
-        if (isPresent(this.value)) {
-            return bind(this.value);
-        }
-        return this.none();
+    public onto<U>(flatMap: (value: T) => Just<U>): Just<U>
+    public onto<U>(flatMap: (value: T) => Nothing<U>): Nothing<U>
+    public onto<U>(flatMap: (value: T) => Maybe<U>): Maybe<U>
+    public onto<U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Maybe<U> | Just<U> | Nothing<U> {
+        return flatMap(this.value);
     }
 
-    public to<U>(map: (value: T) => U | null | undefined): Maybe<U> {
-        if (isPresent(this.value)) {
-            return maybe(map(this.value));
-        }
-        return this.none();
+    // Return type has to be Present<U> to exclude null or undefined from the type U
+    public to<U>(map: (value: T) => Present<U>): Just<U>
+    public to<U>(map: (value: T) => null | undefined): Nothing<U>
+    public to<U>(map: (value: T) => U | null | undefined): Maybe<U>
+    public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> | Nothing<U> {
+        return maybe<U>(map(this.value));
     }
 
-    public pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>> {
-        return this.to(v => v[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
+    public pick<K extends keyof T>(
+        property: Value<K>,
+    ): T[K] extends Present<T[K]> ? Just<T[K]> : Maybe<Present<T[K]>>;
+
+    public pick<K extends keyof T>(property: Value<K>): Just<T[K]> | Maybe<Present<T[K]>> {
+        return this.to(value => value[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
     }
 
     public that(filter: Predicate<T>): Maybe<T> {
-        if (isPresent(this.value)) {
-            if (filter(this.value)) {
-                return this;
-            }
-            return this.none();
+        if (filter(this.value)) {
+            return this;
         }
-        return this;
+        return nothing<T>();
     }
 
     public which<U extends T>(filter: TypeGuard<T, U>): Maybe<U> {
-        if (isPresent(this.value)) {
-            if (filter(this.value)) {
-                return this as unknown as Just<U>;
-            }
-            return this.none();
+        if (filter(this.value)) {
+            // When condition is true, this.value is of type U extends T.
+            // Return it as is instead of passing it through just(this.value).
+            return this as unknown as Just<U>;
         }
-        return this as unknown as Nothing<U> | Nil<U>;
+        return nothing<U>();
     }
 
     public when(condition: Proposition): Maybe<T> {
-        if (isPresent(this.value) && isTrue(condition)) {
+        if (isTrue(condition)) {
             return this;
         }
-        return this.none();
+        return nothing<T>();
     }
 
-    public otherwise(fallback: Value<T>): Just<T>
-    public otherwise(fallback: Value<T | null | undefined>): Maybe<T>
-    public otherwise(fallback: Value<T | null | undefined>): Just<T> | Maybe<T> {
-        if (isPresent(this.value)) {
-            return just(this.value);
-        }
-        return maybe(valueOf(fallback));
-    }
-
-    public or(fallback: Value<T>): T
-    public or(fallback: Value<T | null> | null): T | null
-    public or(fallback: Value<T | undefined> | undefined): T | undefined
-    public or(fallback: Value<T | null | undefined>): T | null | undefined
-    public or(fallback: Value<T | null | undefined> | null | undefined): T | null | undefined {
-        if (isPresent(this.value)) {
-            return this.value;
-        }
-        if (isPresent(fallback)) {
-            return valueOf(fallback);
-        }
-        return fallback;
-    }
-
-    public run(procedure: (value: T) => void): Maybe<T> {
-        if (isPresent(this.value)) {
-            procedure(this.value);
-        }
+    public otherwise(fallback: Value<T | null | undefined>): Just<T>
+    public otherwise(): Just<T> {
         return this;
     }
 
-    public lift<U>(map: (value: T | null | undefined) => U | null | undefined): Maybe<U> {
+    public or(fallback: Value<T | null | undefined>): T
+    public or(): T {
+        return this.value;
+    }
+
+    public run(procedure: (value: T) => void): Just<T> {
+        procedure(this.value);
+        return this;
+    }
+
+    public lift<U>(map: (value: T) => U | null | undefined): Maybe<U> {
         return maybe(map(this.value));
     }
 }
@@ -98,105 +119,98 @@ export abstract class Maybe<T> {
 /**
  * @final
  */
-export class Just<T>
-    extends Maybe<T> {
+export class Nothing<T> implements Maybe<T> {
     public constructor(
-        public readonly value: T,
-    ) {
-        super(value, nothing);
+        public readonly value: null | undefined,
+    ) {}
+
+    public onto<U>(flatMap: (value: T) => Maybe<U> | Just<U> | Nothing<U>): Nothing<U>
+    public onto<U>(): Nothing<U> {
+        return this as unknown as Nothing<U>;
     }
 
-    public onto<U>(bind: (value: T) => Just<Present<U>>): Just<U>
-    public onto<U>(bind: (value: T) => Maybe<U>): Maybe<U>
-    public onto<U>(bind: (value: T) => Maybe<U> | Just<U>): Maybe<U> | Just<U> {
-        return super.onto(bind);
+    public to<U>(map: (value: T) => (U | null | undefined)): Nothing<U>
+    public to<U>(): Nothing<U> {
+        return this as unknown as Nothing<U>;
     }
 
-    public to<U>(map: (value: T) => Present<U>): Just<U>
-    public to<U>(map: (value: T) => U | null | undefined): Maybe<U>
-    public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> {
-        return super.to(map);
+    public pick<K extends keyof T>(property: Value<K>): Nothing<Present<T[K]>>
+    public pick<K extends keyof T>(): Nothing<Present<T[K]>> {
+        return this as unknown as Nothing<Present<T[K]>>;
     }
 
-    public pick<K extends keyof T>(
-        property: Value<K>,
-    ): T[K] extends Present<T[K]> ? Just<Present<T[K]>> : Maybe<Present<T[K]>>;
-    public pick<K extends keyof T>(property: Value<K>): Just<Present<T[K]>> | Maybe<Present<T[K]>> {
-        return super.pick(property);
+    public that(filter: Predicate<T>): Nothing<T>
+    public that(): Nothing<T> {
+        return this;
+    }
+
+    public which<U extends T>(filter: TypeGuard<T, U>): Nothing<U>
+    public which<U extends T>(): Nothing<U> {
+        return this as unknown as Nothing<U>;
+    }
+
+    public when(condition: Proposition): Nothing<T>
+    public when(): Nothing<T> {
+        return this;
     }
 
     public otherwise(fallback: Value<T>): Just<T>
-    // eslint-disable-next-line @typescript-eslint/unified-signatures -- unified signature causes compiler errors
-    public otherwise(fallback: Value<T | null | undefined>): Just<T>
-    public otherwise(fallback: Value<T | null | undefined>): Just<T> {
-        return super.otherwise(fallback) as Just<T>;
+    public otherwise(fallback: Value<null | undefined>): Nothing<T>;
+    public otherwise(fallback: Value<T | null | undefined>): Maybe<T>
+    public otherwise(fallback: Value<T | null | undefined>): Just<T> | Nothing<T> | Maybe<T> {
+        return maybe(valueOf(fallback));
     }
 
-    public run(procedure: (value: T) => void): Just<T> {
-        return super.run(procedure) as Just<T>;
+    public or(fallback: Value<T>): T
+    public or(fallback: Value<null>): null
+    public or(fallback: Value<undefined>): undefined
+    public or(fallback: Value<T | null>): T | null
+    public or(fallback: Value<T | undefined>): T | undefined
+    public or(fallback: Value<T | null | undefined>): T | null | undefined
+    public or(
+        fallback: Value<T | null | undefined> | Value<T | null> | Value<T | undefined> | Value<T>,
+    ): T | null | undefined {
+        return valueOf(fallback);
     }
+
+    public run(procedure: (value: T) => void): Nothing<T>
+    public run(): Nothing<T> {
+        return this;
+    }
+
+    public lift<U>(map: (value: null | undefined) => U | null | undefined): Maybe<U> {
+        return maybe(map(this.value));
+    }
+}
+
+export function maybe<T>(value: T | null | undefined): Maybe<T> {
+    if (isPresent(value)) {
+        return just(value);
+    }
+    if (isNull(value)) {
+        return naught();
+    }
+    return nothing();
 }
 
 export function just<T>(value: T): Just<T> {
     return new Just<T>(value);
 }
 
-/**
- * @final
- */
-export class Nothing<T>
-    extends Maybe<T> {
-    public readonly value: undefined = undefined;
-
-    public constructor() {
-        super(undefined, nothing);
-    }
+interface Memo {
+    nothing: Nothing<unknown>;
+    naught: Nothing<unknown>;
 }
 
-const none: Nothing<unknown> = new Nothing<unknown>();
+const memo: Memo = {
+    nothing: new Nothing(undefined),
+    naught: new Nothing(null),
+};
 
 export function nothing<T>(): Nothing<T> {
-    return none as Nothing<T>;
+    return memo.nothing as Nothing<T>;
 }
 
-/**
- * @final
- */
-export class Nil<T>
-    extends Maybe<T> {
-    public readonly value: null = null;
-
-    public constructor() {
-        super(null, nil);
-    }
-}
-
-const naught: Nil<unknown> = new Nil<unknown>();
-
-export function nil<T>(): Nil<T> {
-    return naught as Nil<T>;
-}
-
-export function maybe<T>(value: T | null | undefined): Maybe<T> {
-    if (isUndefined(value)) {
-        return nothing();
-    }
-    if (isNull(value)) {
-        return nil();
-    }
-    return just(value);
-}
-
-export function nullable<T>(value: T | null): Maybe<T> {
-    if (isNull(value)) {
-        return nil();
-    }
-    return just(value);
-}
-
-export function optional<T>(value: T | undefined): Maybe<T> {
-    if (isUndefined(value)) {
-        return nothing();
-    }
-    return just(value);
+export function naught<T>(): Nothing<T> {
+    return memo.naught as Nothing<T>;
 }

@@ -11,111 +11,102 @@ import { decimal, isGreaterThan } from '@perfective/real';
 import { isPresent } from '@perfective/value';
 
 import { lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
-import { just, Maybe, nil, nothing } from './maybe';
+import { just, Maybe, naught, nothing } from './maybe';
+import { TypeGuardCheck } from './type-guard-check.mock';
 
-const list: Maybe<number>[] = [just(2.71), just(3.14), nothing<number>(), nil<number>()];
+const list: Maybe<number>[] = [just(2.71), just(3.14), nothing(), naught()];
 
-function justDecimal(value: number): Maybe<string> {
+function maybeDecimal(value: number): Maybe<string> {
     return just(value).to<string>(decimal);
 }
 
-interface TypeGuardCheck<T> {
-    readonly required: T;
-    readonly optional?: T;
-    readonly option: T | undefined;
-    readonly nullable: T | null;
-    readonly maybe: T | null | undefined;
-    readonly possible?: T | null | undefined;
-}
+const checkEuler: Maybe<TypeGuardCheck> = just({
+    required: 2.71,
+    optional: 2.71828,
+    option: undefined,
+    nullable: 2.718,
+    maybe: 2.7182,
+} as TypeGuardCheck);
 
-const checks: Maybe<TypeGuardCheck<number>>[] = [
-    just<TypeGuardCheck<number>>({
-        required: 2.71,
-        optional: 2.71828,
-        option: undefined,
-        nullable: 2.718,
-        maybe: 2.7182,
-    }),
-    just({
-        required: 3.14,
-        option: 3.141,
-        nullable: null,
-        maybe: 3.1415,
-        possible: 3.14159,
-    } as TypeGuardCheck<number>),
-    nothing(),
-    nil(),
-];
+const checkPi: Maybe<TypeGuardCheck> = just<TypeGuardCheck>({
+    required: 3.14,
+    option: 3.141,
+    nullable: null,
+    maybe: 3.1415,
+    possible: 3.14159,
+});
+
+const checks: Maybe<TypeGuardCheck>[] = [checkEuler, checkPi, nothing(), naught()];
 
 describe('onto', () => {
     it('lifts the bind function to the Maybe.onto()', () => {
-        expect(list.map(onto(justDecimal)))
-            .toStrictEqual([just('2.71'), just('3.14'), nothing(), nil()]);
+        expect(list.map(onto(maybeDecimal)))
+            .toStrictEqual([just('2.71'), just('3.14'), nothing(), naught()]);
     });
 });
 
 describe('to', () => {
     it('lifts the map function to the Maybe.to()', () => {
         expect(list.map(to<number, string>(decimal)))
-            .toStrictEqual([just('2.71'), just('3.14'), nothing(), nil()]);
+            .toStrictEqual([just('2.71'), just('3.14'), nothing(), naught()]);
         expect(list.map(to((): string | undefined => undefined)))
-            .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
+            .toStrictEqual([nothing(), nothing(), nothing(), naught()]);
         expect(list.map(to((): string | null => null)))
-            .toStrictEqual([nil(), nil(), nothing(), nil()]);
+            .toStrictEqual([naught(), naught(), nothing(), naught()]);
     });
 });
 
 describe('that', () => {
     it('lifts the filter function to the Maybe.that()', () => {
         expect(list.map(that(isGreaterThan(3))))
-            .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
+            .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
     });
 });
 
 describe('which', () => {
     it('lifts the filter function to the Maybe.which()', () => {
         expect(checks.map(which(hasPresentProperty('required'))).map(pick('required')))
-            .toStrictEqual([just(2.71), just(3.14), nothing(), nil()]);
+            .toStrictEqual([just(2.71), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasAbsentProperty('required'))).map(pick('required')))
-            .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
+            .toStrictEqual([nothing(), nothing(), nothing(), naught()]);
         expect(checks.map(which(hasDefinedProperty('option'))).map(pick('required')))
-            .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
+            .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasUndefinedProperty('option'))).map(pick('required')))
-            .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
+            .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
         expect(checks.map(which(hasDefinedProperty('optional'))).map(pick('required')))
-            .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
+            .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
         expect(checks.map(which(hasUndefinedProperty('optional'))).map(pick('required')))
-            .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
+            .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasNotNullProperty('nullable'))).map(pick('required')))
-            .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
+            .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
         expect(checks.map(which(hasNullProperty('nullable'))).map(pick('required')))
-            .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
+            .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasPresentProperty('maybe'))).map(pick('maybe')))
-            .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
+            .toStrictEqual([just(2.7182), just(3.1415), nothing(), naught()]);
         expect(checks.map(which(hasAbsentProperty('maybe'))).map(pick('maybe')))
-            .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
+            .toStrictEqual([nothing(), nothing(), nothing(), naught()]);
         expect(checks.map(which(hasPresentProperty('possible'))).map(pick('required')))
-            .toStrictEqual([nothing(), just(3.14), nothing(), nil()]);
+            .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasAbsentProperty('possible'))).map(pick('required')))
-            .toStrictEqual([just(2.71), nothing(), nothing(), nil()]);
+            .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
     });
 });
 
 describe('when', () => {
     it('lifts the filter function to the Maybe.when()', () => {
         expect(list.map(when(false)))
-            .toStrictEqual([nothing(), nothing(), nothing(), nil()]);
+            .toStrictEqual([nothing(), nothing(), nothing(), naught()]);
     });
 });
 
 describe('pick', () => {
     it('lifts the property selector to the Maybe.pick()', () => {
         expect(checks.map(pick('maybe')))
-            .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
+            .toStrictEqual([just(2.7182), just(3.1415), nothing(), naught()]);
         expect(checks.map(pick(() => 'maybe')))
-            .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
-        expect(checks.map(pick(constant<keyof TypeGuardCheck<number>>('maybe'))))
-            .toStrictEqual([just(2.7182), just(3.1415), nothing(), nil()]);
+            .toStrictEqual([just(2.7182), just(3.1415), nothing(), naught()]);
+        expect(checks.map(pick(constant<keyof TypeGuardCheck>('maybe'))))
+            .toStrictEqual([just(2.7182), just(3.1415), nothing(), naught()]);
     });
 });
 
@@ -184,7 +175,7 @@ describe('run', () => {
         const a: (number | null | undefined)[] = [];
 
         expect(list.map(run(v => a.push(v))))
-            .toStrictEqual([just(2.71), just(3.14), nothing(), nil()]);
+            .toStrictEqual([just(2.71), just(3.14), nothing(), naught()]);
         expect(a)
             .toStrictEqual([2.71, 3.14]);
     });

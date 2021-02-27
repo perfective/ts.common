@@ -16,13 +16,30 @@ export {
     just,
     Maybe,
     maybe,
-    Nil,
-    nil,
+    naught,
     Nothing,
     nothing,
-    nullable,
-    optional,
 } from './maybe/maybe';
+
+// ./nullable
+export {
+    Nil,
+    nil,
+    Nullable,
+    nullable,
+    Solum,
+    solum,
+} from './nullable/nullable';
+
+// ./optional
+export {
+    None,
+    none,
+    Optional,
+    optional,
+    Some,
+    some,
+} from './optional/optional';
 
 // ./promise
 export {

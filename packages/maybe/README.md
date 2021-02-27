@@ -99,6 +99,8 @@ otherwise, if the given fallback is a function,
 return the result of the fallback function;
 otherwise, return the fallback value.
     * `Maybe.or(fallback: Value<T>): T`
+    * `Maybe.or(fallback: Value<T | null>): T | null`
+    * `Maybe.or(fallback: Value<T | undefined>): T | undefined`
     * `Just.or(fallback: Value<T | null | undefined>): T`
     * `Nothing.or(fallback: Value<T>): T`
     * `Nothing.or(fallback: Value<null>): null`

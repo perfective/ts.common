@@ -6,7 +6,7 @@ import { isPresent } from '@perfective/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { Nil, nil, Nullable, nullable, Solum, solum } from './nullable';
-import { fallback } from './nullable.mock';
+import { fallbackNullable } from './nullable.mock';
 
 function nullableDecimal(value: number | null): Nullable<string> {
     return nullable(value).to<string>(decimal);
@@ -45,7 +45,7 @@ describe(nullable, () => {
 
     describe('when the value may be present or null', () => {
         it('must be assigned to Nullable', () => {
-            const output: Nullable<number> = nullable(fallback(0));
+            const output: Nullable<number> = nullable(fallbackNullable(0));
 
             expect(output).toStrictEqual(solum(0));
         });
@@ -192,7 +192,7 @@ describe(Nullable, () => {
 
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<string> = nullable(3.14).to(constant(fallback('3.14')));
+                const output: Nullable<string> = nullable(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
@@ -200,7 +200,7 @@ describe(Nullable, () => {
             it('cannot be assigned to Solum', () => {
                 // TS2322: Type 'Nullable<string>' is not assignable to type 'Solum<string>'.
                 // @ts-expect-error -- Nullable.to() may return the result of the function, which can be absent.
-                const output: Solum<string> = nullable(3.14).to(constant(fallback('3.14')));
+                const output: Solum<string> = nullable(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
@@ -208,7 +208,7 @@ describe(Nullable, () => {
             it('cannot be assigned to Nil', () => {
                 // TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
                 // @ts-expect-error -- Nullable.to() may return the result of the function, which can be present.
-                const output: Nil<string> = nullable(3.14).to(constant(fallback('3.14')));
+                const output: Nil<string> = nullable(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
@@ -608,19 +608,19 @@ describe(Nullable, () => {
 
     describe('or', () => {
         describe('when the "fallback" is a present value', () => {
-            it('can be assigned to the value type when the original value is present', () => {
+            it('should be assigned to the value type', () => {
                 const output: number = nullable(3.14).or(2.71);
 
                 expect(output).toStrictEqual(3.14);
             });
 
-            it('can be assigned to the value type when the original value is null', () => {
-                const output: number = nullable<number>(null).or(2.71);
+            it('can be assigned to the nullable value type', () => {
+                const output: number | null = nullable<number>(null).or(2.71);
 
                 expect(output).toStrictEqual(2.71);
             });
 
-            it('can be assigned to the value type when the original value is undefined', () => {
+            it('can be assigned to the optional value type', () => {
                 const output: number | undefined = nullable<number | undefined>(undefined).or(2.71);
 
                 expect(output).toBeUndefined();
@@ -628,50 +628,76 @@ describe(Nullable, () => {
         });
 
         describe('when the "fallback" returns a present value', () => {
-            it('can be assigned to the value type when the original value is present', () => {
+            it('should be assigned to the value type', () => {
                 const output: number = nullable(3.14).or(constant(2.71));
 
                 expect(output).toStrictEqual(3.14);
             });
 
-            it('can be assigned to the value type when the original value is null', () => {
+            it('can be assigned to the nullable value type', () => {
                 const output: number = nullable<number>(null).or(constant(2.71));
 
                 expect(output).toStrictEqual(2.71);
             });
 
-            it('can be assigned to the value type when the original value is undefined', () => {
+            it('can be assigned to the optional value type', () => {
                 const output: number | undefined = nullable<number | undefined>(undefined).or(constant(2.71));
 
                 expect(output).toBeUndefined();
             });
         });
 
-        describe('when the "fallback" may be an absent value', () => {
-            it('must be assigned to the value type or null, or undefined', () => {
-                const output: number | null | undefined = nullable(3.14).or(fallback(2.71));
-
-                expect(output).toStrictEqual(3.14);
-            });
-
-            it('cannot be assigned to the value type when the original value is present', () => {
+        describe('when the "fallback" may be null', () => {
+            it('cannot be assigned to the value type', () => {
                 // TS2322: Type 'number | null' is not assignable to type 'number'.
-                // @ts-expect-error -- fallback() may also return null or undefined.
-                const output: number = nullable(3.14).or(fallback(2.71));
+                // @ts-expect-error -- fallback may be null
+                const output: number = nullable(3.14).or(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(3.14);
             });
 
-            it('can be assigned to the value type when the original value is null', () => {
-                const output: number | null = nullable<number>(null).or(fallback(2.71));
+            it('must be assigned to the nullable value type', () => {
+                const output: number | null = nullable<number>(null).or(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(2.71);
             });
 
-            it('can be assigned to the value type when the original value is undefined', () => {
-                // TS2322: Type 'number | null' is not assignable to type 'number | undefined'.
-                // @ts-expect-error -- fallback() may also return null.
-                const output: number | undefined = nullable<number>(undefined).or(fallback(2.71));
+            it('cannot be assigned to the optional value type', () => {
+                // TS2322: Type 'number | null | undefined' is not assignable to type 'number | undefined'.
+                // @ts-expect-error -- fallback may be null
+                const output: number | undefined = nullable<number | undefined>(undefined).or(fallbackNullable(2.71));
+
+                expect(output).toBeUndefined();
+            });
+        });
+
+        describe('when the "fallback" is null', () => {
+            it('cannot be assigned to the value type', () => {
+                // TS2322: Type 'number | null' is not assignable to type 'number'.
+                // @ts-expect-error -- fallback is null
+                const output: number = nullable(3.14).or(null);
+
+                expect(output).toStrictEqual(3.14);
+            });
+
+            it('cannot be assigned to null type', () => {
+                // TS2322: Type 'number | null' is not assignable to type 'null'.
+                // @ts-expect-error -- value may be present
+                const output: null = nullable(3.14).or(null);
+
+                expect(output).toStrictEqual(3.14);
+            });
+
+            it('must be assigned to the nullable value type', () => {
+                const output: number | null = nullable<number>(null).or(null);
+
+                expect(output).toBeNull();
+            });
+
+            it('cannot be assigned to the optional value type', () => {
+                // TS2322: Type 'number | null | undefined' is not assignable to type 'number | undefined'.
+                // @ts-expect-error -- fallback is null
+                const output: number | undefined = nullable<number | undefined>(undefined).or(null);
 
                 expect(output).toBeUndefined();
             });

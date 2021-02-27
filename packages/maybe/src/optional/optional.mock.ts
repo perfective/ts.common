@@ -5,6 +5,6 @@ export interface Boxed<T> {
 /**
  * Allows to test values that may be absent without compiler narrowing it down automatically.
  */
-export function fallback<T>(input: T | undefined): T | undefined {
+export function fallbackOptional<T>(input: T | undefined): T | undefined {
     return input;
 }

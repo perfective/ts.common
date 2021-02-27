@@ -35,7 +35,9 @@ export abstract class Maybe<T> implements Option<T, null | undefined> {
     public abstract otherwise(fallback: Value<T | null | undefined>): Maybe<T>;
 
     public abstract or(fallback: Value<T>): T;
-    public abstract or(fallback: Value<T> | Value<T | null | undefined>): T | null | undefined;
+    public abstract or(fallback: Value<T | null>): T | null;
+    public abstract or(fallback: Value<T | undefined>): T | undefined;
+    public abstract or(fallback: Value<T | null | undefined>): T | null | undefined;
 
     public abstract run(procedure: (value: T) => void): Maybe<T>;
 

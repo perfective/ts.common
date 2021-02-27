@@ -28,7 +28,7 @@ export abstract class Optional<T> implements Option<T, undefined> {
     public abstract otherwise(fallback: Value<T | undefined>): Optional<T>;
 
     public abstract or(fallback: Value<T>): T;
-    public abstract or(fallback: Value<T> | Value<T | undefined>): T | undefined;
+    public abstract or(fallback: Value<T | undefined>): T | undefined;
 
     public abstract run(procedure: (value: T) => void): Optional<T>;
 

@@ -15,7 +15,7 @@ import { isPresent } from '@perfective/value';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { Nil, nil, Nullable, nullable, Solum, solum } from './nullable';
-import { Boxed, fallback } from './nullable.mock';
+import { Boxed, fallbackNullable } from './nullable.mock';
 
 describe(solum, () => {
     it('can be assigned to Nullable', () => {
@@ -115,7 +115,7 @@ describe(Solum, () => {
     describe('to', () => {
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<string> = solum(3.14).to(constant(fallback('3.14')));
+                const output: Nullable<string> = solum(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
@@ -123,7 +123,7 @@ describe(Solum, () => {
             it('cannot be assigned to Solum', () => {
                 // TS2322: Type 'Nullable' is not assignable to type 'Solum'.
                 // @ts-expect-error -- Solum.to() always returns the result, and result may be absent.
-                const output: Solum<string> = solum(3.14).to(constant(fallback('3.14')));
+                const output: Solum<string> = solum(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
@@ -131,7 +131,7 @@ describe(Solum, () => {
             it('cannot be assigned to Nil', () => {
                 // TS2322: Type 'Nullable' is not assignable to type 'Nil'.
                 // @ts-expect-error -- Solum.to() always returns the result, and result may be present
-                const output: Nil<string> = solum(3.14).to(constant(fallback('3.14')));
+                const output: Nil<string> = solum(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
@@ -456,13 +456,13 @@ describe(Solum, () => {
     describe('otherwise', () => {
         describe('fallback may be present', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = solum(3.14).otherwise(fallback(2.71));
+                const output: Nullable<number> = solum(3.14).otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
             });
 
             it('returns Solum', () => {
-                const output: Solum<number> = solum(3.14).otherwise(fallback(2.71));
+                const output: Solum<number> = solum(3.14).otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
             });
@@ -470,7 +470,7 @@ describe(Solum, () => {
             it('cannot be assigned to Nil', () => {
                 // TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 // @ts-expect-error -- Solum.otherwise() always returns itself.
-                const output: Nil<number> = solum(3.14).otherwise(fallback(2.71));
+                const output: Nil<number> = solum(3.14).otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
             });

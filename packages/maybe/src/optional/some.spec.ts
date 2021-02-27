@@ -15,7 +15,7 @@ import { isPresent } from '@perfective/value';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { None, none, Optional, optional, Some, some } from './optional';
-import { Boxed, fallback } from './optional.mock';
+import { Boxed, fallbackOptional } from './optional.mock';
 
 describe(some, () => {
     it('can be assigned to Optional', () => {
@@ -115,7 +115,7 @@ describe(Some, () => {
     describe('to', () => {
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned to Optional', () => {
-                const output: Optional<string> = some(3.14).to(constant(fallback('3.14')));
+                const output: Optional<string> = some(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
@@ -123,7 +123,7 @@ describe(Some, () => {
             it('cannot be assigned to Some', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'Some'.
                 // @ts-expect-error -- Some.to() always returns the result, and result may be absent
-                const output: Some<string> = some(3.14).to(constant(fallback('3.14')));
+                const output: Some<string> = some(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
@@ -131,7 +131,7 @@ describe(Some, () => {
             it('cannot be assigned to None', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'None'.
                 // @ts-expect-error -- Some.to() always returns the result, and result may be present
-                const output: None<string> = some(3.14).to(constant(fallback('3.14')));
+                const output: None<string> = some(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
@@ -456,13 +456,13 @@ describe(Some, () => {
     describe('otherwise', () => {
         describe('fallback may be present', () => {
             it('can be assigned to Optional', () => {
-                const output: Optional<number> = some(3.14).otherwise(fallback(2.71));
+                const output: Optional<number> = some(3.14).otherwise(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
             it('returns Some', () => {
-                const output: Some<number> = some(3.14).otherwise(fallback(2.71));
+                const output: Some<number> = some(3.14).otherwise(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(some(3.14));
             });
@@ -470,7 +470,7 @@ describe(Some, () => {
             it('cannot be assigned to None', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'None'.
                 // @ts-expect-error -- Some.otherwise() always returns itself.
-                const output: None<number> = some(3.14).otherwise(fallback(2.71));
+                const output: None<number> = some(3.14).otherwise(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(some(3.14));
             });

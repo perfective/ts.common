@@ -7,7 +7,7 @@ import { isUndefined } from '@perfective/value';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { None, none, Optional, optional, Some, some } from './optional';
-import { Boxed, fallback } from './optional.mock';
+import { Boxed, fallbackOptional } from './optional.mock';
 
 describe(none, () => {
     it('can be assigned to Optional', () => {
@@ -421,7 +421,7 @@ describe(None, () => {
 
         describe('fallback may be present', () => {
             it('must be assigned to Optional', () => {
-                const output: Optional<number> = none<number>().otherwise(fallback(2.71));
+                const output: Optional<number> = none<number>().otherwise(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(some(2.71));
             });
@@ -429,7 +429,7 @@ describe(None, () => {
             it('cannot be assigned to Some', () => {
                 // TS2322: Type 'Optional<number>' is not assignable to type 'Some<number>'.
                 // @ts-expect-error -- None.otherwise() always returns the fallback, but the result may be absent.
-                const output: Some<number> = none<number>().otherwise(fallback(2.71));
+                const output: Some<number> = none<number>().otherwise(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(some(2.71));
             });
@@ -437,7 +437,7 @@ describe(None, () => {
             it('cannot be assigned to None', () => {
                 // TS2322: Type 'Optional<number>' is not assignable to type 'None<number>'.
                 // @ts-expect-error -- None.otherwise() always returns the fallback, but the result may be present.
-                const output: None<number> = none<number>().otherwise(fallback(2.71));
+                const output: None<number> = none<number>().otherwise(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(some(2.71));
             });
@@ -719,7 +719,7 @@ describe(None, () => {
 
         describe('fallback may return an absent value', () => {
             it('must be assigned to the fallback return type', () => {
-                const output: string | null | undefined = none<string>().or(fallback<string>('3.14'));
+                const output: string | null | undefined = none<string>().or(fallbackOptional<string>('3.14'));
 
                 expect(output).toStrictEqual('3.14');
             });
@@ -727,7 +727,7 @@ describe(None, () => {
             it('cannot be assigned to the value type', () => {
                 // TS2322: Type 'string | undefined' is not assignable to type 'string'.
                 // @ts-expect-error -- fallback may return string, null, or undefined.
-                const output: string = none<string>().or(fallback<string>('3.14'));
+                const output: string = none<string>().or(fallbackOptional<string>('3.14'));
 
                 expect(output).toStrictEqual('3.14');
             });

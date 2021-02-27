@@ -6,7 +6,7 @@ import { isPresent } from '@perfective/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { None, none, Optional, optional, Some, some } from './optional';
-import { fallback } from './optional.mock';
+import { fallbackOptional } from './optional.mock';
 
 function optionalDecimal(value: number | undefined): Optional<string> {
     return optional(value).to<string>(decimal);
@@ -45,7 +45,7 @@ describe(optional, () => {
 
     describe('when the value may be present or undefined', () => {
         it('must be assigned to Optional', () => {
-            const output: Optional<number> = optional(fallback(0));
+            const output: Optional<number> = optional(fallbackOptional(0));
 
             expect(output).toStrictEqual(some(0));
         });
@@ -170,7 +170,7 @@ describe(Optional, () => {
     describe('to', () => {
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned to Optional', () => {
-                const output: Optional<string> = optional(3.14).to(constant(fallback('3.14')));
+                const output: Optional<string> = optional(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
@@ -178,7 +178,7 @@ describe(Optional, () => {
             it('cannot be assigned to Some', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'Some'.
                 // @ts-expect-error -- Some.to() always returns the result, and result may be absent.
-                const output: Some<string> = optional(3.14).to(constant(fallback('3.14')));
+                const output: Some<string> = optional(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
@@ -186,7 +186,7 @@ describe(Optional, () => {
             it('cannot be assigned to None', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'None'.
                 // @ts-expect-error -- Some.to() always returns the result, and result may be present.
-                const output: None<string> = optional(3.14).to(constant(fallback('3.14')));
+                const output: None<string> = optional(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
@@ -647,31 +647,57 @@ describe(Optional, () => {
             });
         });
 
-        describe('when the "fallback" may be an absent value', () => {
-            it('must be assigned to the value type or null, or undefined', () => {
-                const output: number | null | undefined = optional(3.14).or(fallback(2.71));
-
-                expect(output).toStrictEqual(3.14);
-            });
-
-            it('cannot be assigned to the value type when the original value is present', () => {
+        describe('when the "fallback" may be undefined', () => {
+            it('cannot be assigned to the value type', () => {
                 // TS2322: Type 'number | undefined' is not assignable to type 'number'.
-                // @ts-expect-error -- fallback() may also return null or undefined.
-                const output: number = optional(3.14).or(fallback(2.71));
+                // @ts-expect-error -- fallback may be undefined
+                const output: number = optional(3.14).or(fallbackOptional(2.71));
 
                 expect(output).toStrictEqual(3.14);
             });
 
-            it('can be assigned to the value type when the original value is null', () => {
+            it('cannot be assigned to the nullable value type', () => {
                 // TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
-                // @ts-expect-error -- fallback() may also return undefined.
-                const output: number | null = optional<number>(null).or(fallback(2.71));
+                // @ts-expect-error -- fallback may be undefined
+                const output: number | null = optional<number>(null).or(fallbackOptional(2.71));
 
                 expect(output).toBeNull();
             });
 
-            it('can be assigned to the value type when the original value is undefined', () => {
-                const output: number | undefined = optional<number>(undefined).or(fallback(2.71));
+            it('must be assigned to the optional value type', () => {
+                const output: number | undefined = optional<number>(undefined).or(fallbackOptional(2.71));
+
+                expect(output).toStrictEqual(2.71);
+            });
+        });
+
+        describe('when the "fallback" is undefined', () => {
+            it('cannot be assigned to the value type', () => {
+                // TS2322: Type 'number | undefined' is not assignable to type 'number'.
+                // @ts-expect-error -- fallback is undefined
+                const output: number = optional(3.14).or(undefined);
+
+                expect(output).toStrictEqual(3.14);
+            });
+
+            it('cannot be assigned to the nullable value type', () => {
+                // TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
+                // @ts-expect-error -- fallback is undefined
+                const output: number | null = optional<number>(null).or(undefined);
+
+                expect(output).toBeNull();
+            });
+
+            it('must be assigned to the optional value type', () => {
+                const output: number | undefined = optional<number>(undefined).or(undefined);
+
+                expect(output).toBeUndefined();
+            });
+
+            it('cannot be assigned to the undefined type', () => {
+                // TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
+                // @ts-expect-error -- fallback is undefined
+                const output: undefined = optional<number>(2.71).or(undefined);
 
                 expect(output).toStrictEqual(2.71);
             });

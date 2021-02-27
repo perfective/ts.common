@@ -7,7 +7,7 @@ import { isNull } from '@perfective/value';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { Nil, nil, Nullable, nullable, Solum, solum } from './nullable';
-import { Boxed, fallback } from './nullable.mock';
+import { Boxed, fallbackNullable } from './nullable.mock';
 
 describe(nil, () => {
     it('can be assigned to Nullable', () => {
@@ -462,7 +462,7 @@ describe(Nil, () => {
 
         describe('fallback may be absent', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<number> = nil<number>().otherwise(fallback(2.71));
+                const output: Nullable<number> = nil<number>().otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(2.71));
             });
@@ -470,7 +470,7 @@ describe(Nil, () => {
             it('cannot be assigned to Solum', () => {
                 // TS2322: Type 'Nullable<number>' is not assignable to type 'Solum<number>'.
                 // @ts-expect-error -- Nil.otherwise() always returns the fallback, but the result may be absent.
-                const output: Solum<number> = nil<number>().otherwise(fallback(2.71));
+                const output: Solum<number> = nil<number>().otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(2.71));
             });
@@ -478,7 +478,7 @@ describe(Nil, () => {
             it('cannot be assigned to Nil', () => {
                 // TS2322: Type 'Nullable<number>' is not assignable to type 'Nil<number>'.
                 // @ts-expect-error -- Nil.otherwise() always returns the fallback, but the result may be present.
-                const output: Nil<number> = nil<number>().otherwise(fallback(2.71));
+                const output: Nil<number> = nil<number>().otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(2.71));
             });
@@ -698,7 +698,7 @@ describe(Nil, () => {
 
         describe('fallback may return an absent value', () => {
             it('must be assigned to the fallback return type', () => {
-                const output: string | null | undefined = nil<string>().or(fallback<string>('3.14'));
+                const output: string | null | undefined = nil<string>().or(fallbackNullable<string>('3.14'));
 
                 expect(output).toStrictEqual('3.14');
             });
@@ -706,7 +706,7 @@ describe(Nil, () => {
             it('cannot be assigned to the value type', () => {
                 // TS2322: Type 'string | null' is not assignable to type 'string'.
                 // @ts-expect-error -- fallback may return string, null, or undefined.
-                const output: string = nil<string>().or(fallback<string>('3.14'));
+                const output: string = nil<string>().or(fallbackNullable<string>('3.14'));
 
                 expect(output).toStrictEqual('3.14');
             });

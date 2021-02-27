@@ -5,7 +5,7 @@ import { decimal } from '@perfective/real';
 import { isUndefined } from '@perfective/value';
 
 import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
-import { Boxed, fallback } from './maybe.mock';
+import { Boxed, fallbackMaybe } from './maybe.mock';
 import { TypeGuardCheck } from './type-guard-check.mock';
 
 describe(nothing, () => {
@@ -485,7 +485,7 @@ describe(Nothing, () => {
 
         describe('when the "fallback" may be an absent value', () => {
             it('must be assigned toMaybe', () => {
-                const output: Maybe<number> = nothing<number>().otherwise(fallback(2.71));
+                const output: Maybe<number> = nothing<number>().otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(2.71));
             });
@@ -493,7 +493,7 @@ describe(Nothing, () => {
             it('cannot be assigned to Just', () => {
                 // TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
                 // @ts-expect-error -- Nothing.otherwise() always returns the fallback, but the result may be absent.
-                const output: Just<number> = nothing<number>().otherwise(fallback(2.71));
+                const output: Just<number> = nothing<number>().otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(2.71));
             });
@@ -501,7 +501,7 @@ describe(Nothing, () => {
             it('cannot be assigned to Nothing', () => {
                 // TS2322: Type 'Maybe<number>' is not assignable to type 'Nothing<number>'.
                 // @ts-expect-error -- Nothing.otherwise() always returns the fallback, but the result may be present.
-                const output: Nothing<number> = nothing<number>().otherwise(fallback(2.71));
+                const output: Nothing<number> = nothing<number>().otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(2.71));
             });
@@ -509,7 +509,7 @@ describe(Nothing, () => {
 
         describe('when the "fallback" may return an absent value', () => {
             it('must be assigned toMaybe', () => {
-                const output: Maybe<number> = naught<number>().otherwise(constant(fallback(2.71)));
+                const output: Maybe<number> = naught<number>().otherwise(constant(fallbackMaybe(2.71)));
 
                 expect(output).toStrictEqual(just(2.71));
             });
@@ -517,7 +517,7 @@ describe(Nothing, () => {
             it('cannot be assigned to Just', () => {
                 // TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
                 // @ts-expect-error -- Nothing.otherwise() always returns the fallback, but the result may be absent.
-                const output: Just<number> = naught<number>().otherwise(constant(fallback(2.71)));
+                const output: Just<number> = naught<number>().otherwise(constant(fallbackMaybe(2.71)));
 
                 expect(output).toStrictEqual(just(2.71));
             });
@@ -525,7 +525,7 @@ describe(Nothing, () => {
             it('cannot be assigned to Nothing', () => {
                 // TS2322: Type 'Maybe<number>' is not assignable to type 'Nothing<number>'.
                 // @ts-expect-error -- Nothing.otherwise() always returns the fallback, but the result may be present.
-                const output: Nothing<number> = naught<number>().otherwise(constant(fallback(2.71)));
+                const output: Nothing<number> = naught<number>().otherwise(constant(fallbackMaybe(2.71)));
 
                 expect(output).toStrictEqual(just(2.71));
             });
@@ -653,7 +653,7 @@ describe(Nothing, () => {
 
         describe('when the "fallback" may return an absent value', () => {
             it('must be assigned to the fallback return type', () => {
-                const output: string | null | undefined = nothing<string>().or(fallback<string>('3.14'));
+                const output: string | null | undefined = nothing<string>().or(fallbackMaybe<string>('3.14'));
 
                 expect(output).toStrictEqual('3.14');
             });
@@ -661,7 +661,7 @@ describe(Nothing, () => {
             it('cannot be assigned to the value type', () => {
                 // TS2322: Type 'string | null | undefined' is not assignable to type 'string'.
                 // @ts-expect-error -- fallback may return string, null, or undefined.
-                const output: string = nothing<string>().or(fallback<string>('3.14'));
+                const output: string = nothing<string>().or(fallbackMaybe<string>('3.14'));
 
                 expect(output).toStrictEqual('3.14');
             });

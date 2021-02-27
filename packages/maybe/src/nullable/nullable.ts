@@ -28,7 +28,7 @@ export abstract class Nullable<T> implements Option<T, null> {
     public abstract otherwise(fallback: Value<T | null>): Nullable<T>;
 
     public abstract or(fallback: Value<T>): T;
-    public abstract or(fallback: Value<T> | Value<T | null>): T | null;
+    public abstract or(fallback: Value<T | null>): T | null;
 
     public abstract run(procedure: (value: T) => void): Nullable<T>;
 

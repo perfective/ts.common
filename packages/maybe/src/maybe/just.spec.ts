@@ -13,7 +13,7 @@ import { decimal, isGreaterThan, isLessThan } from '@perfective/real';
 import { isPresent } from '@perfective/value';
 
 import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
-import { Boxed, fallback } from './maybe.mock';
+import { Boxed, fallbackMaybe } from './maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from './type-guard-check.mock';
 
 describe(just, () => {
@@ -136,7 +136,7 @@ describe(Just, () => {
     describe('to', () => {
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned toMaybe', () => {
-                const output: Maybe<string> = just(3.14).to(constant(fallback('3.14')));
+                const output: Maybe<string> = just(3.14).to(constant(fallbackMaybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
@@ -144,7 +144,7 @@ describe(Just, () => {
             it('cannot be assigned to Just', () => {
                 // TS2322: Type 'Maybe<string>' is not assignable to type 'Just<string>'.
                 // @ts-expect-error -- Just.to() always returns the result, and result may be absent.
-                const output: Just<string> = just(3.14).to(constant(fallback('3.14')));
+                const output: Just<string> = just(3.14).to(constant(fallbackMaybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
@@ -152,7 +152,7 @@ describe(Just, () => {
             it('cannot be assigned to Nothing', () => {
                 // TS2322: Type 'Maybe<string>' is not assignable to type 'Nothing<string>'.
                 // @ts-expect-error -- Just.to() always returns the result, and result may be present.
-                const output: Nothing<string> = just(3.14).to(constant(fallback('3.14')));
+                const output: Nothing<string> = just(3.14).to(constant(fallbackMaybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
@@ -465,20 +465,20 @@ describe(Just, () => {
     describe('otherwise', () => {
         describe('fallback may be present', () => {
             it('returns Just (itself)', () => {
-                const output: Just<number> = just(3.14).otherwise(fallback(2.71));
+                const output: Just<number> = just(3.14).otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
             });
 
             it('can be assigned to Maybe', () => {
-                const output: Maybe<number> = just(3.14).otherwise(fallback(2.71));
+                const output: Maybe<number> = just(3.14).otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- Just.otherwise() always returns itself
-                const output: Nothing<number> = just(3.14).otherwise(fallback(2.71));
+                const output: Nothing<number> = just(3.14).otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
             });

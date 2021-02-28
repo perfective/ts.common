@@ -39,8 +39,12 @@ export abstract class Optional<T> implements Option<T, undefined> {
 
 export class Some<T> implements Optional<T> {
     public constructor(
-        public readonly value: T,
-    ) {}
+        public readonly value: Defined<T>,
+    ) {
+        if (isUndefined(this.value)) {
+            throw new TypeError('Some value must be defined');
+        }
+    }
 
     public onto<U>(flatMap: (value: T) => Some<Defined<U>>): Some<Defined<U>>
     public onto<U>(flatMap: (value: T) => None<Defined<U>>): None<Defined<U>>
@@ -173,10 +177,10 @@ export function optional<T>(value: T | undefined): Optional<T> {
     if (isUndefined(value)) {
         return none<T>();
     }
-    return some(value);
+    return some(value as Defined<T>);
 }
 
-export function some<T>(value: T): Some<T> {
+export function some<T>(value: Defined<T>): Some<T> {
     return new Some<T>(value);
 }
 

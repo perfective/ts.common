@@ -22,6 +22,11 @@ describe(nothing, () => {
 
         expect(output).toBe(nothing());
     });
+
+    it('throws an error if instantiated with a present value', () => {
+        // @ts-expect-error -- testing a highly unlikely case of direct instantiation with a present value.
+        expect(() => new Nothing(3.14)).toThrow('Nothing value must be absent');
+    });
 });
 
 describe(naught, () => {

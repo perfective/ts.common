@@ -1,5 +1,5 @@
 import { Nullary, Value, valueOf } from '@perfective/fp';
-import { just, Maybe, nothing } from '@perfective/maybe';
+import { Maybe, maybe, nothing } from '@perfective/maybe';
 
 import { Statement } from './statement';
 
@@ -12,7 +12,7 @@ export class Match<T> {
         const value: T = valueOf(this.value);
         for (const statement of statements) {
             if (statement.condition(value)) {
-                return just(statement.evaluate(value));
+                return maybe(statement.evaluate(value));
             }
         }
         return nothing();

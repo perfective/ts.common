@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file -- Maybe<T>, Just<T>, and Nothing<T> are co-dependent
 import { isTrue, Predicate, Proposition, TypeGuard, Value, valueOf } from '@perfective/fp';
-import { isNull, isPresent, Present } from '@perfective/value';
+import { isAbsent, isNull, isPresent, Present } from '@perfective/value';
 
 import { Option } from '../option';
 
@@ -49,8 +49,12 @@ export abstract class Maybe<T> implements Option<T, null | undefined> {
  */
 export class Just<T> implements Maybe<T> {
     public constructor(
-        public readonly value: T,
-    ) {}
+        public readonly value: Present<T>,
+    ) {
+        if (isAbsent(this.value)) {
+            throw new TypeError('Just value must be present');
+        }
+    }
 
     public onto<U>(flatMap: (value: T) => Just<Present<U>>): Just<Present<U>>
     public onto<U>(flatMap: (value: T) => Nothing<Present<U>>): Nothing<Present<U>>
@@ -126,7 +130,11 @@ export class Just<T> implements Maybe<T> {
 export class Nothing<T> implements Maybe<T> {
     public constructor(
         public readonly value: null | undefined,
-    ) {}
+    ) {
+        if (isPresent(this.value)) {
+            throw new TypeError('Nothing value must be absent');
+        }
+    }
 
     public onto<U>(
         flatMap: (value: T) => Maybe<Present<U>>,
@@ -191,7 +199,8 @@ export class Nothing<T> implements Maybe<T> {
 
 export function maybe<T>(value: T | null | undefined): Maybe<T> {
     if (isPresent(value)) {
-        return just(value);
+        // TODO: Update `isPresent` signature to return `Present<T>`
+        return just(value as Present<T>);
     }
     if (isNull(value)) {
         return naught();
@@ -199,7 +208,7 @@ export function maybe<T>(value: T | null | undefined): Maybe<T> {
     return nothing();
 }
 
-export function just<T>(value: T): Just<T> {
+export function just<T>(value: Present<T>): Just<T> {
     return new Just<T>(value);
 }
 

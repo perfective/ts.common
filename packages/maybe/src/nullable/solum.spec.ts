@@ -31,6 +31,11 @@ describe(solum, () => {
 
         expect(output).toStrictEqual(solum(0));
     });
+
+    it('throws an error if instantiated with null', () => {
+        // @ts-expect-error -- testing failure when passed null
+        expect(() => solum(null)).toThrow('Solum value must be not null');
+    });
 });
 
 describe(Solum, () => {

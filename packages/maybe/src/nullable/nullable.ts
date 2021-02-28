@@ -39,9 +39,12 @@ export abstract class Nullable<T> implements Option<T, null> {
 
 export class Solum<T> implements Nullable<T> {
     public constructor(
-        public readonly value: T,
-
-    ) {}
+        public readonly value: NotNull<T>,
+    ) {
+        if (isNull(this.value)) {
+            throw new TypeError('Solum value must be not null');
+        }
+    }
 
     public onto<U>(flatMap: (value: T) => Solum<NotNull<U>>): Solum<NotNull<U>>
     public onto<U>(flatMap: (value: T) => Nil<NotNull<U>>): Nil<NotNull<U>>
@@ -180,7 +183,7 @@ export function nil<T>(): Nil<T> {
     return naught as Nil<T>;
 }
 
-export function solum<T>(value: T): Solum<T> {
+export function solum<T>(value: NotNull<T>): Solum<T> {
     return new Solum<T>(value);
 }
 
@@ -188,5 +191,5 @@ export function nullable<T>(value: T | null): Nullable<T> {
     if (isNull(value)) {
         return nil() as unknown as Nullable<T>;
     }
-    return solum(value);
+    return solum(value as NotNull<T>);
 }

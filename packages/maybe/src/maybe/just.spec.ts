@@ -30,6 +30,14 @@ describe(just, () => {
 
         expect(output).toStrictEqual(just(0));
     });
+
+    it('throws an error if instantiated with an absent value', () => {
+        // @ts-expect-error -- testing failure in cases when type is present, but value is absent
+        expect(() => just(null)).toThrow('Just value must be present');
+
+        // @ts-expect-error -- testing failure in cases when type is present, but value is absent
+        expect(() => just(undefined)).toThrow('Just value must be present');
+    });
 });
 
 describe(Just, () => {

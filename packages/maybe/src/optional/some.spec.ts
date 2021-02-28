@@ -31,6 +31,11 @@ describe(some, () => {
 
         expect(output).toStrictEqual(some(0));
     });
+
+    it('throws an error when instantiated with undefined', () => {
+        // @ts-expect-error -- testing failure when passed undefined
+        expect(() => some(undefined)).toThrow('Some value must be defined');
+    });
 });
 
 describe(Some, () => {

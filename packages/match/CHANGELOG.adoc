@@ -1,6 +1,6 @@
 = Changelog
 
-== v0.3.0 (next)
+== v0.3.0
 
 * Add `statements` function to create `Statement` array from an array of `StatementEntry` tuples.
 

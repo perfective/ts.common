@@ -1,6 +1,6 @@
 {
     "name": "@perfective/common",
-    "version": "0.7.0-beta.1",
+    "version": "0.7.0-beta.2",
     "description": "Common types and functions for perfective development in TypeScript",
     "keywords": [
         "es6",

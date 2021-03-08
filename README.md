@@ -16,30 +16,30 @@ npm install @perfective/common
 
 ## Features
 
-* [`@perfective/common/array`](https://github.com/perfective/js/tree/master/src/array)
+* [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/master/src/array)
   — functions to work with the
   [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) class.
-* [`@perfective/common/error`](https://github.com/perfective/js/tree/master/src/error)
+* [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/master/src/error)
   — functions to work with the
   [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
   and related classes.
-* [`@perfective/common/fp`](https://github.com/perfective/js/tree/master/src/fp)
+* [`@perfective/common/fp`](https://github.com/perfective/ts.common/tree/master/src/fp)
   — functions and types for functional programming and logical operations.
-* [`@perfective/common/identity`](https://github.com/perfective/js/tree/master/src/identity)
+* [`@perfective/common/identity`](https://github.com/perfective/ts.common/tree/master/src/identity)
   — [Identity monad](https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad) implementation.
-* [`@perfective/common/match`](https://github.com/perfective/js/tree/master/src/match)
+* [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/master/src/match)
   — functions to support a functional switch-case.
-* [`@perfective/common/maybe`](https://github.com/perfective/js/tree/master/src/maybe)
+* [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/master/src/maybe)
   — [Maybe type](https://en.wikipedia.org/wiki/Option_type) implementation.
-* [`@perfective/common/object`](https://github.com/perfective/js/tree/master/src/object)
+* [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/master/src/object)
   — functions to work with the
   [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
-* [`@perfective/common/real`](https://github.com/perfective/js/tree/master/src/real)
+* [`@perfective/common/real`](https://github.com/perfective/ts.common/tree/master/src/real)
   — functions and types to work with the real numbers.
-* [`@perfective/common/string`](https://github.com/perfective/js/tree/master/src/string)
+* [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/master/src/string)
   — functions to work with the
   [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) class.
-* [`@perfective/common/value`](https://github.com/perfective/js/tree/master/src/value)
+* [`@perfective/common/value`](https://github.com/perfective/ts.common/tree/master/src/value)
   — functions to separate generic values from `undefined` and `null`.
 
 

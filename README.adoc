@@ -34,30 +34,30 @@ All non-abstract classes should be considered final even TypeScript does not all
 
 This repo currently contains the following sub-packages:
 
-* `link:https://github.com/perfective/js/tree/master/src/array[@perfective/common/array]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/array[@perfective/common/array]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]` class.
-* `link:https://github.com/perfective/js/tree/master/src/error[@perfective/common/error]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/error[@perfective/common/error]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`
 and related classes.
-* `link:https://github.com/perfective/js/tree/master/src/fp[@perfective/common/fp]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/fp[@perfective/common/fp]`
 — functions and types for functional programming and logical operations.
-* `link:https://github.com/perfective/js/tree/master/src/identity[@perfective/common/identity]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/identity[@perfective/common/identity]`
 — https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad[Identity monad] implementation.
-* `link:https://github.com/perfective/js/tree/master/src/match[@perfective/common/match]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/match[@perfective/common/match]`
 — functions to support a functional switch-case.
-* `link:https://github.com/perfective/js/tree/master/src/maybe[@perfective/common/maybe]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/maybe[@perfective/common/maybe]`
 — https://en.wikipedia.org/wiki/Option_type[Maybe type] implementation.
-* `link:https://github.com/perfective/js/tree/master/src/object[@perfective/common/object]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/object[@perfective/common/object]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
-* `link:https://github.com/perfective/js/tree/master/src/real[@perfective/common/real]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/real[@perfective/common/real]`
 — functions and types to work with the real numbers.
-* `link:https://github.com/perfective/js/tree/master/src/string[@perfective/common/string]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/string[@perfective/common/string]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.
-* `link:https://github.com/perfective/js/tree/master/src/value[@perfective/common/value]`
+* `link:https://github.com/perfective/ts.common/tree/master/src/value[@perfective/common/value]`
 — functions to separate generic values from `undefined` and `null`.
 
 The package has a 100% unit test coverage.

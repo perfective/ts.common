@@ -64,7 +64,7 @@ and linters provide different rules to restrict its usage only to correct cases.
 
 Unfortunately, different packages (like AWS SDK) may use `void` as a synonym to `null | undefined`.
 This approach creates conflicts in the code linted with the
-`link:https://github.com/perfective/js/tree/master/packages/eslint-config[@perfective/eslint-config]`,
+`link:https://github.com/perfective/ts.common/tree/master/packages/eslint-config[@perfective/eslint-config]`,
 so a special function is introduced to "type cast" any `void` value into `null | undefined`:
 
 * `voidable<T>(value: T | void): T | null | undefined`

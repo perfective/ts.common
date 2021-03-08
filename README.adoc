@@ -95,7 +95,7 @@ Term used as distinguished from `constructor` and `new` keywords.
 there is at least one unit function to instantiate it.
 This function has the same name as the interface/class but in camelCase.
 * For each declared class,
-there are two https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types[type-guards] to check
+there are two https://www.typescriptlang.org/docs/handbook/2/narrowing.html[type guards] to check
 if a given value is an instance of that class or not.
 These functions have prefixes `is` and `isNot`.
 * Declared interfaces and types may have other predicates

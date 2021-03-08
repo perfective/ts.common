@@ -31,6 +31,13 @@ function copyPackageJson() {
         .pipe(gulpJsonEditor({
             scripts: undefined,
             devDependencies: undefined,
+            main: './index.cjs',
+            module: './index.mjs',
+            types: './index.d.ts',
+            exports: {
+                import: './index.mjs',
+                require: './index.cjs',
+            },
         }))
         .pipe(gulp.dest('dist'));
 }

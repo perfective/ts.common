@@ -32,11 +32,13 @@ function copyPackageJson() {
             scripts: undefined,
             devDependencies: undefined,
             main: './index.cjs',
-            module: './index.mjs',
+            module: './index.js',
             types: './index.d.ts',
             exports: {
-                import: './index.mjs',
-                require: './index.cjs',
+                '.': {
+                    import: './index.js',
+                    require: './index.cjs',
+                },
             },
         }))
         .pipe(gulp.dest('dist'));
@@ -48,10 +50,10 @@ function createSubPackageJson() {
         .pipe(gulpSubPackage())
         .pipe(gulpJsonEditor({
             main: './index.cjs',
-            module: './index.mjs',
+            module: './index.js',
             types: './index.d.ts',
             exports: {
-                import: './index.mjs',
+                import: './index.js',
                 require: './index.cjs',
             },
             sideEffects: false,
@@ -78,7 +80,6 @@ function buildEsm() {
         allowSyntheticDefaultImports: true,
     })
         .pipe(gulpBabel())
-        .pipe(gulpRename(fileExtension('js', 'mjs')))
         .pipe(gulp.dest('dist'));
 }
 

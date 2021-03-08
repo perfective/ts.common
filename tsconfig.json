@@ -1,19 +1,9 @@
 {
     "extends": "./tsconfig.strict.json",
     "compilerOptions": {
-        "baseUrl": "./packages",
-        "module": "commonjs",
-        "paths": {
-            "@perfective/array": ["array/src/index.ts"],
-            "@perfective/error": ["error/src/index.ts"],
-            "@perfective/fp": ["fp/src/index.ts"],
-            "@perfective/identity": ["identity/src/index.ts"],
-            "@perfective/match": ["match/src/index.ts"],
-            "@perfective/maybe": ["maybe/src/index.ts"],
-            "@perfective/object": ["object/src/index.ts"],
-            "@perfective/real": ["real/src/index.ts"],
-            "@perfective/string": ["string/src/index.ts"],
-            "@perfective/value": ["value/src/index.ts"]
-        }
-    }
+        "rootDir": "./src"
+    },
+    "exclude": [
+        "dist"
+    ]
 }

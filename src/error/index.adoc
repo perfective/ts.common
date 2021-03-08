@@ -1,0 +1,235 @@
+= Error
+
+The `@perfective/common/error` package helps organize exceptions and error handling.
+It defines an `Exception`, based on the JS
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]` class,
+that supports localizable error messages and error chaining;
+and provides functions to handle error stack output.
+
+== Exception
+
+.`Exception` type definition.
+[source,typescript]
+----
+class Exception extends Error {
+    public readonly name: string = 'Exception';
+    public message: string; // <.>
+
+    public readonly template: string; // <.>
+    public readonly tokens: ExceptionTokens; // <.>
+    public readonly context: ExceptionContext; // <.>
+    public readonly previous: Error | null; // <.>
+
+    public toString(): string; // <.>
+}
+----
+<1> Inherited from `Error`, message is generated from the `template` and `tokens`.
+<2> Message template with tokens wrapped in `{{ }}`,
+e.g. `User ID {{id}}` or `User {{user_id}}`.
+<3> Token/Value map to be used in the error message.
+<4> Additional context information.
+Context is not rendered by default,
+but may be useful in applications.
+<5> Provide a previous error, if exists.
+<6> Human-readable output of all the errors.
+
+.Using the `Exception`.
+[source,typescript]
+----
+import { causedBy, chainStack, exception, rethrows, throws } from '@perfective/common/error';
+import { decimal } from '@perfective/common/real';
+
+function positive(input: number): string {
+    if (input <= 0) {
+        return throws(exception('Invalid input {{input}}', { // <.>
+            input: decimal(input);
+        }));
+    }
+    return decimal(10);
+}
+
+function field(name: string, value: number): string {
+    try {
+        return `${name} = ${positive(value)}`;
+    }
+    catch (error) {
+        return throws(causedBy(error, 'Failed to output field {{field}}', { // <.>
+            field: name,
+        }));
+    }
+}
+
+function record(): Record<string, string> {
+    try {
+        return {
+            username: field('username', -42),
+        }
+    }
+    catch (error) {
+        return rethrows(error, 'Failed to build a record'); // <.>
+    }
+}
+
+try {
+    record();
+}
+catch (error) {
+    console.error(error.toString()); // <.>
+    // Outputs:
+    //  Exception: Failed to build a record
+    //      - Exception: Failed to output field `username`
+    //      - Exception: Invalid input `-42`
+
+    console.error(chainStack(error)); // <.>
+    // Outputs:
+    //  Exception: Failed to build a record
+    //      at Object.rethrows (...)
+    //      at Object.record (...)
+    //      ...
+    //  Caused by: Exception: Failed to output field `username`
+    //      at Object.causedBy (...)
+    //      at Object.throws (...)
+    //      at Object.field (...)
+    //      ...
+    //  Caused by: Exception: Invalid input `-42`
+    //      at Object.exception (...)
+    //      at Object.throws (...)
+    //      at Object.positive (...)
+    //      ...
+}
+----
+<1> `throws` can be used with any `Error` type,
+but `Exception` supports passing context information separately,
+which can be convenient for localization or logging purposes.
+<2> `causedBy` is a function to create an `Exception` with a present `Exception.previous` property.
+<3> `rethrows` is a shortcut for the `throws(causedBy())` call.
+It supports message context as well.
+<4> `error.toString()` is explicitly re-defined on `Exception` to output all error messages.
+<5> `chainStack()` allows to output all errors with their stack information
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack[platform dependent]).
+
+
+== Throws and Panic
+
+The package declares two functions to throw errors and two functions to rethrow them.
+
+* `throws<E extends Error>(error: E | (() => E) | string): never`
++
+`throws<E extends Error>(message: string, context?: ExceptionContext): never`
++
+The `throws` function is a syntax sugar around the `throw` operator
+that checks if the input is an `Error`, a function that returns an `Error`, or a `string`,
+and throws an exception immediately.
+It may be used instead of the `throw new Exception()`,
+to handle a union type of `E extends Error | string`,
+to throw an exception in a one-line arrow function,
+or to avoid issues with the `@typescript-eslint/no-throw-literal` linter rule.
++
+* `panic<E extends Error>(error: E | (() => E) | string): Panic`
++
+`panic<E extends Error>(message: string, context?: ExceptionContext): Panic`
++
+The `panic` function creates a new function that throws an error.
+It is used for lazy evaluation,
+e.g. when an exceptional situation is optional.
++
+[source,typescript]
+----
+import { panic } from '@perfective/common/error';
+import { maybe } from '@perfective/common/maybe';
+
+export function example(input?: string | null): string {
+    return maybe(input)
+        .or(panic('Input is not present')); // <.>
+}
+----
+<.> Must use `panic()`,
+as the fallback in `Maybe.or()` is called only when the `input` is not present.
+Using `throws()` will result in throwing an exception every time a function is called.
++
+* `rethrows(previous: Error, message: string, context: ExceptionContext = {}): never`
++
+Similar to `throws`, but requires to provide a previous error.
++
+* `rethrow( message: string, context: ExceptionContext = {}): Rethrow`
++
+Similar to `panic`: creates a function that will wrap up an error with additional context.
+Can be useful working with promises or RxJS `catchError`.
+
+
+== Failure
+
+The default JS `Error` class does not have `toJSON` method
+and is serialized as an empty object by `JSON.stringify`.
+This creates a problem for any attempt to transfer error information.
+Type `Failure` solved this problem by providing a record type to "serialize" `Error` and `Exception`.
+It omits stack information, but keeps the list of previous errors.
+
+* `Failure`
+** `failure<E extends Error>(error: E): Failure`
+— convert and `Error` or an `Exception` into a `Failure` record.
+
+
+== Standard built-in JS Error types
+
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`:
+** `error(message: string): Error`
+— instantiates a new `Error`.
+** `isError<T>(value: Error | T): value is Error`
+— returns `true` when the value is an instance of `Error`.
+** `isNotError<T>(value: Error | T): value is T`
+— returns `true` when the value is not an instance of `Error`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError[EvalError]`:
+** `evalError(message: string): EvalError`
+— instantiates a new `EvalError`.
+** `isEvalError<T>(value: EvalError | T): value is EvalError`
+— returns `true` when the value is an instance of `EvalError`.
+** `isNotEvalError<T>(value: EvalError | T): value is T`
+— returns `true` when the value is not an instance of `EvalError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError[RangeError]`:
+** `rangeError(message: string): RangeError`
+— instantiates a new `RangeError`.
+** `isRangeError<T>(value: RangeError | T): value is RangeError`
+— returns `true` when the value is an instance of `RangeError`.
+** `isNotRangeError<T>(value: RangeError | T): value is T`
+— returns `true` when the value is not an instance of `RangeError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError[ReferenceError]`:
+** `referenceError(message: string): ReferenceError`
+— instantiates a new `ReferenceError`.
+** `isReferenceError<T>(value: ReferenceError | T): value is ReferenceError`
+— returns `true` when the value is an instance of `ReferenceError`.
+** `isNotReferenceError<T>(value: ReferenceError | T): value is T`
+— returns `true` when the value is not an instance of `ReferenceError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError[SyntaxError]`:
+** `syntaxError(message: string): SyntaxError`
+— instantiates a new `SyntaxError`.
+** `isSyntaxError<T>(value: SyntaxError | T): value is SyntaxError`
+— returns `true` when the value is an instance of `SyntaxError`.
+** `isNotSyntaxError<T>(value: SyntaxError | T): value is T`
+— returns `true` when the value is not an instance of `SyntaxError`.
++
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError[TypeError]`:
+** `typeError(message: string): TypeError`
+— instantiates a new `TypeError`.
+** `isTypeError<T>(value: TypeError | T): value is TypeError`
+— returns `true` when the value is an instance of `TypeError`.
+** `isNotTypeError<T>(value: TypeError | T): value is T`
+— returns `true` when the value is not an instance of `TypeError`.
+
+[NOTE]
+====
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError[InternalError]`
+is non-standard and won't be supported.
+* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError[URIError]`
+will be supported in the `@perfective/common/url` package.
+====
+
+== Roadmap
+
+* Provide functions to parse
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/[standard error messages]
+and predicates to check for them.

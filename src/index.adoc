@@ -1,0 +1,18 @@
+= Perfective Common (`@perfective/common`)
+:toc: left
+:toclevels: 2
+:icons: font
+:sourcedir: ./
+
+include::./array/index.adoc[leveloffset=+1]
+include::./error/index.adoc[leveloffset=+1]
+include::./fp/index.adoc[leveloffset=+1]
+include::./identity/index.adoc[leveloffset=+1]
+include::./match/index.adoc[leveloffset=+1]
+include::./maybe/index.adoc[leveloffset=+1]
+include::./object/index.adoc[leveloffset=+1]
+include::./real/index.adoc[leveloffset=+1]
+include::./string/index.adoc[leveloffset=+1]
+include::./value/index.adoc[leveloffset=+1]
+
+include::./legacy.adoc[leveloffset=+1]

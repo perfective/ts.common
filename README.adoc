@@ -1,25 +1,24 @@
-= Perfective JavaScript
-
-[WARNING]
-====
-This project is under active development.
-Each package has major version `0` and an independent minor version.
-A change of a minor version would contain breaking changes.
-Patch versions may provide non-breaking features and patches.
-When the packages are ready for the `1.0.0-alpha` release,
-they will be switched to a common version.
-====
+= Perfective Common for TypeScript
 
 [IMPORTANT]
 ====
-http://typescriptlang.org[TypeScript] is the JavaScript that scales,
-and all the code provided by this project relies heavily on strict TypeScript compiler checks.
-Use of these packages in the regular JS projects may produce unexpected behavior
-and is undocumented.
+The code provided by this project relies on the strict http://typescriptlang.org[TypeScript] compiler checks.
+Use of these packages in the regular JS projects may produce unexpected behavior and is undocumented.
 For example,
 a function that declares an argument as required relies on strict TSC `null` checks
 and does not check value for `null` additionally.
 ====
+
+
+== Installation
+
+[source,bash]
+----
+npm install @perfective/common
+----
+
+
+== Features
 
 While JavaScript supports the object-oriented paradigm,
 the functional programming style allows writing more readable code in JS.
@@ -33,40 +32,36 @@ to discourage the use of the new operator
 Classes should only be used in function types declaration.
 All non-abstract classes should be considered final even TypeScript does not allow to limit that.
 
-This repo currently contains the following JavaScript packages (in order of types/dependencies):
+This repo currently contains the following sub-packages:
 
-* `link:https://github.com/perfective/js/tree/master/packages/fp[@perfective/fp]`
-— functions and types for functional programming and logical operations.
-* `link:https://github.com/perfective/js/tree/master/packages/error[@perfective/error]`
+* `link:https://github.com/perfective/js/tree/master/src/array[@perfective/common/array]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]` class.
+* `link:https://github.com/perfective/js/tree/master/src/error[@perfective/common/error]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`
 and related classes.
-* `link:https://github.com/perfective/js/tree/master/packages/value[@perfective/value]`
-— functions to separate generic values from `undefined` and `null`.
-* `link:https://github.com/perfective/js/tree/master/packages/array[@perfective/array]`
+* `link:https://github.com/perfective/js/tree/master/src/fp[@perfective/common/fp]`
+— functions and types for functional programming and logical operations.
+* `link:https://github.com/perfective/js/tree/master/src/identity[@perfective/common/identity]`
+— https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad[Identity monad] implementation.
+* `link:https://github.com/perfective/js/tree/master/src/match[@perfective/common/match]`
+— functions to support a functional switch-case.
+* `link:https://github.com/perfective/js/tree/master/src/maybe[@perfective/common/maybe]`
+— https://en.wikipedia.org/wiki/Option_type[Maybe type] implementation.
+* `link:https://github.com/perfective/js/tree/master/src/object[@perfective/common/object]`
 — functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]`
-class.
-* `link:https://github.com/perfective/js/tree/master/packages/object[@perfective/object]`
-— functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]`
-class.
-* `link:https://github.com/perfective/js/tree/master/packages/real[@perfective/real]`
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
+* `link:https://github.com/perfective/js/tree/master/src/real[@perfective/common/real]`
 — functions and types to work with the real numbers.
-* `link:https://github.com/perfective/js/tree/master/packages/string[@perfective/string]`
+* `link:https://github.com/perfective/js/tree/master/src/string[@perfective/common/string]`
 — functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]`
-class.
-* `link:https://github.com/perfective/js/tree/master/packages/identity[@perfective/identity]`
-— https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad[Identity monad]
-implementation.
-* `link:https://github.com/perfective/js/tree/master/packages/maybe[@perfective/maybe]`
-— https://en.wikipedia.org/wiki/Option_type[Maybe type] (monadic container) implementation.
-* `link:https://github.com/perfective/js/tree/master/packages/match[@perfective/match]`
-— functions to support https://en.wikipedia.org/wiki/Pattern_matching[pattern matching]
-(a functional switch-case).
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.
+* `link:https://github.com/perfective/js/tree/master/src/value[@perfective/common/value]`
+— functions to separate generic values from `undefined` and `null`.
 
-All the packages have a 100% unit test coverage.
+The package has a 100% unit test coverage.
+
 
 == Roadmap
 
@@ -83,15 +78,16 @@ Additional packages to be certainly developed before version `1.0` can be releas
 * `@perfective/regexp`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp[RegExp]` class.
-* `@perfective/rxjs`
-— additional operators for the https://rxjs.dev[RxJS].
+
 
 == Terminology
 
 * _Unit function_ — a function that creates a new object or a function.
 Term used as distinguished from `constructor` and `new` keywords.
 
+
 == Development
+
 
 === Common patterns
 
@@ -103,8 +99,8 @@ there are two https://www.typescriptlang.org/docs/handbook/advanced-types.html#t
 if a given value is an instance of that class or not.
 These functions have prefixes `is` and `isNot`.
 * Declared interfaces and types may have other predicates
-with the `is`/`isNot` prefixes
-(e.g., `string` has `isEmpty` and `isNotEmpty` functions).
+with the `is`/`isNot` prefixes.
+
 
 === TypeScript configuration
 
@@ -112,35 +108,23 @@ The project contains a group of TSConfig files to maintain a productive developm
 with the WebStorm IDE:
 
 * The base file with the TypeScript compiler configuration is `tsconfig.strict.json`.
-It contains all the default compiler settings.
-* The root `tsconfig.json` includes the list of paths
-so that WebStorm can pick them up in the packages' imports before the build.
-* Packages do not have `tsconfig.json`,
-as the paths can be set only for the files included in the project.
-* WebStorm picks up the `tsconfig.json` provided in the package as the default configuration,
-which breaks the paths option recognition.
-Thus, instead, builds use the `tsconfig.build.mjs.json` and `tsconfig.build.cjs.json` in each package,
-which extends the `tsconfig.strict.json` directly.
-* As WebStorm does not recognize package-based `tsconfig.build.*.json` as the source of truth,
-it reports errors in the packages that must use CommonJS exports.
-To work around this issue,
-the root `tsconfig.json` provides `compilerOptions.module: "commonjs"` override.
-It does not affect anything, except the WebStorm.
-* Linters use an additional `tsconfig.lint.json` in each package,
-which _do_ extend the root `tsconfig.json` to pick up the `compilerOptions.paths`.
+It contains all the default (strict) compiler settings.
+* The root `tsconfig.json` is picked up by WebStorm and is used by Jest.
+* `tsconfig.build.json` contains the defaults for the build,
+and is further overridden in `gulpfile.js` for CommonJS, ESM, and declaration files compilation.
+
 
 === Documentation
 
-This project uses the AsciiDoc format for its documentation.
-Each package has a `README.adoc` file with the list of the exported types and functions,
-examples their usages,
-and other helpful information.
-Github renders these README files by default.
+This project uses the https://asciidoctor.org[AsciiDoc] format for its documentation.
+Each sub-package has an `index.adoc` file that is included into the package `src/index.adoc`.
+It is automatically compiled into the `dist/docs.html` file
+and is published with all other package files.
 
-Unfortunately, https://www.npmjs.com[npm] does not support the AsciiDoc
-and only supports Markdown.
-Markdown format is less expressive
-and is not as convenient to provide examples and build complex lists.
-As a result,
-each package also has a `README.md` file that only lists the exported types and functions,
-but directs to the Github for the full documentation.
+[NOTE]
+====
+Unfortunately, https://www.npmjs.com[npmjs] only supports Markdown.
+As a result, in addition to this `README.adoc` for the repository,
+there is a `README.md` file with only basic information for the
+https://www.npmjs.com/package/@perfective/common[npm page].
+====

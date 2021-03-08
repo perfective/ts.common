@@ -1,0 +1,649 @@
+= Legacy Changelog
+
+
+== `@perfective/array`
+
+
+=== v0.4.0
+
+* Added array `intersection` function.
+* Added array `init`/`end` functions.
+* Changed `tail` to return an array, not the last element
+(use `end` instead).
+
+
+=== v0.3.1
+
+* Added `by(property)` filter function.
+
+
+=== v0.3.0
+
+* Added `Filter`, `Map`, and `Reduce` function types.
+* Added `insertInto` function.
+* Added `isFirstOccurrence`/`isLastOccurrence` filter functions.
+
+
+=== v0.2.2
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.1
+
+* Added the `replicated` array unit function.
+* Added the `wrapped` array unit function.
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Added package documentation.
+* Added types:
+** `Compare`,
+** `Reducer`.
+* Added unit functions: `array`, `arrayFromArrayLike`, `arrayFromIterable`, `copy`, `flatten`, `reversed`, `sorted`,
+and `unique`.
+* Added type guards: `isArray`/`isNotArray`.
+* Added predicates: `isEmpty`/`isNotEmpty`.
+* Added property function: `length`.
+* Added element functions: `append`/`prepend`, `insert/replace/remove`.
+* Added functions and operators based on `Array.prototype`: `copyWithin`, `entries`, `every`, `fill`, `filter`, `find`,
+`findIndex`, `forEach`, `includes`, `indexOf`, `join`, `keys`, `lastIndexOf`, `map`, `pop`, `push`, `reduce`,
+`reduceTo`, `reduceRight`, `reduceRightTo`, `reverse`, `shift`, `some`, `sort`, `splice`, `spliceWith`, `unshift`,
+and `values`.
+
+
+=== v0.1.1
+
+* Added the `includes()`/`includedIn()` array predicates.
+
+
+=== v0.1.0
+
+* Declared the `Element<A>` type.
+* Added the `concatenated()` array unit function.
+* Added the `concat()` and `slice()` array functors.
+* Added the `head()`/`tail()`, `first()`/`last()`, and `element()` functions.
+
+
+== `@perfective/error`
+
+
+=== v0.3.0
+
+* Added `Failure` type with:
+** the `failure` unit function.
+
+
+=== v0.2.4
+
+* Added `Rethrow` type.
+
+
+=== v0.2.3
+
+* Support lazy error creation in the `panic` and `throws` functions.
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.2
+
+* Added `Panic` type.
+
+
+=== v0.2.1
+
+* Fix: export `unknownError` function.
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Required the error message argument in all functions.
+* Added `errorOutput` function to emulate Node.js `Error.toString()`.
+* Added `Exception` base class:
+** added `exception` and `causedBy` unit functions;
+** added `unknownError` type casting function;
+** added `rethrow`/`rethrows`, `unchained`, `chainStack`,
+and `fault` functions for error chaining support;
+** added `isException`/`isNotException` type-guards;
+** added `ExceptionContext` for exception message template and context support.
+* Added the `Trace` type:
+** added `stackTrace` and `trace` functions for stack trace data parsing.
+* Switched the `throws`/`panic` functions to use `Exception`.
+
+
+=== v0.1.1
+
+* Added documentation.
+
+
+=== v0.1.0
+
+* Added `error()`/`isError()`/`isNotError()` for the `Error` type.
+* Added `evalError()`/`isEvalError()`/`isNotEvalError()` for the `EvalError` type.
+* Added `rangeError()`/`isRangeError()`/`isNotRangeError()` for the `RangeError` type.
+* Added `referenceError()`/`isReferenceError()`/`isNotReferenceError()`
+for the `ReferenceError` type.
+* Added `syntaxError()`/`isSyntaxError()`/`isNotSyntaxError()` for the `SyntaxError` type.
+* Added `typeError()`/`isTypeError()`/`isNotTypeError()` for the `TypeError` type.
+* Added `throws()` and `panic()` functions to throw errors.
+
+
+== `@perfective/fp`
+
+
+=== v0.6.0
+
+* Added `Length` type with:
+** unit function `length`;
+** predicates `hasLength`, `isEmpty`, and `isNotEmpty`;
+** reducers `toShortest` and `toLongest`.
++
+* Added the `isNullary`, `isUnary`, `isBinary`, and `isTernary` predicates for functions.
++
+* Renamed `Type<T>` into `Instance<T>` to match the corresponding `isInstanceOf`/`isNotInstanceOf` functions.
+
+
+=== v0.5.1
+
+* Renamed `negative` into `negated`.
+
+
+=== v0.5.0
+
+* Remove `always()` and `never()` functions.
+* Add the `negative` predicate.
+* Fix: `isNotInstanceOf` function definition.
+* Fix: invalid "exports" main target.
+
+
+=== v0.4.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Renamed `value()` function into `same()`.
+
+
+=== v0.3.0
+
+* Added the `Type<T>` type.
+** Added the `isInstanceOf` function.
+** Added the `isNotInstanceOf` function.
+* Added the `Value<T>` type.
+** Added `valueOf` function.
+* Removed the `Fallback<T>` type.
+** Removed the `fallbackTo` function.
+* Added the package documentation.
+
+
+=== v0.2.1
+
+* Fixed linting errors.
+
+
+=== v0.2.0
+
+* Declared the `Proposition` type.
+* Added the `isTrue()`/`isFalse()` functions.
+* Added the `always()`/`never()` propositions.
+* Added the `is()`/`isNot()`, `not()`, `all()`/`either()`/`neither()`,
+and `atLeast()`/`atMost()`/`exactly()` predicates.
+
+
+=== v0.1.3
+
+* Added the `TypeGuard<T, V>` type.
+* Fix: corrected the changelog grammar.
+
+
+=== v0.1.2
+
+* Added the `Predicate<T>` type.
+
+
+=== v0.1.1
+
+* Fix: exported the `Fallback<T>` type.
+
+
+=== v0.1.0
+
+* Added the `isFunction()` and `isNotFunction()` type guards.
+* Added the `Nullary<T>` type with the `constant()`, `empty()`, and `fallbackTo()` functions.
+* Added the `Unary<X, T>` type with the `value()` function.
+* Declared the `Binary<X, Y, T>` type.
+* Declared the `Ternary<X, Y, Z, T>` type.
+
+
+== `@perfective/identity`
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+
+
+=== v0.1.0
+
+* Added `Identity<T>` monadic class.
+* Added `identity()` and `take()` unit functions.
+* Added `isIdentity()` type guard function.
+
+
+== `@perfective/match`
+
+
+=== v0.3.0
+
+* Add `statements` function to create `Statement` array from an array of `StatementEntry` tuples.
+
+
+=== v0.2.2
+
+* Bump `@perfective/maybe` to `0.5.2`.
+
+
+=== v0.2.1
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Add package documentation.
+
+
+=== v0.1.0
+
+* Declared the `Match<T>`, `When<T>`, and `Statement<T, U>` types.
+* Added the `match()` and `when()` functions.
+
+
+== `@perfective/maybe`
+
+
+=== v0.6.0
+
+* Added `Nullable<T>` as `Solum<T>` or `Nil<T>`
+to cover `T | null` only (using `isNotNull` check)
+with the unit functions `nullable`, `solum`, and `nil`.
+** `nil` for `Maybe` is renamed  into `naught`.
++
+* Added `Optional<T>` as `Some<T>` or `None<T>`
+to cover `T | undefined` only (using `isDefined` check)
+with the unit functions `optional`, `some`, and `none`.
+* Improve type context for `Just`/`Nothing`, `Solum`/`Nil`, and `Some`/`None`.
+* Increased test coverage by adding types declaration/assignment verification.
+
+
+=== v0.5.2
+
+* Return `Just` value from `Just.pick()` when property is required.
+
+
+=== v0.5.1
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.5.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Added package documentation.
+* Renamed `Maybe.has()` into `Maybe.which()`.
+* Added support for a function argument type in `Maybe.pick()`.
+* Added support for an optional/nullable values in `Maybe.otherwise()`.
+* Added custom `Just.to()` signature to preserve the `Just` chain.
+* Added custom `Just.onto()` signature to preserve the `Just` chain.
+* Changed `Just.run()` signature to return `Just`.
+* Fixed: `to()` lift function signature.
+
+
+=== v0.4.0
+
+* Extracted auxiliary functions and types into the `@perfective/fp`, `@perfective/error`,
+`@perfective/value`, `@perfective/real`, and `@perfective/object` packages.
+* Renamed the `Maybe.with()` into `Maybe.has()`.
+* Removed the `Maybe.index()` method
+(use functions from the `@perfective/array` package instead).
+* Added the `Maybe.run()` method.
+* Added functors for each `Maybe` method
+(can be used in the `map()`/`lift()` methods).
+
+
+=== v0.3.4
+
+* Removed `Maybe.then()` as it conflicts with `Promise.then()` and `PromiseLike<T>`.
+
+
+=== v0.3.3
+
+* Added `Maybe.lift()` method to map to the plain `Maybe` value.
+* Added `sideEffects: false` flag to ensure Webpack tree-shaking.
+
+
+=== v0.3.2
+
+* Add `Maybe.onto()` as a bind operator.
+* Add `Maybe.to()` as a mapping operator.
+* Fix: require an argument in the `optional()` unit function.
+
+
+=== v0.3.1
+
+* Add `…ValueOrThrow()` unpacking functions:
+** `definedValueOrThrow`/`undefinedValueOrThrow`,
+** `notNullValueOrThrow`/`nullValueOrThrow`,
+** `presentValueOrThrow`/`absentValueOrThrow`.
++
+* Fix: export functions and types added in the previous version.
+
+
+=== v0.3.0
+
+* Move fallback support from `Maybe.otherwise()` to `Maybe.or()`.
+* Add `Just<T>`, `Nothing<T>`, and `Nil<T>` sealed classes.
+* Provide a fallback to `Just<T>` in `Maybe.otherwise()` to allow chaining after a fallback.
+* Keep context of `Nothing<T>` and `Nil<T>` through the chain.
+* Add `Maybe.when()` method to filter based on an outside values.
+* Add `Maybe.with()` method to filter based on a provided type-guard:
+** `definedProperty()`/`undefinedProperty()`,
+** `notNullProperty()`/`nullProperty()`,
+** `presentProperty()`/`absentProperty()`.
++
+* Add `throws()` function.
+* Add `isError()` function.
+* Add `…ValueOrPanic()` unpacking functions:
+** `definedValueOrPanic`/`undefinedValueOrPanic`,
+** `notNullValueOrPanic`/`nullValueOrPanic`,
+** `presentValueOrPanic`/`absentValueOrPanic`.
++
+* Fix: explicitly use `undefined` in type guards.
+* Fix: filter out absent types from `Maybe.pick()` signature.
+* Fix: filter out absent types from `Maybe.index()` signature.
+
+
+=== v0.2.3
+
+* Add object properties type-guards:
+** `hasDefinedProperty()`;
+** `hasUndefinedProperty()`;
+** `hasNotNullProperty()`;
+** `hasNullProperty()`;
+** `hasPresentProperty()`;
+** `hasAbsentProperty()`.
++
+* Add `voidable()` function to cast `void` into `null | undefined`.
+* Use the same check for `undefined` as in the compiled JS code.
+
+
+=== v0.2.2
+
+* Fix: failing “no-unsafe-return” linter rule.
+
+
+=== v0.2.1
+
+* Add `Maybe.index()` method to pick array elements.
+* Fix: keep the absent value in `Maybe.that()` instead of always switching to `nothing()`.
+
+
+=== v0.2.0
+
+* Remove `fail()` function.
+* Add support for a `message?: string` parameter to the `panic()`.
+* Require `value` to be explicitly passed into `new Maybe()`.
+* Add functions to work with promises:
+`promise()` to instantiate a promise,
+and `result()` as default callback to resolve or reject a promise.
+
+
+=== v0.1.5
+
+* Add `Maybe.or()` method to act as the nullish coalescing operator `??`.
+
+
+=== v0.1.4
+
+* Fix: correct definition for the `Bind<T, R>` type to allow returning `undefined` and `null`.
+
+
+=== v0.1.3
+
+* Fix: remove unnecessary generic type default.
+
+
+=== v0.1.2
+
+* Export `Maybe<T>` class.
+* Include source maps.
+* Add `types` path to `package.json` to allow TypeScript imports `from '@perfective/maybe'`
+instead of `from '@perfective/maybe/dist'`.
+
+
+=== v0.1.1
+
+* Fix NPM documentation file.
+
+
+=== v0.1.0
+
+* Added Maybe monad-like container with unit functions and full test coverage.
+
+
+== `@perfective/object`
+
+
+=== v0.4.0
+
+* Added `Input`, `InputPrimitive`, `InputArray` and `InputObject` types.
+* Added `input`, `stringInput`, `numberInput`, `booleanInput`, `arrayInput`, `objectInput`, and `nullInput` functions.
+
+
+=== v0.3.0
+
+* Added `RecursivePartial` type.
+* Added `Entry` type, `recordFromEntries` function, and `toRecordFromEntries` reducer.
+* Added `isObject`, `isRecord`, `isTruthy`, `isFalsy`, `isEmpty` predicates.
+* Added _experimental_ (shallow) `copy` and (deep) `clone` functions.
+* Added `omit` and `recordWithOmitted` functions.
+* Added `pick` and `recordWithPicked` functions.
+* Added `filter` and `recordFiltered` functions.
+* Added `assigned` and `recordWithAssigned` functions.
+
+
+=== v0.2.1
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Added package documentation.
+* Removed `has*Property()` functions; renamed `*Property()` functions into `has*Property()`.
+* Added the `recordFromArray()` unit function.
+* Added `property` function to pick a property or create a predicate for the object,
+based on the given property.
+* Added `by` function to create a comparison function for a given property.
+
+
+=== v0.1.0
+
+* Declared types:
+** `ObjectWithDefined<T, K>`/`ObjectWithUndefined<T, K>`;
+** `ObjectWithNotNull<T, K>`/`ObjectWithNull<T, K>`;
+** `ObjectWithPresent<T, K>`/`ObjectWithAbsent<T, K>`.
++
+* Added functions:
+** `hasDefinedProperty()`/`definedProperty()`;
+** `hasUndefinedProperty()`/`undefinedProperty()`;
+** `hasNotNullProperty()`/`notNullProperty()`;
+** `hasNullProperty()`/`nullProperty()`;
+** `hasPresentProperty()`/`presentProperty()`;
+** `hasAbsentProperty()`/`absentProperty()`.
+
+
+== `@perfective/real`
+
+
+=== v0.6.0
+
+* Declared `Enum<T>` and `Member<T>` enum types with `members` function.
+* Declared `Flags<T>`, `Flag<T>`, and `Bitmask<T>` bitmask types with:
+** `bitmask` and `raisedFlags` functions;
+** `isFlagOn` and `hasFlagOn` predicates.
+
+
+=== v0.5.1
+
+* Added the `negative` function.
+
+
+=== v0.5.0
+
+* Added `minimum` and `maximum` functions.
+* Added check for `min` be less or equal to `max` in `Interval`.
+* Renamed `range` into `intervalFromValues`.
+* Added `null` (instead of `NaN`) as a return type from `decimal`, `binary`, `octal`, and `hexadecimal`.
+* Added `Natural` type and `isNatural` function.
+
+
+=== v0.4.1
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.4.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Added arithmetic functions: `sum`, `difference`, `product`, `quotient`, and `remainder`.
+* Added `range` `Interval` unit function for an array of numbers.
+
+
+=== v0.3.0
+
+* Added the package documentation.
+* Added the `Precision` type:
+** added the `precision` function.
+* Added the `Digits` type:
+** added the `exponential` function;
+** added the `fixed` function.
+* Added the `isSafeInteger` function.
+* Renamed the `isInOpenMinInterval` function into `isInLeftOpenInterval`.
+* Renamed the `isInOpenMaxInterval` function into `isInRightOpenInterval`.
+
+
+=== v0.2.1
+
+* Fix: exported `isNumber`/`isNotNumber` functions.
+
+
+=== v0.2.0
+
+* Required `@perfective/fp`.
+* Added `ascending`/`descending` sorting functions.
+* Added `isNumber`/`isNotNumber` type guards.
+* Added the `Interval` type.
+
+
+=== v0.1.1
+
+* Fixed clean up scripts.
+* Included the built `dist` code.
+
+
+=== v0.1.0
+
+* Added base conversion functions: `decimal`, `binary`, `octal`, and `hexadecimal`.
+* Added number comparison predicates.
+* Added integer and natural number predicates.
+
+
+== `@perfective/string`
+
+
+=== v0.3.0
+
+* Declared `Format` and `Tokens` types with `format`, `formatted` and `tokens` functions.
+
+
+=== v0.2.3
+
+* Added the `concatTo` function.
+
+
+=== v0.2.2
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.1
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Added package documentation.
+* Added types:
+** `UnicodeNormalizationForm`,
+** `UnicodeCanonicalEquivalenceNormalization`,
+** `UnicodeCompatibilityNormalization`,
+** `Replacement`,
+** `Utf16CodeUnit`,
+** `CodePoint`.
++
+* Added functions and operators based on the `String` prototype: `charAt`, `charCodeAt`, `codePointAt`, `concat`
+`endsWith`, `includes`, `indexOf`, `lastIndexOf`, `normalize`, `padEnd`, `padStart`, `repeat`, `replace`, `replaceWith`,
+`search`, `slice`, `startsWith`.
+* Added `length` function.
+* Added support for `null` and `undefined` arguments in the `output` function.
+* Added `isOutput/`isNotOutput` type guards.
+* Added `lines` unit function.
+* Removed unnecessary construction of unary functions: `lowerCase`, `upperCase`, `trim`.
+
+
+=== v0.1.0
+
+* Declared the `Output` interface.
+* Added the `output()` function.
+* Added the `isString()`/`isNotString()` and `isEmpty()`/`isNotEmpty()` functions.
+* Added the `lowerCase`/`upperCase()`, `split()`, and `trim()` functors.
+
+
+== `@perfective/value`
+
+
+=== v0.3.0
+
+* Declared the `EcmaType`, `TsType`, and `TypeOf<T>` types with:
+** `typeOf` unit function;
+** `isTypeOf`/`isNotTypeOf` predicates.
++
+* Declared the `Undefined<T>` and `Null<T>` types.
+
+
+=== v0.2.1
+
+* Fix: invalid "exports" main target.
+
+
+=== v0.2.0
+
+* Compiled `ES6` and `CommonsJS` modules.
+* Added the documentation.
+* Removed the `*ValueOrThrow()`/`*ValueOrPanic()` functions.
+
+
+=== v0.1.0
+
+* Declared the `Defined<T>`, `NotNull<T>`, `Present<T>`, and `Absent<T>` types.
+* Added the `isDefined()`/`isUndefined()`, `isNotNull()`/`isNull()`,
+and `isPresent()`/`isAbsent()` functions.
+* Added the `*ValueOrThrow()`/`*ValueOrPanic()` functions.
+* Added the `voidable()` function.

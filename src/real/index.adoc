@@ -1,0 +1,208 @@
+= Real Numbers
+
+The `@perfective/common/real` package declares types and functions to work with real numbers,
+including the JavaScript
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[Number]` class.
+
+
+== Number
+
+* Type guards:
+** `isNumber<T>(value: number | T): value is number`
+— value is a `number` and is not `NaN`.
+** `isNotNumber<T>(value: number | T): value is T`
+— value is of type `T` or `NaN`.
++
+* Unit functions:
+** `negative(value: number): number`
++
+* `Number` methods:
+** `exponential(fraction: Digits): Unary<number, string>`
+— returns a function that
+returns a number in the exponential notation with the given digits after the decimal point.
+** `fixed(fraction: Digits): Unary<number, string>`
+— returns a function that
+returns a number in the fixed-point notation with the given digits after the decimal point.
+** `precision(precision: Precision): Unary<number, string>`
+— returns a function that
+returns a number in the exponential or fixed-point notation with the given precision.
++
+[WARNING]
+====
+In JavaScript, a `Number` only keeps 17 decimal places of precision,
+while `Digit` is an integer from `0` to `20`,
+and `Precision` is an integer from `1` to `21`.
+So passing digits or precision over 15 requires careful consideration and thorough testing.
+====
++
+* Arithmetic functions:
+** `sum(augend: number, addend: number): number`
+** `difference(minuend: number, subtrahend: number): number`
+** `product(multiplier: number, multiplicand: number): number`
+** `quotient(dividend: number, divisor: number): number`
+** `remainder(dividend: number, divisor: number): number`.
++
+* Set functions:
+** `maximum(values: readonly number[]): number | null`
+— returns the maximum number if array contains numbers, `null` otherwise.
+** `minimum(values: readonly number[]): number | null`
+— returns the minimum number if array contains numbers, `null` otherwise.
+
+
+== Integer
+
+* Nominal types (aliases of `number`):
+** `Integer`;
+** `SafeInteger`;
+** `PositiveInteger`;
+** `NonNegativeInteger`;
+** `NonPositiveInteger`;
+** `NegativeInteger`.
++
+* Predicates:
+** `isInteger(value: number): value is Integer`
+** `isSafeInteger(value: number): value is SafeInteger`
+** `isNonNegativeInteger(value: number): value is NonNegativeInteger`
+** `isPositiveInteger(value: number): value is PositiveInteger`
+** `isNonPositiveInteger(value: number): value is NonPositiveInteger`
+** `isNegativeInteger(value: number): value is NegativeInteger`
+
+
+== Natural
+
+`Natural` type is a nominal type based on the `number` type.
+
+* Type Guards:
+** `isNatural<T>(value: number | T): value is Natural`.
+
+
+== Base (Radix)
+
+The `parseFloat()`, `parseInt()`, and `Number.prototype.toString()` functions are combined
+into polymorphic shortcuts for readability:
+
+* `decimal(value: number): string`
+— returns a decimal representation of a number.
+* `decimal(value: string): number | null`
+— parses a decimal (float) string into a number;
+returns `null` if parsing failed or returned `NaN`.
+* `binary(value: Integer): string`
+— returns a binary representation of an integer.
+* `binary(value: string): Integer | null`
+— parses a binary string into an integer;
+returns `null` if parsing failed or returned `NaN`.
+* `octal(value: Integer): string`
+— returns an octal representation of an integer.
+* `octal(value: string): Integer | null`
+— parses an octal string into an integer;
+returns `null` if parsing failed or returned `NaN`.
+* `hexadecimal(value: Integer): string`
+— returns a hexadecimal representation of an integer.
+* `hexadecimal(value: string): Integer | null`
+— parses a hexadecimal string into an integer;
+returns `null` if parsing failed or returned `NaN`.
+
+[NOTE]
+====
+When any of these functions is passed as a parameter to a generic function or method,
+TypeScript does not recognize the polymorphic `(string): number` signature.
+It requires to pass the `number` as a type parameter explicitly.
+
+[source,typescript]
+----
+import { just } from '@perfective/common/maybe';
+import { decimal } from '@perfective/common/real';
+
+just('3.14').to(decimal) === just(3.14); // <.>
+just(3.14).to<string>(decimal) === just('3.14'); // <.>
+----
+<1> The `(number): string` signature is recognized,
+and `to()` method does not require a type parameter.
+<2> The `(string): number` signature is not picked by the compiler
+and `to()` method requires a type parameter to compile.
+====
+
+
+== Order
+
+* Predicates:
+** `isEqualTo(value: number): Predicate<number>`
+** `isNotEqualTo(value: number): Predicate<number>`
+** `isGreaterThan(value: number): Predicate<number>`
+** `isGreaterThanOrEqualTo(value: number): Predicate<number>`
+** `isLessThan(value: number): Predicate<number>`
+** `isLessThanOrEqualTo(value: number): Predicate<number>`
++
+* Sorting:
+** `ascending(a: number, b: number): number`
+** `descending(a: number, b: number): number`
+
+
+== Interval
+
+`Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
+
+* Unit functions:
+** `interval(min: number, max: number): Interval | null`
+— returns an `Interval` when `min <= max`.
+** `intervalFromPair(pair: readonly [number, number]): Interval | null`
+— returns an `Interval` for an ordered pair.
+** `intervalFromValues(values: number[]): Interval | null`
+— returns an `Interval` for a non-empty array.
+** `intervalFromNullable(min: number | null, max: number | null): Interval | null`
+— returns an `Interval` from nullable values, replacing them with `-Infinity` and `Infinity`;
+returns `null` if `min > max`.
++
+* Predicates:
+** `isInInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in a closed interval.
+** `isInOpenInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in an open interval.
+** `isInLeftOpenInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in a left-open (and right-closed) interval.
+** `isInRightOpenInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in a right-open (and left-closed) interval.
+
+
+== Enum
+
+* Types:
+** `Enum<T extends number | string>` — a record generated based on the `enum` keyword;
+** `Member<T extends number | string>` — key of an enum.
+* Functions:
+** `members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[]`
+— returns a list of `enum` keys.
+
+
+== Bitmasks
+
+* Types:
+** `Flags<T extends number = number>` — an `enum` with `number` values;
+** `Flag<T extends Flags>` — a key of a `Flags` enum.
+** `Bitmask<T extends Flags | number = number>` — a combination of bits.
+* Unit function:
+** `bitmask<T extends Flags | number = number>(flags: Bitmask<T>[]): Bitmask`
+— creates a bitmask by raising all given flags.
+* Predicates:
+** `isFlagOn<T extends Flags | number>(bitmask: Bitmask<T>, flag: Bitmask<T>): boolean`
+— returns true when given flags are raised on a bitmask.
+** `hasFlagOn<T extends Flags | number>(flag: Bitmask<T>): Unary<Bitmask<T>, boolean>`
+— creates a curried version of the hasRaised() function.
+* Other:
+** `raisedFlags<T extends number>(type: object, bitmask: Bitmask<T>): Member<T>[]`
+— returns flags that are raised on the given bitmask.
+
+
+== Roadmap
+
+* Add support for the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]` object.
+* Export the `base()` function to allow generic base values conversions.
+* Research support of the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt[BigInt]` type.
+* `Interval`:
+** `midpoint()`;
+** `radius()`;
+** `size`;
+** `isSubInterval()`;
+** `isStrictSubInterval()`.
+** verify correct behavior with `Infinity`.
+** consider adding negated functions, like `isNotInInterval()`.

@@ -1,0 +1,39 @@
+= Match
+
+The `@perfective/common/match` package provides functions and types for the pattern matching.
+
+* `match<T>(value: T | Nullary<T>): Match<T>`
+** `Match.that<U>(...statements: Statement<T, U>[]): Maybe<U>`
+** `Match.to<U>(statements: Statement<T, U>[]): Maybe<U>`
+— applies the given value to the `Statement.condition` predicate until the first one match,
+returns the result of applying the value to the `Statement.evaluate` function;
+when match is not found, returns `Nothing`.
++
+* `when<T>(condition: T | Predicate<T>): When<T>`
+— `Statement<T, U>` builder;
+** `then<U>(value: U | Unary<T, U>): Statement<T, U>`
++
+* `statements<T, U>(entries: StatementEntry<T, U>[]): Statement<T, U>[]`
+— creates statements from an array of tuples `[Predicate<T>, Unary<T, U>]`.
+
+
+[source,typescript]
+----
+function base(root: number): Maybe<number> {
+    return match(root).that(
+        when(1.41).then(() => 2),
+        when(1.73).then(() => 3),
+        when(2.23).then(() => 5),
+    );
+}
+
+function base(root: number): Maybe<string> {
+    return match(root).to(statements([
+        [1.41, '2']
+        [1.73, '3'],
+        [2.23, '5'],
+        [true, 'unknown'], // <.>
+    ]));
+}
+----
+<1> `statements` function allow to pass constant values as condition and as evaluation result.

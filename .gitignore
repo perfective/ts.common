@@ -1,12 +1,10 @@
 # Build
 dist
 *.tsbuildinfo
-packages/**/*.d.ts
-packages/**/*.js
-packages/**/*.map
 
 # Dependencies
 node_modules
 
 # Logs
 *.log
+*.out

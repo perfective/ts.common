@@ -1,0 +1,16 @@
+= Changelog
+
+
+== v0.7.0 (next)
+
+* Merged into `@perfective/common` and deprecated micro-packages:
+** `@perfective/array` (`v0.4.0`) is now `@perfective/common/array`;
+** `@perfective/error` (`v0.3.0`) is now `@perfective/common/error`;
+** `@perfective/fp` (`v0.6.0`) is now `@perfective/common/fp`;
+** `@perfective/identity` (`v0.2.0`) is now `@perfective/common/identity`;
+** `@perfective/match` (`v0.3.0`) is now `@perfective/common/match`;
+** `@perfective/maybe` (`v0.6.0`) is now `@perfective/common/maybe`;
+** `@perfective/object` (`v0.4.0`) is now `@perfective/common/object`;
+** `@perfective/real` (`v0.6.0`) is now `@perfective/common/real`;
+** `@perfective/string` (`v0.3.0`) is now `@perfective/common/string`;
+** `@perfective/value` (`v0.3.0`) is now `@perfective/common/value`.

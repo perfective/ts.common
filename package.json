@@ -69,6 +69,7 @@
         "eslint-plugin-simple-import-sort": "7.0.0",
         "eslint-plugin-sonarjs": "0.6.0",
         "eslint-plugin-unicorn": "28.0.2",
+        "glob": "7.1.6",
         "gulp": "4.0.2",
         "gulp-babel": "8.0.0",
         "gulp-json-editor": "2.5.4",

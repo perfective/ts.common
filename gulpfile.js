@@ -1,4 +1,7 @@
+const path = require('path');
+
 const del = require('del');
+const glob = require('glob');
 const gulp = require('gulp');
 const gulpAsciidoctor = require('@asciidoctor/gulp-asciidoctor');
 const gulpBabel = require('gulp-babel');
@@ -26,7 +29,39 @@ function clean(callback) {
     callback();
 }
 
-function copyPackageJson() {
+function subPackages() {
+    return new Promise((resolve, reject) => {
+        glob('./dist/*/package.json', {}, (error, files) => {
+            if (error) {
+                reject(error);
+            }
+            resolve(
+                files.map(file => path.dirname(file).split('/').pop()),
+            );
+        });
+    });
+}
+
+/**
+ * @see https://nodejs.org/api/packages.html#packages_subpath_exports
+ */
+function subPackageExports(packages) {
+    return packages
+        .map(name => [
+            `./${name}`,
+            {
+                import: `./${name}/index.js`,
+                require: `./${name}/index.cjs`,
+            },
+        ])
+        .reduce((exports, [key, value]) => ({
+            ...exports,
+            [key]: value,
+        }), {});
+}
+
+async function copyPackageJson() {
+    const packages = await subPackages();
     return gulp.src('./package.json')
         .pipe(gulpJsonEditor({
             scripts: undefined,
@@ -39,6 +74,7 @@ function copyPackageJson() {
                     import: './index.js',
                     require: './index.cjs',
                 },
+                ...subPackageExports(packages),
             },
         }))
         .pipe(gulp.dest('dist'));

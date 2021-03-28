@@ -1,5 +1,5 @@
 {
-    "extends": "./tsconfig.strict.json",
+    "extends": "@perfective/build/tsconfig.strict.json",
     "compilerOptions": {
         "rootDir": "./src"
     },

@@ -1,6 +1,8 @@
+const perfective = require('@perfective/build/babel');
+
 module.exports = {
     presets: [],
     plugins: [
-        './build/babel-plugin-import-extensions.js',
+        perfective.babelPluginRequireExtension,
     ],
 };

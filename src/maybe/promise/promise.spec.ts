@@ -19,7 +19,11 @@ describe('result', () => {
         .then(result => expect(result)
             .toStrictEqual('example')));
 
-    it('rejects promise when error is defined', async () => promiseForward(new Error('Fail'))
-        .catch((error: Readonly<Error>) => expect(error)
-            .toStrictEqual(new Error('Fail'))));
+    it('rejects promise when error is defined', async () => {
+        expect.assertions(1);
+
+        await promiseForward(new Error('Fail'))
+            // eslint-disable-next-line jest/no-conditional-expect -- approach with "toThrow()" does not work
+            .catch((error: Readonly<Error>) => expect(error).toStrictEqual(new Error('Fail')));
+    });
 });

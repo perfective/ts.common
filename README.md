@@ -6,6 +6,9 @@ For example,
 a function that declares an argument as required relies on strict TSC `null` checks
 and does not check value for `null` additionally.
 
+Read the [full README](https://github.com/perfective/ts.common/#readme)
+in the repository.
+
 ## Installation
 
 ```bash

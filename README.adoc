@@ -70,16 +70,83 @@ The package has a 100% unit test coverage.
 The primary development focus is to provide convenient functions
 and detailed documentation in the existing packages.
 
-Additional packages to be certainly developed before version `1.0` can be released:
+=== Version 1.0
 
-* `@perfective/either`
-— Either type (monadic container) to support a functional Result/Error return type.
-* `@perfective/url`
-— functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/API/URL[URL]` and related classes.
-* `@perfective/regexp`
-— functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp[RegExp]` class.
+* Must target https://262.ecma-international.org/6.0/[ECMAScript 6].
+* May support newer versions of ECMAScript if they have wide browser or TypeScript support.
+* Legacy browsers support may be provided using `@babel`.
+
+
+=== Packages
+
+* `@perfective/common/date`:
+** Add support for the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date[Date]` type.
++
+* `@perfective/common/either`:
+** Add `Either` (monadic container) to support a functional `Result`/`Error` return type.
++
+* `@perfective/common/function`:
+** Ensure coverage of the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function[Function]`,
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator[Generator]`,
+and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction[GeneratorFunction]` types.
+** Consider support for
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction[AsyncFunction]` (ES 8)
++
+* `@perfective/common/i18n`:
+** Add support for localization functions.
++
+* `@perfective/common/number`:
+** Ensure coverage of:
+*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[Number]`
+*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]`
+*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity[Infinity]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/NEGATIVE_INFINITY[Number.NEGATIVE_INFINITY]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY[Number.POSITIVE_INFINITY]`
+*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite[Number.isFinite()]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isFinite[isFinite()]`
+*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN[NaN]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN[isNaN()]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN[Number.isNaN()]`
++
+* `@perfective/common/promise`:
+** Ensure coverage of the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` type.
++
+* `@perfective/common/reflect`:
+** Add support for the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect[Reflect]` type.
++
+* `@perfective/common/regexp`:
+** Add support for the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp[RegExp]` type.
++
+* `@perfective/common/symbol`:
+** Add support for the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol[Symbol]` type.
++
+* `@perfective/common/uri`:
+** Ensure support of:
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI[encodeURI]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent[encodeURIComponent]`,
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI[decodeURI]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent[decodeURIComponent]`,
+and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError[URIError]`.
+** Consider custom support for:
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape[escape]`
+/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/unescape[unescape]`.
++
+* `@perfective/common/url`
+** Add support for the
+`link:https://developer.mozilla.org/en-US/docs/Web/API/URL[URL]` WebAPI.
+
+
+=== References
+
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference[MDN JavaScript Reference]
+* https://en.wikipedia.org/wiki/ECMAScript[ECMAScript Wikipedia]
+* https://262.ecma-international.org/6.0/[ECMA Script 2015 Specification]
 
 
 == Terminology
@@ -88,18 +155,17 @@ Additional packages to be certainly developed before version `1.0` can be releas
 Term used as distinguished from `constructor` and `new` keywords.
 
 
-== Development
-
-
 === Common patterns
 
 * For each declared `interface` or `class`,
 there is at least one unit function to instantiate it.
 This function has the same name as the interface/class but in camelCase.
++
 * For each declared class,
 there are two https://www.typescriptlang.org/docs/handbook/2/narrowing.html[type guards] to check
 if a given value is an instance of that class or not.
 These functions have prefixes `is` and `isNot`.
++
 * Declared interfaces and types may have other predicates
 with the `is`/`isNot` prefixes.
 

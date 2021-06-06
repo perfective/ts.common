@@ -34,8 +34,9 @@
     "scripts": {
         "clean": "rm -rf dist && rm -f *.tsbuildinfo",
         "dist": "gulp",
-        "lint": "npm run lint:eslint",
+        "lint": "npm run lint:eslint && npm run lint:prettier",
         "lint:eslint": "eslint --fix ./",
+        "lint:prettier": "prettier --write .",
         "test": "jest",
         "test:clean": "jest --clearCache && jest",
         "test:verbose": "jest --verbose"
@@ -77,6 +78,7 @@
         "gulp-rename": "^2.0.0",
         "gulp-typescript": "^6.0.0-alpha.1",
         "jest": "^26.6.3",
+        "prettier": "^2.3.1",
         "rimraf": "^3.0.2",
         "ts-jest": "^26.5.6",
         "ts-node": "^9.1.1",

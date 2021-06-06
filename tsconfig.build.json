@@ -7,8 +7,5 @@
         "declarationMap": false,
         "sourceMap": false
     },
-    "exclude": [
-        "dist",
-        "src/**/*.spec.ts"
-    ]
+    "exclude": ["dist", "src/**/*.spec.ts"]
 }

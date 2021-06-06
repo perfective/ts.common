@@ -1,0 +1,17 @@
+# Auto-generated
+dist
+*.tsbuildinfo
+package-lock.json
+
+# Dependencies
+node_modules
+
+# Logs
+*.log
+*.out
+
+# ESLint
+*.js
+*.jsx
+*.ts
+*.tsx

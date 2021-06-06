@@ -16,7 +16,7 @@ export type EcmaType = 'undefined' | 'boolean' | 'number' | 'bigint' | 'string' 
 export type TsType = EcmaType | 'null' | 'array' | 'unknown';
 
 /**
- * @see @see https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types
+ * @see https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types
  */
 export type TypeOf<T> =
 T extends undefined

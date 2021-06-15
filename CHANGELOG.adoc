@@ -1,5 +1,18 @@
 = Changelog
 
+== v0.8.0 (next)
+
+=== Breaking changes
+
+* Renamed `@perfective/common/fp` into `@perfective/common/function`;
+* Renamed `@perfective/common/real` into `@perfective/common/number`;
+* Moved `@perfective/common/value` into `@perfective/common`;
+* Moved `Proposition` and `Predicate` types (and their functions)
+from `@perfective/common/fp` into `@perfective/common/boolean`;
+* Moved `TypeGuard` and `Instance` types (and their functions)
+from `@perfective/common/fp` into `@perfective/common`;
+* Removed `@perfective/common/identity`.
+
 
 == v0.7.0
 

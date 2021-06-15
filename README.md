@@ -21,7 +21,7 @@ npm install @perfective/common
     — functions to work with the
     [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
     and related classes.
--   [`@perfective/common/fp`](https://github.com/perfective/ts.common/tree/master/src/fp)
+-   [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/master/src/function)
     — functions and types for functional programming and logical operations.
 -   [`@perfective/common/identity`](https://github.com/perfective/ts.common/tree/master/src/identity)
     — [Identity monad](<https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad>) implementation.

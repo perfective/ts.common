@@ -1,4 +1,4 @@
-import { same } from '../../fp/function/unary';
+import { same } from '../../function/function/unary';
 import { difference, sum } from '../../real/math/arithmetic';
 import { decimal } from '../../real/number/base';
 import { descending, isGreaterThan, isLessThan } from '../../real/number/order';

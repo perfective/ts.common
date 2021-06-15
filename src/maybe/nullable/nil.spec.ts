@@ -1,5 +1,5 @@
 import { panic } from '../../error/panic/panic';
-import { constant, Nullary } from '../../fp/function/nullary';
+import { constant, Nullary } from '../../function/function/nullary';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 import { decimal } from '../../real/number/base';
 import { isNull } from '../../value/value/type-guard';

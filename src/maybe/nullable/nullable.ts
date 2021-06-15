@@ -1,8 +1,8 @@
 // eslint-disable-next-line max-classes-per-file -- Nullable, One, and Nil are co-dependent
-import { Value, valueOf } from '../../fp/function/nullary';
-import { Predicate } from '../../fp/function/predicate';
-import { isTrue, Proposition } from '../../fp/function/proposition';
-import { TypeGuard } from '../../fp/function/type-guard';
+import { Value, valueOf } from '../../function/function/nullary';
+import { Predicate } from '../../function/function/predicate';
+import { isTrue, Proposition } from '../../function/function/proposition';
+import { TypeGuard } from '../../function/function/type-guard';
 import { isNull, NotNull } from '../../value/value/type-guard';
 import { Option } from '../option';
 

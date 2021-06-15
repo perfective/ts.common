@@ -1,4 +1,4 @@
-import { Predicate } from '../../fp/function/predicate';
+import { Predicate } from '../../function/function/predicate';
 import { maximum, minimum } from '../math/set';
 import { isNumber } from '../number/number';
 

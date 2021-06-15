@@ -1,6 +1,6 @@
-= Perfective Functional Programming
+= Function
 
-The `@perfective/common/fp` package provides types and functions for the functional programming style
+The `@perfective/common/function` package provides types and functions for the functional programming style
 as well as logical types and functions (predicates and propositions).
 As functions with more than three arguments are considered a code smell,
 this package only declares the `Nullary`, `Unary`, `Binary`, and `Ternary` types.
@@ -26,7 +26,7 @@ but requires explicit type parameter for the TypeScript classes.
 
 [source,typescript]
 ----
-import { isInstanceOf } from '@perfective/common/fp';
+import { isInstanceOf } from '@perfective/common/function';
 
 
 class A { public readonly value: string = 'a'; }

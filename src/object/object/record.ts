@@ -1,5 +1,5 @@
-import { Predicate } from '../../fp/function/predicate';
-import { Unary } from '../../fp/function/unary';
+import { Predicate } from '../../function/function/predicate';
+import { Unary } from '../../function/function/unary';
 
 export function recordFromArray(array: string[]): Record<string, number> {
     return array.reduce<Record<string, number>>(indexByValue, {});

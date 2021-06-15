@@ -364,7 +364,7 @@ that will be used if the value is present.
 .Using `Maybe.that()` to filter out a value
 [source,typescript]
 ----
-import { isNot } from '@perfective/common/fp';
+import { isNot } from '@perfective/common/function';
 import { Maybe, just } from '@perfective/common/maybe';
 
 function quotient(dividend: number, divisor: number): Maybe<number> {
@@ -461,7 +461,7 @@ if we want to run computation only when the value is present.
 [source,typescript]
 ----
 import { panic } from '@perfective/common/error';
-import { isNot } from '@perfective/common/fp';
+import { isNot } from '@perfective/common/function';
 import { maybe } from '@perfective/common/maybe';
 
 function range(min?: number, max?: number): number {

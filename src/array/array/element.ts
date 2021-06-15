@@ -1,4 +1,4 @@
-import { Unary } from '../../fp/function/unary';
+import { Unary } from '../../function/function/unary';
 
 export type Element<A> = A extends readonly (infer T)[] ? T : undefined;
 

@@ -1,8 +1,8 @@
-import { Value } from '../../fp/function/nullary';
-import { Predicate } from '../../fp/function/predicate';
-import { Proposition } from '../../fp/function/proposition';
-import { TypeGuard } from '../../fp/function/type-guard';
-import { Unary } from '../../fp/function/unary';
+import { Value } from '../../function/function/nullary';
+import { Predicate } from '../../function/function/predicate';
+import { Proposition } from '../../function/function/proposition';
+import { TypeGuard } from '../../function/function/type-guard';
+import { Unary } from '../../function/function/unary';
 import { Present } from '../../value/value/type-guard';
 
 import { Just, Maybe } from './maybe';

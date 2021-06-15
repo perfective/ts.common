@@ -1,4 +1,4 @@
-import { Unary } from '../../fp/function/unary';
+import { Unary } from '../../function/function/unary';
 
 import { CodePoint, Utf16CodeUnit } from './string';
 

@@ -1,8 +1,8 @@
-import { isFunction } from '../../fp/function/function';
-import { constant, Value } from '../../fp/function/nullary';
-import { Predicate } from '../../fp/function/predicate';
-import { Proposition } from '../../fp/function/proposition';
-import { Unary } from '../../fp/function/unary';
+import { isFunction } from '../../function/function/function';
+import { constant, Value } from '../../function/function/nullary';
+import { Predicate } from '../../function/function/predicate';
+import { Proposition } from '../../function/function/proposition';
+import { Unary } from '../../function/function/unary';
 
 export interface Statement<T, U> {
     readonly condition: Predicate<T>;

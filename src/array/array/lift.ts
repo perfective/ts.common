@@ -1,5 +1,5 @@
-import { Predicate } from '../../fp/function/predicate';
-import { Unary } from '../../fp/function/unary';
+import { Predicate } from '../../function/function/predicate';
+import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value/type-guard';
 
 export function concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]> {

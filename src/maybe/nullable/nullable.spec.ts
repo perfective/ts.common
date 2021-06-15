@@ -1,4 +1,4 @@
-import { constant, Nullary } from '../../fp/function/nullary';
+import { constant, Nullary } from '../../function/function/nullary';
 import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
 import { decimal } from '../../real/number/base';
 import { isGreaterThan, isLessThan } from '../../real/number/order';

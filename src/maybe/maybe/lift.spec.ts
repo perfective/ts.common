@@ -1,4 +1,4 @@
-import { constant } from '../../fp/function/nullary';
+import { constant } from '../../function/function/nullary';
 import {
     hasAbsentProperty,
     hasDefinedProperty,

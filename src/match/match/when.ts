@@ -1,7 +1,7 @@
-import { isFunction } from '../../fp/function/function';
-import { constant } from '../../fp/function/nullary';
-import { is, Predicate } from '../../fp/function/predicate';
-import { Unary } from '../../fp/function/unary';
+import { isFunction } from '../../function/function/function';
+import { constant } from '../../function/function/nullary';
+import { is, Predicate } from '../../function/function/predicate';
+import { Unary } from '../../function/function/unary';
 
 import { Statement } from './statement';
 

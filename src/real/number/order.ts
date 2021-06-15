@@ -1,4 +1,4 @@
-import { Predicate } from '../../fp/function/predicate';
+import { Predicate } from '../../function/function/predicate';
 
 export function isEqualTo(value: number): Predicate<number> {
     return (variable: number): boolean => variable === value;

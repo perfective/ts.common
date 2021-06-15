@@ -1,5 +1,5 @@
 import { panic } from '../../error/panic/panic';
-import { constant, Nullary } from '../../fp/function/nullary';
+import { constant, Nullary } from '../../function/function/nullary';
 import {
     hasAbsentProperty,
     hasDefinedProperty,

@@ -1,4 +1,4 @@
-import { Unary } from '../../fp/function/unary';
+import { Unary } from '../../function/function/unary';
 import { Enum, Member, members } from '../enum/enum';
 
 export type Flags<T extends number = number> = Enum<T>;

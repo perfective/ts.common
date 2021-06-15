@@ -1,4 +1,4 @@
-import { Nullary, Value, valueOf } from '../../fp/function/nullary';
+import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Maybe, maybe, nothing } from '../../maybe/maybe/maybe';
 
 import { Statement } from './statement';

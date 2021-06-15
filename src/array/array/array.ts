@@ -1,5 +1,5 @@
-import { toLongest, toShortest } from '../../fp/function/length';
-import { Unary } from '../../fp/function/unary';
+import { toLongest, toShortest } from '../../function/function/length';
+import { Unary } from '../../function/function/unary';
 import { isPresent } from '../../value/value/type-guard';
 
 import { isFirstOccurrence } from './filter';

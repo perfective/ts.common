@@ -37,6 +37,9 @@ This repo currently contains the following sub-packages:
 * `link:https://github.com/perfective/ts.common/tree/master/src/array[@perfective/common/array]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]` class.
+* `link:https://github.com/perfective/ts.common/tree/master/src/boolean[@perfective/common/boolean]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean[boolean]` values.
 * `link:https://github.com/perfective/ts.common/tree/master/src/error[@perfective/common/error]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`

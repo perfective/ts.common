@@ -106,36 +106,6 @@ The function works correctly.
 (does not count a variadic argument).
 
 
-== Logic types and functions
-
-* `Proposition = Value<boolean>`:
-** `isTrue(proposition: Proposition): boolean`
-** `isFalse(proposition: Proposition): boolean`
-+
-* `Predicate<T> = (value: T) => boolean`
-— a predicate on type T:
-** `negated(value: Proposition): boolean`
-— negates the given proposition value.
-** `is<T>(input: T): Predicate<T>`
-— creates a predicate that is `true` when its argument is the same as the `input`.
-** `isNot<T>(input: T): Predicate<T>`
-— creates a predicate that is `true` when its argument is not the same as the `input`.
-** `not<T>(predicate: Predicate<T>): Predicate<T>`
-— creates a predicate that negates the given predicate.
-** `all<T>(...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when all predicates are `true` (logical `AND`).
-** `either<T>(...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when at least one predicate is `true` (logical `OR`).
-** `neither<T>(...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when none of the predicates is `true`.
-** `atLeast<T>(minimum: number, ...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when at least the `minimum` number of predicates are `true`.
-** `atMost<T>(maximum: number, ...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when at most the `maximum` number of predicates are `true`.
-** `exactly<T>(count: number, ...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when exact `count` of predicates are `true`.
-
-
 == Length
 
 `Length` type defines a kind of objects that have "length" (arrays, strings, etc).

@@ -1,6 +1,6 @@
+import { is, Predicate } from '../../boolean/predicate/predicate';
 import { isFunction } from '../../function/function/function';
 import { constant } from '../../function/function/nullary';
-import { is, Predicate } from '../../function/function/predicate';
 import { Unary } from '../../function/function/unary';
 
 import { Statement } from './statement';

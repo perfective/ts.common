@@ -1,6 +1,6 @@
+import { Predicate } from '../../boolean/predicate/predicate';
+import { Proposition } from '../../boolean/proposition/proposition';
 import { Value } from '../../function/function/nullary';
-import { Predicate } from '../../function/function/predicate';
-import { Proposition } from '../../function/function/proposition';
 import { TypeGuard } from '../../function/function/type-guard';
 import { Unary } from '../../function/function/unary';
 import { Present } from '../../value/value/type-guard';

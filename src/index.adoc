@@ -5,6 +5,7 @@
 :sourcedir: ./
 
 include::./array/index.adoc[leveloffset=+1]
+include::./boolean/index.adoc[leveloffset=+1]
 include::./error/index.adoc[leveloffset=+1]
 include::./function/index.adoc[leveloffset=+1]
 include::./identity/index.adoc[leveloffset=+1]

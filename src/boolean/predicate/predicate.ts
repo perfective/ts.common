@@ -1,5 +1,5 @@
-import { isFalse, isTrue } from './proposition';
-import { Unary } from './unary';
+import { Unary } from '../../function/function/unary';
+import { isFalse, isTrue } from '../proposition/proposition';
 
 export type Predicate<T> = (value: T) => boolean;
 

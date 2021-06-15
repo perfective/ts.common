@@ -1,7 +1,7 @@
 /**
  * Array filter function type that can be passed into Array.prototype.filter().
  */
-import { Predicate } from '../../function/function/predicate';
+import { Predicate } from '../../boolean/predicate/predicate';
 
 export type Filter<T, S extends T> = (value: T, index: number, array: T[]) => value is S;
 

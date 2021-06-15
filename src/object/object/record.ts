@@ -1,4 +1,4 @@
-import { Predicate } from '../../function/function/predicate';
+import { Predicate } from '../../boolean/predicate/predicate';
 import { Unary } from '../../function/function/unary';
 
 export function recordFromArray(array: string[]): Record<string, number> {

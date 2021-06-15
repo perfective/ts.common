@@ -29,24 +29,6 @@ export {
     valueOf,
 } from './function/nullary';
 export {
-    all,
-    atLeast,
-    atMost,
-    either,
-    exactly,
-    is,
-    isNot,
-    neither,
-    not,
-    Predicate,
-} from './function/predicate';
-export {
-    isFalse,
-    isTrue,
-    negated,
-    Proposition,
-} from './function/proposition';
-export {
     isTernary,
     Ternary,
 } from './function/ternary';

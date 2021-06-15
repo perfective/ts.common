@@ -17,6 +17,9 @@ npm install @perfective/common
 -   [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/master/src/array)
     — functions to work with the
     [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) class.
+-   [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/master/src/boolean)
+    — functions to work with the
+    [`Boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
 -   [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/master/src/error)
     — functions to work with the
     [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)

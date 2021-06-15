@@ -1,4 +1,4 @@
-import { Predicate } from '../../function/function/predicate';
+import { Predicate } from '../../boolean/predicate/predicate';
 
 export function isEqualTo(value: number): Predicate<number> {
     return (variable: number): boolean => variable === value;

@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file -- Optional, Some and None are co-dependent
+import { Predicate } from '../../boolean/predicate/predicate';
+import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
-import { Predicate } from '../../function/function/predicate';
-import { isTrue, Proposition } from '../../function/function/proposition';
 import { TypeGuard } from '../../function/function/type-guard';
 import { Defined, isUndefined } from '../../value/value/type-guard';
 import { Option } from '../option';

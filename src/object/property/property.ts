@@ -1,5 +1,5 @@
+import { Predicate } from '../../boolean/predicate/predicate';
 import { isFunction } from '../../function/function/function';
-import { Predicate } from '../../function/function/predicate';
 import { Unary } from '../../function/function/unary';
 import {
     Absent,

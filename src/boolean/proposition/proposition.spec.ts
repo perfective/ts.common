@@ -1,4 +1,5 @@
-import { constant } from './nullary';
+import { constant } from '../../function/function/nullary';
+
 import { isFalse, isTrue, negated } from './proposition';
 
 describe('negated', () => {

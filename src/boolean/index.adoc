@@ -1,0 +1,48 @@
+= Boolean
+
+The `@perfective/common/boolean` package provides types and functions to work with the `boolean` type.
+
+
+== Proposition
+
+`Proposition<T>` is a `boolean` value,
+or a nullary function that returns a `boolean` value.
+
+* `isTrue(proposition: Proposition): boolean`
++
+* `isFalse(proposition: Proposition): boolean`
++
+* `negated(value: Proposition): boolean`
+— negates the given proposition value.
+
+
+== Predicate
+
+`Predicate<T>` is a unary function that returns a `boolean` value.
+
+* `is<T>(input: T): Predicate<T>`
+— creates a predicate that is `true` when its argument is the same as the `input`.
++
+* `isNot<T>(input: T): Predicate<T>`
+— creates a predicate that is `true` when its argument is not the same as the `input`.
++
+* `not<T>(predicate: Predicate<T>): Predicate<T>`
+— creates a predicate that negates the given predicate.
++
+* `all<T>(...predicates: Predicate<T>[]): Predicate<T>`
+— creates a predicate that is `true` when all predicates are `true` (logical `AND`).
++
+* `either<T>(...predicates: Predicate<T>[]): Predicate<T>`
+— creates a predicate that is `true` when at least one predicate is `true` (logical `OR`).
++
+* `neither<T>(...predicates: Predicate<T>[]): Predicate<T>`
+— creates a predicate that is `true` when none of the predicates is `true`.
++
+* `atLeast<T>(minimum: number, ...predicates: Predicate<T>[]): Predicate<T>`
+— creates a predicate that is `true` when at least the `minimum` number of predicates are `true`.
++
+* `atMost<T>(maximum: number, ...predicates: Predicate<T>[]): Predicate<T>`
+— creates a predicate that is `true` when at most the `maximum` number of predicates are `true`.
++
+* `exactly<T>(count: number, ...predicates: Predicate<T>[]): Predicate<T>`
+— creates a predicate that is `true` when exact `count` of predicates are `true`.

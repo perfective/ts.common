@@ -1,4 +1,4 @@
-import { Value, valueOf } from './nullary';
+import { Value, valueOf } from '../../function/function/nullary';
 
 export type Proposition = Value<boolean>;
 

@@ -1,7 +1,7 @@
+import { Predicate } from '../../boolean/predicate/predicate';
+import { Proposition } from '../../boolean/proposition/proposition';
 import { isFunction } from '../../function/function/function';
 import { constant, Value } from '../../function/function/nullary';
-import { Predicate } from '../../function/function/predicate';
-import { Proposition } from '../../function/function/proposition';
 import { Unary } from '../../function/function/unary';
 
 export interface Statement<T, U> {

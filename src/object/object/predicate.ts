@@ -1,4 +1,4 @@
-import { isPresent } from '../../value/value/type-guard';
+import { isPresent } from '../../value/value/value';
 
 // eslint-disable-next-line @typescript-eslint/ban-types -- type guard
 export function isObject<T>(value: T | null): value is T & object {

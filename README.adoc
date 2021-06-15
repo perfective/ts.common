@@ -60,8 +60,6 @@ and related classes.
 * `link:https://github.com/perfective/ts.common/tree/master/src/string[@perfective/common/string]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.
-* `link:https://github.com/perfective/ts.common/tree/master/src/value[@perfective/common/value]`
-— functions to separate generic values from `undefined` and `null`.
 
 The package has a 100% unit test coverage.
 

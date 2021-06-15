@@ -2,7 +2,7 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
-import { isPresent } from '../../value/value/type-guard';
+import { isPresent } from '../../value/value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { Nil, nil, Nullable, nullable, Solum, solum } from './nullable';

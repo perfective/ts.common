@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../function/function/type-guard';
-import { isNull, NotNull } from '../../value/value/type-guard';
+import { isNull, NotNull } from '../../value/value/value';
 import { Option } from '../option';
 
 export abstract class Nullable<T> implements Option<T, null> {

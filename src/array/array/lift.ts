@@ -1,6 +1,6 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { Unary } from '../../function/function/unary';
-import { isDefined } from '../../value/value/type-guard';
+import { isDefined } from '../../value/value/value';
 
 export function concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]> {
     return (array: T[]): T[] => array.concat(...items);

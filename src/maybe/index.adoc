@@ -199,7 +199,7 @@ use the `Maybe.lift()` function as it executes the given function even when the 
 .Consider an example function `decimal` that handles different cases that are possible in JS code.
 [source,typescript]
 ----
-import { isAbsent } from '@perfective/common/value';
+import { isAbsent } from '@perfective/common';
 import { Just, just, maybe, naught, nothing } from '@perfective/common/maybe';
 
 function decimal(value?: number | null): Just<string> {
@@ -224,7 +224,7 @@ The _left-identity law_ is *not* satisfied.
 .Using `Maybe.lift` to handle functions with custom `null`/`undefined` handling.
 [source,typescript]
 ----
-import { isNull, isUndefined } from '@perfective/common/value';
+import { isNull, isUndefined } from '@perfective/common';
 import { Just, just, maybe, naught, nothing } from '@perfective/common/maybe';
 
 function decimal(value?: number | null): string { // <.>
@@ -540,7 +540,7 @@ It always runs, unlike `Maybe.map()` that is called only when the value is prese
 
 [source,typescript]
 ----
-import { isAbsent } from '@perfective/common/value';
+import { isAbsent } from '@perfective/common';
 import { maybe } from '@perfective/common/maybe';
 
 function decimal(value?: number | null): string {

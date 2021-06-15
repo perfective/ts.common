@@ -1,4 +1,4 @@
-import { isAbsent, isNull, isPresent, isUndefined } from '../../value/value/type-guard';
+import { isAbsent, isNull, isPresent, isUndefined } from '../../value/value/value';
 
 export interface Output {
     toString: () => string;

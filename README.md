@@ -40,8 +40,6 @@ npm install @perfective/common
 -   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/master/src/string)
     — functions to work with the
     [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) class.
--   [`@perfective/common/value`](https://github.com/perfective/ts.common/tree/master/src/value)
-    — functions to separate generic values from `undefined` and `null`.
 
 ## Documentation
 

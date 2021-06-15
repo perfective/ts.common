@@ -4,6 +4,8 @@
 :icons: font
 :sourcedir: ./
 
+include::./value/index.adoc[leveloffset=+1]
+
 include::./array/index.adoc[leveloffset=+1]
 include::./boolean/index.adoc[leveloffset=+1]
 include::./error/index.adoc[leveloffset=+1]
@@ -14,6 +16,5 @@ include::./maybe/index.adoc[leveloffset=+1]
 include::./number/index.adoc[leveloffset=+1]
 include::./object/index.adoc[leveloffset=+1]
 include::./string/index.adoc[leveloffset=+1]
-include::./value/index.adoc[leveloffset=+1]
 
 include::./legacy.adoc[leveloffset=+1]

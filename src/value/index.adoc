@@ -1,9 +1,10 @@
-= Value
+= Common
 
-The `@perfective/common/value` package provides functions to work with `undefined` and `null` values
-and utility types
-(similar to `link:https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullablet[NonNullable<T>]`)
-to describe some of such values.
+The `@perfective/common` package provides functions to work with `undefined` and `null` values,
+utility types to work with `undefined` and `null`
+(similar to `link:https://www.typescriptlang.org/docs/handbook/utility-types.html#nonnullablet[NonNullable<T>]`).
+It also provides functions to work with type and instance definitions.
+
 
 == Utility types
 

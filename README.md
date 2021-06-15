@@ -14,28 +14,28 @@ npm install @perfective/common
 
 ## Features
 
--   [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/master/src/array)
+-   [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/main/src/array/index.adoc)
     — functions to work with the
     [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) class.
--   [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/master/src/boolean)
+-   [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc)
     — functions to work with the
     [`Boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
--   [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/master/src/error)
+-   [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc)
     — functions to work with the
     [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
     and related classes.
--   [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/master/src/function)
+-   [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/main/src/function/index.adoc)
     — functions and types for functional programming and logical operations.
--   [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/master/src/match)
+-   [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/main/src/match/index.adoc)
     — functions to support a functional switch-case.
--   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/master/src/maybe)
+-   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc)
     — [Maybe type](https://en.wikipedia.org/wiki/Option_type) implementation.
--   [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/master/src/number)
+-   [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
     — functions and types to work with the real numbers.
--   [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/master/src/object)
+-   [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/main/src/object/index.adoc)
     — functions to work with the
     [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
--   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/master/src/string)
+-   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/main/src/string/index.adoc)
     — functions to work with the
     [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) class.
 

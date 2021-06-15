@@ -46,8 +46,6 @@ This repo currently contains the following sub-packages:
 and related classes.
 * `link:https://github.com/perfective/ts.common/tree/master/src/function[@perfective/common/function]`
 — functions and types for functional programming and logical operations.
-* `link:https://github.com/perfective/ts.common/tree/master/src/identity[@perfective/common/identity]`
-— https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad[Identity monad] implementation.
 * `link:https://github.com/perfective/ts.common/tree/master/src/match[@perfective/common/match]`
 — functions to support a functional switch-case.
 * `link:https://github.com/perfective/ts.common/tree/master/src/maybe[@perfective/common/maybe]`

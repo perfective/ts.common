@@ -26,8 +26,6 @@ npm install @perfective/common
     and related classes.
 -   [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/master/src/function)
     — functions and types for functional programming and logical operations.
--   [`@perfective/common/identity`](https://github.com/perfective/ts.common/tree/master/src/identity)
-    — [Identity monad](<https://en.wikipedia.org/wiki/Monad_(functional_programming)#Identity_monad>) implementation.
 -   [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/master/src/match)
     — functions to support a functional switch-case.
 -   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/master/src/maybe)

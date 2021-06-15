@@ -1,8 +1,8 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { Proposition } from '../../boolean/proposition/proposition';
 import { Value } from '../../function/function/nullary';
-import { TypeGuard } from '../../function/function/type-guard';
 import { Unary } from '../../function/function/unary';
+import { TypeGuard } from '../../value/type-guard/type-guard';
 import { Present } from '../../value/value/value';
 
 import { Just, Maybe } from './maybe';

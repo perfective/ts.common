@@ -1,4 +1,9 @@
-// ./value
+export {
+    Instance,
+    isInstanceOf,
+    isNotInstanceOf,
+} from './value/instance/instance';
+export { TypeGuard } from './value/type-guard/type-guard';
 export {
     EcmaType,
     isNotTypeOf,
@@ -21,6 +26,4 @@ export {
     Present,
     Undefined,
 } from './value/value/value';
-
-// ./void
 export { voidable } from './value/void/void';

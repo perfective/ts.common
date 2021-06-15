@@ -2,7 +2,7 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
-import { TypeGuard } from '../../function/function/type-guard';
+import { TypeGuard } from '../../value/type-guard/type-guard';
 import { Defined, isUndefined } from '../../value/value/value';
 import { Option } from '../option';
 

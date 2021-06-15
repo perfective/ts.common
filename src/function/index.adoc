@@ -8,55 +8,8 @@ The functions of higher arity is unlikely to be added to the package.
 
 == Type Guards
 
-* `TypeGuard<T, V extends T> = (value: T) => value is V`
-— a function type to check if the value is of a certain type:
 ** `isFunction<T>(value: Function | T): value is Function`
 ** `isNotFunction<T>(value: Function | T): value is T`
-* `Instance<T> = new(...args: any[]) => T`
-— definition for a type reference:
-** `isInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is T`
-** `isNotInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is V`
-
-[WARNING]
-====
-The `isInstanceOf`/`isNotInstanceOf` functions generic parameters
-are not always correctly recognized by the compiler.
-It works as expected for the concrete classes,
-but requires explicit type parameter for the TypeScript classes.
-
-[source,typescript]
-----
-import { isInstanceOf } from '@perfective/common/function';
-
-
-class A { public readonly value: string = 'a'; }
-class B extends A {}
-class C { public readonly c: string = 'value'; }
-
-let x: A | C = new B();
-
-if (isInstanceOf(A)(x)) { // <.>
-    x.value; // <.>
-}
-
-let xOrError: A | TypeError = new TypeError();
-if (isInstanceOf<TypeError>(TypeError)(xOrError)) { // <.>
-}
-
-let typeOrRangeError: TypeError | RangeError = new RangeError();
-if (isInstanceOf<TypeError>(TypeError)(typeOrRangeError)) { // <.>
-}
-
-----
-<1> `isInstanceOf` infers class `A` as the type parameter.
-<2> Compiler type guards `x` as an instance of `A`.
-<3> Explicitly providing the built-in type.
-Otherwise, compiler considers `xOrError` as `A | TypeError`.
-The function works correctly.
-<4> For the union of two built-in type,
-even explicit type parameter does not work.
-The function works correctly.
-====
 
 
 == Nullary functions

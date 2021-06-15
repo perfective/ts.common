@@ -1,7 +1,7 @@
 import { constant, Nullary } from '../../function/function/nullary';
+import { decimal } from '../../number/number/base';
+import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
-import { decimal } from '../../real/number/base';
-import { isGreaterThan, isLessThan } from '../../real/number/order';
 import { isPresent } from '../../value/value/type-guard';
 import { fallbackNullable } from '../nullable/nullable.mock';
 import { fallbackOptional } from '../optional/optional.mock';

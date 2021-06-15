@@ -1,4 +1,4 @@
-import { isInteger } from '../../real/number/integer';
+import { isInteger } from '../../number/number/integer';
 
 import { by, isFirstOccurrence, isLastOccurrence } from './filter';
 

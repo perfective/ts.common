@@ -1,5 +1,7 @@
 import { panic } from '../../error/panic/panic';
 import { constant, Nullary } from '../../function/function/nullary';
+import { decimal } from '../../number/number/base';
+import { isGreaterThan, isLessThan } from '../../number/number/order';
 import {
     hasAbsentProperty,
     hasDefinedProperty,
@@ -9,8 +11,6 @@ import {
     hasUndefinedProperty,
     ObjectWithPresent,
 } from '../../object/property/property';
-import { decimal } from '../../real/number/base';
-import { isGreaterThan, isLessThan } from '../../real/number/order';
 import { isPresent } from '../../value/value/type-guard';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 

@@ -67,7 +67,7 @@ The original value (`null` or `undefined`) will be preserved through operations.
 [source,typescript]
 ----
 import { just, nullable, optional } from '@perfective/common/maybe';
-import { isGreaterThan } from '@perfective/common/real';
+import { isGreaterThan } from '@perfective/common/number';
 
 nullable(3.14)
     .that(isGreaterThan(4))

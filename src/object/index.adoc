@@ -104,8 +104,8 @@ Validation functions and additional input types cover default https://www.json.o
 ----
 import { panic } from '@perfective/common/error';
 import { maybe } from '@perfective/common/maybe';
+import { isNatural, Natural } from '@perfective/common/number';
 import { Input, InputObject, numberInput, objectInput } from '@perfective/common/object';
-import { isNatural, Natural } from '@perfective/common/real';
 
 interface ExampleParams {
     id: number;

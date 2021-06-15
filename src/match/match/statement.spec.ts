@@ -1,4 +1,4 @@
-import { isNegativeInteger, isPositiveInteger } from '../../real/number/integer';
+import { isNegativeInteger, isPositiveInteger } from '../../number/number/integer';
 
 import { statements } from './statement';
 

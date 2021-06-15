@@ -37,7 +37,7 @@ but may be useful in applications.
 [source,typescript]
 ----
 import { causedBy, chainStack, exception, rethrows, throws } from '@perfective/common/error';
-import { decimal } from '@perfective/common/real';
+import { decimal } from '@perfective/common/number';
 
 function positive(input: number): string {
     if (input <= 0) {

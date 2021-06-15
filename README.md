@@ -29,11 +29,11 @@ npm install @perfective/common
     — functions to support a functional switch-case.
 -   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/master/src/maybe)
     — [Maybe type](https://en.wikipedia.org/wiki/Option_type) implementation.
+-   [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/master/src/number)
+    — functions and types to work with the real numbers.
 -   [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/master/src/object)
     — functions to work with the
     [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
--   [`@perfective/common/real`](https://github.com/perfective/ts.common/tree/master/src/real)
-    — functions and types to work with the real numbers.
 -   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/master/src/string)
     — functions to work with the
     [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) class.

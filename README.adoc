@@ -49,11 +49,11 @@ and related classes.
 — functions to support a functional switch-case.
 * `link:https://github.com/perfective/ts.common/tree/master/src/maybe[@perfective/common/maybe]`
 — https://en.wikipedia.org/wiki/Option_type[Maybe type] implementation.
+* `link:https://github.com/perfective/ts.common/tree/master/src/number[@perfective/common/number]`
+— functions and types to work with the real numbers.
 * `link:https://github.com/perfective/ts.common/tree/master/src/object[@perfective/common/object]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
-* `link:https://github.com/perfective/ts.common/tree/master/src/real[@perfective/common/real]`
-— functions and types to work with the real numbers.
 * `link:https://github.com/perfective/ts.common/tree/master/src/string[@perfective/common/string]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.

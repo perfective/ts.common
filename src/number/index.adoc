@@ -1,6 +1,6 @@
-= Real Numbers
+= Number
 
-The `@perfective/common/real` package declares types and functions to work with real numbers,
+The `@perfective/common/number` package declares types and functions to work with real numbers,
 including the JavaScript
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[Number]` class.
 
@@ -111,7 +111,7 @@ It requires to pass the `number` as a type parameter explicitly.
 [source,typescript]
 ----
 import { just } from '@perfective/common/maybe';
-import { decimal } from '@perfective/common/real';
+import { decimal } from '@perfective/common/number';
 
 just('3.14').to(decimal) === just(3.14); // <.>
 just(3.14).to<string>(decimal) === just('3.14'); // <.>

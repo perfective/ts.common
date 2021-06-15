@@ -1,4 +1,4 @@
-import { descending } from '../../real/number/order';
+import { descending } from '../../number/number/order';
 
 import {
     array,

@@ -1,4 +1,6 @@
 import { constant } from '../../function/function/nullary';
+import { decimal } from '../../number/number/base';
+import { isGreaterThan } from '../../number/number/order';
 import {
     hasAbsentProperty,
     hasDefinedProperty,
@@ -6,8 +8,6 @@ import {
     hasNullProperty,
     hasPresentProperty, hasUndefinedProperty,
 } from '../../object/property/property';
-import { decimal } from '../../real/number/base';
-import { isGreaterThan } from '../../real/number/order';
 import { isPresent } from '../../value/value/type-guard';
 
 import { lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';

@@ -1,7 +1,7 @@
 import { panic } from '../../error/panic/panic';
 import { constant, Nullary } from '../../function/function/nullary';
+import { decimal } from '../../number/number/base';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
-import { decimal } from '../../real/number/base';
 import { isUndefined } from '../../value/value/type-guard';
 
 import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';

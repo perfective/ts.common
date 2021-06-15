@@ -1,4 +1,4 @@
-import { ascending, isEqualTo, isGreaterThan } from '../../real/number/order';
+import { ascending, isEqualTo, isGreaterThan } from '../../number/number/order';
 
 import {
     by,

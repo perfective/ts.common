@@ -16,32 +16,6 @@ export {
     members,
 } from './enum/enum';
 
-// ./interval
-export {
-    Interval,
-    interval,
-    intervalFromNullable,
-    intervalFromPair,
-    intervalFromValues,
-    isInInterval,
-    isInLeftOpenInterval,
-    isInOpenInterval,
-    isInRightOpenInterval,
-} from './interval/interval';
-
-// ./math
-export {
-    difference,
-    product,
-    quotient,
-    remainder,
-    sum,
-} from './math/arithmetic';
-export {
-    maximum,
-    minimum,
-} from './math/set';
-
 // ./number
 export {
     binary,

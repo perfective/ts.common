@@ -1,5 +1,5 @@
 import { same } from '../../function/function/unary';
-import { difference, sum } from '../../number/math/arithmetic';
+import { difference, sum } from '../../math/arithmetic/arithmetic';
 import { decimal } from '../../number/number/base';
 import { descending, isGreaterThan, isLessThan } from '../../number/number/order';
 

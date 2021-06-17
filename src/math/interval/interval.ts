@@ -1,6 +1,6 @@
 import { Predicate } from '../../boolean/predicate/predicate';
-import { maximum, minimum } from '../math/set';
-import { isNumber } from '../number/number';
+import { isNumber } from '../../number/number/number';
+import { maximum, minimum } from '../set/set';
 
 export interface Interval {
     readonly min: number;

@@ -58,6 +58,9 @@ and related classes.
 * `link:https://github.com/perfective/ts.common/tree/main/src/object/index.adoc[@perfective/common/object]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
+* `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/promise]`
+— functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
 * `link:https://github.com/perfective/ts.common/tree/main/src/string/index.adoc[@perfective/common/string]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.

@@ -1,0 +1,4 @@
+= Promise
+
+The `@perfective/common/promise` package provides functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.

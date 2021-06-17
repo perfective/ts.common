@@ -38,6 +38,9 @@ npm install @perfective/common
 -   [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/main/src/object/index.adoc)
     — functions to work with the
     [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
+-   [`@perfective/common/promise`](https://github.com/perfective/ts.common/tree/main/src/promise/index.adoc)
+    — functions to work with the
+    [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) class.
 -   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/main/src/string/index.adoc)
     — functions to work with the
     [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) class.

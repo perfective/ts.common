@@ -15,6 +15,7 @@ include::./math/index.adoc[leveloffset=+1]
 include::./maybe/index.adoc[leveloffset=+1]
 include::./number/index.adoc[leveloffset=+1]
 include::./object/index.adoc[leveloffset=+1]
+include::./promise/index.adoc[leveloffset=+1]
 include::./string/index.adoc[leveloffset=+1]
 
 include::./legacy.adoc[leveloffset=+1]

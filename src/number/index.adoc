@@ -125,16 +125,6 @@ and `to()` method requires a type parameter to compile.
 ** `descending(a: number, b: number): number`
 
 
-== Enum
-
-* Types:
-** `Enum<T extends number | string>` — a record generated based on the `enum` keyword;
-** `Member<T extends number | string>` — key of an enum.
-* Functions:
-** `members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[]`
-— returns a list of `enum` keys.
-
-
 == Bitmasks
 
 * Types:

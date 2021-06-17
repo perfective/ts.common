@@ -1,5 +1,5 @@
 import { Unary } from '../../function/function/unary';
-import { Enum, Member, members } from '../enum/enum';
+import { Enum, Member, members } from '../../object/enum/enum';
 
 export type Flags<T extends number = number> = Enum<T>;
 export type Flag<T extends Flags> = T[keyof T] & number;

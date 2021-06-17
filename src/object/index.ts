@@ -1,3 +1,10 @@
+// ./enum
+export {
+    Enum,
+    Member,
+    members,
+} from './enum/enum';
+
 // ./input
 export {
     arrayInput,

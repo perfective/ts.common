@@ -1,4 +1,4 @@
-import { Enum } from '../enum/enum';
+import { Enum } from '../../object/enum/enum';
 
 import { Bitmask, bitmask, hasFlagOn, isFlagOn, raisedFlags } from './bitmask';
 

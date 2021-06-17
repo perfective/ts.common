@@ -9,13 +9,6 @@ export {
     raisedFlags,
 } from './bitmask/bitmask';
 
-// ./enum
-export {
-    Enum,
-    Member,
-    members,
-} from './enum/enum';
-
 // ./number
 export {
     binary,

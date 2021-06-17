@@ -137,3 +137,13 @@ so explicit type need to provided for `objectInput`.
 ====
 A custom validation monad may be added later to allow "collecting" all validation errors and warnings.
 ====
+
+
+== Enum
+
+* Types:
+** `Enum<T extends number | string>` — a record generated based on the `enum` keyword;
+** `Member<T extends number | string>` — key of an enum.
+* Functions:
+** `members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[]`
+— returns a list of `enum` keys.

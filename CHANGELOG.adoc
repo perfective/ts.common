@@ -11,6 +11,9 @@
 from `@perfective/common/fp` into `@perfective/common/boolean`;
 * Moved `TypeGuard` and `Instance` types (and their functions)
 from `@perfective/common/fp` into `@perfective/common`;
+* Moved math functions and types from `@perfective/common/real` into `@perfective/common/math`;
+* Moved `Enum` from `@perfective/common/real` into `@perfective/common/object`;
+* Moved `Promise` functions from `@perfective/common/maybe` into `@perfective/common/promise`;
 * Removed `@perfective/common/identity`.
 
 

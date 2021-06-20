@@ -28,9 +28,6 @@ npm install @perfective/common
     — functions and types for functional programming and logical operations.
 -   [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/main/src/match/index.adoc)
     — functions to support a functional switch-case.
--   [`@perfective/common/math`](https://github.com/perfective/ts.common/tree/main/src/math/index.adoc)
-    — functions built around the global
-    [`Math`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) object.
 -   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc)
     — [Maybe type](https://en.wikipedia.org/wiki/Option_type) implementation.
 -   [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)

@@ -34,6 +34,19 @@ while `Digit` is an integer from `0` to `20`,
 and `Precision` is an integer from `1` to `21`.
 So passing digits or precision over 15 requires careful consideration and thorough testing.
 ====
++
+* Arithmetic functions:
+** `sum(augend: number, addend: number): number`
+** `difference(minuend: number, subtrahend: number): number`
+** `product(multiplier: number, multiplicand: number): number`
+** `quotient(dividend: number, divisor: number): number`
+** `remainder(dividend: number, divisor: number): number`.
++
+* Set functions:
+** `maximum(values: readonly number[]): number | null`
+— returns the maximum number if array contains numbers, `null` otherwise.
+** `minimum(values: readonly number[]): number | null`
+— returns the minimum number if array contains numbers, `null` otherwise.
 
 
 == Integer
@@ -125,6 +138,42 @@ and `to()` method requires a type parameter to compile.
 ** `descending(a: number, b: number): number`
 
 
+== Interval
+
+`Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
+
+* Unit functions:
+** `interval(min: number, max: number): Interval | null`
+— returns an `Interval` when `min <= max`.
+** `intervalFromPair(pair: readonly [number, number]): Interval | null`
+— returns an `Interval` for an ordered pair.
+** `intervalFromValues(values: number[]): Interval | null`
+— returns an `Interval` for a non-empty array.
+** `intervalFromNullable(min: number | null, max: number | null): Interval | null`
+— returns an `Interval` from nullable values, replacing them with `-Infinity` and `Infinity`;
+returns `null` if `min > max`.
++
+* Predicates:
+** `isInInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in a closed interval.
+** `isInOpenInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in an open interval.
+** `isInLeftOpenInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in a left-open (and right-closed) interval.
+** `isInRightOpenInterval(interval: Interval): Predicate<number>`
+— returns a predicate to check if a number is in a right-open (and left-closed) interval.
+
+
+== Enum
+
+* Types:
+** `Enum<T extends number | string>` — a record generated based on the `enum` keyword;
+** `Member<T extends number | string>` — key of an enum.
+* Functions:
+** `members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[]`
+— returns a list of `enum` keys.
+
+
 == Bitmasks
 
 * Types:
@@ -146,4 +195,14 @@ and `to()` method requires a type parameter to compile.
 
 == Roadmap
 
+* Add support for the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]` object.
 * Export the `base()` function to allow generic base values conversions.
+* Research support of the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt[BigInt]` type.
+* `Interval`:
+** `midpoint()`;
+** `radius()`;
+** `size`;
+** `isSubInterval()`;
+** `isStrictSubInterval()`.
+** verify correct behavior with `Infinity`.
+** consider adding negated functions, like `isNotInInterval()`.

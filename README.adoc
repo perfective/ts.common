@@ -48,9 +48,6 @@ and related classes.
 — functions and types for functional programming and logical operations.
 * `link:https://github.com/perfective/ts.common/tree/main/src/match/index.adoc[@perfective/common/match]`
 — functions to support a functional switch-case.
-* `link:https://github.com/perfective/ts.common/tree/main/src/math/index.adoc[@perfective/common/math]`
-— functions built around the global
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]` object.
 * `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]`
 — https://en.wikipedia.org/wiki/Option_type[Maybe type] implementation.
 * `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/number]`

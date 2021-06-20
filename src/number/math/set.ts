@@ -1,4 +1,4 @@
-import { isNumber } from '../../number/number/number';
+import { isNumber } from '../number/number';
 
 export function maximum(values: readonly number[]): number | null {
     const numbers: number[] = values.filter(isNumber);

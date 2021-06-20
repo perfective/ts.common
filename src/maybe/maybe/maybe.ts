@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
-import { isAbsent, isNull, isPresent, Present } from '../../value/value/value';
+import { isAbsent, isNull, isPresent, Present } from '../../value/value';
 import { Option } from '../option';
 
 /**

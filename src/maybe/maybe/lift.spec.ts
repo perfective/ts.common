@@ -8,7 +8,7 @@ import {
     hasNullProperty,
     hasPresentProperty, hasUndefinedProperty,
 } from '../../object/property/property';
-import { isPresent } from '../../value/value/value';
+import { isPresent } from '../../value/value';
 
 import { lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
 import { just, Maybe, naught, nothing } from './maybe';

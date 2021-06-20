@@ -11,7 +11,7 @@ import {
     hasUndefinedProperty,
     ObjectWithPresent,
 } from '../../object/property/property';
-import { isPresent } from '../../value/value/value';
+import { isPresent } from '../../value/value';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { None, none, Optional, optional, Some, some } from './optional';

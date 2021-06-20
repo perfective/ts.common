@@ -9,7 +9,7 @@ import {
     hasPresentProperty, hasUndefinedProperty,
     ObjectWithPresent,
 } from '../../object/property/property';
-import { isPresent } from '../../value/value/value';
+import { isPresent } from '../../value/value';
 
 import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
 import { Boxed, fallbackMaybe } from './maybe.mock';

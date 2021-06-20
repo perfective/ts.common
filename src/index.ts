@@ -25,5 +25,5 @@ export {
     Null,
     Present,
     Undefined,
-} from './value/value/value';
+} from './value/value';
 export { voidable } from './value/void/void';

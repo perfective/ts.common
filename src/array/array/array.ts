@@ -1,6 +1,6 @@
 import { toLongest, toShortest } from '../../function/function/length';
 import { Unary } from '../../function/function/unary';
-import { isPresent } from '../../value/value/value';
+import { isPresent } from '../../value/value';
 
 import { isFirstOccurrence } from './filter';
 import { Compare } from './lift';

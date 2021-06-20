@@ -1,4 +1,4 @@
-import { isPresent } from '../../value/value/value';
+import { isPresent } from '../../value/value';
 
 export type Resolve<T> = (value: T | PromiseLike<T>) => void;
 export type Reject<E extends Error = Error> = (reason?: E) => void;

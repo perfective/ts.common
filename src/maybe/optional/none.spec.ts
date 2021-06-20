@@ -2,7 +2,7 @@ import { panic } from '../../error/panic/panic';
 import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
-import { isUndefined } from '../../value/value/value';
+import { isUndefined } from '../../value/value';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
 import { None, none, Optional, optional, Some, some } from './optional';

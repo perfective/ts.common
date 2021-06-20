@@ -3,7 +3,7 @@ import { Proposition } from '../../boolean/proposition/proposition';
 import { Value } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
-import { Present } from '../../value/value/value';
+import { Present } from '../../value/value';
 
 import { Just, Maybe } from './maybe';
 

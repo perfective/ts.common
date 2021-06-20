@@ -12,7 +12,7 @@ import {
     isUndefined,
     NotNull,
     Present,
-} from '../../value/value/value';
+} from '../../value/value';
 
 export type ObjectWithDefined<T, K extends keyof T> = T & {
     [P in K]-?: Defined<T[P]>;

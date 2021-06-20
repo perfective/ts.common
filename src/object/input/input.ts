@@ -1,4 +1,4 @@
-import { isNull } from '../../value/value/value';
+import { isNull } from '../../value/value';
 import { isObject } from '../object/predicate';
 
 export type InputPrimitive<T> = T extends string | number | boolean | null | undefined

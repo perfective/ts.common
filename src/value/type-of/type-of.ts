@@ -1,4 +1,4 @@
-import { isNull } from '../value/value';
+import { isNull } from '../value';
 
 /**
  * @see https://262.ecma-international.org/7.0/#sec-typeof-operator

@@ -1,4 +1,4 @@
-import { isDefined } from '../../value/value/value';
+import { isDefined } from '../../value/value';
 
 import {
     arrayInput,

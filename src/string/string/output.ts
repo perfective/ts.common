@@ -1,4 +1,4 @@
-import { isAbsent, isNull, isPresent, isUndefined } from '../../value/value/value';
+import { isAbsent, isNull, isPresent, isUndefined } from '../../value/value';
 
 export interface Output {
     toString: () => string;

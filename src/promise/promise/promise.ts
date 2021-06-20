@@ -1,4 +1,4 @@
-import { maybe } from '../../maybe/maybe/maybe';
+import { isPresent } from '../../value/value/value';
 
 export type Resolve<T> = (value: T | PromiseLike<T>) => void;
 export type Reject<E extends Error = Error> = (reason?: E) => void;
@@ -13,7 +13,12 @@ export function result<T, E extends Error = Error>(
     resolve: Resolve<T>,
     reject: Reject<E>,
 ): Callback<T, E> {
-    return (error: E | null | undefined, data: T | PromiseLike<T>): void => maybe(error)
-        .to(reject)
-        .or(() => resolve(data));
+    return (error: E | null | undefined, data: T | PromiseLike<T>): void => {
+        if (isPresent(error)) {
+            reject(error);
+        }
+        else {
+            resolve(data);
+        }
+    };
 }

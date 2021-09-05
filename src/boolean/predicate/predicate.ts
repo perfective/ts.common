@@ -20,7 +20,7 @@ export function all<T>(...predicates: Predicate<T>[]): Predicate<T> {
 }
 
 export function either<T>(...predicates: Predicate<T>[]): Predicate<T> {
-    return (value: T): boolean => predicates.map(bool(value)).filter(isTrue).length > 0;
+    return (value: T): boolean => predicates.map(bool(value)).some(isTrue);
 }
 
 export function neither<T>(...predicates: Predicate<T>[]): Predicate<T> {

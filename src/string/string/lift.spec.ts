@@ -88,6 +88,7 @@ describe('concat', () => {
         it('concatenates provided strings to the end', () => {
             expect(concat('!')('Hello')).toStrictEqual('Hello!');
             expect(concat(' ', 'World', '!')('Hello')).toStrictEqual('Hello World!');
+            // eslint-disable-next-line unicorn/no-useless-spread -- a demo of a spread for testing only
             expect(concat(...[' ', 'World', '!'])('Hello')).toStrictEqual('Hello World!');
         });
     });

@@ -178,7 +178,7 @@ describe('isNotException', () => {
 describe('chainStack', () => {
     it('returns stack of the given error', () => {
         expect(chainStack(typeError('"x" is not a function')))
-            .toMatch('TypeError: "x" is not a function\n    at Object.typeError (');
+            .toMatch('TypeError: "x" is not a function\n    at typeError (');
     });
 
     it('returns stack of stack of all the chained errors', () => {
@@ -187,9 +187,9 @@ describe('chainStack', () => {
         );
 
         expect(trace)
-            .toMatch(/^Exception: Failed to process input\n {4}at Object.causedBy \(/u);
+            .toMatch(/^Exception: Failed to process input\n {4}at causedBy \(/u);
         expect(trace)
-            .toMatch('Caused by: TypeError: "x" is not a function\n    at Object.typeError (');
+            .toMatch('Caused by: TypeError: "x" is not a function\n    at typeError (');
     });
 });
 

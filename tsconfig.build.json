@@ -5,6 +5,7 @@
         "rootDir": "src",
         "declaration": false,
         "declarationMap": false,
+        "exactOptionalPropertyTypes": false,
         "sourceMap": false
     },
     "exclude": ["dist", "src/**/*.spec.ts"]

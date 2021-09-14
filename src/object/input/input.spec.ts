@@ -48,6 +48,7 @@ describe('input', () => {
             id?: InputPrimitive<number>;
             date?: InputPrimitive<string>;
         } | null | undefined = example?.params;
+        // @ts-expect-error -- test behvaior when exactOptionalPropertyTypes is off.
         const query: {
             filter?: {
                 status?: InputPrimitive<boolean>;

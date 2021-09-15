@@ -107,7 +107,7 @@ export class Just<T> implements Maybe<T> {
     }
 
     public otherwise(fallback: Value<T | null | undefined>): Just<T>
-    public otherwise(): Just<T> {
+    public otherwise(): this {
         return this;
     }
 
@@ -116,7 +116,7 @@ export class Just<T> implements Maybe<T> {
         return this.value;
     }
 
-    public run(procedure: (value: T) => void): Just<T> {
+    public run(procedure: (value: T) => void): this {
         procedure(this.value);
         return this;
     }
@@ -156,7 +156,7 @@ export class Nothing<T> implements Maybe<T> {
     }
 
     public that(filter: Predicate<T>): Nothing<T>
-    public that(): Nothing<T> {
+    public that(): this {
         return this;
     }
 
@@ -166,7 +166,7 @@ export class Nothing<T> implements Maybe<T> {
     }
 
     public when(condition: Proposition): Nothing<T>
-    public when(): Nothing<T> {
+    public when(): this {
         return this;
     }
 
@@ -190,7 +190,7 @@ export class Nothing<T> implements Maybe<T> {
     }
 
     public run(procedure: (value: T) => void): Nothing<T>
-    public run(): Nothing<T> {
+    public run(): this {
         return this;
     }
 

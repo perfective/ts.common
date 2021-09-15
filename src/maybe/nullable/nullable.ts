@@ -97,7 +97,7 @@ export class Solum<T> implements Nullable<T> {
     }
 
     public otherwise(fallback: Value<T | null>): Solum<T>
-    public otherwise(): Solum<T> {
+    public otherwise(): this {
         return this;
     }
 
@@ -106,7 +106,7 @@ export class Solum<T> implements Nullable<T> {
         return this.value;
     }
 
-    public run(procedure: (value: T) => void): Solum<T> {
+    public run(procedure: (value: T) => void): this {
         procedure(this.value);
         return this;
     }
@@ -139,7 +139,7 @@ implements Nullable<T> {
     }
 
     public that(filter: Predicate<T>): Nil<T>
-    public that(): Nil<T> {
+    public that(): this {
         return this;
     }
 
@@ -149,7 +149,7 @@ implements Nullable<T> {
     }
 
     public when(condition: Proposition): Nil<T>
-    public when(): Nil<T> {
+    public when(): this {
         return this;
     }
 
@@ -170,7 +170,7 @@ implements Nullable<T> {
     }
 
     public run(procedure: (value: T) => void): Nil<T>
-    public run(): Nil<T> {
+    public run(): this {
         return this;
     }
 

@@ -97,7 +97,7 @@ export class Some<T> implements Optional<T> {
     }
 
     public otherwise(fallback: Value<T | undefined>): Some<T>
-    public otherwise(): Some<T> {
+    public otherwise(): this {
         return this;
     }
 
@@ -106,7 +106,7 @@ export class Some<T> implements Optional<T> {
         return this.value;
     }
 
-    public run(procedure: (value: T) => void): Some<T> {
+    public run(procedure: (value: T) => void): this {
         procedure(this.value);
         return this;
     }
@@ -135,7 +135,7 @@ export class None<T> implements Optional<T> {
     }
 
     public that(filter: Predicate<T>): None<T>
-    public that(): None<T> {
+    public that(): this {
         return this;
     }
 
@@ -145,7 +145,7 @@ export class None<T> implements Optional<T> {
     }
 
     public when(condition: Proposition): None<T>
-    public when(): None<T> {
+    public when(): this {
         return this;
     }
 
@@ -166,7 +166,7 @@ export class None<T> implements Optional<T> {
     }
 
     public run(procedure: (value: T) => void): None<T>
-    public run(): None<T> {
+    public run(): this {
         return this;
     }
 

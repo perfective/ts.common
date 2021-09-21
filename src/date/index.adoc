@@ -1,0 +1,4 @@
+= Date
+
+The `@perfective/common/date` package provides functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date[Date]` type.

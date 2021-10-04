@@ -43,7 +43,7 @@ describe(Solum, () => {
         it('is a required property and can be assigned to the value type', () => {
             const value: number = solum<number>(3.14).value;
 
-            expect(value).toStrictEqual(3.14);
+            expect(value).toBe(3.14);
         });
     });
 
@@ -638,7 +638,7 @@ describe(Solum, () => {
             it('returns the original value', () => {
                 const output: string = solum('3.14').or('2.71');
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -646,7 +646,7 @@ describe(Solum, () => {
             it('returns the original value', () => {
                 const output: string = solum('3.14').or(constant('2.71'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -654,7 +654,7 @@ describe(Solum, () => {
             it('returns the original value', () => {
                 const output: string = solum('3.14').or(null);
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -662,7 +662,7 @@ describe(Solum, () => {
             it('returns the original value', () => {
                 const output: string = solum('3.14').or(constant(null));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -670,7 +670,7 @@ describe(Solum, () => {
             it('returns the original value', () => {
                 const output: string | undefined = solum<string | undefined>('3.14').or(undefined);
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -678,7 +678,7 @@ describe(Solum, () => {
             it('returns the original value', () => {
                 const output: string | undefined = solum<string | undefined>('3.14').or(constant(undefined));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
     });
@@ -696,9 +696,9 @@ describe(Solum, () => {
         });
 
         it('runs the given procedure and keeps original value', () => {
-            expect(pi).toStrictEqual(3.14);
+            expect(pi).toBe(3.14);
             expect(solum(pi).run(assignPi(3.1415))).toStrictEqual(solum(3.14));
-            expect(pi).toStrictEqual(3.1415);
+            expect(pi).toBe(3.1415);
         });
 
         it('can be assigned to Nullable', () => {

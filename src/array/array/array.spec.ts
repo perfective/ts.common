@@ -221,23 +221,23 @@ describe('wrapped', () => {
 describe('isArray', () => {
     it('returns true when value is an array', () => {
         expect(isArray(['0', 0]))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when value is not an array', () => {
         expect(isArray(0))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });
 
 describe('isNotArray', () => {
     it('returns true when value is not an array', () => {
         expect(isNotArray('0'))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when value is an array', () => {
         expect(isNotArray(['0', 0]))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });

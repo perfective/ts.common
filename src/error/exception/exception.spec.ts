@@ -24,18 +24,18 @@ describe('exception', () => {
     });
 
     it('creates an instance of an Exception', () => {
-        expect(error.name).toStrictEqual('Exception');
-        expect(error.message).toStrictEqual('User not found');
-        expect(error.template).toStrictEqual('User not found');
+        expect(error.name).toBe('Exception');
+        expect(error.message).toBe('User not found');
+        expect(error.template).toBe('User not found');
         expect(error.tokens).toStrictEqual({});
         expect(error.context).toStrictEqual({});
         expect(error.previous).toBeNull();
     });
 
     it('creates an instance of an Exception with context data', () => {
-        expect(contextError.name).toStrictEqual('Exception');
-        expect(contextError.message).toStrictEqual('User `42` not found');
-        expect(contextError.template).toStrictEqual('User {{id}} not found');
+        expect(contextError.name).toBe('Exception');
+        expect(contextError.message).toBe('User `42` not found');
+        expect(contextError.template).toBe('User {{id}} not found');
         expect(contextError.tokens).toStrictEqual({
             id: '42',
         });
@@ -50,7 +50,7 @@ describe('exception', () => {
     });
 
     it('outputs error message', () => {
-        expect(error.toString()).toStrictEqual('Exception: User not found');
+        expect(error.toString()).toBe('Exception: User not found');
     });
 });
 
@@ -65,17 +65,17 @@ describe('causedBy', () => {
     });
 
     it('creates an instance of an Exception', () => {
-        expect(chain.name).toStrictEqual('Exception');
-        expect(chain.message).toStrictEqual('API request failed');
-        expect(chain.template).toStrictEqual('API request failed');
+        expect(chain.name).toBe('Exception');
+        expect(chain.message).toBe('API request failed');
+        expect(chain.template).toBe('API request failed');
         expect(chain.context).toStrictEqual({});
         expect(chain.previous).toStrictEqual(error('Resource not found'));
     });
 
     it('creates an instance of an Exception with context data', () => {
-        expect(contextChain.name).toStrictEqual('Exception');
-        expect(contextChain.message).toStrictEqual('`User API` request failed');
-        expect(contextChain.template).toStrictEqual('{{api}} request failed');
+        expect(contextChain.name).toBe('Exception');
+        expect(contextChain.message).toBe('`User API` request failed');
+        expect(contextChain.template).toBe('{{api}} request failed');
         expect(contextChain.tokens).toStrictEqual({
             api: 'User API',
         });
@@ -132,7 +132,7 @@ describe('unknownError', () => {
         const error: Exception = exception('Failure');
 
         expect(unknownError(error) === error)
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns an exception with the passed value in context when the value is not an Error', () => {
@@ -150,28 +150,28 @@ describe('unknownError', () => {
 describe('isException', () => {
     it('returns true when value is an instance of Exception', () => {
         expect(isException(exception('User-defined Exception')))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when value is not an instance of Exception', () => {
         expect(isException(error('Previous')))
-            .toStrictEqual(false);
+            .toBe(false);
         expect(isException('Previous'))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });
 
 describe('isNotException', () => {
     it('returns false when value is an instance of Exception', () => {
         expect(isNotException(exception('User-defined Exception')))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 
     it('returns true when value is not an instance of Exception', () => {
         expect(isNotException(error('Previous')))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isNotException('Previous'))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 });
 

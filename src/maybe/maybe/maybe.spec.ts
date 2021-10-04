@@ -112,7 +112,7 @@ describe(Maybe, () => {
             // @ts-expect-error -- Maybe.value has to be assigned to "number | null | undefined".
             const value: number = maybe<number>(3.14).value;
 
-            expect(value).toStrictEqual(3.14);
+            expect(value).toBe(3.14);
         });
     });
 
@@ -658,7 +658,7 @@ describe(Maybe, () => {
             it('can be assigned to the value type', () => {
                 const output: number = maybe<number>(null).or(2.71);
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the null type', () => {
@@ -666,7 +666,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- Maybe.or() always returns the given fallback value.
                 const output: null = maybe<number>(null).or(2.71);
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the undefined type', () => {
@@ -674,7 +674,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- Maybe.or() always returns the given fallback value.
                 const output: undefined = maybe<number>(null).or(2.71);
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -682,7 +682,7 @@ describe(Maybe, () => {
             it('can be assigned to the value type', () => {
                 const output: number = maybe<number>(undefined).or(constant(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the null type', () => {
@@ -690,7 +690,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- Maybe.or() always returns the given fallback value.
                 const output: null = maybe<number>(undefined).or(constant(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the undefined type', () => {
@@ -698,7 +698,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- Maybe.or() always returns the given fallback value.
                 const output: undefined = maybe<number>(undefined).or(constant(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -706,7 +706,7 @@ describe(Maybe, () => {
             it('must be assigned to the union of the value type, null, and undefined', () => {
                 const output: number | null | undefined = maybe<number>(null).or(fallbackMaybe(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the value type', () => {
@@ -714,7 +714,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback() may also return null or undefined
                 const output: number = maybe<number>(null).or(fallbackMaybe(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and null', () => {
@@ -722,7 +722,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback() may also return undefined
                 const output: number | null = maybe<number>(null).or(fallbackMaybe(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and undefined', () => {
@@ -730,7 +730,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback() may also return null
                 const output: number | undefined = maybe<number>(null).or(fallbackMaybe(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -738,7 +738,7 @@ describe(Maybe, () => {
             it('must be assigned to the union of the value type, null, and undefined', () => {
                 const output: number | null | undefined = maybe<number>(undefined).or(constant(fallbackMaybe(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the value type', () => {
@@ -746,7 +746,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback() may also return null or undefined
                 const output: number = maybe<number>(undefined).or(constant(fallbackMaybe(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and null', () => {
@@ -754,7 +754,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback() may also return undefined
                 const output: number | null = maybe<number>(undefined).or(constant(fallbackMaybe(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and undefined', () => {
@@ -762,7 +762,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback() may also return null
                 const output: number | undefined = maybe<number>(undefined).or(constant(fallbackMaybe(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -772,13 +772,13 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be null
                 const output: number = maybe<number>(null).or(fallbackNullable(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('must be assigned to the union of the value type and null', () => {
                 const output: number | null = maybe<number>(null).or(fallbackNullable(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and undefined', () => {
@@ -786,7 +786,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be null
                 const output: number | undefined = maybe<number>(null).or(fallbackNullable(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -796,13 +796,13 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be null
                 const output: number = maybe<number>(undefined).or(constant(fallbackNullable(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('must be assigned to the union of the value type and null', () => {
                 const output: number | null = maybe<number>(undefined).or(constant(fallbackNullable(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and undefined', () => {
@@ -810,7 +810,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be null
                 const output: number | undefined = maybe<number>(undefined).or(constant(fallbackNullable(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -868,7 +868,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be undefined
                 const output: number = maybe<number>(null).or(fallbackOptional(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and null', () => {
@@ -876,13 +876,13 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be undefined
                 const output: number | null = maybe<number>(null).or(fallbackOptional(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('must be assigned to the union of the value type and undefined', () => {
                 const output: number | undefined = maybe<number>(null).or(fallbackOptional(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -892,7 +892,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be undefined
                 const output: number = maybe<number>(undefined).or(constant(fallbackOptional(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the union of the value type and null', () => {
@@ -900,13 +900,13 @@ describe(Maybe, () => {
                 // @ts-expect-error -- fallback may be undefined
                 const output: number | null = maybe<number>(undefined).or(constant(fallbackOptional(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('must be assigned to the union of the value type and undefined', () => {
                 const output: number | undefined = maybe<number>(undefined).or(constant(fallbackOptional(2.71)));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 

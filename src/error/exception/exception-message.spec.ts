@@ -25,19 +25,19 @@ describe('exceptionMessage', () => {
 describe('exceptionMessageOutput', () => {
     it('keeps message the same when no context is provided', () => {
         expect(exceptionMessageOutput(exceptionMessage('Invalid argument {{key}}')))
-            .toStrictEqual('Invalid argument {{key}}');
+            .toBe('Invalid argument {{key}}');
     });
 
     it('skips tokens that are not present in the template', () => {
         expect(exceptionMessageOutput(exceptionMessage('Invalid argument {{key}}', {
             key: 'value',
             map: 'WeakMap',
-        }))).toStrictEqual('Invalid argument `value`');
+        }))).toBe('Invalid argument `value`');
     });
 
     it('replaces all occurrences of the same token', () => {
         expect(exceptionMessageOutput(exceptionMessage('Invalid argument {{key}}: {{key}} must be defined', {
             key: 'value',
-        }))).toStrictEqual('Invalid argument `value`: `value` must be defined');
+        }))).toBe('Invalid argument `value`: `value` must be defined');
     });
 });

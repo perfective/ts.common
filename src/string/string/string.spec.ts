@@ -77,22 +77,22 @@ describe('isNotEmpty', () => {
 describe('length', () => {
     it('returns a string length', () => {
         expect(length(''))
-            .toStrictEqual(0);
+            .toBe(0);
         expect(length('ABC'))
-            .toStrictEqual(3);
+            .toBe(3);
     });
 });
 
 describe('stringFromCharCode', () => {
     it('creates a string from the given UTF-16 code units', () => {
         expect(stringFromCharCode(65, 66, 67))
-            .toStrictEqual('ABC');
+            .toBe('ABC');
     });
 });
 
 describe('stringFromCodePoint', () => {
     it('creates a string from the given code points', () => {
         expect(stringFromCodePoint(0x1F1FA, 0x1F1F8))
-            .toStrictEqual('🇺🇸');
+            .toBe('🇺🇸');
     });
 });

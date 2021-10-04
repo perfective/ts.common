@@ -81,12 +81,12 @@ describe('every', () => {
     describe('every(condition)', () => {
         it('returns true when every element satisfies the "condition"', () => {
             expect(every<number>(isGreaterThan(0))(irrational))
-                .toStrictEqual(true);
+                .toBe(true);
         });
 
         it('returns false when at least one element does not satisfy the "condition"', () => {
             expect(every<number>(isLessThan(3))(irrational))
-                .toStrictEqual(false);
+                .toBe(false);
         });
     });
 });
@@ -143,7 +143,7 @@ describe('find', () => {
     describe('find(condition)', () => {
         it('returns the value of the first element in the array that matches the "condition"', () => {
             expect(find<number>(isGreaterThan(2))(irrational))
-                .toStrictEqual(2.23);
+                .toBe(2.23);
         });
 
         it('returns undefined if there is no element in the array that matches the "condition"', () => {
@@ -157,7 +157,7 @@ describe('findIndex', () => {
     describe('findIndex(condition)', () => {
         it('returns the index of the first element in the array that matches the "condition"', () => {
             expect(findIndex<number>(isGreaterThan(2))(irrational))
-                .toStrictEqual(4);
+                .toBe(4);
         });
 
         it('returns -1 if there is no element in the array that matches the "condition"', () => {
@@ -207,7 +207,7 @@ describe('indexOf', () => {
     describe('indexOf(search)', () => {
         it('returns the index of the "search" element in the array', () => {
             expect(indexOf<number>(2.71)(irrational))
-                .toStrictEqual(5);
+                .toBe(5);
         });
 
         it('returns -1 if the "search" element is not in the array', () => {
@@ -219,7 +219,7 @@ describe('indexOf', () => {
     describe('indexOf(search, from)', () => {
         it('returns the index of the "search" element in the array starting the "from" index', () => {
             expect(indexOf<number>(2.71, 5)(irrational))
-                .toStrictEqual(5);
+                .toBe(5);
         });
 
         it('returns -1 if the "search" element is not in the array starting the "from" index', () => {
@@ -233,24 +233,24 @@ describe('join', () => {
     describe('join()', () => {
         it('returns an empty string for an empty array', () => {
             expect(join()([]))
-                .toStrictEqual('');
+                .toBe('');
         });
 
         it('replaces undefined and null with an empty string', () => {
             expect(join()([undefined, null, '', 0, false, true]))
-                .toStrictEqual(',,,0,false,true');
+                .toBe(',,,0,false,true');
         });
 
         it('returns a string with the elements separated by comma', () => {
             expect(join()(irrational))
-                .toStrictEqual('1.2,1.41,1.61,1.73,2.23,2.71,3.14');
+                .toBe('1.2,1.41,1.61,1.73,2.23,2.71,3.14');
         });
     });
 
     describe('join(separator)', () => {
         it('returns a string with the elements separated by the given separator', () => {
             expect(join('; ')(irrational))
-                .toStrictEqual('1.2; 1.41; 1.61; 1.73; 2.23; 2.71; 3.14');
+                .toBe('1.2; 1.41; 1.61; 1.73; 2.23; 2.71; 3.14');
         });
     });
 });
@@ -258,7 +258,7 @@ describe('join', () => {
 describe('keys', () => {
     it('returns a new Array Iterator that contains keys for each index in the array', () => {
         expect(keys(irrational).next().value)
-            .toStrictEqual(0);
+            .toBe(0);
     });
 });
 
@@ -266,7 +266,7 @@ describe('lastIndexOf', () => {
     describe('lastIndexOf(search)', () => {
         it('returns the index of the "search" element in the array', () => {
             expect(lastIndexOf<number>(2.71)(irrational))
-                .toStrictEqual(5);
+                .toBe(5);
         });
 
         it('returns -1 if the "search" element is not in the array', () => {
@@ -278,7 +278,7 @@ describe('lastIndexOf', () => {
     describe('lastIndexOf(search, from)', () => {
         it('returns the index of the "search" element in the array starting the "from" index', () => {
             expect(lastIndexOf<number>(2.71, 5)(irrational.concat(irrational)))
-                .toStrictEqual(5);
+                .toBe(5);
         });
 
         it('returns -1 if the "search" element is not in the array starting the "from" index', () => {
@@ -304,7 +304,7 @@ describe('pop', () => {
         expect(copy)
             .toHaveLength(7);
         expect(pop(copy))
-            .toStrictEqual(3.14);
+            .toBe(3.14);
         expect(copy)
             .toHaveLength(6);
     });
@@ -321,7 +321,7 @@ describe('push', () => {
             const copy: number[] = irrational.map(same());
 
             expect(push(5, 7, 11)(copy))
-                .toStrictEqual(10);
+                .toBe(10);
             expect(copy)
                 .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14, 5, 7, 11]);
         });
@@ -334,7 +334,7 @@ describe('reduce', () => {
             expect(reduce<number, string>(
                 (result, element, index) => `${result}, ${decimal(index + 1)}:${decimal(element)}`,
                 '0',
-            )(irrational)).toStrictEqual('0, 1:1.2, 2:1.41, 3:1.61, 4:1.73, 5:2.23, 6:2.71, 7:3.14');
+            )(irrational)).toBe('0, 1:1.2, 2:1.41, 3:1.61, 4:1.73, 5:2.23, 6:2.71, 7:3.14');
         });
     });
 });
@@ -343,7 +343,7 @@ describe('reduceTo', () => {
     describe('reduceTo(reducer)', () => {
         it('returns the reduction of an array without an initial value', () => {
             expect(reduceTo<number>(sum)([0, 1, 3, 5, 7, 11]))
-                .toStrictEqual(27);
+                .toBe(27);
         });
 
         it('throws an error when array is empty', () => {
@@ -361,7 +361,7 @@ describe('reduceRight', () => {
             expect(reduceRight<number, string>(
                 (result, element, index) => `${result}, ${decimal(index + 1)}:${decimal(element)}`,
                 '0',
-            )(irrational)).toStrictEqual('0, 7:3.14, 6:2.71, 5:2.23, 4:1.73, 3:1.61, 2:1.41, 1:1.2');
+            )(irrational)).toBe('0, 7:3.14, 6:2.71, 5:2.23, 4:1.73, 3:1.61, 2:1.41, 1:1.2');
         });
     });
 });
@@ -400,7 +400,7 @@ describe('shift', () => {
         expect(copy)
             .toHaveLength(7);
         expect(shift(copy))
-            .toStrictEqual(1.20);
+            .toBe(1.20);
         expect(copy)
             .toHaveLength(6);
     });
@@ -457,12 +457,12 @@ describe('some', () => {
     describe('some(condition)', () => {
         it('returns true if at least one element in the array satisfies the "condition"', () => {
             expect(some(isGreaterThan(3))(irrational))
-                .toStrictEqual(true);
+                .toBe(true);
         });
 
         it('returns false if there is no element that satisfied the "condition"', () => {
             expect(some(isGreaterThan(4))(irrational))
-                .toStrictEqual(false);
+                .toBe(false);
         });
     });
 });
@@ -532,7 +532,7 @@ describe('unshift', () => {
             const copy: number[] = irrational.map(same());
 
             expect(unshift(-1, 0)(copy))
-                .toStrictEqual(9);
+                .toBe(9);
             expect(copy)
                 .toStrictEqual([-1, 0, 1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14]);
         });
@@ -542,6 +542,6 @@ describe('unshift', () => {
 describe('values', () => {
     it('returns a new Array Iterator that contains values for each index in the array', () => {
         expect(values(irrational).next().value)
-            .toStrictEqual(1.20);
+            .toBe(1.20);
     });
 });

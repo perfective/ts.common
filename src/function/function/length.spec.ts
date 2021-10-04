@@ -3,41 +3,41 @@ import { hasLength, isEmpty, isNotEmpty, Length, length, toLongest, toShortest }
 describe('isEmpty', () => {
     it('returns true when value length is less or equal to 0', () => {
         expect(isEmpty({ length: 0 } as Length))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isEmpty(() => null))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when value length is greater than 0', () => {
         expect(isEmpty({ length: 1 } as Length))
-            .toStrictEqual(false);
+            .toBe(false);
         expect(isEmpty((value: number) => value))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });
 
 describe('isNotEmpty', () => {
     it('returns true when value length is greater than 0', () => {
         expect(isNotEmpty({ length: 1 } as Length))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isNotEmpty((value: number) => value))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when value length is less or equal to 0', () => {
         expect(isNotEmpty({ length: 0 } as Length))
-            .toStrictEqual(false);
+            .toBe(false);
         expect(isNotEmpty(() => null))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });
 
 describe('length', () => {
     it('returns the length of an array', () => {
         expect(length([]))
-            .toStrictEqual(0);
+            .toBe(0);
         expect(length(['a', 'b', 'c']))
-            .toStrictEqual(3);
+            .toBe(3);
         expect(length((...a: number[]): number[] => a))
             .toBe(0);
     });
@@ -75,7 +75,7 @@ describe('toLongest', () => {
             'Hi',
             'Hello',
             'Hello, World',
-        ].reduce(toLongest)).toStrictEqual('Hello, World');
+        ].reduce(toLongest)).toBe('Hello, World');
     });
 
     it('includes the initial value when determining the longest array', () => {
@@ -92,7 +92,7 @@ describe('toLongest', () => {
         expect(([] as number[][]).reduce(toLongest, [0]))
             .toStrictEqual([0]);
         expect(([] as string[]).reduce(toLongest, ''))
-            .toStrictEqual('');
+            .toBe('');
     });
 });
 

@@ -3,24 +3,24 @@ import { includedIn, isEmpty, isNotEmpty } from './predicate';
 describe('isEmpty', () => {
     it('returns true when an array is empty', () => {
         expect(isEmpty([]))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when an array is not empty', () => {
         expect(isEmpty([0]))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });
 
 describe('isNotEmpty', () => {
     it('returns true when an array is not empty', () => {
         expect(isNotEmpty([false]))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when an array is empty', () => {
         expect(isNotEmpty([]))
-            .toStrictEqual(false);
+            .toBe(false);
     });
 });
 

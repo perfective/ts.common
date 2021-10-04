@@ -8,19 +8,19 @@ describe('maximum', () => {
 
     it('returns the only element when an array has one element', () => {
         expect(maximum([0]))
-            .toStrictEqual(0);
+            .toBe(0);
     });
 
     it('disregards NaN values', () => {
         expect(maximum([0, Number.NaN]))
-            .toStrictEqual(0);
+            .toBe(0);
         expect(maximum([Number.NaN]))
             .toBeNull();
     });
 
     it('returns the maximum element when an array has more than one element', () => {
         expect(maximum([-1, 0, 1]))
-            .toStrictEqual(1);
+            .toBe(1);
         expect(maximum([Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY]))
             .toStrictEqual(Number.POSITIVE_INFINITY);
         expect(maximum([Number.MIN_VALUE, Number.MAX_VALUE]))
@@ -42,12 +42,12 @@ describe('minimum', () => {
 
     it('returns the only element when an array has one element', () => {
         expect(minimum([0]))
-            .toStrictEqual(0);
+            .toBe(0);
     });
 
     it('disregards NaN values', () => {
         expect(minimum([0, Number.NaN]))
-            .toStrictEqual(0);
+            .toBe(0);
         expect(minimum([Number.NaN]))
             .toBeNull();
     });

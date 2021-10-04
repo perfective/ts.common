@@ -3,87 +3,87 @@ import { isNotOutput, isOutput, output } from './output';
 describe('output', () => {
     it('returns a string value as is', () => {
         expect(output('3.14'))
-            .toStrictEqual('3.14');
+            .toBe('3.14');
     });
 
     it('returns a result of the object toString() method', () => {
         expect(output(undefined))
-            .toStrictEqual('undefined');
+            .toBe('undefined');
         expect(output(null))
-            .toStrictEqual('null');
+            .toBe('null');
         expect(output(String(3.14)))
-            .toStrictEqual('3.14');
+            .toBe('3.14');
         expect(output(3.14))
-            .toStrictEqual('3.14');
+            .toBe('3.14');
         expect(output(Number.NaN))
-            .toStrictEqual('NaN');
+            .toBe('NaN');
         expect(output(Number.POSITIVE_INFINITY))
-            .toStrictEqual('Infinity');
+            .toBe('Infinity');
         expect(output(Number.NEGATIVE_INFINITY))
-            .toStrictEqual('-Infinity');
+            .toBe('-Infinity');
         expect(output(Number.POSITIVE_INFINITY))
-            .toStrictEqual('Infinity');
+            .toBe('Infinity');
         expect(output(false))
-            .toStrictEqual('false');
+            .toBe('false');
         expect(output(true))
-            .toStrictEqual('true');
+            .toBe('true');
         expect(output([]))
-            .toStrictEqual('');
+            .toBe('');
         expect(output(['a', 'b', 'c']))
-            .toStrictEqual('a,b,c');
+            .toBe('a,b,c');
         expect(output({}))
-            .toStrictEqual('[object Object]');
+            .toBe('[object Object]');
         expect(output({
             a: 'a',
             b: 'b',
-        })).toStrictEqual('[object Object]');
+        })).toBe('[object Object]');
         expect(output(() => ({})))
-            .toStrictEqual('() => ({})');
+            .toBe('() => ({})');
         expect(output(output))
             .toContain('function output(value)');
         expect(output(Symbol('$')))
-            .toStrictEqual('Symbol($)');
+            .toBe('Symbol($)');
     });
 });
 
 describe('isOutput', () => {
     it('returns true when value implements toString()', () => {
         expect(isOutput(Number.NaN))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isOutput(true))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isOutput(false))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 
     it('returns false when value does not implement toString()', () => {
         expect(isOutput(undefined))
-            .toStrictEqual(false);
+            .toBe(false);
         expect(isOutput(null))
-            .toStrictEqual(false);
+            .toBe(false);
         expect(isOutput({
             toString: undefined,
-        })).toStrictEqual(false);
+        })).toBe(false);
     });
 });
 
 describe('isNotOutput', () => {
     it('returns true when value does not implement toString()', () => {
         expect(isNotOutput(undefined))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isNotOutput(null))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isNotOutput({
             toString: undefined,
-        })).toStrictEqual(true);
+        })).toBe(true);
     });
 
     it('returns false when value implements toString()', () => {
         expect(isOutput(Number.POSITIVE_INFINITY))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isOutput(Symbol('$')))
-            .toStrictEqual(true);
+            .toBe(true);
         expect(isOutput(output))
-            .toStrictEqual(true);
+            .toBe(true);
     });
 });

@@ -89,7 +89,7 @@ describe(Optional, () => {
             // @ts-expect-error -- Optional.value has to be assigned to "number | undefined".
             const value: number = optional<number>(3.14).value;
 
-            expect(value).toStrictEqual(3.14);
+            expect(value).toBe(3.14);
         });
     });
 
@@ -611,7 +611,7 @@ describe(Optional, () => {
             it('can be assigned to the value type when the original value is present', () => {
                 const output: number = optional(3.14).or(2.71);
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('can be assigned to the value type when the original value is null', () => {
@@ -623,7 +623,7 @@ describe(Optional, () => {
             it('can be assigned to the value type when the original value is undefined', () => {
                 const output: number = optional<number>(undefined).or(2.71);
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -631,7 +631,7 @@ describe(Optional, () => {
             it('can be assigned to the value type when the original value is present', () => {
                 const output: number = optional(3.14).or(constant(2.71));
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('can be assigned to the value type when the original value is null', () => {
@@ -643,7 +643,7 @@ describe(Optional, () => {
             it('can be assigned to the value type when the original value is undefined', () => {
                 const output: number = optional<number>(undefined).or(constant(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -653,7 +653,7 @@ describe(Optional, () => {
                 // @ts-expect-error -- fallback may be undefined
                 const output: number = optional(3.14).or(fallbackOptional(2.71));
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('cannot be assigned to the nullable value type', () => {
@@ -667,7 +667,7 @@ describe(Optional, () => {
             it('must be assigned to the optional value type', () => {
                 const output: number | undefined = optional<number>(undefined).or(fallbackOptional(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
 
@@ -677,7 +677,7 @@ describe(Optional, () => {
                 // @ts-expect-error -- fallback is undefined
                 const output: number = optional(3.14).or(undefined);
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('cannot be assigned to the nullable value type', () => {
@@ -699,7 +699,7 @@ describe(Optional, () => {
                 // @ts-expect-error -- fallback is undefined
                 const output: undefined = optional<number>(2.71).or(undefined);
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
         });
     });

@@ -44,7 +44,7 @@ describe(Just, () => {
         it('is a required property and can be assigned to the value type', () => {
             const value: number = just<number>(3.14).value;
 
-            expect(value).toStrictEqual(3.14);
+            expect(value).toBe(3.14);
         });
     });
 
@@ -640,7 +640,7 @@ describe(Just, () => {
             it('returns the original value', () => {
                 const output: string = just('3.14').or('2.71');
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -648,7 +648,7 @@ describe(Just, () => {
             it('returns the original value', () => {
                 const output: string = just('3.14').or(constant('2.71'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -656,7 +656,7 @@ describe(Just, () => {
             it('returns the original value', () => {
                 const output: string = just('3.14').or(null);
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -664,7 +664,7 @@ describe(Just, () => {
             it('returns the original value', () => {
                 const output: string = just('3.14').or(constant(null));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -672,7 +672,7 @@ describe(Just, () => {
             it('returns the original value', () => {
                 const output: string = just('3.14').or(undefined);
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -680,7 +680,7 @@ describe(Just, () => {
             it('returns the original value', () => {
                 const output: string = just('3.14').or(constant(undefined));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
     });
@@ -698,9 +698,9 @@ describe(Just, () => {
         });
 
         it('runs the given procedure and keeps original value', () => {
-            expect(pi).toStrictEqual(3.14);
+            expect(pi).toBe(3.14);
             expect(just(pi).run(assignPi(3.1415))).toStrictEqual(just(3.14));
-            expect(pi).toStrictEqual(3.1415);
+            expect(pi).toBe(3.1415);
         });
 
         it('can be assigned to Maybe', () => {

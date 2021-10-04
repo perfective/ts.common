@@ -17,16 +17,16 @@ const powers: Statement<number, number>[] = [
 describe('match', () => {
     it('matches constants values', () => {
         expect(match(1.73).to(roots).or(undefined))
-            .toStrictEqual(3);
+            .toBe(3);
     });
 
     it('matches lazy values', () => {
         expect(match(() => 0).to(powers).or(undefined))
-            .toStrictEqual(0);
+            .toBe(0);
         expect(match(() => 2).to(powers).or(undefined))
-            .toStrictEqual(8);
+            .toBe(8);
         expect(match(() => -3).to(powers).or(undefined))
-            .toStrictEqual(9);
+            .toBe(9);
     });
 
     it('falls back to Nothing when match is not found', () => {

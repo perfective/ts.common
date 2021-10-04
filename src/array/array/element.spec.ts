@@ -17,7 +17,7 @@ import {
 describe('head', () => {
     it('returns the first element of a non-empty array', () => {
         expect(head([2.71, 3.14]))
-            .toStrictEqual(2.71);
+            .toBe(2.71);
         expect(head([null, 3.14]))
             .toBeNull();
         expect(head([undefined, 3.14]))
@@ -54,7 +54,7 @@ describe('tail', () => {
 describe('end', () => {
     it('returns the last element of a non-empty array', () => {
         expect(end([3.14]))
-            .toStrictEqual(3.14);
+            .toBe(3.14);
         expect(end([3.14, null]))
             .toBeNull();
         expect(end([3.14, 2.71, undefined]))
@@ -92,7 +92,7 @@ describe('element', () => {
     describe('element(n)', () => {
         it('returns an array element by index if element is defined', () => {
             expect(element(2)([0, 2.71, 3.14]))
-                .toStrictEqual(3.14);
+                .toBe(3.14);
         });
 
         it('returns undefined when element by index is not defined', () => {

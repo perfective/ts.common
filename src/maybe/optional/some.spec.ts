@@ -43,7 +43,7 @@ describe(Some, () => {
         it('is a required property and can be assigned to the value type', () => {
             const value: number = some<number>(3.14).value;
 
-            expect(value).toStrictEqual(3.14);
+            expect(value).toBe(3.14);
         });
     });
 
@@ -636,7 +636,7 @@ describe(Some, () => {
             it('returns the original value', () => {
                 const output: string = some('3.14').or('2.71');
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -644,7 +644,7 @@ describe(Some, () => {
             it('returns the original value', () => {
                 const output: string = some('3.14').or(constant('2.71'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -652,7 +652,7 @@ describe(Some, () => {
             it('returns the original value', () => {
                 const output: string | null = some<string | null>('3.14').or(null);
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -660,7 +660,7 @@ describe(Some, () => {
             it('returns the original value', () => {
                 const output: string | null = some<string | null>('3.14').or(constant(null));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -668,7 +668,7 @@ describe(Some, () => {
             it('returns the original value', () => {
                 const output: string | null = some('3.14').or(undefined);
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -676,7 +676,7 @@ describe(Some, () => {
             it('returns the original value', () => {
                 const output: string = some('3.14').or(constant(undefined));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
     });
@@ -694,9 +694,9 @@ describe(Some, () => {
         });
 
         it('runs the given procedure and keeps original value', () => {
-            expect(pi).toStrictEqual(3.14);
+            expect(pi).toBe(3.14);
             expect(some(pi).run(assignPi(3.1415))).toStrictEqual(some(3.14));
-            expect(pi).toStrictEqual(3.1415);
+            expect(pi).toBe(3.1415);
         });
 
         it('can be assigned to Optional', () => {

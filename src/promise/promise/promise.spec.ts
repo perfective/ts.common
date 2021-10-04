@@ -17,7 +17,7 @@ async function promiseForward<T>(data: T | Error): Promise<T> {
 describe('result', () => {
     it('resolves promise with data', async () => promiseForward('example')
         .then(result => expect(result)
-            .toStrictEqual('example')));
+            .toBe('example')));
 
     it('rejects promise when error is defined', async () => {
         expect.assertions(1);

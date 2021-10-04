@@ -35,14 +35,14 @@ describe('errorOutput', () => {
     it('returns only error name when message is undefined', () => {
         // eslint-disable-next-line unicorn/error-message -- testing undefined message
         expect(errorOutput(new ReferenceError()))
-            .toStrictEqual('ReferenceError');
+            .toBe('ReferenceError');
     });
 
     it('returns human-readable string matching Error.toString() on Node.js', () => {
         expect(errorOutput(new Error('Failure!')))
-            .toStrictEqual('Error: Failure!');
+            .toBe('Error: Failure!');
         expect(errorOutput(new TypeError('Invalid type')))
-            .toStrictEqual('TypeError: Invalid type');
+            .toBe('TypeError: Invalid type');
     });
 });
 
@@ -61,6 +61,6 @@ describe('errorStack', () => {
         error.stack = undefined;
 
         expect(stack(error))
-            .toStrictEqual('No Stack\n    at <unknown>');
+            .toBe('No Stack\n    at <unknown>');
     });
 });

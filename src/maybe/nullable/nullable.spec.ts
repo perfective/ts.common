@@ -89,7 +89,7 @@ describe(Nullable, () => {
             // @ts-expect-error -- Nullable.value has to be assigned to "number | null".
             const value: number = nullable<number>(3.14).value;
 
-            expect(value).toStrictEqual(3.14);
+            expect(value).toBe(3.14);
         });
     });
 
@@ -611,13 +611,13 @@ describe(Nullable, () => {
             it('should be assigned to the value type', () => {
                 const output: number = nullable(3.14).or(2.71);
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('can be assigned to the nullable value type', () => {
                 const output: number | null = nullable<number>(null).or(2.71);
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('can be assigned to the optional value type', () => {
@@ -631,13 +631,13 @@ describe(Nullable, () => {
             it('should be assigned to the value type', () => {
                 const output: number = nullable(3.14).or(constant(2.71));
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('can be assigned to the nullable value type', () => {
                 const output: number = nullable<number>(null).or(constant(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('can be assigned to the optional value type', () => {
@@ -653,13 +653,13 @@ describe(Nullable, () => {
                 // @ts-expect-error -- fallback may be null
                 const output: number = nullable(3.14).or(fallbackNullable(2.71));
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('must be assigned to the nullable value type', () => {
                 const output: number | null = nullable<number>(null).or(fallbackNullable(2.71));
 
-                expect(output).toStrictEqual(2.71);
+                expect(output).toBe(2.71);
             });
 
             it('cannot be assigned to the optional value type', () => {
@@ -677,7 +677,7 @@ describe(Nullable, () => {
                 // @ts-expect-error -- fallback is null
                 const output: number = nullable(3.14).or(null);
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('cannot be assigned to null type', () => {
@@ -685,7 +685,7 @@ describe(Nullable, () => {
                 // @ts-expect-error -- value may be present
                 const output: null = nullable(3.14).or(null);
 
-                expect(output).toStrictEqual(3.14);
+                expect(output).toBe(3.14);
             });
 
             it('must be assigned to the nullable value type', () => {

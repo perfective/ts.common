@@ -74,7 +74,7 @@ describe('stringInput', () => {
         const validString: string | undefined = stringInput(inputString);
 
         expect(validString)
-            .toStrictEqual('0');
+            .toBe('0');
     });
 
     it('returns undefined when the given input is not a string', () => {
@@ -89,7 +89,7 @@ describe('numberInput', () => {
         const validNumber: number | undefined = numberInput(inputNumber);
 
         expect(validNumber)
-            .toStrictEqual(3.14);
+            .toBe(3.14);
     });
 
     it('returns undefined when the given input is not a number', () => {

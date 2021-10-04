@@ -644,7 +644,7 @@ describe(Nothing, () => {
             it('returns the given fallback value', () => {
                 const output: string = nothing<string>().or('3.14');
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -652,7 +652,7 @@ describe(Nothing, () => {
             it('returns the result of the fallback', () => {
                 const output: string = naught<string>().or(constant('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -660,7 +660,7 @@ describe(Nothing, () => {
             it('must be assigned to the fallback return type', () => {
                 const output: string | null | undefined = nothing<string>().or(fallbackMaybe<string>('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
 
             it('cannot be assigned to the value type', () => {
@@ -668,7 +668,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- fallback may return string, null, or undefined.
                 const output: string = nothing<string>().or(fallbackMaybe<string>('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -708,7 +708,7 @@ describe(Nothing, () => {
             it('must be assigned to the fallback return type', () => {
                 const output: string | null = nothing<string>().or(constant<string | null>('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
 
             it('cannot be assigned to the value type', () => {
@@ -716,7 +716,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- fallback may return string or null.
                 const output: string = nothing<string>().or(constant<string | null>('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
 
@@ -758,7 +758,7 @@ describe(Nothing, () => {
             it('must be assigned to the fallback return type', () => {
                 const output: string | undefined = naught<string>().or(constant<string | undefined>('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
 
             it('cannot be assigned to the value type', () => {
@@ -766,7 +766,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- fallback may return string or undefined.
                 const output: string = naught<string>().or(constant<string | undefined>('3.14'));
 
-                expect(output).toStrictEqual('3.14');
+                expect(output).toBe('3.14');
             });
         });
     });
@@ -780,9 +780,9 @@ describe(Nothing, () => {
         };
 
         it('does not run the given procedure', () => {
-            expect(pi).toStrictEqual(3.14);
+            expect(pi).toBe(3.14);
             expect(nothing<number>().run(assignPi(3.1415))).toBe(nothing());
-            expect(pi).toStrictEqual(3.14);
+            expect(pi).toBe(3.14);
         });
 
         it('can be assigned to Maybe', () => {

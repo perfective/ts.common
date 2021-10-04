@@ -27,19 +27,19 @@ describe('property', () => {
     describe('property(property)', () => {
         it('picks an existing property value from an object', () => {
             expect(property<Example, 'a'>('a')(optional))
-                .toStrictEqual(0);
+                .toBe(0);
         });
     });
 
     describe('property(property, condition)', () => {
         it('returns true when "property" of the given value satisfies the "condition"', () => {
             expect(property<number[], 'length'>('length', isEqualTo(0))([]))
-                .toStrictEqual(true);
+                .toBe(true);
         });
 
         it('returns false when "property" of the given value does not satisfy the "condition"', () => {
             expect(property<number[], 'length'>('length', isGreaterThan(0))([]))
-                .toStrictEqual(false);
+                .toBe(false);
         });
     });
 });

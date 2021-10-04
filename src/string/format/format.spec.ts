@@ -52,7 +52,7 @@ describe('formatted', () => {
                 second: '2nd',
                 third: 'and 3rd',
             },
-        })).toStrictEqual('Formatted values: 1st, 2nd, and 3rd');
+        })).toBe('Formatted values: 1st, 2nd, and 3rd');
     });
 
     it('skips tokens that are not defined', () => {
@@ -63,7 +63,7 @@ describe('formatted', () => {
                 second: '2nd',
                 third: 'and 3rd',
             },
-        })).toStrictEqual('Formatted values: 1st, 2nd, and 3rd, and {{fourth}}');
+        })).toBe('Formatted values: 1st, 2nd, and 3rd, and {{fourth}}');
         expect(formatted({
             template: 'Formatted values: {{first}}, {{second}}',
             tokens: {
@@ -71,6 +71,6 @@ describe('formatted', () => {
                 second: '2nd',
                 third: 'and 3rd',
             },
-        })).toStrictEqual('Formatted values: 1st, 2nd');
+        })).toBe('Formatted values: 1st, 2nd');
     });
 });

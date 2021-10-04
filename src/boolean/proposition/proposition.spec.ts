@@ -4,13 +4,13 @@ import { isFalse, isTrue, negated } from './proposition';
 
 describe('negated', () => {
     it('negates the given boolean value', () => {
-        expect(negated(true)).toStrictEqual(false);
-        expect(negated(false)).toStrictEqual(true);
+        expect(negated(true)).toBe(false);
+        expect(negated(false)).toBe(true);
     });
 
     it('negates the given proposition value', () => {
-        expect(negated(constant(true))).toStrictEqual(false);
-        expect(negated(constant(false))).toStrictEqual(true);
+        expect(negated(constant(true))).toBe(false);
+        expect(negated(constant(false))).toBe(true);
     });
 });
 

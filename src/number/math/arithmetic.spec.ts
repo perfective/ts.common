@@ -13,14 +13,14 @@ describe('sum', () => {
 
     it('has identity element 0', () => {
         expect(sum(2, 0))
-            .toStrictEqual(2);
+            .toBe(2);
         expect(sum(0, 2))
-            .toStrictEqual(2);
+            .toBe(2);
     });
 
     it('can be used to reduce an array of numbers', () => {
         expect([8, 5, 3, 2, 1].reduce(sum))
-            .toStrictEqual(19);
+            .toBe(19);
     });
 });
 
@@ -49,35 +49,35 @@ describe('product', () => {
 
     it('has identity element 1', () => {
         expect(product(3, 1))
-            .toStrictEqual(3);
+            .toBe(3);
         expect(product(1, 3))
-            .toStrictEqual(3);
+            .toBe(3);
     });
 
     it('has zero property', () => {
         expect(product(3, 0))
-            .toStrictEqual(0);
+            .toBe(0);
         expect(product(0, 3))
-            .toStrictEqual(0);
+            .toBe(0);
     });
 
     it('negates value when multiplied by -1', () => {
         expect(product(3, -1))
             .toStrictEqual(-3);
         expect(product(-1, -1))
-            .toStrictEqual(1);
+            .toBe(1);
     });
 
     it('can be used to reduce array of numbers', () => {
         expect([5, 7, 11, 13].reduce(product))
-            .toStrictEqual(5005);
+            .toBe(5005);
     });
 });
 
 describe('quotient', () => {
     it('is a real number result of division of dividend by divisor', () => {
         expect(quotient(5, 2))
-            .toStrictEqual(2.5);
+            .toBe(2.5);
     });
 
     it('returns Infinity when divisor is 0', () => {
@@ -91,7 +91,7 @@ describe('quotient', () => {
 describe('remainder', () => {
     it('is an integer remainder of division of dividend by divisor', () => {
         expect(remainder(5, 3))
-            .toStrictEqual(2);
+            .toBe(2);
     });
 
     it('returns NaN when divisor is 0', () => {

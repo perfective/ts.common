@@ -29,6 +29,6 @@ describe('isUnary', () => {
 
 describe('same', () => {
     it('creates a function that returns the passed value', () => {
-        expect(same()(3.14)).toStrictEqual(3.14);
+        expect(same()(3.14)).toBe(3.14);
     });
 });

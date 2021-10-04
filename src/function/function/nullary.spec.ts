@@ -14,7 +14,7 @@ describe('isNullary', () => {
 
 describe('constant', () => {
     it('creates a function that returns a constant value', () => {
-        expect(constant(3.14)()).toStrictEqual(3.14);
+        expect(constant(3.14)()).toBe(3.14);
     });
 });
 
@@ -28,11 +28,11 @@ describe('empty', () => {
 describe('valueOf', () => {
     it('returns the value when a value is a constant', () => {
         expect(valueOf(3.14))
-            .toStrictEqual(3.14);
+            .toBe(3.14);
     });
 
     it('returns the result of a function when value is a function', () => {
         expect(valueOf(constant(3.14)))
-            .toStrictEqual(3.14);
+            .toBe(3.14);
     });
 });

@@ -21,6 +21,7 @@ export function length(value: string): number {
 export type Utf16CodeUnit = number;
 
 export function stringFromCharCode(...codes: Utf16CodeUnit[]): string {
+    // eslint-disable-next-line unicorn/prefer-code-point -- proxy function
     return String.fromCharCode(...codes);
 }
 

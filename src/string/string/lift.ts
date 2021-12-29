@@ -7,6 +7,7 @@ export function charAt(index: number): Unary<string, string> {
 }
 
 export function charCodeAt(index: number): Unary<string, Utf16CodeUnit> {
+    // eslint-disable-next-line unicorn/prefer-code-point -- lifted function
     return (value: string): number => value.charCodeAt(index);
 }
 

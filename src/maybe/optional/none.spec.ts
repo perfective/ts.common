@@ -775,7 +775,7 @@ describe(None, () => {
                 //  is not assignable to parameter of type '(value: undefined) => number | null | undefined'.
                 // @ts-expect-error -- None.lift passes null or undefined into the function.
                 none<string>().lift(decimal);
-            }).toThrow("Cannot read property 'toString' of undefined");
+            }).toThrow("Cannot read properties of undefined (reading 'toString')");
         });
 
         it('must be assigned to Optional', () => {

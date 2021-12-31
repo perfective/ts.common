@@ -754,7 +754,7 @@ describe(Nil, () => {
                 //  is not assignable to parameter of type '(value: null) => number | null'.
                 // @ts-expect-error -- Nil.lift passes null or undefined into the function.
                 nil<string>().lift(decimal);
-            }).toThrow("Cannot read property 'toString' of null");
+            }).toThrow("Cannot read properties of null (reading 'toString')");
         });
 
         it('must be assigned to Nullable', () => {

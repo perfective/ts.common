@@ -812,13 +812,13 @@ describe(Nothing, () => {
                 //  is not assignable to parameter of type '(value: null | undefined) => number | null | undefined'.
                 // @ts-expect-error -- Nothing.lift passes null or undefined into the function.
                 nothing<string>().lift(decimal);
-            }).toThrow("Cannot read property 'toString' of undefined");
+            }).toThrow("Cannot read properties of undefined (reading 'toString')");
             expect(() => {
                 // TS2345: Argument of type '{ (value: number): string; (value: string): number | null; }'
                 //  is not assignable to parameter of type '(value: null | undefined) => number | null | undefined'.
                 // @ts-expect-error -- Nothing.lift passes null or undefined into the function.
                 naught<string>().lift(decimal);
-            }).toThrow("Cannot read property 'toString' of null");
+            }).toThrow("Cannot read properties of null (reading 'toString')");
         });
 
         it('must be assigned to Maybe', () => {

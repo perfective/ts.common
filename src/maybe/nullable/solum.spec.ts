@@ -335,6 +335,7 @@ describe(Solum, () => {
         describe('when the "filter" type guard is true', () => {
             it('returns Solum', () => {
                 expect(input.which(hasDefinedProperty('required'))).toStrictEqual(input);
+                // @ts-expect-error -- TS2345: errors with "exactOptionalPropertyTypes: true"
                 expect(input.which(hasUndefinedProperty('optional'))).toStrictEqual(input);
                 expect(input.which(hasNotNullProperty('nullable'))).toStrictEqual(input);
                 expect(input.which(hasNullProperty('possible'))).toStrictEqual(input);

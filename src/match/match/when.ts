@@ -10,6 +10,7 @@ class When<T> {
         private readonly condition: Predicate<T>,
     ) {}
 
+    // eslint-disable-next-line unicorn/no-thenable -- TODO: Try to find a different term
     public then<U>(value: U | Unary<T, U>): Statement<T, U> {
         return {
             condition: this.condition,

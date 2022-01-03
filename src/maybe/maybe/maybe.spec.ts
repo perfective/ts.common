@@ -960,7 +960,7 @@ describe(Maybe, () => {
     });
 
     describe('run', () => {
-        let pi: number = 3.14;
+        let pi: number;
 
         // eslint-disable-next-line func-style -- conflicts with prefer-arrow
         const assignPi = (value: number): Nullary<void> => (): void => {

@@ -58,9 +58,9 @@ export class Just<T> implements Maybe<T> {
         }
     }
 
-    public onto<U>(flatMap: (value: T) => Just<Present<U>>): Just<Present<U>>
-    public onto<U>(flatMap: (value: T) => Nothing<Present<U>>): Nothing<Present<U>>
-    public onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Maybe<Present<U>>
+    public onto<U>(flatMap: (value: T) => Just<Present<U>>): Just<Present<U>>;
+    public onto<U>(flatMap: (value: T) => Nothing<Present<U>>): Nothing<Present<U>>;
+    public onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Maybe<Present<U>>;
     public onto<U>(
         flatMap: (value: T) => Maybe<Present<U>>,
     ): Maybe<Present<U>> {
@@ -68,9 +68,9 @@ export class Just<T> implements Maybe<T> {
     }
 
     // Return type has to be Present<U> to exclude null or undefined from the type U
-    public to<U>(map: (value: T) => Present<U>): Just<U>
-    public to<U>(map: (value: T) => null | undefined): Nothing<U>
-    public to<U>(map: (value: T) => U | null | undefined): Maybe<U>
+    public to<U>(map: (value: T) => Present<U>): Just<U>;
+    public to<U>(map: (value: T) => null | undefined): Nothing<U>;
+    public to<U>(map: (value: T) => U | null | undefined): Maybe<U>;
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> | Nothing<U> {
         return maybe<U>(map(this.value));
     }
@@ -106,12 +106,12 @@ export class Just<T> implements Maybe<T> {
         return nothing<T>();
     }
 
-    public otherwise(fallback: Value<T | null | undefined>): Just<T>
+    public otherwise(fallback: Value<T | null | undefined>): Just<T>;
     public otherwise(): this {
         return this;
     }
 
-    public or(fallback: Value<T | null | undefined>): T
+    public or(fallback: Value<T | null | undefined>): T;
     public or(): T {
         return this.value;
     }
@@ -140,56 +140,56 @@ export class Nothing<T> implements Maybe<T> {
 
     public onto<U>(
         flatMap: (value: T) => Maybe<Present<U>>,
-    ): Nothing<Present<U>>
+    ): Nothing<Present<U>>;
     public onto<U>(): Nothing<U> {
         return this as unknown as Nothing<U>;
     }
 
-    public to<U>(map: (value: T) => (U | null | undefined)): Nothing<U>
+    public to<U>(map: (value: T) => (U | null | undefined)): Nothing<U>;
     public to<U>(): Nothing<U> {
         return this as unknown as Nothing<U>;
     }
 
-    public pick<K extends keyof T>(property: Value<K>): Nothing<Present<T[K]>>
+    public pick<K extends keyof T>(property: Value<K>): Nothing<Present<T[K]>>;
     public pick<K extends keyof T>(): Nothing<Present<T[K]>> {
         return this as unknown as Nothing<Present<T[K]>>;
     }
 
-    public that(filter: Predicate<T>): Nothing<T>
+    public that(filter: Predicate<T>): Nothing<T>;
     public that(): this {
         return this;
     }
 
-    public which<U extends T>(filter: TypeGuard<T, U>): Nothing<U>
+    public which<U extends T>(filter: TypeGuard<T, U>): Nothing<U>;
     public which<U extends T>(): Nothing<U> {
         return this as unknown as Nothing<U>;
     }
 
-    public when(condition: Proposition): Nothing<T>
+    public when(condition: Proposition): Nothing<T>;
     public when(): this {
         return this;
     }
 
-    public otherwise(fallback: Value<T>): Just<T>
+    public otherwise(fallback: Value<T>): Just<T>;
     public otherwise(fallback: Value<null | undefined>): Nothing<T>;
-    public otherwise(fallback: Value<T | null | undefined>): Maybe<T>
+    public otherwise(fallback: Value<T | null | undefined>): Maybe<T>;
     public otherwise(fallback: Value<T | null | undefined>): Just<T> | Nothing<T> | Maybe<T> {
         return maybe(valueOf(fallback));
     }
 
-    public or(fallback: Value<T>): T
-    public or(fallback: Value<null>): null
-    public or(fallback: Value<undefined>): undefined
-    public or(fallback: Value<T | null>): T | null
-    public or(fallback: Value<T | undefined>): T | undefined
-    public or(fallback: Value<T | null | undefined>): T | null | undefined
+    public or(fallback: Value<T>): T;
+    public or(fallback: Value<null>): null;
+    public or(fallback: Value<undefined>): undefined;
+    public or(fallback: Value<T | null>): T | null;
+    public or(fallback: Value<T | undefined>): T | undefined;
+    public or(fallback: Value<T | null | undefined>): T | null | undefined;
     public or(
         fallback: Value<T | null | undefined> | Value<T | null> | Value<T | undefined> | Value<T>,
     ): T | null | undefined {
         return valueOf(fallback);
     }
 
-    public run(procedure: (value: T) => void): Nothing<T>
+    public run(procedure: (value: T) => void): Nothing<T>;
     public run(): this {
         return this;
     }

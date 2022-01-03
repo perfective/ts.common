@@ -48,9 +48,9 @@ export class Some<T> implements Optional<T> {
         }
     }
 
-    public onto<U>(flatMap: (value: T) => Some<Defined<U>>): Some<Defined<U>>
-    public onto<U>(flatMap: (value: T) => None<Defined<U>>): None<Defined<U>>
-    public onto<U>(flatMap: (value: T) => Optional<Defined<U>>): Optional<Defined<U>>
+    public onto<U>(flatMap: (value: T) => Some<Defined<U>>): Some<Defined<U>>;
+    public onto<U>(flatMap: (value: T) => None<Defined<U>>): None<Defined<U>>;
+    public onto<U>(flatMap: (value: T) => Optional<Defined<U>>): Optional<Defined<U>>;
     public onto<U>(
         flatMap: (value: T) => Optional<Defined<U>>,
     ): Optional<Defined<U>> {
@@ -58,9 +58,9 @@ export class Some<T> implements Optional<T> {
     }
 
     // Return type has to be Defined<U> to exclude undefined from the type U
-    public to<U>(map: (value: T) => Defined<U>): Some<U>
-    public to<U>(map: (value: T) => undefined): None<U>
-    public to<U>(map: (value: T) => U | undefined): Optional<U>
+    public to<U>(map: (value: T) => Defined<U>): Some<U>;
+    public to<U>(map: (value: T) => undefined): None<U>;
+    public to<U>(map: (value: T) => U | undefined): Optional<U>;
     public to<U>(map: (value: T) => U | undefined): Optional<U> | Some<U> | None<U> {
         return optional<U>(map(this.value));
     }
@@ -96,12 +96,12 @@ export class Some<T> implements Optional<T> {
         return none<T>();
     }
 
-    public otherwise(fallback: Value<T | undefined>): Some<T>
+    public otherwise(fallback: Value<T | undefined>): Some<T>;
     public otherwise(): this {
         return this;
     }
 
-    public or(fallback: Value<T | undefined>): T
+    public or(fallback: Value<T | undefined>): T;
     public or(): T {
         return this.value;
     }
@@ -119,53 +119,53 @@ export class Some<T> implements Optional<T> {
 export class None<T> implements Optional<T> {
     public readonly value: undefined;
 
-    public onto<U>(flatMap: (value: T) => Optional<Defined<U>>): None<Defined<U>>
+    public onto<U>(flatMap: (value: T) => Optional<Defined<U>>): None<Defined<U>>;
     public onto<U>(): None<Defined<U>> {
         return this as unknown as None<Defined<U>>;
     }
 
-    public to<U>(map: (value: T) => (U | undefined)): None<U>
+    public to<U>(map: (value: T) => (U | undefined)): None<U>;
     public to<U>(): None<U> {
         return this as unknown as None<U>;
     }
 
-    public pick<K extends keyof T>(property: Value<K>): None<Defined<T[K]>>
+    public pick<K extends keyof T>(property: Value<K>): None<Defined<T[K]>>;
     public pick<K extends keyof T>(): None<Defined<T[K]>> {
         return this as unknown as None<Defined<T[K]>>;
     }
 
-    public that(filter: Predicate<T>): None<T>
+    public that(filter: Predicate<T>): None<T>;
     public that(): this {
         return this;
     }
 
-    public which<U extends T>(filter: TypeGuard<T, U>): None<U>
+    public which<U extends T>(filter: TypeGuard<T, U>): None<U>;
     public which<U extends T>(): None<U> {
         return this as unknown as None<U>;
     }
 
-    public when(condition: Proposition): None<T>
+    public when(condition: Proposition): None<T>;
     public when(): this {
         return this;
     }
 
-    public otherwise(fallback: Value<T>): Some<T>
+    public otherwise(fallback: Value<T>): Some<T>;
     public otherwise(fallback: Value<undefined>): None<T>;
-    public otherwise(fallback: Value<T | undefined>): Optional<T>
+    public otherwise(fallback: Value<T | undefined>): Optional<T>;
     public otherwise(fallback: Value<T | undefined>): Some<T> | None<T> | Optional<T> {
         return optional(valueOf(fallback));
     }
 
-    public or(fallback: Value<T>): T
-    public or(fallback: Value<undefined>): undefined
-    public or(fallback: Value<T | undefined>): T | undefined
+    public or(fallback: Value<T>): T;
+    public or(fallback: Value<undefined>): undefined;
+    public or(fallback: Value<T | undefined>): T | undefined;
     public or(
         fallback: Value<T | undefined> | Value<T>,
     ): T | undefined {
         return valueOf(fallback);
     }
 
-    public run(procedure: (value: T) => void): None<T>
+    public run(procedure: (value: T) => void): None<T>;
     public run(): this {
         return this;
     }

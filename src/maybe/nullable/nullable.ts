@@ -48,9 +48,9 @@ export class Solum<T> implements Nullable<T> {
         }
     }
 
-    public onto<U>(flatMap: (value: T) => Solum<NotNull<U>>): Solum<NotNull<U>>
-    public onto<U>(flatMap: (value: T) => Nil<NotNull<U>>): Nil<NotNull<U>>
-    public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nullable<NotNull<U>>
+    public onto<U>(flatMap: (value: T) => Solum<NotNull<U>>): Solum<NotNull<U>>;
+    public onto<U>(flatMap: (value: T) => Nil<NotNull<U>>): Nil<NotNull<U>>;
+    public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nullable<NotNull<U>>;
     public onto<U>(
         flatMap: (value: T) => Nullable<NotNull<U>>,
     ): Nullable<NotNull<U>> {
@@ -58,9 +58,9 @@ export class Solum<T> implements Nullable<T> {
     }
 
     // Return type has to be NotNull<U> to exclude null from the type U
-    public to<U>(map: (value: T) => NotNull<U>): Solum<U>
-    public to<U>(map: (value: T) => null): Nil<U>
-    public to<U>(map: (value: T) => U | null): Nullable<U>
+    public to<U>(map: (value: T) => NotNull<U>): Solum<U>;
+    public to<U>(map: (value: T) => null): Nil<U>;
+    public to<U>(map: (value: T) => U | null): Nullable<U>;
     public to<U>(map: (value: T) => U | null): Nullable<U> | Solum<U> | Nil<U> {
         return nullable<U>(map(this.value));
     }
@@ -96,12 +96,12 @@ export class Solum<T> implements Nullable<T> {
         return nil<T>();
     }
 
-    public otherwise(fallback: Value<T | null>): Solum<T>
+    public otherwise(fallback: Value<T | null>): Solum<T>;
     public otherwise(): this {
         return this;
     }
 
-    public or(fallback: Value<T | null>): T
+    public or(fallback: Value<T | null>): T;
     public or(): T {
         return this.value;
     }
@@ -123,53 +123,53 @@ export class Nil<T>
 implements Nullable<T> {
     public readonly value: null = null;
 
-    public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nil<NotNull<U>>
+    public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nil<NotNull<U>>;
     public onto<U>(): Nil<NotNull<U>> {
         return this as unknown as Nil<NotNull<U>>;
     }
 
-    public to<U>(map: (value: T) => (U | null)): Nil<U>
+    public to<U>(map: (value: T) => (U | null)): Nil<U>;
     public to<U>(): Nil<U> {
         return this as unknown as Nil<U>;
     }
 
-    public pick<K extends keyof T>(property: Value<K>): Nil<NotNull<T[K]>>
+    public pick<K extends keyof T>(property: Value<K>): Nil<NotNull<T[K]>>;
     public pick<K extends keyof T>(): Nil<NotNull<T[K]>> {
         return this as unknown as Nil<NotNull<T[K]>>;
     }
 
-    public that(filter: Predicate<T>): Nil<T>
+    public that(filter: Predicate<T>): Nil<T>;
     public that(): this {
         return this;
     }
 
-    public which<U extends T>(filter: TypeGuard<T, U>): Nil<U>
+    public which<U extends T>(filter: TypeGuard<T, U>): Nil<U>;
     public which<U extends T>(): Nil<U> {
         return this as unknown as Nil<U>;
     }
 
-    public when(condition: Proposition): Nil<T>
+    public when(condition: Proposition): Nil<T>;
     public when(): this {
         return this;
     }
 
-    public otherwise(fallback: Value<T>): Solum<T>
+    public otherwise(fallback: Value<T>): Solum<T>;
     public otherwise(fallback: Value<null>): Nil<T>;
-    public otherwise(fallback: Value<T | null>): Nullable<T>
+    public otherwise(fallback: Value<T | null>): Nullable<T>;
     public otherwise(fallback: Value<T | null>): Solum<T> | Nil<T> | Nullable<T> {
         return nullable(valueOf(fallback));
     }
 
-    public or(fallback: Value<T>): T
-    public or(fallback: Value<null>): null
-    public or(fallback: Value<T | null>): T | null
+    public or(fallback: Value<T>): T;
+    public or(fallback: Value<null>): null;
+    public or(fallback: Value<T | null>): T | null;
     public or(
         fallback: Value<T | null> | Value<T>,
     ): T | null {
         return valueOf(fallback);
     }
 
-    public run(procedure: (value: T) => void): Nil<T>
+    public run(procedure: (value: T) => void): Nil<T>;
     public run(): this {
         return this;
     }

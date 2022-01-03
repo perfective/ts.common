@@ -772,12 +772,16 @@ describe(Nothing, () => {
     });
 
     describe('run', () => {
-        let pi: number = 3.14;
+        let pi: number;
 
         // eslint-disable-next-line func-style -- conflicts with prefer-arrow
         const assignPi = (value: number): Nullary<void> => (): void => {
             pi = value;
         };
+
+        beforeEach(() => {
+            pi = 3.14;
+        });
 
         it('does not run the given procedure', () => {
             expect(pi).toBe(3.14);

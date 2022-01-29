@@ -131,8 +131,8 @@ describe('unknownError', () => {
     it('returns the passed value as is when the value is an Error', () => {
         const error: Exception = exception('Failure');
 
-        expect(unknownError(error) === error)
-            .toBe(true);
+        expect(unknownError(error))
+            .toBe(error);
     });
 
     it('returns an exception with the passed value in context when the value is not an Error', () => {

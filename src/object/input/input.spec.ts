@@ -48,7 +48,7 @@ describe('input', () => {
             id?: InputPrimitive<number>;
             date?: InputPrimitive<string>;
         } | null | undefined = example?.params;
-        // @ts-expect-error -- test behvaior when exactOptionalPropertyTypes is off.
+        // @ts-expect-error -- test behavior when exactOptionalPropertyTypes is off.
         const query: {
             filter?: {
                 status?: InputPrimitive<boolean>;
@@ -119,7 +119,7 @@ describe('arrayInput', () => {
             'white',
             'blue',
         ]);
-        const inputArray: (string | unknown | null | undefined)[] = arrayInput<string>(inputColors) ?? [];
+        const inputArray: (string | unknown | null | undefined)[] = arrayInput<string>(inputColors) as [];
         const validInput: string[] = inputArray.map(stringInput).filter(isDefined);
 
         expect(validInput)

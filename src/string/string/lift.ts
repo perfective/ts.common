@@ -2,6 +2,9 @@ import { Unary } from '../../function/function/unary';
 
 import { CodePoint, Utf16CodeUnit } from './string';
 
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- -1 is an error code
+export type NumberOrErrorCode = number | -1;
+
 export function charAt(index: number): Unary<string, string> {
     return (value: string): string => value.charAt(index);
 }
@@ -77,8 +80,8 @@ export function replaceWith(search: string | RegExp, replacement: Replacement): 
     return (value: string): string => value.replace(search, replacement);
 }
 
-export function search(search: RegExp): Unary<string, number | -1> {
-    return (value: string): number | -1 => value.search(search);
+export function search(search: RegExp): Unary<string, NumberOrErrorCode> {
+    return (value: string): NumberOrErrorCode => value.search(search);
 }
 
 export function slice(start: number, end?: number): Unary<string, string> {

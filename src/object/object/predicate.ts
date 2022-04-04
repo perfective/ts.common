@@ -19,6 +19,7 @@ export function isRecord<T>(value: T): boolean {
  *
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Truthy
  */
+// eslint-disable-next-line unicorn/prefer-native-coercion-functions -- function name increases readability
 export function isTruthy<T>(value: T): boolean {
     return Boolean(value);
 }

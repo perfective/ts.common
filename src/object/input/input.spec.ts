@@ -119,6 +119,7 @@ describe('arrayInput', () => {
             'white',
             'blue',
         ]);
+        // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- listing types for testing
         const inputArray: (string | unknown | null | undefined)[] = arrayInput<string>(inputColors) as [];
         const validInput: string[] = inputArray.map(stringInput).filter(isDefined);
 

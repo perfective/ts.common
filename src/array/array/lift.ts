@@ -2,6 +2,9 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- -1 is an error code
+export type NumberOrErrorCode = number | -1;
+
 export function concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]> {
     return (array: T[]): T[] => array.concat(...items);
 }
@@ -30,8 +33,8 @@ export function find<T>(condition: Predicate<T>): Unary<T[], T | undefined> {
     return (array: T[]): T | undefined => array.find(condition);
 }
 
-export function findIndex<T>(condition: Predicate<T>): Unary<T[], number | -1> {
-    return (array: T[]): number | -1 => array.findIndex(condition);
+export function findIndex<T>(condition: Predicate<T>): Unary<T[], NumberOrErrorCode> {
+    return (array: T[]): NumberOrErrorCode => array.findIndex(condition);
 }
 
 export function forEach<T>(procedure: Unary<T, void>): Unary<T[], void> {
@@ -42,8 +45,8 @@ export function includes<T>(search: T, from?: number): Predicate<T[]> {
     return (array: T[]): boolean => array.includes(search, from);
 }
 
-export function indexOf<T>(search: T, from?: number): Unary<T[], number | -1> {
-    return (array: T[]): number | -1 => array.indexOf(search, from);
+export function indexOf<T>(search: T, from?: number): Unary<T[], NumberOrErrorCode> {
+    return (array: T[]): NumberOrErrorCode => array.indexOf(search, from);
 }
 
 export function join<T>(separator: string = ','): Unary<T[], string> {
@@ -54,8 +57,8 @@ export function keys<T>(array: T[]): IterableIterator<number> {
     return array.keys();
 }
 
-export function lastIndexOf<T>(search: T, from?: number): Unary<T[], number | -1> {
-    return (array: T[]): number | -1 => array.lastIndexOf(
+export function lastIndexOf<T>(search: T, from?: number): Unary<T[], NumberOrErrorCode> {
+    return (array: T[]): NumberOrErrorCode => array.lastIndexOf(
         search,
         isDefined(from) ? from : array.length - 1,
     );

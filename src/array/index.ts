@@ -53,6 +53,7 @@ export {
     keys,
     lastIndexOf,
     map,
+    NumberOrErrorCode,
     pop,
     push,
     reduce,

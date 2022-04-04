@@ -23,6 +23,7 @@ export {
     lastIndexOf,
     lowerCase,
     normalize,
+    NumberOrErrorCode,
     padEnd,
     padStart,
     repeat,

@@ -7,7 +7,7 @@ import { ExceptionTokens } from './exception-tokens';
 // eslint-disable-next-line unicorn/custom-error-definition -- base class for user-defined errors
 export class Exception
     extends Error {
-    public readonly name: string;
+    public override readonly name: string;
     public readonly template: string;
     public readonly tokens: ExceptionTokens;
 
@@ -22,7 +22,7 @@ export class Exception
         this.tokens = message.tokens;
     }
 
-    public toString(): string {
+    public override toString(): string {
         return unchained(this)
             .map(errorOutput)
             .join('\n\t- ');

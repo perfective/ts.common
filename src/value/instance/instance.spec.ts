@@ -9,7 +9,7 @@ class Base {
 
 class Extension
     extends Base {
-    public name(): string {
+    public override name(): string {
         return 'Concrete';
     }
 }

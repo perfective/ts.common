@@ -1,57 +1,58 @@
-= Maybe (Monad)
+= Maybe monad
 
 `@perfective/common/maybe` package provides an https://en.wikipedia.org/wiki/Option_type[Option type] implementation.
 It is inspired by the Haskell
-`link:https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe[Maybe]` monad,
-and is following the https://en.wikipedia.org/wiki/Monad_(functional_programming)#Analysis[monad laws]
-as close as possible given the limitations of JavaScript and TypeScript
-(exceptions and solutions are described below).
+`link:https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe[Maybe]` monad
+and satisfies the https://en.wikipedia.org/wiki/Monad_(functional_programming)#Analysis[monad laws].
 
-The purpose of the `Maybe` type is to simplify handling of values that may be absent
-by providing operators that are called only when a value is present.
-It allows creating chained calls similar to ones created by `Promise.then()` and RxJS `pipe()`
-and handling values in-place.
+`Maybe` type simplifies handling of the absent (`null`/`undefined`) values
+and provides methods that are called only when the value is present.
+It allows the creation of chained calls similar to `Promise.then()` and RxJS `pipe()`.
 
 
-== Implementation with `null` and `undefined`
+== Handling `null` and `undefined` values
 
-In JavaScript there two different types representing "absence": `undefined` and `null`.
-This means, that the standard dichotomy like `Just | Nothing`,
-or `Some | None` does not fit precisely,
-and requires additional logic to cover all the cases: `T | null | undefined`.
+In JavaScript, two types represent an "absence" of value: `undefined` and `null`.
+So the dichotomies like `Just | Nothing` and `Some | None` do not fit precisely
+and require additional logic to cover all the cases: `T | null | undefined`.
 For example, when you create a new `Maybe<T>` with a `null` value,
-it has to maintain this value as `null` and not switch it to `undefined`.
+it has to maintain the value as `null` and should not change it to `undefined`.
 
 .`Maybe<T>` maintains the original value.
 [source,typescript]
 ----
 import { maybe, naught, nothing } from '@perfective/common/maybe';
-
-maybe(undefined).value === undefined;
-nothing().value === undefined; // <1>
-
-maybe(null).value === null;
-naught().value === null; // <2>
+import { isGreaterThan } from '@perfective/common/number';
 
 maybe(3.14).value === 3.14;
-----
-<1> The `nothing()` function is the default unit function for `Nothing<T>`
-and returns a memoized `new Nothing(undefined)`.
-<2> The `naught()` function is the secondary unit function for `Nothing<T>`
-and returns a memoized `new Nothing(null)`.
 
-It may not always be desired to have both `undefined` and `null` excluded.
-Consider you have data coming from an API.
-If this API has JSON schema attached
-and that schema says that all fields will be returned,
-it is not correct to treat them as `T | null | undefined`,
-but rather only as `T | null`
-(or even just `T`, if the field is required).
-Using `maybe` will hide a problem with the API,
-as a field that is not returned will be treated as if it was returned as `null`.
-To handle such cases,
-in addition to the `Maybe` type,
-there are two other types:
+maybe(undefined).value === undefined;
+nothing().value === undefined; // <.>
+maybe(3.14)
+    .that(isGreaterThan(4))
+    .value === undefined; // <.>
+
+maybe(null).value === null;
+naught().value === null; // <.>
+maybe(null)
+    .that(isGreaterThan(4))
+    .value === null; // <.>
+----
+<.> The `nothing()` function is the default unit function for `Nothing<T>`
+and returns a memoized `new Nothing(undefined)`.
+<.> By default, `Maybe` uses `undefined` for the absent value.
+<.> The `naught()` function is the secondary unit function for `Nothing<T>`
+and returns a memoized `new Nothing(null)`.
+<.> If the original value is `null`,
+`null` will be returned as an absent value after all transformations.
+
+It is not always desired to have both `undefined` and `null` excluded.
+For example, consider you have a field in an API that is `null` when there is no data,
+but the field is not returned if a user does not have access to it.
+In this case, you may prefer to fall back from `null` to a default value
+but to throw an error for `undefined`.
+
+To cover these cases, `@perfective/common/maybe` provides additional types:
 
 * `Nullable<T>` that considers `null` as _absent_ and `undefined` as _present_:
 ** `Solum<T>` represents a present value;
@@ -61,42 +62,33 @@ there are two other types:
 ** `Some<T>` represents a present value;
 ** `None<T>` represents an absent value.
 
-The original value (`null` or `undefined`) will be preserved through operations.
-
-.`nullable` maintains the original `null` value context.
+.The original absent value (`null` or `undefined`) is maintained through transformations.
 [source,typescript]
 ----
-import { just, nullable, optional } from '@perfective/common/maybe';
+import { nullable, optional } from '@perfective/common/maybe';
 import { isGreaterThan } from '@perfective/common/number';
 
 nullable(3.14)
     .that(isGreaterThan(4))
-    .value === null;
+    .value === null; // <.>
 
 optional(3.14)
     .that(isGreaterThan(4))
-    .value === undefined;
-
-just(3.14)
-    .that(isGreaterThan(4))
-    .value === undefined; // <1>
-
-maybe(null)
-    .that(isGreaterThan(4))
-    .value === null; // <2>
+    .value === undefined; // <.>
 ----
-<1> For the `Maybe<T>`, the default `Nothing` context is `undefined`,
-so going from `Just` to `Nothing` will default to `undefined`.
-<2> But if `Maybe` already is `Nothing`,
-it will keep the original value.
+<.> `Nullable<T>` returns `null` when the value is absent (`Nil<T>`)
+<.> `Optional<T>` returns `undefined` when the value is absent (`None<T>`).
 
 
-== Maintaining the monad context
+== Preserving the monad type.
 
-An important implementation detail of this package is a strict typing of the context.
-It means, that if you know you a `Just` type, you don't lose this information.
+This package strictly preserves the type of the monad.
+For example,
+if you have a `Just` type and apply a function that returns a present value,
+then the result will also be of type `Just`.
 
 .Difference between `Maybe`, `Just` and `Nothing` contexts.
+[source,typescript]
 ----
 function maybeDecimal(ma: Maybe<number>): Maybe<string> { // <.>
     return ma.to(a => a.toString(10));
@@ -110,40 +102,35 @@ function nothingDecimal(ma: Nothing<number>): Nothing<string> { // <.>
     return ma.to(a => a.toString(10));
 }
 ----
-<1> In the first example, the argument of the `maybeDecimal` function is only `Maybe<number>`.
-It allows to pass either `Just<number>` or `Nothing<number>`.
-As it's flexible for the function call (and is usually desired),
-it limits the return type strictly to `Maybe<string>`.
-The lambda `a => a.toString(10)` is guaranteed to be a string,
-it may never be called, if `ma` is `Nothing`,
-returning `Nothing` as the result.
-<2> In case of the `justDecimal` function,
-the argument is `Just<number>`,
-so the bound value (inside the monad) is _always_ present.
-Hence, given the lambda that also _always_ returns a value,
-the result type can be narrowed down to a stricter `Just<string>`.
-<3> If we decide to limit ourselves with `Nothing<number>` as an argument,
-we won't be able to return anything but `Nothing<string>`.
+<.> The argument of the `maybeDecimal` function is `Maybe<number>`.
+You can pass either `Just<number>` or `Nothing<number>`.
+The result of the function may also be `Just` or `Nothing`,
+even as `a => a.toString(10)` is guaranteed to be present.
+<.> The argument is `Just<number>`, so the value is _always_ present.
+If a given function _always_ returns a value,
+the result type is also `Just<string>`.
+<.> When the argument is `Nothing<number>`,
+the result will always be `Nothing<string>`.
 
 
 == Usage
 
-There are three distinct type groups that are available in this package:
+There are three distinct type groups available in this package:
 
 * `Maybe<T>` is `Just<T>` or `Nothing<T>`;
 * `Optional<T>` is `Some<T>` or `None<T>`;
 * `Nullable<T>` is `Solum<T>` or `Nil<T>`.
 
 The examples below are shown primarily for the `Maybe` type,
-as its most used.
+as the most used.
 
 
 === `onto(flatMap)`
 
-`Maybe.onto()` is the _bind_ operator (`>>=`),
-that (almost) satisfies three https://wiki.haskell.org/Monad_laws[monad laws]:
+`Maybe.onto()` is the _bind_ operator (`>>=`)
+that satisfies the three https://wiki.haskell.org/Monad_laws[monad laws]:
 
-* _Unit_ is a _left-identity_ for _bind_:
+1. The _unit_ function is a _left-identity_ for _bind_:
 +
 [source,typescript]
 ----
@@ -152,12 +139,11 @@ let f: (value: T) => Maybe<U>;
 maybe(x).onto(f) === f(x);
 ----
 +
-Given a function that map a given `value` into a `Maybe`,
-applying it to a value through the `onto` operator
-results in the same value,
-as when function was applied directly.
+Given a function `f` mapping a `value` to a `Maybe`
+and applying it using the `onto` operator,
+the result will be the same as applying this function `f` directly.
 +
-* _Unit_ function is a _right-identity_ for _bind_:
+2. The _unit_ function is a _right-identity_ for _bind_:
 +
 [source,typescript]
 ----
@@ -170,7 +156,7 @@ Given a monad value,
 applying a unit function through the `onto` operator
 results in the same monad value.
 +
-* _Bind_ operator is associative
+3. _Bind_ operator is associative
 +
 [source,typescript]
 ----
@@ -183,72 +169,69 @@ ma.onto(a => f(a).onto(g)) === ma.onto(f).onto(g)
 +
 Given a monad value,
 applying one function and then another inside one `onto`
-is the same as applying those functions consequentially.
+is the same as applying those functions one after another.
 In other words, `onto` operators can be flattened.
 
 [WARNING]
 ====
-The _left-identity_ and _associativity_ laws are not satisfied
-when the given function has custom handling
-of `null` or `undefined` values.
-
-If the result of the function is critical,
-use the `Maybe.lift()` function as it executes the given function even when the value is absent.
+If you have a `flatMap` function with custom handling for `null` or `undefined` values,
+you may break the _left-identity_ and the _associativity_ monad laws.
 ====
 
-.Consider an example function `decimal` that handles different cases that are possible in JS code.
+.Custom handling of `null` with `Maybe<T>.onto()` breaking the _left-identity_ law.
 [source,typescript]
 ----
-import { isAbsent } from '@perfective/common';
-import { Just, just, maybe, naught, nothing } from '@perfective/common/maybe';
+import { isNull } from '@perfective/common';
+import { Just, just, naught } from '@perfective/common/maybe';
 
-function decimal(value?: number | null): Just<string> {
-    if (isAbsent(value)) {
+function decimal(value: number | null): Just<string> { // <.>
+    if (isNull(value)) {
         return just('0');
     }
     return just(value.toString(10));
 }
 
-maybe(3.14).onto(decimal) == decimal(3.14); // <.>
-maybe(0).onto(decimal) == decimal(0);
-maybe(-1).onto(decimal) == decimal(-1);
-
-nothing().onto(decimal) != decimal(undefined);
+just(3.14).onto(decimal) == decimal(3.14); // <.>
 naught().onto(decimal) != decimal(null); // <.>
 ----
-<1> Applying `decimal` to a present `number` satisfies the first law.
-<2> When value is absent, `onto` does not execute `decimal` at all,
-so the result is not the same, as by applying `decimal` directly.
-The _left-identity law_ is *not* satisfied.
+<.> `Maybe<T>.onto()` expects the function of type `Unary<number, Maybe<string>>`,
+but `decimal` function is of type `Unary<number | null, Maybe<string>>`,
+so the argument type does not match.
+<.> Applying `decimal` to a present `number` behaves as expected.
+<.> When the value is absent, `onto` does not execute `decimal` at all,
+so the result is not the same as applying `decimal` directly.
 
-.Using `Maybe.lift` to handle functions with custom `null`/`undefined` handling.
+If you have to use custom handling of `null`/`undefined`,
+you should use `Optional<T>` or `Nullable<T>` types
+that treat `null` and `undefined` as present.
+
+.Custom handling of `null` with `Optional<T>.onto()` satisfying the _left-identity_ law.
 [source,typescript]
 ----
-import { isNull, isUndefined } from '@perfective/common';
-import { Just, just, maybe, naught, nothing } from '@perfective/common/maybe';
+import { isNull } from '@perfective/common';
+import { Some, some, none } from '@perfective/common/maybe';
 
-function decimal(value?: number | null): string { // <.>
+function decimal(value: number | null): Some<string> { // <.>
     if (isNull(value)) {
-        return 'null';
+        return just('0');
     }
-    if (isUndefined(value)) {
-        return 'undefined';
-    }
-    return value.toString(10);
+    return just(value.toString(10));
 }
 
-maybe(3.14).lift(decimal) == just('3.14'); // <.>
-
-nothing().lift(decimal) === just(decimal(undefined));
-naught().lift(decimal) === just(decimal(null)); // <.>
+some(3.14).onto(decimal) == decimal(3.14); // <.>
+none().onto(decimal) == decimal(null); // <.>
 ----
-<1> `lift` is a `map` operator, not a `flatMap`,
-so the function should transform value of type `T` into a value of type `U`.
-`lift` itself will wrap it into the `Maybe<U>`.
-<2> Applying the `decimal` function using `lift` returns the same result for a present value.
-<3> But when we apply `decimal` function to `Nothing`,
-`lift` operator is actually called,
-and its result wrapped into `maybe` is returned.
+<.> `Optional<T>.onto()` expects the function of type `Unary<number | null, Optional<string>>`,
+and the `decimal` function is of type `Unary<number | null, Some<string>>`,
+so the argument type matches.
+<.> Applying `decimal` to a present `number` behaves as expected.
+<.> When the value is `null`, `Optional<T>` considers it as present and runs `onto(decimal)`,
+so the result is the same as applying `decimal` directly.
+
+For the (legacy) functions
+(written prior to using `Maybe`)
+that handle/return `null`/`undefined`,
+you should use `Maybe.map()` or `Maybe.lift()` methods.
 
 [INFO]
 ====
@@ -259,7 +242,7 @@ and the `flatMap` method in `java.util.Optional`.
 
 === `to(map)`
 
-`Maybe.to()` is a mapping operator,
+`Maybe.to()` is a mapping operator
 that applies the provided mapping function only when the value is present
 and wraps up the result into a new `Maybe` value.
 
@@ -268,7 +251,7 @@ and wraps up the result into a new `Maybe` value.
 `Maybe.to` is not a _bind_ operator and is not required to satisfy the monad laws.
 ====
 
-.Using `Maybe.to()` to chain computations
+.Using `Maybe.to()` chaining
 [source,typescript]
 ----
 import { Maybe, maybe } from '@perfective/common/maybe';
@@ -280,25 +263,21 @@ interface Name {
 }
 
 interface User {
-    id?: number;
     name?: Name;
 }
 
-function nameOutput(name?: Name): string | undefined {
-    return maybe(name)
-        .to(name => `${name.first} ${name.last}`) // <.>
-        .or(undefined);
+function nameOutput(name: Name): string { // <.>
+    return `${name.first} ${name.last}`;
 }
 
 function usernameOutput(user?: User): Maybe<string> {
     return maybe(user)
-        .to(user => nameOutput(user.name)) // <.>
+        .pick('name')
+        .to(nameOutput)
         .to(lowercase);
 }
 ----
-<1> Unlike `onto`, `to` should return an unpacked value.
-The result will be wrapped into `maybe`
-<2> This example can be simplified be using `Maybe.pick()`.
+<.> The `to` method wraps the result into `maybe`.
 
 [INFO]
 ====
@@ -310,12 +289,12 @@ and the `map` method in `java.util.Optional`.
 === `pick(property)`
 
 `Maybe.pick()` is a shortcut for the `Maybe.to()`
-that allows to provide a property name to pick from an object.
+that picks a property value by its name.
 Only properties that are defined on the value type are allowed.
 
 It is similar to the
 https://devblogs.microsoft.com/typescript/announcing-typescript-3-7/#optional-chaining[optional chaining]
-that was introduced in TypeScript 3.7,
+introduced in TypeScript 3.7
 but does not generate excessive JS code for each `null` and `undefined` check in the chain.
 
 .Using `Maybe.pick()` for optional chaining
@@ -335,18 +314,18 @@ interface User {
 }
 
 function firstName(user?: User): string {
-    return maybe(user).pick('name').pick('first').or(panic('First name unknown')); // <.>
+    return maybe(user).pick('name').pick('first').or(panic('Unknown first name')); // <.>
 }
 
 function userId(user: User): number {
     return just(user).pick('id').value; // <.>
 }
 ----
-<1> `maybe(user).pick('email')` will not compile,
+<.> `maybe(user).pick('email')` will not compile,
 as, in this example, the `User` type does not have an `email` property.
-<2> When value is `Just` and a required property is picked,
+<.> When the value is `Just<T>`, and you `pick` a required property,
 the result is `Just<U>` (where `U` is the type of that property).
-Hence, it's strongly recommended starting a `maybe`-chain with `Just`
+Hence, starting a `maybe`-chain with `Just` is strongly recommended
 if the value is already present.
 
 [INFO]
@@ -358,8 +337,7 @@ This method is similar to the `pluck` operator in `rxjs`.
 === `that(filter)`
 
 `Maybe.that()` is a filter method.
-It allows to pass a predicate,
-that will be used if the value is present.
+It allows passing a predicate for filtering a present value.
 
 .Using `Maybe.that()` to filter out a value
 [source,typescript]
@@ -373,7 +351,7 @@ function quotient(dividend: number, divisor: number): Maybe<number> {
         .to(divisor => dividend / divisor);
 }
 ----
-<1> Returns `Nothing`, so `to()` will not be running its function.
+<.> Returns `Nothing`, so `to()` will not be running its function.
 
 [INFO]
 ====
@@ -384,10 +362,9 @@ and the `filter` method in `java.util.Optional`.
 
 === `which(filter)`
 
-`Maybe.which()` is a filter method that requires to use a
+`Maybe.which()` is a filter method that requires passing a
 link:https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types[_type guard_].
-It handles the result type,
-so it can be used inside the binding operators.
+It narrows down the result type based on the type guard.
 
 .Using `Maybe.which()` to filter out values with absent properties.
 [source,typescript]
@@ -416,26 +393,26 @@ function usernameOutput(user: User): Maybe<string> {
         .to(nameOutput); // <.>
 }
 ----
-<1> A broader `hasPresentProperty('first', 'last')` can be used as well,
-to guarantee that these properties _value_ are not `null` too.
-It is not required for the TS compiler `strictNullCheck`,
-as these properties only _optional_,
-but are not _nullable_.
-<2> `Name` type requires both `first` and `last` properties to be defined and not null,
+<.> A broader `hasPresentProperty('first', 'last')` can also be used.
+to guarantee that these properties' values are not `null` too.
+But it is not required by the TS compiler `strictNullCheck`,
+as these properties are _optional_ not _nullable_.
+<.> `Name` type requires both `first` and `last` properties to be defined and not null,
 so  without the `which` filter (with TS `strictNullChecks` enabled),
 this code will not compile.
 
 
 === `when(condition)`
 
-`Maybe.when()` is a filter method that allows to use a proposition
-(a `boolean` value, or a nullary function that returns `boolean`)
-to describe condition that is not related to the value inside `Maybe`.
+`Maybe.when()` is a filter method.
+It uses a proposition
+(a `boolean` value or a nullary function that returns a `boolean` value)
+to describe a condition that is not related to the value inside `Maybe`.
 
 [NOTE]
 ====
-`Maybe.when()` should be used to increase readability,
-as a nullary function can be passed into the `Maybe.that()`.
+`Maybe.when()` should be used for better readability,
+instead of passing a nullary function into the `Maybe.that()`.
 ====
 
 .Using `Maybe.when()` to filter out values based on a global condition.
@@ -449,13 +426,14 @@ function tokenLogOutput(token: string, isLog: boolean): Maybe<string> {
         .to(token => '***');
 }
 ----
-<1> Can be `when(() => isLog)`,
-if we want to run computation only when the value is present.
+<.> You can use `when(() => isLog)`
+if you only want to run the computation when the value is present.
 
 
 === `otherwise(fallback)`
 
-`Maybe.otherwise()` method allows to provide a fallback value or to throw an error.
+`Maybe.otherwise()` method allows passing a fallback value or to throw an error
+if the monad value is _absent_.
 
 .Using `Maybe.otherwise()` to continue the chain after the fallback.
 [source,typescript]
@@ -476,9 +454,9 @@ function range(min?: number, max?: number): number {
 
 === `or(fallback)`
 
-`Maybe.or()` method allows to get the present value of the monad,
-to fallback to the provided value if monad value is absent,
-or to throw an error.
+The `Maybe.or()` method allows getting the present monad value
+and providing a fallback value or throwing an error
+when the monad value is missing.
 
 .Using `Maybe.or()`
 [source,typescript]
@@ -508,10 +486,10 @@ function userOutput(user?: User): string {
         .or(panic('Undefined user')); // <.>
 }
 ----
-<1> The fallback value type can be present or absent.
-It allows to always return only `undefined` or `null` if the value is absent.
-<2> Using `panic` or any other function that throws an error when called
-allows to guarantee a present value is returned.
+<.> The fallback value type can be present or absent.
+It allows returning only `undefined` or `null` if the value is absent.
+<.> Using `panic` or any other function that throws an error when called
+allows guaranteeing a present value is returned.
 
 [INFO]
 ====
@@ -521,10 +499,24 @@ This method is similar to the `orElse`, `orElseGet`, and `orElseThrow` methods i
 
 === `run(procedure)`
 
-`Maybe.run()` method allows to run a procedure with the present value.
-It always returns the original value
-(or a reference to the original object,
-which can be mutated by the procedure).
+The `Maybe.run()` method allows running a procedure using the present value.
+`Maybe.run()` discards the procedure's return value
+and keeps the original monad value.
+
+[WARNING]
+====
+The `Maybe.run()` does not check if the given procedure mutates the present value.
+====
+
+[source,typescript]
+----
+import { optional } from '@perfective/common/maybe';
+
+function logError(error?: Error): Error|undefined {
+    return optional(error)
+        .run(console.error);
+}
+----
 
 [NOTE]
 ====
@@ -535,8 +527,9 @@ and `ifPresent` method in `java.util.Optional`.
 
 === `lift(map)`
 
-`Maybe.lift()` method allows to pass a function that maps the value even when it is absent.
-It always runs, unlike `Maybe.map()` that is called only when the value is present.
+The `Maybe.lift()` method allows passing a function that maps even an absent value.
+Unlike `Maybe.map()`, which is called only when the value is present,
+the `Maybe.lift()` method always runs.
 
 [source,typescript]
 ----
@@ -553,12 +546,12 @@ function decimal(value?: number | null): string {
 maybe(undefined).lift(decimal) === just(decimal(undefined));
 maybe(null).lift(decimal) === just(decimal(null)); // <.>
 ----
-<1> `Maybe.lift()` wraps the result into the next `maybe` value.
+<.> `Maybe.lift()` wraps the result into the next `maybe` value.
 
 
 === Lifting functions
 
-Each method has a corresponding lifting function that can be used in the `Array.prototype.map`
+Each method has a corresponding lifting function to be used in the `Array.prototype.map`
 (or any other mapping method or operator).
 
 [source,typescript]
@@ -577,6 +570,6 @@ numbers.map(or(0)) === [2.71, 3.14, 0, 0];
 
 [WARNING]
 ====
-As of v0.6.0, lifting functions only supported for the `Maybe`/`Just`/`Nothing` types,
-and are not supported for `Nullable`/`Solum`/`Nil` or `Optional`/`Some`/`None`.
+As of v0.6.0, the lifting functions are only supported for the `Maybe`/`Just`/`Nothing` types
+and not for `Nullable`/`Solum`/`Nil` or `Optional`/`Some`/`None`.
 ====

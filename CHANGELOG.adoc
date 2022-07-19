@@ -1,11 +1,21 @@
 = Changelog
 
+== v8.0.2
+
+=== Fixes
+
+* Move the `"types"` field to be the first one in the `"exports"`.
++
+https://devblogs.microsoft.com/typescript/announcing-typescript-4-7/#package-json-exports-imports-and-self-referencing[`"types"` condition should be first in `"exports"`].
+
+
 == v8.0.1
 
 === Fixes
 
-* Add type definitions files for sub-packages
-Types definitions [have to be provided](https://devblogs.microsoft.com/typescript/announcing-typescript-4-7/#package-json-exports-imports-and-self-referencing) since TypeScript 4.7.
+* Add type definitions files for sub-packages.
++
+Types definitions https://devblogs.microsoft.com/typescript/announcing-typescript-4-7/#package-json-exports-imports-and-self-referencing[have to be provided] since TypeScript 4.7.
 
 
 == v0.8.0

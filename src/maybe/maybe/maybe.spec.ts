@@ -118,7 +118,7 @@ describe(Maybe, () => {
 
     describe('onto', () => {
         describe('when the "flatMap" function returns Maybe', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).onto(constant(maybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -142,7 +142,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "flatMap" function returns Just', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).onto(constant(just('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -166,7 +166,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "flatMap" function returns Nothing(null)', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).onto(constant(naught<string>()));
 
                 expect(output).toBe(naught());
@@ -190,7 +190,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "flatMap" function returns Nothing(undefined)', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).onto(constant(nothing<string>()));
 
                 expect(output).toBe(nothing());
@@ -215,7 +215,7 @@ describe(Maybe, () => {
 
     describe('to', () => {
         describe('when the "map" function returns a present or absent value', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).to(constant(fallbackMaybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -239,7 +239,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "map" function returns a present value', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).to(constant('3.14'));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -263,7 +263,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "map" function returns null', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).to<string>(constant(null));
 
                 expect(output).toBe(naught());
@@ -287,7 +287,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "map" function returns undefined', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).to<string>(constant(undefined));
 
                 expect(output).toBe(nothing());
@@ -313,7 +313,7 @@ describe(Maybe, () => {
 
     describe('pick', () => {
         describe('when the property is required', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(typeGuardCheck).pick('required');
 
                 expect(output).toStrictEqual(just(3.14));
@@ -337,7 +337,7 @@ describe(Maybe, () => {
         });
 
         describe('when the property can be absent', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(naught());
@@ -363,7 +363,7 @@ describe(Maybe, () => {
 
     describe('that', () => {
         describe('when the "filter" condition is true', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -387,7 +387,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "filter" condition is false', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(nothing());
@@ -463,7 +463,7 @@ describe(Maybe, () => {
 
     describe('when', () => {
         describe('when the "condition" is true', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -487,7 +487,7 @@ describe(Maybe, () => {
         });
 
         describe('when the "condition" is false', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(3.14).when(constant(false));
 
                 expect(output).toBe(nothing());

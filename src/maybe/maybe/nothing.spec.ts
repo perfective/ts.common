@@ -489,7 +489,7 @@ describe(Nothing, () => {
         });
 
         describe('when the "fallback" may be an absent value', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = nothing<number>().otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(2.71));
@@ -513,7 +513,7 @@ describe(Nothing, () => {
         });
 
         describe('when the "fallback" may return an absent value', () => {
-            it('must be assigned toMaybe', () => {
+            it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = naught<number>().otherwise(constant(fallbackMaybe(2.71)));
 
                 expect(output).toStrictEqual(just(2.71));

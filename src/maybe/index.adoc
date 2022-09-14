@@ -80,7 +80,7 @@ optional(3.14)
 <.> `Optional<T>` returns `undefined` when the value is absent (`None<T>`).
 
 
-== Preserving the monad type.
+== Preserving the monad type
 
 This package strictly preserves the type of the monad.
 For example,
@@ -113,7 +113,76 @@ the result type is also `Just<string>`.
 the result will always be `Nothing<string>`.
 
 
-== Usage
+== Using `onto()` and `to()` methods
+
+Both `Maybe.onto()` and `Maybe.to()` methods  apply a given function
+only when the value is present.
+But `onto` requires the function to return the next `Maybe` instance,
+while `to` will wrap the returned value into `Maybe`.
+
+When writing functions that use Maybe chaining,
+the best practice is to return the packed value (as `Maybe`, `Just`, or `Nothing`).
+This allows a consumer of the function to decide how they want to unpack it
+or to keep it as `Maybe` for the next chain.
+
+When you have a function of non-Maybe types,
+then you have to use `Maybe.to`.
+
+.For example, consider you are writing a function to parse a date.
+[source,typescript]
+----
+function isValidDate(date: Date): boolean {
+    return date.toString() !== 'Invalid Date'; <.>
+}
+
+function parsedDate(input: string): Maybe<Date> { <.>
+    const date = new Date(input);
+    if (isValidDate(date)) {
+        return just(date);
+    }
+    return nothing();
+}
+
+interface BlogPost {
+    createdAt: string;
+}
+
+function dbDate(input: BlogPost): Date { <.>
+    return just(input)
+        .pick('createdAt')
+        .onto(parsedDate)
+        .or(panic('Invalid "Created At" Date'));
+}
+
+function jsonDate(input: BlogPost): string|null { <.>
+    return just(input)
+        .pick('createAt')
+        .onto(parsedDate)
+        .or(null);
+}
+
+function formattedCreatedAt(input: BlogPost): string { <.>
+    return just(input)
+        .pick('createdAt')
+        .onto(parsedDate)
+        .or('Unknown date');
+}
+----
+<.> The `new Date()` constructor creates a `Date` object even for
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date#return_value[invalid inputs].
+<.> We postpone the decision of how to handle an invalid value.
+By returning `Maybe<Date>` (instead of `Date|null` or throwing an error)
+we allow consumers of the function to make a decision that is most appropriate to their situation.
+<.> When we record value to the database,
+it has to be valid.
+So we must throw an error when the date is invalid.
+<.> When we return an API response,
+a `null` for invalid dates is ok.
+<.> When we try to format a date in the UI,
+we may prefer a readable fallback.
+
+
+== Reference
 
 There are three distinct type groups available in this package:
 
@@ -195,7 +264,7 @@ just(3.14).onto(decimal) == decimal(3.14); // <.>
 naught().onto(decimal) != decimal(null); // <.>
 ----
 <.> `Maybe<T>.onto()` expects the function of type `Unary<number, Maybe<string>>`,
-but `decimal` function is of type `Unary<number | null, Maybe<string>>`,
+but the `decimal` function is of type `Unary<number | null, Maybe<string>>`,
 so the argument type does not match.
 <.> Applying `decimal` to a present `number` behaves as expected.
 <.> When the value is absent, `onto` does not execute `decimal` at all,
@@ -203,7 +272,7 @@ so the result is not the same as applying `decimal` directly.
 
 If you have to use custom handling of `null`/`undefined`,
 you should use `Optional<T>` or `Nullable<T>` types
-that treat `null` and `undefined` as present.
+that treat `null` and `undefined` as present values.
 
 .Custom handling of `null` with `Optional<T>.onto()` satisfying the _left-identity_ law.
 [source,typescript]
@@ -396,7 +465,7 @@ function usernameOutput(user: User): Maybe<string> {
 <.> A broader `hasPresentProperty('first', 'last')` can also be used.
 to guarantee that these properties' values are not `null` too.
 But it is not required by the TS compiler `strictNullCheck`,
-as these properties are _optional_ not _nullable_.
+as these properties are _optional_, not _nullable_.
 <.> `Name` type requires both `first` and `last` properties to be defined and not null,
 so  without the `which` filter (with TS `strictNullChecks` enabled),
 this code will not compile.
@@ -411,7 +480,7 @@ to describe a condition that is not related to the value inside `Maybe`.
 
 [NOTE]
 ====
-`Maybe.when()` should be used for better readability,
+`Maybe.when()` should be used for better readability
 instead of passing a nullary function into the `Maybe.that()`.
 ====
 
@@ -432,7 +501,7 @@ if you only want to run the computation when the value is present.
 
 === `otherwise(fallback)`
 
-`Maybe.otherwise()` method allows passing a fallback value or to throw an error
+`Maybe.otherwise()` method allows passing a fallback value or throwing an error
 if the monad value is _absent_.
 
 .Using `Maybe.otherwise()` to continue the chain after the fallback.
@@ -499,7 +568,7 @@ This method is similar to the `orElse`, `orElseGet`, and `orElseThrow` methods i
 
 === `run(procedure)`
 
-The `Maybe.run()` method allows running a procedure using the present value.
+The `Maybe.run()` method allows executing a procedure using the present value.
 `Maybe.run()` discards the procedure's return value
 and keeps the original monad value.
 

@@ -24,12 +24,14 @@ describe('exception', () => {
     });
 
     it('creates an instance of an Exception', () => {
+        /* eslint-disable jest/max-expects -- check error properties */
         expect(error.name).toBe('Exception');
         expect(error.message).toBe('User not found');
         expect(error.template).toBe('User not found');
         expect(error.tokens).toStrictEqual({});
         expect(error.context).toStrictEqual({});
         expect(error.previous).toBeNull();
+        /* eslint-enable jest/max-expects */
     });
 
     it('creates an instance of an Exception with context data', () => {
@@ -73,6 +75,7 @@ describe('causedBy', () => {
     });
 
     it('creates an instance of an Exception with context data', () => {
+        /* eslint-disable jest/max-expects -- check all test properties */
         expect(contextChain.name).toBe('Exception');
         expect(contextChain.message).toBe('`User API` request failed');
         expect(contextChain.template).toBe('{{api}} request failed');
@@ -85,6 +88,7 @@ describe('causedBy', () => {
             },
         });
         expect(chain.previous).toStrictEqual(error('Resource not found'));
+        /* eslint-enable jest/max-expects */
     });
 
     it('provides an error stack', () => {

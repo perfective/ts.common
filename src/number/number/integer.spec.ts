@@ -8,24 +8,35 @@ import {
 } from './integer';
 
 describe('isInteger', () => {
-    it('returns true when value is an integer', () => {
+    it('returns true when the value is an integer', () => {
         expect(isInteger(0)).toBe(true);
         expect(isInteger(1)).toBe(true);
         expect(isInteger(-1)).toBe(true);
         expect(isInteger(Number.MIN_SAFE_INTEGER)).toBe(true);
         expect(isInteger(Number.MAX_SAFE_INTEGER)).toBe(true);
+    });
+
+    it('returns true when the value is MAX_VALUE', () => {
         expect(isInteger(Number.MAX_VALUE)).toBe(true);
     });
 
-    it('returns false when value is not an integer', () => {
+    it('returns false when the value is not an integer', () => {
         expect(isInteger(3.14)).toBe(false);
         expect(isInteger(-2.71)).toBe(false);
-        expect(isInteger(Number.POSITIVE_INFINITY)).toBe(false);
+        expect(isInteger(Number.EPSILON)).toBe(false);
+    });
+
+    it('returns false when the value is MIN_VALUE', () => {
+        expect(isInteger(Number.MIN_VALUE)).toBe(false);
+    });
+
+    it('returns false when the value is NaN', () => {
         expect(isInteger(Number.NaN)).toBe(false);
+    });
+
+    it('returns false when the value is Infinity', () => {
         expect(isInteger(Number.NEGATIVE_INFINITY)).toBe(false);
         expect(isInteger(Number.POSITIVE_INFINITY)).toBe(false);
-        expect(isInteger(Number.MIN_VALUE)).toBe(false);
-        expect(isInteger(Number.EPSILON)).toBe(false);
     });
 });
 

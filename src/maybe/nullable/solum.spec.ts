@@ -334,6 +334,7 @@ describe(Solum, () => {
 
         describe('when the "filter" type guard is true', () => {
             it('returns Solum', () => {
+                /* eslint-disable jest/max-expects -- check all test properties */
                 expect(input.which(hasDefinedProperty('required'))).toStrictEqual(input);
                 // @ts-expect-error -- TS2345: errors with "exactOptionalPropertyTypes: true"
                 expect(input.which(hasUndefinedProperty('optional'))).toStrictEqual(input);
@@ -341,6 +342,7 @@ describe(Solum, () => {
                 expect(input.which(hasNullProperty('possible'))).toStrictEqual(input);
                 expect(input.which(hasPresentProperty('nullable'))).toStrictEqual(input);
                 expect(input.which(hasAbsentProperty('option'))).toStrictEqual(input);
+                /* eslint-enable jest/max-expects */
             });
 
             it('must be assigned to Nullable', () => {
@@ -372,12 +374,14 @@ describe(Solum, () => {
 
         describe('when the "filter" type guard is false', () => {
             it('returns Nil', () => {
+                /* eslint-disable jest/max-expects -- check all test properties */
                 expect(input.which(hasUndefinedProperty('required'))).toBe(nil());
                 expect(input.which(hasDefinedProperty('optional'))).toBe(nil());
                 expect(input.which(hasNullProperty('nullable'))).toBe(nil());
                 expect(input.which(hasNotNullProperty('possible'))).toBe(nil());
                 expect(input.which(hasAbsentProperty('nullable'))).toBe(nil());
                 expect(input.which(hasPresentProperty('option'))).toBe(nil());
+                /* eslint-enable jest/max-expects */
             });
 
             it('must be assigned to Nullable', () => {

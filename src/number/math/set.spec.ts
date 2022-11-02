@@ -27,10 +27,11 @@ describe('maximum', () => {
             .toStrictEqual(Number.MAX_VALUE);
         expect(maximum([Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER]))
             .toStrictEqual(Number.MAX_SAFE_INTEGER);
-        expect(maximum([Number.POSITIVE_INFINITY, Number.MAX_VALUE, Number.MAX_SAFE_INTEGER]))
-            .toStrictEqual(Number.POSITIVE_INFINITY);
         expect(maximum([Number.MAX_VALUE, Number.MAX_SAFE_INTEGER]))
             .toStrictEqual(Number.MAX_VALUE);
+        // eslint-disable-next-line jest/max-expects -- check that +Infinity is the maximum
+        expect(maximum([Number.POSITIVE_INFINITY, Number.MAX_VALUE, Number.MAX_SAFE_INTEGER]))
+            .toStrictEqual(Number.POSITIVE_INFINITY);
     });
 });
 
@@ -54,16 +55,17 @@ describe('minimum', () => {
 
     it('returns the minimum element when an array has more than one element', () => {
         expect(minimum([-1, 0, 1]))
-            .toStrictEqual(-1);
+            .toBe(-1);
         expect(minimum([Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY]))
             .toStrictEqual(Number.NEGATIVE_INFINITY);
         expect(minimum([Number.MIN_VALUE, Number.MAX_VALUE]))
             .toStrictEqual(Number.MIN_VALUE);
         expect(minimum([Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER]))
             .toStrictEqual(Number.MIN_SAFE_INTEGER);
-        expect(minimum([Number.NEGATIVE_INFINITY, Number.MIN_VALUE, Number.MIN_SAFE_INTEGER]))
-            .toStrictEqual(Number.NEGATIVE_INFINITY);
         expect(minimum([Number.MIN_VALUE, Number.MIN_SAFE_INTEGER]))
             .toStrictEqual(Number.MIN_SAFE_INTEGER);
+        // eslint-disable-next-line jest/max-expects -- check that -Infinity is the minimum
+        expect(minimum([Number.NEGATIVE_INFINITY, Number.MIN_VALUE, Number.MIN_SAFE_INTEGER]))
+            .toStrictEqual(Number.NEGATIVE_INFINITY);
     });
 });

@@ -63,7 +63,7 @@ describe('product', () => {
 
     it('negates value when multiplied by -1', () => {
         expect(product(3, -1))
-            .toStrictEqual(-3);
+            .toBe(-3);
         expect(product(-1, -1))
             .toBe(1);
     });

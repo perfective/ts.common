@@ -202,14 +202,27 @@ describe('insert', () => {
 });
 
 describe('insertInto', () => {
-    describe('insert(array, index)', () => {
-        it('creates a new array with an element inserted into the given "array" in the given "index"', () => {
-            expect(insertInto<number>([], 0)(2.71)).toStrictEqual([2.71]);
-            expect(insertInto<number>([], 1)(2.71)).toStrictEqual([2.71]);
-            expect(insertInto([0, 3.14], 0)(2.71)).toStrictEqual([2.71, 0, 3.14]);
-            expect(insertInto([0, 3.14], 1)(2.71)).toStrictEqual([0, 2.71, 3.14]);
-            expect(insertInto([0, 3.14], 2)(2.71)).toStrictEqual([0, 3.14, 2.71]);
-            expect(insertInto([0, 3.14], 3)(2.71)).toStrictEqual([0, 3.14, 2.71]);
+    const input: number[] = [0, 3.14];
+    const element: number = 2.71;
+
+    describe('insert element into the 0 index', () => {
+        it('inserts element into the beginning of the array and shifts the rest of the elements', () => {
+            expect(insertInto<number>([], 0)(element)).toStrictEqual([element]);
+            expect(insertInto(input, 0)(element)).toStrictEqual([element, input[0], input[1]]);
+        });
+    });
+
+    describe('insert element into the index in the middle of the array', () => {
+        it('inserts element into the given index between the existing elements', () => {
+            expect(insertInto(input, 1)(element)).toStrictEqual([input[0], element, input[1]]);
+        });
+    });
+
+    describe('insert element into the index in end of the array', () => {
+        it('inserts element after the existing elements', () => {
+            expect(insertInto<number>([], 1)(element)).toStrictEqual([element]);
+            expect(insertInto(input, input.length)(element)).toStrictEqual([input[0], input[1], element]);
+            expect(insertInto(input, input.length + 1)(element)).toStrictEqual([input[0], input[1], element]);
         });
     });
 });

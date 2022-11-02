@@ -65,6 +65,7 @@ describe('that', () => {
 
 describe('which', () => {
     it('lifts the filter function to the Maybe.which()', () => {
+        /* eslint-disable jest/max-expects -- check all test properties */
         expect(checks.map(which(hasPresentProperty('required'))).map(pick('required')))
             .toStrictEqual([just(2.71), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasAbsentProperty('required'))).map(pick('required')))
@@ -90,6 +91,7 @@ describe('which', () => {
             .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasAbsentProperty('possible'))).map(pick('required')))
             .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
+        /* eslint-enable jest/max-expects */
     });
 });
 

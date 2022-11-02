@@ -6,6 +6,7 @@ describe('copy', () => {
             real: string;
             imaginary?: string;
         }
+
         const input: Example[] = [{
             real: 'real',
             imaginary: '-1',
@@ -27,6 +28,7 @@ describe('copy', () => {
             array: string[];
             name?: string;
         }
+
         const input: Example = {
             array: ['a', 'b', 'c'],
         };
@@ -81,13 +83,30 @@ describe('copy', () => {
         expect(output).not.toStrictEqual(input);
     });
 
-    it('returns the original value if it is a primitive', () => {
-        expect(copy(true)).toBe(true);
-        expect(copy(false)).toBe(false);
+    it('returns undefined when the value is undefined', () => {
         // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing undefined value
         expect(copy(undefined)).toBeUndefined();
+    });
+
+    it('returns null when the value is null', () => {
         expect(copy(null)).toBeNull();
+    });
+
+    it('returns true when the value is boolean true', () => {
+        expect(copy(true)).toBe(true);
+    });
+
+    it('returns false when the value is boolean false', () => {
+        expect(copy(false)).toBe(false);
+    });
+
+    it('returns the original number when the value is a number', () => {
         expect(copy(3.14)).toBe(3.14);
+        expect(copy(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        expect(copy(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+    });
+
+    it('returns NaN when the value is a NaN', () => {
         expect(copy(Number.NaN)).toBe(Number.NaN);
     });
 });
@@ -98,6 +117,7 @@ describe('clone', () => {
             real: string;
             imaginary?: string;
         }
+
         const input: Example[] = [{
             real: 'real',
             imaginary: '-1',
@@ -118,6 +138,7 @@ describe('clone', () => {
             array: string[];
             name?: string;
         }
+
         const input: Example = {
             array: ['a', 'b', 'c'],
         };

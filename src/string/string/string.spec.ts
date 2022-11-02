@@ -9,35 +9,71 @@ import {
 } from './string';
 
 describe('isString', () => {
-    it('returns true when value is a string', () => {
+    it('returns true when the value is a string literal', () => {
         expect(isString('3.14')).toBe(true);
+    });
+
+    it('returns true when the value is a String object', () => {
         expect(isString(String(3.14))).toBe(true);
     });
 
-    it('returns false when value is not a string', () => {
+    it('returns false when the value is a number', () => {
         expect(isString(3.14)).toBe(false);
+    });
+
+    it('returns false when the value is a boolean', () => {
         expect(isString(true)).toBe(false);
         expect(isString(false)).toBe(false);
+    });
+
+    it('returns false when the value is null', () => {
         expect(isString(null)).toBe(false);
+    });
+
+    it('returns false when the value is undefined', () => {
         expect(isString(undefined)).toBe(false);
+    });
+
+    it('returns false when the value is an array', () => {
         expect(isString([])).toBe(false);
+    });
+
+    it('returns false when the value is an object', () => {
         expect(isString({})).toBe(false);
     });
 });
 
 describe('isNotString', () => {
-    it('returns false when value is a string', () => {
+    it('returns false when the value is a string literal', () => {
         expect(isNotString('3.14')).toBe(false);
+    });
+
+    it('returns false when the value is a String object', () => {
         expect(isNotString(String(3.14))).toBe(false);
     });
 
-    it('returns true when value is not a string', () => {
+    it('returns true when the value is a number', () => {
         expect(isNotString(3.14)).toBe(true);
+    });
+
+    it('returns true when the value is a boolean', () => {
         expect(isNotString(true)).toBe(true);
         expect(isNotString(false)).toBe(true);
+    });
+
+    it('returns true when the value is null', () => {
         expect(isNotString(null)).toBe(true);
+    });
+
+    it('returns true when value is undefined', () => {
         expect(isNotString(undefined)).toBe(true);
+    });
+
+    it('returns true when value is an array', () => {
         expect(isNotString([])).toBe(true);
+    });
+
+    it('returns true when value is an object', () => {
         expect(isNotString({})).toBe(true);
     });
 });
@@ -53,24 +89,20 @@ describe('isEmpty', () => {
         expect(isEmpty('false')).toBe(false);
         expect(isEmpty('null')).toBe(false);
         expect(isEmpty('undefined')).toBe(false);
-        expect(isEmpty('[]')).toBe(false);
-        expect(isEmpty('{}')).toBe(false);
     });
 });
 
 describe('isNotEmpty', () => {
-    it('returns true when value is an empty string', () => {
+    it('returns false when value is an empty string', () => {
         expect(isNotEmpty('')).toBe(false);
         expect(isNotEmpty(String())).toBe(false);
     });
 
-    it('returns false when value is not an empty string', () => {
+    it('returns true when value is not an empty string', () => {
         expect(isNotEmpty('0')).toBe(true);
         expect(isNotEmpty('false')).toBe(true);
         expect(isNotEmpty('null')).toBe(true);
         expect(isNotEmpty('undefined')).toBe(true);
-        expect(isNotEmpty('[]')).toBe(true);
-        expect(isNotEmpty('{}')).toBe(true);
     });
 });
 

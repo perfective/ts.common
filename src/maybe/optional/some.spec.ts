@@ -334,6 +334,7 @@ describe(Some, () => {
 
         describe('when the "filter" type guard is true', () => {
             it('returns Some', () => {
+                /* eslint-disable jest/max-expects -- check all test properties */
                 expect(input.which(hasDefinedProperty('required'))).toStrictEqual(input);
                 // @ts-expect-error -- TS2345: errors with "exactOptionalPropertyTypes: true"
                 expect(input.which(hasUndefinedProperty('optional'))).toStrictEqual(input);
@@ -341,6 +342,7 @@ describe(Some, () => {
                 expect(input.which(hasNullProperty('possible'))).toStrictEqual(input);
                 expect(input.which(hasPresentProperty('maybe'))).toStrictEqual(input);
                 expect(input.which(hasAbsentProperty('option'))).toStrictEqual(input);
+                /* eslint-enable jest/max-expects */
             });
 
             it('must be assigned to Optional', () => {
@@ -372,12 +374,14 @@ describe(Some, () => {
 
         describe('when the "filter" type guard is false', () => {
             it('returns None', () => {
+                /* eslint-disable jest/max-expects -- check all test properties */
                 expect(input.which(hasUndefinedProperty('required'))).toBe(none());
                 expect(input.which(hasDefinedProperty('optional'))).toBe(none());
                 expect(input.which(hasNullProperty('nullable'))).toBe(none());
                 expect(input.which(hasNotNullProperty('possible'))).toBe(none());
                 expect(input.which(hasAbsentProperty('maybe'))).toBe(none());
                 expect(input.which(hasPresentProperty('option'))).toBe(none());
+                /* eslint-enable jest/max-expects */
             });
 
             it('must be assigned to Optional', () => {

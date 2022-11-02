@@ -14,7 +14,7 @@ describe('decimal', () => {
         expect(decimal('1234567890'))
             .toBe(1_234_567_890);
         expect(decimal('-123450.6789'))
-            .toStrictEqual(-123_450.6789);
+            .toBe(-123_450.6789);
     });
 
     it('parses a string until the first character that is not a digit, ".", or "-"', () => {
@@ -27,7 +27,7 @@ describe('decimal', () => {
         expect(decimal('.10,24'))
             .toBe(0.10);
         expect(decimal('-.20,48'))
-            .toStrictEqual(-0.2);
+            .toBe(-0.2);
     });
 
     it('fails to parse a string that does not start with a digit', () => {
@@ -70,7 +70,7 @@ describe('binary', () => {
         expect(binary('10b01'))
             .toBe(2);
         expect(binary('-11b01'))
-            .toStrictEqual(-3);
+            .toBe(-3);
     });
 
     it('fails to parse a string that does not start with characters "0" or "1"', () => {
@@ -100,14 +100,14 @@ describe('octal', () => {
         expect(octal('10'))
             .toBe(8);
         expect(octal('-20'))
-            .toStrictEqual(-16);
+            .toBe(-16);
     });
 
     it('parses a string until the first character that is not from "0" to "7", or "-"', () => {
         expect(octal('79.10'))
             .toBe(7);
         expect(octal('-0109'))
-            .toStrictEqual(-8);
+            .toBe(-8);
     });
 
     it('fails to parse a string that does not start with characters from "0" to "7"', () => {
@@ -137,14 +137,14 @@ describe('hexadecimal', () => {
         expect(hexadecimal('10'))
             .toBe(16);
         expect(hexadecimal('-ff'))
-            .toStrictEqual(-255);
+            .toBe(-255);
     });
 
     it('parses a string until the first character that is not from "0" to "f", or "-"', () => {
         expect(hexadecimal('7g.10'))
             .toBe(7);
         expect(hexadecimal('-0f0.9'))
-            .toStrictEqual(-240);
+            .toBe(-240);
         expect(hexadecimal('example'))
             .toBe(14);
     });

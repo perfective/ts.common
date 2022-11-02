@@ -54,6 +54,7 @@ describe('charCodeAt', () => {
 
 describe('codePointAt', () => {
     describe('codePointAt(position)', () => {
+        /* eslint-disable jest/max-expects -- checking different codepoints */
         it('returns code point value at the given position when UTF-16 surrogate pair is available', () => {
             expect(codePointAt(0)('\u{1F1FA}')).toBe(0x1F1FA);
             expect(codePointAt(0)('🇺')).toBe(0x1F1FA);
@@ -80,6 +81,7 @@ describe('codePointAt', () => {
             expect(codePointAt(2)('🇸')).toBeUndefined();
             expect(codePointAt(4)('🇺🇸')).toBeUndefined();
         });
+        /* eslint-enable jest/max-expects */
     });
 });
 
@@ -165,11 +167,11 @@ describe('indexOf', () => {
         });
 
         it('returns -1 when the search substring is not present in the given value', () => {
-            expect(indexOf('Earth')('Hello World')).toStrictEqual(-1);
+            expect(indexOf('Earth')('Hello World')).toBe(-1);
         });
 
         it('performs case-sensitive search', () => {
-            expect(indexOf('world')('Hello World')).toStrictEqual(-1);
+            expect(indexOf('world')('Hello World')).toBe(-1);
         });
     });
 
@@ -186,8 +188,8 @@ describe('indexOf', () => {
         });
 
         it('returns -1 when the search substring is not present in the given value', () => {
-            expect(indexOf('Hello', 6)('Hello World')).toStrictEqual(-1);
-            expect(indexOf('world', 6)('Hello World')).toStrictEqual(-1);
+            expect(indexOf('Hello', 6)('Hello World')).toBe(-1);
+            expect(indexOf('world', 6)('Hello World')).toBe(-1);
         });
     });
 });
@@ -201,12 +203,12 @@ describe('lastIndexOf', () => {
 
         it('returns -1 when the search value is not found', () => {
             expect(lastIndexOf('Four')('One, two, three. One.'))
-                .toStrictEqual(-1);
+                .toBe(-1);
         });
 
         it('performs case-sensitive search', () => {
             expect(lastIndexOf('one')('One, two, three. One.'))
-                .toStrictEqual(-1);
+                .toBe(-1);
         });
     });
 
@@ -230,9 +232,9 @@ describe('lastIndexOf', () => {
 
         it('returns -1 for "from" index less or equal 0 if the string does not start with the "search"', () => {
             expect(lastIndexOf('two', 0)('One, two, three. One, two.'))
-                .toStrictEqual(-1);
+                .toBe(-1);
             expect(lastIndexOf('two', -24)('One, two, three. One, two.'))
-                .toStrictEqual(-1);
+                .toBe(-1);
         });
     });
 });
@@ -394,7 +396,7 @@ describe('search', () => {
 
     it('returns -1 when no match is found', () => {
         expect(search(/\w{6}/u)('One, two, three. Six, seven, eight.'))
-            .toStrictEqual(-1);
+            .toBe(-1);
     });
 });
 

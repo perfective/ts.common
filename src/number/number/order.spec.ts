@@ -12,15 +12,16 @@ import {
 describe('isEqualTo', () => {
     describe('isEqualTo(Number)', () => {
         it('is true when a value is equal to the Number', () => {
+            /* eslint-disable jest/max-expects -- checking constants */
             expect(isEqualTo(0)(0)).toBe(true);
             expect(isEqualTo(Number.POSITIVE_INFINITY)(Number.POSITIVE_INFINITY)).toBe(true);
             expect(isEqualTo(Number.MAX_VALUE)(Number.MAX_VALUE)).toBe(true);
             expect(isEqualTo(Number.MIN_VALUE)(Number.MIN_VALUE)).toBe(true);
-            expect(isEqualTo(Number.POSITIVE_INFINITY)(Number.POSITIVE_INFINITY)).toBe(true);
             expect(isEqualTo(Number.NEGATIVE_INFINITY)(Number.NEGATIVE_INFINITY)).toBe(true);
             expect(isEqualTo(Number.MAX_SAFE_INTEGER)(Number.MAX_SAFE_INTEGER)).toBe(true);
             expect(isEqualTo(Number.MIN_SAFE_INTEGER)(Number.MIN_SAFE_INTEGER)).toBe(true);
             expect(isEqualTo(Number.EPSILON)(Number.EPSILON)).toBe(true);
+            /* eslint-enable jest/max-expects */
         });
 
         it('is false when the value is not equal to the Number', () => {

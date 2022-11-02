@@ -1,5 +1,12 @@
 = Changelog
 
+== v8.0.3
+
+=== Fixes
+
+* Update `@perfective/common/maybe` package https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc[documentation].
+
+
 == v8.0.2
 
 === Fixes

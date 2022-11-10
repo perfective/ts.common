@@ -1,5 +1,8 @@
 import { isPresent } from '../../value/value';
 
+/**
+ * Returns true when the value is a non-null object.
+ */
 // eslint-disable-next-line @typescript-eslint/ban-types -- type guard
 export function isObject<T>(value: T | null): value is T & object {
     return value !== null
@@ -8,8 +11,12 @@ export function isObject<T>(value: T | null): value is T & object {
 
 /**
  * Returns true when the value is an object created from the Object class (not an Array, Date, etc.).
+ *
+ * At the moment, the type guard does not narrow down the object types.
+ *  - when isRecord() returns true, it is possible to assign the checked value to non-Object value (e.g. Date);
+ *  - when isRecord() returns false, it is possible to assign the value to a Record value.
  */
-export function isRecord<T>(value: T): boolean {
+export function isRecord<T>(value: T): value is T & Record<string, unknown> {
     return isObject(value)
         && hasConstructor(Object.name)(value);
 }

@@ -6,6 +6,7 @@ import { isPresent } from '../../value/value';
 // eslint-disable-next-line @typescript-eslint/ban-types -- type guard
 export function isObject<T>(value: T | null): value is T & object {
     return value !== null
+        // eslint-disable-next-line @typescript-eslint/tslint/config -- typeof can be any EcmaType
         && typeof value === 'object';
 }
 

@@ -2,6 +2,7 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
+import { split } from '../../string/string/lift';
 import { isPresent } from '../../value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
@@ -14,6 +15,21 @@ function nullableDecimal(value: number | null): Nullable<string> {
 
 function nullableSplit(value: string | null): Nullable<string[]> {
     return nullable(value).to(v => v.split('.'));
+}
+
+function identity<T>(value: T): T {
+    return value;
+}
+
+function undefinedDecimal(value: number | undefined): string {
+    if (isPresent(value)) {
+        return decimal(value);
+    }
+    return '';
+}
+
+function splitUndefinedDecimal(value: number | undefined): string[] {
+    return split('.')(undefinedDecimal(value));
 }
 
 describe(nullable, () => {
@@ -168,6 +184,32 @@ describe(Nullable, () => {
     });
 
     describe('to', () => {
+        describe('to() is the "fmap" operator for the Nullable type and satisfies functor laws', () => {
+            // Functors must preserve identity morphisms:
+            //  fmap id = id
+            it('preserves identity morphisms', () => {
+                expect(nullable(3.14).to(identity)).toStrictEqual(nullable(3.14));
+                expect(nullable(null).to(identity)).toStrictEqual(nullable(null));
+                expect(nullable(undefined).to(identity)).toStrictEqual(nullable(undefined));
+            });
+
+            // Functors preserve composition of morphisms:
+            //  fmap (f . g)  ==  fmap f . fmap g
+            it('preserved composition of morphisms', () => {
+                expect(nullable(3.14).to<string>(undefinedDecimal).to(split('.')))
+                    .toStrictEqual(nullable(3.14).to(splitUndefinedDecimal));
+                expect(nullable(undefined).to<string>(undefinedDecimal).to(split('.')))
+                    .toStrictEqual(nullable(undefined).to(splitUndefinedDecimal));
+
+                // TS2345: Type 'null' is not assignable to type 'number'.
+                // @ts-expect-error -- Composing the same functions for test clarity
+                expect(nil().to<string>(undefinedDecimal).to(split('.')))
+                    // TS2345: Type 'null' is not assignable to type 'number'.
+                    // @ts-expect-error -- Composing the same functions for test clarity
+                    .toStrictEqual(nil().to(splitUndefinedDecimal));
+            });
+        });
+
         describe('when the "map" function returns a present value', () => {
             it('must be assigned to Nullable', () => {
                 const output: Nullable<string> = nullable(3.14).to(constant('3.14'));

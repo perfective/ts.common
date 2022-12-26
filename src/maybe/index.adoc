@@ -312,12 +312,41 @@ and the `flatMap` method in `java.util.Optional`.
 === `to(map)`
 
 `Maybe.to()` is a mapping operator
-that applies the provided mapping function only when the value is present
+that applies a provided mapping function only when the value is present
 and wraps up the result into a new `Maybe` value.
+`Maybe.to()` is the `fmap` operator and satisfies https://wiki.haskell.org/Functor[functor laws]:
+
+1. `Maybe.to` preserves identity morphisms:
++
+[source,typescript]
+----
+import { maybe } from '@perfective/common/maybe';
+
+// fmap id = id
+maybe(3.14).to(x => x) === maybe(3.14);
+----
++
+When the value in the Maybe is mapped to itself, the result is the same Maybe.
++
+2. `Maybe.to` preserves composition of morphisms:
++
+[source,typescript]
+----
+import { maybe, naught, nothing } from '@perfective/common/maybe';
+import { decimal } from '@perfective/number';
+import { split } from '@perfective/string';
+
+// fmap f . fmap g == fmap (f . g)
+maybe(3.14).to<string>(decimal).to(split('.'))
+    === maybe(3.14).to(x => split('.')(decimal(x)));
+----
++
+Two `Maybe.to()` operations applied one after another using two functions return the same result
+as applying `Maybe.to()` once with the composition of the same two functions.
 
 [IMPORTANT]
 ====
-`Maybe.to` is not a _bind_ operator and is not required to satisfy the monad laws.
+`Maybe.to` is not the _bind_ (`>>=`) operator and is not required to satisfy the monad laws.
 ====
 
 .Using `Maybe.to()` chaining

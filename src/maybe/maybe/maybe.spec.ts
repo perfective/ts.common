@@ -2,6 +2,7 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
+import { split } from '../../string/string/lift';
 import { isPresent } from '../../value/value';
 import { fallbackNullable } from '../nullable/nullable.mock';
 import { fallbackOptional } from '../optional/optional.mock';
@@ -16,6 +17,14 @@ function maybeDecimal(value: number | null | undefined): Maybe<string> {
 
 function maybeSplit(value: string | null | undefined): Maybe<string[]> {
     return maybe(value).to(v => v.split('.'));
+}
+
+function identity<T>(value: T): T {
+    return value;
+}
+
+function splitDecimal(value: number): string[] {
+    return split('.')(decimal(value));
 }
 
 describe(maybe, () => {
@@ -214,6 +223,35 @@ describe(Maybe, () => {
     });
 
     describe('to', () => {
+        describe('to() is the "fmap" operator for the Maybe type and satisfies functor laws', () => {
+            // Functors must preserve identity morphisms:
+            //  fmap id = id
+            it('preserves identity morphisms', () => {
+                expect(maybe(3.14).to(identity)).toStrictEqual(maybe(3.14));
+                expect(maybe(null).to(identity)).toStrictEqual(maybe(null));
+                expect(maybe(undefined).to(identity)).toStrictEqual(maybe(undefined));
+            });
+
+            // Functors preserve composition of morphisms:
+            //  fmap (f . g)  ==  fmap f . fmap g
+            it('preserved composition of morphisms', () => {
+                expect(maybe(3.14).to<string>(decimal).to(split('.')))
+                    .toStrictEqual(maybe(3.14).to(splitDecimal));
+                // TS2345: Type 'null' is not assignable to type 'number'.
+                // @ts-expect-error -- Composing the same functions for test clarity
+                expect(naught().to<string>(decimal).to(split('.')))
+                    // TS2345: Type 'null' is not assignable to type 'number'.
+                    // @ts-expect-error -- Composing the same functions for test clarity
+                    .toStrictEqual(naught().to(splitDecimal));
+                // TS2345: Type 'undefined' is not assignable to type 'number'.
+                // @ts-expect-error -- Composing the same functions for test clarity
+                expect(nothing().to<string>(decimal).to(split('.')))
+                    // TS2345: Type 'undefined' is not assignable to type 'number'.
+                    // @ts-expect-error -- Composing the same functions for test clarity
+                    .toStrictEqual(nothing().to(splitDecimal));
+            });
+        });
+
         describe('when the "map" function returns a present or absent value', () => {
             it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).to(constant(fallbackMaybe('3.14')));

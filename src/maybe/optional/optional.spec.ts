@@ -2,6 +2,7 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
+import { split } from '../../string/string/lift';
 import { isPresent } from '../../value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
@@ -14,6 +15,21 @@ function optionalDecimal(value: number | undefined): Optional<string> {
 
 function optionalSplit(value: string | undefined): Optional<string[]> {
     return optional(value).to(v => v.split('.'));
+}
+
+function identity<T>(value: T): T {
+    return value;
+}
+
+function nullableDecimal(value: number | null): string {
+    if (isPresent(value)) {
+        return decimal(value);
+    }
+    return '';
+}
+
+function splitNullableDecimal(value: number | null): string[] {
+    return split('.')(nullableDecimal(value));
 }
 
 describe(optional, () => {
@@ -168,6 +184,32 @@ describe(Optional, () => {
     });
 
     describe('to', () => {
+        describe('to() is the "fmap" operator for the Optional type and satisfies functor laws', () => {
+            // Functors must preserve identity morphisms:
+            //  fmap id = id
+            it('preserves identity morphisms', () => {
+                expect(optional(3.14).to(identity)).toStrictEqual(optional(3.14));
+                expect(optional(null).to(identity)).toStrictEqual(optional(null));
+                expect(optional(undefined).to(identity)).toStrictEqual(optional(undefined));
+            });
+
+            // Functors preserve composition of morphisms:
+            //  fmap (f . g)  ==  fmap f . fmap g
+            it('preserved composition of morphisms', () => {
+                expect(optional(3.14).to<string>(nullableDecimal).to(split('.')))
+                    .toStrictEqual(optional(3.14).to(splitNullableDecimal));
+                expect(optional(null).to<string>(nullableDecimal).to(split('.')))
+                    .toStrictEqual(optional(null).to(splitNullableDecimal));
+
+                // TS2345: Type 'undefined' is not assignable to type 'number'.
+                // @ts-expect-error -- Composing the same functions for test clarity
+                expect(none().to<string>(nullableDecimal).to(split('.')))
+                    // TS2345: Type 'undefined' is not assignable to type 'number'.
+                    // @ts-expect-error -- Composing the same functions for test clarity
+                    .toStrictEqual(none().to(splitNullableDecimal));
+            });
+        });
+
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned to Optional', () => {
                 const output: Optional<string> = optional(3.14).to(constant(fallbackOptional('3.14')));

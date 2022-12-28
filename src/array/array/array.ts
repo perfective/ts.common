@@ -57,14 +57,13 @@ export function replicated<T>(value: T, length: number): T[];
 export function replicated<T>(length: number): Unary<T, T[]>;
 
 export function replicated<T>(argument1: T | number, argument2?: number): T[] | Unary<T, T[]> {
-    /* eslint-disable array-func/prefer-array-from,unicorn/no-new-array -- custom use of new Array to  */
+    // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill#using_fill_to_populate_an_empty_array
+    /* eslint-disable unicorn/new-for-builtins -- populate an empty array */
     if (isPresent(argument2)) {
-        /* eslint-disable @typescript-eslint/no-unsafe-assignment -- spread array to allocate elements */
-        return [...new Array(argument2)].map<T>(() => argument1 as T);
-        /* eslint-enable @typescript-eslint/no-unsafe-assignment */
+        return Array(argument2).fill(argument1) as T[];
     }
-    return (value: T): T[] => Array.from(new Array(argument1), () => value);
-    /* eslint-enable array-func/prefer-array-from,unicorn/no-new-array */
+    return (value: T): T[] => Array(argument1).fill(value) as T[];
+    /* eslint-enable unicorn/new-for-builtins */
 }
 
 export function reversed<T>(array: T[]): T[] {

@@ -48,15 +48,14 @@ describe('input', () => {
             id?: InputPrimitive<number>;
             date?: InputPrimitive<string>;
         } | null | undefined = example?.params;
-        // @ts-expect-error -- test behavior when exactOptionalPropertyTypes is off.
         const query: {
             filter?: {
                 status?: InputPrimitive<boolean>;
-                colors?: InputPrimitive<string>[] | null;
-            } | null;
+                colors?: InputPrimitive<string>[] | null | undefined;
+            } | null | undefined;
             sort?: {
                 direction?: InputPrimitive<'ascending' | 'descending'>;
-            } | null;
+            } | null | undefined;
         } | null | undefined = example?.query;
         const fragment: string | undefined = stringInput(example?.fragment);
 

@@ -54,11 +54,9 @@ describe('errorStack', () => {
             .toMatch('Error: Stack\n    at Object.<anonymous>');
     });
 
-    it('returns message with "at <unknown>" stack, when Error.stack property is undefined', () => {
+    it('returns message with "at <unknown>" stack, when Error.stack property is not defined', () => {
         const error: Error = new Error('No Stack');
-        // TS2322: Type 'undefined' is not assignable to type 'string'.
-        // @ts-expect-error -- this error will not be reported if --exactOptionalPropertyTypes is off
-        error.stack = undefined;
+        delete error.stack;
 
         expect(stack(error))
             .toBe('No Stack\n    at <unknown>');

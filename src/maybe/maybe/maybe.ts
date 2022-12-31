@@ -53,6 +53,7 @@ export class Just<T> implements Maybe<T> {
     public constructor(
         public readonly value: Present<T>,
     ) {
+        // Catches an error when the given argument passes the type definition, but is null or undefined in runtime.
         if (isAbsent(this.value)) {
             throw new TypeError('Just value must be present');
         }

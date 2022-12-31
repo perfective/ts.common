@@ -43,6 +43,7 @@ export class Solum<T> implements Nullable<T> {
     public constructor(
         public readonly value: NotNull<T>,
     ) {
+        // Catches an error when the given argument passes the type definition, but is null in runtime.
         if (isNull(this.value)) {
             throw new TypeError('Solum value must be not null');
         }

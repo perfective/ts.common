@@ -43,6 +43,7 @@ export class Some<T> implements Optional<T> {
     public constructor(
         public readonly value: Defined<T>,
     ) {
+        // Catches an error when the given argument passes the type definition, but is undefined in runtime.
         if (isUndefined(this.value)) {
             throw new TypeError('Some value must be defined');
         }

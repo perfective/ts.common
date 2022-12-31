@@ -23,18 +23,17 @@ describe(just, () => {
     });
 
     it('cannot be assigned to Nothing<T>', () => {
-        // TS2322: Type 'Just<number>' is not assignable to type 'Nothing<number>'.
-        // @ts-expect-error -- Nothing is not Just.
+        // @ts-expect-error -- TS2322: Type 'Just<number>' is not assignable to type 'Nothing<number>'.
         const output: Nothing<number> = just(0);
 
         expect(output).toStrictEqual(just(0));
     });
 
     it('throws an error if instantiated with an absent value', () => {
-        // @ts-expect-error -- testing failure in cases when type is present, but value is absent
+        // @ts-expect-error -- TS2345: Argument of type 'null' is not assignable to parameter of type 'never'.
         expect(() => just(null)).toThrow('Just value must be present');
 
-        // @ts-expect-error -- testing failure in cases when type is present, but value is absent
+        // @ts-expect-error -- TS2345: Argument of type 'undefined' is not assignable to parameter of type 'never'.
         expect(() => just(undefined)).toThrow('Just value must be present');
     });
 });
@@ -57,16 +56,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Maybe<string>' is not assignable to type 'Just<string>'.
-                // @ts-expect-error -- Just.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Maybe<string>' is not assignable to type 'Just<string>'.
                 const output: Just<string> = just(3.14).onto(constant(maybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Maybe<string>' is not assignable to type 'Nothing<string>'.
-                // @ts-expect-error -- Just.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Maybe<string>' is not assignable to type 'Nothing<string>'.
                 const output: Nothing<string> = just(3.14).onto(constant(maybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -87,8 +84,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Just<string>' is not assignable to type 'Nothing<string>'.
-                // @ts-expect-error -- Just.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Just<string>' is not assignable to type 'Nothing<string>'.
                 const output: Nothing<string> = just(3.14).onto(constant(just('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -103,8 +99,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Nothing<string>' is not assignable to type 'Just<string>'.
-                // @ts-expect-error -- Just.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Nothing<string>' is not assignable to type 'Just<string>'.
                 const output: Just<string> = just(3.14).onto(constant(naught<string>()));
 
                 expect(output).toBe(naught());
@@ -125,8 +120,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Nothing<string>' is not assignable to type 'Just<string>'.
-                // @ts-expect-error -- Just.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Nothing' is not assignable to type 'Just'.
                 const output: Just<string> = just(3.14).onto(constant(nothing<string>()));
 
                 expect(output).toBe(nothing());
@@ -149,16 +143,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Maybe<string>' is not assignable to type 'Just<string>'.
-                // @ts-expect-error -- Just.to() always returns the result, and result may be absent.
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<string> = just(3.14).to(constant(fallbackMaybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Maybe<string>' is not assignable to type 'Nothing<string>'.
-                // @ts-expect-error -- Just.to() always returns the result, and result may be present.
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<string> = just(3.14).to(constant(fallbackMaybe('3.14')));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -179,8 +171,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Just<string>' is not assignable to type 'Nothing<string>'.
-                // @ts-expect-error -- Just.to() always returns the result, and result is present.
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<string> = just(3.14).to(constant('3.14'));
 
                 expect(output).toStrictEqual(just('3.14'));
@@ -195,8 +186,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Nothing' is not assignable to type 'Just'.
-                // @ts-expect-error -- Just.to() always returns the result, and result is absent.
+                // @ts-expect-error -- TS2322: Type 'Nothing' is not assignable to type 'Just'.
                 const output: Just<string> = just(3.14).to<string>(constant(null));
 
                 expect(output).toBe(naught());
@@ -217,8 +207,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Nothing' is not assignable to type 'Just'.
-                // @ts-expect-error -- Just.to() always returns the result, and result is absent.
+                // @ts-expect-error -- TS2322: Type 'Nothing' is not assignable to type 'Just'.
                 const output: Just<string> = just(3.14).to<string>(constant(undefined));
 
                 expect(output).toBe(nothing());
@@ -254,8 +243,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Just ' is not assignable to type 'Nothing '.
-                // @ts-expect-error -- Just.pick() returns property value when it is present.
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(typeGuardCheck).pick('required');
 
                 expect(output).toStrictEqual(just(3.14));
@@ -270,16 +258,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
-                // @ts-expect-error -- Just.pick() returns property value and it can be absent.
+                // @ts-expect-error -- TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
                 const output: Just<number> = just(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(naught());
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Maybe<number>' is not assignable to type 'Nothing<number>'.
-                // @ts-expect-error -- Just.pick() returns property value when it is present.
+                // @ts-expect-error -- TS2322: Type 'Maybe<number>' is not assignable to type 'Nothing<number>'.
                 const output: Nothing<number> = just(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(naught());
@@ -296,16 +282,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
-                // @ts-expect-error -- Just.that() may return Nothing.
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = just(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
-                // @ts-expect-error -- Just.that() may return Just.
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -320,16 +304,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
-                // @ts-expect-error -- Just.that() may return Nothing.
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = just(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(nothing());
             });
 
             it('cannot be assigned to Nothing', () => {
-                // TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
-                // @ts-expect-error -- Just.that() may return Just.
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(nothing());
@@ -375,14 +357,18 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // @ts-expect-error -- Just.which() may return Nothing
+                // @ts-expect-error -- TS2322:
+                //  Type 'Maybe<ObjectWithPresent<TypeGuardCheck<number>, "required">>'
+                //  is not assignable to type 'Just<TypeGuardCheck<number>>'.
                 const output: Just<TypeGuardCheck> = input.which(hasPresentProperty('required'));
 
                 expect(output).toStrictEqual(input);
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.which() may return Nothing
+                // @ts-expect-error -- TS2322:
+                //  Type 'Maybe<ObjectWithPresent<TypeGuardCheck<number>, "nullable">>'
+                //  is not assignable to type 'Nothing<ObjectWithPresent<TypeGuardCheck<number>, "nullable">>'.
                 const output: Nothing<ObjectWithPresent<TypeGuardCheck, 'nullable'>> = input
                     .which(hasPresentProperty('nullable'));
 
@@ -410,7 +396,9 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // @ts-expect-error -- Just.which may return Nothing
+                // @ts-expect-error -- TS2322:
+                //  Type 'Maybe<ObjectWithPresent<TypeGuardCheck<number>, "option">>'
+                //  is not assignable to type 'Just<ObjectWithPresent<TypeGuardCheck<number>, "option">>'.
                 const output: Just<ObjectWithPresent<TypeGuardCheck, 'option'>> = input
                     .which(hasPresentProperty('option'));
 
@@ -418,7 +406,9 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.which may return Just
+                // @ts-expect-error -- TS2322:
+                //  Type 'Maybe<ObjectWithPresent<TypeGuardCheck<number>, "possible">>'
+                //  is not assignable to type 'Nothing<ObjectWithPresent<TypeGuardCheck<number>, "possible">>'.
                 const output: Nothing<ObjectWithPresent<TypeGuardCheck, 'possible'>> = input
                     .which(hasPresentProperty('possible'));
 
@@ -436,14 +426,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // @ts-expect-error -- Just.when() may return Nothing
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = just(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(just(3.14));
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.when() may return Just
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -458,14 +448,14 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Just', () => {
-                // @ts-expect-error -- Just.when() may return Nothing
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = just(3.14).when(constant(false));
 
                 expect(output).toBe(nothing());
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.when() may return Just
+                // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).when(constant(false));
 
                 expect(output).toBe(nothing());
@@ -488,7 +478,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(fallbackMaybe(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -509,7 +499,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(2.71);
 
                 expect(output).toStrictEqual(just(3.14));
@@ -530,7 +520,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(constant(2.71));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -551,7 +541,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(null);
 
                 expect(output).toStrictEqual(just(3.14));
@@ -572,7 +562,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(constant(null));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -593,7 +583,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(undefined);
 
                 expect(output).toStrictEqual(just(3.14));
@@ -614,7 +604,7 @@ describe(Just, () => {
             });
 
             it('cannot be assigned to Nothing', () => {
-                // @ts-expect-error -- Just.otherwise() always returns itself
+                // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = just(3.14).otherwise(constant(undefined));
 
                 expect(output).toStrictEqual(just(3.14));
@@ -720,7 +710,7 @@ describe(Just, () => {
         });
 
         it('cannot be assigned to Nothing', () => {
-            // @ts-expect-error -- Just.run returns original Just.
+            // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
             const output: Nothing<number> = just(pi).run(assignPi(3.1415));
 
             expect(output).toStrictEqual(just(3.14));
@@ -740,14 +730,14 @@ describe(Just, () => {
         });
 
         it('cannot be assigned to Just', () => {
-            // @ts-expect-error -- Just.lift() may return Nothing
+            // @ts-expect-error -- TS2322: Type 'Maybe<number>' is not assignable to type 'Just<boolean>'.
             const output: Just<boolean> = just(3.14).lift(constant(2.71));
 
             expect(output).toStrictEqual(just(2.71));
         });
 
         it('cannot be assigned to Nothing', () => {
-            // @ts-expect-error -- Nothing.lift() may return Just
+            // @ts-expect-error -- TS2322: Type 'Maybe<boolean>' is not assignable to type 'Nothing<boolean>'.
             const output: Nothing<boolean> = just(3.14).lift<boolean>(constant(null));
 
             expect(output).toBe(naught());

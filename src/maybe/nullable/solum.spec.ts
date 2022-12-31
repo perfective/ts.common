@@ -26,15 +26,14 @@ describe(solum, () => {
     });
 
     it('cannot be assigned to Nil', () => {
-        // TS2322: Type 'Solum<number>' is not assignable to type 'Nil<number>'.
-        // @ts-expect-error -- Nil is not Solum.
+        // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
         const output: Nil<number> = solum(0);
 
         expect(output).toStrictEqual(solum(0));
     });
 
     it('throws an error if instantiated with null', () => {
-        // @ts-expect-error -- testing failure when passed null
+        // @ts-expect-error -- TS2345: Argument of type 'null' is not assignable to parameter of type 'never'.
         expect(() => solum(null)).toThrow('Solum value must be not null');
     });
 });
@@ -57,16 +56,14 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable<string>' is not assignable to type 'Solum<string>'.
-                // @ts-expect-error -- Solum.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Solum<string>'.
                 const output: Solum<string> = solum(3.14).onto(constant(nullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
-                // @ts-expect-error -- Solum.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
                 const output: Nil<string> = solum(3.14).onto(constant(nullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
@@ -87,8 +84,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum<string>' is not assignable to type 'Nil<string>'.
-                // @ts-expect-error -- Solum.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Solum<string>' is not assignable to type 'Nil<string>'.
                 const output: Nil<string> = solum(3.14).onto(constant(solum('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
@@ -103,8 +99,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nil<string>' is not assignable to type 'Solum<string>'.
-                // @ts-expect-error -- Solum.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Nil<string>' is not assignable to type 'Solum<string>'.
                 const output: Solum<string> = solum(3.14).onto(constant(nil<string>()));
 
                 expect(output).toBe(nil());
@@ -127,16 +122,14 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Solum'.
-                // @ts-expect-error -- Solum.to() always returns the result, and result may be absent.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Solum'.
                 const output: Solum<string> = solum(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.to() always returns the result, and result may be present
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
                 const output: Nil<string> = solum(3.14).to(constant(fallbackNullable('3.14')));
 
                 expect(output).toStrictEqual(solum('3.14'));
@@ -157,8 +150,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.to() always returns the result, and result is present
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<string> = solum(3.14).to(constant('3.14'));
 
                 expect(output).toStrictEqual(solum('3.14'));
@@ -173,8 +165,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nil' is not assignable to type 'Solum'.
-                // @ts-expect-error -- Solum.to() always returns the result, and result is absent
+                // @ts-expect-error -- TS2322: Type 'Nil' is not assignable to type 'Solum'.
                 const output: Solum<string> = solum(3.14).to<string>(constant(null));
 
                 expect(output).toBe(nil());
@@ -201,8 +192,8 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil of optional value', () => {
-                // TS2322: Type 'Solum<string | undefined>' is not assignable to type 'Nil<string | undefined>'.
-                // @ts-expect-error -- Solum.to() returns the result of the mapping function, which is not null.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Solum<string | undefined>' is not assignable to type 'Nil<string | undefined>'.
                 const output: Nil<string | undefined> = solum(3.14).to<string | undefined>(constant(undefined));
 
                 expect(output).toStrictEqual(solum(undefined));
@@ -232,8 +223,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.pick() returns property value when it is present.
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(typeGuardCheck).pick('required');
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -248,16 +238,16 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable<number | undefined>' is not assignable to type 'Solum<number>'.
-                // @ts-expect-error -- Solum.pick() returns property value and it can be absent.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Nullable<number | undefined>' is not assignable to type 'Solum<number>'.
                 const output: Solum<number> = solum(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable<number | undefined>' is not assignable to type 'Nil<number>'.
-                // @ts-expect-error -- Solum.pick() returns property value when it is present.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Nullable<number | undefined>' is not assignable to type 'Nil<number>'.
                 const output: Nil<number> = solum(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(nil());
@@ -274,16 +264,14 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable<number>' is not assignable to type 'Solum<number>'.
-                // @ts-expect-error -- Solum.that() may return Nil.
+                // @ts-expect-error -- TS2322: Type 'Nullable<number>' is not assignable to type 'Solum<number>'.
                 const output: Solum<number> = solum(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable<number>' is not assignable to type 'Nil<number>'.
-                // @ts-expect-error -- Solum.that() may return Solum.
+                // @ts-expect-error -- TS2322: Type 'Nullable<number>' is not assignable to type 'Nil<number>'.
                 const output: Nil<number> = solum(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -298,16 +286,14 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Solum'.
-                // @ts-expect-error -- Solum.that() may return Nil.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Solum'.
                 const output: Solum<number> = solum(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.that() may return Solum.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(nil());
@@ -349,18 +335,18 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "required">>'
+                // @ts-expect-error -- TS2322:
+                //  Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "required">>'
                 //  is not assignable to type 'Solum<TypeGuardCheck<number>>'.
-                // @ts-expect-error -- Solum.which() may return Nil
                 const output: Solum<TypeGuardCheck> = input.which(hasPresentProperty('required'));
 
                 expect(output).toStrictEqual(input);
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "nullable">>'
+                // @ts-expect-error -- TS2322:
+                //  Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "nullable">>'
                 //  is not assignable to type 'Nil<ObjectWithPresent<TypeGuardCheck<number>, "nullable">>'.
-                // @ts-expect-error -- Solum.which() may return Nil
                 const output: Nil<ObjectWithPresent<TypeGuardCheck, 'nullable'>> = input
                     .which(hasPresentProperty('nullable'));
 
@@ -388,9 +374,9 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "option">>'
+                // @ts-expect-error -- TS2322:
+                //  Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "option">>'
                 //  is not assignable to type 'Solum<ObjectWithPresent<TypeGuardCheck<number>, "option">>'.
-                // @ts-expect-error -- Solum.which() may return Nil.
                 const output: Solum<ObjectWithPresent<TypeGuardCheck, 'option'>> = input
                     .which(hasPresentProperty('option'));
 
@@ -398,9 +384,9 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "possible">>'
+                // @ts-expect-error -- TS2322:
+                //  Type 'Nullable<ObjectWithPresent<TypeGuardCheck<number>, "possible">>'
                 //  is not assignable to type 'Nil<ObjectWithPresent<TypeGuardCheck<number>, "possible">>'.
-                // @ts-expect-error -- Solum.which() may return Solum.
                 const output: Nil<ObjectWithPresent<TypeGuardCheck, 'possible'>> = input
                     .which(hasPresentProperty('possible'));
 
@@ -418,16 +404,14 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Solum'.
-                // @ts-expect-error -- Solum.when() may return Nil.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Solum'.
                 const output: Solum<number> = solum(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(solum(3.14));
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.when() may return Solum.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -442,16 +426,14 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Solum', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Solum'.
-                // @ts-expect-error -- Solum.when() may return Nil.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Solum'.
                 const output: Solum<number> = solum(3.14).when(constant(false));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.when() may return Solum.
+                // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).when(constant(false));
 
                 expect(output).toBe(nil());
@@ -474,8 +456,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).otherwise(fallbackNullable(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -496,8 +477,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).otherwise(2.71);
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -518,8 +498,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).otherwise(constant(2.71));
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -540,8 +519,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).otherwise(null);
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -562,8 +540,7 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
+                // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
                 const output: Nil<number> = solum(3.14).otherwise(constant(null));
 
                 expect(output).toStrictEqual(solum(3.14));
@@ -584,9 +561,10 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
-                const output: Nil<number> = solum(3.14).otherwise(undefined);
+                // @ts-expect-error -- TS2322:
+                //  Type 'Solum<number | undefined>' is not assignable to type 'Nil<number | undefined>'.
+                const output: Nil<number | undefined> = solum<number | undefined>(3.14)
+                    .otherwise(undefined);
 
                 expect(output).toStrictEqual(solum(3.14));
             });
@@ -608,9 +586,10 @@ describe(Solum, () => {
             });
 
             it('cannot be assigned to Nil', () => {
-                // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-                // @ts-expect-error -- Solum.otherwise() always returns itself.
-                const output: Nil<number> = solum(3.14).otherwise(constant(undefined));
+                // @ts-expect-error: TS2322:
+                //  Type 'Solum<number | undefined>' is not assignable to type 'Nil<number | undefined>'.
+                const output: Nil<number | undefined> = solum<number | undefined>(3.14)
+                    .otherwise(constant(undefined));
 
                 expect(output).toStrictEqual(solum(3.14));
             });
@@ -715,8 +694,7 @@ describe(Solum, () => {
         });
 
         it('cannot be assigned to Nil', () => {
-            // TS2322: Type 'Solum' is not assignable to type 'Nil'.
-            // @ts-expect-error -- Solum.run returns original Solum.
+            // @ts-expect-error -- TS2322: Type 'Solum' is not assignable to type 'Nil'.
             const output: Nil<number> = solum(pi).run(assignPi(3.1415));
 
             expect(output).toStrictEqual(solum(3.14));
@@ -736,16 +714,14 @@ describe(Solum, () => {
         });
 
         it('cannot be assigned to Solum', () => {
-            // TS2322: Type 'Nullable<number>' is not assignable to type 'Solum<boolean>'.
-            // @ts-expect-error -- Solum.lift() may return Nil.
-            const output: Solum<boolean> = solum(3.14).lift(constant(2.71));
+            // @ts-expect-error -- TS2322: Type 'Nullable<number>' is not assignable to type 'Solum<number>'.
+            const output: Solum<number> = solum(3.14).lift(constant(2.71));
 
             expect(output).toStrictEqual(solum(2.71));
         });
 
         it('cannot be assigned to Nil', () => {
-            // TS2322: Type 'Nullable<boolean>' is not assignable to type 'Nil<boolean>'.
-            // @ts-expect-error -- Nil.lift() may return Solum.
+            // @ts-expect-error -- TS2322: Type 'Nullable<boolean>' is not assignable to type 'Nil<boolean>'.
             const output: Nil<boolean> = solum(3.14).lift<boolean>(constant(null));
 
             expect(output).toBe(nil());

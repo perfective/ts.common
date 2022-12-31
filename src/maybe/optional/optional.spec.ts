@@ -74,8 +74,7 @@ describe(optional, () => {
         });
 
         it('cannot be assigned to Some<T>', () => {
-            // TS2322: Type 'Optional<number>' is not assignable to type 'Some<number>'.
-            // @ts-expect-error -- Optional can be None
+            // @ts-expect-error -- TS2322: Type 'Optional<number>' is not assignable to type 'Some<number>'.
             const output: Some<number> = optional(0);
 
             expect(output).toStrictEqual(some(0));
@@ -89,8 +88,7 @@ describe(optional, () => {
         });
 
         it('cannot be assigned to None<T>', () => {
-            // TS2322: Type 'Optional<undefined>' is not assignable to type 'None<number>'.
-            // @ts-expect-error -- Optional can be Some
+            // @ts-expect-error -- TS2322: Type 'Optional<number>' is not assignable to type 'None<number>'.
             const output: None<number> = optional<number>(undefined);
 
             expect(output).toBe(none());
@@ -101,8 +99,7 @@ describe(optional, () => {
 describe(Optional, () => {
     describe('value', () => {
         it('is an optional property and cannot be assigned to the value type', () => {
-            // TS2322: Type 'number | undefined' is not assignable to type 'number'.
-            // @ts-expect-error -- Optional.value has to be assigned to "number | undefined".
+            // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number'.
             const value: number = optional<number>(3.14).value;
 
             expect(value).toBe(3.14);
@@ -118,16 +115,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional<string>' is not assignable to type 'Some<string>'.
-                // @ts-expect-error -- Some.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Optional<string>' is not assignable to type 'Some<string>'.
                 const output: Some<string> = optional(3.14).onto(constant(optional('3.14')));
 
                 expect(output).toStrictEqual(optional('3.14'));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional<string>' is not assignable to type 'None<string>'.
-                // @ts-expect-error -- Some.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Optional<string>' is not assignable to type 'None<string>'.
                 const output: None<string> = optional(3.14).onto(constant(optional('3.14')));
 
                 expect(output).toStrictEqual(optional('3.14'));
@@ -142,16 +137,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.onto() may return a result or none.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<string> = optional(3.14).onto(constant(some('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.onto() may return a result or none.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<string> = optional(3.14).onto(constant(some('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
@@ -166,16 +159,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Some.onto() always returns the result of the given function.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<string> = optional(3.14).onto(constant(none<string>()));
 
                 expect(output).toBe(none());
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.onto() may return a result or none.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<string> = optional(3.14).onto(constant(none<string>()));
 
                 expect(output).toBe(none());
@@ -200,13 +191,8 @@ describe(Optional, () => {
                     .toStrictEqual(optional(3.14).to(splitNullableDecimal));
                 expect(optional(null).to<string>(nullableDecimal).to(split('.')))
                     .toStrictEqual(optional(null).to(splitNullableDecimal));
-
-                // TS2345: Type 'undefined' is not assignable to type 'number'.
-                // @ts-expect-error -- Composing the same functions for test clarity
-                expect(none().to<string>(nullableDecimal).to(split('.')))
-                    // TS2345: Type 'undefined' is not assignable to type 'number'.
-                    // @ts-expect-error -- Composing the same functions for test clarity
-                    .toStrictEqual(none().to(splitNullableDecimal));
+                expect(none<number>().to<string>(nullableDecimal).to(split('.')))
+                    .toStrictEqual(none<number>().to(splitNullableDecimal));
             });
         });
 
@@ -218,16 +204,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be absent.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<string> = optional(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be present.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<string> = optional(3.14).to(constant(fallbackOptional('3.14')));
 
                 expect(output).toStrictEqual(some('3.14'));
@@ -242,16 +226,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be absent.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<string> = optional(3.14).to(constant('3.14'));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be present.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<string> = optional(3.14).to(constant('3.14'));
 
                 expect(output).toStrictEqual(some('3.14'));
@@ -266,16 +248,16 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be absent.
-                const output: Some<string> = optional(3.14).to<string>(constant(null));
+                // @ts-expect-error -- TS2322:
+                //  Type 'Optional<number | null>' is not assignable to type 'Some<number | null>'.
+                const output: Some<number | null> = optional(3.14).to<number | null>(constant(null));
 
                 expect(output).toStrictEqual(some(null));
             });
 
             it('cannot be assigned to None', () => {
-                // @ts-expect-error -- Some.to() always returns the result, and result may be present.
-                const output: None<string> = optional(3.14).to<string>(constant(null));
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
+                const output: None<number | null> = optional(3.14).to<number | null>(constant(null));
 
                 expect(output).toStrictEqual(some(null));
             });
@@ -289,16 +271,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be absent.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<string> = optional(3.14).to<string>(constant(undefined));
 
                 expect(output).toBe(none());
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Some.to() always returns the result, and result may be present.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<string> = optional(3.14).to<string>(constant(undefined));
 
                 expect(output).toBe(none());
@@ -315,16 +295,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.pick() may not have a value to pick from
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional(typeGuardCheck).pick('required');
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.pick() may not have a value to pick from
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<number> = optional(typeGuardCheck).pick('required');
 
                 expect(output).toStrictEqual(some(3.14));
@@ -339,16 +317,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.pick() may not have a value to pick from.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional(typeGuardCheck).pick('option');
 
                 expect(output).toBe(none());
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.pick() may not have a value to pick from.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<number> = optional(typeGuardCheck).pick('option');
 
                 expect(output).toBe(none());
@@ -365,16 +341,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.that() may return None.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.that() may return Some.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<number> = optional(3.14).that(isGreaterThan(2.71));
 
                 expect(output).toStrictEqual(some(3.14));
@@ -389,16 +363,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.that() may return None.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(none());
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.that() may return Some.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<number> = optional(3.14).that(isLessThan(2.71));
 
                 expect(output).toBe(none());
@@ -415,16 +387,16 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.which() may return None.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Optional<ObjectWithPresent<string, "length">>' is not assignable to type 'Some<string>'.
                 const output: Some<string> = optional<string>('3.14').which(hasPresentProperty('length'));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
 
             it('cannot be assign to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.which() may return Some.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Optional<ObjectWithPresent<string, "length">>' is not assignable to type 'None<string>'.
                 const output: None<string> = optional<string>('3.14').which(hasPresentProperty('length'));
 
                 expect(output).toStrictEqual(some('3.14'));
@@ -440,8 +412,9 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.which() may return None.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Optional<ObjectWithAbsent<string, "length">>'
+                //  is not assignable to type 'Some<ObjectWithAbsent<string, "length">>'.
                 const output: Some<ObjectWithAbsent<string, 'length'>> = optional<string>('3.14')
                     .which(hasAbsentProperty('length'));
 
@@ -449,8 +422,9 @@ describe(Optional, () => {
             });
 
             it('cannot be assign to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.which() may return Some.
+                // @ts-expect-error -- TS2322:
+                //  Type 'Optional<ObjectWithAbsent<string, "length">>'
+                //  is not assignable to type 'None<ObjectWithAbsent<string, "length">>'.
                 const output: None<ObjectWithAbsent<string, 'length'>> = optional<string>('3.14')
                     .which(hasAbsentProperty('length'));
 
@@ -468,16 +442,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.when() may return None.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.when() may return Some.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<number> = optional(3.14).when(constant(true));
 
                 expect(output).toStrictEqual(some(3.14));
@@ -492,16 +464,14 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.when() may return None.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional(3.14).when(constant(false));
 
                 expect(output).toBe(none());
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.when() may return Some.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
                 const output: None<number> = optional(3.14).when(constant(false));
 
                 expect(output).toBe(none());
@@ -524,8 +494,7 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.otherwise() is always present if fallback is present.
+                // @ts-expect-error -- TS2322: Type 'Some<number>' is not assignable to type 'None<number>'.
                 const output: None<number> = optional<number>(3.14).otherwise(2.71);
 
                 expect(output).toStrictEqual(some(3.14));
@@ -546,8 +515,7 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to None', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.otherwise() is always present if fallback is present.
+                // @ts-expect-error -- TS2322: Type 'Some' is not assignable to type 'None'.
                 const output: None<number> = optional<number>(3.14).otherwise(constant(2.71));
 
                 expect(output).toStrictEqual(some(3.14));
@@ -562,17 +530,16 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.otherwise() may return None if the value is absent.
-                const output: Some<number> = optional<number>(3.14).otherwise(null);
+                const output: Some<number | null> = optional<number | null>(3.14).otherwise(null);
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
-            it('cannot be assigned to null', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.otherwise() may return Some if the value is present.
-                const output: None<number> = optional<number>(undefined).otherwise(null);
+            it('cannot be assigned to None', () => {
+                // @ts-expect-error -- TS2322:
+                //  Type 'Some<number | null>' is not assignable to type 'None<number | null>'.
+                const output: None<number | null> = optional<number | null>(undefined)
+                    .otherwise(null);
 
                 expect(output).toStrictEqual(some(null));
             });
@@ -586,17 +553,17 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.otherwise() may return None if the value is absent.
-                const output: Some<number> = optional<number>(3.14).otherwise(constant(null));
+                const output: Some<number | null> = optional<number | null>(3.14)
+                    .otherwise(constant(null));
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
-            it('cannot be assigned to null', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.otherwise() may return Some if the value is present.
-                const output: None<number> = optional<number>(undefined).otherwise(constant(null));
+            it('cannot be assigned to None', () => {
+                // @ts-expect-error -- TS2322:
+                //  Type 'Some<number | null>' is not assignable to type 'None<number | null>'.
+                const output: None<number | null> = optional<number | null>(undefined)
+                    .otherwise(constant(null));
 
                 expect(output).toStrictEqual(some(null));
             });
@@ -610,17 +577,15 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.otherwise() may return None if the value is absent.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional<number>(3.14).otherwise(undefined);
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
-            it('cannot be assigned to undefined', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.otherwise() may return Some if the value is present.
-                const output: None<number> = optional<number>(null).otherwise(undefined);
+            it('cannot be assigned to None', () => {
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
+                const output: None<number> = optional<number | null>(null).otherwise(undefined);
 
                 expect(output).toStrictEqual(some(null));
             });
@@ -634,17 +599,15 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to Some', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'Some'.
-                // @ts-expect-error -- Optional.otherwise() may return None if the value is absent.
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
                 const output: Some<number> = optional<number>(3.14).otherwise(constant(undefined));
 
                 expect(output).toStrictEqual(some(3.14));
             });
 
-            it('cannot be assigned to undefined', () => {
-                // TS2322: Type 'Optional' is not assignable to type 'None'.
-                // @ts-expect-error -- Optional.otherwise() may return Some if the value is present.
-                const output: None<number> = optional<number>(null).otherwise(constant(undefined));
+            it('cannot be assigned to None', () => {
+                // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
+                const output: None<number> = optional<number | null>(null).otherwise(constant(undefined));
 
                 expect(output).toStrictEqual(some(null));
             });
@@ -694,17 +657,16 @@ describe(Optional, () => {
 
         describe('when the "fallback" may be undefined', () => {
             it('cannot be assigned to the value type', () => {
-                // TS2322: Type 'number | undefined' is not assignable to type 'number'.
-                // @ts-expect-error -- fallback may be undefined
+                // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number'.
                 const output: number = optional(3.14).or(fallbackOptional(2.71));
 
                 expect(output).toBe(3.14);
             });
 
             it('cannot be assigned to the nullable value type', () => {
-                // TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
-                // @ts-expect-error -- fallback may be undefined
-                const output: number | null = optional<number>(null).or(fallbackOptional(2.71));
+                // @ts-expect-error -- TS2322:
+                //  Type 'number | null | undefined' is not assignable to type 'number | null'.
+                const output: number | null = optional<number | null>(null).or(fallbackOptional(2.71));
 
                 expect(output).toBeNull();
             });
@@ -718,17 +680,16 @@ describe(Optional, () => {
 
         describe('when the "fallback" is undefined', () => {
             it('cannot be assigned to the value type', () => {
-                // TS2322: Type 'number | undefined' is not assignable to type 'number'.
-                // @ts-expect-error -- fallback is undefined
+                // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number'.
                 const output: number = optional(3.14).or(undefined);
 
                 expect(output).toBe(3.14);
             });
 
             it('cannot be assigned to the nullable value type', () => {
-                // TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
-                // @ts-expect-error -- fallback is undefined
-                const output: number | null = optional<number>(null).or(undefined);
+                // @ts-expect-error -- TS2322:
+                //  Type 'number | null | undefined' is not assignable to type 'number | null'.
+                const output: number | null = optional<number | null>(null).or(undefined);
 
                 expect(output).toBeNull();
             });
@@ -740,8 +701,7 @@ describe(Optional, () => {
             });
 
             it('cannot be assigned to the undefined type', () => {
-                // TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
-                // @ts-expect-error -- fallback is undefined
+                // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'undefined'.
                 const output: undefined = optional<number>(2.71).or(undefined);
 
                 expect(output).toBe(2.71);
@@ -768,16 +728,14 @@ describe(Optional, () => {
         });
 
         it('cannot be assign to Some', () => {
-            // TS2322: Type 'Optional' is not assignable to type 'Some'.
-            // @ts-expect-error -- Optional.run may return original None.
+            // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'Some'.
             const output: Some<number> = optional(pi).run(assignPi(3.1415));
 
             expect(output).toStrictEqual(some(3.14));
         });
 
         it('cannot be assigned to None', () => {
-            // TS2322: Type 'Optional' is not assignable to type 'None'.
-            // @ts-expect-error -- Optional.run may return original Some.
+            // @ts-expect-error -- TS2322: Type 'Optional' is not assignable to type 'None'.
             const output: None<number> = optional(pi).run(assignPi(3.1415));
 
             expect(output).toStrictEqual(some(3.14));
@@ -786,11 +744,10 @@ describe(Optional, () => {
 
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
-            // TS2345: Argument of type '{ (value: number): string; (value: string): number | null; }'
+            // @ts-expect-error -- TS2345:
+            //  Argument of type '{ (value: number): string; (value: string): number | null; }'
             //  is not assignable to parameter of type '(value: string | undefined) => number | null | undefined'.
-            // @ts-expect-error -- Optional.lift may pass null or undefined into the function.
-            expect(optional('3.14').lift(decimal))
-                .toStrictEqual(some(3.14));
+            expect(optional('3.14').lift(decimal)).toStrictEqual(some(3.14));
         });
 
         it('must be assigned to Optional', () => {
@@ -800,17 +757,16 @@ describe(Optional, () => {
         });
 
         it('cannot be assigned to Some', () => {
-            // TS2322: Type 'Optional<number>' is not assignable to type 'Some<boolean>'.
-            // @ts-expect-error -- Optional.lift() may return None.
-            const output: Some<boolean> = optional(3.14).lift(constant(2.71));
+            // @ts-expect-error -- TS2322: Type 'Optional<number>' is not assignable to type 'Some<number>'.
+            const output: Some<number> = optional(3.14).lift(constant(2.71));
 
             expect(output).toStrictEqual(some(2.71));
         });
 
         it('cannot be assigned to None', () => {
-            // TS2322: Type 'Optional<boolean>' is not assignable to type 'None<boolean>'.
-            // @ts-expect-error -- Optional.lift() may return Some.
-            const output: None<boolean> = optional(3.14).lift<boolean>(constant(null));
+            // @ts-expect-error -- TS2322:
+            //  Type 'Optional<number | null>' is not assignable to type 'None<number | null>'.
+            const output: None<number | null> = optional(3.14).lift<number | null>(constant(null));
 
             expect(output).toStrictEqual(some(null));
         });

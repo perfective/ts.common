@@ -16,15 +16,15 @@ describe('typeof', () => {
             expect(output).toBe('null' as TsType);
         });
 
-        it('returns union type for a union type', () => {
+        it('returns a union type for a union type', () => {
             const output: 'undefined' | 'null' = typeOf<undefined | null>(undefined);
 
             expect(output).toBe('undefined' as TsType);
         });
 
         it('cannot be assigned to a different Type', () => {
-            // @ts-expect-error -- Type '"undefined" | "null"' is not assignable to type '"null"'.
-            const output: 'null' = typeOf<undefined | null>(undefined);
+            // @ts-expect-error -- TS2322: Type '"undefined"' is not assignable to type '"null"'.
+            const output: 'null' = typeOf(undefined);
 
             expect(output).toBe('undefined' as TsType);
         });

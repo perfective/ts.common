@@ -24,7 +24,7 @@ enum Style {
     Onset = 128,
 }
 
-describe('bitmask<T>', () => {
+describe('Bitmask<T>', () => {
     it('can be created without a generic type parameter', () => {
         const flags: Bitmask = 0b1001_0110;
 
@@ -38,8 +38,8 @@ describe('bitmask<T>', () => {
     });
 
     it('cannot be used with a string-based enum', () => {
-        // @ts-expect-error -- Type 'Record<string, Bool>' does not satisfy the constraint 'Record<string, number>'
-        const truth: Bitmask<Enum<CharBool>> = CharBool.True;
+        // @ts-expect-error -- TS2322: Type 'CharBool' is not assignable to type 'number'.
+        const truth: Bitmask = CharBool.True;
 
         expect(truth).toBe('t');
     });

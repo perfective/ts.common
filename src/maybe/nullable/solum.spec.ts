@@ -9,6 +9,7 @@ import {
     hasNullProperty,
     hasPresentProperty,
     hasUndefinedProperty,
+    ObjectWithNotNull,
     ObjectWithPresent,
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
@@ -320,16 +321,12 @@ describe(Solum, () => {
         it('combines checked properties', () => {
             const intermediate: Nullable<ObjectWithPresent<TypeGuardCheck, 'maybe'>> = input
                 .which(hasPresentProperty('maybe'));
-            const output: Nullable<ObjectWithPresent<TypeGuardCheck, 'nullable'>> = intermediate
-                .which(hasNotNullProperty('nullable'));
+            const output: Nullable<ObjectWithPresent<TypeGuardCheck, 'maybe'>
+            & ObjectWithNotNull<TypeGuardCheck, 'nullable'>> = intermediate.which(hasNotNullProperty('nullable'));
 
-            expect(
-                output.to(v => `${decimal(v.nullable)}:${decimal(v.nullable)}`),
-            ).toStrictEqual(
-                input
-                    .which(hasPresentProperty('nullable', 'nullable'))
-                    .to(v => `${decimal(v.nullable)}:${decimal(v.nullable)}`),
-            );
+            expect(output.to(v => `${decimal(v.nullable)}:${decimal(v.maybe)}`)).toStrictEqual(input
+                .which(hasPresentProperty('nullable', 'maybe'))
+                .to(v => `${decimal(v.nullable)}:${decimal(v.maybe)}`));
         });
 
         describe('when the "filter" type guard is true', () => {

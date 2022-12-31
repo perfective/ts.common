@@ -19,7 +19,7 @@ export type ObjectWithDefined<T, K extends keyof T> = T & {
 };
 
 export type ObjectWithUndefined<T, K extends keyof T> = T & {
-    [P in K]: undefined;
+    [P in K]?: undefined;
 };
 
 export type ObjectWithNotNull<T, K extends keyof T> = T & {

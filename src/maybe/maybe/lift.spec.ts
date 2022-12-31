@@ -76,7 +76,6 @@ describe('which', () => {
             .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
         expect(checks.map(which(hasDefinedProperty('optional'))).map(pick('required')))
             .toStrictEqual([just(2.71), nothing(), nothing(), naught()]);
-        // @ts-expect-error -- TS2345: errors with "exactOptionalPropertyTypes: true"
         expect(checks.map(which(hasUndefinedProperty('optional'))).map(pick('required')))
             .toStrictEqual([nothing(), just(3.14), nothing(), naught()]);
         expect(checks.map(which(hasNotNullProperty('nullable'))).map(pick('required')))

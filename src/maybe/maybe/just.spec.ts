@@ -359,7 +359,6 @@ describe(Just, () => {
             it('returns Just', () => {
                 /* eslint-disable jest/max-expects -- check all test properties */
                 expect(input.which(hasDefinedProperty('required'))).toStrictEqual(input);
-                // @ts-expect-error -- TS2345: errors with "exactOptionalPropertyTypes: true"
                 expect(input.which(hasUndefinedProperty('optional'))).toStrictEqual(input);
                 expect(input.which(hasNotNullProperty('nullable'))).toStrictEqual(input);
                 expect(input.which(hasNullProperty('possible'))).toStrictEqual(input);

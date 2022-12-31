@@ -1,7 +1,7 @@
 import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
-import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
+import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
 import { isPresent } from '../../value/value';
 import { fallbackNullable } from '../nullable/nullable.mock';
@@ -476,7 +476,8 @@ describe(Maybe, () => {
 
         describe('when the "filter" type guard is false', () => {
             it('must be assigned to Maybe', () => {
-                const output: Maybe<string> = maybe<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Maybe<ObjectWithAbsent<string, 'length'>> = maybe<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(nothing());
             });
@@ -484,7 +485,8 @@ describe(Maybe, () => {
             it('cannot be assigned to Just', () => {
                 // TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 // @ts-expect-error -- Maybe.which() may return Nothing.
-                const output: Just<string> = maybe<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Just<ObjectWithAbsent<string, 'length'>> = maybe<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(nothing());
             });
@@ -492,7 +494,8 @@ describe(Maybe, () => {
             it('cannot be assign to Nothing', () => {
                 // TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 // @ts-expect-error -- Maybe.which() may return Just.
-                const output: Nothing<string> = maybe<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Nothing<ObjectWithAbsent<string, 'length'>> = maybe<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(nothing());
             });

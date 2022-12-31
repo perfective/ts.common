@@ -1,7 +1,7 @@
 import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
-import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
+import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
 import { isPresent } from '../../value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
@@ -433,7 +433,8 @@ describe(Optional, () => {
 
         describe('when the "filter" type guard is false', () => {
             it('must be assigned to Optional', () => {
-                const output: Optional<string> = optional<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Optional<ObjectWithAbsent<string, 'length'>> = optional<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(none());
             });
@@ -441,7 +442,8 @@ describe(Optional, () => {
             it('cannot be assigned to Some', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'Some'.
                 // @ts-expect-error -- Optional.which() may return None.
-                const output: Some<string> = optional<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Some<ObjectWithAbsent<string, 'length'>> = optional<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(none());
             });
@@ -449,7 +451,8 @@ describe(Optional, () => {
             it('cannot be assign to None', () => {
                 // TS2322: Type 'Optional' is not assignable to type 'None'.
                 // @ts-expect-error -- Optional.which() may return Some.
-                const output: None<string> = optional<string>('3.14').which(hasAbsentProperty('length'));
+                const output: None<ObjectWithAbsent<string, 'length'>> = optional<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(none());
             });

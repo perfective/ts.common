@@ -1,7 +1,7 @@
 import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
-import { hasAbsentProperty, hasPresentProperty } from '../../object/property/property';
+import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
 import { isPresent } from '../../value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
@@ -432,7 +432,8 @@ describe(Nullable, () => {
 
         describe('when the "filter" type guard is false', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<string> = nullable<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Nullable<ObjectWithAbsent<string, 'length'>> = nullable<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(nil());
             });
@@ -440,7 +441,8 @@ describe(Nullable, () => {
             it('cannot be assigned to Solum', () => {
                 // TS2322: Type 'Nullable<string>' is not assignable to type 'Solum<string>'.
                 // @ts-expect-error -- Nullable.which() returns Nil.
-                const output: Solum<string> = nullable<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Solum<ObjectWithAbsent<string, 'length'>> = nullable<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(nil());
             });
@@ -448,7 +450,8 @@ describe(Nullable, () => {
             it('cannot be assign to Nil', () => {
                 // TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
                 // @ts-expect-error -- Nullable.which() may be true.
-                const output: Nil<string> = nullable<string>('3.14').which(hasAbsentProperty('length'));
+                const output: Nil<ObjectWithAbsent<string, 'length'>> = nullable<string>('3.14')
+                    .which(hasAbsentProperty('length'));
 
                 expect(output).toBe(nil());
             });

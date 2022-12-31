@@ -36,7 +36,7 @@ export function toRecordFromEntries(record: Record<string, unknown>, value: Entr
  *
  * @see Pick
  */
-export function pick<T, K extends keyof T>(record: T, ...property: readonly K[]): Pick<T, K> {
+export function pick<T, K extends keyof T>(record: NonNullable<T>, ...property: readonly K[]): Pick<T, K> {
     return Object.entries(record)
         .filter(([key]: Entry) => property.includes(key as K))
         .reduce(toRecordFromEntries, {}) as Pick<T, K>;
@@ -47,8 +47,8 @@ export function pick<T, K extends keyof T>(record: T, ...property: readonly K[])
  *
  * @see pick()
  */
-export function recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<T, Pick<T, K>> {
-    return (value: T): Pick<T, K> => pick<T, K>(value, ...property);
+export function recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<NonNullable<T>, Pick<T, K>> {
+    return (value: NonNullable<T>): Pick<T, K> => pick<T, K>(value, ...property);
 }
 
 /**
@@ -56,7 +56,7 @@ export function recordWithPicked<T, K extends keyof T>(...property: readonly K[]
  *
  * @see Omit
  */
-export function omit<T, K extends keyof T>(record: T, ...property: readonly K[]): Omit<T, K> {
+export function omit<T, K extends keyof T>(record: NonNullable<T>, ...property: readonly K[]): Omit<T, K> {
     return Object.entries(record)
         .filter(([key]: Entry) => !property.includes(key as K))
         .reduce(toRecordFromEntries, {}) as Omit<T, K>;
@@ -67,14 +67,14 @@ export function omit<T, K extends keyof T>(record: T, ...property: readonly K[])
  *
  * @see omit()
  */
-export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<T, Omit<T, K>> {
-    return (value: T): Omit<T, K> => omit<T, K>(value, ...property);
+export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<NonNullable<T>, Omit<T, K>> {
+    return (value: NonNullable<T>): Omit<T, K> => omit<T, K>(value, ...property);
 }
 
 /**
  * Creates a copy of the record where each value meets the condition.
  */
-export function filter<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T> {
+export function filter<T, K extends keyof T>(record: NonNullable<T>, condition: Predicate<T[K]>): Partial<T> {
     return Object.entries(record)
         .filter(([, value]: Entry) => condition(value as T[K]))
         .reduce(toRecordFromEntries, {}) as Partial<T>;
@@ -85,8 +85,10 @@ export function filter<T, K extends keyof T>(record: T, condition: Predicate<T[K
  *
  * @see filter()
  */
-export function recordFiltered<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>> {
-    return (record: T): Partial<T> => filter(record, condition);
+export function recordFiltered<T, K extends keyof T = keyof T>(
+    condition: Predicate<T[K]>,
+): Unary<NonNullable<T>, Partial<T>> {
+    return (record: NonNullable<T>): Partial<T> => filter(record, condition);
 }
 
 /**

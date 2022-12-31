@@ -234,7 +234,7 @@ describe(Just, () => {
 
     describe('pick', () => {
         it('is a shortcut of the Just.to()', () => {
-            const input: Just<Boxed<TypeGuardCheck>> = just({ value: typeGuardCheck });
+            const input: Just<Boxed<TypeGuardCheck>> = just({ value: typeGuardCheck } as Boxed<TypeGuardCheck>);
 
             expect(input.pick('value').pick('required'))
                 .toStrictEqual(input.to(i => i.value).to(i => i.required));

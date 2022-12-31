@@ -211,7 +211,7 @@ describe(Solum, () => {
 
     describe('pick', () => {
         it('is an equivalent of the then() chain', () => {
-            const input: Solum<Boxed<TypeGuardCheck>> = solum({ value: typeGuardCheck });
+            const input: Solum<Boxed<TypeGuardCheck>> = solum({ value: typeGuardCheck } as Boxed<TypeGuardCheck>);
 
             expect(input.pick('value').pick('required'))
                 .toStrictEqual(input.to(i => i.value).to(i => i.required));

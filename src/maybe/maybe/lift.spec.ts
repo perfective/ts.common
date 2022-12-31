@@ -142,11 +142,11 @@ describe('or', () => {
     it('lifts a fallback function to the Maybe.or()', () => {
         expect(list.map(or(constant(Number.POSITIVE_INFINITY))))
             .toStrictEqual([2.71, 3.14, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
-        expect(list.map(or((): number | null | undefined => Number.POSITIVE_INFINITY)))
+        expect(list.map(or<number>((): number | null | undefined => Number.POSITIVE_INFINITY)))
             .toStrictEqual([2.71, 3.14, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
-        expect(list.map(or((): number | null => Number.POSITIVE_INFINITY)))
+        expect(list.map(or<number>((): number | null => Number.POSITIVE_INFINITY)))
             .toStrictEqual([2.71, 3.14, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
-        expect(list.map(or((): number | undefined => Number.POSITIVE_INFINITY)))
+        expect(list.map(or<number>((): number | undefined => Number.POSITIVE_INFINITY)))
             .toStrictEqual([2.71, 3.14, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY]);
     });
 

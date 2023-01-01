@@ -1,4 +1,28 @@
-import { isNotTypeOf, isTypeOf, TsType, typeOf } from './type-of';
+import { ecmaType, isEcmaType, isNotTypeOf, isTypeOf, TsType, typeOf } from './type-of';
+
+describe(ecmaType, () => {
+    it('returns the given EcmaType value', () => {
+        expect(ecmaType('symbol')).toBe('symbol');
+    });
+
+    it('does not compile and throws a runtime error with a non-EcmaType value', () => {
+        // @ts-expect-error --TS2345: Argument of type '"null"' is not assignable to parameter of type 'EcmaType'.
+        expect(() => ecmaType('null')).toThrow(new TypeError('Input "null" is not an EcmaType'));
+
+        // @ts-expect-error -- TS2345: Argument of type 'undefined' is not assignable to parameter of type 'EcmaType'.
+        expect(() => ecmaType(undefined)).toThrow(new TypeError('Input "undefined" is not an EcmaType'));
+    });
+});
+
+describe(isEcmaType, () => {
+    it('returns true if the given input is an EcmaType', () => {
+        expect(isEcmaType('undefined')).toBe(true);
+    });
+
+    it('returns false if the given input is not an EcmaType', () => {
+        expect(isEcmaType('UNDEFINED')).toBe(false);
+    });
+});
 
 // NOTE: Explicitly defining each constant with a type to verify correct TypeOf<T> type
 describe('typeof', () => {

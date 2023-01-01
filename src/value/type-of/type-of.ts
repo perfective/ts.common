@@ -6,6 +6,41 @@ import { isNull } from '../value';
  */
 export type EcmaType = 'undefined' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function' | 'object';
 
+const ecmaTypes: Set<EcmaType> = new Set<EcmaType>([
+    'undefined',
+    'boolean',
+    'number',
+    'bigint',
+    'string',
+    'symbol',
+    'function',
+    'object',
+]);
+
+/**
+ * Type guards an EcmaType value in compile time
+ * (unlike the `as` operator which allows to type cast any string as EcmaType).
+ *
+ * @throws TypeError - when the value in runtime is not an EcmaType.
+ *
+ * @since v0.9.0
+ */
+export function ecmaType(type: EcmaType): EcmaType {
+    if (isEcmaType(type)) {
+        return type;
+    }
+    throw new TypeError(`Input "${type as string}" is not an EcmaType`);
+}
+
+/**
+ * Returns true and narrows the variable type, if the given input string is an EcmaType.
+ *
+ * @since v0.9.0
+ */
+export function isEcmaType(input: string): input is EcmaType {
+    return ecmaTypes.has(input as EcmaType);
+}
+
 /**
  * Extended EcmaType to include checks for "null" and "array".
  *

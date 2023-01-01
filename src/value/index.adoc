@@ -107,11 +107,17 @@ To reduce this complexity, the `typeOf<T>` function is provided with the conditi
 — Type guards an `EcmaType` value in compile time
 (unlike the `as` operator which allows to type cast any string as `EcmaType`).
 Throws a `TypeError` when the value in runtime is not an `EcmaType`.
+** `tsType(type: TsType): TsType`
+— Type guards a `TsType` value in compile time
+(unlike the `as` operator which allows to type cast any string as `TsType`).
+Throws a `TypeError` when the value in runtime is not a `TsType`.
 ** `typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType`.
 +
 * Type guards:
 ** `isEcmaType(input: string): input is EcmaType`
 — returns true and narrows the variable type, if the given input string is an `EcmaType`.
+** `isTsType(input: string): input is TsType`
+— returns true and narrows the variable type, if the given input string is a `TsType`.
 +
 * Predicates:
 ** `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;

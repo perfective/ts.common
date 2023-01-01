@@ -1,4 +1,4 @@
-import { ecmaType, isEcmaType, isNotTypeOf, isTypeOf, TsType, typeOf } from './type-of';
+import { ecmaType, isEcmaType, isNotTypeOf, isTsType, isTypeOf, TsType, tsType, typeOf } from './type-of';
 
 describe(ecmaType, () => {
     it('returns the given EcmaType value', () => {
@@ -21,6 +21,33 @@ describe(isEcmaType, () => {
 
     it('returns false if the given input is not an EcmaType', () => {
         expect(isEcmaType('UNDEFINED')).toBe(false);
+    });
+});
+
+describe(tsType, () => {
+    it('returns the given TsType value', () => {
+        expect(tsType('null')).toBe('null');
+        expect(tsType('array')).toBe('array');
+    });
+
+    it('does not compile and throws a runtime error with a non-TsType value', () => {
+        // @ts-expect-error -- TS2345: Argument of type '"any"' is not assignable to parameter of type 'TsType'.
+        expect(() => tsType('any')).toThrow(new TypeError('Input "any" is not a TsType'));
+
+        // @ts-expect-error -- TS2345: Argument of type 'undefined' is not assignable to parameter of type 'TsType'.
+        expect(() => tsType(undefined)).toThrow(new TypeError('Input "undefined" is not a TsType'));
+    });
+});
+
+describe(isTsType, () => {
+    it('returns true if the given input is an EcmaType', () => {
+        expect(isTsType('null')).toBe(true);
+        expect(isTsType('array')).toBe(true);
+    });
+
+    it('returns false if the given input is not a TsType', () => {
+        expect(isTsType('any')).toBe(false);
+        expect(isTsType('never')).toBe(false);
     });
 });
 

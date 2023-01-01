@@ -50,6 +50,37 @@ export function isEcmaType(input: string): input is EcmaType {
  */
 export type TsType = EcmaType | 'null' | 'array' | 'unknown';
 
+const tsTypes: Set<TsType> = new Set<TsType>([
+    ...ecmaTypes,
+    'null',
+    'array',
+    'unknown',
+]);
+
+/**
+ * Type guards a TsType value in compile time
+ * (unlike the `as` operator which allows to type cast any string as TsType).
+ *
+ * @throws TypeError - when the value in runtime is not a TsType.
+ *
+ * @since v0.9.0
+ */
+export function tsType(type: TsType): TsType {
+    if (isTsType(type)) {
+        return type;
+    }
+    throw new TypeError(`Input "${type as string}" is not a TsType`);
+}
+
+/**
+ * Returns true and narrows the variable type, if the given input string is a TsType.
+ *
+ * @since v0.9.0
+ */
+export function isTsType(input: string): input is TsType {
+    return tsTypes.has(input as TsType);
+}
+
 /**
  * @see https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types
  */

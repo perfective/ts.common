@@ -26,7 +26,7 @@ export abstract class Nullable<T> implements Option<T, null> {
 
     public abstract when(condition: Proposition): Nullable<T>;
 
-    public abstract otherwise(fallback: Value<T>): Solum<T>;
+    public abstract otherwise(fallback: Value<T>): Only<T>;
     public abstract otherwise(fallback: Value<T | null>): Nullable<T>;
 
     public abstract or(fallback: Value<T>): T;
@@ -39,17 +39,17 @@ export abstract class Nullable<T> implements Option<T, null> {
     ): Nullable<U>;
 }
 
-export class Solum<T> implements Nullable<T> {
+export class Only<T> implements Nullable<T> {
     public constructor(
         public readonly value: NotNull<T>,
     ) {
         // Catches an error when the given argument passes the type definition, but is null in runtime.
         if (isNull(this.value)) {
-            throw new TypeError('Solum value must be not null');
+            throw new TypeError('Only value must be not null');
         }
     }
 
-    public onto<U>(flatMap: (value: T) => Solum<NotNull<U>>): Solum<NotNull<U>>;
+    public onto<U>(flatMap: (value: T) => Only<NotNull<U>>): Only<NotNull<U>>;
     public onto<U>(flatMap: (value: T) => Nil<NotNull<U>>): Nil<NotNull<U>>;
     public onto<U>(flatMap: (value: T) => Nullable<NotNull<U>>): Nullable<NotNull<U>>;
     public onto<U>(
@@ -59,18 +59,18 @@ export class Solum<T> implements Nullable<T> {
     }
 
     // Return type has to be NotNull<U> to exclude null from the type U
-    public to<U>(map: (value: T) => NotNull<U>): Solum<U>;
+    public to<U>(map: (value: T) => NotNull<U>): Only<U>;
     public to<U>(map: (value: T) => null): Nil<U>;
     public to<U>(map: (value: T) => U | null): Nullable<U>;
-    public to<U>(map: (value: T) => U | null): Nullable<U> | Solum<U> | Nil<U> {
+    public to<U>(map: (value: T) => U | null): Nullable<U> | Only<U> | Nil<U> {
         return nullable<U>(map(this.value));
     }
 
     public pick<K extends keyof T>(
         property: Value<K>,
-    ): T[K] extends NotNull<T[K]> ? Solum<T[K]> : Nullable<NotNull<T[K]>>;
+    ): T[K] extends NotNull<T[K]> ? Only<T[K]> : Nullable<NotNull<T[K]>>;
 
-    public pick<K extends keyof T>(property: Value<K>): Solum<T[K]> | Nullable<NotNull<T[K]>> {
+    public pick<K extends keyof T>(property: Value<K>): Only<T[K]> | Nullable<NotNull<T[K]>> {
         return this.to(value => value[valueOf(property)]) as unknown as Nullable<NotNull<T[K]>>;
     }
 
@@ -85,7 +85,7 @@ export class Solum<T> implements Nullable<T> {
         if (filter(this.value)) {
             // When condition is true, this.value is of type U extends T.
             // Return it as is instead of passing it through just(this.value).
-            return this as unknown as Solum<U>;
+            return this as unknown as Only<U>;
         }
         return nil<U>();
     }
@@ -97,7 +97,7 @@ export class Solum<T> implements Nullable<T> {
         return nil<T>();
     }
 
-    public otherwise(fallback: Value<T | null>): Solum<T>;
+    public otherwise(fallback: Value<T | null>): Only<T>;
     public otherwise(): this {
         return this;
     }
@@ -154,10 +154,10 @@ implements Nullable<T> {
         return this;
     }
 
-    public otherwise(fallback: Value<T>): Solum<T>;
+    public otherwise(fallback: Value<T>): Only<T>;
     public otherwise(fallback: Value<null>): Nil<T>;
     public otherwise(fallback: Value<T | null>): Nullable<T>;
-    public otherwise(fallback: Value<T | null>): Solum<T> | Nil<T> | Nullable<T> {
+    public otherwise(fallback: Value<T | null>): Only<T> | Nil<T> | Nullable<T> {
         return nullable(valueOf(fallback));
     }
 
@@ -186,13 +186,13 @@ export function nil<T>(): Nil<T> {
     return naught as Nil<T>;
 }
 
-export function solum<T>(value: NotNull<T>): Solum<T> {
-    return new Solum<T>(value);
+export function only<T>(value: NotNull<T>): Only<T> {
+    return new Only<T>(value);
 }
 
 export function nullable<T>(value: T | null): Nullable<T> {
     if (isNull(value)) {
         return nil() as unknown as Nullable<T>;
     }
-    return solum(value as NotNull<T>);
+    return only(value as NotNull<T>);
 }

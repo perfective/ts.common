@@ -55,7 +55,7 @@ but to throw an error for `undefined`.
 To cover these cases, `@perfective/common/maybe` provides additional types:
 
 * `Nullable<T>` that considers `null` as _absent_ and `undefined` as _present_:
-** `Solum<T>` represents a present value;
+** `Only<T>` represents a present value;
 ** `Nil<T>` represents an absent value.
 +
 * `Optional<T>` that considers `undefined` as _absent_ and `null` as _present_:
@@ -188,7 +188,7 @@ There are three distinct type groups available in this package:
 
 * `Maybe<T>` is `Just<T>` or `Nothing<T>`;
 * `Optional<T>` is `Some<T>` or `None<T>`;
-* `Nullable<T>` is `Solum<T>` or `Nil<T>`.
+* `Nullable<T>` is `Only<T>` or `Nil<T>`.
 
 The examples below are shown primarily for the `Maybe` type,
 as the most used.
@@ -669,5 +669,5 @@ numbers.map(or(0)) === [2.71, 3.14, 0, 0];
 [WARNING]
 ====
 As of v0.6.0, the lifting functions are only supported for the `Maybe`/`Just`/`Nothing` types
-and not for `Nullable`/`Solum`/`Nil` or `Optional`/`Some`/`None`.
+and not for `Nullable`/`Only`/`Nil` or `Optional`/`Some`/`None`.
 ====

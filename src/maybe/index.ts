@@ -27,8 +27,8 @@ export {
     nil,
     Nullable,
     nullable,
-    Solum,
-    solum,
+    Only,
+    only,
 } from './nullable/nullable';
 
 // ./optional

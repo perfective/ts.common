@@ -45,7 +45,7 @@ export class Only<T> implements Nullable<T> {
     ) {
         // Catches an error when the given argument passes the type definition, but is null in runtime.
         if (isNull(this.value)) {
-            throw new TypeError('Only value must be not null');
+            throw new TypeError('The value of `Only` must be not `null`');
         }
     }
 

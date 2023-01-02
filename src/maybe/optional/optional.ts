@@ -45,7 +45,7 @@ export class Some<T> implements Optional<T> {
     ) {
         // Catches an error when the given argument passes the type definition, but is undefined in runtime.
         if (isUndefined(this.value)) {
-            throw new TypeError('Some value must be defined');
+            throw new TypeError('The value of `Some` must not be `undefined`');
         }
     }
 

@@ -34,7 +34,7 @@ describe(only, () => {
 
     it('throws an error if instantiated with null', () => {
         // @ts-expect-error -- TS2345: Argument of type 'null' is not assignable to parameter of type 'never'.
-        expect(() => only(null)).toThrow('Only value must be not null');
+        expect(() => only(null)).toThrow(new TypeError('The value of `Only` must be not `null`'));
     });
 });
 

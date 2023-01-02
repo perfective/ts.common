@@ -29,12 +29,14 @@ describe(just, () => {
         expect(output).toStrictEqual(just(0));
     });
 
-    it('throws an error if instantiated with an absent value', () => {
+    it('throws an error if instantiated with null', () => {
         // @ts-expect-error -- TS2345: Argument of type 'null' is not assignable to parameter of type 'never'.
-        expect(() => just(null)).toThrow('Just value must be present');
+        expect(() => just(null)).toThrow(new TypeError('The value of `Just` must not be `null`'));
+    });
 
+    it('throws an error if instantiated with undefined', () => {
         // @ts-expect-error -- TS2345: Argument of type 'undefined' is not assignable to parameter of type 'never'.
-        expect(() => just(undefined)).toThrow('Just value must be present');
+        expect(() => just(undefined)).toThrow(new TypeError('The value of `Just` must not be `undefined`'));
     });
 });
 

@@ -33,7 +33,7 @@ describe(some, () => {
 
     it('throws an error when instantiated with undefined', () => {
         // @ts-expect-error -- TS2345: Argument of type 'undefined' is not assignable to parameter of type 'never'.
-        expect(() => some(undefined)).toThrow('Some value must be defined');
+        expect(() => some(undefined)).toThrow(new TypeError('The value of `Some` must not be `undefined`'));
     });
 });
 

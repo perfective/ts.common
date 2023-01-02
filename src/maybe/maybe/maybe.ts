@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
-import { isAbsent, isNull, isPresent, Present } from '../../value/value';
+import { isNull, isPresent, isUndefined, Present } from '../../value/value';
 import { Option } from '../option';
 
 /**
@@ -54,8 +54,11 @@ export class Just<T> implements Maybe<T> {
         public readonly value: Present<T>,
     ) {
         // Catches an error when the given argument passes the type definition, but is null or undefined in runtime.
-        if (isAbsent(this.value)) {
-            throw new TypeError('Just value must be present');
+        if (isNull(this.value)) {
+            throw new TypeError('The value of `Just` must not be `null`');
+        }
+        if (isUndefined(this.value)) {
+            throw new TypeError('The value of `Just` must not be `undefined`');
         }
     }
 

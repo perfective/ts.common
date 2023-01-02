@@ -28,38 +28,6 @@ function splitDecimal(value: number): string[] {
 }
 
 describe(maybe, () => {
-    describe('relations to three monad laws', () => {
-        it('is a left-identity for Maybe.onto() as the "bind" operator', () => {
-            // Left-identity: unit(a) >>= \x -> f(x) <=> f(a)
-            expect(maybe(3.14).onto(maybeDecimal))
-                .toStrictEqual(maybeDecimal(3.14));
-            expect(maybe(null).onto(maybeDecimal))
-                .toStrictEqual(maybeDecimal(null));
-            expect(maybe(undefined).onto(maybeDecimal))
-                .toStrictEqual(maybeDecimal(undefined));
-        });
-
-        it('is a right-identity for Maybe.onto() as the "bind" operator', () => {
-            // Right-identity: ma >>= x -> unit(x) <=> ma
-            expect(maybeDecimal(3.14).onto(maybe))
-                .toStrictEqual(maybeDecimal(3.14));
-            expect(maybeDecimal(null).onto(maybe))
-                .toStrictEqual(maybeDecimal(null));
-            expect(maybeDecimal(undefined).onto(maybe))
-                .toStrictEqual(maybeDecimal(undefined));
-        });
-
-        it('has essentially associative Maybe.onto() as the "bind" operator', () => {
-            // Associativity: ma >>= \x -> (f(x) >>= \y -> g(y)) <=> (ma >>= \x -> f(x) >>= \y -> g(y)
-            expect(maybe(3.14).onto(x => maybeDecimal(x).onto(maybeSplit)))
-                .toStrictEqual(maybe(3.14).onto(maybeDecimal).onto(maybeSplit));
-            expect(maybe(null).onto(x => maybeDecimal(x).onto(maybeSplit)))
-                .toStrictEqual(maybe(null).onto(maybeDecimal).onto(maybeSplit));
-            expect(maybe(undefined).onto(x => maybeDecimal(x).onto(maybeSplit)))
-                .toStrictEqual(maybe(undefined).onto(maybeDecimal).onto(maybeSplit));
-        });
-    });
-
     describe('when the value maybe be present or absent', () => {
         it('must be assigned to Maybe<T>', () => {
             const output: Maybe<number> = maybe(fallbackMaybe(0));
@@ -122,6 +90,36 @@ describe(Maybe, () => {
     });
 
     describe('onto', () => {
+        it('is a left-identity for Maybe.onto() as the "bind" operator', () => {
+            // Left-identity: unit(a) >>= \x -> f(x) <=> f(a)
+            expect(maybe(3.14).onto(maybeDecimal))
+                .toStrictEqual(maybeDecimal(3.14));
+            expect(maybe(null).onto(maybeDecimal))
+                .toStrictEqual(maybeDecimal(null));
+            expect(maybe(undefined).onto(maybeDecimal))
+                .toStrictEqual(maybeDecimal(undefined));
+        });
+
+        it('is a right-identity for Maybe.onto() as the "bind" operator', () => {
+            // Right-identity: ma >>= x -> unit(x) <=> ma
+            expect(maybeDecimal(3.14).onto(maybe))
+                .toStrictEqual(maybeDecimal(3.14));
+            expect(maybeDecimal(null).onto(maybe))
+                .toStrictEqual(maybeDecimal(null));
+            expect(maybeDecimal(undefined).onto(maybe))
+                .toStrictEqual(maybeDecimal(undefined));
+        });
+
+        it('has essentially associative Maybe.onto() as the "bind" operator', () => {
+            // Associativity: ma >>= \x -> (f(x) >>= \y -> g(y)) <=> (ma >>= \x -> f(x) >>= \y -> g(y)
+            expect(maybe(3.14).onto(x => maybeDecimal(x).onto(maybeSplit)))
+                .toStrictEqual(maybe(3.14).onto(maybeDecimal).onto(maybeSplit));
+            expect(maybe(null).onto(x => maybeDecimal(x).onto(maybeSplit)))
+                .toStrictEqual(maybe(null).onto(maybeDecimal).onto(maybeSplit));
+            expect(maybe(undefined).onto(x => maybeDecimal(x).onto(maybeSplit)))
+                .toStrictEqual(maybe(undefined).onto(maybeDecimal).onto(maybeSplit));
+        });
+
         describe('when the "flatMap" function returns Maybe', () => {
             it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(3.14).onto(constant(maybe('3.14')));

@@ -33,32 +33,6 @@ function splitNullableDecimal(value: number | null): string[] {
 }
 
 describe(optional, () => {
-    describe('relations to three monad laws', () => {
-        it('is a left-identity for Nullable.onto() as the "bind" operator', () => {
-            // Left-identity: unit(a) >>= \x -> f(x) <=> f(a)
-            expect(optional(3.14).onto(optionalDecimal))
-                .toStrictEqual(optionalDecimal(3.14));
-            expect(optional(undefined).onto(optionalDecimal))
-                .toStrictEqual(optionalDecimal(undefined));
-        });
-
-        it('is a right-identity for Nullable.onto() as the "bind" operator', () => {
-            // Right-identity: ma >>= x -> unit(x) <=> ma
-            expect(optionalDecimal(3.14).onto(optional))
-                .toStrictEqual(optionalDecimal(3.14));
-            expect(optionalDecimal(undefined).onto(optional))
-                .toStrictEqual(optionalDecimal(undefined));
-        });
-
-        it('has essentially associative Nullable.onto() as the "bind" operator', () => {
-            // Associativity: ma >>= \x -> (f(x) >>= \y -> g(y)) <=> (ma >>= \x -> f(x) >>= \y -> g(y)
-            expect(optional(3.14).onto(x => optionalDecimal(x).onto(optionalSplit)))
-                .toStrictEqual(optional(3.14).onto(optionalDecimal).onto(optionalSplit));
-            expect(optional(undefined).onto(x => optionalDecimal(x).onto(optionalSplit)))
-                .toStrictEqual(optional(undefined).onto(optionalDecimal).onto(optionalSplit));
-        });
-    });
-
     describe('when the value may be present or undefined', () => {
         it('must be assigned to Optional', () => {
             const output: Optional<number> = optional(fallbackOptional(0));
@@ -107,6 +81,30 @@ describe(Optional, () => {
     });
 
     describe('onto', () => {
+        it('is a left-identity for Nullable.onto() as the "bind" operator', () => {
+            // Left-identity: unit(a) >>= \x -> f(x) <=> f(a)
+            expect(optional(3.14).onto(optionalDecimal))
+                .toStrictEqual(optionalDecimal(3.14));
+            expect(optional(undefined).onto(optionalDecimal))
+                .toStrictEqual(optionalDecimal(undefined));
+        });
+
+        it('is a right-identity for Nullable.onto() as the "bind" operator', () => {
+            // Right-identity: ma >>= x -> unit(x) <=> ma
+            expect(optionalDecimal(3.14).onto(optional))
+                .toStrictEqual(optionalDecimal(3.14));
+            expect(optionalDecimal(undefined).onto(optional))
+                .toStrictEqual(optionalDecimal(undefined));
+        });
+
+        it('has essentially associative Nullable.onto() as the "bind" operator', () => {
+            // Associativity: ma >>= \x -> (f(x) >>= \y -> g(y)) <=> (ma >>= \x -> f(x) >>= \y -> g(y)
+            expect(optional(3.14).onto(x => optionalDecimal(x).onto(optionalSplit)))
+                .toStrictEqual(optional(3.14).onto(optionalDecimal).onto(optionalSplit));
+            expect(optional(undefined).onto(x => optionalDecimal(x).onto(optionalSplit)))
+                .toStrictEqual(optional(undefined).onto(optionalDecimal).onto(optionalSplit));
+        });
+
         describe('when the "flatMap" function returns Optional', () => {
             it('must be assigned to Optional', () => {
                 const output: Optional<string> = optional(3.14).onto(constant(optional('3.14')));

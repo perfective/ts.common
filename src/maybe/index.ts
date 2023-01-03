@@ -29,6 +29,10 @@ export {
     nullable,
     Only,
     only,
+    // eslint-disable-next-line deprecation/deprecation -- providing Solum until v0.10.0
+    Solum,
+    // eslint-disable-next-line deprecation/deprecation -- providing solum until v0.10.0
+    solum,
 } from './nullable/nullable';
 
 // ./optional

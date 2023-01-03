@@ -196,3 +196,18 @@ export function nullable<T>(value: T | null): Nullable<T> {
     }
     return only(value as NotNull<T>);
 }
+
+/**
+ * @see Only<T>
+ * @deprecated Since v0.9.0. Use Only<T> instead.
+ */
+export type Solum<T> = Only<T>;
+
+/**
+ * @see only
+ * @deprecated Since v0.9.0. Use only() instead.
+ */
+// eslint-disable-next-line deprecation/deprecation -- providing Solum until v0.10.0
+export function solum<T>(value: NotNull<T>): Solum<T> {
+    return only(value);
+}

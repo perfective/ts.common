@@ -15,8 +15,18 @@ import {
 import { isPresent } from '../../value/value';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
+import { Nil, nil, Nullable, nullable, Only, only, solum } from './nullable';
 import { Boxed, fallbackNullable } from './nullable.mock';
+
+/* eslint-disable deprecation/deprecation -- providing solum until v0.10.0 */
+describe(solum, () => {
+    it('returns Only<T>', () => {
+        const output: Only<number> = solum(3.14);
+
+        expect(output).toStrictEqual(only(3.14));
+    });
+});
+/* eslint-enable deprecation/deprecation */
 
 describe(only, () => {
     it('can be assigned to Nullable', () => {

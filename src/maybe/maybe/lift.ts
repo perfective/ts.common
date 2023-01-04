@@ -19,6 +19,17 @@ export function to<T, U>(
     return (maybe: Maybe<T>): Maybe<U> => maybe.to(map);
 }
 
+/**
+ * Creates a function to apply the given fold function to the Maybe.into() method.
+ *
+ * @since 0.9.0
+ */
+export function into<T, U>(
+    fold: (value: T | null | undefined) => U,
+): Unary<Maybe<T>, U> {
+    return (maybe: Maybe<T>): U => maybe.into(fold);
+}
+
 export function pick<T, K extends keyof T>(
     property: Value<K>,
 ): Unary<Maybe<T>, Maybe<Present<T[K]>>> {

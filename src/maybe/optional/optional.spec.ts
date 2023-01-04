@@ -3,6 +3,7 @@ import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
+import { output as stringOutput } from '../../string/string/output';
 import { isPresent } from '../../value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
@@ -281,6 +282,22 @@ describe(Optional, () => {
 
                 expect(output).toBe(none());
             });
+        });
+    });
+
+    describe('into', () => {
+        it('does not accept a "fold" function with a non-optional value argument', () => {
+            // @ts-expect-error -- TS2345:
+            //  Argument of type '{ (value: number): string; (value: string): number | null; }'
+            //  is not assignable to parameter of type '(value: string | undefined) => number | null'.
+            const output: number | null = optional('3.14').into(decimal);
+
+            expect(output).toBe(3.14);
+        });
+
+        it('returns the result of the given "fold" function applied to the value of Optional', () => {
+            expect(optional(3.14).into(stringOutput)).toBe('3.14');
+            expect(optional(undefined).into(stringOutput)).toBe('undefined');
         });
     });
 

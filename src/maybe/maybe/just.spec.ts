@@ -223,6 +223,18 @@ describe(Just, () => {
         });
     });
 
+    describe('into', () => {
+        it('accepts a "fold" function with a non-nullable and non-optional value argument', () => {
+            const output: number | null = just('3.14').into(decimal);
+
+            expect(output).toBe(3.14);
+        });
+
+        it('returns the result of the given "fold" function applied to the value of Just', () => {
+            expect(just(3.14).into<string>(decimal)).toBe('3.14');
+        });
+    });
+
     describe('pick', () => {
         it('is a shortcut of the Just.to()', () => {
             const input: Just<Boxed<TypeGuardCheck>> = just({ value: typeGuardCheck } as Boxed<TypeGuardCheck>);

@@ -10,7 +10,7 @@ import {
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 
-import { lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
+import { into, lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
 import { just, Maybe, naught, nothing } from './maybe';
 import { TypeGuardCheck } from './type-guard-check.mock';
 
@@ -53,6 +53,13 @@ describe('to', () => {
             .toStrictEqual([nothing(), nothing(), nothing(), naught()]);
         expect(list.map(to((): string | null => null)))
             .toStrictEqual([naught(), naught(), nothing(), naught()]);
+    });
+});
+
+describe(into, () => {
+    it('lifts the given "fold" function to the Maybe.into()', () => {
+        expect(list.map(into(isPresent)))
+            .toStrictEqual([true, true, false, false]);
     });
 });
 

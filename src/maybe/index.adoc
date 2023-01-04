@@ -384,6 +384,47 @@ and the `map` method in `java.util.Optional`.
 ====
 
 
+=== `into(fold)`
+
+`Maybe.into()` is a fold (reduce) operator for the `Maybe` type.
+It applies the given `fold` function to the `value` of the `Maybe`
+and returns the result of any type as is.
+The purpose of `Maybe.into()` is to terminate the `Maybe`
+and switch to a different type.
+
+[NOTE]
+====
+Unlike `Maybe.onto()` and `Maybe.to()`,
+the `Maybe.into()` method is called even if the `Maybe.value` is absent.
+
+Unlike `Maybe.or()` and `Maybe.otherwise()`,
+the `Maybe.into()` method is called even if the `Maybe.value` is present.
+====
+
+.Using `Maybe.into()`
+[source,typescript]
+----
+import { Maybe, maybe } from '@perfective/common/maybe';
+import { isPresent } from '@perfective/common';
+
+function usernameRequest(userId: number | null | undefined): Promise<string> {
+    if (isPresent(userId)) {
+        return Promise.resolve({ userId });
+    }
+    return Promise.reject("UserId is missing");
+}
+
+function username(userId: Maybe<number>): Promise<string> {
+    return userId.into(usernameRequest) // === usernameRequest(userId.value)
+        .then(response => response.username) // <.>
+        .catch(() => "Unknown");
+}
+----
+<.> While applying the function directly is possible,
+the `Maybe.into()` method allows to switch the chain to a different monadic type
+and continue the chain with that new type.
+
+
 === `pick(property)`
 
 `Maybe.pick()` is a shortcut for the `Maybe.to()`

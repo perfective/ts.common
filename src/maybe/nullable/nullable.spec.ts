@@ -3,6 +3,7 @@ import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
+import { output as stringOutput } from '../../string/string/output';
 import { isPresent } from '../../value/value';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
@@ -282,6 +283,22 @@ describe(Nullable, () => {
 
                 expect(output).toStrictEqual(only(undefined));
             });
+        });
+    });
+
+    describe('into', () => {
+        it('does not accept a "fold" function with a non-nullable value argument', () => {
+            // @ts-expect-error -- TS2345:
+            //  Argument of type '{ (value: number): string; (value: string): number | null; }'
+            //  is not assignable to parameter of type '(value: string | null) => number | null'.
+            const output: number | null = nullable('3.14').into(decimal);
+
+            expect(output).toBe(3.14);
+        });
+
+        it('returns the result of the given "fold" function applied to the value of Nullable', () => {
+            expect(nullable(3.14).into(stringOutput)).toBe('3.14');
+            expect(nullable(null).into(stringOutput)).toBe('null');
         });
     });
 

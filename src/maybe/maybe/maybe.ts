@@ -24,6 +24,15 @@ export abstract class Maybe<T> implements Option<T, null | undefined> {
         map: (value: T) => U | null | undefined,
     ): Maybe<U>;
 
+    /**
+     * Folds (reduces) the value of Maybe using the given `fold` function.
+     *
+     * @since 0.9.0
+     */
+    public abstract into<U>(
+        fold: (value: T | null | undefined) => U
+    ): U;
+
     // Using Present<T[K]> to exclude null | undefined from the type
     public abstract pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>>;
 
@@ -77,6 +86,15 @@ export class Just<T> implements Maybe<T> {
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U>;
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U> | Just<U> | Nothing<U> {
         return maybe<U>(map(this.value));
+    }
+
+    /**
+     * Folds (reduces) the value of Just using the given `fold` function.
+     *
+     * @since 0.9.0
+     */
+    public into<U>(fold: (value: T) => U): U {
+        return fold(this.value);
     }
 
     public pick<K extends keyof T>(
@@ -152,6 +170,15 @@ export class Nothing<T> implements Maybe<T> {
     public to<U>(map: (value: T) => (U | null | undefined)): Nothing<U>;
     public to<U>(): Nothing<U> {
         return this as unknown as Nothing<U>;
+    }
+
+    /**
+     * Folds (reduces) the value of Nothing using the given `fold` function.
+     *
+     * @since 0.9.0
+     */
+    public into<U>(fold: (value: (null | undefined)) => U): U {
+        return fold(this.value);
     }
 
     public pick<K extends keyof T>(property: Value<K>): Nothing<Present<T[K]>>;

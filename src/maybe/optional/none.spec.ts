@@ -2,6 +2,7 @@ import { panic } from '../../error/panic/panic';
 import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
+import { output as stringOutput } from '../../string/string/output';
 import { isUndefined } from '../../value/value';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
@@ -162,6 +163,20 @@ describe(None, () => {
 
                 expect(output).toBe(none());
             });
+        });
+    });
+
+    describe('into', () => {
+        it('does not accept a "fold" function with a non-optional value argument', () => {
+            // @ts-expect-error -- TS2345:
+            //  Argument of type '{ (value: number): string; (value: string): number | null; }'
+            //  is not assignable to parameter of type '(value: undefined) => string'.
+            expect(() => none<number>().into<string>(decimal))
+                .toThrow("Cannot read properties of undefined (reading 'toString')");
+        });
+
+        it('returns the result of the given "fold" function applied to the value of None', () => {
+            expect(none().into(stringOutput)).toBe('undefined');
         });
     });
 

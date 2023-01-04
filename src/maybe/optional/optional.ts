@@ -17,6 +17,15 @@ export abstract class Optional<T> implements Option<T, undefined> {
         map: (value: T) => U | undefined,
     ): Optional<U>;
 
+    /**
+     * Folds (reduces) the value of Optional using the given `fold` function.
+     *
+     * @since 0.9.0
+     */
+    public abstract into<U>(
+        fold: (value: T | undefined) => U
+    ): U;
+
     // Using Defined<T[K]> to exclude undefined from the type
     public abstract pick<K extends keyof T>(property: Value<K>): Optional<Defined<T[K]>>;
 
@@ -64,6 +73,15 @@ export class Some<T> implements Optional<T> {
     public to<U>(map: (value: T) => U | undefined): Optional<U>;
     public to<U>(map: (value: T) => U | undefined): Optional<U> | Some<U> | None<U> {
         return optional<U>(map(this.value));
+    }
+
+    /**
+     * Folds (reduces) the value of Some using the given `fold` function.
+     *
+     * @since 0.9.0
+     */
+    public into<U>(fold: (value: T) => U): U {
+        return fold(this.value);
     }
 
     public pick<K extends keyof T>(
@@ -133,6 +151,15 @@ export class None<T> implements Optional<T> {
     public pick<K extends keyof T>(property: Value<K>): None<Defined<T[K]>>;
     public pick<K extends keyof T>(): None<Defined<T[K]>> {
         return this as unknown as None<Defined<T[K]>>;
+    }
+
+    /**
+     * Folds (reduces) the value of None using the given `fold` function.
+     *
+     * @since 0.9.0
+     */
+    public into<U>(fold: (value: undefined) => U): U {
+        return fold(this.value);
     }
 
     public that(filter: Predicate<T>): None<T>;

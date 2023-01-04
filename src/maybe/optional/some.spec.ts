@@ -200,6 +200,18 @@ describe(Some, () => {
         });
     });
 
+    describe('into', () => {
+        it('accepts a "fold" function with a non-nullable value argument', () => {
+            const output: number | null = some('3.14').into(decimal);
+
+            expect(output).toBe(3.14);
+        });
+
+        it('returns the result of the given "fold" function applied to the value of Some', () => {
+            expect(some(3.14).into<string>(decimal)).toBe('3.14');
+        });
+    });
+
     describe('pick', () => {
         it('is an equivalent of the then() chain', () => {
             const input: Some<Boxed<TypeGuardCheck>> = some({ value: typeGuardCheck } as Boxed<TypeGuardCheck>);

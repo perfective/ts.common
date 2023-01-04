@@ -211,6 +211,18 @@ describe(Only, () => {
         });
     });
 
+    describe('into', () => {
+        it('accepts a "fold" function with a non-nullable value argument', () => {
+            const output: number | null = only('3.14').into(decimal);
+
+            expect(output).toBe(3.14);
+        });
+
+        it('returns the result of the given "fold" function applied to the value of Only', () => {
+            expect(only(3.14).into<string>(decimal)).toBe('3.14');
+        });
+    });
+
     describe('pick', () => {
         it('is an equivalent of the then() chain', () => {
             const input: Only<Boxed<TypeGuardCheck>> = only({ value: typeGuardCheck } as Boxed<TypeGuardCheck>);

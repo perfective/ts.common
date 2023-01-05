@@ -37,20 +37,20 @@ describe(Nil, () => {
     describe('onto', () => {
         describe('when the "flatMap" function returns Nullable', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = nil<number>().onto(constant(nullable(2.71)));
+                const output: Nullable<number> = nil<number>().onto(constant(nullable(fallbackNullable(2.71))));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nil' is not assignable to type 'Only'.
-                const output: Only<number> = nil<number>().onto(constant(nullable(2.71)));
+                const output: Only<number> = nil<number>().onto(constant(nullable(fallbackNullable(2.71))));
 
                 expect(output).toBe(nil());
             });
 
             it('returns Nil', () => {
-                const output: Nil<number> = nil<number>().onto(constant(nullable(2.71)));
+                const output: Nil<number> = nil<number>().onto(constant(nullable(fallbackNullable(2.71))));
 
                 expect(output).toBe(nil());
             });

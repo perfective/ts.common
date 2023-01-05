@@ -60,21 +60,21 @@ describe(Only, () => {
     describe('onto', () => {
         describe('when the "flatMap" function returns Nullable', () => {
             it('returns Nullable the next value', () => {
-                const output: Nullable<string> = only(3.14).onto(constant(nullable('3.14')));
+                const output: Nullable<string> = only(3.14).onto(constant(nullable(fallbackNullable('3.14'))));
 
                 expect(output).toStrictEqual(only('3.14'));
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Only<string>'.
-                const output: Only<string> = only(3.14).onto(constant(nullable('3.14')));
+                const output: Only<string> = only(3.14).onto(constant(nullable(fallbackNullable('3.14'))));
 
                 expect(output).toStrictEqual(only('3.14'));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
-                const output: Nil<string> = only(3.14).onto(constant(nullable('3.14')));
+                const output: Nil<string> = only(3.14).onto(constant(nullable(fallbackNullable('3.14'))));
 
                 expect(output).toStrictEqual(only('3.14'));
             });

@@ -49,21 +49,21 @@ describe(Some, () => {
     describe('onto', () => {
         describe('when the "flatMap" function returns Optional', () => {
             it('must be assigned to Optional', () => {
-                const output: Optional<string> = some(3.14).onto(constant(optional('3.14')));
+                const output: Optional<string> = some(3.14).onto(constant(optional(fallbackOptional('3.14'))));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
 
             it('cannot be assigned to Some', () => {
                 // @ts-expect-error -- TS2322: Type 'Optional<string>' is not assignable to type 'Some<string>'.
-                const output: Some<string> = some(3.14).onto(constant(optional('3.14')));
+                const output: Some<string> = some(3.14).onto(constant(optional(fallbackOptional('3.14'))));
 
                 expect(output).toStrictEqual(some('3.14'));
             });
 
             it('cannot be assigned to None', () => {
                 // @ts-expect-error -- TS2322: Type 'Optional<string>' is not assignable to type 'None<string>'.
-                const output: None<string> = some(3.14).onto(constant(optional('3.14')));
+                const output: None<string> = some(3.14).onto(constant(optional(fallbackOptional('3.14'))));
 
                 expect(output).toStrictEqual(some('3.14'));
             });

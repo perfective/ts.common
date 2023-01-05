@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
-import { isNull, NotNull } from '../../value/value';
+import { isNotNull, isNull, NotNull } from '../../value/value';
 import { Option } from '../option';
 
 export abstract class Nullable<T> implements Option<T, null> {
@@ -217,11 +217,15 @@ export function only<T>(value: NotNull<T>): Only<T> {
     return new Only<T>(value);
 }
 
-export function nullable<T>(value: T | null): Nullable<T> {
-    if (isNull(value)) {
-        return nil() as unknown as Nullable<T>;
+export function nullable<T>(value: NotNull<T>): Only<T>;
+export function nullable<T>(value: null): Nil<T>;
+export function nullable<T>(value: T | null): Nullable<T>;
+
+export function nullable<T>(value: T | null): Only<T> | Nil<T> | Nullable<T> {
+    if (isNotNull(value)) {
+        return only(value);
     }
-    return only(value as NotNull<T>);
+    return nil<T>();
 }
 
 /**

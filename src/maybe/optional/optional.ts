@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
-import { Defined, isUndefined } from '../../value/value';
+import { Defined, isDefined, isUndefined } from '../../value/value';
 import { Option } from '../option';
 
 export abstract class Optional<T> implements Option<T, undefined> {
@@ -203,11 +203,15 @@ export class None<T> implements Optional<T> {
     }
 }
 
-export function optional<T>(value: T | undefined): Optional<T> {
-    if (isUndefined(value)) {
-        return none<T>();
+export function optional<T>(value: Defined<T>): Some<T>;
+export function optional<T>(value: undefined): None<T>;
+export function optional<T>(value: T | undefined): Optional<T>;
+
+export function optional<T>(value: T | undefined): Some<T> | None<T> | Optional<T> {
+    if (isDefined(value)) {
+        return some(value);
     }
-    return some(value as Defined<T>);
+    return none<T>();
 }
 
 export function some<T>(value: Defined<T>): Some<T> {

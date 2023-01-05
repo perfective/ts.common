@@ -65,20 +65,20 @@ describe(Nothing, () => {
     describe('onto', () => {
         describe('when the "flatMap" function returns Maybe', () => {
             it('can be assigned to Maybe', () => {
-                const output: Maybe<number> = nothing<number>().onto(constant(maybe(2.71)));
+                const output: Maybe<number> = nothing<number>().onto(constant(maybe(fallbackMaybe(2.71))));
 
                 expect(output).toBe(nothing());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Nothing' is not assignable to type 'Just'.
-                const output: Just<number> = nothing<number>().onto(constant(maybe(2.71)));
+                const output: Just<number> = nothing<number>().onto(constant(maybe(fallbackMaybe(2.71))));
 
                 expect(output).toBe(nothing());
             });
 
             it('returns Nothing (self)', () => {
-                const output: Nothing<number> = nothing<number>().onto(constant(maybe(2.71)));
+                const output: Nothing<number> = nothing<number>().onto(constant(maybe(fallbackMaybe(2.71))));
 
                 expect(output).toBe(nothing());
             });
@@ -198,7 +198,7 @@ describe(Nothing, () => {
             //  Argument of type '{ (value: number): string; (value: string): number | null; }'
             //  is not assignable to parameter of type '(value: null | undefined) => string'.
             expect(() => nothing<number>().into<string>(decimal))
-                .toThrow("Cannot read properties of undefined (reading 'toString')");
+                .toThrow('Cannot read properties of undefined (reading \'toString\')');
         });
 
         it('returns the result of the given "fold" function applied to the value of Nothing', () => {
@@ -800,13 +800,13 @@ describe(Nothing, () => {
             //  Argument of type '{ (value: number): string; (value: string): number | null; }'
             //  is not assignable to parameter of type '(value: null | undefined) => number | null | undefined'.
             expect(() => nothing().lift(decimal))
-                .toThrow("Cannot read properties of undefined (reading 'toString')");
+                .toThrow('Cannot read properties of undefined (reading \'toString\')');
 
             // @ts-expect-error -- TS2345:
             //  Argument of type '{ (value: number): string; (value: string): number | null; }'
             //  is not assignable to parameter of type '(value: null | undefined) => number | null | undefined'.
             expect(() => naught().lift(decimal))
-                .toThrow("Cannot read properties of null (reading 'toString')");
+                .toThrow('Cannot read properties of null (reading \'toString\')');
         });
 
         it('must be assigned to Maybe', () => {

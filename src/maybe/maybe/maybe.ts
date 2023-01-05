@@ -230,7 +230,11 @@ export class Nothing<T> implements Maybe<T> {
     }
 }
 
-export function maybe<T>(value: T | null | undefined): Maybe<T> {
+export function maybe<T>(value: Present<T>): Just<T>;
+export function maybe<T>(value: null | undefined): Nothing<T>;
+export function maybe<T>(value: T | null | undefined): Maybe<T>;
+
+export function maybe<T>(value: T | null | undefined): Just<T> | Nothing<T> | Maybe<T> {
     if (isPresent(value)) {
         return just(value);
     }

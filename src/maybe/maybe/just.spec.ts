@@ -52,21 +52,21 @@ describe(Just, () => {
     describe('onto', () => {
         describe('when the "flatMap" function returns Maybe', () => {
             it('returns the next value as Maybe', () => {
-                const output: Maybe<string> = just(3.14).onto(constant(maybe('3.14')));
+                const output: Maybe<string> = just(3.14).onto(constant(maybe(fallbackMaybe('3.14'))));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe<string>' is not assignable to type 'Just<string>'.
-                const output: Just<string> = just(3.14).onto(constant(maybe('3.14')));
+                const output: Just<string> = just(3.14).onto(constant(maybe(fallbackMaybe('3.14'))));
 
                 expect(output).toStrictEqual(just('3.14'));
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe<string>' is not assignable to type 'Nothing<string>'.
-                const output: Nothing<string> = just(3.14).onto(constant(maybe('3.14')));
+                const output: Nothing<string> = just(3.14).onto(constant(maybe(fallbackMaybe('3.14'))));
 
                 expect(output).toStrictEqual(just('3.14'));
             });

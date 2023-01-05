@@ -37,20 +37,20 @@ describe(None, () => {
     describe('onto', () => {
         describe('when the "flatMap" function returns Optional', () => {
             it('can be assigned to Optional', () => {
-                const output: Optional<number> = none<number>().onto(constant(optional(2.71)));
+                const output: Optional<number> = none<number>().onto(constant(optional(fallbackOptional(2.71))));
 
                 expect(output).toBe(none());
             });
 
             it('cannot be assigned to Some', () => {
                 // @ts-expect-error -- TS2322: Type 'None' is not assignable to type 'Some'.
-                const output: Some<number> = none<number>().onto(constant(optional(2.71)));
+                const output: Some<number> = none<number>().onto(constant(optional(fallbackOptional(2.71))));
 
                 expect(output).toBe(none());
             });
 
             it('returns None', () => {
-                const output: None<number> = none<number>().onto(constant(optional(2.71)));
+                const output: None<number> = none<number>().onto(constant(optional(fallbackOptional(2.71))));
 
                 expect(output).toBe(none());
             });

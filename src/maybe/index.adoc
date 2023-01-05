@@ -90,27 +90,39 @@ then the result will also be of type `Just`.
 .Difference between `Maybe`, `Just` and `Nothing` contexts.
 [source,typescript]
 ----
-function maybeDecimal(ma: Maybe<number>): Maybe<string> { // <.>
-    return ma.to(a => a.toString(10));
+function maybeDecimal(value: number | null | undefined): Maybe<string> {
+    return maybe(value).to(v => v.toString(10)); // <.>
 }
 
-function justDecimal(ma: Just<number>): Just<string> { // <.>
-    return ma.to(a => a.toString(10));
+function justDecimal(value: number): Just<string> {
+    return maybe(value).to(v => v.toString(10)); // <.>
 }
 
-function nothingDecimal(ma: Nothing<number>): Nothing<string> { // <.>
-    return ma.to(a => a.toString(10));
+function nothingDecimal(value: null | undefined): Nothing<string> {
+    return maybe<number>(value).to(a => a.toString(10)); // <.>
 }
 ----
-<.> The argument of the `maybeDecimal` function is `Maybe<number>`.
-You can pass either `Just<number>` or `Nothing<number>`.
+<.> The argument of the `maybeDecimal` function is `number | null | undefined`.
+So the `maybe()` function returns `Maybe<number>`
+(which is either `Just<number>` or `Nothing<number>`).
 The result of the function may also be `Just` or `Nothing`,
-even as `a => a.toString(10)` is guaranteed to be present.
-<.> The argument is `Just<number>`, so the value is _always_ present.
-If a given function _always_ returns a value,
-the result type is also `Just<string>`.
-<.> When the argument is `Nothing<number>`,
-the result will always be `Nothing<string>`.
+because we can not be sure that the `to()` method will be called,
+even the `v => v.toString(10)` returns a `string` for any `number` input.
++
+<.> The argument of the `justDecimal` is always a `number`.
+The `maybe()` function returns `Just<number>`,
+because the value is _always_ present.
+`maybe` has a custom overload signature,
+and compiler also knows,
+that `maybe` returns `Just<number>`.
++
+As the `v => v.toString(10)` result is always a `string`,
+compiler also knows that the result of the whole chain remains present.
+And the return type can be set as `Just<string>`.
++
+<.> Similarly, when the value can only be `null` or `undefined`,
+the `maybe()` function returns `Nothing<number>` in compile time and in runtime.
+And the return type of the whole chain can be set to `Nothing<string>`.
 
 
 == Using `onto()` and `to()` methods

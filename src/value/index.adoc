@@ -20,12 +20,14 @@ It also provides functions to work with type and instance definitions.
 * `type Null<T> = T extends null ? T : never`:
 ** `isNull<T>(value: T | null): value is null`;
 +
-* `type Present<T> = T extends null | undefined ? never : T`:
-— same as `NonNullable<T>`, but is used in the project for consistency with the type guards;
-** `isPresent<T>(value: T | null | undefined): value is T`;
+* `type Present<T> = T extends null | undefined ? never : T`
+— same as `NonNullable<T>`,
+added for consistency with the terminology of the package.
+It is defined as a conditional type (not `T & {}`) to ensure support of TS compiler before v4.9.
+** `isPresent<T>(value: T | null | undefined): value is Present<T>`;
 +
 * `type Absent<T> = T extends null | undefined ? T : never`:
-** `isAbsent<T>(value: T | null | undefined): value is null | undefined`.
+** `isAbsent<T>(value: T | null | undefined): value is Absent<T>`.
 
 [NOTE]
 ====

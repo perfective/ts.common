@@ -25,16 +25,18 @@ export function isNull<T>(value: T | null): value is null {
 }
 
 /**
+ * Keeping legacy definition (instead of using T & {}) to ensure support of preivious TypeScript versions.
+ *
  * @see NonNullable
  */
 export type Present<T> = T extends null | undefined ? never : T;
 
-export function isPresent<T>(value: T | null | undefined): value is T {
+export function isPresent<T>(value: T | null | undefined): value is Present<T> {
     return isDefined(value) && isNotNull(value);
 }
 
 export type Absent<T> = T extends null | undefined ? T : never;
 
-export function isAbsent<T>(value: T | null | undefined): value is null | undefined {
+export function isAbsent<T>(value: T | null | undefined): value is Absent<T> {
     return isUndefined(value) || isNull(value);
 }

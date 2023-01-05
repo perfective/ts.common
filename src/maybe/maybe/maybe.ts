@@ -232,8 +232,7 @@ export class Nothing<T> implements Maybe<T> {
 
 export function maybe<T>(value: T | null | undefined): Maybe<T> {
     if (isPresent(value)) {
-        // TODO: Update `isPresent` signature to return `Present<T>`
-        return just(value as Present<T>);
+        return just(value);
     }
     if (isNull(value)) {
         return naught();

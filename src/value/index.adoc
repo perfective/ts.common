@@ -9,13 +9,13 @@ It also provides functions to work with type and instance definitions.
 == Value
 
 * `type Defined<T> = T extends undefined ? never : T`:
-** `isDefined<T>(value: T | undefined): value is T`;
+** `isDefined<T>(value: T | undefined): value is Defined<T>`;
 +
 * `type Undefined<T> = T extends undefined ? T : never`:
 ** `isUndefined<T>(value: T | undefined): value is undefined`;
 +
 * `type NotNull<T> = T extends null ? never : T`:
-** `isNotNull<T>(value: T | null): value is T`;
+** `isNotNull<T>(value: T | null): value is NotNull<T>`;
 +
 * `type Null<T> = T extends null ? T : never`:
 ** `isNull<T>(value: T | null): value is null`;

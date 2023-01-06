@@ -1,6 +1,6 @@
 export type Defined<T> = T extends undefined ? never : T;
 
-export function isDefined<T>(value: T | undefined): value is T {
+export function isDefined<T>(value: T | undefined): value is Defined<T> {
     // eslint-disable-next-line no-void -- the same check as in the compiled JS
     return value !== void 0;
 }
@@ -14,7 +14,7 @@ export function isUndefined<T>(value: T | undefined): value is undefined {
 
 export type NotNull<T> = T extends null ? never : T;
 
-export function isNotNull<T>(value: T | null): value is T {
+export function isNotNull<T>(value: T | null): value is NotNull<T> {
     return value !== null;
 }
 
@@ -25,7 +25,7 @@ export function isNull<T>(value: T | null): value is null {
 }
 
 /**
- * Keeping legacy definition (instead of using T & {}) to ensure support of preivious TypeScript versions.
+ * Keeping legacy definition (instead of using T & {}) to ensure support of TypeScript prior to v4.9.
  *
  * @see NonNullable
  */

@@ -2,6 +2,7 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
+import { Unary } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
 import { isNull, isPresent, isUndefined, Present } from '../../value/value';
 import { Option } from '../option';
@@ -242,6 +243,28 @@ export function maybe<T>(value: T | null | undefined): Just<T> | Nothing<T> | Ma
         return naught();
     }
     return nothing();
+}
+
+export function maybeOf<T, U>(
+    map: (value: T | null | undefined) => Present<U>,
+): Unary<T | null | undefined, Just<U>>;
+export function maybeOf<T, U>(
+    map: (value: Present<T>) => Present<U>,
+): Unary<Present<T>, Just<U>>;
+export function maybeOf<T, U>(
+    map: (value: T | null | undefined) => null | undefined,
+): Unary<T | null | undefined, Nothing<U>>;
+export function maybeOf<T, U>(
+    map: (value: T | null | undefined) => U | null | undefined,
+): Unary<T | null | undefined, Maybe<U>>;
+
+/**
+ * Wraps a result of the given "map" function into a Maybe.
+ */
+export function maybeOf<T, U>(
+    map: (value: T | null | undefined) => U | null | undefined,
+): Unary<T | null | undefined, Maybe<U> | Just<U> | Nothing<U>> {
+    return (value: T | null | undefined): Maybe<U> | Just<U> | Nothing<U> => maybe(map(value));
 }
 
 export function just<T>(value: Present<T>): Just<T> {

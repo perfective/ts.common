@@ -1,3 +1,4 @@
+import { Unary } from '../../function';
 import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
@@ -8,7 +9,7 @@ import { isPresent } from '../../value/value';
 import { fallbackNullable } from '../nullable/nullable.mock';
 import { fallbackOptional } from '../optional/optional.mock';
 
-import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
+import { Just, just, Maybe, maybe, maybeOf, naught, Nothing, nothing } from './maybe';
 import { fallbackMaybe } from './maybe.mock';
 import { typeGuardCheck } from './type-guard-check.mock';
 
@@ -91,6 +92,50 @@ describe(maybe, () => {
             const output: Nothing<number> = maybe(undefined);
 
             expect(output).toBe(nothing());
+        });
+    });
+});
+
+describe(maybeOf, () => {
+    describe('when the "map" function requires present input and returns present output', () => {
+        it('returns an unary function that returns Just', () => {
+            const output: Unary<number, Just<string[]>> = maybeOf(splitDecimal);
+
+            expect(output(3.14)).toStrictEqual(just(['3', '14']));
+        });
+    });
+
+    describe('when the "map" function accepts present or absent value and returns present output', () => {
+        it('creates an unary function that returns Just', () => {
+            // TODO: Figure out why it can also be assigned to Unary<number, Just<boolean>>
+            //  or Unary<string | null | undefined, Just<boolean>>
+            const output: Unary<number | null | undefined, Just<boolean>> = maybeOf(isPresent);
+
+            expect(output(3.14)).toStrictEqual(just(true));
+            expect(output(null)).toStrictEqual(just(false));
+            expect(output(undefined)).toStrictEqual(just(false));
+        });
+    });
+
+    describe('when the "map" function accepts present or absent value and returns absent output', () => {
+        it('creates an unary function that returns Nothing', () => {
+            // TODO: Figure out why it can also be assigned to Unary<number, Nothing<boolean>>
+            const output: Unary<number | null | undefined, Nothing<boolean>> = maybeOf(constant(null));
+
+            expect(output(3.14)).toBe(naught());
+            expect(output(null)).toBe(naught());
+            expect(output(undefined)).toBe(naught());
+        });
+    });
+
+    describe('when the "map" function accepts present or absent value and returns present or absent output', () => {
+        it('creates an unary function that returns Maybe', () => {
+            // TODO: Figure out why it can also be assigned to Unary<number, Maybe<number>>
+            const output: Unary<number | null | undefined, Maybe<number>> = maybeOf<number, number>(fallbackMaybe);
+
+            expect(output(3.14)).toStrictEqual(just(3.14));
+            expect(output(null)).toBe(naught());
+            expect(output(undefined)).toBe(nothing());
         });
     });
 });

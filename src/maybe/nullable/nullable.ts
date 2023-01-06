@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file -- Nullable, One, and Nil are co-dependent
 import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
+import { Unary } from '../../function';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
 import { isNotNull, isNull, NotNull } from '../../value/value';
@@ -226,6 +227,28 @@ export function nullable<T>(value: T | null): Only<T> | Nil<T> | Nullable<T> {
         return only(value);
     }
     return nil<T>();
+}
+
+export function nullableOf<T, U>(
+    map: (value: T | null) => NotNull<U>,
+): Unary<T | null, Only<U>>;
+export function nullableOf<T, U>(
+    map: (value: NotNull<T>) => NotNull<U>,
+): Unary<NotNull<T>, Only<U>>;
+export function nullableOf<T, U>(
+    map: (value: T | null) => null,
+): Unary<T | null, Nil<U>>;
+export function nullableOf<T, U>(
+    map: (value: T | null) => U | null,
+): Unary<T | null, Nullable<U>>;
+
+/**
+ * Wraps a result of the given "map" function into a Nullable.
+ */
+export function nullableOf<T, U>(
+    map: (value: T | null) => U | null,
+): Unary<T | null, Nullable<U> | Only<U> | Nil<U>> {
+    return (value: T | null): Nullable<U> | Only<U> | Nil<U> => nullable(map(value));
 }
 
 /**

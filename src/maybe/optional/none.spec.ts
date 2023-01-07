@@ -3,10 +3,10 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 import { output as stringOutput } from '../../string/string/output';
-import { isUndefined } from '../../value/value';
+import { isPresent, isUndefined } from '../../value/value';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optional, Some, some } from './optional';
+import { None, none, Optional, optional, optionalOf, Some, some } from './optional';
 import { Boxed, fallbackOptional } from './optional.mock';
 
 describe(none, () => {
@@ -177,6 +177,12 @@ describe(None, () => {
 
         it('returns the result of the given "fold" function applied to the value of None', () => {
             expect(none().into(stringOutput)).toBe('undefined');
+        });
+
+        it('can be used to return Optional', () => {
+            const output: Optional<boolean> = none().into(optionalOf(isPresent));
+
+            expect(output).toStrictEqual(some(false));
         });
     });
 
@@ -755,6 +761,7 @@ describe(None, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -786,4 +793,5 @@ describe(None, () => {
             expect(output).toStrictEqual(some(null));
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

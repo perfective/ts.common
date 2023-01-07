@@ -194,6 +194,50 @@ a `null` for invalid dates is ok.
 we may prefer a readable fallback.
 
 
+== Using the `into()` method with the `maybeOf()` function
+
+The `Maybe.into()` method allows folding a Maybe instance into a different type.
+It applies the argument function for present and absent values.
+In combination with the `maybeOf()` function,
+it allows to apply functions with custom handling of absent values
+and return a new `Maybe` instance.
+
+[source,typescript]
+----
+import { isAbsent } from '@perfective/common';
+import { maybe } from '@perfective/common/maybe';
+
+function decimal(value: number | null | undefined): string {
+    if (isAbsent(value)) {
+        return '0'; // <.>
+    }
+    return value.toString(10);
+}
+
+maybe(null).onto(x => maybe(decimal(x))) != just(decimal(null)); // <.>
+maybe(null).to(decimal) != just(decimal(null)); // <.>
+
+maybe(null).into(x => maybe(decimal(x)) == just(decimal(null)) // <.>
+maybe(null).into(maybeOf(decimal)) == just(decimal(null)) // <.>
+----
+<.> The `decimal()` function returns a default value for the absent values
+instead of returning another absent value
+(or throwing an error).
+<.> As a result, when `decimal()` is applied through the `Maybe.onto()` method,
+it breaks the left-identity monad law.
+<.> Applying `decimal()` through `Maybe.to()` gives the same incorrect result.
+<.> Using the `Maybe.into()` method allows working around this issue
+because `Maybe.into()` is called for all Maybe values
+(not only present values).
+<.> Use the `maybeOf()` function as a shortcut.
+
+[NOTE]
+====
+Since v0.9.0,
+`Maybe.into(maybeOf)` replaced the `Maybe.lift(map)` method.
+====
+
+
 == Reference
 
 There are three distinct type groups available in this package:
@@ -432,7 +476,7 @@ function username(userId: Maybe<number>): Promise<string> {
         .catch(() => "Unknown");
 }
 ----
-<.> While applying the function directly is possible,
+<.> While passing the `Maybe.value` directly into the function is possible,
 the `Maybe.into()` method allows to switch the chain to a different monadic type
 and continue the chain with that new type.
 

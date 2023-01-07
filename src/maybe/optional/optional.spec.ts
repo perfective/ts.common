@@ -357,6 +357,12 @@ describe(Optional, () => {
             expect(optional(fallbackOptional(3.14)).into(stringOutput)).toBe('3.14');
             expect(optional(undefined).into(stringOutput)).toBe('undefined');
         });
+
+        it('can be used to return Optional', () => {
+            const output: Optional<boolean> = optional(fallbackOptional(3.14)).into(optionalOf(isPresent));
+
+            expect(output).toStrictEqual(some(true));
+        });
     });
 
     describe('pick', () => {
@@ -822,6 +828,7 @@ describe(Optional, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -851,4 +858,5 @@ describe(Optional, () => {
             expect(output).toStrictEqual(some(null));
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

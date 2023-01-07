@@ -15,7 +15,7 @@ import {
 import { isPresent } from '../../value/value';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, Only, only, solum } from './nullable';
+import { Nil, nil, Nullable, nullable, nullableOf, Only, only, solum } from './nullable';
 import { Boxed, fallbackNullable } from './nullable.mock';
 
 /* eslint-disable deprecation/deprecation -- providing solum until v0.10.0 */
@@ -220,6 +220,12 @@ describe(Only, () => {
 
         it('returns the result of the given "fold" function applied to the value of Only', () => {
             expect(only(3.14).into<string>(decimal)).toBe('3.14');
+        });
+
+        it('can be used to return Nullable', () => {
+            const output: Nullable<boolean> = only(3.14).into(nullableOf(isPresent));
+
+            expect(output).toStrictEqual(only(true));
         });
     });
 
@@ -723,6 +729,7 @@ describe(Only, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
             expect(only('3.14').lift(decimal))
@@ -749,4 +756,5 @@ describe(Only, () => {
             expect(output).toBe(nil());
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

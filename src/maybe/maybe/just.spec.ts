@@ -11,7 +11,7 @@ import {
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 
-import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
+import { Just, just, Maybe, maybe, maybeOf, naught, Nothing, nothing } from './maybe';
 import { Boxed, fallbackMaybe } from './maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from './type-guard-check.mock';
 
@@ -232,6 +232,12 @@ describe(Just, () => {
 
         it('returns the result of the given "fold" function applied to the value of Just', () => {
             expect(just(3.14).into<string>(decimal)).toBe('3.14');
+        });
+
+        it('can be used to return Maybe', () => {
+            const output: Just<string> = just(3.14).into(maybeOf<number, string>(decimal));
+
+            expect(output).toStrictEqual(just('3.14'));
         });
     });
 
@@ -731,6 +737,7 @@ describe(Just, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
             expect(just('3.14').lift(decimal))
@@ -757,4 +764,5 @@ describe(Just, () => {
             expect(output).toBe(naught());
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

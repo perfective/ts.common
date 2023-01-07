@@ -44,6 +44,12 @@ export abstract class Nullable<T> implements Option<T, null> {
 
     public abstract run(procedure: (value: T) => void): Nullable<T>;
 
+    /**
+     * Lifts a function into the Nullable monad.
+     *
+     * @deprecated Since v0.9.0. Use `Nullable.into(nullableOf)`.
+     */
+    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     public abstract lift<U>(
         map: (value: T | null) => U | null,
     ): Nullable<U>;
@@ -131,6 +137,11 @@ export class Only<T> implements Nullable<T> {
         return this;
     }
 
+    /**
+     * Lifts a function into the Nullable monad.
+     *
+     * @deprecated Since v0.9.0. Use `Nullable.into(nullableOf)`.
+     */
     public lift<U>(map: (value: T) => U | null): Nullable<U> {
         return nullable(map(this.value));
     }
@@ -203,6 +214,11 @@ implements Nullable<T> {
         return this;
     }
 
+    /**
+     * Lifts a function into the Nullable monad.
+     *
+     * @deprecated Since v0.9.0. Use `Nullable.into(nullableOf)`.
+     */
     public lift<U>(map: (value: null) => U | null): Nullable<U> {
         return nullable(map(this.value));
     }

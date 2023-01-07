@@ -357,6 +357,12 @@ describe(Nullable, () => {
             expect(nullable(fallbackNullable(3.14)).into(stringOutput)).toBe('3.14');
             expect(nullable(fallbackNullable(null)).into(stringOutput)).toBe('null');
         });
+
+        it('can be used to return Nullable', () => {
+            const output: Nullable<boolean> = nullable(fallbackNullable(3.14)).into(nullableOf(isPresent));
+
+            expect(output).toStrictEqual(only(true));
+        });
     });
 
     describe('pick', () => {
@@ -823,6 +829,7 @@ describe(Nullable, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -852,4 +859,5 @@ describe(Nullable, () => {
             expect(output).toBe(nil());
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

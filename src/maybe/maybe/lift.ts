@@ -64,8 +64,14 @@ export function run<T>(procedure: (value: T) => void): Unary<Maybe<T>, Maybe<T>>
     return (maybe: Maybe<T>): Maybe<T> => maybe.run(procedure);
 }
 
+/**
+ * Creates a function that lifts the given "map" function from Maybe<T> into Maybe<U>.
+ *
+ * @deprecated Since v0.9.0.
+ */
 export function lift<T, U>(
     map: (value: T | null | undefined) => U | null | undefined,
 ): Unary<Maybe<T>, Maybe<U>> {
+    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     return (maybe: Maybe<T>): Maybe<U> => maybe.lift(map);
 }

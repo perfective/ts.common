@@ -3,9 +3,9 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 import { output as stringOutput } from '../../string/string/output';
-import { isUndefined } from '../../value/value';
+import { isPresent, isUndefined } from '../../value/value';
 
-import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
+import { Just, just, Maybe, maybe, maybeOf, naught, Nothing, nothing } from './maybe';
 import { Boxed, fallbackMaybe } from './maybe.mock';
 import { TypeGuardCheck } from './type-guard-check.mock';
 
@@ -204,6 +204,12 @@ describe(Nothing, () => {
         it('returns the result of the given "fold" function applied to the value of Nothing', () => {
             expect(nothing().into(stringOutput)).toBe('undefined');
             expect(naught().into(stringOutput)).toBe('null');
+        });
+
+        it('can be used to return Maybe', () => {
+            const output: Maybe<boolean> = naught().into(maybeOf(isPresent));
+
+            expect(output).toStrictEqual(just(false));
         });
     });
 
@@ -794,6 +800,7 @@ describe(Nothing, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -829,4 +836,5 @@ describe(Nothing, () => {
             expect(output).toBe(naught());
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

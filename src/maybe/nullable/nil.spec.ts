@@ -3,10 +3,10 @@ import { constant, Nullary } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 import { output as stringOutput } from '../../string/string/output';
-import { isNull } from '../../value/value';
+import { isNull, isPresent } from '../../value/value';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
+import { Nil, nil, Nullable, nullable, nullableOf, Only, only } from './nullable';
 import { Boxed, fallbackNullable } from './nullable.mock';
 
 describe(nil, () => {
@@ -175,6 +175,12 @@ describe(Nil, () => {
 
         it('returns the result of the given "fold" function applied to the value of Nil', () => {
             expect(nil().into(stringOutput)).toBe('null');
+        });
+
+        it('can be used to return Nullable', () => {
+            const output: Nullable<boolean> = nil().into(nullableOf(isPresent));
+
+            expect(output).toStrictEqual(only(false));
         });
     });
 
@@ -736,6 +742,7 @@ describe(Nil, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error --TS2345:
@@ -765,4 +772,5 @@ describe(Nil, () => {
             expect(output).toBe(nil());
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

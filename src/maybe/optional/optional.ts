@@ -44,6 +44,12 @@ export abstract class Optional<T> implements Option<T, undefined> {
 
     public abstract run(procedure: (value: T) => void): Optional<T>;
 
+    /**
+     * Lifts a function into the Optional monad.
+     *
+     * @deprecated Since v0.9.0. Use `Optional.into(optionalOf)` instead.
+     */
+    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     public abstract lift<U>(
         map: (value: T | undefined) => U | undefined,
     ): Optional<U>;
@@ -131,6 +137,11 @@ export class Some<T> implements Optional<T> {
         return this;
     }
 
+    /**
+     * Lifts a function into the Optional monad.
+     *
+     * @deprecated Since v0.9.0. Use `Optional.into(optionalOf)` instead.
+     */
     public lift<U>(map: (value: T) => U | undefined): Optional<U> {
         return optional(map(this.value));
     }
@@ -199,6 +210,11 @@ export class None<T> implements Optional<T> {
         return this;
     }
 
+    /**
+     * Lifts a function into the Optional monad.
+     *
+     * @deprecated Since v0.9.0. Use `Optional.into(optionalOf)` instead.
+     */
     public lift<U>(map: (value: undefined) => U | undefined): Optional<U> {
         return optional(map(this.value));
     }

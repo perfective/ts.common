@@ -14,7 +14,7 @@ import {
 import { isPresent } from '../../value/value';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optional, Some, some } from './optional';
+import { None, none, Optional, optional, optionalOf, Some, some } from './optional';
 import { Boxed, fallbackOptional } from './optional.mock';
 
 describe(some, () => {
@@ -209,6 +209,12 @@ describe(Some, () => {
 
         it('returns the result of the given "fold" function applied to the value of Some', () => {
             expect(some(3.14).into<string>(decimal)).toBe('3.14');
+        });
+
+        it('can be used to return Optional', () => {
+            const output: Optional<boolean> = some(3.14).into(optionalOf(isPresent));
+
+            expect(output).toStrictEqual(some(true));
         });
     });
 
@@ -709,6 +715,7 @@ describe(Some, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
             expect(some('3.14').lift(decimal))
@@ -736,4 +743,5 @@ describe(Some, () => {
             expect(output).toStrictEqual(some(null));
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

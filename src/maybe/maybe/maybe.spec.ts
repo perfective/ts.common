@@ -396,6 +396,12 @@ describe(Maybe, () => {
             expect(maybe(null).into(stringOutput)).toBe('null');
             expect(maybe(undefined).into(stringOutput)).toBe('undefined');
         });
+
+        it('can be used to return Maybe', () => {
+            const output: Maybe<boolean> = maybe(fallbackMaybe(3.14)).into(maybeOf(isPresent));
+
+            expect(output).toStrictEqual(just(true));
+        });
     });
 
     describe('pick', () => {
@@ -1046,6 +1052,7 @@ describe(Maybe, () => {
         });
     });
 
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -1076,4 +1083,5 @@ describe(Maybe, () => {
             expect(output).toBe(naught());
         });
     });
+    /* eslint-enable deprecation/deprecation */
 });

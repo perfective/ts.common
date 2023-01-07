@@ -11,7 +11,7 @@ import {
 import { isPresent } from '../../value/value';
 
 import { into, lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
-import { just, Maybe, naught, nothing } from './maybe';
+import { just, Maybe, maybeOf, naught, nothing } from './maybe';
 import { TypeGuardCheck } from './type-guard-check.mock';
 
 const list: Maybe<number>[] = [just(2.71), just(3.14), nothing(), naught()];
@@ -60,6 +60,11 @@ describe(into, () => {
     it('lifts the given "fold" function to the Maybe.into()', () => {
         expect(list.map(into(isPresent)))
             .toStrictEqual([true, true, false, false]);
+    });
+
+    it('can be used with into(maybeOf) to lift values', () => {
+        expect(list.map(into(maybeOf(isPresent))))
+            .toStrictEqual([just(true), just(true), just(false), just(false)]);
     });
 });
 
@@ -190,9 +195,11 @@ describe('run', () => {
     });
 });
 
+/* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
 describe('lift', () => {
     it('lifts a map function to the Maybe.lift()', () => {
         expect(list.map(lift(isPresent)))
             .toStrictEqual([just(true), just(true), just(false), just(false)]);
     });
 });
+/* eslint-enable deprecation/deprecation */

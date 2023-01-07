@@ -1,5 +1,6 @@
 // ./maybe
 export {
+    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     lift,
     onto,
     or,

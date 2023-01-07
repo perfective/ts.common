@@ -53,6 +53,12 @@ export abstract class Maybe<T> implements Option<T, null | undefined> {
 
     public abstract run(procedure: (value: T) => void): Maybe<T>;
 
+    /**
+     * Lifts a function into the Maybe monad.
+     *
+     * @deprecated Since v0.9.0. Use `Maybe.into(maybeOf)` instead.
+     */
+    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     public abstract lift<U>(map: (value: T | null | undefined) => U | null | undefined): Maybe<U>;
 }
 
@@ -144,6 +150,11 @@ export class Just<T> implements Maybe<T> {
         return this;
     }
 
+    /**
+     * Lifts a function into the Maybe monad.
+     *
+     * @deprecated Since v0.9.0. Use `Maybe.into(maybeOf)` instead.
+     */
     public lift<U>(map: (value: T) => U | null | undefined): Maybe<U> {
         return maybe(map(this.value));
     }
@@ -226,6 +237,11 @@ export class Nothing<T> implements Maybe<T> {
         return this;
     }
 
+    /**
+     * Lifts a function into the Maybe monad.
+     *
+     * @deprecated Since v0.9.0. Use `Maybe.into(maybeOf)` instead.
+     */
     public lift<U>(map: (value: null | undefined) => U | null | undefined): Maybe<U> {
         return maybe(map(this.value));
     }
@@ -247,10 +263,10 @@ export function maybe<T>(value: T | null | undefined): Just<T> | Nothing<T> | Ma
 
 export function maybeOf<T, U>(
     map: (value: T | null | undefined) => Present<U>,
-): Unary<T | null | undefined, Just<U>>;
+): Unary<T | null | undefined, Just<Present<U>>>;
 export function maybeOf<T, U>(
     map: (value: Present<T>) => Present<U>,
-): Unary<Present<T>, Just<U>>;
+): Unary<Present<T>, Just<Present<U>>>;
 export function maybeOf<T, U>(
     map: (value: T | null | undefined) => null | undefined,
 ): Unary<T | null | undefined, Nothing<U>>;

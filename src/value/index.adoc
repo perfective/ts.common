@@ -27,7 +27,7 @@ It is defined as a conditional type (not `T & {}`) to ensure support of TS compi
 ** `isPresent<T>(value: T | null | undefined): value is Present<T>`;
 +
 * `type Absent<T> = T extends null | undefined ? T : never`:
-** `isAbsent<T>(value: T | null | undefined): value is Absent<T>`.
+** `isAbsent<T>(value: T | null | undefined): value is null | undefined`.
 
 [NOTE]
 ====

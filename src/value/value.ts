@@ -37,6 +37,6 @@ export function isPresent<T>(value: T | null | undefined): value is Present<T> {
 
 export type Absent<T> = T extends null | undefined ? T : never;
 
-export function isAbsent<T>(value: T | null | undefined): value is Absent<T> {
+export function isAbsent<T>(value: T | null | undefined): value is null | undefined {
     return isUndefined(value) || isNull(value);
 }

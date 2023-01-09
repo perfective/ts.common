@@ -6,7 +6,8 @@ import {
     hasDefinedProperty,
     hasNotNullProperty,
     hasNullProperty,
-    hasPresentProperty, hasUndefinedProperty,
+    hasPresentProperty,
+    hasUndefinedProperty,
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 

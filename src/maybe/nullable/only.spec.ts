@@ -12,18 +12,18 @@ import {
     ObjectWithNotNull,
     ObjectWithPresent,
 } from '../../object/property/property';
-import { isPresent } from '../../value/value';
+import { strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, nullableOf, Only, only, solum } from './nullable';
-import { Boxed, fallbackNullable } from './nullable.mock';
+import { Nil, nil, Nullable, nullableOf, Only, only, solum } from './nullable';
+import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
 /* eslint-disable deprecation/deprecation -- providing solum until v0.10.0 */
 describe(solum, () => {
     it('returns Only<T>', () => {
-        const output: Only<number> = solum(3.14);
+        const output: Only<number> = solum(0);
 
-        expect(output).toStrictEqual(only(3.14));
+        expect(output).toStrictEqual(only(0));
     });
 });
 /* eslint-enable deprecation/deprecation */
@@ -51,72 +51,72 @@ describe(only, () => {
 describe(Only, () => {
     describe('value', () => {
         it('is a required property and can be assigned to the value type', () => {
-            const value: number = only<number>(3.14).value;
+            const value: number = only(0).value;
 
-            expect(value).toBe(3.14);
+            expect(value).toBe(0);
         });
     });
 
     describe('onto', () => {
         describe('when the "flatMap" function returns Nullable', () => {
             it('returns Nullable the next value', () => {
-                const output: Nullable<string> = only(3.14).onto(constant(nullable(fallbackNullable('3.14'))));
+                const output: Nullable<string> = only(0).onto(nullableDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Only<string>'.
-                const output: Only<string> = only(3.14).onto(constant(nullable(fallbackNullable('3.14'))));
+                const output: Only<string> = only(0).onto(nullableDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
-                const output: Nil<string> = only(3.14).onto(constant(nullable(fallbackNullable('3.14'))));
+                const output: Nil<string> = only(0).onto(nullableDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
         });
 
         describe('when the "flatMap" function returns Only', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<string> = only(3.14).onto(constant(only('3.14')));
+                const output: Nullable<string> = only(0).onto(onlyDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('returns Only the next value', () => {
-                const output: Only<string> = only(3.14).onto(constant(only('3.14')));
+                const output: Only<string> = only(0).onto(onlyDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only<string>' is not assignable to type 'Nil<string>'.
-                const output: Nil<string> = only(3.14).onto(constant(only('3.14')));
+                const output: Nil<string> = only(0).onto(onlyDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
         });
 
         describe('when the "flatMap" function returns Nil', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<string> = only(3.14).onto(constant(nil<string>()));
+                const output: Nullable<string> = only(0).onto(nilDecimalOutput);
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nil<string>' is not assignable to type 'Only<string>'.
-                const output: Only<string> = only(3.14).onto(constant(nil<string>()));
+                const output: Only<string> = only(0).onto(nilDecimalOutput);
 
                 expect(output).toBe(nil());
             });
 
             it('returns Nil', () => {
-                const output: Nil<string> = only(3.14).onto(constant(nil<string>()));
+                const output: Nil<string> = only(0).onto(nilDecimalOutput);
 
                 expect(output).toBe(nil());
             });
@@ -126,63 +126,63 @@ describe(Only, () => {
     describe('to', () => {
         describe('when the "map" function may return a present or absent value', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<string> = only(3.14).to(constant(fallbackNullable('3.14')));
+                const output: Nullable<string | undefined> = only(0).to(unsafeDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Only'.
-                const output: Only<string> = only(3.14).to(constant(fallbackNullable('3.14')));
+                const output: Only<string | undefined> = only(0).to(unsafeDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                const output: Nil<string> = only(3.14).to(constant(fallbackNullable('3.14')));
+                const output: Nil<string | undefined> = only(0).to(unsafeDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
         });
 
         describe('when the "map" function returns a present value', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<string> = only(3.14).to(constant('3.14'));
+                const output: Nullable<string> = only(0).to(strictDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('returns Only the next value', () => {
-                const output: Only<string> = only(3.14).to(constant('3.14'));
+                const output: Only<string> = only(0).to(strictDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-                const output: Nil<string> = only(3.14).to(constant('3.14'));
+                const output: Nil<string> = only(0).to(strictDecimalOutput);
 
-                expect(output).toStrictEqual(only('3.14'));
+                expect(output).toStrictEqual(only('0'));
             });
         });
 
         describe('when the "map" function returns null', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<string> = only(3.14).to<string>(constant(null));
+                const output: Nullable<string> = only(0).to<string>(constant(null));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nil' is not assignable to type 'Only'.
-                const output: Only<string> = only(3.14).to<string>(constant(null));
+                const output: Only<string> = only(0).to<string>(constant(null));
 
                 expect(output).toBe(nil());
             });
 
             it('returns Nil', () => {
-                const output: Nil<string> = only(3.14).to<string>(constant(null));
+                const output: Nil<string> = only(0).to<string>(constant(null));
 
                 expect(output).toBe(nil());
             });
@@ -190,13 +190,13 @@ describe(Only, () => {
 
         describe('when the "map" function returns undefined', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<string | undefined> = only(3.14).to<string | undefined>(constant(undefined));
+                const output: Nullable<string | undefined> = only(0).to<string | undefined>(constant(undefined));
 
                 expect(output).toStrictEqual(only(undefined));
             });
 
             it('returns Only undefined', () => {
-                const output: Only<string | undefined> = only(3.14).to<string | undefined>(constant(undefined));
+                const output: Only<string | undefined> = only(0).to<string | undefined>(constant(undefined));
 
                 expect(output).toStrictEqual(only(undefined));
             });
@@ -204,7 +204,7 @@ describe(Only, () => {
             it('cannot be assigned to Nil of optional value', () => {
                 // @ts-expect-error -- TS2322:
                 //  Type 'Only<string | undefined>' is not assignable to type 'Nil<string | undefined>'.
-                const output: Nil<string | undefined> = only(3.14).to<string | undefined>(constant(undefined));
+                const output: Nil<string | undefined> = only(0).to<string | undefined>(constant(undefined));
 
                 expect(output).toStrictEqual(only(undefined));
             });
@@ -213,19 +213,19 @@ describe(Only, () => {
 
     describe('into', () => {
         it('accepts a "fold" function with a non-nullable value argument', () => {
-            const output: number | null = only('3.14').into(decimal);
+            const output: string = only(0).into(strictDecimalOutput);
 
-            expect(output).toBe(3.14);
+            expect(output).toBe('0');
         });
 
         it('returns the result of the given "fold" function applied to the value of Only', () => {
-            expect(only(3.14).into<string>(decimal)).toBe('3.14');
+            expect(only(0).into(strictDecimalOutput)).toBe('0');
         });
 
         it('can be used to return Nullable', () => {
-            const output: Nullable<boolean> = only(3.14).into(nullableOf(isPresent));
+            const output: Nullable<string | undefined> = only(0).into(nullableOf(unsafeDecimalOutput));
 
-            expect(output).toStrictEqual(only(true));
+            expect(output).toStrictEqual(only('0'));
         });
     });
 
@@ -267,16 +267,16 @@ describe(Only, () => {
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322:
-                //  Type 'Nullable<number | undefined>' is not assignable to type 'Only<number>'.
-                const output: Only<number> = only(typeGuardCheck).pick('possible');
+                //  Type 'Nullable<number | undefined>' is not assignable to type 'Only<number | undefined>'.
+                const output: Only<number | undefined> = only(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322:
-                //  Type 'Nullable<number | undefined>' is not assignable to type 'Nil<number>'.
-                const output: Nil<number> = only(typeGuardCheck).pick('possible');
+                //  Type 'Nullable<number | undefined>' is not assignable to type 'Nil<number | undefined>'.
+                const output: Nil<number | undefined> = only(typeGuardCheck).pick('possible');
 
                 expect(output).toBe(nil());
             });
@@ -286,43 +286,43 @@ describe(Only, () => {
     describe('that', () => {
         describe('when the "filter" condition is true', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).that(isGreaterThan(2.71));
+                const output: Nullable<number> = only(0).that(isLessThan(2.71));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable<number>' is not assignable to type 'Only<number>'.
-                const output: Only<number> = only(3.14).that(isGreaterThan(2.71));
+                const output: Only<number> = only(0).that(isLessThan(2.71));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable<number>' is not assignable to type 'Nil<number>'.
-                const output: Nil<number> = only(3.14).that(isGreaterThan(2.71));
+                const output: Nil<number> = only(0).that(isLessThan(2.71));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "filter" condition is false', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).that(isLessThan(2.71));
+                const output: Nullable<number> = only(0).that(isGreaterThan(2.71));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Only'.
-                const output: Only<number> = only(3.14).that(isLessThan(2.71));
+                const output: Only<number> = only(0).that(isGreaterThan(2.71));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).that(isLessThan(2.71));
+                const output: Nil<number> = only(0).that(isGreaterThan(2.71));
 
                 expect(output).toBe(nil());
             });
@@ -426,43 +426,43 @@ describe(Only, () => {
     describe('when', () => {
         describe('when the "filter" condition is true', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).when(constant(true));
+                const output: Nullable<number> = only(0).when(constant(true));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Only'.
-                const output: Only<number> = only(3.14).when(constant(true));
+                const output: Only<number> = only(0).when(constant(true));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).when(constant(true));
+                const output: Nil<number> = only(0).when(constant(true));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "filter" condition is false', () => {
             it('must be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).when(constant(false));
+                const output: Nullable<number> = only(0).when(constant(false));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Only', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Only'.
-                const output: Only<number> = only(3.14).when(constant(false));
+                const output: Only<number> = only(0).when(constant(false));
 
                 expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Nullable' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).when(constant(false));
+                const output: Nil<number> = only(0).when(constant(false));
 
                 expect(output).toBe(nil());
             });
@@ -472,288 +472,288 @@ describe(Only, () => {
     describe('otherwise', () => {
         describe('fallback may be present', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).otherwise(fallbackNullable(2.71));
+                const output: Nullable<number | undefined> = only<number | undefined>(0).otherwise(unsafeNumber(1));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('returns Only', () => {
-                const output: Only<number> = only(3.14).otherwise(fallbackNullable(2.71));
+                const output: Only<number | undefined> = only<number | undefined>(0).otherwise(unsafeNumber(1));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).otherwise(fallbackNullable(2.71));
+                const output: Nil<number | undefined> = only<number | undefined>(0).otherwise(unsafeNumber(1));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('fallback is present', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).otherwise(2.71);
+                const output: Nullable<number> = only(0).otherwise(1);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('returns Only', () => {
-                const output: Only<number> = only(3.14).otherwise(2.71);
+                const output: Only<number> = only(0).otherwise(1);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).otherwise(2.71);
+                const output: Nil<number> = only(0).otherwise(1);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "fallback" returns a present value', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).otherwise(constant(2.71));
+                const output: Nullable<number> = only(0).otherwise(constant(1));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('returns Only', () => {
-                const output: Only<number> = only(3.14).otherwise(constant(2.71));
+                const output: Only<number> = only(0).otherwise(constant(1));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).otherwise(constant(2.71));
+                const output: Nil<number> = only(0).otherwise(constant(1));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "fallback" is null', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).otherwise(null);
+                const output: Nullable<number> = only(0).otherwise(null);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('returns Only', () => {
-                const output: Only<number> = only(3.14).otherwise(null);
+                const output: Only<number> = only(0).otherwise(null);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).otherwise(null);
+                const output: Nil<number> = only(0).otherwise(null);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "fallback" returns null', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number> = only(3.14).otherwise(constant(null));
+                const output: Nullable<number> = only(0).otherwise(constant(null));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('returns Only', () => {
-                const output: Only<number> = only(3.14).otherwise(constant(null));
+                const output: Only<number> = only(0).otherwise(constant(null));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-                const output: Nil<number> = only(3.14).otherwise(constant(null));
+                const output: Nil<number> = only(0).otherwise(constant(null));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "fallback" is undefined', () => {
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number | undefined> = only<number | undefined>(3.14).otherwise(undefined);
+                const output: Nullable<number | undefined> = only<number | undefined>(0).otherwise(undefined);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('returns Only', () => {
-                const output: Only<number | undefined> = only<number | undefined>(3.14).otherwise(undefined);
+                const output: Only<number | undefined> = only<number | undefined>(0).otherwise(undefined);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error -- TS2322:
                 //  Type 'Only<number | undefined>' is not assignable to type 'Nil<number | undefined>'.
-                const output: Nil<number | undefined> = only<number | undefined>(3.14)
+                const output: Nil<number | undefined> = only<number | undefined>(0)
                     .otherwise(undefined);
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         describe('when the "fallback" returns undefined', () => {
             it('returns Only', () => {
-                const output: Only<number | undefined> = only<number | undefined>(3.14)
+                const output: Only<number | undefined> = only<number | undefined>(0)
                     .otherwise(constant(undefined));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('can be assigned to Nullable', () => {
-                const output: Nullable<number | undefined> = only<number | undefined>(3.14)
+                const output: Nullable<number | undefined> = only<number | undefined>(0)
                     .otherwise(constant(undefined));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
 
             it('cannot be assigned to Nil', () => {
                 // @ts-expect-error: TS2322:
                 //  Type 'Only<number | undefined>' is not assignable to type 'Nil<number | undefined>'.
-                const output: Nil<number | undefined> = only<number | undefined>(3.14)
+                const output: Nil<number | undefined> = only<number | undefined>(0)
                     .otherwise(constant(undefined));
 
-                expect(output).toStrictEqual(only(3.14));
+                expect(output).toStrictEqual(only(0));
             });
         });
 
         it('does not throw an error', () => {
-            expect(() => only(3.14).otherwise(panic('Value is absent')))
+            expect(() => only(0).otherwise(panic('Value is absent')))
                 .not.toThrow('Value is absent');
         });
     });
 
     describe('or', () => {
         it('is a shortcut of Nullable.otherwise().value', () => {
-            expect(only(3.14).or(2.71))
-                .toStrictEqual(only(3.14).otherwise(2.71).value);
-            expect(only(3.14).or(constant(2.71)))
-                .toStrictEqual(only(3.14).otherwise(constant(2.71)).value);
+            expect(only(0).or(1))
+                .toStrictEqual(only(0).otherwise(1).value);
+            expect(only(0).or(constant(1)))
+                .toStrictEqual(only(0).otherwise(constant(1)).value);
         });
 
         it('does not throw an error', () => {
-            expect(() => only(3.14).or(panic('Value is not present')))
+            expect(() => only(0).or(panic('Value is not present')))
                 .not.toThrow('Value is not present');
         });
 
         describe('fallback is present', () => {
             it('returns the original value', () => {
-                const output: string = only('3.14').or('2.71');
+                const output: number = only(0).or(1);
 
-                expect(output).toBe('3.14');
+                expect(output).toBe(0);
             });
         });
 
         describe('when the "fallback" returns a present value', () => {
             it('returns the original value', () => {
-                const output: string = only('3.14').or(constant('2.71'));
+                const output: number = only(0).or(constant(1));
 
-                expect(output).toBe('3.14');
+                expect(output).toBe(0);
             });
         });
 
         describe('when the "fallback" is null', () => {
             it('returns the original value', () => {
-                const output: string = only('3.14').or(null);
+                const output: number = only(0).or(null);
 
-                expect(output).toBe('3.14');
+                expect(output).toBe(0);
             });
         });
 
         describe('when the "fallback" returns null', () => {
             it('returns the original value', () => {
-                const output: string = only('3.14').or(constant(null));
+                const output: number = only(0).or(constant(null));
 
-                expect(output).toBe('3.14');
+                expect(output).toBe(0);
             });
         });
 
         describe('when the "fallback" is undefined', () => {
             it('returns the original value', () => {
-                const output: string | undefined = only<string | undefined>('3.14').or(undefined);
+                const output: number | undefined = only<number | undefined>(0).or(undefined);
 
-                expect(output).toBe('3.14');
+                expect(output).toBe(0);
             });
         });
 
         describe('when the "fallback" returns undefined', () => {
             it('returns the original value', () => {
-                const output: string | undefined = only<string | undefined>('3.14').or(constant(undefined));
+                const output: number | undefined = only<number | undefined>(0).or(constant(undefined));
 
-                expect(output).toBe('3.14');
+                expect(output).toBe(0);
             });
         });
     });
 
     describe('run', () => {
-        let pi: number;
+        let value: number;
 
         // eslint-disable-next-line func-style -- conflicts with prefer-arrow
-        const assignPi = (value: number): Nullary<void> => (): void => {
-            pi = value;
+        const assignValue = (update: number): Nullary<void> => (): void => {
+            value = update;
         };
 
         beforeEach(() => {
-            pi = 3.14;
+            value = 0;
         });
 
         it('runs the given procedure and keeps original value', () => {
-            expect(pi).toBe(3.14);
-            expect(only(pi).run(assignPi(3.1415))).toStrictEqual(only(3.14));
-            expect(pi).toBe(3.1415);
+            expect(value).toBe(0);
+            expect(only(value).run(assignValue(1))).toStrictEqual(only(0));
+            expect(value).toBe(1);
         });
 
         it('can be assigned to Nullable', () => {
-            const output: Nullable<number> = only(pi).run(assignPi(3.1415));
+            const output: Nullable<number> = only(value).run(assignValue(1));
 
-            expect(output).toStrictEqual(only(3.14));
+            expect(output).toStrictEqual(only(0));
         });
 
         it('returns Only', () => {
-            const output: Only<number> = only(pi).run(assignPi(3.1415));
+            const output: Only<number> = only(value).run(assignValue(1));
 
-            expect(output).toStrictEqual(only(3.14));
+            expect(output).toStrictEqual(only(0));
         });
 
         it('cannot be assigned to Nil', () => {
             // @ts-expect-error -- TS2322: Type 'Only' is not assignable to type 'Nil'.
-            const output: Nil<number> = only(pi).run(assignPi(3.1415));
+            const output: Nil<number> = only(value).run(assignValue(1));
 
-            expect(output).toStrictEqual(only(3.14));
+            expect(output).toStrictEqual(only(0));
         });
     });
 
     /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
-            expect(only('3.14').lift(decimal))
-                .toStrictEqual(only(3.14));
+            expect(only(0).lift(strictDecimalOutput))
+                .toStrictEqual(only('0'));
         });
 
         it('must be assigned to Nullable', () => {
-            const output: Nullable<boolean> = only(3.14).lift(isPresent);
+            const output: Nullable<string> = only(0).lift(strictDecimalOutput);
 
-            expect(output).toStrictEqual(only(true));
+            expect(output).toStrictEqual(only('0'));
         });
 
         it('cannot be assigned to Only', () => {
-            // @ts-expect-error -- TS2322: Type 'Nullable<number>' is not assignable to type 'Only<number>'.
-            const output: Only<number> = only(3.14).lift(constant(2.71));
+            // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Only<string>'.
+            const output: Only<string> = only(0).lift(strictDecimalOutput);
 
-            expect(output).toStrictEqual(only(2.71));
+            expect(output).toStrictEqual(only('0'));
         });
 
         it('cannot be assigned to Nil', () => {
-            // @ts-expect-error -- TS2322: Type 'Nullable<boolean>' is not assignable to type 'Nil<boolean>'.
-            const output: Nil<boolean> = only(3.14).lift<boolean>(constant(null));
+            // @ts-expect-error -- TS2322: Type 'Nullable<string>' is not assignable to type 'Nil<string>'.
+            const output: Nil<string> = only(0).lift(strictDecimalOutput);
 
-            expect(output).toBe(nil());
+            expect(output).toStrictEqual(only('0'));
         });
     });
     /* eslint-enable deprecation/deprecation */

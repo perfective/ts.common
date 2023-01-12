@@ -49,7 +49,7 @@ and related classes.
 * `link:https://github.com/perfective/ts.common/tree/main/src/match/index.adoc[@perfective/common/match]`
 — functions to support a functional switch-case.
 * `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]`
-— https://en.wikipedia.org/wiki/Option_type[Maybe type] implementation.
+— a `Maybe` monad (https://en.wikipedia.org/wiki/Option_type[Option type]) implementation.
 * `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/number]`
 — functions and types to work with the real numbers.
 * `link:https://github.com/perfective/ts.common/tree/main/src/object/index.adoc[@perfective/common/object]`
@@ -58,6 +58,8 @@ and related classes.
 * `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/promise]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
+* `link:https://github.com/perfective/ts.common/tree/main/src/result/index.adoc[@perfective/common/result]`
+— a `Result` monad (https://en.wikipedia.org/wiki/Result_type[Result type]) implementation.
 * `link:https://github.com/perfective/ts.common/tree/main/src/string/index.adoc[@perfective/common/string]`
 — functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.
@@ -82,9 +84,6 @@ and detailed documentation in the existing packages.
 * `@perfective/common/date`:
 ** Add support for the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date[Date]` type.
-+
-* `@perfective/common/either`:
-** Add `Either` (monadic container) to support a functional `Result`/`Error` return type.
 +
 * `@perfective/common/function`:
 ** Ensure coverage of the

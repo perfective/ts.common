@@ -1,0 +1,157 @@
+= Result
+
+The `@perfective/common/result` package provides
+a https://en.wikipedia.org/wiki/Result_type[Result type] implementation.
+
+The `Result` type represents a result of a function that can be a `Success` or a `Failure` (an `Error`).
+It provides a mechanism for "checked exceptions"
+and allows to avoid `try-catch` blocks and unchecked JavaScript errors.
+
+== Result Monad
+
+The `Result<T, E>` type is a monad that implements:
+
+*  the `Result.onto()` method as a _bind_ (`>==`) operator;
+*  the `success()` constructor as a _unit_ (`return`) function.
+
+It satisfies the https://wiki.haskell.org/Monad_laws[monad laws]:
+
+1. _unit_ is a left _identity_ for _bind_:
++
+[source,typescript]
+----
+let x: T;
+let f: (value: T) => Result<T, E>;
+
+success(x).onto(f) === f(x);
+----
++
+2. _unit_ is a right _identity_ for _bind_:
++
+[source,typescript]
+----
+let ma: Result<T, E>;
+
+ma.onto(success) === ma;
+----
++
+3. _bind_ is associative:
++
+[source,typescript]
+----
+let ma: Result<T, E>;
+let f: (value: T) => Success<U, E>;
+let g: (value: U) => Success<V, E>;
+
+ma.onto(a => f(a).onto(g)) === ma.onto(f).onto(g);
+----
+
+
+== Reference
+
+=== Constructors
+
+* `success<T>(value: T): Success<T>`
+— creates a `Success` object from a given `value`.
+It is a _unit_ function for the `Result` monad.
++
+[NOTE]
+====
+An `Error` type can also be used as a `Success` value.
+
+For example, when an API returns an error code
+and this error code is parsed and matched to a specific `Error` subtype.
+====
++
+* `failure<T>(error: Error): Failure<T>`
+— creates a `Failure` object from a given `error`.
++
+Throws a `TypeError`, if the given `error` value is not an `Error` object.
++
+* `result<T>(value: T | Error): Result<T>`
+— creates a `Failure` if a given value is an `Error`,
+otherwise creates a `Success`.
++
+[WARNING]
+====
+TypeScript compiler does not exclude an `Error` type from the `T` automatically.
+
+If you pass a `value` of type `T | Error` to the `result()`
+then the return type will be `Success<T | Error>`.
+
+You have to cast the type parameter manually
+(e.g., `result<string>(...)`)
+to get the return type as `Result<T>`.
+====
+
+
+=== `onto()`
+
+* `Result#onto<U>(flatMap: (value: T) => Result<U, E>): Result<U, E>`:
+** for a `Success`, applies a given `flatMap` callback to the `Success#value` and returns the result;
+** for a `Failure`, ignores the `flatMap` callback and returns the same `Failure`.
+
+[source,typescript]
+----
+import { error, typeError } from '@perfective/common/error';
+import { Unary } from '@perfective/common/function';
+import { Result, failure, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+interface Request {
+    method: string;
+    url: string;
+}
+
+interface Response {
+    status: string;
+}
+
+function validInput(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(typeError('Input id is empty'));
+    }
+    return success(id);
+}
+
+function apiRequest(method: string): Unary<string, Result<Request>> {
+    return (id: string): Result<Request> => success({
+        method,
+        url: `/entity/${id}`,
+    });
+}
+
+function apiResponse(request: Request): Result<Response> {
+    if (request.method === 'HEAD') {
+        return failure(error('Not implemented'));
+    }
+    return success({
+        status: '200 OK',
+    });
+}
+
+validInput('abc')
+    .onto(apiRequest('GET'))
+    .onto(apiResponse)
+    .value == { status: '200 OK' }; // <.>
+
+validInput('abc')
+    .onto(apiRequest('HEAD'))
+    .onto(apiResponse)
+    .value == error('Not implemented'); // <.>
+
+validInput('')
+    .onto(apiRequest('HEAD'))
+    .onto(apiResponse)
+    .value == typeError('Input id is empty'); // <.>
+----
+<.> When we have a valid `id` and "send" a `GET` request,
+then the whole chain succeeds.
+<.> When we have a valid `id` but "send" a `HEAD` request,
+then the `apiResponse` fails with an `Error`.
+<.> When we have an invalid `id`,
+then neither the `apiRequest` nor `apiResponse` callbacks are called.
++
+So even it is a `HEAD` request,
+the error is the earliest one in the chain
+(from `validInput`).

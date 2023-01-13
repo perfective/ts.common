@@ -47,6 +47,41 @@ ma.onto(a => f(a).onto(g)) === ma.onto(f).onto(g);
 ----
 
 
+== Result Functor
+
+The `Result<T>` type is a functor that implements:
+
+* the `Result.to()` method as a _fmap_ function.
+
+It satisfies the https://wiki.haskell.org/Functor[functor laws]:
+
+1. `Result.to()` preserves identity morphisms:
++
+[source,typescript]
+----
+let id = (value: T) => value;
+let value: T;
+let error: Error;
+
+success(value).to(id) === success(id(value));
+failure(error).to(id) === failure(id(error));
+----
++
+2. `Result.to()` preserves composition of morphisms:
++
+[source,typescript]
+----
+let f: (value: U) => V;
+let g: (value: T) => U;
+let value: T;
+let error: Error;
+
+success(value).to(v => f(g(v))) === succes(value).to(g).to(f);
+failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
+----
+<.> `Failure.to()` ignores the input and always returns itself.
+
+
 == Reference
 
 === Constructors
@@ -153,3 +188,65 @@ then the whole chain succeeds.
 So even as a `HEAD` request it would fail,
 the error is the earliest one in the chain
 (from `validInput`).
+
+
+=== `to()`
+
+* `Result#to<U>(map: (value: T) => U): Result<U>`:
+** for a `Success`, applies a given `map` callback to the `Success#value` and returns the result;
+** for a `Failure`, ignores the `map` callback and returns the same `Failure`.
+
+[source,typescript]
+----
+import { error, typeError } from '@perfective/common/error';
+import { Unary } from '@perfective/common/function';
+import { Result, failure, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+interface Request {
+    method: string;
+    url: string;
+}
+
+interface Response {
+    status: string;
+    url: string;
+}
+
+function validInput(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(typeError('Input id is empty'));
+    }
+    return success(id);
+}
+
+function apiRequest(method: string): Unary<string, Request> {
+    return (id: string): Request => ({
+        method,
+        url: `/entity/${id}`,
+    });
+}
+
+function apiResponse(request: Request): Response {
+    return {
+        status: '200 OK',
+        url: request.url,
+    };
+}
+
+validInput('abc')
+    .to(apiRequest('GET'))
+    .to(apiResponse) // <.>
+    .value == { status: '200 OK' }; // <.>
+
+validInput('')
+    .to(apiRequest('GET'))
+    .to(apiResponse)
+    .value == typeError('Input id is empty'); // <.>
+----
+<.> Both `apiRequest` and `apiResponse` transform a given value into a new one.
+`Result#to` wraps them into the next `Success`.
+<.> When we have a valid `id`,
+then the whole chain succeeds.
+<.> When we have an invalid `id` neither `apiRequest` nor `apiResponse` callbacks are called.
+So the result is the `TypeError` returned by the `validInput`.

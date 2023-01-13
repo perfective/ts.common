@@ -1,5 +1,6 @@
 import { error } from '../../error/error/error';
 import { Exception, exception } from '../../error/exception/exception';
+import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result } from './result';
 import { resultDecimal } from './result.mock';
@@ -29,10 +30,19 @@ describe(failure, () => {
 });
 
 describe(Failure, () => {
+    const input = failure<number>(error('Failure'));
+
     describe('onto', () => {
         it('ignores a given `flatMap` callback and returns itself', () => {
-            const input = failure<number>(error('Failure'));
             const output: Failure<string> = input.onto(resultDecimal);
+
+            expect(output).toBe(input);
+        });
+    });
+
+    describe('to', () => {
+        it('ignores a given `map` callback and returns itself', () => {
+            const output: Failure<string> = input.to(stringOutput);
 
             expect(output).toBe(input);
         });

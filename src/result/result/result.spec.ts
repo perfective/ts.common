@@ -1,4 +1,7 @@
+import { array } from '../../array/array/array';
 import { error } from '../../error/error/error';
+import { same } from '../../function/function/unary';
+import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result, result, Success, success } from './result';
 import { eitherResult, resultDecimal, resultNumber, successErrorMessage } from './result.mock';
@@ -62,6 +65,51 @@ describe(Result, () => {
 
                 expect(fa.onto(x => resultDecimal(x).onto(resultNumber)))
                     .toStrictEqual(fa.onto(resultDecimal).onto(resultNumber));
+            });
+        });
+    });
+
+    describe('to', () => {
+        describe('is an "fmap" operator for the Result functor', () => {
+            it('preserves identity morphisms', () => {
+                // Identity: fmap id = id
+
+                // Success with a non-error value
+                const sa = success(0);
+
+                expect(sa.to(same)).toStrictEqual(same(sa));
+
+                // Success with an error value
+                const sb = success(error('Success'));
+
+                expect(sb.to(same)).toStrictEqual(same(sb));
+
+                // Failure (with an error value)
+                const fa = failure<number>(error('Failure'));
+
+                expect(fa.to(same)).toStrictEqual(same(fa));
+            });
+
+            it('preserves composition of morphisms', () => {
+                // Composition: fmap (f . g)  ===  fmap f . fmap g
+
+                // Success with a non-error value
+                const sa = success(0);
+
+                expect(sa.to(x => array(stringOutput(x))))
+                    .toStrictEqual(sa.to(stringOutput).to(array));
+
+                // Success with an error value
+                const sb = success(error('Success'));
+
+                expect(sb.to(x => array(successErrorMessage(x))))
+                    .toStrictEqual(sb.to(successErrorMessage).to(array));
+
+                // Failure (with an error value)
+                const fa = failure<number>(error('Failure'));
+
+                expect(fa.to(x => array(stringOutput(x))))
+                    .toStrictEqual(fa.to(stringOutput).to(array));
             });
         });
     });

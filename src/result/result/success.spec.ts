@@ -1,5 +1,6 @@
 import { error } from '../../error/error/error';
 import { Exception, exception } from '../../error/exception/exception';
+import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result, Success, success } from './result';
 import { failureDecimal, resultDecimal, successDecimal, successErrorMessage } from './result.mock';
@@ -86,6 +87,14 @@ describe(Success, () => {
 
                 expect(output).toStrictEqual(failure(error('3.14')));
             });
+        });
+    });
+
+    describe('to', () => {
+        it('applies a given `map` callback and returns the result wrapped into a Success', () => {
+            const output: Success<string> = success(0).to(stringOutput);
+
+            expect(output).toStrictEqual(success('0'));
         });
     });
 });

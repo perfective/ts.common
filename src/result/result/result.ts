@@ -26,6 +26,14 @@ export abstract class Result<T> {
     public abstract onto<U>(
         flatMap: (value: T) => Result<U>,
     ): Result<U>;
+
+    /**
+     * Applies a given {@linkcode map} callback to the {@linkcode Result#value|value} property,
+     * when the instance is a {@linkcode Success}.
+     */
+    public abstract to<U>(
+        map: (value: T) => U,
+    ): Result<U>;
 }
 
 /**
@@ -67,6 +75,15 @@ export class Success<T> extends Result<T> {
     public override onto<U>(flatMap: (value: T) => Result<U>): Result<U> {
         return flatMap(this.value);
     }
+
+    /**
+     * Applies a given {@linkcode map} callback to the {@linkcode Success.value|value}.
+     *
+     * Returns the result of the {@linkcode map} wrapped into {@linkcode Success}.
+     */
+    public override to<U>(map: (value: T) => U): Success<U> {
+        return success(map(this.value));
+    }
 }
 
 /**
@@ -96,6 +113,18 @@ export class Failure<T> extends Result<T> {
      * Returns itself.
      */
     public override onto<U>(): Result<U> {
+        return this as unknown as Failure<U>;
+    }
+
+    /**
+     * Ignores a given {@linkcode map} callback and returns itself.
+     */
+    public override to<U>(map: (value: T) => U): Failure<U>;
+
+    /**
+     * Returns itself.
+     */
+    public override to<U>(): Failure<U> {
         return this as unknown as Failure<U>;
     }
 }

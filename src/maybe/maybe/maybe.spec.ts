@@ -1,5 +1,5 @@
-import { Unary } from '../../function';
 import { constant, Nullary } from '../../function/function/nullary';
+import { same, Unary } from '../../function/function/unary';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { nullableNumber } from '../nullable/nullable.mock';
@@ -8,7 +8,6 @@ import { optionalNumber } from '../optional/optional.mock';
 import { Just, just, Maybe, maybe, maybeOf, naught, Nothing, nothing } from './maybe';
 import {
     absentNumber,
-    identity,
     justDecimalOutput,
     maybeDecimalOutput,
     naughtDecimalOutput,
@@ -269,9 +268,9 @@ describe(Maybe, () => {
             // Functors must preserve identity morphisms:
             //  fmap id = id
             it('preserves identity morphisms', () => {
-                expect(maybe(unsafeNumber(0)).to(identity)).toStrictEqual(maybe(unsafeNumber(0)));
-                expect(maybe(null).to(identity)).toStrictEqual(maybe(null));
-                expect(maybe(undefined).to(identity)).toStrictEqual(maybe(undefined));
+                expect(maybe(unsafeNumber(0)).to(same)).toStrictEqual(maybe(unsafeNumber(0)));
+                expect(maybe(null).to(same)).toStrictEqual(maybe(null));
+                expect(maybe(undefined).to(same)).toStrictEqual(maybe(undefined));
             });
 
             // Functors preserve composition of morphisms:

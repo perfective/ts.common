@@ -37,8 +37,8 @@ The functions of higher arity is unlikely to be added to the package.
 ** `isUnary<F extends Function>(f: F): boolean`
 — returns `true` when function accepts only one argument
 (does not count a variadic argument).
-** `value<T>(): Unary<T, T>`
-— creates a function that returns its argument.
+** `same<T>(value: T): T`
+— returns a given value.
 
 
 == Binary functions

@@ -7,6 +7,11 @@ export function isUnary<F extends Function>(f: F): boolean {
     return hasLength(1)(f);
 }
 
-export function same<T>(): Unary<T, T> {
-    return (value: T): T => value;
+/**
+ * Returns a given value.
+ *
+ * Same is the "identity" function.
+ */
+export function same<T>(value: T): T {
+    return value;
 }

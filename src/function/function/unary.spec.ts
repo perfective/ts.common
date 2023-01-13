@@ -27,8 +27,8 @@ describe('isUnary', () => {
     });
 });
 
-describe('same', () => {
-    it('creates a function that returns the passed value', () => {
-        expect(same()(3.14)).toBe(3.14);
+describe(same, () => {
+    it('returns a given input as is', () => {
+        expect(same(0)).toBe(0);
     });
 });

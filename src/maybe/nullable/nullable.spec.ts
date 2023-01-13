@@ -1,11 +1,10 @@
-import { Unary } from '../../function';
 import { constant, Nullary } from '../../function/function/nullary';
+import { same, Unary } from '../../function/function/unary';
 import { decimal } from '../../number/number/base';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
 import { isDefined, isPresent, isUndefined } from '../../value/value';
 import {
-    identity,
     safeDecimalOutput,
     strictDecimalOutput,
     unsafe,
@@ -224,9 +223,9 @@ describe(Nullable, () => {
             // Functors must preserve identity morphisms:
             //  fmap id = id
             it('preserves identity morphisms', () => {
-                expect(nullable(unsafeNumber(0)).to(identity)).toStrictEqual(nullable(unsafeNumber(0)));
-                expect(nullable(unsafeNumber(null)).to(identity)).toStrictEqual(nullable(unsafeNumber(null)));
-                expect(nullable(undefined).to(identity)).toStrictEqual(nullable(undefined));
+                expect(nullable(unsafeNumber(0)).to(same)).toStrictEqual(nullable(unsafeNumber(0)));
+                expect(nullable(unsafeNumber(null)).to(same)).toStrictEqual(nullable(unsafeNumber(null)));
+                expect(nullable(undefined).to(same)).toStrictEqual(nullable(undefined));
             });
 
             // Functors preserve composition of morphisms:

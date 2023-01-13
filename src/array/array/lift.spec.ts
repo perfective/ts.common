@@ -39,7 +39,7 @@ import {
 const input: number[] = [1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14];
 
 function copyOf(input: number[]): number[] {
-    return input.map(same());
+    return input.map(same);
 }
 
 describe('concat', () => {
@@ -125,7 +125,7 @@ describe('every', () => {
 describe('fill', () => {
     describe('fill(value)', () => {
         it('replaces all the values in the array with the given value', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(fill<number>(0)(copy))
                 .toBe(copy);
@@ -138,7 +138,7 @@ describe('fill', () => {
 
     describe('fill(value, start)', () => {
         it('replaces the value in the array with the given array from the "start" index', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(fill<number>(0, 3)([]))
                 .toStrictEqual([]);
@@ -149,7 +149,7 @@ describe('fill', () => {
 
     describe('fill(value, start, end)', () => {
         it('replaces the value in the array with the given array from the "start" to the "end" index', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(fill<number>(0, 3, 5)([]))
                 .toStrictEqual([]);
@@ -330,7 +330,7 @@ describe('map', () => {
 
 describe('pop', () => {
     it('returns the last element removed from an array', () => {
-        const copy: number[] = input.map(same());
+        const copy: number[] = input.map(same);
 
         expect(copy)
             .toHaveLength(7);
@@ -349,7 +349,7 @@ describe('pop', () => {
 describe('push', () => {
     describe('push(...items)', () => {
         it('returns the new length of the array after pushing items into it', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(push(5, 7, 11)(copy))
                 .toBe(10);
@@ -415,7 +415,7 @@ describe('reduceRightTo', () => {
 
 describe('reverse', () => {
     it('returns a reversed array', () => {
-        const copy: number[] = input.map(same());
+        const copy: number[] = input.map(same);
 
         expect(reverse(copy))
             .toStrictEqual([3.14, 2.71, 2.23, 1.73, 1.61, 1.41, 1.20]);
@@ -426,7 +426,7 @@ describe('reverse', () => {
 
 describe('shift', () => {
     it('returns the first element remove from an array', () => {
-        const copy: number[] = input.map(same());
+        const copy: number[] = input.map(same);
 
         expect(copy)
             .toHaveLength(7);
@@ -501,7 +501,7 @@ describe('some', () => {
 describe('sort', () => {
     describe('sort()', () => {
         it('returns an array sorted ascending after converting elements into strings', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(sort()(copy))
                 .toStrictEqual(input);
@@ -512,7 +512,7 @@ describe('sort', () => {
 
     describe('sort(order)', () => {
         it('returns an array sorted with the given "order" function', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(sort(descending)(copy))
                 .toStrictEqual([3.14, 2.71, 2.23, 1.73, 1.61, 1.41, 1.20]);
@@ -523,7 +523,7 @@ describe('sort', () => {
 describe('splice', () => {
     describe('splice(start)', () => {
         it('returns removed elements before the "start" index', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(splice(3)(copy))
                 .toStrictEqual([1.73, 2.23, 2.71, 3.14]);
@@ -533,7 +533,7 @@ describe('splice', () => {
     });
 
     describe('splice(start, deleteCount)', () => {
-        const copy: number[] = input.map(same());
+        const copy: number[] = input.map(same);
 
         it('returns removed "deleteCount" elements from the "start" index', () => {
             expect(splice(3, 2)(copy))
@@ -547,7 +547,7 @@ describe('splice', () => {
 describe('spliceWith', () => {
     describe('spliceWith(start, deleteCount, ...items)', () => {
         it('returns removed elements', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(spliceWith(3, 2, 1.73205, 2.23606)(copy))
                 .toStrictEqual([1.73, 2.23]);
@@ -560,7 +560,7 @@ describe('spliceWith', () => {
 describe('unshift', () => {
     describe('unshift(...items)', () => {
         it('returns the length of an array after adding elements to the beginning of it', () => {
-            const copy: number[] = input.map(same());
+            const copy: number[] = input.map(same);
 
             expect(unshift(-1, 0)(copy))
                 .toBe(9);

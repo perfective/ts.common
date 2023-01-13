@@ -68,7 +68,3 @@ export function naughtDecimalOutput(): Nothing<string> {
 export function nothingDecimalOutput(): Nothing<string> {
     return nothing();
 }
-
-export function identity<T>(value: T): T {
-    return value;
-}

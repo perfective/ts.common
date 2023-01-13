@@ -4,7 +4,7 @@ import { Failure, failure, Result, result, Success, success } from './result';
 import { eitherResult, resultDecimal, resultNumber, successErrorMessage } from './result.mock';
 
 describe(result, () => {
-    describe('when a given `value` is either an Error or not an Error', () => {
+    describe('when a given value is either an Error or not an Error', () => {
         it('cannot be assigned to type Success', () => {
             // @ts-expect-error -- TS2322:
             //  Type 'Result<string>' is not assignable to type 'Success<string>'.
@@ -22,7 +22,7 @@ describe(result, () => {
         });
     });
 
-    describe('when a given `value` is not an Error', () => {
+    describe('when a given value is not an Error', () => {
         it('returns an instance of type Success', () => {
             const output: Success<string> = result('Success');
 
@@ -30,7 +30,7 @@ describe(result, () => {
         });
     });
 
-    describe('when a given `value` is an Error', () => {
+    describe('when a given value is an Error', () => {
         it('returns an instance of type Failure', () => {
             const output: Failure<unknown> = result(error('Failure'));
 

@@ -5,7 +5,7 @@ import { Failure, failure, Result } from './result';
 import { resultDecimal } from './result.mock';
 
 describe(failure, () => {
-    describe('when the input argument is an instance of an Error', () => {
+    describe('when a given input is an instance of an Error', () => {
         it('creates an instance of a Failure', () => {
             const output: Failure<unknown> = failure(exception('Error'));
 
@@ -16,7 +16,7 @@ describe(failure, () => {
         });
     });
 
-    describe('when the input argument is not an instance of an Error', () => {
+    describe('when a given input is not an instance of an Error', () => {
         it('throws a TypeError', () => {
             // @ts-expect-error -- TS2345: Argument of type 'number' is not assignable to parameter of type 'Error'.
             expect(() => failure('Error'))
@@ -30,7 +30,7 @@ describe(failure, () => {
 
 describe(Failure, () => {
     describe('onto', () => {
-        it('ignores a given `flatMap` callback and returns self', () => {
+        it('ignores a given `flatMap` callback and returns itself', () => {
             const input = failure<number>(error('Failure'));
             const output: Failure<string> = input.onto(resultDecimal);
 

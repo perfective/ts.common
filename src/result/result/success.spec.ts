@@ -10,7 +10,7 @@ describe(success, () => {
         expect(success('Result')).toBeInstanceOf(Result);
     });
 
-    it('creates an instances of Success even for an Error value', () => {
+    it('creates an instance of Success even for an Error value', () => {
         const input: Exception = exception('Expected');
         const output: Success<Exception> = success(input);
 
@@ -54,7 +54,7 @@ describe(Success, () => {
             expect(success(0).onto(successDecimal)).toStrictEqual(success('0'));
         });
 
-        describe('when a given `flatMap` function returns a Failure', () => {
+        describe('when a given `flatMap` callback has a return type of Failure', () => {
             it('can be assigned to type Failure', () => {
                 const output: Failure<unknown> = success(0).onto(failureDecimal);
 
@@ -62,7 +62,7 @@ describe(Success, () => {
             });
         });
 
-        describe('when a given `flatMap` function returns a Success', () => {
+        describe('when a given `flatMap` callback has a return type of Success', () => {
             it('can be assigned to type Success', () => {
                 const output: Success<string> = success(0).onto(successDecimal);
 
@@ -70,7 +70,7 @@ describe(Success, () => {
             });
         });
 
-        describe('when a given `flatMap` function returns a Result', () => {
+        describe('when a given `flatMap` callback has a return type of Result', () => {
             it('cannot be assigned to type Success', () => {
                 // @ts-expect-error -- TS2322:
                 //  Type 'Result<string>' is not assignable to type 'Success<string>'.

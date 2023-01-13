@@ -16,7 +16,7 @@ export abstract class Result<T> {
     public abstract readonly value: T | Error;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Result#value|value} property,
+     * Applies a given {@linkcode flatMap} callback to the {@linkcode Result.value|value} property,
      * if the instance is a {@linkcode Success}.
      *
      * Ignores the {@linkcode flatMap} for the Failure.
@@ -39,28 +39,28 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success#value|value}.
+     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
      */
     public override onto<U>(flatMap: (value: T) => Failure<U>): Failure<U>;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success#value|value}.
+     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
      */
     public override onto<U>(flatMap: (value: T) => Success<U>): Success<U>;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success#value|value}.
+     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
      */
     public override onto<U>(flatMap: (value: T) => Result<U>): Result<U>;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success#value|value}.
+     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
      */
@@ -76,7 +76,7 @@ export class Failure<T> extends Result<T> {
     /**
      * Constructs a {@linkcode Failure} instance.
      *
-     * @throws {TypeError} - If a passed {@linkcode Failure#value|value} is not an instance of an {Error}.
+     * @throws {TypeError} - If a passed {@linkcode Failure.value|value} is not an instance of an {Error}.
      */
     public constructor(
         public readonly value: Error,
@@ -88,12 +88,12 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Ignores a given {@linkcode flatMap} callback and returns self.
+     * Ignores a given {@linkcode flatMap} callback and returns itself.
      */
     public override onto<U>(flatMap: (value: T) => Result<U>): Failure<U>;
 
     /**
-     * Returns self.
+     * Returns itself.
      */
     public override onto<U>(): Result<U> {
         return this as unknown as Failure<U>;

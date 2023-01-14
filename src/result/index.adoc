@@ -84,7 +84,7 @@ failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
 
 == Reference
 
-=== Constructors
+=== Functions
 
 * `success<T>(value: T): Success<T>`
 — creates a `Success` object from a given `value`.
@@ -117,6 +117,16 @@ then the return type will be `Success<T | Error>`.
 You have to cast the type parameter manually
 (e.g., `result<string>(...)`)
 to get the return type as `Result<T>`.
+====
++
+* `recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>>`
+— creates a function that returns a given `fallback` wrapped into a `Success`,
+when an error is given.
++
+[WARNING]
+====
+Even if the `T` if a type of `Error`,
+the `fallback` value will be returned.
 ====
 
 

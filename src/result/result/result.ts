@@ -1,5 +1,7 @@
 // eslint-disable-next-line max-classes-per-file -- Result, Success, and Failure are interdependent.
-import { isNotError } from '../../error/error/error';
+import { isError, isNotError } from '../../error/error/error';
+import { Value, valueOf } from '../../function/function/nullary';
+import { Unary } from '../../function/function/unary';
 
 /**
  * A monadic type that represents a result of a function. It can be a successful value or an error value.
@@ -174,4 +176,16 @@ export function success<T>(value: T): Success<T> {
  */
 export function failure<T>(error: Error): Failure<T> {
     return new Failure(error);
+}
+
+/**
+ * Returns a given {@linkcode value} wrapped into a {@linkcode Success}.
+ */
+export function recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>> {
+    return (value: T | Error): Success<T> => {
+        if (isError(value)) {
+            return success(valueOf(fallback));
+        }
+        return success(value);
+    };
 }

@@ -1,6 +1,7 @@
 export {
     Failure,
     failure,
+    recovery,
     Result,
     result,
     Success,

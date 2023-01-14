@@ -2,7 +2,7 @@ import { error } from '../../error/error/error';
 import { Exception, exception } from '../../error/exception/exception';
 import { output as stringOutput } from '../../string/string/output';
 
-import { Failure, failure, Result, Success, success } from './result';
+import { Failure, failure, recovery, Result, Success, success } from './result';
 import { failureDecimal, resultDecimal, successDecimal, successErrorMessage } from './result.mock';
 
 describe(success, () => {
@@ -95,6 +95,20 @@ describe(Success, () => {
             const output: Success<string> = success(0).to(stringOutput);
 
             expect(output).toStrictEqual(success('0'));
+        });
+    });
+});
+
+describe(recovery, () => {
+    describe('when the created function is given a value argument', () => {
+        it('returns a Success with the given value', () => {
+            expect(recovery(0)(1)).toStrictEqual(success(1));
+        });
+    });
+
+    describe('when the created function is given an Error argument', () => {
+        it('returns a Success with the fallback value', () => {
+            expect(recovery(0)(error('Failure'))).toStrictEqual(success(0));
         });
     });
 });

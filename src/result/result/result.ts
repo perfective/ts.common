@@ -30,7 +30,7 @@ export abstract class Result<T> {
     ): Result<U>;
 
     /**
-     * Applies a given {@linkcode map} callback to the {@linkcode Result#value|value} property,
+     * Applies a given {@linkcode map} callback to the {@linkcode Result.value|value} property,
      * when the instance is a {@linkcode Success}.
      */
     public abstract to<U>(

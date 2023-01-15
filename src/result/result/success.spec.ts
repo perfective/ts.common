@@ -58,7 +58,7 @@ describe(success, () => {
 
 describe(Success, () => {
     describe('onto', () => {
-        it('applies a given `flatMap` callback to the Success `value` and returns the result', () => {
+        it('applies a given `flatMap` callback to the Success.value. and returns the result', () => {
             expect(success(0).onto(successDecimal)).toStrictEqual(success('0'));
         });
 
@@ -98,7 +98,7 @@ describe(Success, () => {
     });
 
     describe('to', () => {
-        it('applies a given `map` callback and returns the result wrapped into a Success', () => {
+        it('applies a given `map` callback to the Success.value and returns the result wrapped into a Success', () => {
             const output: Success<string> = success(0).to(stringOutput);
 
             expect(output).toStrictEqual(success('0'));

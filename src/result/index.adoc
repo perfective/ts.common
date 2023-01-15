@@ -130,10 +130,10 @@ the `fallback` value will be returned.
 ====
 
 
-=== `onto()`
+=== `Result.onto()`
 
-* `Result#onto<U>(flatMap: (value: T) => Result<U>): Result<U>`:
-** for a `Success`, applies a given `flatMap` callback to the `Success#value` and returns the result;
+* `Result.onto<U>(flatMap: (value: T) => Result<U>): Result<U>`:
+** for a `Success`, applies a given `flatMap` callback to the `Success.value` and returns the result;
 ** for a `Failure`, ignores the `flatMap` callback and returns the same `Failure`.
 
 [source,typescript]
@@ -200,10 +200,10 @@ the error is the earliest one in the chain
 (from `validInput`).
 
 
-=== `to()`
+=== `Result.to()`
 
-* `Result#to<U>(map: (value: T) => U): Result<U>`:
-** for a `Success`, applies a given `map` callback to the `Success#value` and returns the result;
+* `Result.to<U>(map: (value: T) => U): Result<U>`:
+** for a `Success`, applies a given `map` callback to the `Success.value` and returns the result;
 ** for a `Failure`, ignores the `map` callback and returns the same `Failure`.
 
 [source,typescript]
@@ -255,14 +255,14 @@ validInput('')
     .value == typeError('Input id is empty'); // <.>
 ----
 <.> Both `apiRequest` and `apiResponse` transform a given value into a new one.
-`Result#to` wraps them into the next `Success`.
+`Result.to` wraps them into the next `Success`.
 <.> When we have a valid `id`,
 then the whole chain succeeds.
 <.> When we have an invalid `id` neither `apiRequest` nor `apiResponse` callbacks are called.
 So the result is the `TypeError` returned by the `validInput`.
 
 
-=== `into()`
+=== `Result.into()`
 
 * `Result.into<U>(reduce: (value: T | Error) => U): U`
 — applies a given `reduce` callback to the `Result.value` and returns the result of the `reduce`.

@@ -11,7 +11,7 @@ and allows to avoid `try-catch` blocks and unchecked JavaScript errors.
 
 The `Result<T>` type is a monad that implements:
 
-*  the `Result.onto()` method as a _bind_ (`>==`) operator;
+*  the `Result.onto()` method as a _bind_ (`>>=`) operator;
 *  the `success()` constructor as a _unit_ (`return`) function.
 
 It satisfies the https://wiki.haskell.org/Monad_laws[monad laws]:
@@ -266,11 +266,11 @@ So the result is the `TypeError` returned by the `validInput`.
 
 * `Result.into<U>(reduce: (value: T | Error) => U): U`
 — applies a given `reduce` callback to the `Result.value` and returns the result of the `reduce`.
-
-`Result.into()` is an equivalent of applying the `reduce` callback directly to the `Result.value`.
-Using `Result.into()` allows you to completely switch the type
++
+`Result.into(reduce)` is an equivalent of applying the `reduce` callback directly to the `Result.value`.
+Using `Result.into(reduce)` allows you to completely switch the type
 or recover from an `Error` and continue a transformation chain.
-
++
 [source,typescript]
 ----
 import { error, typeError } from '@perfective/common/error';
@@ -317,3 +317,14 @@ async function entityById(id: string): Promise<string> {
 <.> When we have a `Request`,
 we use `Result.into()` to switch it to the `apiResponse` `Promise`.
 <.> Now we have a `Promise` chain and can continue computation.
++
++
+* `Result.into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U`
+— for a `Success` applies a given `reduceValue` to the `Success.value`,
+for a `Failure` applies a given `reduceError` to the `Failure.value` (`Error`).
++
+`Result.into(reduceValue, reduceError)` is a strict separate handling of the `Success.value` and `Failure.value`.
+It is especially useful, when the `Success.value` is an `Error`.
+As in this case,
+the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
+and a `Failure.value` `Error`.

@@ -3,7 +3,7 @@ import { Exception, exception } from '../../error/exception/exception';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result } from './result';
-import { resultDecimal, safeStringOutput, strictErrorOutput } from './result.mock';
+import { resultDecimal, safeNumberOutput, strictErrorOutput, strictNumberOutput } from './result.mock';
 
 describe(failure, () => {
     describe('when a given input is an instance of an Error', () => {
@@ -49,12 +49,20 @@ describe(Failure, () => {
     });
 
     describe('into', () => {
-        it('applies a given `reduce` callback to the Failure.value and returns the result', () => {
-            expect(input.into(safeStringOutput)).toBe('Failure');
+        describe('into(reduce)', () => {
+            it('applies a given `reduce` callback to the Failure.value and returns the result', () => {
+                expect(input.into(safeNumberOutput)).toBe('Failure');
+            });
+
+            it('allows a `reduce` callback that does not accept a non-Error input', () => {
+                expect(input.into(strictErrorOutput)).toBe('Failure');
+            });
         });
 
-        it('allows a `reduce` callback that does not accept a non-Error input', () => {
-            expect(input.into(strictErrorOutput)).toBe('Failure');
+        describe('into(reduceValue, reduceError)', () => {
+            it('returns the result of a given `reduceError` callback applied to the Failure.value', () => {
+                expect(input.into(strictNumberOutput, strictErrorOutput)).toBe('Failure');
+            });
         });
     });
 });

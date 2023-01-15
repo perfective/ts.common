@@ -4,7 +4,7 @@ import { same } from '../../function/function/unary';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result, result, Success, success } from './result';
-import { eitherResult, resultDecimal, resultNumber, safeStringOutput, successErrorMessage } from './result.mock';
+import { eitherResult, resultDecimal, resultNumber, safeNumberOutput, successErrorMessage } from './result.mock';
 
 describe(result, () => {
     describe('when a given value is either an Error or not an Error', () => {
@@ -44,7 +44,7 @@ describe(result, () => {
 
 describe(Result, () => {
     describe('onto', () => {
-        describe('is a "bind" (>==) operator for the Result monad', () => {
+        describe('is a "bind" (>>=) operator for the Result monad', () => {
             it('is associative', () => {
                 // Associativity: ma >>= (\x -> f x >>= g)  ===  (ma >>= k) >>= g
 
@@ -114,22 +114,39 @@ describe(Result, () => {
         });
     });
 
-    describe('into', () => {
-        it('is an equivalent of applying a `reduce` function to the Result value', () => {
+    describe('into(reduce)', () => {
+        it('is an equivalent of applying a `reduce` callback to the Result.value', () => {
             // Success with a non-error value
             const sa = success(0);
 
-            expect(sa.into(safeStringOutput)).toBe(safeStringOutput(sa.value));
+            expect(sa.into(safeNumberOutput)).toBe(safeNumberOutput(sa.value));
 
             // Success with an error value
             const sb = success(error('Success'));
 
-            expect(sb.into(safeStringOutput)).toBe(safeStringOutput(sb.value));
+            expect(sb.into(safeNumberOutput)).toBe(safeNumberOutput(sb.value));
 
             // Failure (with an error value)
             const fa = failure<number>(error('Failure'));
 
-            expect(fa.into(safeStringOutput)).toBe(safeStringOutput(fa.value));
+            expect(fa.into(safeNumberOutput)).toBe(safeNumberOutput(fa.value));
+        });
+
+        it('is an equivalent of applying a `reduce` callback as `reduceValue` and `reduceError`', () => {
+            // Success with a non-error value
+            const sa = success(0);
+
+            expect(sa.into(safeNumberOutput)).toBe(sa.into(safeNumberOutput, safeNumberOutput));
+
+            // Success with an error value
+            const sb = success(error('Success'));
+
+            expect(sb.into(safeNumberOutput)).toBe(sb.into(safeNumberOutput, safeNumberOutput));
+
+            // Failure (with an error value)
+            const fa = failure<number>(error('Failure'));
+
+            expect(fa.into(safeNumberOutput)).toBe(fa.into(safeNumberOutput, safeNumberOutput));
         });
     });
 });

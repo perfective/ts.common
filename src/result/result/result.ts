@@ -2,6 +2,7 @@
 import { isError, isNotError } from '../../error/error/error';
 import { Value, valueOf } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
+import { isDefined } from '../../value/value';
 
 /**
  * A monadic type that represents a result of a function. It can be a successful value or an error value.
@@ -42,9 +43,16 @@ export abstract class Result<T> {
      *
      * @returns The result of the {@linkcode reduce}.
      */
-    public abstract into<U>(
-        reduce: (value: T | Error) => U,
-    ): U;
+    public abstract into<U>(reduce: (value: T | Error) => U): U;
+
+    /**
+     * Applies a given {@linkcode reduceValue} callback to the {@linkcode Success.value} property.
+     * Or applies a given {@linkcode reduceError} callback to the {@linkcode Error.value}.
+     *
+     * Returns the result of the {@linkcode reduceValue} for a {@linkcode Success}
+     * or the result of the {@linkcode reduceError} for a {@linkcode Failure}.
+     */
+    public abstract into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
 }
 
 /**
@@ -95,6 +103,14 @@ export class Success<T> extends Result<T> {
     public override to<U>(map: (value: T) => U): Success<U> {
         return success(map(this.value));
     }
+
+    /**
+     * Applies a given {@linkcode reduce} callback to the {@linkcode Success.value|value}.
+     * Ignores the {@linkcode reduceError} callback.
+     *
+     * @returns The result of the {@linkcode reduce}.
+     */
+    public override into<U>(reduce: (value: T) => U, reduceError?: (value: Error) => U): U;
 
     /**
      * Applies a given {@linkcode reduce} callback to the {@linkcode Success.value|value}.
@@ -149,12 +165,33 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode reduce} callback to the {@linkcode Failure.value|value}.
+     * Applies a given {@linkcode reduce} callback to the {@linkcode Failure.value} {@linkcode Error}.
      *
-     * @returns The result of the {@linkcode reduce}.
+     * @returns The result of the {@linkcode reduce} call.
      */
-    public override into<U>(reduce: (value: Error) => U): U {
-        return reduce(this.value);
+    public override into<U>(reduce: (value: Error) => U): U;
+
+    /**
+     * Applies a given {@linkcode reduceError} callback to the {@linkcode Failure.value} {@linkcode Error}.
+     * Ignores a given {@linkcode reduceValue} callback.
+     *
+     * @returns The result of the {@linkcode reduceError} call.
+     */
+    public override into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
+
+    /**
+     * When a {@linkcode reduceError} callback is provided,
+     * applies it to the {@linkcode Failure.value|value} {@linkcode Error}.
+     * Otherwise applies a given {@linkcode reduce} callback to the {@linkcode Failure.value} {@linkcode Error}.
+     *
+     * @returns The result of the {@linkcode reduceError} or {@linkcode reduce} call.
+     */
+    public override into<U>(reduceValue: Unary<Error, U> | Unary<T, U>, reduceError?: Unary<Error, U>): U {
+        if (isDefined(reduceError)) {
+            return reduceError(this.value);
+        }
+        // When reduceError() argument is not defined, then it can only be an unary method signature.
+        return (reduceValue as Unary<T | Error, U>)(this.value);
     }
 }
 

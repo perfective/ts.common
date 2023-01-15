@@ -1,7 +1,8 @@
+import { Exception } from '../../error';
 import { error, isError } from '../../error/error/error';
 import { decimal } from '../../number/number/base';
 import { isInteger } from '../../number/number/integer';
-import { Output, output as stringOutput } from '../../string/string/output';
+import { output as stringOutput } from '../../string/string/output';
 import { isNull } from '../../value/value';
 
 import { Failure, failure, Result, Success, success } from './result';
@@ -59,19 +60,16 @@ export function successErrorMessage(error: Error): Success<string> {
 }
 
 /**
- * Returns {@linkcode Error.message} or string output of the {@linkcode input}.
+ * Returns {@linkcode Error.message} or decimal output of the {@linkcode input}.
  */
-export function safeStringOutput<T extends Output>(input: T | Error): string {
+export function safeNumberOutput(input: number | Error): string {
     if (isError(input)) {
         return strictErrorOutput(input);
     }
-    return stringOutput(input);
+    return strictNumberOutput(input);
 }
 
-/**
- * Returns a string output of a non-Error type.
- */
-export function strictStringOutput<T extends Output>(input: Exclude<T, 'Error'>): string {
+export function strictNumberOutput(input: number): string {
     return stringOutput(input);
 }
 
@@ -80,4 +78,8 @@ export function strictStringOutput<T extends Output>(input: Exclude<T, 'Error'>)
  */
 export function strictErrorOutput<E extends Error>(error: E): string {
     return error.message;
+}
+
+export function strictExceptionOutput(exception: Exception): string {
+    return exception.template;
 }

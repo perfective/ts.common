@@ -6,8 +6,10 @@ import { Failure, failure, recovery, Result, Success, success } from './result';
 import {
     failureDecimal,
     resultDecimal,
-    safeStringOutput,
-    strictStringOutput,
+    safeNumberOutput,
+    strictErrorOutput,
+    strictExceptionOutput,
+    strictNumberOutput,
     successDecimal,
     successErrorMessage,
 } from './result.mock';
@@ -106,13 +108,29 @@ describe(Success, () => {
     });
 
     describe('into', () => {
-        it('applies a given `reduce` callback to the Success.value and returns the result', () => {
-            expect(success(0).into(safeStringOutput)).toBe('0');
-            expect(success(error('Success')).into(safeStringOutput)).toBe('Success');
+        describe('into(reduce)', () => {
+            it('applies a given `reduce` callback to the Success.value and returns the result', () => {
+                expect(success(0).into(safeNumberOutput)).toBe('0');
+
+                const sb = success(exception('Success of {{number}}', { number: '0' }));
+
+                expect(sb.into(safeNumberOutput)).toBe('Success of `0`');
+            });
+
+            it('allows a `reduce` callback that does not accept an Error input', () => {
+                expect(success(0).into(strictNumberOutput)).toBe('0');
+            });
         });
 
-        it('allows a `reduce` callback that does not accept an Error input', () => {
-            expect(success(0).into(strictStringOutput)).toBe('0');
+        describe('into(reduceValue, reduceError)', () => {
+            it('returns a result of applying a given `reduceValue` callback to the Success.value', () => {
+                expect(success(0).into(strictNumberOutput, strictErrorOutput)).toBe('0');
+
+                const sb = success(exception('Success of {{number}}', { number: '0' }));
+
+                expect(sb.into(strictExceptionOutput, strictErrorOutput))
+                    .toBe('Success of {{number}}');
+            });
         });
     });
 });

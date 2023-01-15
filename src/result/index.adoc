@@ -260,3 +260,60 @@ validInput('')
 then the whole chain succeeds.
 <.> When we have an invalid `id` neither `apiRequest` nor `apiResponse` callbacks are called.
 So the result is the `TypeError` returned by the `validInput`.
+
+
+=== `into()`
+
+* `Result.into<U>(reduce: (value: T | Error) => U): U`
+— applies a given `reduce` callback to the `Result.value` and returns the result of the `reduce`.
+
+`Result.into()` is an equivalent of applying the `reduce` callback directly to the `Result.value`.
+Using `Result.into()` allows you to completely switch the type
+or recover from an `Error` and continue a transformation chain.
+
+[source,typescript]
+----
+import { error, typeError } from '@perfective/common/error';
+import { Unary } from '@perfective/common/function';
+import { failure, recovery, Result, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+interface Request {
+    method: string;
+    url: string;
+}
+
+function validInput(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(typeError('Input id is empty'));
+    }
+    return success(id);
+}
+
+function apiRequest(method: string): Unary<string, Request> {
+    return (id: string): Request => ({
+        method,
+        url: `/entity/${id}`,
+    });
+}
+
+async function apiResponse(request: Request): Promise<string> {
+    if (request.method === 'HEAD') {
+        return '501 Not Implemented';
+    }
+    return '200 OK';
+}
+
+async function entityById(id: string): Promise<string> {
+    return validInput('') // <.>
+        .into(recovery('abc')) // <.>
+        .to(apiRequest('HEAD'))
+        .into(apiResponse) // <.>
+        .catch(() => '503 Service Unavailable'); // <.>
+}
+----
+<.> The `id` input is not valid.
+<.> We use the `Result.into()` method with the `recovery` function to recover from an `Error`.
+<.> When we have a `Request`,
+we use `Result.into()` to switch it to the `apiResponse` `Promise`.
+<.> Now we have a `Promise` chain and can continue computation.

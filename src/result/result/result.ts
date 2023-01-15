@@ -36,6 +36,15 @@ export abstract class Result<T> {
     public abstract to<U>(
         map: (value: T) => U,
     ): Result<U>;
+
+    /**
+     * Applies a given {@linkcode reduce} callback to the {@linkcode Result.value|value} property.
+     *
+     * @returns The result of the {@linkcode reduce}.
+     */
+    public abstract into<U>(
+        reduce: (value: T | Error) => U,
+    ): U;
 }
 
 /**
@@ -86,6 +95,15 @@ export class Success<T> extends Result<T> {
     public override to<U>(map: (value: T) => U): Success<U> {
         return success(map(this.value));
     }
+
+    /**
+     * Applies a given {@linkcode reduce} callback to the {@linkcode Success.value|value}.
+     *
+     * @returns The result of the {@linkcode reduce}.
+     */
+    public override into<U>(reduce: (value: T) => U): U {
+        return reduce(this.value);
+    }
 }
 
 /**
@@ -128,6 +146,15 @@ export class Failure<T> extends Result<T> {
      */
     public override to<U>(): Failure<U> {
         return this as unknown as Failure<U>;
+    }
+
+    /**
+     * Applies a given {@linkcode reduce} callback to the {@linkcode Failure.value|value}.
+     *
+     * @returns The result of the {@linkcode reduce}.
+     */
+    public override into<U>(reduce: (value: Error) => U): U {
+        return reduce(this.value);
     }
 }
 

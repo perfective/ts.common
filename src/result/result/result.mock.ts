@@ -1,6 +1,7 @@
-import { error } from '../../error/error/error';
+import { error, isError } from '../../error/error/error';
 import { decimal } from '../../number/number/base';
 import { isInteger } from '../../number/number/integer';
+import { Output, output as stringOutput } from '../../string/string/output';
 import { isNull } from '../../value/value';
 
 import { Failure, failure, Result, Success, success } from './result';
@@ -55,4 +56,28 @@ export function resultNumber(input: string): Result<number> {
 
 export function successErrorMessage(error: Error): Success<string> {
     return success(error.message);
+}
+
+/**
+ * Returns {@linkcode Error.message} or string output of the {@linkcode input}.
+ */
+export function safeStringOutput<T extends Output>(input: T | Error): string {
+    if (isError(input)) {
+        return strictErrorOutput(input);
+    }
+    return stringOutput(input);
+}
+
+/**
+ * Returns a string output of a non-Error type.
+ */
+export function strictStringOutput<T extends Output>(input: Exclude<T, 'Error'>): string {
+    return stringOutput(input);
+}
+
+/**
+ * Returns {@linkcode Error.message}.
+ */
+export function strictErrorOutput<E extends Error>(error: E): string {
+    return error.message;
 }

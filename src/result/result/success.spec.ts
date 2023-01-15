@@ -3,7 +3,14 @@ import { Exception, exception } from '../../error/exception/exception';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, recovery, Result, Success, success } from './result';
-import { failureDecimal, resultDecimal, successDecimal, successErrorMessage } from './result.mock';
+import {
+    failureDecimal,
+    resultDecimal,
+    safeStringOutput,
+    strictStringOutput,
+    successDecimal,
+    successErrorMessage,
+} from './result.mock';
 
 describe(success, () => {
     it('creates an instance of Success', () => {
@@ -95,6 +102,17 @@ describe(Success, () => {
             const output: Success<string> = success(0).to(stringOutput);
 
             expect(output).toStrictEqual(success('0'));
+        });
+    });
+
+    describe('into', () => {
+        it('applies a given `reduce` callback to the Success.value and returns the result', () => {
+            expect(success(0).into(safeStringOutput)).toBe('0');
+            expect(success(error('Success')).into(safeStringOutput)).toBe('Success');
+        });
+
+        it('allows a `reduce` callback that does not accept an Error input', () => {
+            expect(success(0).into(strictStringOutput)).toBe('0');
         });
     });
 });

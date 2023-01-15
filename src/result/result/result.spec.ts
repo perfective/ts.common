@@ -4,7 +4,7 @@ import { same } from '../../function/function/unary';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result, result, Success, success } from './result';
-import { eitherResult, resultDecimal, resultNumber, successErrorMessage } from './result.mock';
+import { eitherResult, resultDecimal, resultNumber, safeStringOutput, successErrorMessage } from './result.mock';
 
 describe(result, () => {
     describe('when a given value is either an Error or not an Error', () => {
@@ -111,6 +111,25 @@ describe(Result, () => {
                 expect(fa.to(x => array(stringOutput(x))))
                     .toStrictEqual(fa.to(stringOutput).to(array));
             });
+        });
+    });
+
+    describe('into', () => {
+        it('is an equivalent of applying a `reduce` function to the Result value', () => {
+            // Success with a non-error value
+            const sa = success(0);
+
+            expect(sa.into(safeStringOutput)).toBe(safeStringOutput(sa.value));
+
+            // Success with an error value
+            const sb = success(error('Success'));
+
+            expect(sb.into(safeStringOutput)).toBe(safeStringOutput(sb.value));
+
+            // Failure (with an error value)
+            const fa = failure<number>(error('Failure'));
+
+            expect(fa.into(safeStringOutput)).toBe(safeStringOutput(fa.value));
         });
     });
 });

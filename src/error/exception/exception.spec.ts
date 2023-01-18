@@ -5,6 +5,7 @@ import { typeError } from '../error/type-error';
 
 import {
     causedBy,
+    chainedException,
     chainStack,
     Exception,
     exception,
@@ -53,6 +54,40 @@ describe('exception', () => {
 
     it('outputs error message', () => {
         expect(error.toString()).toBe('Exception: User not found');
+    });
+});
+
+describe(chainedException, () => {
+    const previous = error('Previous');
+
+    it('creates a function to wrap a previous error into an exception', () => {
+        const chainedCausedBy = chainedException('Exception {{code}}', {
+            code: '0',
+        }, {
+            context: 'spec',
+        });
+        const output = chainedCausedBy(previous);
+
+        expect(output).toBeInstanceOf(Exception);
+        expect(output.previous).toBe(previous);
+        expect(output.message).toBe('Exception `0`');
+        expect(output.context).toStrictEqual({
+            context: 'spec',
+        });
+    });
+
+    it('has empty tokens by default', () => {
+        const chainedCausedBy = chainedException('Exception {{code}}');
+        const output = chainedCausedBy(previous);
+
+        expect(output.tokens).toStrictEqual({});
+    });
+
+    it('has empty context by default', () => {
+        const chainedCausedBy = chainedException('Exception {{code}}');
+        const output = chainedCausedBy(previous);
+
+        expect(output.context).toStrictEqual({});
     });
 });
 

@@ -33,7 +33,19 @@ but may be useful in applications.
 <5> Provide a previous error, if exists.
 <6> Human-readable output of all the errors.
 
-.Using the `Exception`.
+
+=== Constructors
+
+* `exception(message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception`
+— creates an `Exception`.
+* `chainedException(message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): (previous: Error) => Exception`
+— creates a function to wrap a previous `Error` into an `Exception`.
+* `causedBy(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception`
+— creates an `Exception` with a previous `Error`.
+
+
+=== Usage
+
 [source,typescript]
 ----
 import { causedBy, chainStack, exception, rethrows, throws } from '@perfective/common/error';

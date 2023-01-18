@@ -42,6 +42,7 @@ export {
 // ./exception
 export {
     causedBy,
+    chainedException,
     chainStack,
     Exception,
     exception,

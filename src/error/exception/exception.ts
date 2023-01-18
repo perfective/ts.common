@@ -33,6 +33,18 @@ export function exception(message: string, tokens: ExceptionTokens = {}, context
     return new Exception(exceptionMessage(message, tokens), context, null);
 }
 
+/**
+ * Creates a function to wrap a previous {@linkcode Error}
+ * into an {@linkcode Exception} with a given {@linkcode message}.
+ */
+export function chainedException(
+    message: string,
+    tokens: ExceptionTokens = {},
+    context: ExceptionContext = {},
+): (previous: Error) => Exception {
+    return (previous: Error): Exception => causedBy(previous, message, tokens, context);
+}
+
 export function causedBy(
     previous: Error,
     message: string,

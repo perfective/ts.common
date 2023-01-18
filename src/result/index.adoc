@@ -76,10 +76,49 @@ let g: (value: T) => U;
 let value: T;
 let error: Error;
 
-success(value).to(v => f(g(v))) === succes(value).to(g).to(f);
+success(value).to(v => f(g(v))) === success(value).to(g).to(f);
 failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
 ----
 <.> `Failure.to()` ignores the input and always returns itself.
+
+
+== Result Bifunctor
+
+The `Result<T>` type is a bifunctor that implements:
+
+* the `Result.to(mapValue, mapError)` method as a `bimap` function.
+* the `Result.to(mapValue)` method as a `second` function.
+* the `Result.failure(mapError)` method as a `first` function.
+
+Which ensures that:
+
+1. `Result.to(mapValue, mapError)` preserves identity morphisms
++
+[source,typescript]
+----
+let id = (value: T) => value;
+let value: T;
+let error: Error;
+
+success(value).to(id, id) === success(id(value));
+failure(error).to(id, id) === failure(id(error));
+----
+2. `Result.to(mapValue)` preserves identity morphisms
+3. `Result.failure(mapError)` preserves identity morphisms
++
++
+4. Applying the `bimap` function is the same as applying `first` and `second` functions.
++
+[source,typescript]
+----
+let f: (value: Error) => Error;
+let s: (value: T) => U;
+let value: T;
+let error: Error;
+
+success(value).to(s, f) === success(value).to(s).failure(f);
+failure(error).to(s, f) === failure(error).to(s).failure(f);
+----
 
 
 == Reference
@@ -206,6 +245,7 @@ the error is the earliest one in the chain
 ** for a `Success`, applies a given `map` callback to the `Success.value` and returns the result;
 ** for a `Failure`, ignores the `map` callback and returns the same `Failure`.
 
++
 [source,typescript]
 ----
 import { error, typeError } from '@perfective/common/error';
@@ -260,6 +300,14 @@ validInput('')
 then the whole chain succeeds.
 <.> When we have an invalid `id` neither `apiRequest` nor `apiResponse` callbacks are called.
 So the result is the `TypeError` returned by the `validInput`.
++
+* `Result.to<U>(mapValue: (value: T) => U, mapError: (error: Error) => Error): Result<U>`
+** for a `Success`, applies a given `mapValue` callback to the `Success.value` and returns the result as a `Success`;
+** for a `Failure`, applies a given `mapError` callback to the `Failure.value` and returns the result as s `Failure`.
+
++
+This method can be used to track all occurred failures,
+by chaining them together using the `mapError`.
 
 
 === `Result.into()`

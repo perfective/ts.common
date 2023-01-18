@@ -1,10 +1,19 @@
 import { array } from '../../array/array/array';
 import { error } from '../../error/error/error';
+import { chainedException } from '../../error/exception/exception';
 import { same } from '../../function/function/unary';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result, result, Success, success } from './result';
-import { eitherResult, resultDecimal, resultNumber, safeNumberOutput, successErrorMessage } from './result.mock';
+import {
+    eitherResult,
+    resultDecimal,
+    resultNumber,
+    safeNumberOutput,
+    strictErrorOutput,
+    strictNumberOutput,
+    successErrorMessage,
+} from './result.mock';
 
 describe(result, () => {
     describe('when a given value is either an Error or not an Error', () => {
@@ -69,10 +78,12 @@ describe(Result, () => {
         });
     });
 
-    describe('to', () => {
-        describe('is an "fmap" operator for the Result functor', () => {
+    describe('to(mapValue)', () => {
+        describe('is an "fmap" method for the Result functor and a "second" method for the Result bifunctor', () => {
             it('preserves identity morphisms', () => {
-                // Identity: fmap id = id
+                // Identity:
+                // - fmap id  ===  id
+                // - second id  ===  id
 
                 // Success with a non-error value
                 const sa = success(0);
@@ -91,7 +102,9 @@ describe(Result, () => {
             });
 
             it('preserves composition of morphisms', () => {
-                // Composition: fmap (f . g)  ===  fmap f . fmap g
+                // Composition:
+                // - fmap (f . g)  ===  fmap f . fmap g
+                // - second (f . g)  ===  second f . second g
 
                 // Success with a non-error value
                 const sa = success(0);
@@ -110,6 +123,51 @@ describe(Result, () => {
 
                 expect(fa.to(x => array(stringOutput(x))))
                     .toStrictEqual(fa.to(stringOutput).to(array));
+            });
+        });
+    });
+
+    describe('to(mapValue, mapError)', () => {
+        describe('is a "bimap" method for the Result bifunctor', () => {
+            it('preserves identity morphisms', () => {
+                // Identity: bimap id id = id
+
+                // Success with a non-error value
+                const sa = success(0);
+
+                expect(sa.to(same, same)).toStrictEqual(same(sa));
+
+                // Success with an error value
+                const sb = success(error('Success'));
+
+                expect(sb.to(same, same)).toStrictEqual(same(sb));
+
+                // Failure (with an error value)
+                const fa = failure<number>(error('Failure'));
+
+                expect(fa.to(same, same)).toStrictEqual(same(fa));
+            });
+
+            it('the same as applying the "first" and "second" methods', () => {
+                // Ensure: bimap f g  =  first f . second g
+
+                // Success with a non-error value
+                const sa = success(0);
+
+                expect(sa.to(strictNumberOutput, chainedException('Exceptional')))
+                    .toStrictEqual(sa.to(strictNumberOutput).failure(chainedException('Exceptional')));
+
+                // Success with an error value
+                const sb = success(error('Success'));
+
+                expect(sb.to(strictErrorOutput, chainedException('Exceptional')))
+                    .toStrictEqual(sb.to(strictErrorOutput).failure(chainedException('Exceptional')));
+
+                // Failure (with an error value)
+                const fa = failure<number>(error('Failure'));
+
+                expect(fa.to(strictNumberOutput, chainedException('Exceptional')))
+                    .toStrictEqual(fa.to(strictNumberOutput).failure(chainedException('Exceptional')));
             });
         });
     });
@@ -147,6 +205,53 @@ describe(Result, () => {
             const fa = failure<number>(error('Failure'));
 
             expect(fa.into(safeNumberOutput)).toBe(fa.into(safeNumberOutput, safeNumberOutput));
+        });
+    });
+
+    describe('failure(mapError)', () => {
+        describe('is a "first" method of a Result bifunctor', () => {
+            it('preserves identity morphisms', () => {
+                // Identity: first id  =  id
+
+                // Success with a non-error value
+                const sa = success(0);
+
+                expect(sa.failure(same)).toStrictEqual(same(sa));
+
+                // Success with an error value
+                const sb = success(error('Success'));
+
+                expect(sb.failure(same)).toStrictEqual(same(sb));
+
+                // Failure (with an error value)
+                const fa = failure<number>(error('Failure'));
+
+                expect(fa.failure(same)).toStrictEqual(same(fa));
+            });
+
+            it('preserves composition of morphisms', () => {
+                // Composition: first (f . g)  ===  first f . first g
+                const f = chainedException('Exceptional');
+                const g = chainedException('Failure');
+
+                // Success with a non-error value
+                const sa = success(0);
+
+                expect(sa.failure(error => f(g(error))))
+                    .toStrictEqual(sa.failure(g).failure(f));
+
+                // Success with an error value
+                const sb = success(error('Success'));
+
+                expect(sb.failure(error => f(g(error))))
+                    .toStrictEqual(sb.failure(g).failure(f));
+
+                // Failure (with an error value)
+                const fa = failure<number>(error('Failure'));
+
+                expect(fa.failure(error => f(g(error))))
+                    .toStrictEqual(fa.failure(g).failure(f));
+            });
         });
     });
 });

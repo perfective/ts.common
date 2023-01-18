@@ -1,6 +1,5 @@
 import { error } from '../../error/error/error';
 import { chainedException, Exception, exception } from '../../error/exception/exception';
-import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, recovery, Result, Success, success } from './result';
 import {
@@ -100,10 +99,21 @@ describe(Success, () => {
     });
 
     describe('to', () => {
-        it('applies a given `map` callback to the Success.value and returns the result wrapped into a Success', () => {
-            const output: Success<string> = success(0).to(stringOutput);
+        describe('to(mapValue)', () => {
+            it('applies a given `mapValue` callback to the Success.value and returns a Success', () => {
+                const output: Success<string> = success(0).to(strictNumberOutput);
 
-            expect(output).toStrictEqual(success('0'));
+                expect(output).toStrictEqual(success('0'));
+            });
+        });
+
+        describe('to(mapValue, mapError)', () => {
+            it('applies a given `mapValue` callback and ignores a given `mapError` callback', () => {
+                const output: Success<string> = success(0)
+                    .to(strictNumberOutput, chainedException('Exceptional Failure'));
+
+                expect(output).toStrictEqual(success('0'));
+            });
         });
     });
 

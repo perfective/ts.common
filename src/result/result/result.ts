@@ -31,11 +31,15 @@ export abstract class Result<T> {
     ): Result<U>;
 
     /**
-     * Applies a given {@linkcode map} callback to the {@linkcode Result.value|value} property,
+     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value},
      * when the instance is a {@linkcode Success}.
+     *
+     * If given a {@linkcode mapError} callback,
+     * applies it to the {@linkcode Failure.value} when the instance is a {@linkcode Failure}.
      */
     public abstract to<U>(
-        map: (value: T) => U,
+        mapValue: (value: T) => U,
+        mapError?: (error: Error) => Error,
     ): Result<U>;
 
     /**
@@ -106,12 +110,20 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode map} callback to the {@linkcode Success.value|value}.
+     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
+     * Ignores a given {@linkcode mapError} callback.
      *
-     * Returns the result of the {@linkcode map} wrapped into {@linkcode Success}.
+     * Returns the result of the {@linkcode mapValue} call wrapped into a {@linkcode Success}.
      */
-    public override to<U>(map: (value: T) => U): Success<U> {
-        return success(map(this.value));
+    public override to<U>(mapValue: (value: T) => U, mapError?: (error: Error) => Error): Success<U>;
+
+    /**
+     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
+     *
+     * Returns the result of the {@linkcode mapValue} call wrapped into a {@linkcode Success}.
+     */
+    public override to<U>(mapValue: (value: T) => U): Success<U> {
+        return success(mapValue(this.value));
     }
 
     /**
@@ -175,14 +187,17 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Ignores a given {@linkcode map} callback and returns itself.
+     * If given a {@linkcode mapError} callback,
+     * applies it to the {@linkcode Failure.value}
+     * and returns the result wrapped into a {@linkcode Failure}.
+     * Returns itself, if a {@linkcode mapError} callback is omitted.
+     *
+     * Always ignores a given {@linkcode mapValue} callback.
      */
-    public override to<U>(map: (value: T) => U): Failure<U>;
-
-    /**
-     * Returns itself.
-     */
-    public override to<U>(): Failure<U> {
+    public override to<U>(mapValue: (value: T) => U, mapError?: (error: Error) => Error): Failure<U> {
+        if (isDefined(mapError)) {
+            return failure(mapError(this.value));
+        }
         return this as unknown as Failure<U>;
     }
 

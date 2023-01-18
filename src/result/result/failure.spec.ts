@@ -1,5 +1,5 @@
 import { error } from '../../error/error/error';
-import { Exception, exception } from '../../error/exception/exception';
+import { causedBy, chainedException, Exception, exception } from '../../error/exception/exception';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, Result } from './result';
@@ -63,6 +63,14 @@ describe(Failure, () => {
             it('returns the result of a given `reduceError` callback applied to the Failure.value', () => {
                 expect(input.into(strictNumberOutput, strictErrorOutput)).toBe('Failure');
             });
+        });
+    });
+
+    describe('failure', () => {
+        it('applies a given `mapError` callback to the Failure.value and returns the result as a Failure', () => {
+            const output: Failure<number> = input.failure(chainedException('Exceptional Failure'));
+
+            expect(output).toStrictEqual(failure(causedBy(input.value, 'Exceptional Failure')));
         });
     });
 });

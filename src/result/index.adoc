@@ -328,3 +328,34 @@ It is especially useful, when the `Success.value` is an `Error`.
 As in this case,
 the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
 and a `Failure.value` `Error`.
+
+
+=== `Result.failure()`
+
+* `Result.failure(mapError: (error: Error) => Error): Result<T>`
+** for a `Failure`, applies a given `mapError` callback and returns a result wrapped into a `Failure`.
+** for a `Success`, ignores the `mapError` callback and returns itself.
+
+[source,typescript]
+----
+import { chainedException, typeError } from '@perfective/common/error';
+import { failure, Result, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+function validInput(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(typeError('Input id is empty'));
+    }
+    return success(id);
+}
+
+function entityByIdRequest(id: string): Result<Request> {
+    return validInput(id)
+        .failure(chainedException('Entity ID {{id}} is invalid' { // <.>
+            id,
+        }))
+        .to(apiRequest('GET'));
+}
+----
+<.> When `validInput` returns a `Failure`
+you can use `Result.failure` method to chain or otherwise transform the error.

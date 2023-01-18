@@ -53,6 +53,16 @@ export abstract class Result<T> {
      * or the result of the {@linkcode reduceError} for a {@linkcode Failure}.
      */
     public abstract into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
+
+    /**
+     * Applies a given {@linkcode mapError} callback to the {@linkcode Failure.value},
+     * when the instance is a {@linkcode Failure}.
+     *
+     * If the instance is a {@linkcode Success},
+     * ignores the given {@linkcode mapError} callback
+     * and returns itself.
+     */
+    public abstract failure(mapError: (error: Error) => Error): Result<T>;
 }
 
 /**
@@ -119,6 +129,18 @@ export class Success<T> extends Result<T> {
      */
     public override into<U>(reduce: (value: T) => U): U {
         return reduce(this.value);
+    }
+
+    /**
+     * Ignores a given {@linkcode mapError} callback and returns itself.
+     */
+    public override failure(mapError: (error: Error) => Error): Success<T>;
+
+    /**
+     * Returns itself.
+     */
+    public override failure(): this {
+        return this;
     }
 }
 
@@ -192,6 +214,15 @@ export class Failure<T> extends Result<T> {
         }
         // When reduceError() argument is not defined, then it can only be an unary method signature.
         return (reduceValue as Unary<T | Error, U>)(this.value);
+    }
+
+    /**
+     * Applies a given {@linkcode mapError} callback to the {@linkcode Failure.value}.
+     *
+     * Returns the result of the {@linkcode mapError} call wrapped into a `Failure`.
+     */
+    public override failure(mapError: (error: Error) => Error): Failure<T> {
+        return failure(mapError(this.value));
     }
 }
 

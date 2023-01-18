@@ -1,5 +1,5 @@
 import { error } from '../../error/error/error';
-import { Exception, exception } from '../../error/exception/exception';
+import { chainedException, Exception, exception } from '../../error/exception/exception';
 import { output as stringOutput } from '../../string/string/output';
 
 import { Failure, failure, recovery, Result, Success, success } from './result';
@@ -131,6 +131,15 @@ describe(Success, () => {
                 expect(sb.into(strictExceptionOutput, strictErrorOutput))
                     .toBe('Success of {{number}}');
             });
+        });
+    });
+
+    describe('failure', () => {
+        it('ignores a given `mapError` callback and returns itself', () => {
+            const input = success(0);
+            const output: Success<number> = input.failure(chainedException('Exceptional Failure'));
+
+            expect(output).toBe(input);
         });
     });
 });

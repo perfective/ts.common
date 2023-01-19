@@ -7,119 +7,6 @@ The `Result` type represents a result of a function that can be a `Success` or a
 It provides a mechanism for "checked exceptions"
 and allows to avoid `try-catch` blocks and unchecked JavaScript errors.
 
-== Result Monad
-
-The `Result<T>` type is a monad that implements:
-
-*  the `Result.onto()` method as a _bind_ (`>>=`) operator;
-*  the `success()` constructor as a _unit_ (`return`) function.
-
-It satisfies the https://wiki.haskell.org/Monad_laws[monad laws]:
-
-1. _unit_ is a left _identity_ for _bind_:
-+
-[source,typescript]
-----
-let x: T;
-let f: (value: T) => Result<T>;
-
-success(x).onto(f) === f(x);
-----
-+
-2. _unit_ is a right _identity_ for _bind_:
-+
-[source,typescript]
-----
-let ma: Result<T>;
-
-ma.onto(success) === ma;
-----
-+
-3. _bind_ is associative:
-+
-[source,typescript]
-----
-let ma: Result<T>;
-let f: (value: T) => Success<U>;
-let g: (value: U) => Success<V>;
-
-ma.onto(a => f(a).onto(g)) === ma.onto(f).onto(g);
-----
-
-
-== Result Functor
-
-The `Result<T>` type is a functor that implements:
-
-* the `Result.to()` method as a _fmap_ function.
-
-It satisfies the https://wiki.haskell.org/Functor[functor laws]:
-
-1. `Result.to()` preserves identity morphisms:
-+
-[source,typescript]
-----
-let id = (value: T) => value;
-let value: T;
-let error: Error;
-
-success(value).to(id) === success(id(value));
-failure(error).to(id) === failure(id(error));
-----
-+
-2. `Result.to()` preserves composition of morphisms:
-+
-[source,typescript]
-----
-let f: (value: U) => V;
-let g: (value: T) => U;
-let value: T;
-let error: Error;
-
-success(value).to(v => f(g(v))) === success(value).to(g).to(f);
-failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
-----
-<.> `Failure.to()` ignores the input and always returns itself.
-
-
-== Result Bifunctor
-
-The `Result<T>` type is a bifunctor that implements:
-
-* the `Result.to(mapValue, mapError)` method as a `bimap` function.
-* the `Result.to(mapValue)` method as a `second` function.
-* the `Result.failure(mapError)` method as a `first` function.
-
-Which ensures that:
-
-1. `Result.to(mapValue, mapError)` preserves identity morphisms
-+
-[source,typescript]
-----
-let id = (value: T) => value;
-let value: T;
-let error: Error;
-
-success(value).to(id, id) === success(id(value));
-failure(error).to(id, id) === failure(id(error));
-----
-2. `Result.to(mapValue)` preserves identity morphisms
-3. `Result.failure(mapError)` preserves identity morphisms
-+
-+
-4. Applying the `bimap` function is the same as applying `first` and `second` functions.
-+
-[source,typescript]
-----
-let f: (value: Error) => Error;
-let s: (value: T) => U;
-let value: T;
-let error: Error;
-
-success(value).to(s, f) === success(value).to(s).failure(f);
-failure(error).to(s, f) === failure(error).to(s).failure(f);
-----
-
 
 == Reference
 
@@ -407,3 +294,119 @@ function entityByIdRequest(id: string): Result<Request> {
 ----
 <.> When `validInput` returns a `Failure`
 you can use `Result.failure` method to chain or otherwise transform the error.
+
+
+== Type classes
+
+=== Monad
+
+The `Result<T>` type is a monad that provides:
+
+*  the `Result.onto()` method as a _bind_ (`>>=`) operator;
+*  the `success()` constructor as a _unit_ (`return`) function.
+
+It satisfies the https://wiki.haskell.org/Monad_laws[monad laws]:
+
+1. _unit_ is a left _identity_ for _bind_:
++
+[source,typescript]
+----
+let x: T;
+let f: (value: T) => Result<T>;
+
+success(x).onto(f) === f(x);
+----
++
+2. _unit_ is a right _identity_ for _bind_:
++
+[source,typescript]
+----
+let ma: Result<T>;
+
+ma.onto(success) === ma;
+----
++
+3. _bind_ is associative:
++
+[source,typescript]
+----
+let ma: Result<T>;
+let f: (value: T) => Success<U>;
+let g: (value: U) => Success<V>;
+
+ma.onto(a => f(a).onto(g)) === ma.onto(f).onto(g);
+----
+
+
+=== Functor
+
+The `Result<T>` type is a functor that provides:
+
+* the `Result.to()` method as a _fmap_ function.
+
+It satisfies the https://wiki.haskell.org/Functor[functor laws]:
+
+1. `Result.to()` preserves identity morphisms:
++
+[source,typescript]
+----
+let id = (value: T) => value;
+let value: T;
+let error: Error;
+
+success(value).to(id) === success(id(value));
+failure(error).to(id) === failure(id(error));
+----
++
+2. `Result.to()` preserves composition of morphisms:
++
+[source,typescript]
+----
+let f: (value: U) => V;
+let g: (value: T) => U;
+let value: T;
+let error: Error;
+
+success(value).to(v => f(g(v))) === success(value).to(g).to(f);
+failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
+----
+<.> `Failure.to()` ignores the input and always returns itself.
+
+
+=== Bifunctor
+
+The `Result<T>` type is a bifunctor that provides:
+
+* the `Result.to(mapValue, mapError)` method as a _bimap_ function.
+* the `Result.to(mapValue)` method as a _second_ function.
+* the `Result.failure(mapError)` method as a _first_ function.
+
+Which ensures that:
+
+1. `Result.to(mapValue, mapError)` preserves identity morphisms
++
+[source,typescript]
+----
+let id = (value: T) => value;
+let value: T;
+let error: Error;
+
+success(value).to(id, id) === success(id(value));
+failure(error).to(id, id) === failure(id(error));
+----
+2. `Result.to(mapValue)` preserves identity morphisms
+3. `Result.failure(mapError)` preserves identity morphisms
++
++
+4. Applying the `bimap` function is the same as applying `first` and `second` functions.
++
+[source,typescript]
+----
+let f: (value: Error) => Error;
+let s: (value: T) => U;
+let value: T;
+let error: Error;
+
+success(value).to(s, f) === success(value).to(s).failure(f);
+failure(error).to(s, f) === failure(error).to(s).failure(f);
+----

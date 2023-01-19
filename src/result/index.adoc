@@ -24,10 +24,18 @@ For example, when an API returns an error code
 and this error code is parsed and matched to a specific `Error` subtype.
 ====
 +
+* `successOf<T, U>(map: (value: T) => U): Unary<T, Success<U>>`
+— creates a function to transform a `value` with a given `map` callback
+and return the result as a `Success`.
++
 * `failure<T>(error: Error): Failure<T>`
 — creates a `Failure` object from a given `error`.
 +
 Throws a `TypeError`, if the given `error` value is not an `Error` object.
++
+* `failureOf<T>(map: (value: T) => Error): Unary<T, Failure<T>>`
+— creates a function to transform a `value` into an `Error` with a given `map` callback
+and return the result as a `Failure`.
 +
 * `result<T>(value: T | Error): Result<T>`
 — creates a `Failure` if a given value is an `Error`,
@@ -44,6 +52,11 @@ You have to cast the type parameter manually
 (e.g., `result<string>(...)`)
 to get the return type as `Result<T>`.
 ====
++
+* `resultOf<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>`
+— creates a function to transform a `value` with a given `map` callback
+and return the result as a `Failure`, if the result is an `Error`,
+or a `Success`.
 +
 * `recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>>`
 — creates a function that returns a given `fallback` wrapped into a `Success`,

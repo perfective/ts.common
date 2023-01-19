@@ -273,10 +273,44 @@ export function result<T>(value: T | Error): Result<T> {
 }
 
 /**
+ * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * and return it as a {@linkcode Failure}.
+ */
+export function resultOf<T, U>(map: (value: T) => Error): Unary<T, Failure<U>>;
+
+/**
+ * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * and return it as a {@linkcode Success}.
+ */
+export function resultOf<T, U>(map: (value: T) => U): Unary<T, Success<U>>;
+
+/**
+ * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * and return it as a {@linkcode Result}.
+ */
+export function resultOf<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>;
+
+/**
+ * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * and return it as a {@linkcode Result}.
+ */
+export function resultOf<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>> {
+    return (value: T): Result<U> => result<U>(map(value));
+}
+
+/**
  * Creates a {@linkcode Success} from a given value.
  */
 export function success<T>(value: T): Success<T> {
     return new Success(value);
+}
+
+/**
+ * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * and return it as a {@linkcode Success}.
+ */
+export function successOf<T, U>(map: (value: T) => U): Unary<T, Success<U>> {
+    return (value: T): Success<U> => success(map(value));
 }
 
 /**
@@ -286,6 +320,14 @@ export function success<T>(value: T): Success<T> {
  */
 export function failure<T>(error: Error): Failure<T> {
     return new Failure(error);
+}
+
+/**
+ * Creates a function to transform an {@linkcode value} with a given {@linkcode map} callback
+ * and return it as a {@linkcode Failure}.
+ */
+export function failureOf<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
+    return (value: T): Failure<T> => failure(map(value));
 }
 
 /**

@@ -1,7 +1,7 @@
 import { error } from '../../error/error/error';
 import { chainedException, Exception, exception } from '../../error/exception/exception';
 
-import { Failure, failure, recovery, Result, Success, success } from './result';
+import { Failure, failure, recovery, Result, Success, success, successOf } from './result';
 import {
     failureDecimal,
     resultDecimal,
@@ -54,6 +54,16 @@ describe(success, () => {
 
             expect(fa.onto(success)).toStrictEqual(fa);
         });
+    });
+});
+
+describe(successOf, () => {
+    it('creates a function to pass a `value` into a given `map` callback and return the result as a `Success`', () => {
+        const outputNumber = successOf(strictNumberOutput);
+        const outputError = successOf(strictErrorOutput);
+
+        expect(outputNumber(0)).toStrictEqual(success('0'));
+        expect(outputError(error('Success'))).toStrictEqual(success('Success'));
     });
 });
 

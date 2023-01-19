@@ -1,7 +1,7 @@
 import { error } from '../../error/error/error';
 import { causedBy, chainedException, Exception, exception } from '../../error/exception/exception';
 
-import { Failure, failure, Result } from './result';
+import { Failure, failure, failureOf, Result } from './result';
 import { resultDecimal, safeNumberOutput, strictErrorOutput, strictNumberOutput } from './result.mock';
 
 describe(failure, () => {
@@ -25,6 +25,15 @@ describe(failure, () => {
             expect(() => failure('Error'))
                 .toThrow('The value of `Failure` must be an instance of an `Error`');
         });
+    });
+});
+
+describe(failureOf, () => {
+    it('creates a function to pass a `value` into a given `map` callback and return the result as a `Failure`', () => {
+        const output = failureOf(error);
+
+        expect(output('Failure'))
+            .toStrictEqual(failure(error('Failure')));
     });
 });
 

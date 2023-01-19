@@ -48,9 +48,9 @@ export function failureDecimal<T>(input: number): Failure<T> {
  * Returns a {@linkcode Failure} when a decimal number cannot be parsed.
  */
 export function resultNumber(input: string): Result<number> {
-    const output = decimal(input);
-    if (isNull(output)) {
-        return failure(error('Failed to parse a number'));
+    const output = unsafeNumberOutput(input);
+    if (isError(output)) {
+        return failure(output);
     }
     return success(output);
 }
@@ -71,6 +71,14 @@ export function safeNumberOutput(input: number | Error): string {
 
 export function strictNumberOutput(input: number): string {
     return stringOutput(input);
+}
+
+export function unsafeNumberOutput(input: string): number | Error {
+    const output = decimal(input);
+    if (isNull(output)) {
+        return error('Failed to parse a number');
+    }
+    return output;
 }
 
 /**

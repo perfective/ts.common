@@ -3,7 +3,7 @@ import { error } from '../../error/error/error';
 import { chainedException } from '../../error/exception/exception';
 import { same, Unary } from '../../function/function/unary';
 
-import { Failure, failure, Result, result, Success, success } from './result';
+import { Failure, failure, Result, result, resultOf, Success, success } from './result';
 import {
     eitherResult,
     resultDecimal,
@@ -12,6 +12,7 @@ import {
     strictErrorOutput,
     strictNumberOutput,
     successErrorMessage,
+    unsafeNumberOutput,
 } from './result.mock';
 
 describe(result, () => {
@@ -46,6 +47,42 @@ describe(result, () => {
             const output: Failure<unknown> = result(error('Failure'));
 
             expect(output).toStrictEqual(failure(error('Failure')));
+        });
+    });
+});
+
+describe(resultOf, () => {
+    describe('when a given a function to convert a value into either a value or an Error', () => {
+        it('cannot be assigned to a `Success`', () => {
+            // @ts-expect-error -- TS2322:
+            //  Type 'Unary<string, Result<string>>' is not assignable to type 'Unary<string, Success<string>>'.
+            const output: Unary<string, Success<string>> = resultOf<string, string>(eitherResult);
+
+            expect(output('Success')).toStrictEqual(success('Success'));
+        });
+
+        it('cannot be assigned to a `Failure`', () => {
+            // @ts-expect-error -- TS2322:
+            //  Type 'Unary<string, Result<number>>' is not assignable to type 'Unary<string, Failure<number>>'.
+            const output: Unary<string, Failure<number>> = resultOf<string, number>(unsafeNumberOutput);
+
+            expect(output('NaN')).toStrictEqual(failure(error('Failed to parse a number')));
+        });
+    });
+
+    describe('when a given a function to convert a value into a value', () => {
+        it('returns an instance of `Success`', () => {
+            const output: Unary<number, Success<string>> = resultOf(strictNumberOutput);
+
+            expect(output(0)).toStrictEqual(success('0'));
+        });
+    });
+
+    describe('when a given a function to convert a value into an Error', () => {
+        it('returns an instance of `Failure`', () => {
+            const output: Unary<string, Failure<string>> = resultOf(error);
+
+            expect(output('Failure')).toStrictEqual(failure(error('Failure')));
         });
     });
 });

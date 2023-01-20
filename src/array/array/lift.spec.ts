@@ -21,6 +21,7 @@ import {
     map,
     pop,
     push,
+    pushInto,
     reduce,
     reduceRight,
     reduceRightTo,
@@ -352,6 +353,19 @@ describe('push', () => {
             const copy: number[] = input.map(same);
 
             expect(push(5, 7, 11)(copy))
+                .toBe(10);
+            expect(copy)
+                .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14, 5, 7, 11]);
+        });
+    });
+});
+
+describe('pushInto', () => {
+    describe('pushInto(array)', () => {
+        it('returns a new length of a given array after pushing items into it', () => {
+            const copy: number[] = input.map(same);
+
+            expect(pushInto(copy)(5, 7, 11))
                 .toBe(10);
             expect(copy)
                 .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14, 5, 7, 11]);

@@ -76,6 +76,13 @@ export function push<T>(...items: T[]): Unary<T[], number> {
     return (array: T[]): number => array.push(...items);
 }
 
+/**
+ * Creates a function that pushes {@linkcode items} into a given {@linkcode array}.
+ */
+export function pushInto<T>(array: T[]): (...items: T[]) => number {
+    return (...items: T[]): number => array.push(...items);
+}
+
 export type Reducer<T, V> = (result: V, element: T, index: number) => V;
 
 export function reduce<T, V>(reducer: Reducer<T, V>, initial: V): Unary<T[], V> {

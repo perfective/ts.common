@@ -56,6 +56,7 @@ export {
     NumberOrErrorCode,
     pop,
     push,
+    pushInto,
     reduce,
     Reducer,
     reduceRight,

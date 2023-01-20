@@ -66,6 +66,8 @@ The `@perfective/common/array` package provides functions for the standard JS
 * Mutable element operators:
 ** `pop<T>(array: T[]): T | undefined`
 ** `push<T>(...items: T[]): Unary<T[], number>`
+** `pushInto<T>(array: T[]): (...items: T[]) => number`
+— creates a function that pushes `items` into a given `array`.
 ** `shift<T>(array: T[]): T | undefined`
 ** `unshift<T>(...items: T[]): Unary<T[], number>`
 +

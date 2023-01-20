@@ -67,6 +67,16 @@ export abstract class Result<T> {
      * and returns itself.
      */
     public abstract failure(mapError: (error: Error) => Error): Result<T>;
+
+    /**
+     * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
+     * when the instance is a {@linkcode Success}.
+     * Runs a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
+     * when the instance is a {@linkcode Failure}.
+     *
+     * Returns the original {@linkcode Result} object.
+     */
+    public abstract run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Result<T>;
 }
 
 /**
@@ -154,6 +164,24 @@ export class Success<T> extends Result<T> {
     public override failure(): this {
         return this;
     }
+
+    /**
+     * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
+     * Ignores a given {@linkcode errorProcedure} callback.
+     *
+     * Returns itself.
+     */
+    public override run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Success<T>;
+
+    /**
+     * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
+     *
+     * Returns itself.
+     */
+    public override run(valueProcedure: (value: T) => void): this {
+        valueProcedure(this.value);
+        return this;
+    }
 }
 
 /**
@@ -238,6 +266,17 @@ export class Failure<T> extends Result<T> {
      */
     public override failure(mapError: (error: Error) => Error): Failure<T> {
         return failure(mapError(this.value));
+    }
+
+    /**
+     * Runs a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}.
+     * Ignores a given {@linkcode valueProcedure} callback.
+     *
+     * Returns itself.
+     */
+    public override run(valueProcedure: (value: T) => void, errorProcedure: (error: Error) => void): this {
+        errorProcedure(this.value);
+        return this;
     }
 }
 

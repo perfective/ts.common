@@ -309,6 +309,37 @@ function entityByIdRequest(id: string): Result<Request> {
 you can use `Result.failure` method to chain or otherwise transform the error.
 
 
+=== `Result.run()`
+
+* `Result.run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Result<T>`
+** for a `Success`, runs a given `valueProcedure` and returns itself;
+** for a `Failure`, runs a given `errorProcedure` and returns itself.
+
+[source,typescript]
+----
+import { typeError } from '@perfective/common/error';
+import { empty } from '@perfective/common/function';
+import { failure, Result, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+function validInput(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(typeError('Input id is empty'));
+    }
+    return success(id);
+}
+
+function entityByIdRequest(id: string): Result<Request> {
+    return validInput(id)
+        .to(apiRequest('GET'))
+        .run(empty, console.error); // <.>
+}
+----
+<.> When we have a `Success`, we only run a no-op `empty` function.
+But if we have a `Failure`, we log an error.
+Either way, the `Result` is the same.
+
+
 == Type classes
 
 === Monad

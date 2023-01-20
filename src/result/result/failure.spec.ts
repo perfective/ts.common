@@ -1,3 +1,4 @@
+import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { causedBy, chainedException, Exception, exception } from '../../error/exception/exception';
 
@@ -89,6 +90,19 @@ describe(Failure, () => {
             const output: Failure<number> = input.failure(chainedException('Exceptional Failure'));
 
             expect(output).toStrictEqual(failure(causedBy(input.value, 'Exceptional Failure')));
+        });
+    });
+
+    describe('run', () => {
+        it('runs a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {
+            const values: number[] = [];
+            const errors: string[] = [];
+            const input = failure<number>(error('Failure'));
+            const output: Failure<number> = input.run(pushInto(values), error => errors.push(error.message));
+
+            expect(output).toBe(input);
+            expect(values).toStrictEqual([]);
+            expect(errors).toStrictEqual(['Failure']);
         });
     });
 });

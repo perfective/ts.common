@@ -1,8 +1,8 @@
 export {
     Callback,
+    Executor,
     promise,
     Reject,
     Resolve,
     result,
-    Run,
 } from './promise/promise';

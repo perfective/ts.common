@@ -1,13 +1,31 @@
 import { isPresent } from '../../value/value';
 
+/**
+ * A type of a callback called to resolve a {@linkcode Promise} value.
+ */
 export type Resolve<T> = (value: T | PromiseLike<T>) => void;
-export type Reject<E extends Error = Error> = (reason?: E) => void;
-export type Run<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void;
-export type Callback<T, E extends Error = Error> = (error: E | null | undefined, data: T) => void;
 
-export async function promise<T, E extends Error = Error>(run: Run<T, E>): Promise<T> {
-    return new Promise<T>(run);
+/**
+ * A type of a callback called to reject a {@linkcode Promise} with a reason.
+ *
+ * This type is stricter than the default type of the reject callback,
+ * as it requires an {@linkcode Error} as a {@linkcode reason}.
+ */
+export type Reject<E extends Error = Error> = (reason?: E) => void;
+
+/**
+ * A type of the `executor` callback passed into a {@linkcode Promise} constructor.
+ */
+export type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void;
+
+/**
+ * Creates a new {@linkcode Promise} with a given {@linkcode executor} callback.
+ */
+export async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T> {
+    return new Promise<T>(executor);
 }
+
+export type Callback<T, E extends Error = Error> = (error: E | null | undefined, data: T) => void;
 
 export function result<T, E extends Error = Error>(
     resolve: Resolve<T>,

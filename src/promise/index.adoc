@@ -2,3 +2,28 @@
 
 The `@perfective/common/promise` package provides functions to work with the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
+
+== Reference
+
+=== Types
+
+* `type Resolve<T> = (value: T | PromiseLike<T>) => void`
+— a type of a callback called to resolve a `Promise` value.
++
+* `type Reject<E extends Error = Error> = (reason?: E) => void`
+— a type of a callback called to reject a `Promise` with a `reason`.
++
+[NOTE]
+====
+This type is stricter than the default type of the reject callback,
+as it requires an `Error` as a `reason`.
+====
++
+* `type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void`
+— a type of the `executor` callback passed into a `Promise` constructor.
+
+
+=== Constructors
+
+* `async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T>`
+— creates a new `Promise` with a given `executor` callback.

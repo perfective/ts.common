@@ -6,6 +6,8 @@ export {
 } from './promise/callback';
 export {
     Executor,
+    OnFulfilled,
+    OnRejected,
     promise,
     Reject,
     Resolve,

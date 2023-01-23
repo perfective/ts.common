@@ -37,6 +37,30 @@ as it requires an `Error` as a `reason`.
 * `async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T>`
 — creates a new `Promise` with a given `executor` callback.
 +
+* `async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T>>`
+— creates a fulfilled `Promise` (a shortcut for the `Promise.resolve()` function).
++
+[NOTE]
+====
+Using `Promise.resolve()` directly causes the `@typescript-eslint/unbound-method` linting error
+and a TS compiler error: `TS2322: Type 'unknown' is not assignable to type 'T'`.
+====
++
+* `async function rejected<T = never>(reason: Error): Promise<Awaited<T>>`
+— creates a rejected `Promise` (a shortcut for the `Promise.rejected()` function).
++
+[NOTE]
+====
+Using `Promise.rejected()` directly causes the `@typescript-eslint/unbound-method` linting error.
+====
++
+* `async function settled<T>(value: T | PromiseLike<T> | Error): Promise<T>`
+— creates a settled `Promise`:
+** If a given value is _not_ an `Error`, the `Promise` is fulfilled.
+** If a given value is an `Error`, the `Promise` is rejected.
+** If a given value is a `PromiseLike` value,
+the `Promise` state matches the state of the given value.
++
 * `function settlement<T, E extends Error = Error>(resolve: Resolve<T>, reject: Reject<E>): Callback<T, E>`
 — create a `Callback` that uses given `resolve` and `reject` functions from an `executor` to settle a `Promise`.
-This function can be used to promisify functions written in the error-first callback style.
+Use `settlement` to promisify functions written in the error-first callback style.

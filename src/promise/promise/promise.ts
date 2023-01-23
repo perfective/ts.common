@@ -1,3 +1,5 @@
+import { isError } from '../../error/error/error';
+
 /**
  * A type of a callback called to resolve a {@linkcode Promise} value.
  */
@@ -31,4 +33,52 @@ export type OnRejected<T = never> = (reason: unknown) => T | PromiseLike<T>;
  */
 export async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T> {
     return new Promise<T>(executor);
+}
+
+/**
+ * Creates a fulfilled {@linkcode Promise}.
+ * A shortcut for the {@linkcode Promise.resolve} function.
+ *
+ * Using the {@linkcode Promise.resolve} directly causes the `@typescript-eslint/unbound-method` linting error
+ * and a TSC error: "TS2322: Type 'unknown' is not assignable to type 'T'".
+ *
+ * @see Promise.resolve()
+ * @see https://typescript-eslint.io/rules/unbound-method/
+ */
+export async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T>> {
+    // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject -- instantiating a Promise.
+    return Promise.resolve(value);
+}
+
+/**
+ * Creates a rejected {@linkcode Promise}.
+ * A shortcut for the {@linkcode Promise.reject} function.
+ *
+ * Using the {@linkcode Promise.reject} directly causes the `@typescript-eslint/unbound-method` linting error.
+ *
+ * @see Promise.reject()
+ * @see https://typescript-eslint.io/rules/unbound-method/
+ */
+export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
+    // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject -- instantiating a Promise.
+    return Promise.reject<Awaited<T>>(reason);
+}
+
+/**
+ * Creates a settled {@linkcode Promise}.
+ *
+ * - If a given value is not an {@linkcode Error},
+ * the {@linkcode Promise} is fulfilled.
+ * - If a given value is an {@linkcode Error},
+ * the {@linkcode Promise} is rejected.
+ * - If a given value is a {@linkcode PromiseLike},
+ * the {@linkcode Promise} state matches the state of the given value.
+ */
+export async function settled<T>(value: T | PromiseLike<T> | Error): Promise<T> {
+    /* eslint-disable unicorn/no-useless-promise-resolve-reject -- instantiating a Promise */
+    if (isError(value)) {
+        return Promise.reject(value);
+    }
+    return Promise.resolve(value);
+    /* eslint-enable unicorn/no-useless-promise-resolve-reject */
 }

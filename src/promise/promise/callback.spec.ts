@@ -1,4 +1,4 @@
-import { Callback, settlement } from './callback';
+import { Callback, result, settlement } from './callback';
 import { promise, Reject, Resolve } from './promise';
 
 function isError<T>(data: T | Error, callback: Callback<T>): void {
@@ -11,7 +11,8 @@ function isError<T>(data: T | Error, callback: Callback<T>): void {
 
 async function isErrorPromise<T>(data: T | Error): Promise<T> {
     return promise<T>((resolve: Resolve<T>, reject: Reject): void => {
-        isError(data, settlement(resolve, reject));
+        // eslint-disable-next-line deprecation/deprecation -- TODO: replace in v0.10.0-alpha
+        isError(data, result(resolve, reject));
     });
 }
 

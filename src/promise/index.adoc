@@ -21,9 +21,16 @@ as it requires an `Error` as a `reason`.
 +
 * `type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void`
 — a type of the `executor` callback passed into a `Promise` constructor.
++
+* `type Callback<T, E extends Error = Error> = (error: E | null | undefined, value: T) => void`
+— a type of the error-first callbacks.
 
 
 === Constructors
 
 * `async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T>`
 — creates a new `Promise` with a given `executor` callback.
++
+* `function settlement<T, E extends Error = Error>(resolve: Resolve<T>, reject: Reject<E>): Callback<T, E>`
+— create a `Callback` that uses given `resolve` and `reject` functions from an `executor` to settle a `Promise`.
+This function can be used to promisify functions written in the error-first callback style.

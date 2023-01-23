@@ -1,5 +1,3 @@
-import { isPresent } from '../../value/value';
-
 /**
  * A type of a callback called to resolve a {@linkcode Promise} value.
  */
@@ -23,20 +21,4 @@ export type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject:
  */
 export async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T> {
     return new Promise<T>(executor);
-}
-
-export type Callback<T, E extends Error = Error> = (error: E | null | undefined, data: T) => void;
-
-export function result<T, E extends Error = Error>(
-    resolve: Resolve<T>,
-    reject: Reject<E>,
-): Callback<T, E> {
-    return (error: E | null | undefined, data: T | PromiseLike<T>): void => {
-        if (isPresent(error)) {
-            reject(error);
-        }
-        else {
-            resolve(data);
-        }
-    };
 }

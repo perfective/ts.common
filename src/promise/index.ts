@@ -1,8 +1,10 @@
 export {
     Callback,
+    settlement,
+} from './promise/callback';
+export {
     Executor,
     promise,
     Reject,
     Resolve,
-    result,
 } from './promise/promise';

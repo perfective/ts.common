@@ -4,7 +4,7 @@ import { hasPresentProperty, ObjectWithPresent } from '../../object/property/pro
 import { safeDecimalOutput, strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optional, Some, some } from './optional';
+import { None, none, Optional, Some, some } from './optional';
 import { Boxed, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
 describe(none, () => {
@@ -160,27 +160,6 @@ describe(None, () => {
 
                 expect(output).toBe(none());
             });
-        });
-    });
-
-    describe('into', () => {
-        it('does not accept a "fold" function with a non-optional value argument', () => {
-            // @ts-expect-error -- TS2345:
-            //  Argument of type '(input: number) => string'
-            //  is not assignable to
-            //  parameter of type '(value: undefined) => string'.
-            expect(() => none<number>().into<string>(strictDecimalOutput))
-                .toThrow("Cannot read properties of undefined (reading 'toString')");
-        });
-
-        it('returns the result of the given "fold" function applied to the value of None', () => {
-            expect(none().into(safeDecimalOutput)).toBe('undefined');
-        });
-
-        it('can be used to return Optional', () => {
-            const output: Optional<string | null> = none().into(v => optional(unsafeDecimalOutput(v)));
-
-            expect(output).toBe(none());
         });
     });
 

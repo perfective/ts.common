@@ -291,29 +291,6 @@ describe(Nullable, () => {
         });
     });
 
-    describe('into', () => {
-        it('does not accept a "fold" function with a non-nullable value argument', () => {
-            // @ts-expect-error -- TS2345:
-            //  Argument of type '(input: number) => string'
-            //  is not assignable to
-            //  parameter of type '(value: number | null | undefined) => string'.
-            const output: string | null | undefined = nullable(unsafe(0)).into(strictDecimalOutput);
-
-            expect(output).toBe('0');
-        });
-
-        it('returns the result of the given "fold" function applied to the value of Nullable', () => {
-            expect(nullable(unsafeNumber(0)).into(safeDecimalOutput)).toBe('0');
-            expect(nullable(unsafeNumber(null)).into(safeDecimalOutput)).toBe('null');
-        });
-
-        it('can be used to return Nullable', () => {
-            const output: Nullable<boolean> = nullable(unsafeNumber(0)).into(v => nullable(isPresent(v)));
-
-            expect(output).toStrictEqual(only(true));
-        });
-    });
-
     describe('pick', () => {
         describe('when the property is required', () => {
             it('must be assigned to Nullable', () => {

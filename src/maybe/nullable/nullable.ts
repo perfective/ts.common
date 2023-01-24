@@ -17,15 +17,6 @@ export abstract class Nullable<T> implements Option<T, null> {
         map: (value: T) => U | null,
     ): Nullable<U>;
 
-    /**
-     * Folds (reduces) the value of Nullable using the given `fold` function.
-     *
-     * @since 0.9.0
-     */
-    public abstract into<U>(
-        fold: (value: T | null) => U,
-    ): U;
-
     // Using NotNull<T[K]> to exclude null from the type
     public abstract pick<K extends keyof T>(property: Value<K>): Nullable<NotNull<T[K]>>;
 
@@ -79,15 +70,6 @@ export class Only<T> implements Nullable<T> {
     public to<U>(map: (value: T) => U | null): Nullable<U>;
     public to<U>(map: (value: T) => U | null): Nullable<U> | Only<U> | Nil<U> {
         return nullable<U>(map(this.value));
-    }
-
-    /**
-     * Folds (reduces) the value of Only using the given `fold` function.
-     *
-     * @since 0.9.0
-     */
-    public into<U>(fold: (value: T) => U): U {
-        return fold(this.value);
     }
 
     public pick<K extends keyof T>(
@@ -161,15 +143,6 @@ implements Nullable<T> {
     public to<U>(map: (value: T) => (U | null)): Nil<U>;
     public to<U>(): Nil<U> {
         return this as unknown as Nil<U>;
-    }
-
-    /**
-     * Folds (reduces) the value of Nil using the given `fold` function.
-     *
-     * @since 0.9.0
-     */
-    public into<U>(fold: (value: null) => U): U {
-        return fold(this.value);
     }
 
     public pick<K extends keyof T>(property: Value<K>): Nil<NotNull<T[K]>>;

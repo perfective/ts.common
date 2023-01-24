@@ -15,7 +15,7 @@ import {
 import { strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, Only, only, solum } from './nullable';
+import { Nil, nil, Nullable, Only, only, solum } from './nullable';
 import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
 /* eslint-disable deprecation/deprecation -- providing solum until v0.10.0 */
@@ -208,24 +208,6 @@ describe(Only, () => {
 
                 expect(output).toStrictEqual(only(undefined));
             });
-        });
-    });
-
-    describe('into', () => {
-        it('accepts a "fold" function with a non-nullable value argument', () => {
-            const output: string = only(0).into(strictDecimalOutput);
-
-            expect(output).toBe('0');
-        });
-
-        it('returns the result of the given "fold" function applied to the value of Only', () => {
-            expect(only(0).into(strictDecimalOutput)).toBe('0');
-        });
-
-        it('can be used to return Nullable', () => {
-            const output: Nullable<string | undefined> = only(0).into(v => nullable(unsafeDecimalOutput(v)));
-
-            expect(output).toStrictEqual(only('0'));
         });
     });
 

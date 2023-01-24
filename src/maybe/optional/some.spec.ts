@@ -14,7 +14,7 @@ import {
 import { safeDecimalOutput, strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optional, Some, some } from './optional';
+import { None, none, Optional, Some, some } from './optional';
 import { Boxed, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
 describe(some, () => {
@@ -197,24 +197,6 @@ describe(Some, () => {
 
                 expect(output).toBe(none());
             });
-        });
-    });
-
-    describe('into', () => {
-        it('accepts a "fold" function with a non-nullable value argument', () => {
-            const output: string = some(0).into(strictDecimalOutput);
-
-            expect(output).toBe('0');
-        });
-
-        it('returns the result of the given "fold" function applied to the value of Some', () => {
-            expect(some(0).into(unsafeDecimalOutput)).toBe('0');
-        });
-
-        it('can be used to return Optional', () => {
-            const output: Optional<string | null> = some(0).into(v => optional(unsafeDecimalOutput(v)));
-
-            expect(output).toStrictEqual(some('0'));
         });
     });
 

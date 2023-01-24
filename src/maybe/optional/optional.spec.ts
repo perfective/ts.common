@@ -288,30 +288,6 @@ describe(Optional, () => {
         });
     });
 
-    describe('into', () => {
-        it('does not accept a "fold" function with a non-optional value argument', () => {
-            // @ts-expect-error -- TS2345:
-            // Argument of type '(input: number) => string'
-            // is not assignable to
-            // parameter of type '(value: number | null | undefined) => string'.
-            const output: string = optional(unsafeNumber(0)).into(strictDecimalOutput);
-
-            expect(output).toBe('0');
-        });
-
-        it('returns the result of the given "fold" function applied to the value of Optional', () => {
-            expect(optional(unsafeNumber(0)).into(safeDecimalOutput)).toBe('0');
-            expect(optional(unsafeNumber(undefined)).into(safeDecimalOutput)).toBe('undefined');
-        });
-
-        it('can be used to return Optional', () => {
-            const output: Optional<string | null> = optional(unsafeNumber(0))
-                .into(v => optional(unsafeDecimalOutput(v)));
-
-            expect(output).toStrictEqual(some('0'));
-        });
-    });
-
     describe('pick', () => {
         describe('when the property is required', () => {
             it('must be assigned to Optional', () => {

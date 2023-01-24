@@ -4,7 +4,7 @@ import { hasPresentProperty, ObjectWithPresent } from '../../object/property/pro
 import { safeDecimalOutput, strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
+import { Nil, nil, Nullable, Only, only } from './nullable';
 import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
 describe(nil, () => {
@@ -159,27 +159,6 @@ describe(Nil, () => {
 
                 expect(output).toBe(nil());
             });
-        });
-    });
-
-    describe('into', () => {
-        it('does not accept a "fold" function with a non-nullable value argument', () => {
-            // @ts-expect-error -- TS2345:
-            //  Argument of type '(input: number) => string'
-            //  is not assignable to
-            //  parameter of type '(value: null) => string'.
-            expect(() => nil<number>().into(strictDecimalOutput))
-                .toThrow("Cannot read properties of null (reading 'toString')");
-        });
-
-        it('returns the result of the given "fold" function applied to the value of Nil', () => {
-            expect(nil().into(safeDecimalOutput)).toBe('null');
-        });
-
-        it('can be used to return Nullable', () => {
-            const output: Nullable<string | undefined> = nil().into(v => nullable(unsafeDecimalOutput(v)));
-
-            expect(output).toBe(nil());
         });
     });
 

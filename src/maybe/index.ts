@@ -1,5 +1,6 @@
 // ./maybe
 export {
+    into,
     // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
     lift,
     onto,
@@ -17,6 +18,7 @@ export {
     just,
     Maybe,
     maybe,
+    maybeOf,
     naught,
     Nothing,
     nothing,

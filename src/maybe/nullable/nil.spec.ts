@@ -4,7 +4,7 @@ import { hasPresentProperty, ObjectWithPresent } from '../../object/property/pro
 import { safeDecimalOutput, strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullableOf, Only, only } from './nullable';
+import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
 import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
 describe(nil, () => {
@@ -177,7 +177,7 @@ describe(Nil, () => {
         });
 
         it('can be used to return Nullable', () => {
-            const output: Nullable<string | undefined> = nil().into(nullableOf(unsafeDecimalOutput));
+            const output: Nullable<string | undefined> = nil().into(v => nullable(unsafeDecimalOutput(v)));
 
             expect(output).toBe(nil());
         });

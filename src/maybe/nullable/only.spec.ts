@@ -15,7 +15,7 @@ import {
 import { strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullableOf, Only, only, solum } from './nullable';
+import { Nil, nil, Nullable, nullable, Only, only, solum } from './nullable';
 import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
 /* eslint-disable deprecation/deprecation -- providing solum until v0.10.0 */
@@ -223,7 +223,7 @@ describe(Only, () => {
         });
 
         it('can be used to return Nullable', () => {
-            const output: Nullable<string | undefined> = only(0).into(nullableOf(unsafeDecimalOutput));
+            const output: Nullable<string | undefined> = only(0).into(v => nullable(unsafeDecimalOutput(v)));
 
             expect(output).toStrictEqual(only('0'));
         });

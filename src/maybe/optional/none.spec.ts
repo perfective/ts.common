@@ -4,7 +4,7 @@ import { hasPresentProperty, ObjectWithPresent } from '../../object/property/pro
 import { safeDecimalOutput, strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optionalOf, Some, some } from './optional';
+import { None, none, Optional, optional, Some, some } from './optional';
 import { Boxed, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
 describe(none, () => {
@@ -178,7 +178,7 @@ describe(None, () => {
         });
 
         it('can be used to return Optional', () => {
-            const output: Optional<string | null> = none().into(optionalOf(unsafeDecimalOutput));
+            const output: Optional<string | null> = none().into(v => optional(unsafeDecimalOutput(v)));
 
             expect(output).toBe(none());
         });

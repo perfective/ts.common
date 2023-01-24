@@ -1,7 +1,6 @@
 // eslint-disable-next-line max-classes-per-file -- Optional, Some and None are co-dependent
 import { Predicate } from '../../boolean/predicate/predicate';
 import { isTrue, Proposition } from '../../boolean/proposition/proposition';
-import { Unary } from '../../function';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
 import { Defined, isDefined, isUndefined } from '../../value/value';
@@ -229,28 +228,6 @@ export function optional<T>(value: T | undefined): Some<T> | None<T> | Optional<
         return some(value);
     }
     return none<T>();
-}
-
-export function optionalOf<T, U>(
-    map: (value: T | undefined) => Defined<U>,
-): Unary<T | undefined, Some<U>>;
-export function optionalOf<T, U>(
-    map: (value: Defined<T>) => Defined<U>,
-): Unary<Defined<T>, Some<U>>;
-export function optionalOf<T, U>(
-    map: (value: T | undefined) => undefined,
-): Unary<T | undefined, None<U>>;
-export function optionalOf<T, U>(
-    map: (value: T | undefined) => U | undefined,
-): Unary<T | undefined, Optional<U>>;
-
-/**
- * Wraps a result of the given "map" function into an Optional.
- */
-export function optionalOf<T, U>(
-    map: (value: T | undefined) => U | undefined,
-): Unary<T | undefined, Optional<U> | Some<U> | None<U>> {
-    return (value: T | undefined): Optional<U> | Some<U> | None<U> => optional(map(value));
 }
 
 export function some<T>(value: Defined<T>): Some<T> {

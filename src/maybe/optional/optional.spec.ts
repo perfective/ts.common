@@ -1,5 +1,5 @@
 import { constant, Nullary } from '../../function/function/nullary';
-import { same, Unary } from '../../function/function/unary';
+import { same } from '../../function/function/unary';
 import { decimal } from '../../number/number/base';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
@@ -12,7 +12,7 @@ import {
 } from '../maybe/maybe.mock';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optional, optionalOf, Some, some } from './optional';
+import { None, none, Optional, optional, Some, some } from './optional';
 import { fallbackOptional, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
 function optionalDecimal(value: number | null | undefined): Optional<string> {
@@ -72,51 +72,6 @@ describe(optional, () => {
             expect(output).toBe(none());
         });
     });
-});
-
-describe(optionalOf, () => {
-    describe('when the "map" function requires defined input and returns defined output', () => {
-        it('returns an unary function that returns Some', () => {
-            const output: Unary<number, Some<string>> = optionalOf(strictDecimalOutput);
-
-            expect(output(0)).toStrictEqual(some('0'));
-        });
-    });
-
-    describe('when the "map" function accepts defined or undefined value and returns defined output', () => {
-        it('creates an unary function that returns Some', () => {
-            const output: Unary<number | null | undefined, Some<string>> = optionalOf(safeDecimalOutput);
-
-            expect(output(0)).toStrictEqual(some('0'));
-            expect(output(null)).toStrictEqual(some('null'));
-            expect(output(undefined)).toStrictEqual(some('undefined'));
-        });
-    });
-
-    describe('when the "map" function accepts defined or undefined value and returns undefined output', () => {
-        it('creates an unary function that returns None', () => {
-            const output: Unary<number | null | undefined, None<string>> = optionalOf(constant(undefined));
-
-            expect(output(0)).toBe(none());
-            expect(output(null)).toBe(none());
-            expect(output(undefined)).toBe(none());
-        });
-    });
-
-    describe(
-        'when the "map" function accepts defined or undefined value and returns defined or undefined output',
-        () => {
-            it('creates an unary function that returns Maybe', () => {
-                const output: Unary<number | null | undefined, Optional<string | null>> = optionalOf(
-                    unsafeDecimalOutput,
-                );
-
-                expect(output(0)).toStrictEqual(some('0'));
-                expect(output(null)).toStrictEqual(some(null));
-                expect(output(undefined)).toBe(none());
-            });
-        },
-    );
 });
 
 describe(Optional, () => {
@@ -351,7 +306,7 @@ describe(Optional, () => {
 
         it('can be used to return Optional', () => {
             const output: Optional<string | null> = optional(unsafeNumber(0))
-                .into(optionalOf(unsafeDecimalOutput));
+                .into(v => optional(unsafeDecimalOutput(v)));
 
             expect(output).toStrictEqual(some('0'));
         });

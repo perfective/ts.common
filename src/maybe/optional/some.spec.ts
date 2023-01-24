@@ -14,7 +14,7 @@ import {
 import { safeDecimalOutput, strictDecimalOutput, unsafeDecimalOutput, unsafeNumber } from '../maybe/maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { None, none, Optional, optionalOf, Some, some } from './optional';
+import { None, none, Optional, optional, Some, some } from './optional';
 import { Boxed, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
 describe(some, () => {
@@ -212,7 +212,7 @@ describe(Some, () => {
         });
 
         it('can be used to return Optional', () => {
-            const output: Optional<string | null> = some(0).into(optionalOf(unsafeDecimalOutput));
+            const output: Optional<string | null> = some(0).into(v => optional(unsafeDecimalOutput(v)));
 
             expect(output).toStrictEqual(some('0'));
         });

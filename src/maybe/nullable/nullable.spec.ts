@@ -1,5 +1,5 @@
 import { constant, Nullary } from '../../function/function/nullary';
-import { same, Unary } from '../../function/function/unary';
+import { same } from '../../function/function/unary';
 import { decimal } from '../../number/number/base';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 import { split } from '../../string/string/lift';
@@ -13,7 +13,7 @@ import {
 } from '../maybe/maybe.mock';
 import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 
-import { Nil, nil, Nullable, nullable, nullableOf, Only, only } from './nullable';
+import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
 import { fallbackNullable, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
 function nullableDecimal(value: number | null | undefined): Nullable<string> {
@@ -69,49 +69,6 @@ describe(nullable, () => {
             const output: Nil<number | undefined> = nullable(unsafeNumber(null));
 
             expect(output).toBe(nil());
-        });
-    });
-});
-
-describe(nullableOf, () => {
-    describe('when the "map" function requires not null input and returns not null output', () => {
-        it('returns an unary function that returns Only', () => {
-            const output: Unary<number, Only<string[]>> = nullableOf(splitUndefinedDecimal);
-
-            expect(output(3.14)).toStrictEqual(only(['3', '14']));
-        });
-    });
-
-    describe('when the "map" function accepts not null or null value and returns not null output', () => {
-        it('creates an unary function that returns Only', () => {
-            const output: Unary<number | null | undefined, Only<string>> = nullableOf(safeDecimalOutput);
-
-            expect(output(0)).toStrictEqual(only('0'));
-            expect(output(null)).toStrictEqual(only('null'));
-            expect(output(undefined)).toStrictEqual(only('undefined'));
-        });
-    });
-
-    describe('when the "map" function accepts not null or null value and returns null output', () => {
-        it('creates an unary function that returns Nil', () => {
-            const output: Unary<number | null | undefined, Nil<boolean>> = nullableOf(constant(null));
-
-            expect(output(0)).toBe(nil());
-            expect(output(null)).toBe(nil());
-            expect(output(undefined)).toBe(nil());
-        });
-    });
-
-    describe('when the "map" function accepts not null or null value and returns not null or null output', () => {
-        it('creates an unary function that returns Maybe', () => {
-            const output: Unary<
-                number | null | undefined,
-                Nullable<number | undefined>
-            > = nullableOf<number | undefined, number | undefined>(unsafeNumber);
-
-            expect(output(0)).toStrictEqual(only(0));
-            expect(output(null)).toBe(nil());
-            expect(output(undefined)).toStrictEqual(only(undefined));
         });
     });
 });
@@ -351,7 +308,7 @@ describe(Nullable, () => {
         });
 
         it('can be used to return Nullable', () => {
-            const output: Nullable<boolean> = nullable(unsafeNumber(0)).into(nullableOf(isPresent));
+            const output: Nullable<boolean> = nullable(unsafeNumber(0)).into(v => nullable(isPresent(v)));
 
             expect(output).toStrictEqual(only(true));
         });

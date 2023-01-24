@@ -17,6 +17,8 @@ import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 import { None, none, Optional, Some, some } from './optional';
 import { Boxed, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 describe(some, () => {
     it('can be assigned to Optional', () => {
         const output: Optional<number> = some(0);
@@ -697,7 +699,6 @@ describe(Some, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
             expect(some(0).lift(strictDecimalOutput))
@@ -726,5 +727,6 @@ describe(Some, () => {
             expect(output).toStrictEqual(some('0'));
         });
     });
-    /* eslint-enable deprecation/deprecation */
 });
+
+/* eslint-enable deprecation/deprecation */

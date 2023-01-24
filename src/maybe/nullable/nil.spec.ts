@@ -7,6 +7,8 @@ import { TypeGuardCheck } from '../maybe/type-guard-check.mock';
 import { Nil, nil, Nullable, Only, only } from './nullable';
 import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 describe(nil, () => {
     it('can be assigned to Nullable', () => {
         const output: Nullable<number> = nil();
@@ -723,7 +725,6 @@ describe(Nil, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -756,5 +757,6 @@ describe(Nil, () => {
             expect(output).toBe(nil());
         });
     });
-    /* eslint-enable deprecation/deprecation */
 });
+
+/* eslint-enable deprecation/deprecation */

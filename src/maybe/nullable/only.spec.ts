@@ -18,7 +18,8 @@ import { TypeGuardCheck, typeGuardCheck } from '../maybe/type-guard-check.mock';
 import { Nil, nil, Nullable, Only, only, solum } from './nullable';
 import { Boxed, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
-/* eslint-disable deprecation/deprecation -- providing solum until v0.10.0 */
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 describe(solum, () => {
     it('returns Only<T>', () => {
         const output: Only<number> = solum(0);
@@ -26,7 +27,6 @@ describe(solum, () => {
         expect(output).toStrictEqual(only(0));
     });
 });
-/* eslint-enable deprecation/deprecation */
 
 describe(only, () => {
     it('can be assigned to Nullable', () => {
@@ -711,7 +711,6 @@ describe(Only, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
             expect(only(0).lift(strictDecimalOutput))
@@ -738,5 +737,6 @@ describe(Only, () => {
             expect(output).toStrictEqual(only('0'));
         });
     });
-    /* eslint-enable deprecation/deprecation */
 });
+
+/* eslint-enable deprecation/deprecation */

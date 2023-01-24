@@ -2,6 +2,8 @@ import { safeDecimalOutput } from '../maybe/maybe.mock';
 
 import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 export interface Boxed<T> {
     readonly value: T | null;
 }
@@ -28,3 +30,5 @@ export function onlyDecimalOutput(input: number | undefined): Only<string> {
 export function nilDecimalOutput(): Nil<string> {
     return nil();
 }
+
+/* eslint-enable deprecation/deprecation */

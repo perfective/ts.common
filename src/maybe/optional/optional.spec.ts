@@ -15,6 +15,8 @@ import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 import { None, none, Optional, optional, Some, some } from './optional';
 import { fallbackOptional, noneDecimalOutput, optionalDecimalOutput, someDecimalOutput } from './optional.mock';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 function optionalDecimal(value: number | null | undefined): Optional<string> {
     return optional(value).to<string>(safeDecimalOutput);
 }
@@ -738,7 +740,6 @@ describe(Optional, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -771,5 +772,6 @@ describe(Optional, () => {
             expect(output).toStrictEqual(some('0'));
         });
     });
-    /* eslint-enable deprecation/deprecation */
 });
+
+/* eslint-enable deprecation/deprecation */

@@ -16,6 +16,8 @@ import { typeGuardCheck } from '../maybe/type-guard-check.mock';
 import { Nil, nil, Nullable, nullable, Only, only } from './nullable';
 import { fallbackNullable, nilDecimalOutput, nullableDecimalOutput, onlyDecimalOutput } from './nullable.mock';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 function nullableDecimal(value: number | null | undefined): Nullable<string> {
     return nullable<number | undefined>(value).to<string>(safeDecimalOutput);
 }
@@ -713,7 +715,6 @@ describe(Nullable, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:
@@ -746,5 +747,6 @@ describe(Nullable, () => {
             expect(output).toStrictEqual(only('0'));
         });
     });
-    /* eslint-enable deprecation/deprecation */
 });
+
+/* eslint-enable deprecation/deprecation */

@@ -1,6 +1,6 @@
 // ./maybe
 export {
-    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
     lift,
     onto,
     or,
@@ -22,6 +22,7 @@ export {
     nothing,
 } from './maybe/maybe';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
 // ./nullable
 export {
     Nil,
@@ -30,12 +31,9 @@ export {
     nullable,
     Only,
     only,
-    // eslint-disable-next-line deprecation/deprecation -- providing Solum until v0.10.0
     Solum,
-    // eslint-disable-next-line deprecation/deprecation -- providing solum until v0.10.0
     solum,
 } from './nullable/nullable';
-
 // ./optional
 export {
     None,
@@ -45,3 +43,4 @@ export {
     Some,
     some,
 } from './optional/optional';
+/* eslint-enable deprecation/deprecation */

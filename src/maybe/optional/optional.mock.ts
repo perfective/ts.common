@@ -2,6 +2,8 @@ import { safeDecimalOutput } from '../maybe/maybe.mock';
 
 import { None, none, Optional, optional, Some, some } from './optional';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+
 export interface Boxed<T> {
     readonly value?: T | undefined;
 }
@@ -28,3 +30,5 @@ export function someDecimalOutput(input: number | null): Some<string> {
 export function noneDecimalOutput(): None<string> {
     return none();
 }
+
+/* eslint-enable deprecation/deprecation */

@@ -4,7 +4,6 @@ import { isTrue, Proposition } from '../../boolean/proposition/proposition';
 import { Value, valueOf } from '../../function/function/nullary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
 import { Defined, isDefined, isUndefined } from '../../value/value';
-import { Option } from '../option';
 
 /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
 /* eslint-disable jsdoc/require-description -- Skip description in JSDocs that mark code as deprecated */
@@ -12,7 +11,7 @@ import { Option } from '../option';
 /**
  * @deprecated Since v0.9.0. Use {@linkcode Maybe} instead.
  */
-export abstract class Optional<T> implements Option<T, undefined> {
+export abstract class Optional<T> {
     /**
      * @deprecated Since v0.9.0. Use {@linkcode Maybe} instead.
      */

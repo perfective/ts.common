@@ -5,7 +5,6 @@ import { Value, valueOf } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
 import { isNull, isPresent, isUndefined, Present } from '../../value/value';
-import { Option } from '../option';
 
 /**
  * @sealed
@@ -14,7 +13,7 @@ import { Option } from '../option';
  * @see Nothing
  * @see Nil
  */
-export abstract class Maybe<T> implements Option<T, null | undefined> {
+export abstract class Maybe<T> {
     public abstract readonly value: T | null | undefined;
 
     public abstract onto<U>(

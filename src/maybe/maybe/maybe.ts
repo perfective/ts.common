@@ -287,6 +287,18 @@ export function just<T>(value: Present<T>): Just<T> {
     return new Just<T>(value);
 }
 
+/**
+ * Creates a function that applies a given {@linkcode map} to a {@linkcode value}
+ * and returns the result wrapped into a {@linkcode Just}.
+ *
+ * @since v0.9.0
+ */
+export function justOf<T, U>(
+    map: (value: T | null | undefined) => Present<U>,
+): Unary<T | null | undefined, Just<U>> {
+    return (value: T | null | undefined): Just<U> => just(map(value));
+}
+
 interface Memo {
     nothing: Nothing<unknown>;
     naught: Nothing<unknown>;

@@ -11,8 +11,9 @@ import {
     hasUndefinedProperty,
     ObjectWithPresent,
 } from '../../object/property/property';
+import { isPresent } from '../../value/value';
 
-import { Just, just, Maybe, naught, Nothing, nothing } from './maybe';
+import { Just, just, justOf, Maybe, naught, Nothing, nothing } from './maybe';
 import {
     Boxed,
     justDecimalOutput,
@@ -20,7 +21,8 @@ import {
     naughtDecimalOutput,
     nothingDecimalOutput,
     strictDecimalOutput,
-    unsafe, unsafeDecimalOutput,
+    unsafe,
+    unsafeDecimalOutput,
 } from './maybe.mock';
 import { TypeGuardCheck, typeGuardCheck } from './type-guard-check.mock';
 
@@ -46,6 +48,15 @@ describe(just, () => {
     it('throws an error if instantiated with undefined', () => {
         // @ts-expect-error -- TS2345: Argument of type 'undefined' is not assignable to parameter of type 'never'.
         expect(() => just(undefined)).toThrow(new TypeError('The value of `Just` must not be `undefined`'));
+    });
+});
+
+describe(justOf, () => {
+    it('creates a function to pass a `value` into a given `map` callback and return the result as a `Just`', () => {
+        const justIsPresent = justOf(isPresent);
+        const output: Just<boolean> = justIsPresent(null);
+
+        expect(output).toStrictEqual(just(false));
     });
 });
 

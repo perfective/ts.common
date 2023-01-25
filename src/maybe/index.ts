@@ -16,6 +16,7 @@ export {
 export {
     Just,
     just,
+    justOf,
     Maybe,
     maybe,
     maybeOf,

@@ -64,10 +64,11 @@ export abstract class Maybe<T> {
 /**
  * @final
  */
-export class Just<T> implements Maybe<T> {
+export class Just<T> extends Maybe<T> {
     public constructor(
         public readonly value: Present<T>,
     ) {
+        super();
         // Catches an error when the given argument passes the type definition, but is null or undefined in runtime.
         if (isNull(this.value)) {
             throw new TypeError('The value of `Just` must not be `null`');
@@ -162,10 +163,11 @@ export class Just<T> implements Maybe<T> {
 /**
  * @final
  */
-export class Nothing<T> implements Maybe<T> {
+export class Nothing<T> extends Maybe<T> {
     public constructor(
         public readonly value: null | undefined,
     ) {
+        super();
         if (isPresent(this.value)) {
             throw new TypeError('Nothing value must be absent');
         }

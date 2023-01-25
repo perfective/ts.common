@@ -63,6 +63,8 @@ describe(maybe, () => {
             const output: Just<number> = maybe(0);
 
             expect(output).toStrictEqual(just(0));
+            expect(output).toBeInstanceOf(Just);
+            expect(output).toBeInstanceOf(Maybe);
         });
     });
 
@@ -76,6 +78,8 @@ describe(maybe, () => {
             const output: Nothing<number> = maybe(null);
 
             expect(output).toBe(naught());
+            expect(output).toBeInstanceOf(Nothing);
+            expect(output).toBeInstanceOf(Maybe);
         });
     });
 
@@ -89,6 +93,8 @@ describe(maybe, () => {
             const output: Nothing<number> = maybe(undefined);
 
             expect(output).toBe(nothing());
+            expect(output).toBeInstanceOf(Nothing);
+            expect(output).toBeInstanceOf(Maybe);
         });
     });
 });

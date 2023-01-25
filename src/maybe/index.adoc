@@ -13,7 +13,7 @@ It allows the creation of chained calls similar to `Promise.then()` and RxJS `pi
 == Handling `null` and `undefined` values
 
 In JavaScript, two types represent an "absence" of value: `undefined` and `null`.
-So the dichotomies like `Just | Nothing` and `Some | None` do not fit precisely
+So the dichotomies like `Just | Nothing` or `Some | None` do not fit precisely
 and require additional logic to cover all the cases: `T | null | undefined`.
 For example, when you create a new `Maybe<T>` with a `null` value,
 it has to maintain the value as `null` and should not change it to `undefined`.
@@ -52,32 +52,37 @@ but the field is not returned if a user does not have access to it.
 In this case, you may prefer to fall back from `null` to a default value
 but to throw an error for `undefined`.
 
-To cover these cases, `@perfective/common/maybe` provides additional types:
-
-* `Nullable<T>` that considers `null` as _absent_ and `undefined` as _present_:
-** `Only<T>` represents a present value;
-** `Nil<T>` represents an absent value.
-+
-* `Optional<T>` that considers `undefined` as _absent_ and `null` as _present_:
-** `Some<T>` represents a present value;
-** `None<T>` represents an absent value.
+To cover these cases, `@perfective/common/maybe` provides the `Maybe.into()` method:
+it allows to apply a function that handles either `T`, `null`, or `undefined` value.
 
 .The original absent value (`null` or `undefined`) is maintained through transformations.
 [source,typescript]
 ----
-import { nullable, optional } from '@perfective/common/maybe';
-import { isGreaterThan } from '@perfective/common/number';
+import { isNull, isUndefined } from '@perfective/common';
+import { panic } from '@perfective/common/error';
+import { just } from '@perfective/common/maybe';
 
-nullable(3.14)
-    .that(isGreaterThan(4))
-    .value === null; // <.>
+interface ApiResponse {
+    username?: string | null;
+}
 
-optional(3.14)
-    .that(isGreaterThan(4))
-    .value === undefined; // <.>
+function username(response: ApiResponse) {
+    return just(response)
+        .pick('username')
+        .into((username: string | null | undefined) => { // <.>
+            if (isUndefined(username)) {
+                return panic('Unknown username');
+            }
+            if (isNull(username)) {
+                return 'anonymous';
+            }
+            return username;
+        });
+}
 ----
-<.> `Nullable<T>` returns `null` when the value is absent (`Nil<T>`)
-<.> `Optional<T>` returns `undefined` when the value is absent (`None<T>`).
+<.> As  `Maybe` preserves the original type,
+the result of the `pick()` can be either `nothing()` or `naught()`.
+So `Maybe.into()` will have a correct value on input.
 
 
 == Preserving the monad type
@@ -240,14 +245,14 @@ Since v0.9.0,
 
 == Reference
 
-There are three distinct type groups available in this package:
+=== Types
 
-* `Maybe<T>` is `Just<T>` or `Nothing<T>`;
-* `Optional<T>` is `Some<T>` or `None<T>`;
-* `Nullable<T>` is `Only<T>` or `Nil<T>`.
-
-The examples below are shown primarily for the `Maybe` type,
-as the most used.
+* `Maybe<T>`
+— an abstract class, represents either `Just<T>` or `Nothing<T>`.
+* `Just<T>`
+— represents a defined non-null value of type `T`.
+* `Nothing<T>`
+— represents an `undefined` or `null` value.
 
 
 === `onto(flatMap)`
@@ -327,31 +332,32 @@ so the argument type does not match.
 so the result is not the same as applying `decimal` directly.
 
 If you have to use custom handling of `null`/`undefined`,
-you should use `Optional<T>` or `Nullable<T>` types
-that treat `null` and `undefined` as present values.
+you should use the `Maybe.into()` method
+that passed `null` and `undefined` as into the callback.
 
-.Custom handling of `null` with `Optional<T>.onto()` satisfying the _left-identity_ law.
+.Custom handling of `null` and `undefined`
 [source,typescript]
 ----
-import { isNull } from '@perfective/common';
-import { Some, some, none } from '@perfective/common/maybe';
+import { isAbsent } from '@perfective/common';
+import { Just, just, nothing, naught } from '@perfective/common/maybe';
 
-function decimal(value: number | null): Some<string> { // <.>
-    if (isNull(value)) {
+function decimal(value: number | null | undefined): Just<string> {
+    if (isAbsent(value)) {
         return just('0');
     }
     return just(value.toString(10));
 }
 
-some(3.14).onto(decimal) == decimal(3.14); // <.>
-none().onto(decimal) == decimal(null); // <.>
+just(3.14).onto(decimal) == decimal(3.14); // === just('3.14')
+just(3.14).into(decimal) == decimal(3.14); // === just('3.14')
+
+nothing().onto(decimal) == nothing(); // != decimal(undefined);
+nothing().into(decimal) == decimal(undefined); // === just('0')
+
+naught().onto(decimal) == naught(); // != decimal(null);
+naught().into(decimal) == decimal(null); // === just('0')
 ----
-<.> `Optional<T>.onto()` expects the function of type `Unary<number | null, Optional<string>>`,
-and the `decimal` function is of type `Unary<number | null, Some<string>>`,
-so the argument type matches.
-<.> Applying `decimal` to a present `number` behaves as expected.
-<.> When the value is `null`, `Optional<T>` considers it as present and runs `onto(decimal)`,
-so the result is the same as applying `decimal` directly.
+
 
 For the (legacy) functions
 (written prior to using `Maybe`)
@@ -705,10 +711,10 @@ The `Maybe.run()` does not check if the given procedure mutates the present valu
 
 [source,typescript]
 ----
-import { optional } from '@perfective/common/maybe';
+import { maybe } from '@perfective/common/maybe';
 
 function logError(error?: Error): Error|undefined {
-    return optional(error)
+    return maybe(error)
         .run(console.error);
 }
 ----
@@ -762,9 +768,3 @@ const numbers: Maybe<number>[] = [
 
 numbers.map(or(0)) === [2.71, 3.14, 0, 0];
 ----
-
-[WARNING]
-====
-As of v0.6.0, the lifting functions are only supported for the `Maybe`/`Just`/`Nothing` types
-and not for `Nullable`/`Only`/`Nil` or `Optional`/`Some`/`None`.
-====

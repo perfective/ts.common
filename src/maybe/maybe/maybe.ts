@@ -247,11 +247,30 @@ export class Nothing<T> implements Maybe<T> {
     }
 }
 
+/**
+ * Creates an instance of {@linkcode Just} with the present {@linkcode value}.
+ */
 export function maybe<T>(value: Present<T>): Just<T>;
+
+/**
+ * Returns a memoized instance of {@linkcode Nothing}
+ * with either {@linkcode null} or {@linkcode undefined} value.
+ */
 export function maybe<T>(value: null | undefined): Nothing<T>;
+
+/**
+ * Creates an instance of {@linkcode Just} when the {@linkcode value} is present
+ * or returns a memoized instance of {@linkcode Nothing}
+ * with either {@linkcode null} or {@linkcode undefined} value.
+ */
 export function maybe<T>(value: T | null | undefined): Maybe<T>;
 
-export function maybe<T>(value: T | null | undefined): Just<T> | Nothing<T> | Maybe<T> {
+/**
+ * Creates an instance of {@linkcode Just} when the {@linkcode value} is present
+ * or returns a memoized instance of {@linkcode Nothing}
+ * with either {@linkcode null} or {@linkcode undefined} value.
+ */
+export function maybe<T>(value: T | null | undefined): Maybe<T> {
     if (isPresent(value)) {
         return just(value);
     }
@@ -261,28 +280,63 @@ export function maybe<T>(value: T | null | undefined): Just<T> | Nothing<T> | Ma
     return nothing();
 }
 
+/**
+ * Creates a function that applies a given {@linkcode map} to a present {@linkcode value}
+ * and returns the defined and non-null result wrapped into a {@linkcode Just}.
+ *
+ * @since v0.9.0
+ */
 export function maybeOf<T, U>(
     map: (value: T | null | undefined) => Present<U>,
 ): Unary<T | null | undefined, Just<Present<U>>>;
+
+/**
+ * Creates a function that applies a given {@linkcode map} to a {@linkcode value}
+ * and returns the present result wrapped into a {@linkcode Just}.
+ *
+ * @since v0.9.0
+ */
 export function maybeOf<T, U>(
     map: (value: Present<T>) => Present<U>,
 ): Unary<Present<T>, Just<Present<U>>>;
+
+/**
+ * Creates a function that applies a given {@linkcode map} to a {@linkcode value}
+ * and returns the null or undefined result wrapped into a {@linkcode Nothing}.
+ *
+ * @since v0.9.0
+ */
 export function maybeOf<T, U>(
     map: (value: T | null | undefined) => null | undefined,
 ): Unary<T | null | undefined, Nothing<U>>;
+
+/**
+ * Creates a function that applies a given {@linkcode map} to a {@linkcode value}
+ * and returns the result wrapped into a {@linkcode Maybe}.
+ *
+ * @since v0.9.0
+ */
 export function maybeOf<T, U>(
     map: (value: T | null | undefined) => U | null | undefined,
 ): Unary<T | null | undefined, Maybe<U>>;
 
 /**
- * Wraps a result of the given "map" function into a Maybe.
+ * Creates a function that applies a given {@linkcode map} to a {@linkcode value}
+ * and returns the result wrapped into a {@linkcode Maybe}.
+ *
+ * @since v0.9.0
  */
 export function maybeOf<T, U>(
     map: (value: T | null | undefined) => U | null | undefined,
-): Unary<T | null | undefined, Maybe<U> | Just<U> | Nothing<U>> {
+): Unary<T | null | undefined, Maybe<U>> {
     return (value: T | null | undefined): Maybe<U> | Just<U> | Nothing<U> => maybe(map(value));
 }
 
+/**
+ * Creates an instance of {@linkcode Just} with a given defined non-null {@linkcode value}.
+ *
+ * A unit (return) function for the {@linkcode Maybe} monad.
+ */
 export function just<T>(value: Present<T>): Just<T> {
     return new Just<T>(value);
 }
@@ -309,10 +363,16 @@ const memo: Memo = {
     naught: new Nothing(null),
 };
 
+/**
+ * Returns a memoized instance of {@linkcode Nothing} with an {@linkcode undefined} value.
+ */
 export function nothing<T>(): Nothing<T> {
     return memo.nothing as Nothing<T>;
 }
 
+/**
+ * Returns a memoized instance of {@linkcode Nothing} with a {@linkcode null} value.
+ */
 export function naught<T>(): Nothing<T> {
     return memo.naught as Nothing<T>;
 }

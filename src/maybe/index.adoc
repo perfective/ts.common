@@ -255,6 +255,25 @@ Since v0.9.0,
 — represents an `undefined` or `null` value.
 
 
+=== Functions
+
+* `maybe<T>(value: T | null | undefined): Maybe<T>`
+— creates an instance of `Just` when the `value` is present,
+or returns a memoized instance of `Nothing`
+with either `null` or `undefined` `value`.
+* `maybeOf<T, U>(map: Unary<T | null | undefined, U | null | undefined>): Unary<T | null | undefined, Maybe<U>>`
+* `just<T>(value: Present<T>): Just<T>`
+— creates an instance of `Just` with a given defined non-null `value`.
+A _unit_ (_return_) function for the `Maybe` monad.
+* `justOf<T, U>(map: Unary<T | null | undefined, Present<U>>): Unary<T | null | undefined, Just<U>>`
+— creates a function that applies a given `map` to a value
+and returns the result wrapped into a `Just`.
+* `nothing<T>(): Nothing<T>`
+— returns a memoized instance of `Nothing` with an `undefined` value.
+* `naught<T>(): Nothing<T>`
+— returns a memoized instance of `Nothing` with a `null` value.
+
+
 === `onto(flatMap)`
 
 `Maybe.onto()` is the _bind_ operator (`>>=`)

@@ -8,6 +8,79 @@ It provides a mechanism for "checked exceptions"
 and allows to avoid `try-catch` blocks and unchecked JavaScript errors.
 
 
+== Using `Result` with `Promise`
+
+You can use `Result<T>` to handle synchronous parts of `Promise` chains.
+
+[source,typescript]
+----
+import { error, throws } from '@perfective/common/error';
+import { Unary } from '@perfective/common/function';
+import { failure, promisedResult, Result, settledResult, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+interface Request {
+    method: string;
+    url: string;
+}
+
+function validInput(id: string): string {
+    if (isEmpty(id)) {
+        return throws(error('Input id is empty'));
+    }
+    return id;
+}
+
+function apiRequest(method: string): Unary<string, Request> {
+    return (id: string): Request => ({
+        method,
+        url: `/entity/${id}`,
+    });
+}
+
+async function apiResponse(request: Request): Promise<string> {
+    if (request.method === 'HEAD') {
+        return '501 Not Implemented';
+    }
+    return '200 OK';
+}
+
+async function entityById(inputId: Promise<string>): Promise<string> {
+    return inputId
+        .then(validInput)
+        .then(apiRequest('HEAD')) // <.>
+        .then(apiResponse);
+}
+
+async function entityById(inputId: Promise<string>): Promise<string> {
+    return promisedResult(inputId) // <.>
+        .then(headApiRequest) // <.>
+        .then(settledResult) // <.>
+        .then(apiResponse);
+}
+
+async function headApiRequest(inputId: Result<string>): Result<Request> {
+    return inputId.onto(validId).to(apiRequest('HEAD'));
+}
+
+function validId(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(error('Input id is empty'));
+    }
+    return success(id);
+}
+----
+<.> Even if the `inputId` is a `Promise`,
+and the `apiResponse` is an asynchronous function,
+the `validInput` and `apiRequest` functions are synchronous.
+<.> Use `promisedResult` to wrap `Promise` resolved value or rejection into a `Result`.
+<.> The result is transformed using a synchronous `headApiRequest` function.
+<.> Use `settledResult` to unpack a `Result` into a settled `Promise`.
+In this case, if the value is a `Success`, a fulfilled `Promise` is returned.
+But if the value is a `Failure`,
+then a `Promise` is rejected.
+
+
 == Reference
 
 === Functions
@@ -37,6 +110,11 @@ Throws a `TypeError`, if the given `error` value is not an `Error` object.
 — creates a function to transform a `value` into an `Error` with a given `map` callback
 and return the result as a `Failure`.
 +
+* `rejection<T = never>(reason: unknown): Failure<T>`
+— creates a `Failure` from an `unknown` `reason`.
+Pass `rejection` into `Promise.catch()` or `Promise.then()` as an `onRejected` callback
+to wrap a `reason` into a `Failure`.
++
 * `result<T>(value: T | Error): Result<T>`
 — creates a `Failure` if a given value is an `Error`,
 otherwise creates a `Success`.
@@ -57,6 +135,12 @@ to get the return type as `Result<T>`.
 — creates a function to transform a `value` with a given `map` callback
 and return the result as a `Failure`, if the result is an `Error`,
 or a `Success`.
++
+* `promisedResult<T>(promise: Promise<T>): Promise<Result<T>>`
+— wraps a `Promise` _value_ into a `Result`.
++
+* `settledResult<T>(result: Result<T>): Promise<T>`
+— creates a _settled_ `Promise` from a given `Result`.
 +
 * `recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>>`
 — creates a function that returns a given `fallback` wrapped into a `Success`,

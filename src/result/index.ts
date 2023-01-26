@@ -1,4 +1,9 @@
 export {
+    promisedResult,
+    rejection,
+    settledResult,
+} from './result/promise';
+export {
     Failure,
     failure,
     failureOf,

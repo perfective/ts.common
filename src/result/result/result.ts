@@ -255,7 +255,7 @@ export class Failure<T> extends Result<T> {
         if (isDefined(reduceError)) {
             return reduceError(this.value);
         }
-        // When reduceError() argument is not defined, then it can only be an unary method signature.
+        // When reduceError() argument is not defined, then it can only be a unary method signature.
         return (reduceValue as Unary<T | Error, U>)(this.value);
     }
 

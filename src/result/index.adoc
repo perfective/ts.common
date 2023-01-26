@@ -123,8 +123,8 @@ otherwise creates a `Success`.
 ====
 TypeScript compiler does not exclude an `Error` type from the `T` automatically.
 
-If you pass a `value` of type `T | Error` to the `result()`
-then the return type will be `Success<T | Error>`.
+If you pass a `value` of type `T | Error` to the `result()`,
+the return type will be `Success<T | Error>`.
 
 You have to cast the type parameter manually
 (e.g., `result<string>(...)`)
@@ -133,8 +133,8 @@ to get the return type as `Result<T>`.
 +
 * `resultOf<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>`
 — creates a function to transform a `value` with a given `map` callback
-and return the result as a `Failure`, if the result is an `Error`,
-or a `Success`.
+and return the result as a `Failure`, if the result is an `Error`.
+Otherwise, it returns a `Success`.
 +
 * `promisedResult<T>(promise: Promise<T>): Promise<Result<T>>`
 — wraps a `Promise` _value_ into a `Result`.
@@ -143,12 +143,12 @@ or a `Success`.
 — creates a _settled_ `Promise` from a given `Result`.
 +
 * `recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>>`
-— creates a function that returns a given `fallback` wrapped into a `Success`,
+— creates a function that returns a given `fallback` wrapped into a `Success`
 when an error is given.
 +
 [WARNING]
 ====
-Even if the `T` if a type of `Error`,
+Even if the `T` is a type of `Error`,
 the `fallback` value will be returned.
 ====
 
@@ -215,11 +215,13 @@ validInput('')
 ----
 <.> When we have a valid `id` and "send" a `GET` request,
 then the whole chain succeeds.
-<.> When we have a valid `id` but "send" a `HEAD` request the `apiResponse` fails with an `Error`.
-<.> When we have an invalid `id` neither the `apiRequest` nor `apiResponse` callbacks are called.
+<.> When we have a valid `id` but "send" a `HEAD` request,
+the `apiResponse` fails with an `Error`.
+<.> When we have an invalid `id`,
+neither the `apiRequest` nor `apiResponse` callbacks are called.
 +
-So even as a `HEAD` request it would fail,
-the error is the earliest one in the chain
+So even as a `HEAD` request,
+it would fail with the earliest error in the chain
 (from `validInput`).
 
 
@@ -282,7 +284,8 @@ validInput('')
 `Result.to` wraps them into the next `Success`.
 <.> When we have a valid `id`,
 then the whole chain succeeds.
-<.> When we have an invalid `id` neither `apiRequest` nor `apiResponse` callbacks are called.
+<.> When we have an invalid `id`,
+neither `apiRequest` nor `apiResponse` callbacks are called.
 So the result is the `TypeError` returned by the `validInput`.
 +
 * `Result.to<U>(mapValue: (value: T) => U, mapError: (error: Error) => Error): Result<U>`
@@ -290,8 +293,7 @@ So the result is the `TypeError` returned by the `validInput`.
 ** for a `Failure`, applies a given `mapError` callback to the `Failure.value` and returns the result as s `Failure`.
 
 +
-This method can be used to track all occurred failures,
-by chaining them together using the `mapError`.
+This method can be used to track all occurred failures by chaining them together using the `mapError`.
 
 
 === `Result.into()`
@@ -356,7 +358,7 @@ we use `Result.into()` to switch it to the `apiResponse` `Promise`.
 for a `Failure` applies a given `reduceError` to the `Failure.value` (`Error`).
 +
 `Result.into(reduceValue, reduceError)` is a strict separate handling of the `Success.value` and `Failure.value`.
-It is especially useful, when the `Success.value` is an `Error`.
+It is especially useful when the `Success.value` is an `Error`.
 As in this case,
 the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
 and a `Failure.value` `Error`.
@@ -365,8 +367,8 @@ and a `Failure.value` `Error`.
 === `Result.failure()`
 
 * `Result.failure(mapError: (error: Error) => Error): Result<T>`
-** for a `Failure`, applies a given `mapError` callback and returns a result wrapped into a `Failure`.
-** for a `Success`, ignores the `mapError` callback and returns itself.
+** For a `Failure`, applies a given `mapError` callback and returns a result wrapped into a `Failure`.
+** For a `Success`, ignores the `mapError` callback and returns itself.
 
 [source,typescript]
 ----
@@ -389,15 +391,15 @@ function entityByIdRequest(id: string): Result<Request> {
         .to(apiRequest('GET'));
 }
 ----
-<.> When `validInput` returns a `Failure`
+<.> When `validInput` returns a `Failure`,
 you can use `Result.failure` method to chain or otherwise transform the error.
 
 
 === `Result.run()`
 
 * `Result.run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Result<T>`
-** for a `Success`, runs a given `valueProcedure` and returns itself;
-** for a `Failure`, runs a given `errorProcedure` and returns itself.
+** For a `Success`, runs a given `valueProcedure` and returns itself;
+** For a `Failure`, runs a given `errorProcedure` and returns itself.
 
 [source,typescript]
 ----
@@ -526,7 +528,7 @@ failure(error).to(id, id) === failure(id(error));
 3. `Result.failure(mapError)` preserves identity morphisms
 +
 +
-4. Applying the `bimap` function is the same as applying `first` and `second` functions.
+4. Applying the `bimap` function is the same as applying the `first` and `second` functions.
 +
 [source,typescript]
 ----

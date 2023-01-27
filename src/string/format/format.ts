@@ -1,5 +1,3 @@
-import { Output, output } from '../string/output';
-
 import { tokenKey, Tokens, tokens as prepared } from './tokens';
 
 export interface Format {
@@ -7,7 +5,7 @@ export interface Format {
     readonly tokens: Tokens;
 }
 
-export function format(template: string, tokens: Tokens | Output[] = {}): Format {
+export function format(template: string, tokens: Tokens | unknown[] = {}): Format {
     return {
         template,
         tokens: prepared(tokens),
@@ -18,6 +16,6 @@ export function formatted(input: Format): string {
     return Object.entries(input.tokens)
         .reduce((formatted, [key, value]) => formatted.replace(
             tokenKey(key),
-            output(value),
+            String(value),
         ), input.template);
 }

@@ -42,11 +42,6 @@ It provides the following functions and additional types.
 ** `lastIndexOf(search: string, from?: number): Unary<string, number>`
 ** `search(search: RegExp): Unary<string, number | -1>`
 +
-* `Output` — an interface to explicitly require `toString()` method implementation
-** `output<T extends Output>(value: T | string | null | undefined): string`
-** `isOutput<T>(value: Output | T): value is Output`
-** `isNotOutput<T>(value: Output | T): value is T`
-+
 * `Utf16CodeUnit`:
 ** `stringFromCharCode(...codes: Utf16CodeUnit[]): string`
 ** `charCodeAt(index: number): Unary<string, Utf16CodeUnit>`
@@ -62,14 +57,14 @@ It provides the following functions and additional types.
 == Format
 
 * `Format`:
-** `format(template: string, tokens: Tokens | Output[] = {}): Format`
+** `format(template: string, tokens: Tokens | unknown[] = {}): Format`
 — creates a `Format` record converting positional tokens into named.
 ** `formatted(input: Format): string`
 — replaces input tokens in the input template.
 +
 * `Tokens`:
-** `tokens(tokens: Output[] | Tokens): Tokens`
-— converts positional tokens (an array of `Output` values) into named `Tokens`.
+** `tokens(tokens: unknown[] | Tokens): Tokens`
+— converts positional tokens (an array of `unknown` values) into named `Tokens`.
 
 
 == Roadmap

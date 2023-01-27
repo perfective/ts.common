@@ -1,5 +1,3 @@
-import { output } from '../string/output';
-
 import { Format, format, formatted } from './format';
 import { Tokens } from './tokens';
 
@@ -16,7 +14,7 @@ describe('format', () => {
 
     describe('format(string, string[])', () => {
         it('creates a Format record with named tokens converted from positional tokens', () => {
-            expect(format('Absent values are {{0}} and {{1}}', [output(undefined), output(null)]))
+            expect(format('Absent values are {{0}} and {{1}}', [undefined, null]))
                 .toStrictEqual({
                     template: 'Absent values are {{0}} and {{1}}',
                     tokens: {

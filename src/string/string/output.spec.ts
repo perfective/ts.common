@@ -1,5 +1,6 @@
 import { isNotOutput, isOutput, output } from './output';
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
 describe('output', () => {
     it('returns a string value as is', () => {
         expect(output('3.14'))
@@ -121,3 +122,4 @@ describe('isNotOutput', () => {
             .toBe(true);
     });
 });
+/* eslint-enable deprecation/deprecation */

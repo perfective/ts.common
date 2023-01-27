@@ -2,7 +2,6 @@ import { Exception } from '../../error';
 import { error, isError } from '../../error/error/error';
 import { decimal } from '../../number/number/base';
 import { isInteger } from '../../number/number/integer';
-import { output as stringOutput } from '../../string/string/output';
 import { isNull } from '../../value/value';
 
 import { Failure, failure, Result, Success, success } from './result';
@@ -69,8 +68,9 @@ export function safeNumberOutput(input: number | Error): string {
     return strictNumberOutput(input);
 }
 
+// eslint-disable-next-line unicorn/prefer-native-coercion-functions -- a strict number-to-string function for testing.
 export function strictNumberOutput(input: number): string {
-    return stringOutput(input);
+    return String(input);
 }
 
 export function unsafeNumberOutput(input: string): number | Error {

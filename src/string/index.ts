@@ -40,12 +40,14 @@ export {
     UnicodeNormalizationForm,
     upperCase,
 } from './string/lift';
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
 export {
     isNotOutput,
     isOutput,
     Output,
     output,
 } from './string/output';
+/* eslint-enable deprecation/deprecation */
 export {
     CodePoint,
     isEmpty,

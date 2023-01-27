@@ -1,13 +1,11 @@
-import { Output } from '../string/output';
-
 export interface Tokens
-    extends Record<string, Output> {
+    extends Record<string, string> {
 }
 
-export function tokens(tokens: Output[] | Tokens): Tokens {
+export function tokens(tokens: unknown[] | Tokens): Tokens {
     if (Array.isArray(tokens)) {
-        return tokens.reduce((tokens: Tokens, value: Output, i: number): Tokens => {
-            tokens[i.toString(10)] = value;
+        return tokens.reduce((tokens: Tokens, value: unknown, i: number): Tokens => {
+            tokens[i.toString(10)] = String(value);
             return tokens;
         }, {});
     }

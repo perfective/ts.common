@@ -1,3 +1,5 @@
+import { isAbsent, isPresent } from '../../value/value';
+
 import { isRecord } from './predicate';
 import { Entry, toRecordFromEntries } from './record';
 
@@ -35,3 +37,25 @@ export function clone<T>(value: T): T {
     }
     return copy(value);
 }
+
+/* eslint-disable @typescript-eslint/no-explicit-any -- check if method is defined */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- check if method is defined */
+
+/**
+ * Returns true if a given {@linkcode value} implements a given {@linkcode method}.
+ * Otherwise returns false.
+ */
+export function hasMethod(value: unknown, method: string): boolean {
+    return isPresent(value) && typeof (value as any)[method] === 'function';
+}
+
+/**
+ * Returns true if a given {@linkcode value} does not implement a given {@linkcode method}.
+ * Otherwise returns false.
+ */
+export function hasNoMethod(value: unknown, method: string): boolean {
+    return isAbsent(value) || typeof (value as any)[method] !== 'function';
+}
+
+/* eslint-enable @typescript-eslint/no-explicit-any */
+/* eslint-enable @typescript-eslint/no-unsafe-member-access */

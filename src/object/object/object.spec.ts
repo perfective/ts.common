@@ -1,4 +1,4 @@
-import { clone, copy } from './object';
+import { clone, copy, hasMethod, hasNoMethod } from './object';
 
 describe('copy', () => {
     it('creates a shallow copy of an array', () => {
@@ -155,5 +155,45 @@ describe('clone', () => {
         input.array.pop();
 
         expect(output.array).not.toStrictEqual(input.array);
+    });
+});
+
+describe(hasMethod, () => {
+    it('returns true when a given `value` implements a given `method`', () => {
+        expect(hasMethod(true, 'toString'))
+            .toBe(true);
+        expect(hasMethod(0, 'toPrecision'))
+            .toBe(true);
+        expect(hasMethod(new Date(), 'toLocaleString'))
+            .toBe(true);
+    });
+
+    it('returns false when a given `value` does not implement a given `method`', () => {
+        expect(hasMethod(undefined, 'toString'))
+            .toBe(false);
+        expect(hasMethod(null, 'toString'))
+            .toBe(false);
+        expect(hasMethod({}, 'toPrecision'))
+            .toBe(false);
+    });
+});
+
+describe(hasNoMethod, () => {
+    it('returns true when a given `value` does not implement a given `method`', () => {
+        expect(hasNoMethod(undefined, 'toString'))
+            .toBe(true);
+        expect(hasNoMethod(null, 'toString'))
+            .toBe(true);
+        expect(hasNoMethod({}, 'toPrecision'))
+            .toBe(true);
+    });
+
+    it('returns false when a given `value` implements a given `method`', () => {
+        expect(hasNoMethod(true, 'toString'))
+            .toBe(false);
+        expect(hasNoMethod(0, 'toPrecision'))
+            .toBe(false);
+        expect(hasNoMethod(new Date(), 'toLocaleString'))
+            .toBe(false);
     });
 });

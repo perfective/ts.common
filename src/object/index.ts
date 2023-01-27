@@ -24,6 +24,8 @@ export {
 export {
     clone,
     copy,
+    hasMethod,
+    hasNoMethod,
 } from './object/object';
 export {
     isEmpty,

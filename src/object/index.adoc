@@ -51,6 +51,10 @@ The `@perfective/common/object` package provides functions to work with the stan
 ** `isFalsy<T>(value: T): boolean`
 ** `isEmpty<T>(value: T): boolean`
 — returns `true` when the value is truthy or is a non-empty array or object.
+** `hasMethod(value: unknown, method: string): boolean`
+— returns `true` when a given value implements a given `method`.
+** `hasNoMethod(value: unknown, method: string): boolean`
+— returns `true` when a given value implements a given `method`.
 +
 * Reducers:
 ** `toRecordFromEntries(record: Record<string, unknown>, value: Entry): Record<string, unknown>`

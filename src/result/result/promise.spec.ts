@@ -28,7 +28,7 @@ describe(rejection, () => {
     it('creates a `Failure` from a non-`Error` reason', () => {
         const output: Failure<never> = rejection('Rejected Promise');
 
-        expect(output).toStrictEqual(failure(exception('Literal error')));
+        expect(output).toStrictEqual(failure(exception('Unknown error: `Rejected Promise`')));
     });
 
     describe('with Promise', () => {

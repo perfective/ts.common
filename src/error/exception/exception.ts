@@ -54,10 +54,22 @@ export function causedBy(
     return new Exception(exceptionMessage(message, tokens), context, previous);
 }
 
-export function unknownError(error: unknown): Error | Exception {
-    return isError(error)
-        ? error
-        : exception('Literal error', {}, { error });
+/**
+ * Wraps a non-{@linkcode Error} {@linkcode value} into an {@linkcode Exception}.
+ * The {@linkcode Exception.message} starts with `Unknown error`
+ * and contains the given {@linkcode value} coerced to a string.
+ *
+ * Returns an original {@linkcode value} when given an {@linkcode Error}.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#string_coercion
+ */
+export function unknownError(value: unknown): Error | Exception {
+    if (isError(value)) {
+        return value;
+    }
+    return exception('Unknown error: {{error}}', {
+        error: String(value),
+    }, { error: value });
 }
 
 export function isException<T>(value: Exception | T): value is Exception {

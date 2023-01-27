@@ -166,7 +166,7 @@ describe('causedBy', () => {
     });
 });
 
-describe('unknownError', () => {
+describe(unknownError, () => {
     it('returns the passed value as is when the value is an Error', () => {
         const error: Exception = exception('Failure');
 
@@ -176,11 +176,11 @@ describe('unknownError', () => {
 
     it('returns an exception with the passed value in context when the value is not an Error', () => {
         expect(unknownError('Failure'))
-            .toStrictEqual(exception('Literal error', {}, {
+            .toStrictEqual(exception('Unknown error: `Failure`', {}, {
                 error: 'Failure',
             }));
-        expect(unknownError(404))
-            .toStrictEqual(exception('Literal error', {}, {
+        expect(unknownError({ code: 404 }))
+            .toStrictEqual(exception('Unknown error: `[object Object]`', {}, {
                 error: 404,
             }));
     });

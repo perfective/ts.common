@@ -13,7 +13,7 @@ import {
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 
-import { Just, just, justOf, Maybe, naught, Nothing, nothing } from './maybe';
+import { Just, just, justFrom, Maybe, naught, Nothing, nothing } from './maybe';
 import {
     Boxed,
     justDecimalOutput,
@@ -51,9 +51,9 @@ describe(just, () => {
     });
 });
 
-describe(justOf, () => {
+describe(justFrom, () => {
     it('creates a function to pass a `value` into a given `map` callback and return the result as a `Just`', () => {
-        const justIsPresent = justOf(isPresent);
+        const justIsPresent = justFrom(isPresent);
         const output: Just<boolean> = justIsPresent(null);
 
         expect(output).toStrictEqual(just(false));

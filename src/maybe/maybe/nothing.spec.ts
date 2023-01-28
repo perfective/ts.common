@@ -2,7 +2,7 @@ import { panic } from '../../error/panic/panic';
 import { constant, Nullary } from '../../function/function/nullary';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 
-import { Just, just, Maybe, maybeOf, naught, Nothing, nothing } from './maybe';
+import { Just, just, Maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
 import {
     Boxed,
     justDecimalOutput,
@@ -213,7 +213,7 @@ describe(Nothing, () => {
         });
 
         it('can be used to return Maybe', () => {
-            const output: Maybe<string> = naught().into(maybeOf(safeDecimalOutput));
+            const output: Maybe<string> = naught().into(maybeFrom(safeDecimalOutput));
 
             expect(output).toStrictEqual(just('null'));
         });

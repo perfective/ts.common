@@ -55,7 +55,7 @@ export abstract class Maybe<T> {
     /**
      * Lifts a function into the Maybe monad.
      *
-     * @deprecated Since v0.9.0. Use `Maybe.into(maybeOf)` instead.
+     * @deprecated Since v0.9.0. Use `Maybe.into(maybeFrom)` instead.
      */
     // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     public abstract lift<U>(map: (value: T | null | undefined) => U | null | undefined): Maybe<U>;
@@ -153,7 +153,7 @@ export class Just<T> extends Maybe<T> {
     /**
      * Lifts a function into the Maybe monad.
      *
-     * @deprecated Since v0.9.0. Use `Maybe.into(maybeOf)` instead.
+     * @deprecated Since v0.9.0. Use `Maybe.into(maybeFrom)` instead.
      */
     public lift<U>(map: (value: T) => U | null | undefined): Maybe<U> {
         return maybe(map(this.value));
@@ -241,7 +241,7 @@ export class Nothing<T> extends Maybe<T> {
     /**
      * Lifts a function into the Maybe monad.
      *
-     * @deprecated Since v0.9.0. Use `Maybe.into(maybeOf)` instead.
+     * @deprecated Since v0.9.0. Use `Maybe.into(maybeFrom)` instead.
      */
     public lift<U>(map: (value: null | undefined) => U | null | undefined): Maybe<U> {
         return maybe(map(this.value));
@@ -287,7 +287,7 @@ export function maybe<T>(value: T | null | undefined): Maybe<T> {
  *
  * @since v0.9.0
  */
-export function maybeOf<T, U>(
+export function maybeFrom<T, U>(
     map: (value: T | null | undefined) => Present<U>,
 ): Unary<T | null | undefined, Just<Present<U>>>;
 
@@ -297,7 +297,7 @@ export function maybeOf<T, U>(
  *
  * @since v0.9.0
  */
-export function maybeOf<T, U>(
+export function maybeFrom<T, U>(
     map: (value: Present<T>) => Present<U>,
 ): Unary<Present<T>, Just<Present<U>>>;
 
@@ -307,7 +307,7 @@ export function maybeOf<T, U>(
  *
  * @since v0.9.0
  */
-export function maybeOf<T, U>(
+export function maybeFrom<T, U>(
     map: (value: T | null | undefined) => null | undefined,
 ): Unary<T | null | undefined, Nothing<U>>;
 
@@ -317,7 +317,7 @@ export function maybeOf<T, U>(
  *
  * @since v0.9.0
  */
-export function maybeOf<T, U>(
+export function maybeFrom<T, U>(
     map: (value: T | null | undefined) => U | null | undefined,
 ): Unary<T | null | undefined, Maybe<U>>;
 
@@ -327,7 +327,7 @@ export function maybeOf<T, U>(
  *
  * @since v0.9.0
  */
-export function maybeOf<T, U>(
+export function maybeFrom<T, U>(
     map: (value: T | null | undefined) => U | null | undefined,
 ): Unary<T | null | undefined, Maybe<U>> {
     return (value: T | null | undefined): Maybe<U> | Just<U> | Nothing<U> => maybe(map(value));
@@ -348,7 +348,7 @@ export function just<T>(value: Present<T>): Just<T> {
  *
  * @since v0.9.0
  */
-export function justOf<T, U>(
+export function justFrom<T, U>(
     map: (value: T | null | undefined) => Present<U>,
 ): Unary<T | null | undefined, Just<U>> {
     return (value: T | null | undefined): Just<U> => just(map(value));

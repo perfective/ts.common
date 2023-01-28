@@ -199,18 +199,18 @@ a `null` for invalid dates is ok.
 we may prefer a readable fallback.
 
 
-== Using the `into()` method with the `maybeOf()` function
+== Using the `into()` method with the `maybeFrom()` function
 
 The `Maybe.into()` method allows folding a Maybe instance into a different type.
 It applies the argument function for present and absent values.
-In combination with the `maybeOf()` function,
+In combination with the `maybeFrom()` function,
 it allows to apply functions with custom handling of absent values
 and return a new `Maybe` instance.
 
 [source,typescript]
 ----
 import { isAbsent } from '@perfective/common';
-import { maybe } from '@perfective/common/maybe';
+import { just, maybe, maybeFrom } from '@perfective/common/maybe';
 
 function decimal(value: number | null | undefined): string {
     if (isAbsent(value)) {
@@ -223,7 +223,7 @@ maybe(null).onto(x => maybe(decimal(x))) != just(decimal(null)); // <.>
 maybe(null).to(decimal) != just(decimal(null)); // <.>
 
 maybe(null).into(x => maybe(decimal(x)) == just(decimal(null)) // <.>
-maybe(null).into(maybeOf(decimal)) == just(decimal(null)) // <.>
+maybe(null).into(maybeFrom(decimal)) == just(decimal(null)) // <.>
 ----
 <.> The `decimal()` function returns a default value for the absent values
 instead of returning another absent value
@@ -234,12 +234,12 @@ it breaks the left-identity monad law.
 <.> Using the `Maybe.into()` method allows working around this issue
 because `Maybe.into()` is called for all Maybe values
 (not only present values).
-<.> Use the `maybeOf()` function as a shortcut.
+<.> Use the `maybeFrom()` function as a shortcut.
 
 [NOTE]
 ====
 Since v0.9.0,
-`Maybe.into(maybeOf)` replaced the `Maybe.lift(map)` method.
+`Maybe.into(maybeFrom)` replaced the `Maybe.lift(map)` method.
 ====
 
 
@@ -261,11 +261,11 @@ Since v0.9.0,
 — creates an instance of `Just` when the `value` is present,
 or returns a memoized instance of `Nothing`
 with either `null` or `undefined` `value`.
-* `maybeOf<T, U>(map: Unary<T | null | undefined, U | null | undefined>): Unary<T | null | undefined, Maybe<U>>`
+* `maybeFrom<T, U>(map: Unary<T | null | undefined, U | null | undefined>): Unary<T | null | undefined, Maybe<U>>`
 * `just<T>(value: Present<T>): Just<T>`
 — creates an instance of `Just` with a given defined non-null `value`.
 A _unit_ (_return_) function for the `Maybe` monad.
-* `justOf<T, U>(map: Unary<T | null | undefined, Present<U>>): Unary<T | null | undefined, Just<U>>`
+* `justFrom<T, U>(map: Unary<T | null | undefined, Present<U>>): Unary<T | null | undefined, Just<U>>`
 — creates a function that applies a given `map` to a value
 and returns the result wrapped into a `Just`.
 * `nothing<T>(): Nothing<T>`

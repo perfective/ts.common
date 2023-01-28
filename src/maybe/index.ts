@@ -16,10 +16,10 @@ export {
 export {
     Just,
     just,
-    justOf,
+    justFrom,
     Maybe,
     maybe,
-    maybeOf,
+    maybeFrom,
     naught,
     Nothing,
     nothing,

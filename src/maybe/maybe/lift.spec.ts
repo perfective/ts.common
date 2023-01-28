@@ -12,7 +12,7 @@ import {
 import { isPresent } from '../../value/value';
 
 import { into, lift, onto, or, otherwise, pick, run, that, to, when, which } from './lift';
-import { just, Maybe, maybeOf, naught, nothing } from './maybe';
+import { just, Maybe, maybeFrom, naught, nothing } from './maybe';
 import { TypeGuardCheck } from './type-guard-check.mock';
 
 const list: Maybe<number>[] = [just(2.71), just(3.14), nothing(), naught()];
@@ -63,8 +63,8 @@ describe(into, () => {
             .toStrictEqual([true, true, false, false]);
     });
 
-    it('can be used with into(maybeOf) to lift values', () => {
-        expect(list.map(into(maybeOf(isPresent))))
+    it('can be used with into(maybeFrom) to lift values', () => {
+        expect(list.map(into(maybeFrom(isPresent))))
             .toStrictEqual([just(true), just(true), just(false), just(false)]);
     });
 });

@@ -5,7 +5,7 @@ import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../o
 import { nullableNumber } from '../nullable/nullable.mock';
 import { optionalNumber } from '../optional/optional.mock';
 
-import { Just, just, Maybe, maybe, maybeOf, naught, Nothing, nothing } from './maybe';
+import { Just, just, Maybe, maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
 import {
     absentNumber,
     justDecimalOutput,
@@ -99,10 +99,10 @@ describe(maybe, () => {
     });
 });
 
-describe(maybeOf, () => {
+describe(maybeFrom, () => {
     describe('when the "map" function requires present input and returns present output', () => {
         it('returns an unary function that returns Just', () => {
-            const output: Unary<number, Just<string>> = maybeOf(strictDecimalOutput);
+            const output: Unary<number, Just<string>> = maybeFrom(strictDecimalOutput);
 
             expect(output(3.14)).toStrictEqual(just('3.14'));
         });
@@ -110,7 +110,7 @@ describe(maybeOf, () => {
 
     describe('when the "map" function accepts present or absent value and returns present output', () => {
         it('creates an unary function that returns Just', () => {
-            const output: Unary<number | null | undefined, Just<string>> = maybeOf(safeDecimalOutput);
+            const output: Unary<number | null | undefined, Just<string>> = maybeFrom(safeDecimalOutput);
 
             expect(output(3.14)).toStrictEqual(just('3.14'));
             expect(output(null)).toStrictEqual(just('null'));
@@ -120,7 +120,7 @@ describe(maybeOf, () => {
 
     describe('when the "map" function accepts present or absent value and returns absent output', () => {
         it('creates an unary function that returns Nothing', () => {
-            const output: Unary<number | null | undefined, Nothing<number>> = maybeOf(absentNumber);
+            const output: Unary<number | null | undefined, Nothing<number>> = maybeFrom(absentNumber);
 
             expect(output(3.14)).toBe(naught());
             expect(output(null)).toBe(naught());
@@ -130,7 +130,7 @@ describe(maybeOf, () => {
 
     describe('when the "map" function accepts present or absent value and returns present or absent output', () => {
         it('creates an unary function that returns Maybe', () => {
-            const output: Unary<number | null | undefined, Maybe<number>> = maybeOf(unsafeNumber);
+            const output: Unary<number | null | undefined, Maybe<number>> = maybeFrom(unsafeNumber);
 
             expect(output(0)).toStrictEqual(just(0));
             expect(output(null)).toBe(naught());
@@ -401,7 +401,7 @@ describe(Maybe, () => {
         });
 
         it('can be used to return Maybe', () => {
-            const output: Maybe<string> = maybe(unsafeNumber(0)).into(maybeOf(safeDecimalOutput));
+            const output: Maybe<string> = maybe(unsafeNumber(0)).into(maybeFrom(safeDecimalOutput));
 
             expect(output).toStrictEqual(just('0'));
         });

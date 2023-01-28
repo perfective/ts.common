@@ -1,9 +1,10 @@
 import { array } from '../../array/array/array';
 import { error } from '../../error/error/error';
-import { chainedException } from '../../error/exception/exception';
+import { chainedException, exception } from '../../error/exception/exception';
+import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
 
-import { Failure, failure, Result, result, resultFrom, Success, success } from './result';
+import { Failure, failure, Result, result, resultFrom, resultOf, Success, success } from './result';
 import {
     eitherResult,
     resultDecimal,
@@ -47,6 +48,24 @@ describe(result, () => {
             const output: Failure<unknown> = result(error('Failure'));
 
             expect(output).toStrictEqual(failure(error('Failure')));
+        });
+    });
+});
+
+describe(resultOf, () => {
+    describe('given a callback that returns a value', () => {
+        it('returns the result of the callback as a `Success`', () => {
+            const output: Result<string> = resultOf(() => strictNumberOutput(0));
+
+            expect(output).toStrictEqual(success('0'));
+        });
+    });
+
+    describe('given a callback that throws an error', () => {
+        it('catches the error and returns it as a `Failure`', () => {
+            const output: Result<unknown> = resultOf(panic('Failure'));
+
+            expect(output).toStrictEqual(failure(exception('Failure')));
         });
     });
 });

@@ -131,6 +131,14 @@ You have to cast the type parameter manually
 to get the return type as `Result<T>`.
 ====
 +
+* `resultOf<T>(callback: Nullary<T>): Result<T>`
+— calls a given `callback` in a `try-catch` block.
+If the `callback` throws an error,
+catches the error and returns it as a `Failure`.
+Otherwise, returns the result of the `callback` as a `Success`.
++
+Use the `resultOf` to wrap up unsafe functions into a `Result`.
++
 * `resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>`
 — creates a function to transform a `value` with a given `map` callback
 and return the result as a `Failure`, if the result is an `Error`.

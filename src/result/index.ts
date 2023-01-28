@@ -11,6 +11,7 @@ export {
     Result,
     result,
     resultFrom,
+    resultOf,
     Success,
     success,
     successFrom,

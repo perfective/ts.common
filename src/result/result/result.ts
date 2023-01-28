@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file -- Result, Success, and Failure are interdependent.
 import { isError, isNotError } from '../../error/error/error';
-import { Value, valueOf } from '../../function/function/nullary';
+import { unknownError } from '../../error/exception/exception';
+import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 
@@ -309,6 +310,24 @@ export function result<T>(value: T | Error): Result<T> {
         return success<T>(value);
     }
     return failure<T>(value);
+}
+
+/**
+ * Calls a given {@linkcode callback} in a try-catch block.
+ *
+ * If the {@linkcode callback} call throws an error,
+ * catches that error and returns it as a {@linkcode Failure}.
+ * Otherwise, returns a result of the {@linkcode callback} wrapped into a {@linkcode Success}.
+ *
+ * Use this function to wrap up legacy functions that throw errors into a {@linkcode Result}.
+ */
+export function resultOf<T>(callback: Nullary<T>): Result<T> {
+    try {
+        return success(callback());
+    }
+    catch (error: unknown) {
+        return failure(unknownError(error));
+    }
 }
 
 /**

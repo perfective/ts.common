@@ -97,7 +97,7 @@ For example, when an API returns an error code
 and this error code is parsed and matched to a specific `Error` subtype.
 ====
 +
-* `successOf<T, U>(map: (value: T) => U): Unary<T, Success<U>>`
+* `successFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>>`
 — creates a function to transform a `value` with a given `map` callback
 and return the result as a `Success`.
 +
@@ -106,7 +106,7 @@ and return the result as a `Success`.
 +
 Throws a `TypeError`, if the given `error` value is not an `Error` object.
 +
-* `failureOf<T>(map: (value: T) => Error): Unary<T, Failure<T>>`
+* `failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>>`
 — creates a function to transform a `value` into an `Error` with a given `map` callback
 and return the result as a `Failure`.
 +
@@ -131,7 +131,7 @@ You have to cast the type parameter manually
 to get the return type as `Result<T>`.
 ====
 +
-* `resultOf<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>`
+* `resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>`
 — creates a function to transform a `value` with a given `map` callback
 and return the result as a `Failure`, if the result is an `Error`.
 Otherwise, it returns a `Success`.

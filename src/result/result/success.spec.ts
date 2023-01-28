@@ -2,7 +2,7 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chainedException, Exception, exception } from '../../error/exception/exception';
 
-import { Failure, failure, recovery, Result, Success, success, successOf } from './result';
+import { Failure, failure, recovery, Result, Success, success, successFrom } from './result';
 import {
     failureDecimal,
     resultDecimal,
@@ -58,10 +58,10 @@ describe(success, () => {
     });
 });
 
-describe(successOf, () => {
+describe(successFrom, () => {
     it('creates a function to pass a `value` into a given `map` callback and return the result as a `Success`', () => {
-        const outputNumber = successOf(strictNumberOutput);
-        const outputError = successOf(strictErrorOutput);
+        const outputNumber = successFrom(strictNumberOutput);
+        const outputError = successFrom(strictErrorOutput);
 
         expect(outputNumber(0)).toStrictEqual(success('0'));
         expect(outputError(error('Success'))).toStrictEqual(success('Success'));

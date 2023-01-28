@@ -6,12 +6,12 @@ export {
 export {
     Failure,
     failure,
-    failureOf,
+    failureFrom,
     recovery,
     Result,
     result,
-    resultOf,
+    resultFrom,
     Success,
     success,
-    successOf,
+    successFrom,
 } from './result/result';

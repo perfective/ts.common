@@ -2,7 +2,7 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { causedBy, chainedException, Exception, exception } from '../../error/exception/exception';
 
-import { Failure, failure, failureOf, Result } from './result';
+import { Failure, failure, failureFrom, Result } from './result';
 import { resultDecimal, safeNumberOutput, strictErrorOutput, strictNumberOutput } from './result.mock';
 
 describe(failure, () => {
@@ -29,9 +29,9 @@ describe(failure, () => {
     });
 });
 
-describe(failureOf, () => {
+describe(failureFrom, () => {
     it('creates a function to pass a `value` into a given `map` callback and return the result as a `Failure`', () => {
-        const output = failureOf(error);
+        const output = failureFrom(error);
 
         expect(output('Failure'))
             .toStrictEqual(failure(error('Failure')));

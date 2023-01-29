@@ -25,12 +25,12 @@ export abstract class Maybe<T> {
     ): Maybe<U>;
 
     /**
-     * Folds (reduces) the value of Maybe using the given `fold` function.
+     * Reduces the value of a {@linkcode Maybe} using a given {@linkcode reduce} callback.
      *
      * @since 0.9.0
      */
     public abstract into<U>(
-        fold: (value: T | null | undefined) => U
+        reduce: (value: T | null | undefined) => U
     ): U;
 
     // Using Present<T[K]> to exclude null | undefined from the type
@@ -96,12 +96,12 @@ export class Just<T> extends Maybe<T> {
     }
 
     /**
-     * Folds (reduces) the value of Just using the given `fold` function.
+     * Reduces the value of a {@linkcode Just} using a given {@linkcode reduce} callback.
      *
      * @since 0.9.0
      */
-    public into<U>(fold: (value: T) => U): U {
-        return fold(this.value);
+    public into<U>(reduce: (value: T) => U): U {
+        return reduce(this.value);
     }
 
     public pick<K extends keyof T>(
@@ -186,12 +186,12 @@ export class Nothing<T> extends Maybe<T> {
     }
 
     /**
-     * Folds (reduces) the value of Nothing using the given `fold` function.
+     * Reduces the value of a {@linkcode Nothing} using a given {@linkcode reduce} callback.
      *
      * @since 0.9.0
      */
-    public into<U>(fold: (value: (null | undefined)) => U): U {
-        return fold(this.value);
+    public into<U>(reduce: (value: (null | undefined)) => U): U {
+        return reduce(this.value);
     }
 
     public pick<K extends keyof T>(property: Value<K>): Nothing<Present<T[K]>>;

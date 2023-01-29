@@ -199,7 +199,7 @@ describe(Nothing, () => {
     });
 
     describe('into', () => {
-        it('does not accept a "fold" function with a non-nullable and non-optional value argument', () => {
+        it('does not accept a `reduce` callback with a non-nullable and non-optional value argument', () => {
             // @ts-expect-error -- TS2345:
             //  Argument of type '(input: number) => string'
             //  is not assignable to parameter of type '(value: null | undefined) => string'.
@@ -207,7 +207,7 @@ describe(Nothing, () => {
                 .toThrow('Cannot read properties of undefined (reading \'toString\')');
         });
 
-        it('returns the result of the given "fold" function applied to the value of Nothing', () => {
+        it('returns the result of the given `reduce` callback applied to the value of Nothing', () => {
             expect(nothing().into(safeDecimalOutput)).toBe('undefined');
             expect(naught().into(safeDecimalOutput)).toBe('null');
         });

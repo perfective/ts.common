@@ -381,7 +381,7 @@ describe(Maybe, () => {
     });
 
     describe('into', () => {
-        it('does not accept a "fold" function with a non-nullable or non-optional value argument', () => {
+        it('does not accept a `reduce` callback with a non-nullable or non-optional value argument', () => {
             // @ts-expect-error -- TS2345:
             //  Argument of type '(input: number) => string'
             //  is not assignable to
@@ -391,7 +391,7 @@ describe(Maybe, () => {
             expect(output).toBe('0');
         });
 
-        it('returns the result of the given "fold" function applied to the value of Maybe', () => {
+        it('returns the result of the given `reduce` callback applied to the value of Maybe', () => {
             expect(maybe(unsafeNumber(0)).into(safeDecimalOutput))
                 .toBe('0');
             expect(maybe(null).into(safeDecimalOutput))

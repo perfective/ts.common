@@ -244,13 +244,13 @@ describe(Just, () => {
     });
 
     describe('into', () => {
-        it('accepts a "fold" function with a non-nullable and non-optional value argument', () => {
+        it('accepts a `reduce` function with a non-nullable and non-optional value argument', () => {
             const output: string = just(0).into(strictDecimalOutput);
 
             expect(output).toBe('0');
         });
 
-        it('returns the result of the given "fold" function applied to the value of Just', () => {
+        it('returns the result of the given `reduce` callback applied to the value of Just', () => {
             expect(just(0).into(strictDecimalOutput)).toBe('0');
         });
 

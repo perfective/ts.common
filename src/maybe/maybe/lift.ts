@@ -20,14 +20,14 @@ export function to<T, U>(
 }
 
 /**
- * Creates a function to apply the given fold function to the Maybe.into() method.
+ * Creates a function to apply the given {@linkcode reduce} callback to the Maybe.into() method.
  *
  * @since 0.9.0
  */
 export function into<T, U>(
-    fold: (value: T | null | undefined) => U,
+    reduce: (value: T | null | undefined) => U,
 ): Unary<Maybe<T>, U> {
-    return (maybe: Maybe<T>): U => maybe.into(fold);
+    return (maybe: Maybe<T>): U => maybe.into(reduce);
 }
 
 export function pick<T, K extends keyof T>(

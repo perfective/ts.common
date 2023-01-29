@@ -201,7 +201,7 @@ we may prefer a readable fallback.
 
 == Using the `into()` method with the `maybeFrom()` function
 
-The `Maybe.into()` method allows folding a Maybe instance into a different type.
+The `Maybe.into()` method allows reducing a Maybe instance into a different type.
 It applies the argument function for present and absent values.
 In combination with the `maybeFrom()` function,
 it allows to apply functions with custom handling of absent values
@@ -465,10 +465,10 @@ and the `map` method in `java.util.Optional`.
 ====
 
 
-=== `into(fold)`
+=== `into(reduce)`
 
-`Maybe.into()` is a fold (reduce) operator for the `Maybe` type.
-It applies the given `fold` function to the `value` of the `Maybe`
+`Maybe.into()` is a `reduce` operator for the `Maybe` type.
+It applies the given `reduce` function to the `value` of the `Maybe`
 and returns the result of any type as is.
 The purpose of `Maybe.into()` is to terminate the `Maybe`
 and switch to a different type.

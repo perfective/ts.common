@@ -58,7 +58,7 @@ describe('to', () => {
 });
 
 describe(into, () => {
-    it('lifts the given "fold" function to the Maybe.into()', () => {
+    it('lifts the given `reduce` callback to the Maybe.into()', () => {
         expect(list.map(into(isPresent)))
             .toStrictEqual([true, true, false, false]);
     });

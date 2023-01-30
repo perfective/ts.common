@@ -1,26 +1,68 @@
+import { isArray } from '../../array/array/array';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Maybe, maybe, nothing } from '../../maybe/maybe/maybe';
 
-import { Statement } from './statement';
+import { Case } from './case';
 
 export class Match<T> {
     public constructor(
         public readonly value: Value<T>,
     ) {}
 
-    public that<U>(...statements: Statement<T, U>[]): Maybe<U> {
+    /**
+     * Finds the first case with a matching {@linkcode Case.condition}
+     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     *
+     * @deprecated Since v0.9.0. Use {@linkcode Match.cases} instead.
+     */
+    public that<U>(...cases: Case<T, U>[]): Maybe<U> {
+        return this.cases(cases);
+    }
+
+    /**
+     * Finds the first case with a matching {@linkcode Case.condition}
+     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     *
+     * @deprecated Since v0.9.0. Use {@linkcode Match.cases} instead.
+     */
+    public to<U>(cases: Case<T, U>[]): Maybe<U> {
+        return this.cases(cases);
+    }
+
+    /**
+     * Finds the first case with a matching {@linkcode Case.condition}
+     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     */
+    public cases<U>(...cases: Case<T, U>[]): Maybe<U>;
+
+    /**
+     * Finds the first case with a matching {@linkcode Case.condition}
+     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     */
+    public cases<U>(cases: Case<T, U>[]): Maybe<U>;
+
+    /**
+     * Finds the first case with a matching {@linkcode Case.condition}
+     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     */
+    public cases<U>(first: Case<T, U>[] | Case<T, U>, ...rest: Case<T, U>[]): Maybe<U> {
         const value: T = valueOf(this.value);
-        for (const statement of statements) {
-            if (statement.condition(value)) {
-                return maybe(statement.evaluate(value));
+        for (const caseValue of concatenate(first, ...rest)) {
+            if (caseValue.condition(value)) {
+                return maybe(caseValue.statement(value));
             }
         }
         return nothing();
     }
+}
 
-    public to<U>(statements: Statement<T, U>[]): Maybe<U> {
-        return this.that(...statements);
-    }
+/**
+ * Creates a list of cases for the {@linkcode Match.cases} method input.
+ *
+ * @internal
+ */
+function concatenate<T, U>(first: Case<T, U>[] | Case<T, U>, ...rest: Case<T, U>[]): Case<T, U>[] {
+    return isArray(first) ? first : [first].concat(rest).filter(Boolean);
 }
 
 export function match<T>(value: T | Nullary<T>): Match<T> {

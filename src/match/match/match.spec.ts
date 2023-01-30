@@ -1,36 +1,57 @@
 import { match } from './match';
-import { Statement } from './statement';
 import { when } from './when';
 
-const roots: Statement<number, number>[] = [
-    when(1.41).then(() => 2),
-    when(1.73).then(() => 3),
-    when(2.23).then(() => 5),
+const roots = [
+    when(1.41).to(2),
+    when(1.73).to(3),
+    when(2.23).to(5),
 ];
 
-const powers: Statement<number, number>[] = [
+/* eslint-disable deprecation/deprecation -- TODO: Change to when.to() in v0.10.0 */
+const powers = [
     when<number>(v => v < 0).then(v => v ** 2),
     when<number>(v => v === 0).then(0),
     when<number>(v => v > 0).then(v => v ** 3),
 ];
+/* eslint-enable deprecation/deprecation */
 
-describe('match', () => {
-    it('matches constants values', () => {
-        expect(match(1.73).to(roots).or(undefined))
-            .toBe(3);
+describe('Match', () => {
+    describe('cases', () => {
+        it('matches constants values', () => {
+            const output = match(1.73).cases(...roots).or(undefined);
+
+            expect(output).toBe(3);
+        });
+
+        it('matches lazy values', () => {
+            const output = match(() => 0).cases(powers).or(undefined);
+
+            expect(output).toBe(0);
+        });
+
+        it('falls back to Nothing when match is not found', () => {
+            expect(match(3.14).cases().or(undefined))
+                .toBeUndefined();
+        });
     });
 
-    it('matches lazy values', () => {
-        expect(match(() => 0).to(powers).or(undefined))
-            .toBe(0);
-        expect(match(() => 2).to(powers).or(undefined))
-            .toBe(8);
-        expect(match(() => -3).to(powers).or(undefined))
-            .toBe(9);
+    /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
+    describe('to', () => {
+        it('calls `Match.cases`', () => {
+            expect(match(1.73).to(roots))
+                .toStrictEqual(match(1.73).cases(roots));
+            expect(match(() => 0).to(powers))
+                .toStrictEqual(match(() => 0).cases(powers));
+        });
     });
 
-    it('falls back to Nothing when match is not found', () => {
-        expect(match(3.14).to(roots).or(undefined))
-            .toBeUndefined();
+    describe('that', () => {
+        it('calls `Match.cases`', () => {
+            expect(match(1.73).that(...roots))
+                .toStrictEqual(match(1.73).cases(...roots));
+            expect(match(() => 0).that(...powers))
+                .toStrictEqual(match(() => 0).cases(...powers));
+        });
     });
+    /* eslint-enable deprecation/deprecation */
 });

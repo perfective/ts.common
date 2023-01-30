@@ -3,18 +3,33 @@ import { isFunction } from '../../function/function/function';
 import { constant } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 
-import { Statement } from './statement';
+import { Case } from './case';
 
+/**
+ * A builder class for a {@linkcode Case}.
+ */
 class When<T> {
     public constructor(
         private readonly condition: Predicate<T>,
     ) {}
 
-    // eslint-disable-next-line unicorn/no-thenable -- TODO: Try to find a different term
-    public then<U>(value: U | Unary<T, U>): Statement<T, U> {
+    /**
+     * Creates a statement with a {@linkcode When.condition|condition} and a given {@linkcode value}.
+     *
+     * @deprecated Since v0.9.0.
+     */
+    // eslint-disable-next-line unicorn/no-thenable -- deprecated. TODO: Remove in v0.10.0.
+    public then<U>(value: U | Unary<T, U>): Case<T, U> {
+        return this.to(value);
+    }
+
+    /**
+     * Creates a statement with a {@linkcode When.condition|condition} and a given {@linkcode value}.
+     */
+    public to<U>(value: U | Unary<T, U>): Case<T, U> {
         return {
             condition: this.condition,
-            evaluate: isFunction(value) ? value : constant(value),
+            statement: isFunction(value) ? value : constant(value),
         };
     }
 }

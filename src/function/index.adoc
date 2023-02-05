@@ -1,7 +1,6 @@
 = Function
 
-The `@perfective/common/function` package provides types and functions for the functional programming style
-as well as logical types and functions (predicates and propositions).
+The `@perfective/common/function` package provides types and functions for the functional programming style.
 As functions with more than three arguments are considered a code smell,
 this package only declares the `Nullary`, `Unary`, `Binary`, and `Ternary` types.
 The functions of higher arity is unlikely to be added to the package.

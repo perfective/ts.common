@@ -1,14 +1,5 @@
 = Perfective Common for TypeScript
 
-[IMPORTANT]
-====
-The code provided by this project relies on the strict https://www.typescriptlang.org[TypeScript] compiler checks.
-Use of these packages in the regular JS projects may produce unexpected behavior and is undocumented.
-For example,
-a function that declares an argument as required relies on strict TSC `null` checks
-and does not check value for `null` additionally.
-====
-
 
 == Installation
 
@@ -26,45 +17,66 @@ Hence, all provided data types (interfaces) are immutable,
 and classes are used only to build fluent method chains
 (considering methods as infix operators).
 
-One of the base patterns used is to provide a unit (constructor) function named after each class
-to discourage the use of the new operator
+One of the base patterns used is to provide a constructor function named after each class
+to discourage the use of the `new` operator
 (for readability and consistency with the method chains).
-Classes should only be used in function types declaration.
-All non-abstract classes should be considered final even TypeScript does not allow to limit that.
+Classes should only be used in types declaration.
+All non-abstract classes should be considered final even TypeScript does not provide a `final` keyword.
 
-This repo currently contains the following sub-packages:
+Packages are organized and named around their primary type:
 
+* `link:https://github.com/perfective/ts.common/blob/main/src/value/index.adoc[@perfective/common]`
+— functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/array/index.adoc[@perfective/common/array]`
-— functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]` class.
+— functions and types to handle
+link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[arrays].
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc[@perfective/common/boolean]`
-— functions to work with the
+— functions and types to handle
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean[boolean]` values.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]`
-— functions to work with the
+— functions and types to handle
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`
 and related classes.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/function/index.adoc[@perfective/common/function]`
-— functions and types for functional programming and logical operations.
+— functions and types for functional programming.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/match/index.adoc[@perfective/common/match]`
-— functions to support a functional switch-case.
+— functions and types for a functional style `switch-case`.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]`
 — a `Maybe` monad (https://en.wikipedia.org/wiki/Option_type[Option type]) implementation.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/number]`
-— functions and types to work with the real numbers.
+— functions and types to handle
+link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[numbers].
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/object/index.adoc[@perfective/common/object]`
-— functions to work with the
+— functions and types to handle the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
 * `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/promise]`
-— functions to work with the
+— functions and types to handle the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/result/index.adoc[@perfective/common/result]`
 — a `Result` monad (https://en.wikipedia.org/wiki/Result_type[Result type]) implementation.
 * `link:https://github.com/perfective/ts.common/tree/main/src/string/index.adoc[@perfective/common/string]`
-— functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` class.
+— functions and types to handle
+link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[strings].
 
-The package has a 100% unit test coverage.
+The packages have full unit tests coverage.
+
+[IMPORTANT]
+====
+The code provided by this project relies on the strict https://www.typescriptlang.org[TypeScript] compiler checks.
+Use of these packages in the regular JS projects may produce unexpected behavior and is undocumented.
+For example,
+a function that declares an argument as _required_ relies on strict TSC `null` checks
+and does not check value for `null` additionally.
+====
 
 
 == Roadmap
@@ -148,13 +160,7 @@ and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glob
 * https://262.ecma-international.org/6.0/[ECMA Script 2015 Specification]
 
 
-== Terminology
-
-* _Unit function_ — a function that creates a new object or a function.
-Term used as distinguished from `constructor` and `new` keywords.
-
-
-=== Common patterns
+== Common patterns
 
 * For each declared `interface` or `class`,
 there is at least one unit function to instantiate it.
@@ -169,7 +175,7 @@ These functions have prefixes `is` and `isNot`.
 with the `is`/`isNot` prefixes.
 
 
-=== TypeScript configuration
+== TypeScript configuration
 
 The project contains a group of TSConfig files to maintain a productive development environment
 with the WebStorm IDE:
@@ -181,7 +187,7 @@ It contains all the default (strict) compiler settings.
 and is further overridden in `gulpfile.js` for CommonJS, ESM, and declaration files compilation.
 
 
-=== Documentation
+== Documentation
 
 This project uses the https://asciidoctor.org[AsciiDoc] format for its documentation.
 Each sub-package has an `index.adoc` file that is included into the package `src/index.adoc`.

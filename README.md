@@ -1,6 +1,6 @@
 # Perfective Common for TypeScript
 
-The code provided by this project relies on the strict [TypeScript](http://typescriptlang.org) compiler checks.
+The code provided by this project relies on the strict [TypeScript](https://www.typescriptlang.org) compiler checks.
 Use of these packages in the regular JS projects may produce unexpected behavior and is undocumented.
 For example,
 a function that declares an argument as required relies on strict TSC `null` checks

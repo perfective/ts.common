@@ -46,7 +46,7 @@ export function isEcmaType(input: string): input is EcmaType {
  *
  * Does not include "any", or "never", as these types cannot be checked in runtime.
  *
- * @see https://www.typescriptlang.org/docs/handbook/basic-types.html
+ * @see https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
  */
 export type TsType = EcmaType | 'null' | 'array' | 'unknown';
 
@@ -82,7 +82,7 @@ export function isTsType(input: string): input is TsType {
 }
 
 /**
- * @see https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types
+ * @see https://www.typescriptlang.org/docs/handbook/2/conditional-types.html
  */
 export type TypeOf<T> =
 T extends undefined

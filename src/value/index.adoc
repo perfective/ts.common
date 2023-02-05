@@ -128,7 +128,7 @@ Throws a `TypeError` when the value in runtime is not a `TsType`.
 
 == Handling `void`
 
-In TypeScript, `link:https://www.typescriptlang.org/docs/handbook/basic-types.html#void[void]` type
+In TypeScript, `link:https://www.typescriptlang.org/docs/handbook/2/functions.html#void[void]` type
 is treated differently from `undefined` and `null`,
 and linters provide different rules to restrict its usage only to correct cases.
 

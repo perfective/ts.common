@@ -2,7 +2,7 @@
 
 [IMPORTANT]
 ====
-The code provided by this project relies on the strict http://typescriptlang.org[TypeScript] compiler checks.
+The code provided by this project relies on the strict https://www.typescriptlang.org[TypeScript] compiler checks.
 Use of these packages in the regular JS projects may produce unexpected behavior and is undocumented.
 For example,
 a function that declares an argument as required relies on strict TSC `null` checks

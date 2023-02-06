@@ -25,38 +25,38 @@ All non-abstract classes should be considered final even TypeScript does not pro
 
 Packages are organized and named around their primary type:
 
-* [`@perfective/common`](https://github.com/perfective/ts.common/blob/main/src/value/index.adoc)
-  — functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
-* [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/main/src/array/index.adoc)
-  — functions and types to handle
-  [arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
-* [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc)
-  — functions and types to handle
-  [`boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
-* [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc)
-  — functions and types to handle
-  [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  and related classes.
-* [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/main/src/function/index.adoc)
-  — functions and types for functional programming.
-* [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/main/src/match/index.adoc)
-  — functions and types for a functional style `switch-case`.
-* [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc)
-  — a `Maybe` monad ([Option type](https://en.wikipedia.org/wiki/Option_type)) implementation.
-* [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
-  — functions and types to handle
-  [numbers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number).
-* [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/main/src/object/index.adoc)
-  — functions and types to handle the
-  [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
-* [`@perfective/common/promise`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
-  — functions and types to handle the
-  [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) class.
-* [`@perfective/common/result`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc)
-  — a `Result` monad ([Result type](https://en.wikipedia.org/wiki/Result_type)) implementation.
-* [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/main/src/string/index.adoc)
-  — functions and types to handle
-  [strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
+-   [`@perfective/common`](https://github.com/perfective/ts.common/blob/main/src/value/index.adoc)
+    — functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
+-   [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/main/src/array/index.adoc)
+    — functions and types to handle
+    [arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
+-   [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc)
+    — functions and types to handle
+    [`boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
+-   [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc)
+    — functions and types to handle
+    [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+    and related classes.
+-   [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/main/src/function/index.adoc)
+    — functions and types for functional programming.
+-   [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/main/src/match/index.adoc)
+    — functions and types for a functional style `switch-case`.
+-   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc)
+    — a `Maybe` monad ([Option type](https://en.wikipedia.org/wiki/Option_type)) implementation.
+-   [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
+    — functions and types to handle
+    [numbers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number).
+-   [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/main/src/object/index.adoc)
+    — functions and types to handle the
+    [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
+-   [`@perfective/common/promise`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
+    — functions and types to handle the
+    [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) class.
+-   [`@perfective/common/result`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc)
+    — a `Result` monad ([Result type](https://en.wikipedia.org/wiki/Result_type)) implementation.
+-   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/main/src/string/index.adoc)
+    — functions and types to handle
+    [strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
 
 The packages have full unit tests coverage.
 
@@ -65,7 +65,6 @@ Use of these packages in the regular JS projects may produce unexpected behavior
 For example,
 a function that declares an argument as required relies on strict TSC `null` checks
 and does not check value for `null` additionally.
-
 
 ## Documentation
 

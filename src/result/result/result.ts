@@ -10,6 +10,8 @@ import { isDefined } from '../../value/value';
  *
  * @see Success
  * @see Failure
+ *
+ * @since v0.9.0
  */
 export abstract class Result<T> {
     /**
@@ -26,6 +28,8 @@ export abstract class Result<T> {
      * Ignores the {@linkcode flatMap} for the Failure.
      *
      * @returns The result of the {@linkcode flatMap}.
+     *
+     * @since v0.9.0
      */
     public abstract onto<U>(
         flatMap: (value: T) => Result<U>,
@@ -37,6 +41,8 @@ export abstract class Result<T> {
      *
      * If given a {@linkcode mapError} callback,
      * applies it to the {@linkcode Failure.value} when the instance is a {@linkcode Failure}.
+     *
+     * @since v0.9.0
      */
     public abstract to<U>(
         mapValue: (value: T) => U,
@@ -47,6 +53,8 @@ export abstract class Result<T> {
      * Applies a given {@linkcode reduce} callback to the {@linkcode Result.value|value} property.
      *
      * @returns The result of the {@linkcode reduce}.
+     *
+     * @since v0.9.0
      */
     public abstract into<U>(reduce: (value: T | Error) => U): U;
 
@@ -56,6 +64,8 @@ export abstract class Result<T> {
      *
      * Returns the result of the {@linkcode reduceValue} for a {@linkcode Success}
      * or the result of the {@linkcode reduceError} for a {@linkcode Failure}.
+     *
+     * @since v0.9.0
      */
     public abstract into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
 
@@ -66,6 +76,8 @@ export abstract class Result<T> {
      * If the instance is a {@linkcode Success},
      * ignores the given {@linkcode mapError} callback
      * and returns itself.
+     *
+     * @since v0.9.0
      */
     public abstract failure(mapError: (error: Error) => Error): Result<T>;
 
@@ -76,12 +88,16 @@ export abstract class Result<T> {
      * when the instance is a {@linkcode Failure}.
      *
      * Returns the original {@linkcode Result} object.
+     *
+     * @since v0.9.0
      */
     public abstract run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Result<T>;
 }
 
 /**
  * An instance of the {@linkcode Result} that represents a successful value.
+ *
+ * @since v0.9.0
  */
 export class Success<T> extends Result<T> {
     public constructor(
@@ -94,6 +110,8 @@ export class Success<T> extends Result<T> {
      * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
+     *
+     * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Failure<U>): Failure<U>;
 
@@ -101,6 +119,8 @@ export class Success<T> extends Result<T> {
      * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
+     *
+     * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Success<U>): Success<U>;
 
@@ -108,6 +128,8 @@ export class Success<T> extends Result<T> {
      * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
+     *
+     * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Result<U>): Result<U>;
 
@@ -115,6 +137,8 @@ export class Success<T> extends Result<T> {
      * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode flatMap}.
+     *
+     * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Result<U>): Result<U> {
         return flatMap(this.value);
@@ -125,6 +149,8 @@ export class Success<T> extends Result<T> {
      * Ignores a given {@linkcode mapError} callback.
      *
      * Returns the result of the {@linkcode mapValue} call wrapped into a {@linkcode Success}.
+     *
+     * @since v0.9.0
      */
     public override to<U>(mapValue: (value: T) => U, mapError?: (error: Error) => Error): Success<U>;
 
@@ -132,6 +158,8 @@ export class Success<T> extends Result<T> {
      * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
      *
      * Returns the result of the {@linkcode mapValue} call wrapped into a {@linkcode Success}.
+     *
+     * @since v0.9.0
      */
     public override to<U>(mapValue: (value: T) => U): Success<U> {
         return success(mapValue(this.value));
@@ -142,6 +170,8 @@ export class Success<T> extends Result<T> {
      * Ignores the {@linkcode reduceError} callback.
      *
      * @returns The result of the {@linkcode reduce}.
+     *
+     * @since v0.9.0
      */
     public override into<U>(reduce: (value: T) => U, reduceError?: (value: Error) => U): U;
 
@@ -149,6 +179,8 @@ export class Success<T> extends Result<T> {
      * Applies a given {@linkcode reduce} callback to the {@linkcode Success.value|value}.
      *
      * @returns The result of the {@linkcode reduce}.
+     *
+     * @since v0.9.0
      */
     public override into<U>(reduce: (value: T) => U): U {
         return reduce(this.value);
@@ -156,11 +188,15 @@ export class Success<T> extends Result<T> {
 
     /**
      * Ignores a given {@linkcode mapError} callback and returns itself.
+     *
+     * @since v0.9.0
      */
     public override failure(mapError: (error: Error) => Error): Success<T>;
 
     /**
      * Returns itself.
+     *
+     * @since v0.9.0
      */
     public override failure(): this {
         return this;
@@ -171,6 +207,8 @@ export class Success<T> extends Result<T> {
      * Ignores a given {@linkcode errorProcedure} callback.
      *
      * Returns itself.
+     *
+     * @since v0.9.0
      */
     public override run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Success<T>;
 
@@ -178,6 +216,8 @@ export class Success<T> extends Result<T> {
      * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      *
      * Returns itself.
+     *
+     * @since v0.9.0
      */
     public override run(valueProcedure: (value: T) => void): this {
         valueProcedure(this.value);
@@ -187,12 +227,16 @@ export class Success<T> extends Result<T> {
 
 /**
  * An instance of the {@linkcode Result} that represents an error value.
+ *
+ * @since v0.9.0
  */
 export class Failure<T> extends Result<T> {
     /**
      * Constructs a {@linkcode Failure} instance.
      *
      * @throws {TypeError} - If a passed {@linkcode Failure.value|value} is not an instance of an {Error}.
+     *
+     * @since v0.9.0
      */
     public constructor(
         public readonly value: Error,
@@ -205,11 +249,15 @@ export class Failure<T> extends Result<T> {
 
     /**
      * Ignores a given {@linkcode flatMap} callback and returns itself.
+     *
+     * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Result<U>): Failure<U>;
 
     /**
      * Returns itself.
+     *
+     * @since v0.9.0
      */
     public override onto<U>(): Result<U> {
         return this as unknown as Failure<U>;
@@ -222,6 +270,8 @@ export class Failure<T> extends Result<T> {
      * Returns itself, if a {@linkcode mapError} callback is omitted.
      *
      * Always ignores a given {@linkcode mapValue} callback.
+     *
+     * @since v0.9.0
      */
     public override to<U>(mapValue: (value: T) => U, mapError?: (error: Error) => Error): Failure<U> {
         if (isDefined(mapError)) {
@@ -234,6 +284,8 @@ export class Failure<T> extends Result<T> {
      * Applies a given {@linkcode reduce} callback to the {@linkcode Failure.value} {@linkcode Error}.
      *
      * @returns The result of the {@linkcode reduce} call.
+     *
+     * @since v0.9.0
      */
     public override into<U>(reduce: (value: Error) => U): U;
 
@@ -242,6 +294,8 @@ export class Failure<T> extends Result<T> {
      * Ignores a given {@linkcode reduceValue} callback.
      *
      * @returns The result of the {@linkcode reduceError} call.
+     *
+     * @since v0.9.0
      */
     public override into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
 
@@ -251,6 +305,8 @@ export class Failure<T> extends Result<T> {
      * Otherwise applies a given {@linkcode reduce} callback to the {@linkcode Failure.value} {@linkcode Error}.
      *
      * @returns The result of the {@linkcode reduceError} or {@linkcode reduce} call.
+     *
+     * @since v0.9.0
      */
     public override into<U>(reduceValue: Unary<Error, U> | Unary<T, U>, reduceError?: Unary<Error, U>): U {
         if (isDefined(reduceError)) {
@@ -264,6 +320,8 @@ export class Failure<T> extends Result<T> {
      * Applies a given {@linkcode mapError} callback to the {@linkcode Failure.value}.
      *
      * Returns the result of the {@linkcode mapError} call wrapped into a `Failure`.
+     *
+     * @since v0.9.0
      */
     public override failure(mapError: (error: Error) => Error): Failure<T> {
         return failure(mapError(this.value));
@@ -274,6 +332,8 @@ export class Failure<T> extends Result<T> {
      * Ignores a given {@linkcode valueProcedure} callback.
      *
      * Returns itself.
+     *
+     * @since v0.9.0
      */
     public override run(valueProcedure: (value: T) => void, errorProcedure: (error: Error) => void): this {
         errorProcedure(this.value);
@@ -287,23 +347,31 @@ export class Failure<T> extends Result<T> {
  * Use the {@linkcode success} function if you need to return an {@linkcode Error} as a {@linkcode Success}.
  *
  * @see success()
+ *
+ * @since v0.9.0
  */
 export function result<T>(value: Error): Failure<T>;
 
 /**
  * Creates a {@linkcode Success} from a given non-error value.
+ *
+ * @since v0.9.0
  */
 export function result<T>(value: T): Success<T>;
 
 /**
  * Creates a {@linkcode Failure} if the {@linkcode value} is an {@linkcode Error}
  * or a {@linkcode Success} for non-error values.
+ *
+ * @since v0.9.0
  */
 export function result<T>(value: T | Error): Result<T>;
 
 /**
  * Creates a {@linkcode Failure} if the {@linkcode value} is an {@linkcode Error}
  * or a {@linkcode Success} for non-error values.
+ *
+ * @since v0.9.0
  */
 export function result<T>(value: T | Error): Result<T> {
     if (isNotError<T>(value)) {
@@ -320,6 +388,8 @@ export function result<T>(value: T | Error): Result<T> {
  * Otherwise, returns a result of the {@linkcode callback} wrapped into a {@linkcode Success}.
  *
  * Use this function to wrap up legacy functions that throw errors into a {@linkcode Result}.
+ *
+ * @since v0.9.0
  */
 export function resultOf<T>(callback: Nullary<T>): Result<T> {
     try {
@@ -333,24 +403,32 @@ export function resultOf<T>(callback: Nullary<T>): Result<T> {
 /**
  * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
  * and return it as a {@linkcode Failure}.
+ *
+ * @since v0.9.0
  */
 export function resultFrom<T, U>(map: (value: T) => Error): Unary<T, Failure<U>>;
 
 /**
  * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
  * and return it as a {@linkcode Success}.
+ *
+ * @since v0.9.0
  */
 export function resultFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>>;
 
 /**
  * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
  * and return it as a {@linkcode Result}.
+ *
+ * @since v0.9.0
  */
 export function resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>;
 
 /**
  * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
  * and return it as a {@linkcode Result}.
+ *
+ * @since v0.9.0
  */
 export function resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>> {
     return (value: T): Result<U> => result<U>(map(value));
@@ -358,6 +436,8 @@ export function resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<
 
 /**
  * Creates a {@linkcode Success} from a given value.
+ *
+ * @since v0.9.0
  */
 export function success<T>(value: T): Success<T> {
     return new Success(value);
@@ -366,6 +446,8 @@ export function success<T>(value: T): Success<T> {
 /**
  * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
  * and return it as a {@linkcode Success}.
+ *
+ * @since v0.9.0
  */
 export function successFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>> {
     return (value: T): Success<U> => success(map(value));
@@ -375,6 +457,8 @@ export function successFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>> {
  * Creates a {@linkcode Failure} from a given {@linkcode Error} value.
  *
  * @throws {TypeError} If a non-{@linkcode Error} value passed in runtime.
+ *
+ * @since v0.9.0
  */
 export function failure<T>(error: Error): Failure<T> {
     return new Failure(error);
@@ -383,6 +467,8 @@ export function failure<T>(error: Error): Failure<T> {
 /**
  * Creates a function to transform an {@linkcode value} with a given {@linkcode map} callback
  * and return it as a {@linkcode Failure}.
+ *
+ * @since v0.9.0
  */
 export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
     return (value: T): Failure<T> => failure(map(value));
@@ -390,6 +476,8 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
 
 /**
  * Returns a given {@linkcode value} wrapped into a {@linkcode Success}.
+ *
+ * @since v0.9.0
  */
 export function recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>> {
     return (value: T | Error): Success<T> => {

@@ -32,19 +32,19 @@ export class Match<T> {
     /**
      * Finds the first case with a matching {@linkcode Case.condition}
      * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     *
+     * @since v0.9.0
      */
     public cases<U>(...cases: Case<T, U>[]): Maybe<U>;
 
     /**
      * Finds the first case with a matching {@linkcode Case.condition}
      * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
+     *
+     * @since v0.9.0
      */
     public cases<U>(cases: Case<T, U>[]): Maybe<U>;
 
-    /**
-     * Finds the first case with a matching {@linkcode Case.condition}
-     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
-     */
     public cases<U>(first: Case<T, U>[] | Case<T, U>, ...rest: Case<T, U>[]): Maybe<U> {
         const value: T = valueOf(this.value);
         for (const caseValue of concatenate(first, ...rest)) {

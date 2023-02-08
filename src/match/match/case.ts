@@ -4,6 +4,9 @@ import { isFunction } from '../../function/function/function';
 import { constant, Value } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 
+/**
+ * @since v0.9.0
+ */
 export interface Case<T, U> {
     readonly condition: Predicate<T>;
     readonly statement: Unary<T, U>;
@@ -14,6 +17,9 @@ export interface Case<T, U> {
  */
 export type Statement<T, U> = Case<T, U>;
 
+/**
+ * @since v0.9.0
+ */
 export type CaseEntry<T, U> = [Predicate<T> | Proposition, Unary<T, U> | Value<U>];
 
 /**
@@ -23,6 +29,8 @@ export type StatementEntry<T, U> = CaseEntry<T, U>;
 
 /**
  * Creates a list of {@linkcode Case|cases} from a list of {@linkcode CaseEntry|entries}.
+ *
+ * @since v0.9.0
  */
 export function fromEntries<T, U>(entries: CaseEntry<T, U>[]): Case<T, U>[] {
     return entries.map(caseFromEntry);
@@ -39,6 +47,8 @@ export function statements<T, U>(entries: CaseEntry<T, U>[]): Case<T, U>[] {
 
 /**
  * Creates a {@linkcode Case} from a {@linkcode CaseEntry}.
+ *
+ * @since v0.9.0
  */
 export function caseFromEntry<T, U>([condition, statement]: CaseEntry<T, U>): Case<T, U> {
     return {

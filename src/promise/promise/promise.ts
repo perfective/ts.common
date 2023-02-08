@@ -27,11 +27,15 @@ export type Run<T, E extends Error = Error> = Executor<T,  E>;
 
 /**
  * A type of a callback passed as `onFulfilled` into {@linkcode Promise.then}.
+ *
+ * @since v0.9.0
  */
 export type OnFulfilled<T, U = T> = (value: T) => U | PromiseLike<U>;
 
 /**
  * A type of a callback passed as `onRejected` into {@linkcode Promise.then} or {@linkcode Promise.catch}.
+ *
+ * @since v0.9.0
  */
 export type OnRejected<T = never> = (reason: unknown) => T | PromiseLike<T>;
 
@@ -51,6 +55,8 @@ export async function promise<T, E extends Error = Error>(executor: Executor<T, 
  *
  * @see Promise.resolve()
  * @see https://typescript-eslint.io/rules/unbound-method/
+ *
+ * @since v0.9.0
  */
 export async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T>> {
     // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject -- instantiating a Promise.
@@ -65,6 +71,8 @@ export async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T
  *
  * @see Promise.reject()
  * @see https://typescript-eslint.io/rules/unbound-method/
+ *
+ * @since v0.9.0
  */
 export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
     // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject -- instantiating a Promise.
@@ -80,6 +88,8 @@ export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
  * the {@linkcode Promise} is rejected.
  * - If a given value is a {@linkcode PromiseLike},
  * the {@linkcode Promise} state matches the state of the given value.
+ *
+ * @since v0.9.0
  */
 export async function settled<T>(value: T | PromiseLike<T> | Error): Promise<T> {
     /* eslint-disable unicorn/no-useless-promise-resolve-reject -- instantiating a Promise */

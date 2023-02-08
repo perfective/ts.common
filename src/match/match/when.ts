@@ -25,6 +25,8 @@ class When<T> {
 
     /**
      * Creates a statement with a {@linkcode When.condition|condition} and a given {@linkcode value}.
+     *
+     * @since v0.9.0
      */
     public to<U>(value: U | Unary<T, U>): Case<T, U> {
         return {

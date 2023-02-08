@@ -44,6 +44,8 @@ export function clone<T>(value: T): T {
 /**
  * Returns true if a given {@linkcode value} implements a given {@linkcode method}.
  * Otherwise returns false.
+ *
+ * @since v0.9.0
  */
 export function hasMethod(value: unknown, method: string): boolean {
     return isPresent(value) && typeof (value as any)[method] === 'function';
@@ -52,6 +54,8 @@ export function hasMethod(value: unknown, method: string): boolean {
 /**
  * Returns true if a given {@linkcode value} does not implement a given {@linkcode method}.
  * Otherwise returns false.
+ *
+ * @since v0.9.0
  */
 export function hasNoMethod(value: unknown, method: string): boolean {
     return isAbsent(value) || typeof (value as any)[method] !== 'function';

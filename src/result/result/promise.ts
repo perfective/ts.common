@@ -12,6 +12,8 @@ import { Failure, failure, Result, success } from './result';
  *
  * Pass this function into {@linkcode Promise.catch} or {@linkcode Promise.then} as an `onRejection` callback
  * to wrap a `reason` into a {@linkcode Failure}.
+ *
+ * @since v0.9.0
  */
 export function rejection<T = never>(reason: unknown): Failure<T> {
     return failure(unknownError(reason));
@@ -22,6 +24,8 @@ export function rejection<T = never>(reason: unknown): Failure<T> {
  *
  * Returns a {@linkcode Success} with a value if a {@linkcode Promise} is fulfilled.
  * Returns a {@linkcode Failure} with a reason if a {@linkcode Promise} is rejected.
+ *
+ * @since v0.9.0
  */
 export async function promisedResult<T>(promise: Promise<T>): Promise<Result<T>> {
     return promise.then(success, rejection);
@@ -32,6 +36,8 @@ export async function promisedResult<T>(promise: Promise<T>): Promise<Result<T>>
  *
  * Returns a fulfilled {@linkcode Promise} if {@linkcode result} is a {@linkcode Success}.
  * Returns a rejected {@linkcode Promise} if {@linkcode result} is a {@linkcode Failure}.
+ *
+ * @since v0.9.0
  */
 export async function settledResult<T>(result: Result<T>): Promise<T> {
     return result.into(fulfilled, rejected);

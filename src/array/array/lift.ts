@@ -78,6 +78,8 @@ export function push<T>(...items: T[]): Unary<T[], number> {
 
 /**
  * Creates a function that pushes {@linkcode items} into a given {@linkcode array}.
+ *
+ * @since v0.9.0
  */
 export function pushInto<T>(array: T[]): (...items: T[]) => number {
     return (...items: T[]): number => array.push(...items);

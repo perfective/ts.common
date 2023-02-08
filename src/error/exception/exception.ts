@@ -36,6 +36,8 @@ export function exception(message: string, tokens: ExceptionTokens = {}, context
 /**
  * Creates a function to wrap a previous {@linkcode Error}
  * into an {@linkcode Exception} with a given {@linkcode message}.
+ *
+ * @since v0.9.0
  */
 export function chainedException(
     message: string,

@@ -6,9 +6,13 @@ export {
 export { TypeGuard } from './value/type-guard/type-guard';
 export {
     EcmaType,
+    ecmaType,
+    isEcmaType,
     isNotTypeOf,
+    isTsType,
     isTypeOf,
     TsType,
+    tsType,
     TypeOf,
     typeOf,
 } from './value/type-of/type-of';

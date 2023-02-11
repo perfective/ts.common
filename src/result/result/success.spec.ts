@@ -126,6 +126,15 @@ describe(Success, () => {
                 expect(output).toStrictEqual(success('0'));
             });
         });
+
+        describe('to(biMap)', () => {
+            it('applies the first callback of a given biMap pair to the Success.value and returns a Success', () => {
+                const output: Success<string> = success(0)
+                    .to([strictNumberOutput, chainedException('Exceptional Failure')]);
+
+                expect(output).toStrictEqual(success('0'));
+            });
+        });
     });
 
     describe('into', () => {

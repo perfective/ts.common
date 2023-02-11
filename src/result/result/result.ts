@@ -5,6 +5,8 @@ import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 
+import { BiMapResult } from './bimap';
+
 /**
  * A monadic type that represents a result of a function. It can be a successful value or an error value.
  *
@@ -36,6 +38,18 @@ export abstract class Result<T> {
     ): Result<U>;
 
     /**
+     * If the instance is a {@linkcode Success},
+     * applies the first callback of a given {@linkcode biMap} pair to the {@linkcode Success.value}
+     * and returns its result wrapped into a {@linkcode Success}.
+     *
+     * Otherwise, applies the second callback of a given {@linkcode biMap} pair to the {@linkcode Failure.value}
+     * and returns its result wrapped into a {@linkcode Failure}.
+     *
+     * @since v0.9.0
+     */
+    public abstract to<U>(biMap: BiMapResult<T, U>): Result<U>;
+
+    /**
      * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value},
      * when the instance is a {@linkcode Success}.
      *
@@ -44,10 +58,7 @@ export abstract class Result<T> {
      *
      * @since v0.9.0
      */
-    public abstract to<U>(
-        mapValue: (value: T) => U,
-        mapError?: (error: Error) => Error,
-    ): Result<U>;
+    public abstract to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Result<U>;
 
     /**
      * Applies a given {@linkcode reduce} callback to the {@linkcode Result.value|value} property.
@@ -145,6 +156,14 @@ export class Success<T> extends Result<T> {
     }
 
     /**
+     * Applies the first callback of a given {@linkcode biMap} pair to the {@linkcode Success.value}
+     * and returns its result wrapped into a {@linkcode Success}.
+     *
+     * @since v0.9.0
+     */
+    public override to<U>(biMap: BiMapResult<T, U>): Success<U>;
+
+    /**
      * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
      * Ignores a given {@linkcode mapError} callback.
      *
@@ -152,16 +171,10 @@ export class Success<T> extends Result<T> {
      *
      * @since v0.9.0
      */
-    public override to<U>(mapValue: (value: T) => U, mapError?: (error: Error) => Error): Success<U>;
+    public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Success<U>;
 
-    /**
-     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
-     *
-     * Returns the result of the {@linkcode mapValue} call wrapped into a {@linkcode Success}.
-     *
-     * @since v0.9.0
-     */
-    public override to<U>(mapValue: (value: T) => U): Success<U> {
+    public override to<U>(args: Unary<T, U> | BiMapResult<T, U>): Success<U> {
+        const mapValue = Array.isArray(args) ? args[0] : args;
         return success(mapValue(this.value));
     }
 
@@ -264,6 +277,14 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
+     * Applies the second callback of a given {@linkcode BiMapResult} pair to the {@linkcode Failure.value}
+     * and returns its result wrapped into a {@linkcode Failure}.
+     *
+     * @since v0.9.0
+     */
+    public override to<U>(biMap: BiMapResult<T, U>): Failure<U>;
+
+    /**
      * If given a {@linkcode mapError} callback,
      * applies it to the {@linkcode Failure.value}
      * and returns the result wrapped into a {@linkcode Failure}.
@@ -273,7 +294,13 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.9.0
      */
-    public override to<U>(mapValue: (value: T) => U, mapError?: (error: Error) => Error): Failure<U> {
+    public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Failure<U>;
+
+    public override to<U>(
+        first: Unary<T, U> | BiMapResult<T, U>,
+        second?: Unary<Error, Error>,
+    ): Failure<U> {
+        const mapError = Array.isArray(first) ? first[1] : second;
         if (isDefined(mapError)) {
             return failure(mapError(this.value));
         }

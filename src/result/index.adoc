@@ -83,6 +83,11 @@ then a `Promise` is rejected.
 
 == Reference
 
+=== Types
+
+* `BiMapResult<T, U> = BiMap<T, U, Error, Error>`
+— a pair of callbacks for the `Result.to()` bifunctor.
+
 === Functions
 
 * `success<T>(value: T): Success<T>`
@@ -159,6 +164,16 @@ when an error is given.
 Even if the `T` is a type of `Error`,
 the `fallback` value will be returned.
 ====
++
+* `successWith<T, U>(map: Unary<T, U>): BiMapResult<T, U>`
+— creates a `BiMapResult` pair
+with a given `map` callback as the first element
+and an identity function as the second element.
++
+* `failureWith<T>(map: Unary<Error, Error>): BiMapResult<T, T>`
+— creates a `BiMapResult` pair
+with a given `map` callback as the second element
+and an identity function as the first element.
 
 
 === `Result.onto()`
@@ -236,10 +251,42 @@ it would fail with the earliest error in the chain
 === `Result.to()`
 
 * `Result.to<U>(map: (value: T) => U): Result<U>`:
-** for a `Success`, applies a given `map` callback to the `Success.value` and returns the result;
-** for a `Failure`, ignores the `map` callback and returns the same `Failure`.
-
+** For a `Success`, applies a given `map` callback to the `Success.value` and returns the result;
+** For a `Failure`, ignores the `map` callback and returns the same `Failure`.
 +
+* `Result.to<U>(mapValue: (value: T) => U, mapError: (error: Error) => Error): Result<U>`
+** For a `Success`, applies a given `mapValue` callback to the `Success.value` and returns the result as a `Success`;
+** For a `Failure`, applies a given `mapError` callback to the `Failure.value` and returns the result as s `Failure`.
++
+This method can be used to track occurred failures occurred in a previous step
+by chaining them together using the `mapError`.
++
+* `Result.to<U>(biMap: [(value: T) => U, (error: Error) => Error]): Result<U>`:
+** For a `Success`,
+applies the first callback of a given `biMap` pair to the `Success.value`
+and returns its result wrapped as a `Success`.
+** For a `Failure`,
+applied the second callback of a given `biMap` pair to the `Failure.value`
+and returns its result wrapped as a `Failure`.
++
+This method allows to use a pair of `mapValue` and `mapError` functions created dynamically.
++
+You can also use it with the `failureWith` function to only transform a `Failure.value`.
+
+[NOTE]
+====
+[source,typescript]
+.The following calls are equivalent
+----
+
+Result.to([mapValue, mapError]) === Result.to(mapValue, mapError);
+Result.to([mapValue, mapError]) === Result.to(successWith(mapValue)).to(failureWith(mapError));
+Result.to(successWith(mapValue)) === Result.to(mapValue);
+Result.to(successWith(mapValue)) === Result.to(mapValue, same);
+Result.to(failureWith(mapError)) === Result.to(same, mapError);
+----
+====
+
 [source,typescript]
 ----
 import { error, typeError } from '@perfective/common/error';
@@ -295,13 +342,30 @@ then the whole chain succeeds.
 <.> When we have an invalid `id`,
 neither `apiRequest` nor `apiResponse` callbacks are called.
 So the result is the `TypeError` returned by the `validInput`.
-+
-* `Result.to<U>(mapValue: (value: T) => U, mapError: (error: Error) => Error): Result<U>`
-** for a `Success`, applies a given `mapValue` callback to the `Success.value` and returns the result as a `Success`;
-** for a `Failure`, applies a given `mapError` callback to the `Failure.value` and returns the result as s `Failure`.
 
-+
-This method can be used to track all occurred failures by chaining them together using the `mapError`.
+[source,typescript]
+.Using `Result.to` with the `failureWith()` function to only transform a `Failure.value`.
+----
+import { chainedException, typeError } from '@perfective/common/error';
+import { failure, failureWith, Result, success } from '@perfective/common/result';
+import { isEmpty } from '@perfective/common/string';
+
+function validInput(id: string): Result<string> {
+    if (isEmpty(id)) {
+        return failure(typeError('Input id is empty'));
+    }
+    return success(id);
+}
+
+function entityByIdRequest(id: string): Result<Request> {
+    return validInput(id)
+        .to(failureWith(chainedException('Entity ID {{id}} is invalid' { // <.>
+            id,
+        })))
+        .to(apiRequest('GET'));
+}
+----
+<.> You can also combine both callbacks into one `Result.to(apiRequest(...), chainedException(...))` call.
 
 
 === `Result.into()`
@@ -515,13 +579,13 @@ failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
 
 The `Result<T>` type is a bifunctor that provides:
 
-* the `Result.to(mapValue, mapError)` method as a _bimap_ function.
-* the `Result.to(mapValue)` method as a _second_ function.
-* the `Result.failure(mapError)` method as a _first_ function.
+* the `Result.to(biMap)` method as the _bimap_ function.
+* the `successWith()` function as the _second_ function.
+* the `failureWIth()` function as the _first_ function.
 
 Which ensures that:
 
-1. `Result.to(mapValue, mapError)` preserves identity morphisms
+1. `Result.to(biMap)` preserves identity morphisms
 +
 [source,typescript]
 ----
@@ -529,11 +593,13 @@ let id = (value: T) => value;
 let value: T;
 let error: Error;
 
-success(value).to(id, id) === success(id(value));
-failure(error).to(id, id) === failure(id(error));
+success(value).to([id, id]) === success(id(value));
+failure(error).to([id, id]) === failure(id(error));
 ----
-2. `Result.to(mapValue)` preserves identity morphisms
-3. `Result.failure(mapError)` preserves identity morphisms
++
+2. `Result.to(successWith(mapValue))` preserves identity morphisms
++
+3. `Result.to(failureWith(mapError))` preserves identity morphisms
 +
 +
 4. Applying the `bimap` function is the same as applying the `first` and `second` functions.
@@ -545,6 +611,6 @@ let s: (value: T) => U;
 let value: T;
 let error: Error;
 
-success(value).to(s, f) === success(value).to(s).failure(f);
-failure(error).to(s, f) === failure(error).to(s).failure(f);
+success(value).to([s, f]) === success(value).to(successWith(s)).(failureWith(f));
+failure(error).to([s, f]) === failure(error).to(successWith(s)).(failureWith(f));
 ----

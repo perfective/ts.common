@@ -4,6 +4,7 @@ import { chainedException, exception } from '../../error/exception/exception';
 import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
 
+import { failureWith, successWith } from './bimap';
 import { Failure, failure, Result, result, resultFrom, resultOf, Success, success } from './result';
 import {
     eitherResult,
@@ -165,18 +166,23 @@ describe.each([
         });
     });
 
-    describe('to(mapValue, mapError)', () => {
+    describe('to(biMap)', () => {
+        it('is the same as applying the first callback as `mapValue` and the second callback as `mapError`', () => {
+            expect(result.to([mapValue1, mapError1]))
+                .toStrictEqual(result.to(mapValue1, mapError1));
+        });
+
         describe('is a "bimap" method for the Result bifunctor', () => {
             it('preserves identity morphisms', () => {
                 // Identity: bimap id id = id
-                expect(result.to(same, same))
+                expect(result.to([same, same]))
                     .toStrictEqual(same(result));
             });
 
             it('the same as applying the "first" and "second" methods', () => {
                 // Ensure: bimap f g  =  first f . second g
-                expect(result.to(mapValue1, mapError1))
-                    .toStrictEqual(result.to(mapValue1).failure(mapError1));
+                expect(result.to([mapValue1, mapError1]))
+                    .toStrictEqual(result.to(successWith(mapValue1)).to(failureWith(mapError1)));
             });
         });
     });

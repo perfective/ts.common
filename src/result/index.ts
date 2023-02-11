@@ -1,4 +1,9 @@
 export {
+    BiMapResult,
+    failureWith,
+    successWith,
+} from './result/bimap';
+export {
     promisedResult,
     rejection,
     settledResult,

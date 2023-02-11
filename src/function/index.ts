@@ -1,3 +1,4 @@
+export { BiMap } from './arguments/bimap';
 export {
     Binary,
     isBinary,

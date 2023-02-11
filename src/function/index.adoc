@@ -75,6 +75,12 @@ The functions of higher arity is unlikely to be added to the package.
 ** `toLongest<T extends Length>(longest: T, array: T): T`
 
 
+== Arguments
+
+* `BiMap<T1, U1, T2, U2> = [Unary<T1, U1>, Unary<T2, U2>]`
+— a pair of callbacks to map both arguments of a given function at the same time.
+
+
 == Roadmap
 
 * Provide functions for the standard

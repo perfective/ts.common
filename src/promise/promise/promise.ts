@@ -21,9 +21,9 @@ export type Reject<E extends Error = Error> = (reason?: E) => void;
 export type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void;
 
 /**
- * @deprecated since v0.9.0
+ * @deprecated Since v0.9.0.
  */
-export type Run<T, E extends Error = Error> = Executor<T,  E>;
+export type Run<T, E extends Error = Error> = Executor<T, E>;
 
 /**
  * A type of a callback passed as `onFulfilled` into {@linkcode Promise.then}.

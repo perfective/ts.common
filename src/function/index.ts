@@ -1,3 +1,4 @@
+export { BiFold } from './arguments/bi-fold';
 export { BiMap } from './arguments/bimap';
 export {
     Binary,

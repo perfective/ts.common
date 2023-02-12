@@ -79,6 +79,9 @@ The functions of higher arity is unlikely to be added to the package.
 
 * `BiMap<T1, U1, T2, U2> = [Unary<T1, U1>, Unary<T2, U2>]`
 — a pair of callbacks to map both arguments of a given function at the same time.
++
+* `BiFold<T1, T2, U> = [Unary<T1, U>, Unary<T2, U>]`
+— a pair of unary callbacks to map both arguments `T1` and `T2` of a function into the same type `U`.
 
 
 == Roadmap

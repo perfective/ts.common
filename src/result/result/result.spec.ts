@@ -134,7 +134,6 @@ describe.each([
     reduce: Unary<T | Error, U3>,
 ) => {
     const mapError1 = chainedException('Exceptional');
-    const mapError2 = chainedException('Failure');
 
     describe('onto', () => {
         describe('is a "bind" (>>=) operator for the Result monad', () => {
@@ -196,22 +195,6 @@ describe.each([
         it('is an equivalent of applying a `reduce` callback as `reduceValue` and `reduceError`', () => {
             expect(result.into(reduce))
                 .toBe(result.into(reduce, reduce));
-        });
-    });
-
-    describe('failure(mapError)', () => {
-        describe('is a "first" method of a Result bifunctor', () => {
-            it('preserves identity morphisms', () => {
-                // Identity: first id  =  id
-                expect(result.failure(same))
-                    .toStrictEqual(same(result));
-            });
-
-            it('preserves composition of morphisms', () => {
-                // Composition: first (f . g)  ===  first f . first g
-                expect(result.failure(error => mapError2(mapError1(error))))
-                    .toStrictEqual(result.failure(mapError1).failure(mapError2));
-            });
         });
     });
 });

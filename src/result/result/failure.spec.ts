@@ -93,14 +93,6 @@ describe(Failure, () => {
         });
     });
 
-    describe('failure', () => {
-        it('applies a given `mapError` callback to the Failure.value and returns the result as a Failure', () => {
-            const output: Failure<number> = input.failure(chainedException('Exceptional Failure'));
-
-            expect(output).toStrictEqual(failure(causedBy(input.value, 'Exceptional Failure')));
-        });
-    });
-
     describe('run', () => {
         it('runs a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {
             const values: number[] = [];

@@ -164,15 +164,6 @@ describe(Success, () => {
         });
     });
 
-    describe('failure', () => {
-        it('ignores a given `mapError` callback and returns itself', () => {
-            const input = success(0);
-            const output: Success<number> = input.failure(chainedException('Exceptional Failure'));
-
-            expect(output).toBe(input);
-        });
-    });
-
     describe('run', () => {
         describe('run(valueProcedure)', () => {
             it('runs a given `valueProcedure` and returns itself', () => {

@@ -2,7 +2,7 @@ import { chainedException } from '../../error/exception/exception';
 import { constant } from '../../function/function/nullary';
 import { same } from '../../function/function/unary';
 
-import { failureWith, successWith } from './bimap';
+import { failureWith, successWith } from './arguments';
 
 describe(successWith, () => {
     const map = constant(0);

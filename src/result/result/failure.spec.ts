@@ -91,6 +91,12 @@ describe(Failure, () => {
                 expect(input.into(strictNumberOutput, strictErrorOutput)).toBe('Failure');
             });
         });
+
+        describe('into(fold)', () => {
+            it('returns the result of the second callback of the `fold` pair applied to the Failure.value', () => {
+                expect(input.into([strictNumberOutput, strictErrorOutput])).toBe('Failure');
+            });
+        });
     });
 
     describe('run', () => {

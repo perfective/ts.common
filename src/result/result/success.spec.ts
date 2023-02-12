@@ -162,6 +162,17 @@ describe(Success, () => {
                     .toBe('Success of {{number}}');
             });
         });
+
+        describe('into(fold)', () => {
+            it('returns a result of applying the first callback of the `fold` pair to the Success.value', () => {
+                expect(success(0).into([strictNumberOutput, strictErrorOutput])).toBe('0');
+
+                const sb = success(exception('Success of {{number}}', { number: '0' }));
+
+                expect(sb.into([strictExceptionOutput, strictErrorOutput]))
+                    .toBe('Success of {{number}}');
+            });
+        });
     });
 
     describe('run', () => {

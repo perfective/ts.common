@@ -87,6 +87,10 @@ then a `Promise` is rejected.
 
 * `BiMapResult<T, U> = BiMap<T, U, Error, Error>`
 — a pair of callbacks for the `Result.to()` bifunctor.
++
+* `BiFoldResult<T, U> = Bifold<T, Error, U>`
+— a pair of callbacks for the `Result.into()` method argument.
+
 
 === Functions
 
@@ -370,14 +374,35 @@ function entityByIdRequest(id: string): Result<Request> {
 
 === `Result.into()`
 
-* `Result.into<U>(reduce: (value: T | Error) => U): U`
+* `Result.into<U>(reduce: Unary<T | Error, U>): U`
 — applies a given `reduce` callback to the `Result.value` and returns the result of the `reduce`.
 +
 `Result.into(reduce)` is an equivalent of applying the `reduce` callback directly to the `Result.value`.
 Using `Result.into(reduce)` allows you to completely switch the type
 or recover from an `Error` and continue a transformation chain.
 +
+* `Result.into<U>(fold: BiFoldResult<T, U>): U`:
+** For a `Success`, applies the first callback of the `fold` pair to the `Success.value` and returns the result.
+** For a `Failure`, applies the second callback of the `fold` pair to the `Failure.value` and returns the result.
+
++
+`Result.into(fold)` allows to pass a pair of reduce callbacks dynamically as one argument.
+
++
+* `Result.into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U`:
+** For a `Success` applies a given `reduceValue` to the `Success.value`,
+** For a `Failure` applies a given `reduceError` to the `Failure.value` (`Error`).
+
++
+`Result.into(reduceValue, reduceError)` separates handling of the `Success.value` and `Failure.value`.
+It is especially useful when the `Success.value` is an `Error`.
+As in this case,
+the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
+and a `Failure.value` `Error`.
+
+
 [source,typescript]
+.Using the `Result.into()` method to recover from an error and switch to a `Promise`.
 ----
 import { error, typeError } from '@perfective/common/error';
 import { Unary } from '@perfective/common/function';
@@ -423,17 +448,6 @@ async function entityById(id: string): Promise<string> {
 <.> When we have a `Request`,
 we use `Result.into()` to switch it to the `apiResponse` `Promise`.
 <.> Now we have a `Promise` chain and can continue computation.
-+
-+
-* `Result.into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U`
-— for a `Success` applies a given `reduceValue` to the `Success.value`,
-for a `Failure` applies a given `reduceError` to the `Failure.value` (`Error`).
-+
-`Result.into(reduceValue, reduceError)` is a strict separate handling of the `Success.value` and `Failure.value`.
-It is especially useful when the `Success.value` is an `Error`.
-As in this case,
-the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
-and a `Failure.value` `Error`.
 
 
 === `Result.run()`

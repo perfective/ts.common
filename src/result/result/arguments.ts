@@ -1,3 +1,4 @@
+import { BiFold } from '../../function/arguments/bi-fold';
 import { BiMap } from '../../function/arguments/bimap';
 import { same, Unary } from '../../function/function/unary';
 
@@ -29,3 +30,10 @@ export function successWith<T, U>(map: Unary<T, U>): BiMapResult<T, U> {
 export function failureWith<T>(map: Unary<Error, Error>): BiMapResult<T, T> {
     return [same, map];
 }
+
+/**
+ * A {@linkcode BiFold} type specific to the {@linkcode Result} type.
+ *
+ * @since v0.9.0
+ */
+export type BiFoldResult<T, U> = BiFold<T, Error, U>;

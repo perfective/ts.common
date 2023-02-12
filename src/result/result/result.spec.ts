@@ -4,7 +4,7 @@ import { chainedException, exception } from '../../error/exception/exception';
 import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
 
-import { failureWith, successWith } from './bimap';
+import { failureWith, successWith } from './arguments';
 import { Failure, failure, Result, result, resultFrom, resultOf, Success, success } from './result';
 import {
     eitherResult,
@@ -125,13 +125,13 @@ describe.each([
     // Failure (with an error value)
     [failure<number>(error('Failure')), resultDecimal, resultNumber, strictNumberOutput, array, safeNumberOutput],
     // @ts-expect-error -- TSC creates a union of all types, while only each row arguments have to match.
-])(Result.name, <T, U1, V1, U2, V2, U3>(
+])(Result.name, <T, U1, V1, U2, V2>(
     result: Result<T>,
     flatMap1: Unary<T, Result<U1>>,
     flatMap2: Unary<U1, Result<V1>>,
     mapValue1: Unary<T, U2>,
     mapValue2: Unary<U2, V2>,
-    reduce: Unary<T | Error, U3>,
+    reduce: Unary<T | Error, string>,
 ) => {
     const mapError1 = chainedException('Exceptional');
 
@@ -195,6 +195,13 @@ describe.each([
         it('is an equivalent of applying a `reduce` callback as `reduceValue` and `reduceError`', () => {
             expect(result.into(reduce))
                 .toBe(result.into(reduce, reduce));
+        });
+    });
+
+    describe('into(fold)', () => {
+        it('is an equivalent of applying a `reduceValue` and `reduceError` as separate arguments', () => {
+            expect(result.into([reduce, strictErrorOutput]))
+                .toBe(result.into(reduce, strictErrorOutput));
         });
     });
 });

@@ -1,8 +1,9 @@
 export {
+    BiFoldResult,
     BiMapResult,
     failureWith,
     successWith,
-} from './result/bimap';
+} from './result/arguments';
 export {
     promisedResult,
     rejection,

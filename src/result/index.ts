@@ -1,6 +1,7 @@
 export {
     BiFoldResult,
     BiMapResult,
+    BiVoidResult,
     failureWith,
     successWith,
 } from './result/arguments';

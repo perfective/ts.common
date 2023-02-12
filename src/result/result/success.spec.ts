@@ -199,6 +199,22 @@ describe(Success, () => {
                 expect(errors).toStrictEqual([]);
             });
         });
+
+        describe('run(procedures)', () => {
+            it('runs the first callback in a given `procedures` pair and returns itself', () => {
+                const values: number[] = [];
+                const errors: string[] = [];
+                const input = success(0);
+                const output: Success<number> = input.run([
+                    pushInto(values),
+                    (error: Error): number => errors.push(error.message),
+                ]);
+
+                expect(output).toBe(input);
+                expect(values).toStrictEqual([0]);
+                expect(errors).toStrictEqual([]);
+            });
+        });
     });
 });
 

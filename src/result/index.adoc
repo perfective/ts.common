@@ -455,6 +455,10 @@ we use `Result.into()` to switch it to the `apiResponse` `Promise`.
 * `Result.run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this`:
 ** For a `Success`, runs a given `valueProcedure` and returns itself.
 ** For a `Failure`, runs a given `errorProcedure` and returns itself.
++
+* `Result.run(procedures: BiVoidResult<T>): this`:
+** For a `Success`, runs the first procedure in the `procedures` pair and returns itself.
+** For a `Failure`, runs the second procedure in the `procedures` pair and returns itself.
 
 [source,typescript]
 ----

@@ -5,7 +5,7 @@ import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 
-import { BiFoldResult, BiMapResult } from './arguments';
+import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 
 /**
  * A monadic type that represents a result of a function. It can be a successful value or an error value.
@@ -92,6 +92,19 @@ export abstract class Result<T> {
      * @since v0.9.0
      */
     public abstract into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
+
+    /**
+     * If the instance is a {@linkcode Success},
+     * runs the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     *
+     * If the instance is a {@linkcode Failure},
+     * runs the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     *
+     * Returns the original {@linkcode Result} object.
+     *
+     * @since v0.9.0
+     */
+    public abstract run(procedures: BiVoidResult<T>): this;
 
     /**
      * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
@@ -203,24 +216,26 @@ export class Success<T> extends Result<T> {
     }
 
     /**
+     * Runs the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     * Returns the original {@linkcode Success} object.
+     *
+     * @since v0.9.0
+     */
+    public override run(procedures: BiVoidResult<T>): this;
+
+    /**
      * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      * Ignores a given {@linkcode errorProcedure} callback.
      *
-     * Returns itself.
+     * Returns the original {@linkcode Success} object.
      *
      * @since v0.9.0
      */
     public override run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 
-    /**
-     * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
-     *
-     * Returns itself.
-     *
-     * @since v0.9.0
-     */
-    public override run(valueProcedure: (value: T) => void): this {
-        valueProcedure(this.value);
+    public override run(first: Unary<T, void> | BiVoidResult<T>): this {
+        const procedure = Array.isArray(first) ? first[0] : first;
+        procedure(this.value);
         return this;
     }
 }
@@ -334,6 +349,15 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
+     * Runs the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     *
+     * Returns the original {@linkcode Failure} object.
+     *
+     * @since v0.9.0
+     */
+    public override run(procedures: BiVoidResult<T>): this;
+
+    /**
      * Runs a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}.
      * Ignores a given {@linkcode valueProcedure} callback.
      *
@@ -341,8 +365,15 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.9.0
      */
-    public override run(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this {
-        errorProcedure(this.value);
+    public override run(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this;
+
+    public override run(
+        first: Unary<T, void> | BiVoidResult<T>,
+        second?: Unary<Error, void>,
+    ): this {
+        // If the first argument is not an array, then the second argument must be present due to the method signature.
+        const procedure = Array.isArray(first) ? first[1] : (second as unknown as Unary<Error, void>);
+        procedure(this.value);
         return this;
     }
 }

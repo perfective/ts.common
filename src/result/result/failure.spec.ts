@@ -100,15 +100,33 @@ describe(Failure, () => {
     });
 
     describe('run', () => {
-        it('runs a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {
-            const values: number[] = [];
-            const errors: string[] = [];
-            const input = failure<number>(error('Failure'));
-            const output: Failure<number> = input.run(pushInto(values), error => errors.push(error.message));
+        describe('run(valueProcedure, errorProcedure)', () => {
+            it('runs a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {
+                const values: number[] = [];
+                const errors: string[] = [];
+                const input = failure<number>(error('Failure'));
+                const output: Failure<number> = input.run(pushInto(values), error => errors.push(error.message));
 
-            expect(output).toBe(input);
-            expect(values).toStrictEqual([]);
-            expect(errors).toStrictEqual(['Failure']);
+                expect(output).toBe(input);
+                expect(values).toStrictEqual([]);
+                expect(errors).toStrictEqual(['Failure']);
+            });
+        });
+
+        describe('run(procedures)', () => {
+            it('runs the second callback in a given `procedures` pair and returns itself', () => {
+                const values: number[] = [];
+                const errors: string[] = [];
+                const input = failure<number>(error('Failure'));
+                const output: Failure<number> = input.run([
+                    pushInto(values),
+                    (error: Error): number => errors.push(error.message),
+                ]);
+
+                expect(output).toBe(input);
+                expect(values).toStrictEqual([]);
+                expect(errors).toStrictEqual(['Failure']);
+            });
         });
     });
 });

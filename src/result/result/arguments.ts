@@ -37,3 +37,10 @@ export function failureWith<T>(map: Unary<Error, Error>): BiMapResult<T, T> {
  * @since v0.9.0
  */
 export type BiFoldResult<T, U> = BiFold<T, Error, U>;
+
+/**
+ * A pair of unary procedures for the {@linkcode Result.run} method.
+ *
+ * @since v0.9.0
+ */
+export type BiVoidResult<T> = [Unary<T, void>, Unary<Error, void>];

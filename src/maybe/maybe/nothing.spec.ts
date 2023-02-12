@@ -1,5 +1,5 @@
 import { panic } from '../../error/panic/panic';
-import { constant, Nullary } from '../../function/function/nullary';
+import { constant, Void } from '../../function/function/nullary';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 
 import { Just, just, Maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
@@ -771,10 +771,11 @@ describe(Nothing, () => {
     describe('run', () => {
         let value: number;
 
-        // eslint-disable-next-line func-style -- conflicts with prefer-arrow
-        const assignValue = (update: number): Nullary<void> => (): void => {
-            value = update;
-        };
+        function assignValue(update: number): Void {
+            return (): void => {
+                value = update;
+            };
+        }
 
         beforeEach(() => {
             value = 0;

@@ -20,8 +20,12 @@ The functions of higher arity is unlikely to be added to the package.
 (does not count a variadic argument).
 ** `constant<T>(value: T): Nullary<T>`
 — creates a function that returns that same value.
-** `empty(): Nullary<void>`
++
+* `Void`
+— a procedure without arguments:
+** `empty(): Void`
 — creates a function that always returns `void` (`undefined`).
++
 * `Value<T> = T | Nullary<T>`
 — represent a value, or a function that returns a value
 (e.g. for lazy evaluation).

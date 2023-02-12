@@ -24,6 +24,7 @@ export {
     Nullary,
     Value,
     valueOf,
+    Void,
 } from './function/nullary';
 export {
     isTernary,

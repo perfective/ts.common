@@ -1,4 +1,4 @@
-import { constant, Nullary } from '../../function/function/nullary';
+import { constant, Void } from '../../function/function/nullary';
 import { same, Unary } from '../../function/function/unary';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
@@ -1025,10 +1025,11 @@ describe(Maybe, () => {
     describe('run', () => {
         let pi: number;
 
-        // eslint-disable-next-line func-style -- conflicts with prefer-arrow
-        const assignPi = (value: number): Nullary<void> => (): void => {
-            pi = value;
-        };
+        function assignPi(update: number): Void {
+            return (): void => {
+                pi = update;
+            };
+        }
 
         beforeEach(() => {
             pi = 3.14;

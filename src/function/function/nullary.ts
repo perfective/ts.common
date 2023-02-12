@@ -2,6 +2,14 @@ import { isFunction } from './function';
 import { hasLength } from './length';
 
 export type Nullary<T> = () => T;
+
+/**
+ * A nullary procedure.
+ *
+ * @since v0.9.0
+ */
+export type Void = () => void;
+
 export type Value<T> = T | Nullary<T>;
 
 // eslint-disable-next-line @typescript-eslint/ban-types -- generic predicate
@@ -13,7 +21,7 @@ export function constant<T>(value: T): Nullary<T> {
     return (): T => value;
 }
 
-export function empty(): Nullary<void> {
+export function empty(): Void {
     return (): void => undefined;
 }
 

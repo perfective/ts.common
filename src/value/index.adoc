@@ -135,6 +135,10 @@ and linters provide different rules to restrict its usage only to correct cases.
 Unfortunately, different packages (like AWS SDK) may use `void` as a synonym to `null | undefined`.
 This approach creates conflicts in the code linted with the
 `link:https://github.com/perfective/eslint-config[@perfective/eslint-config]`,
-so a special function is introduced to "type cast" any `void` value into `null | undefined`:
+so a special type and function are introduced to "type cast" any `void` value into `null | undefined`:
 
+* `Voidable<T> = T | void`
+— a value that is either of type `T` or is `void`.
++
 * `voidable<T>(value: T | void): T | null | undefined`
+— casts a given `Voidable` value into an optional nullable type.

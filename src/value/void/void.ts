@@ -1,16 +1,21 @@
 /**
- * Voidable() function allows to convert a `void`-able type into a `maybe`-acceptable type.
+ * A value that is either of type T or is {@linkcode void}.
  *
- * The use of `void` is discouraged,
+ * The use of {@linkcode void} is discouraged,
  * but some 3rd-party packages, like AWS SDK, may use it.
  *
- * @param value - Value to be casted as undefined when it's void.
+ * @since v0.9.0
  */
-export function voidable<T>(
-    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type -- special function to handle "void"
-    value: T | void,
-): T | null | undefined {
-    // eslint-disable-next-line no-void -- safe check of "undefined"
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type -- special function to handle "void"
+export type Voidable<T> = T | void;
+
+/**
+ * Casts a given {@linkcode Voidable} value into an optional nullable type.
+ *
+ * Use this function only if you have a 3rd-party package that returns {@linkcode void}.
+ */
+export function voidable<T>(value: Voidable<T>): T | null | undefined {
+    // eslint-disable-next-line no-void -- checking for `undefined` to remove `void` from the value type.
     if (value === void 0) {
         return undefined;
     }

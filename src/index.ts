@@ -30,4 +30,7 @@ export {
     Present,
     Undefined,
 } from './value/value';
-export { voidable } from './value/void/void';
+export {
+    Voidable,
+    voidable,
+} from './value/void/void';

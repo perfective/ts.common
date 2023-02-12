@@ -42,6 +42,9 @@ The functions of higher arity is unlikely to be added to the package.
 (does not count a variadic argument).
 ** `same<T>(value: T): T`
 — returns a given value.
++
+* `UnaryVoid<T> = (value: T) => void`
+— a procedure with one argument.
 
 
 == Binary functions

@@ -452,8 +452,8 @@ we use `Result.into()` to switch it to the `apiResponse` `Promise`.
 
 === `Result.run()`
 
-* `Result.run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Result<T>`
-** For a `Success`, runs a given `valueProcedure` and returns itself;
+* `Result.run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this`:
+** For a `Success`, runs a given `valueProcedure` and returns itself.
 ** For a `Failure`, runs a given `errorProcedure` and returns itself.
 
 [source,typescript]

@@ -34,4 +34,5 @@ export {
     isUnary,
     same,
     Unary,
+    UnaryVoid,
 } from './function/unary';

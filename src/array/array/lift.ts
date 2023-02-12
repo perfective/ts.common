@@ -1,5 +1,5 @@
 import { Predicate } from '../../boolean/predicate/predicate';
-import { Unary } from '../../function/function/unary';
+import { Unary, UnaryVoid } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 
 // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- -1 is an error code
@@ -37,7 +37,7 @@ export function findIndex<T>(condition: Predicate<T>): Unary<T[], NumberOrErrorC
     return (array: T[]): NumberOrErrorCode => array.findIndex(condition);
 }
 
-export function forEach<T>(procedure: Unary<T, void>): Unary<T[], void> {
+export function forEach<T>(procedure: UnaryVoid<T>): UnaryVoid<T[]> {
     return (array: T[]): void => array.forEach(procedure);
 }
 

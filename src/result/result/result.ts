@@ -2,7 +2,7 @@
 import { isError, isNotError } from '../../error/error/error';
 import { unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
-import { Unary } from '../../function/function/unary';
+import { Unary, UnaryVoid } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult } from './arguments';
@@ -103,7 +103,7 @@ export abstract class Result<T> {
      *
      * @since v0.9.0
      */
-    public abstract run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Result<T>;
+    public abstract run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 }
 
 /**
@@ -210,7 +210,7 @@ export class Success<T> extends Result<T> {
      *
      * @since v0.9.0
      */
-    public override run(valueProcedure: (value: T) => void, errorProcedure?: (error: Error) => void): Success<T>;
+    public override run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 
     /**
      * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
@@ -341,7 +341,7 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.9.0
      */
-    public override run(valueProcedure: (value: T) => void, errorProcedure: (error: Error) => void): this {
+    public override run(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this {
         errorProcedure(this.value);
         return this;
     }

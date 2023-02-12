@@ -107,7 +107,7 @@ The `@perfective/common/array` package provides functions for the standard JS
 ** `spliceWith<T>(start: number, deleteCount: number, ...items: T[]): Unary<T[], T[]>`
 +
 * Procedures:
-** `forEach<T>(procedure: Unary<T, void>): Unary<T[], void>`
+** `forEach<T>(procedure: UnaryVoid<T>): UnaryVoid<T[]>`
 +
 * Filters:
 ** `Filter<T, S extends T>`

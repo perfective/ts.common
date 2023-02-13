@@ -6,7 +6,6 @@ import { Failure, failure, recovery, Result, Success, success, successFrom } fro
 import {
     failureDecimal,
     resultDecimal,
-    safeNumberOutput,
     strictErrorOutput,
     strictExceptionOutput,
     strictNumberOutput,
@@ -138,17 +137,13 @@ describe(Success, () => {
     });
 
     describe('into', () => {
-        describe('into(reduce)', () => {
+        describe('into(reduceValue)', () => {
             it('applies a given `reduce` callback to the Success.value and returns the result', () => {
-                expect(success(0).into(safeNumberOutput)).toBe('0');
+                expect(success(0).into(strictNumberOutput)).toBe('0');
 
                 const sb = success(exception('Success of {{number}}', { number: '0' }));
 
-                expect(sb.into(safeNumberOutput)).toBe('Success of `0`');
-            });
-
-            it('allows a `reduce` callback that does not accept an Error input', () => {
-                expect(success(0).into(strictNumberOutput)).toBe('0');
+                expect(sb.into(strictExceptionOutput)).toBe('Success of {{number}}');
             });
         });
 
@@ -219,15 +214,17 @@ describe(Success, () => {
 });
 
 describe(recovery, () => {
-    describe('when the created function is given a value argument', () => {
+    const [ifSuccess, ifFailure] = recovery(1);
+
+    describe('when the first function is given a value argument', () => {
         it('returns a Success with the given value', () => {
-            expect(recovery(0)(1)).toStrictEqual(success(1));
+            expect(ifSuccess(0)).toStrictEqual(success(0));
         });
     });
 
-    describe('when the created function is given an Error argument', () => {
+    describe('when the second function is given an Error argument', () => {
         it('returns a Success with the fallback value', () => {
-            expect(recovery(0)(error('Failure'))).toStrictEqual(success(0));
+            expect(ifFailure(error('Failure'))).toStrictEqual(success(1));
         });
     });
 });

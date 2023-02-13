@@ -159,15 +159,13 @@ Otherwise, it returns a `Success`.
 * `settledResult<T>(result: Result<T>): Promise<T>`
 — creates a _settled_ `Promise` from a given `Result`.
 +
-* `recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>>`
-— creates a function that returns a given `fallback` wrapped into a `Success`
-when an error is given.
+* `recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>>`
+— returns a pair of unary callbacks to fold a given `value` into a `Success`.
+** The first callback returns a given value as a `Success`.
+** The second callback ignores a given value and returns a given `fallback` value as a `Success`.
+
 +
-[WARNING]
-====
-Even if the `T` is a type of `Error`,
-the `fallback` value will be returned.
-====
+Use `recovery()` with the `Result.into()` method to recover from a `Failure`.
 +
 * `successWith<T, U>(map: Unary<T, U>): BiMapResult<T, U>`
 — creates a `BiMapResult` pair
@@ -374,13 +372,6 @@ Result.to(failureWith(mapError)) === Result.to(same, mapError);
 
 === `Result.into()`
 
-* `Result.into<U>(reduce: Unary<T | Error, U>): U`
-— applies a given `reduce` callback to the `Result.value` and returns the result of the `reduce`.
-+
-`Result.into(reduce)` is an equivalent of applying the `reduce` callback directly to the `Result.value`.
-Using `Result.into(reduce)` allows you to completely switch the type
-or recover from an `Error` and continue a transformation chain.
-+
 * `Result.into<U>(fold: BiFoldResult<T, U>): U`:
 ** For a `Success`, applies the first callback of the `fold` pair to the `Success.value` and returns the result.
 ** For a `Failure`, applies the second callback of the `fold` pair to the `Failure.value` and returns the result.
@@ -404,8 +395,9 @@ and a `Failure.value` `Error`.
 [source,typescript]
 .Using the `Result.into()` method to recover from an error and switch to a `Promise`.
 ----
-import { error, typeError } from '@perfective/common/error';
+import { typeError } from '@perfective/common/error';
 import { Unary } from '@perfective/common/function';
+import { rejected } from '@perfective/common/promise';
 import { failure, recovery, Result, success } from '@perfective/common/result';
 import { isEmpty } from '@perfective/common/string';
 
@@ -438,15 +430,17 @@ async function apiResponse(request: Request): Promise<string> {
 async function entityById(id: string): Promise<string> {
     return validInput('') // <.>
         .into(recovery('abc')) // <.>
-        .to(apiRequest('HEAD'))
+        .to(apiRequest('HEAD')) // <.>
         .into(apiResponse) // <.>
         .catch(() => '503 Service Unavailable'); // <.>
 }
 ----
 <.> The `id` input is not valid.
-<.> We use the `Result.into()` method with the `recovery` function to recover from an `Error`.
+<.> We use the `Result.into()` method with the `recovery()` function to recover from an `Error`.
+<.> The `recovery()` callback always returns a `Success`,
+so the whole chain now is strictly a `Success`.
 <.> When we have a `Request`,
-we use `Result.into()` to switch it to the `apiResponse` `Promise`.
+we use `Result.into()` to switch into the `apiResponse` `Promise`.
 <.> Now we have a `Promise` chain and can continue computation.
 
 

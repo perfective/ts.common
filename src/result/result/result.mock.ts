@@ -58,16 +58,6 @@ export function successErrorMessage(error: Error): Success<string> {
     return success(error.message);
 }
 
-/**
- * Returns {@linkcode Error.message} or decimal output of the {@linkcode input}.
- */
-export function safeNumberOutput(input: number | Error): string {
-    if (isError(input)) {
-        return strictErrorOutput(input);
-    }
-    return strictNumberOutput(input);
-}
-
 // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- a strict number-to-string function for testing.
 export function strictNumberOutput(input: number): string {
     return String(input);

@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file -- Result, Success, and Failure are interdependent.
-import { isError, isNotError } from '../../error/error/error';
+import { isNotError } from '../../error/error/error';
 import { unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
@@ -59,15 +59,6 @@ export abstract class Result<T> {
      * @since v0.9.0
      */
     public abstract to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Result<U>;
-
-    /**
-     * Applies a given {@linkcode reduce} callback to the {@linkcode Result.value|value} property.
-     *
-     * @returns The result of the {@linkcode reduce}.
-     *
-     * @since v0.9.0
-     */
-    public abstract into<U>(reduce: (value: T | Error) => U): U;
 
     /**
      * If the instance is a {@linkcode Success},
@@ -310,15 +301,6 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode reduce} callback to the {@linkcode Failure.value} {@linkcode Error}.
-     *
-     * @returns The result of the {@linkcode reduce} call.
-     *
-     * @since v0.9.0
-     */
-    public override into<U>(reduce: (value: Error) => U): U;
-
-    /**
      * Applies the second callback of a given {@linkcode fold} pair to the {@linkcode Failure.value}
      * and returns the result.
      *
@@ -337,15 +319,11 @@ export class Failure<T> extends Result<T> {
     public override into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
 
     public override into<U>(
-        first: Unary<Error, U> | Unary<T, U> | BiFoldResult<T, U>,
+        first: Unary<T, U> | BiFoldResult<T, U>,
         second?: Unary<Error, U>,
     ): U {
-        const [reduceValue, reduceError] = Array.isArray(first) ? [first[0], first[1]] : [first, second];
-        if (isDefined(reduceError)) {
-            return reduceError(this.value);
-        }
-        // When reduceError() argument is not defined, then it can only be a unary method signature.
-        return (reduceValue as Unary<T | Error, U>)(this.value);
+        const reduceError = Array.isArray(first) ? first[1] : defined(second);
+        return reduceError(this.value);
     }
 
     /**
@@ -512,15 +490,16 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
 }
 
 /**
- * Returns a given {@linkcode value} wrapped into a {@linkcode Success}.
+ * Returns a pair of unary callbacks to fold a given value into a {@linkcode Success}.
+ *
+ * The first callback returns a given value as a {@linkcode Success}.
+ * The second callback ignores a given value
+ * and returns a given {@linkcode fallback} value as a {@linkcode Success}.
+ *
+ * Use this function with the {@linkcode Result.into} method to recover from a {@linkcode Failure}.
  *
  * @since v0.9.0
  */
-export function recovery<T>(fallback: Value<T>): Unary<T | Error, Success<T>> {
-    return (value: T | Error): Success<T> => {
-        if (isError(value)) {
-            return success(valueOf(fallback));
-        }
-        return success(value);
-    };
+export function recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>> {
+    return [success, (): Success<T> => success(valueOf(fallback))];
 }

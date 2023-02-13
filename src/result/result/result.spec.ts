@@ -10,8 +10,8 @@ import {
     eitherResult,
     resultDecimal,
     resultNumber,
-    safeNumberOutput,
     strictErrorOutput,
+    strictExceptionOutput,
     strictNumberOutput,
     successErrorMessage,
     unsafeNumberOutput,
@@ -119,11 +119,11 @@ describe(resultFrom, () => {
  */
 describe.each([
     // Success with a non-error value
-    [success(0), resultDecimal, resultNumber, strictNumberOutput, array, safeNumberOutput],
+    [success(0), resultDecimal, resultNumber, strictNumberOutput, array, strictNumberOutput],
     // Success with an error value
-    [success(error('Success')), successErrorMessage, resultNumber, strictErrorOutput, array, safeNumberOutput],
+    [success(error('Success')), successErrorMessage, resultNumber, strictErrorOutput, array, strictExceptionOutput],
     // Failure (with an error value)
-    [failure<number>(error('Failure')), resultDecimal, resultNumber, strictNumberOutput, array, safeNumberOutput],
+    [failure<number>(error('Failure')), resultDecimal, resultNumber, strictNumberOutput, array, strictNumberOutput],
     // @ts-expect-error -- TSC creates a union of all types, while only each row arguments have to match.
 ])(Result.name, <T, U1, V1, U2, V2>(
     result: Result<T>,
@@ -131,7 +131,7 @@ describe.each([
     flatMap2: Unary<U1, Result<V1>>,
     mapValue1: Unary<T, U2>,
     mapValue2: Unary<U2, V2>,
-    reduce: Unary<T | Error, string>,
+    reduce1: Unary<T, string>,
 ) => {
     const mapError1 = chainedException('Exceptional');
 
@@ -186,22 +186,10 @@ describe.each([
         });
     });
 
-    describe('into(reduce)', () => {
-        it('is an equivalent of applying a `reduce` callback to the Result.value', () => {
-            expect(result.into(reduce))
-                .toBe(reduce(result.value));
-        });
-
-        it('is an equivalent of applying a `reduce` callback as `reduceValue` and `reduceError`', () => {
-            expect(result.into(reduce))
-                .toBe(result.into(reduce, reduce));
-        });
-    });
-
     describe('into(fold)', () => {
         it('is an equivalent of applying a `reduceValue` and `reduceError` as separate arguments', () => {
-            expect(result.into([reduce, strictErrorOutput]))
-                .toBe(result.into(reduce, strictErrorOutput));
+            expect(result.into([reduce1, strictErrorOutput]))
+                .toBe(result.into(reduce1, strictErrorOutput));
         });
     });
 });

@@ -224,7 +224,7 @@ export class Success<T> extends Result<T> {
      */
     public override run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 
-    public override run(first: Unary<T, void> | BiVoidResult<T>): this {
+    public override run(first: UnaryVoid<T> | BiVoidResult<T>): this {
         const procedure = Array.isArray(first) ? first[0] : first;
         procedure(this.value);
         return this;
@@ -346,8 +346,8 @@ export class Failure<T> extends Result<T> {
     public override run(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this;
 
     public override run(
-        first: Unary<T, void> | BiVoidResult<T>,
-        second?: Unary<Error, void>,
+        first: UnaryVoid<T> | BiVoidResult<T>,
+        second?: UnaryVoid<Error>,
     ): this {
         // If the first argument is not an array, then the second argument must be present due to the method signature.
         const procedure = Array.isArray(first) ? first[1] : defined(second);

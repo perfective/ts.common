@@ -1,6 +1,6 @@
 import { BiFold } from '../../function/arguments/bi-fold';
 import { BiMap } from '../../function/arguments/bi-map';
-import { same, Unary } from '../../function/function/unary';
+import { same, Unary, UnaryVoid } from '../../function/function/unary';
 
 /**
  * A {@linkcode BiMap} type specific for the {@linkcode Result} bifunctor.
@@ -43,4 +43,4 @@ export type BiFoldResult<T, U> = BiFold<T, Error, U>;
  *
  * @since v0.9.0
  */
-export type BiVoidResult<T> = [Unary<T, void>, Unary<Error, void>];
+export type BiVoidResult<T> = [UnaryVoid<T>, UnaryVoid<Error>];

@@ -9,12 +9,22 @@ It also provides functions to work with type and instance definitions.
 == Value
 
 * `type Defined<T> = T extends undefined ? never : T`:
++
+** `defined<T>(value: T | undefined): T`
+— Returns a given `value`, if it is defined.
+Throws a `TypeError` otherwise.
++
 ** `isDefined<T>(value: T | undefined): value is Defined<T>`;
 +
 * `type Undefined<T> = T extends undefined ? T : never`:
 ** `isUndefined<T>(value: T | undefined): value is undefined`;
 +
 * `type NotNull<T> = T extends null ? never : T`:
++
+** `notNull<T>(value: T | null): T`
+— Returns a given `value`, if it is not null.
+Throws a `TypeError` otherwise.
++
 ** `isNotNull<T>(value: T | null): value is NotNull<T>`;
 +
 * `type Null<T> = T extends null ? T : never`:
@@ -24,6 +34,11 @@ It also provides functions to work with type and instance definitions.
 — same as `NonNullable<T>`,
 added for consistency with the terminology of the package.
 It is defined as a conditional type (not `T & {}`) to ensure support of TS compiler before v4.9.
++
+** `present<T>(value: T | null | undefined): T`
+— Returns a given `value`, if it is defined and is not null.
+Throws a `TypeError` otherwise.
++
 ** `isPresent<T>(value: T | null | undefined): value is Present<T>`;
 +
 * `type Absent<T> = T extends null | undefined ? T : never`:

@@ -19,6 +19,7 @@ export {
 export {
     Absent,
     Defined,
+    defined,
     isAbsent,
     isDefined,
     isNotNull,
@@ -26,8 +27,10 @@ export {
     isPresent,
     isUndefined,
     NotNull,
+    notNull,
     Null,
     Present,
+    present,
     Undefined,
 } from './value/value';
 export {

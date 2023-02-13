@@ -3,7 +3,7 @@ import { isError, isNotError } from '../../error/error/error';
 import { unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
-import { isDefined } from '../../value/value';
+import { defined, isDefined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 
@@ -372,7 +372,7 @@ export class Failure<T> extends Result<T> {
         second?: Unary<Error, void>,
     ): this {
         // If the first argument is not an array, then the second argument must be present due to the method signature.
-        const procedure = Array.isArray(first) ? first[1] : (second as unknown as Unary<Error, void>);
+        const procedure = Array.isArray(first) ? first[1] : defined(second);
         procedure(this.value);
         return this;
     }

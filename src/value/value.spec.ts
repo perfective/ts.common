@@ -1,4 +1,19 @@
-import { isAbsent, isDefined, isNotNull, isNull, isPresent, isUndefined } from './value';
+import { defined, isAbsent, isDefined, isNotNull, isNull, isPresent, isUndefined, notNull, present } from './value';
+
+describe(defined, () => {
+    describe('when a value is defined', () => {
+        it('returns the given value', () => {
+            expect(defined(null)).toBeNull();
+        });
+    });
+
+    describe('when a value is undefined', () => {
+        it('throws an error', () => {
+            expect(() => defined(undefined)).toThrow(TypeError);
+            expect(() => defined(undefined)).toThrow('Value is undefined');
+        });
+    });
+});
 
 describe('isDefined', () => {
     it('returns true when value is defined', () => {
@@ -26,6 +41,22 @@ describe('isUndefined', () => {
     });
 });
 
+describe(notNull, () => {
+    describe('when a value is not null', () => {
+        it('returns the given value', () => {
+            // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing an edge case
+            expect(notNull(undefined)).toBeUndefined();
+        });
+    });
+
+    describe('when a value is null', () => {
+        it('throws an error', () => {
+            expect(() => notNull(null)).toThrow(TypeError);
+            expect(() => notNull(null)).toThrow('Value is null');
+        });
+    });
+});
+
 describe('isNotNull', () => {
     it('returns true when value is not null', () => {
         expect(isNotNull('')).toBe(true);
@@ -49,6 +80,30 @@ describe('isNull', () => {
 
     it('returns true when value is null', () => {
         expect(isNull(null)).toBe(true);
+    });
+});
+
+describe(present, () => {
+    describe('when a value is not null and is defined', () => {
+        it('returns the given value', () => {
+            expect(present(0)).toBe(0);
+            expect(present('')).toBe('');
+            expect(present(false)).toBe(false);
+        });
+    });
+
+    describe('when a value is null', () => {
+        it('throws an error', () => {
+            expect(() => present(null)).toThrow(TypeError);
+            expect(() => present(null)).toThrow('Value is null');
+        });
+    });
+
+    describe('when a value is undefined', () => {
+        it('throws an error', () => {
+            expect(() => present(undefined)).toThrow(TypeError);
+            expect(() => present(undefined)).toThrow('Value is undefined');
+        });
     });
 });
 

@@ -1,6 +1,6 @@
 import { array } from '../../array/array/array';
 import { error } from '../../error/error/error';
-import { chainedException, exception } from '../../error/exception/exception';
+import { chained, exception } from '../../error/exception/exception';
 import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
 
@@ -133,7 +133,7 @@ describe.each([
     mapValue2: Unary<U2, V2>,
     reduce1: Unary<T, string>,
 ) => {
-    const mapError1 = chainedException('Exceptional');
+    const mapError1 = chained('Exceptional');
 
     describe('onto', () => {
         describe('is a "bind" (>>=) operator for the Result monad', () => {

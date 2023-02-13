@@ -1,4 +1,4 @@
-import { chainedException } from '../../error/exception/exception';
+import { chained } from '../../error/exception/exception';
 import { constant } from '../../function/function/nullary';
 import { same } from '../../function/function/unary';
 
@@ -17,7 +17,7 @@ describe(successWith, () => {
 });
 
 describe(failureWith, () => {
-    const map = chainedException('Exceptional');
+    const map = chained('Exceptional');
 
     it('creates a BiMapResult pair with an identity function as the first element', () => {
         expect(failureWith(map)[0]).toBe(same);

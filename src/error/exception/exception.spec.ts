@@ -5,7 +5,7 @@ import { typeError } from '../error/type-error';
 
 import {
     causedBy,
-    chainedException,
+    chained,
     chainStack,
     Exception,
     exception,
@@ -57,11 +57,11 @@ describe('exception', () => {
     });
 });
 
-describe(chainedException, () => {
+describe(chained, () => {
     const previous = error('Previous');
 
     it('creates a function to wrap a previous error into an exception', () => {
-        const chainedCausedBy = chainedException('Exception {{code}}', {
+        const chainedCausedBy = chained('Exception {{code}}', {
             code: '0',
         }, {
             context: 'spec',
@@ -77,14 +77,14 @@ describe(chainedException, () => {
     });
 
     it('has empty tokens by default', () => {
-        const chainedCausedBy = chainedException('Exception {{code}}');
+        const chainedCausedBy = chained('Exception {{code}}');
         const output = chainedCausedBy(previous);
 
         expect(output.tokens).toStrictEqual({});
     });
 
     it('has empty context by default', () => {
-        const chainedCausedBy = chainedException('Exception {{code}}');
+        const chainedCausedBy = chained('Exception {{code}}');
         const output = chainedCausedBy(previous);
 
         expect(output.context).toStrictEqual({});

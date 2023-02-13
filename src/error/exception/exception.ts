@@ -39,7 +39,7 @@ export function exception(message: string, tokens: ExceptionTokens = {}, context
  *
  * @since v0.9.0
  */
-export function chainedException(
+export function chained(
     message: string,
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},

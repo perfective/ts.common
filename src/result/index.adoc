@@ -334,7 +334,7 @@ So the result is the `TypeError` returned by the `validInput`.
 [source,typescript]
 .Using `Result.to` with the `failureWith()` function to only transform a `Failure.value`.
 ----
-import { chainedException, typeError } from '@perfective/common/error';
+import { chained, typeError } from '@perfective/common/error';
 import { failure, failureWith, Result, success } from '@perfective/common/result';
 import { isEmpty } from '@perfective/common/string';
 
@@ -347,13 +347,13 @@ function validInput(id: string): Result<string> {
 
 function entityByIdRequest(id: string): Result<Request> {
     return validInput(id)
-        .to(failureWith(chainedException('Entity ID {{id}} is invalid' { // <.>
+        .to(failureWith(chained('Entity ID {{id}} is invalid' { // <.>
             id,
         })))
         .to(apiRequest('GET'));
 }
 ----
-<.> You can also combine both callbacks into one `Result.to(apiRequest(...), chainedException(...))` call.
+<.> You can also combine both callbacks into one `Result.to(apiRequest(...), chained(...))` call.
 
 [NOTE]
 ====

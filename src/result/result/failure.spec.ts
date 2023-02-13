@@ -1,6 +1,6 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
-import { causedBy, chainedException, Exception, exception } from '../../error/exception/exception';
+import { causedBy, chained, Exception, exception } from '../../error/exception/exception';
 
 import { Failure, failure, failureFrom, Result } from './result';
 import { resultDecimal, strictErrorOutput, strictNumberOutput } from './result.mock';
@@ -60,7 +60,7 @@ describe(Failure, () => {
 
         describe('to(mapValue, mapError)', () => {
             it('applies a given `mapError` callback and returns its result wrapped into a Failure', () => {
-                const output: Failure<string> = input.to(strictNumberOutput, chainedException('Exceptional Failure'));
+                const output: Failure<string> = input.to(strictNumberOutput, chained('Exceptional Failure'));
 
                 expect(output).toStrictEqual(failure(causedBy(input.value, 'Exceptional Failure')));
             });
@@ -68,7 +68,7 @@ describe(Failure, () => {
 
         describe('to(maps)', () => {
             it('applies the first callback of a given maps pair to the Failure.value and returns a Failure', () => {
-                const output: Failure<string> = input.to([strictNumberOutput, chainedException('Exceptional Failure')]);
+                const output: Failure<string> = input.to([strictNumberOutput, chained('Exceptional Failure')]);
 
                 expect(output).toStrictEqual(failure(causedBy(input.value, 'Exceptional Failure')));
             });

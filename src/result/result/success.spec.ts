@@ -1,6 +1,6 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
-import { chainedException, Exception, exception } from '../../error/exception/exception';
+import { chained, Exception, exception } from '../../error/exception/exception';
 
 import { Failure, failure, recovery, Result, Success, success, successFrom } from './result';
 import {
@@ -120,7 +120,7 @@ describe(Success, () => {
         describe('to(mapValue, mapError)', () => {
             it('applies a given `mapValue` callback and ignores a given `mapError` callback', () => {
                 const output: Success<string> = success(0)
-                    .to(strictNumberOutput, chainedException('Exceptional Failure'));
+                    .to(strictNumberOutput, chained('Exceptional Failure'));
 
                 expect(output).toStrictEqual(success('0'));
             });
@@ -129,7 +129,7 @@ describe(Success, () => {
         describe('to(maps)', () => {
             it('applies the first callback of a given maps pair to the Success.value and returns a Success', () => {
                 const output: Success<string> = success(0)
-                    .to([strictNumberOutput, chainedException('Exceptional Failure')]);
+                    .to([strictNumberOutput, chained('Exceptional Failure')]);
 
                 expect(output).toStrictEqual(success('0'));
             });

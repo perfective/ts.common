@@ -39,15 +39,15 @@ export abstract class Result<T> {
 
     /**
      * If the instance is a {@linkcode Success},
-     * applies the first callback of a given {@linkcode biMap} pair to the {@linkcode Success.value}
+     * applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
      * and returns its result wrapped into a {@linkcode Success}.
      *
-     * Otherwise, applies the second callback of a given {@linkcode biMap} pair to the {@linkcode Failure.value}
+     * Otherwise, applies the second callback of a given {@linkcode maps} pair to the {@linkcode Failure.value}
      * and returns its result wrapped into a {@linkcode Failure}.
      *
      * @since v0.9.0
      */
-    public abstract to<U>(biMap: BiMapResult<T, U>): Result<U>;
+    public abstract to<U>(maps: BiMapResult<T, U>): Result<U>;
 
     /**
      * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value},
@@ -170,12 +170,12 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies the first callback of a given {@linkcode biMap} pair to the {@linkcode Success.value}
+     * Applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
      * and returns its result wrapped into a {@linkcode Success}.
      *
      * @since v0.9.0
      */
-    public override to<U>(biMap: BiMapResult<T, U>): Success<U>;
+    public override to<U>(maps: BiMapResult<T, U>): Success<U>;
 
     /**
      * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
@@ -279,12 +279,12 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Applies the second callback of a given {@linkcode BiMapResult} pair to the {@linkcode Failure.value}
+     * Applies the second callback of a given {@linkcode maps} pair to the {@linkcode Failure.value}
      * and returns its result wrapped into a {@linkcode Failure}.
      *
      * @since v0.9.0
      */
-    public override to<U>(biMap: BiMapResult<T, U>): Failure<U>;
+    public override to<U>(maps: BiMapResult<T, U>): Failure<U>;
 
     /**
      * If given a {@linkcode mapError} callback,

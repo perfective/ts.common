@@ -165,7 +165,7 @@ describe.each([
         });
     });
 
-    describe('to(biMap)', () => {
+    describe('to(maps)', () => {
         it('is the same as applying the first callback as `mapValue` and the second callback as `mapError`', () => {
             expect(result.to([mapValue1, mapError1]))
                 .toStrictEqual(result.to(mapValue1, mapError1));

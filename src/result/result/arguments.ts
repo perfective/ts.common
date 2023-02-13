@@ -1,5 +1,5 @@
 import { BiFold } from '../../function/arguments/bi-fold';
-import { BiMap } from '../../function/arguments/bimap';
+import { BiMap } from '../../function/arguments/bi-map';
 import { same, Unary } from '../../function/function/unary';
 
 /**

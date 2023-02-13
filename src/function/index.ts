@@ -1,5 +1,5 @@
 export { BiFold } from './arguments/bi-fold';
-export { BiMap } from './arguments/bimap';
+export { BiMap } from './arguments/bi-map';
 export {
     Binary,
     isBinary,

@@ -66,8 +66,8 @@ describe(Failure, () => {
             });
         });
 
-        describe('to(biMap)', () => {
-            it('applies the first callback of a given biMap pair to the Failure.value and returns a Failure', () => {
+        describe('to(maps)', () => {
+            it('applies the first callback of a given maps pair to the Failure.value and returns a Failure', () => {
                 const output: Failure<string> = input.to([strictNumberOutput, chainedException('Exceptional Failure')]);
 
                 expect(output).toStrictEqual(failure(causedBy(input.value, 'Exceptional Failure')));

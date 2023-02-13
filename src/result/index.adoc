@@ -254,42 +254,28 @@ it would fail with the earliest error in the chain
 
 === `Result.to()`
 
-* `Result.to<U>(map: (value: T) => U): Result<U>`:
+* `Result.to<U>(map: Unary<T, U>): Result<U>`:
 ** For a `Success`, applies a given `map` callback to the `Success.value` and returns the result;
 ** For a `Failure`, ignores the `map` callback and returns the same `Failure`.
 +
-* `Result.to<U>(mapValue: (value: T) => U, mapError: (error: Error) => Error): Result<U>`
+* `Result.to<U>(mapValue: Unary<T, U>, mapError: Unary<Error, Error>): Result<U>`
 ** For a `Success`, applies a given `mapValue` callback to the `Success.value` and returns the result as a `Success`;
 ** For a `Failure`, applies a given `mapError` callback to the `Failure.value` and returns the result as s `Failure`.
 +
 This method can be used to track occurred failures occurred in a previous step
 by chaining them together using the `mapError`.
 +
-* `Result.to<U>(biMap: [(value: T) => U, (error: Error) => Error]): Result<U>`:
+* `Result.to<U>(maps: BiMapResult<T, U>): Result<U>`:
 ** For a `Success`,
-applies the first callback of a given `biMap` pair to the `Success.value`
+applies the first callback of a given `maps` pair to the `Success.value`
 and returns its result wrapped as a `Success`.
 ** For a `Failure`,
-applied the second callback of a given `biMap` pair to the `Failure.value`
+applied the second callback of a given `maps` pair to the `Failure.value`
 and returns its result wrapped as a `Failure`.
 +
 This method allows to use a pair of `mapValue` and `mapError` functions created dynamically.
 +
 You can also use it with the `failureWith` function to only transform a `Failure.value`.
-
-[NOTE]
-====
-[source,typescript]
-.The following calls are equivalent
-----
-
-Result.to([mapValue, mapError]) === Result.to(mapValue, mapError);
-Result.to([mapValue, mapError]) === Result.to(successWith(mapValue)).to(failureWith(mapError));
-Result.to(successWith(mapValue)) === Result.to(mapValue);
-Result.to(successWith(mapValue)) === Result.to(mapValue, same);
-Result.to(failureWith(mapError)) === Result.to(same, mapError);
-----
-====
 
 [source,typescript]
 ----
@@ -370,6 +356,20 @@ function entityByIdRequest(id: string): Result<Request> {
 }
 ----
 <.> You can also combine both callbacks into one `Result.to(apiRequest(...), chainedException(...))` call.
+
+[NOTE]
+====
+[source,typescript]
+.The following calls are equivalent
+----
+
+Result.to([mapValue, mapError]) === Result.to(mapValue, mapError);
+Result.to([mapValue, mapError]) === Result.to(successWith(mapValue)).to(failureWith(mapError));
+Result.to(successWith(mapValue)) === Result.to(mapValue);
+Result.to(successWith(mapValue)) === Result.to(mapValue, same);
+Result.to(failureWith(mapError)) === Result.to(same, mapError);
+----
+====
 
 
 === `Result.into()`
@@ -566,13 +566,13 @@ failure(error).to(v => f(g(v))) === failure(error).to(g).to(f); // <.>
 
 The `Result<T>` type is a bifunctor that provides:
 
-* the `Result.to(biMap)` method as the _bimap_ function.
+* the `Result.to(maps)` method as the _bimap_ function.
 * the `successWith()` function as the _second_ function.
 * the `failureWIth()` function as the _first_ function.
 
 Which ensures that:
 
-1. `Result.to(biMap)` preserves identity morphisms
+1. `Result.to(maps)` preserves identity morphisms
 +
 [source,typescript]
 ----

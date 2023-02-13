@@ -127,8 +127,8 @@ describe(Success, () => {
             });
         });
 
-        describe('to(biMap)', () => {
-            it('applies the first callback of a given biMap pair to the Success.value and returns a Success', () => {
+        describe('to(maps)', () => {
+            it('applies the first callback of a given maps pair to the Success.value and returns a Success', () => {
                 const output: Success<string> = success(0)
                     .to([strictNumberOutput, chainedException('Exceptional Failure')]);
 

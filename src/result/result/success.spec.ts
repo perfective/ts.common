@@ -170,24 +170,24 @@ describe(Success, () => {
         });
     });
 
-    describe('run', () => {
-        describe('run(valueProcedure)', () => {
-            it('runs a given `valueProcedure` and returns itself', () => {
+    describe('through', () => {
+        describe('through(valueProcedure)', () => {
+            it('executes a given `valueProcedure` and returns itself', () => {
                 const values: number[] = [];
                 const input = success(0);
-                const output: Success<number> = input.run(pushInto(values));
+                const output: Success<number> = input.through(pushInto(values));
 
                 expect(output).toBe(input);
                 expect(values).toStrictEqual([0]);
             });
         });
 
-        describe('run(valueProcedure, errorProcedure)', () => {
-            it('runs a given `valueProcedure`, ignores an `errorProcedure`, and returns itself', () => {
+        describe('through(valueProcedure, errorProcedure)', () => {
+            it('executes a given `valueProcedure`, ignores an `errorProcedure`, and returns itself', () => {
                 const values: number[] = [];
                 const errors: string[] = [];
                 const input = success(0);
-                const output: Success<number> = input.run(pushInto(values), error => errors.push(error.message));
+                const output: Success<number> = input.through(pushInto(values), error => errors.push(error.message));
 
                 expect(output).toBe(input);
                 expect(values).toStrictEqual([0]);
@@ -195,12 +195,12 @@ describe(Success, () => {
             });
         });
 
-        describe('run(procedures)', () => {
-            it('runs the first callback in a given `procedures` pair and returns itself', () => {
+        describe('through(procedures)', () => {
+            it('executes the first callback in a given `procedures` pair and returns itself', () => {
                 const values: number[] = [];
                 const errors: string[] = [];
                 const input = success(0);
-                const output: Success<number> = input.run([
+                const output: Success<number> = input.through([
                     pushInto(values),
                     (error: Error): number => errors.push(error.message),
                 ]);

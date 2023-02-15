@@ -86,28 +86,28 @@ export abstract class Result<T> {
 
     /**
      * If the instance is a {@linkcode Success},
-     * runs the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     * executes the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
      *
      * If the instance is a {@linkcode Failure},
-     * runs the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     * executes the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
      *
      * Returns the original {@linkcode Result} object.
      *
      * @since v0.9.0
      */
-    public abstract run(procedures: BiVoidResult<T>): this;
+    public abstract through(procedures: BiVoidResult<T>): this;
 
     /**
-     * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
+     * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
      * when the instance is a {@linkcode Success}.
-     * Runs a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
+     * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
      * when the instance is a {@linkcode Failure}.
      *
      * Returns the original {@linkcode Result} object.
      *
      * @since v0.9.0
      */
-    public abstract run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
+    public abstract through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 }
 
 /**
@@ -207,24 +207,24 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Runs the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     * Executes the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
      * Returns the original {@linkcode Success} object.
      *
      * @since v0.9.0
      */
-    public override run(procedures: BiVoidResult<T>): this;
+    public override through(procedures: BiVoidResult<T>): this;
 
     /**
-     * Runs a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
+     * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      * Ignores a given {@linkcode errorProcedure} callback.
      *
      * Returns the original {@linkcode Success} object.
      *
      * @since v0.9.0
      */
-    public override run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
+    public override through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 
-    public override run(first: UnaryVoid<T> | BiVoidResult<T>): this {
+    public override through(first: UnaryVoid<T> | BiVoidResult<T>): this {
         const procedure = Array.isArray(first) ? first[0] : first;
         procedure(this.value);
         return this;
@@ -327,25 +327,25 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Runs the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     * Executes the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
      *
      * Returns the original {@linkcode Failure} object.
      *
      * @since v0.9.0
      */
-    public override run(procedures: BiVoidResult<T>): this;
+    public override through(procedures: BiVoidResult<T>): this;
 
     /**
-     * Runs a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}.
+     * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}.
      * Ignores a given {@linkcode valueProcedure} callback.
      *
      * Returns itself.
      *
      * @since v0.9.0
      */
-    public override run(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this;
+    public override through(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this;
 
-    public override run(
+    public override through(
         first: UnaryVoid<T> | BiVoidResult<T>,
         second?: UnaryVoid<Error>,
     ): this {

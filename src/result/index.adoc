@@ -444,15 +444,15 @@ we use `Result.into()` to switch into the `apiResponse` `Promise`.
 <.> Now we have a `Promise` chain and can continue computation.
 
 
-=== `Result.run()`
+=== `Result.through()`
 
-* `Result.run(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this`:
-** For a `Success`, runs a given `valueProcedure` and returns itself.
-** For a `Failure`, runs a given `errorProcedure` and returns itself.
+* `Result.through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this`:
+** For a `Success`, passes the `value` _through_ a given `valueProcedure` and returns itself.
+** For a `Failure`, passes the `value` _through_ a given `errorProcedure` and returns itself.
 +
-* `Result.run(procedures: BiVoidResult<T>): this`:
-** For a `Success`, runs the first procedure in the `procedures` pair and returns itself.
-** For a `Failure`, runs the second procedure in the `procedures` pair and returns itself.
+* `Result.through(procedures: BiVoidResult<T>): this`:
+** For a `Success`, passes the `value` _through_ the first procedure in the `procedures` pair and returns itself.
+** For a `Failure`, passes the `value` _through_ the second procedure in the `procedures` pair and returns itself.
 
 [source,typescript]
 ----
@@ -471,10 +471,10 @@ function validInput(id: string): Result<string> {
 function entityByIdRequest(id: string): Result<Request> {
     return validInput(id)
         .to(apiRequest('GET'))
-        .run(empty, console.error); // <.>
+        .through(empty, console.error); // <.>
 }
 ----
-<.> When we have a `Success`, we only run a no-op `empty` function.
+<.> When we have a `Success`, we only pass a no-op `empty` function.
 But if we have a `Failure`, we log an error.
 Either way, the `Result` is the same.
 

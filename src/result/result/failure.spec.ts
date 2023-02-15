@@ -89,13 +89,13 @@ describe(Failure, () => {
         });
     });
 
-    describe('run', () => {
-        describe('run(valueProcedure, errorProcedure)', () => {
-            it('runs a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {
+    describe('through', () => {
+        describe('through(valueProcedure, errorProcedure)', () => {
+            it('executes a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {
                 const values: number[] = [];
                 const errors: string[] = [];
                 const input = failure<number>(error('Failure'));
-                const output: Failure<number> = input.run(pushInto(values), error => errors.push(error.message));
+                const output: Failure<number> = input.through(pushInto(values), error => errors.push(error.message));
 
                 expect(output).toBe(input);
                 expect(values).toStrictEqual([]);
@@ -103,12 +103,12 @@ describe(Failure, () => {
             });
         });
 
-        describe('run(procedures)', () => {
-            it('runs the second callback in a given `procedures` pair and returns itself', () => {
+        describe('through(procedures)', () => {
+            it('executes the second callback in a given `procedures` pair and returns itself', () => {
                 const values: number[] = [];
                 const errors: string[] = [];
                 const input = failure<number>(error('Failure'));
-                const output: Failure<number> = input.run([
+                const output: Failure<number> = input.through([
                     pushInto(values),
                     (error: Error): number => errors.push(error.message),
                 ]);

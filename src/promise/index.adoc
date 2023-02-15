@@ -57,12 +57,8 @@ and a TS compiler error: `TS2322: Type 'unknown' is not assignable to type 'T'`.
 Using `Promise.rejected()` directly causes the `@typescript-eslint/unbound-method` linting error.
 ====
 +
-* `async function settled<T>(value: Resolvable<T> | Error): Promise<T>`
-— creates a settled `Promise`:
-** If a given value is _not_ an `Error`, the `Promise` is fulfilled.
-** If a given value is an `Error`, the `Promise` is rejected.
-** If a given value is a `PromiseLike` value,
-the `Promise` state matches the state of the given value.
+* `settled<T>(): BiFold<Resolvable<T>, Error, Promise<Awaited<T>>>`
+— creates a `BiFold` pair of callbacks to wrap a value into a `Promise`.
 +
 * `function settlement<T, E extends Error = Error>(resolve: Resolve<T>, reject: Reject<E>): Callback<T, E>`
 — create a `Callback` that uses given `resolve` and `reject` functions from an `executor` to settle a `Promise`.

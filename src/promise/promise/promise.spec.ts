@@ -23,31 +23,17 @@ describe(rejected, () => {
 });
 
 describe(settled, () => {
-    describe('when given a non-Error value', () => {
-        it('creates a fulfilled Promise', async () => {
-            const output: number = await settled(0);
+    it('returns the first callback that creates a fulfilled promise', async () => {
+        const first = settled()[0];
+        const output = await first(0);
 
-            expect(output).toBe(0);
-        });
+        expect(output).toBe(0);
     });
 
-    describe('when given a fulfilled Promise', () => {
-        it('creates a fulfilled Promise', async () => {
-            const output: number = await settled(Promise.resolve(0));
+    it('returns the second callback that creates a rejected promise', async () => {
+        const second = settled()[1];
+        const reason = error('Rejected');
 
-            expect(output).toBe(0);
-        });
-    });
-
-    describe('when given an Error value', () => {
-        it('creates a rejected Promise', async () => {
-            await expect(settled(error('Failed'))).rejects.toThrow('Failed');
-        });
-    });
-
-    describe('when given a rejected Promise', () => {
-        it('creates a rejected Promise', async () => {
-            await expect(settled(Promise.reject(error('PromiseLike Failed')))).rejects.toThrow('PromiseLike Failed');
-        });
+        await expect(() => second(reason)).rejects.toBe(reason);
     });
 });

@@ -1,4 +1,4 @@
-import { isError } from '../../error/error/error';
+import { BiFold } from '../../function';
 
 /**
  * A shortcut for a type of values that can be passed into Promise.resolve().
@@ -92,20 +92,10 @@ export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
 }
 
 /**
- * Creates a settled {@linkcode Promise}.
- *
- * - If a given value is not an {@linkcode Error},
- * the {@linkcode Promise} is fulfilled.
- * - If a given value is an {@linkcode Error},
- * the {@linkcode Promise} is rejected.
- * - If a given value is a {@linkcode PromiseLike},
- * the {@linkcode Promise} state matches the state of the given value.
+ * Creates a {@linkcode BiFold} pair of callbacks to wrap a value into a {@linkcode Promise}.
  *
  * @since v0.9.0
  */
-export async function settled<T>(value: Resolvable<T> | Error): Promise<Awaited<T>> {
-    if (isError(value)) {
-        return rejected(value);
-    }
-    return fulfilled(value);
+export function settled<T>(): BiFold<Resolvable<T>, Error, Promise<Awaited<T>>> {
+    return [fulfilled, rejected];
 }

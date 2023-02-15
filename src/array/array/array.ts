@@ -56,13 +56,13 @@ export function replicated<T>(value: T, length: number): T[];
  */
 export function replicated<T>(length: number): Unary<T, T[]>;
 
-export function replicated<T>(argument1: T | number, argument2?: number): T[] | Unary<T, T[]> {
+export function replicated<T>(first: T | number, second?: number): T[] | Unary<T, T[]> {
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill#using_fill_to_populate_an_empty_array
     /* eslint-disable unicorn/new-for-builtins -- populate an empty array */
-    if (isPresent(argument2)) {
-        return Array(argument2).fill(argument1) as T[];
+    if (isPresent(second)) {
+        return Array(second).fill(first) as T[];
     }
-    return (value: T): T[] => Array(argument1).fill(value) as T[];
+    return (value: T): T[] => Array(first).fill(value) as T[];
     /* eslint-enable unicorn/new-for-builtins */
 }
 
@@ -72,11 +72,11 @@ export function reversed<T>(array: T[]): T[] {
 
 export function sorted<T>(order?: Compare<T>): Unary<T[], T[]>;
 export function sorted<T>(array: T[], order?: Compare<T>): T[];
-export function sorted<T>(args1?: T[] | Compare<T>, args2?: Compare<T>): Unary<T[], T[]> | T[] {
-    if (Array.isArray(args1)) {
-        return Array.from(args1).sort(args2);
+export function sorted<T>(first?: T[] | Compare<T>, second?: Compare<T>): Unary<T[], T[]> | T[] {
+    if (Array.isArray(first)) {
+        return Array.from(first).sort(second);
     }
-    return (array: T[]): T[] => Array.from(array).sort(args1);
+    return (array: T[]): T[] => Array.from(array).sort(first);
 }
 
 export function unique<T>(array: T[]): T[] {

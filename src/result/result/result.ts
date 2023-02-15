@@ -178,8 +178,8 @@ export class Success<T> extends Result<T> {
      */
     public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Success<U>;
 
-    public override to<U>(args: Unary<T, U> | BiMapResult<T, U>): Success<U> {
-        const mapValue = Array.isArray(args) ? args[0] : args;
+    public override to<U>(first: Unary<T, U> | BiMapResult<T, U>): Success<U> {
+        const mapValue = Array.isArray(first) ? first[0] : first;
         return success(mapValue(this.value));
     }
 
@@ -201,8 +201,8 @@ export class Success<T> extends Result<T> {
      */
     public override into<U>(reduceValue: Unary<T, U>, reduceError?: Unary<Error, U>): U;
 
-    public override into<U>(args: Unary<T, U> | BiFoldResult<T, U>): U {
-        const reduce = Array.isArray(args) ? args[0] : args;
+    public override into<U>(first: Unary<T, U> | BiFoldResult<T, U>): U {
+        const reduce = Array.isArray(first) ? first[0] : first;
         return reduce(this.value);
     }
 

@@ -7,7 +7,10 @@ The `@perfective/common/promise` package provides functions to work with the
 
 === Types
 
-* `type Resolve<T> = (value: T | PromiseLike<T>) => void`
+* `type Resolvable<T> = T | PromiseLike<T>`
+— a shortcut for a type of values that can be passed into `Promise.resolve()`.
++
+* `type Resolve<T> = (value: Resolvable<T>) => void`
 — a type of a callback called to resolve a `Promise` value.
 +
 * `type Reject<E extends Error = Error> = (reason?: E) => void`
@@ -22,10 +25,10 @@ as it requires an `Error` as a `reason`.
 * `type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void`
 — a type of the `executor` callback passed into a `Promise` constructor.
 +
-* `type OnFulfilled<T, U = T> = (value: T) => U | PromiseLike<U>`
+* `type OnFulfilled<T, U = T> = (value: T) => Resolvable<U>`
 — a type of a callback passed as `onFulfilled` into `Promise.then()`.
 +
-* `type OnRejected<T = never> = (reason: unknown) => T | PromiseLike<T>`
+* `type OnRejected<T = never> = (reason: unknown) => Resolvable<T>`
 — a type of a callback passed as `onRejected` into `Promise.then()` or `Promise.catch()`.
 +
 * `type Callback<T, E extends Error = Error> = (error: E | null | undefined, value: T) => void`
@@ -37,7 +40,7 @@ as it requires an `Error` as a `reason`.
 * `async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T>`
 — creates a new `Promise` with a given `executor` callback.
 +
-* `async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T>>`
+* `async function fulfilled<T>(value: Resolvable<T>): Promise<Awaited<T>>`
 — creates a fulfilled `Promise` (a shortcut for the `Promise.resolve()` function).
 +
 [NOTE]
@@ -54,7 +57,7 @@ and a TS compiler error: `TS2322: Type 'unknown' is not assignable to type 'T'`.
 Using `Promise.rejected()` directly causes the `@typescript-eslint/unbound-method` linting error.
 ====
 +
-* `async function settled<T>(value: T | PromiseLike<T> | Error): Promise<T>`
+* `async function settled<T>(value: Resolvable<T> | Error): Promise<T>`
 — creates a settled `Promise`:
 ** If a given value is _not_ an `Error`, the `Promise` is fulfilled.
 ** If a given value is an `Error`, the `Promise` is rejected.

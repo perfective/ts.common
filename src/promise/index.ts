@@ -12,6 +12,7 @@ export {
     promise,
     Reject,
     rejected,
+    Resolvable,
     Resolve,
     // eslint-disable-next-line deprecation/deprecation -- TODO: remove in v0.10.0-alpha
     Run,

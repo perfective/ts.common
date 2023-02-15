@@ -1,9 +1,18 @@
 import { isError } from '../../error/error/error';
 
 /**
+ * A shortcut for a type of values that can be passed into Promise.resolve().
+ *
+ * @see Promise.resolve()
+ *
+ * @since v0.9.0
+ */
+export type Resolvable<T> = T | PromiseLike<T>;
+
+/**
  * A type of a callback called to resolve a {@linkcode Promise} value.
  */
-export type Resolve<T> = (value: T | PromiseLike<T>) => void;
+export type Resolve<T> = (value: Resolvable<T>) => void;
 
 /**
  * A type of a callback called to reject a {@linkcode Promise} with a reason.
@@ -30,14 +39,14 @@ export type Run<T, E extends Error = Error> = Executor<T, E>;
  *
  * @since v0.9.0
  */
-export type OnFulfilled<T, U = T> = (value: T) => U | PromiseLike<U>;
+export type OnFulfilled<T, U = T> = (value: T) => Resolvable<U>;
 
 /**
  * A type of a callback passed as `onRejected` into {@linkcode Promise.then} or {@linkcode Promise.catch}.
  *
  * @since v0.9.0
  */
-export type OnRejected<T = never> = (reason: unknown) => T | PromiseLike<T>;
+export type OnRejected<T = never> = (reason: unknown) => Resolvable<T>;
 
 /**
  * Creates a new {@linkcode Promise} with a given {@linkcode executor} callback.
@@ -58,7 +67,9 @@ export async function promise<T, E extends Error = Error>(executor: Executor<T, 
  *
  * @since v0.9.0
  */
-export async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T>> {
+export async function fulfilled<T>(value: Resolvable<T>): Promise<Awaited<T>> {
+    // Without Promise.resolve() getting an error: TS2322: Type 'T' is not assignable to type 'Awaited'.
+    // With "value as Awaited<T>" failing on "require-await": Async function 'fulfilled' has no 'await' expression.
     // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject -- instantiating a Promise.
     return Promise.resolve(value);
 }
@@ -75,6 +86,7 @@ export async function fulfilled<T>(value: T | PromiseLike<T>): Promise<Awaited<T
  * @since v0.9.0
  */
 export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
+    // With "throw reason" failing on "require-await": Async function 'rejected' has no 'await' expression.
     // eslint-disable-next-line unicorn/no-useless-promise-resolve-reject -- instantiating a Promise.
     return Promise.reject<Awaited<T>>(reason);
 }
@@ -91,11 +103,9 @@ export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
  *
  * @since v0.9.0
  */
-export async function settled<T>(value: T | PromiseLike<T> | Error): Promise<T> {
-    /* eslint-disable unicorn/no-useless-promise-resolve-reject -- instantiating a Promise */
+export async function settled<T>(value: Resolvable<T> | Error): Promise<Awaited<T>> {
     if (isError(value)) {
-        return Promise.reject(value);
+        return rejected(value);
     }
-    return Promise.resolve(value);
-    /* eslint-enable unicorn/no-useless-promise-resolve-reject */
+    return fulfilled(value);
 }

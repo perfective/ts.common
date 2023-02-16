@@ -1,5 +1,137 @@
 = Changelog
 
+== v0.9.0-alpha (next)
+
+=== New `@perfective/common/result` package
+
+* Added the `Result<T>` monad type with `Success<T>` and `Failure<T>` implementations.
+** Added the `result()`, `success()`, and `failure()` constructors.
+** Added the `resultOf()` lazy constructor.
+** Added the `resultFrom()`, `successFrom()`, and `failureFrom()` functions.
+** Added the `recovery()` function.
+** Added the `rejection()` constructor for rejected `Promise` handling.
+** Added the `promisedResult()` and `settledResult()` async functions.
+* Added the `BiMapResult<T, U>` type for the `Result.to(maps)` method:
+** Added the `successWith()` and `failureWith()` `BiMapResult` constructors.
+* Added the `BiFoldResult<T, U>` type for the `Result.into(fold)` method.
+* Added the `BiVoidResult<T>` type for the `Result.through(procedures)` method.
+
+
+=== Breaking changes
+
+* `@perfective/common/function`:
+** Changed the `same()` function into a unary function.
++
+To migrate:
++
+*** replace calls passing the `same` as an argument with `constant(same)`;
+*** replace calls of the `same()` with just `same`.
++
+* `@perfective/common/object`:
+** Narrowed argument to the `NonNullable` type in the
+`pick()`/`recordWithPicked()`, `omit()`/`recordWithOmitted()`, and `filter()`/`recordFiltered()` functions.
+
+
+=== Deprecations
+
+* `@perfective/common/match`:
+** Renamed the `Match.that()` and `Match.to()` methods into `Match.cases()`.
+** Renamed the `When.then()` method into `When.to()`.
+** Renamed the `Statement` type into `Case`.
+** Renamed the `StatementEntry` type into `CaseEntry`.
+** Renamed the `statements()` function into `fromEntries()`.
++
+* `@perfective/common/maybe`:
+** Deprecated the `Nullable` and `Optional` types.
++
+Both types cover specific edge cases for the `Maybe` type.
+But they have not been used in real-world applications.
+Use cases that these types covered can be handled by `Maybe`,
+so there is no good reason to maintain them.
++
+*** Deprecated `nil()`, `nullable()`, `only()`, and `solum()` functions.
+*** Deprecated `none()`, `optional()`, and `some()` functions.
+*** Deprecated `lift()` function.
++
+** Deprecated the `Maybe.lift()` method.
++
+Use the `Maybe.into()` method with the `maybeFrom()` function instead.
++
+* `@perfective/common/promise`:
+** Renamed the `Run` type into `Executor`.
++
+ECMA specification uses the term `executor`.
++
+** Renamed the `result()` function into `settlement()`.
++
+* `@perfective/common/string`:
+** Deprecated the `Output` interface.
+** Deprecated the `output()`, `isOutput()`, and `isNotOutput()` functions.
++
+Use the `String()` function for native string coercion instead.
+
+
+=== Improvements
+
+* Removed mock files from the distribution.
++
+`mock.ts` files are only imported in tests.
++
+* `@perfective/common`:
+** Added the `Voidable<T>` type.
+** Added the `ecmaType()` and `isEcmaType()` functions.
+** Added the `tsType()` and `isTsType()` functions.
+** Added the `present()`, `notNull()`, and `defined()` functions.
+** Set `Present<T>` as the `isPresent()` function return value.
+** Set `Defined<T>` as the `isDefined()` function return value.
+** Set `NotNull<T>` as the `isNotNull()` function return value.
++
+* `@perfective/common/array`:
+** Added the `pushInto()` function.
+
+* `@perfective/common/error`:
+** Added the `chained()` function.
+** Included a non-error value output into an `unknownError()` message.
++
+* `@perfective/common/function`:
+** Added the `BiMap<T1, U1, T2, V2>` arguments pair type.
+** Added the `BiFold<T1, T2, U>` arguments pair type.
+** Added the `Void` and `UnaryVoid<T>` procedure types.
++
+* `@perfective/common/match`:
+** Added the `caseFromEntry()` function.
++
+* `@perfective/common/maybe`:
+** Added `Maybe.into(reduce)` method and `into(reduce)` function.
+** Added `maybeFrom()` and `justFrom()` functions.
+** Narrowed signatures for the `maybe()` function.
++
+When a function is given an always present value, it will return `Just<T>`,
+and for always absent values, it will return `Nothing<T>`.
++
+** Added JSDocs for the `Maybe` type methods.
+** Changed error messages for absent values in `Just`.
+** Switch to `extends` instead of `implements` in `Maybe`
++
+Otherwise, the `Maybe` type is compiled as an interface and cannot be checked with the `instance of` in runtime.
++
+* `@perfective/common/object`:
+** Added the `hasMethod()` and `hasNoMethod()` functions.
+** Changed the `isRecord()` predicate to be a type guard.
+** Marked property definition in the `ObjectWithUndefined` type as optional.
++
+Required to work with `exactOptionalPropertyTypes: true`.
+Otherwise, an object with a never defined property cannot be assigned to an object with a property set to undefined.
++
+The type guard is not yet strict enough, but it is better than just a predicate.
++
+* `@perfective/common/promise`:
+** Added the `Resolvable` shortcut type.
+** Added the `OnFulfilled` and `OnRejected` types.
+** Added the `fulfilled()` and `rejected()` functions.
+** Added the `settled()` function.
+
+
 == v8.0.3
 
 === Fixes

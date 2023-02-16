@@ -38,6 +38,17 @@ export abstract class Result<T> {
     ): Result<U>;
 
     /**
+     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value},
+     * when the instance is a {@linkcode Success}.
+     *
+     * If given a {@linkcode mapError} callback,
+     * applies it to the {@linkcode Failure.value} when the instance is a {@linkcode Failure}.
+     *
+     * @since v0.9.0
+     */
+    public abstract to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Result<U>;
+
+    /**
      * If the instance is a {@linkcode Success},
      * applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
      * and returns its result wrapped into a {@linkcode Success}.
@@ -50,15 +61,15 @@ export abstract class Result<T> {
     public abstract to<U>(maps: BiMapResult<T, U>): Result<U>;
 
     /**
-     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value},
-     * when the instance is a {@linkcode Success}.
+     * Applies a given {@linkcode reduceValue} callback to the {@linkcode Success.value} property.
+     * Or applies a given {@linkcode reduceError} callback to the {@linkcode Error.value}.
      *
-     * If given a {@linkcode mapError} callback,
-     * applies it to the {@linkcode Failure.value} when the instance is a {@linkcode Failure}.
+     * Returns the result of the {@linkcode reduceValue} for a {@linkcode Success}
+     * or the result of the {@linkcode reduceError} for a {@linkcode Failure}.
      *
      * @since v0.9.0
      */
-    public abstract to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Result<U>;
+    public abstract into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
 
     /**
      * If the instance is a {@linkcode Success},
@@ -74,15 +85,16 @@ export abstract class Result<T> {
     public abstract into<U>(fold: BiFoldResult<T, U>): U;
 
     /**
-     * Applies a given {@linkcode reduceValue} callback to the {@linkcode Success.value} property.
-     * Or applies a given {@linkcode reduceError} callback to the {@linkcode Error.value}.
+     * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
+     * when the instance is a {@linkcode Success}.
+     * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
+     * when the instance is a {@linkcode Failure}.
      *
-     * Returns the result of the {@linkcode reduceValue} for a {@linkcode Success}
-     * or the result of the {@linkcode reduceError} for a {@linkcode Failure}.
+     * Returns the original {@linkcode Result} object.
      *
      * @since v0.9.0
      */
-    public abstract into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
+    public abstract through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 
     /**
      * If the instance is a {@linkcode Success},
@@ -96,18 +108,6 @@ export abstract class Result<T> {
      * @since v0.9.0
      */
     public abstract through(procedures: BiVoidResult<T>): this;
-
-    /**
-     * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
-     * when the instance is a {@linkcode Success}.
-     * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
-     * when the instance is a {@linkcode Failure}.
-     *
-     * Returns the original {@linkcode Result} object.
-     *
-     * @since v0.9.0
-     */
-    public abstract through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 }
 
 /**
@@ -161,14 +161,6 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
-     * and returns its result wrapped into a {@linkcode Success}.
-     *
-     * @since v0.9.0
-     */
-    public override to<U>(maps: BiMapResult<T, U>): Success<U>;
-
-    /**
      * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
      * Ignores a given {@linkcode mapError} callback.
      *
@@ -178,18 +170,18 @@ export class Success<T> extends Result<T> {
      */
     public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Success<U>;
 
+    /**
+     * Applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
+     * and returns its result wrapped into a {@linkcode Success}.
+     *
+     * @since v0.9.0
+     */
+    public override to<U>(maps: BiMapResult<T, U>): Success<U>;
+
     public override to<U>(first: Unary<T, U> | BiMapResult<T, U>): Success<U> {
         const mapValue = Array.isArray(first) ? first[0] : first;
         return success(mapValue(this.value));
     }
-
-    /**
-     * Applies the first callback of a given {@linkcode fold} pair to the {@linkcode Success.value}
-     * and returns the result.
-     *
-     * @since v0.9.0
-     */
-    public override into<U>(fold: BiFoldResult<T, U>): U;
 
     /**
      * Applies a given {@linkcode reduce} callback to the {@linkcode Success.value|value}.
@@ -201,18 +193,18 @@ export class Success<T> extends Result<T> {
      */
     public override into<U>(reduceValue: Unary<T, U>, reduceError?: Unary<Error, U>): U;
 
+    /**
+     * Applies the first callback of a given {@linkcode fold} pair to the {@linkcode Success.value}
+     * and returns the result.
+     *
+     * @since v0.9.0
+     */
+    public override into<U>(fold: BiFoldResult<T, U>): U;
+
     public override into<U>(first: Unary<T, U> | BiFoldResult<T, U>): U {
         const reduce = Array.isArray(first) ? first[0] : first;
         return reduce(this.value);
     }
-
-    /**
-     * Executes the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
-     * Returns the original {@linkcode Success} object.
-     *
-     * @since v0.9.0
-     */
-    public override through(procedures: BiVoidResult<T>): this;
 
     /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
@@ -223,6 +215,14 @@ export class Success<T> extends Result<T> {
      * @since v0.9.0
      */
     public override through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
+
+    /**
+     * Executes the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     * Returns the original {@linkcode Success} object.
+     *
+     * @since v0.9.0
+     */
+    public override through(procedures: BiVoidResult<T>): this;
 
     public override through(first: UnaryVoid<T> | BiVoidResult<T>): this {
         const procedure = Array.isArray(first) ? first[0] : first;
@@ -270,14 +270,6 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Applies the second callback of a given {@linkcode maps} pair to the {@linkcode Failure.value}
-     * and returns its result wrapped into a {@linkcode Failure}.
-     *
-     * @since v0.9.0
-     */
-    public override to<U>(maps: BiMapResult<T, U>): Failure<U>;
-
-    /**
      * If given a {@linkcode mapError} callback,
      * applies it to the {@linkcode Failure.value}
      * and returns the result wrapped into a {@linkcode Failure}.
@@ -288,6 +280,14 @@ export class Failure<T> extends Result<T> {
      * @since v0.9.0
      */
     public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Failure<U>;
+
+    /**
+     * Applies the second callback of a given {@linkcode maps} pair to the {@linkcode Failure.value}
+     * and returns its result wrapped into a {@linkcode Failure}.
+     *
+     * @since v0.9.0
+     */
+    public override to<U>(maps: BiMapResult<T, U>): Failure<U>;
 
     public override to<U>(
         first: Unary<T, U> | BiMapResult<T, U>,
@@ -301,14 +301,6 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Applies the second callback of a given {@linkcode fold} pair to the {@linkcode Failure.value}
-     * and returns the result.
-     *
-     * @since v0.9.0
-     */
-    public override into<U>(fold: BiFoldResult<T, U>): U;
-
-    /**
      * Applies a given {@linkcode reduceError} callback to the {@linkcode Failure.value} {@linkcode Error}.
      * Ignores a given {@linkcode reduceValue} callback.
      *
@@ -317,6 +309,14 @@ export class Failure<T> extends Result<T> {
      * @since v0.9.0
      */
     public override into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
+
+    /**
+     * Applies the second callback of a given {@linkcode fold} pair to the {@linkcode Failure.value}
+     * and returns the result.
+     *
+     * @since v0.9.0
+     */
+    public override into<U>(fold: BiFoldResult<T, U>): U;
 
     public override into<U>(
         first: Unary<T, U> | BiFoldResult<T, U>,
@@ -327,15 +327,6 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Executes the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
-     *
-     * Returns the original {@linkcode Failure} object.
-     *
-     * @since v0.9.0
-     */
-    public override through(procedures: BiVoidResult<T>): this;
-
-    /**
      * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}.
      * Ignores a given {@linkcode valueProcedure} callback.
      *
@@ -344,6 +335,15 @@ export class Failure<T> extends Result<T> {
      * @since v0.9.0
      */
     public override through(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this;
+
+    /**
+     * Executes the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     *
+     * Returns the original {@linkcode Failure} object.
+     *
+     * @since v0.9.0
+     */
+    public override through(procedures: BiVoidResult<T>): this;
 
     public override through(
         first: UnaryVoid<T> | BiVoidResult<T>,

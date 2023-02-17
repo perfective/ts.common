@@ -6,7 +6,6 @@ import { TypeGuard } from '../../value/type-guard/type-guard';
 import { isNotNull, isNull, NotNull } from '../../value/value';
 
 /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-/* eslint-disable jsdoc/require-description -- Skip description in JSDocs that mark code as deprecated */
 
 /**
  * @deprecated Since v0.9.0. Use {@linkcode Maybe} instead.
@@ -436,5 +435,4 @@ export function solum<T>(value: NotNull<T>): Solum<T> {
     return only(value);
 }
 
-/* eslint-enable jsdoc/require-description */
 /* eslint-enable deprecation/deprecation */

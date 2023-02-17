@@ -1,7 +1,6 @@
 import { hasMethod, hasNoMethod } from '../../object/object/object';
 
 /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-/* eslint-disable jsdoc/require-description -- deprecation tags only */
 
 /**
  * @deprecated Since v0.9.0. Use {@linkcode unknown} instead with {@linkcode String}.
@@ -32,5 +31,4 @@ export function isNotOutput<T>(value: Output | T): value is T {
     return hasNoMethod(value, 'toString');
 }
 
-/* eslint-enable jsdoc/require-description */
 /* eslint-enable deprecation/deprecation */

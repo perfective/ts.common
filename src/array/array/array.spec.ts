@@ -61,15 +61,33 @@ describe('copy', () => {
     });
 });
 
-describe('concatenated', () => {
-    it('creates a new array from a list of arrays', () => {
-        expect(concatenated([]))
-            .toStrictEqual([]);
-        expect(concatenated(['a', 'b', 'c'], ['d', 'e'], ['f']))
-            .toStrictEqual(alphabet);
+describe(concatenated, () => {
+    describe('concatenated(initial)', () => {
+        it('creates an empty array', () => {
+            expect(concatenated([]))
+                .toStrictEqual([]);
+        });
+    });
+
+    describe('concatenated(initial, arrays)', () => {
+        it('concatenates given arrays in order they were given', () => {
+            expect(concatenated(['a', 'b', 'c'], ['d', 'e'], ['f']))
+                .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+
+            expect(concatenated([['a'], ['b'], ['c']], []))
+                .toStrictEqual([['a'], ['b'], ['c']]);
+        });
+    });
+
+    describe('concatenated(arrays)', () => {
+        it('concatenates given arrays in order they were given', () => {
+            expect(concatenated([['a', 'b'], ['c', 'd'], ['e', 'f']]))
+                .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+        });
     });
 });
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
 describe('flatten', () => {
     it('creates a new array from an array of arrays', () => {
         expect(flatten([]))
@@ -78,6 +96,7 @@ describe('flatten', () => {
             .toStrictEqual(alphabet);
     });
 });
+/* eslint-enable deprecation/deprecation */
 
 describe('intersection', () => {
     it('returns an array of values that included in both arrays', () => {

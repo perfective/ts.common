@@ -21,10 +21,30 @@ export function copy<T>(array: T[]): T[] {
     return Array.from(array);
 }
 
-export function concatenated<T>(initial: T[], ...arrays: T[][]): T[] {
+/**
+ * Flattens a given array of arrays by concatenating them in order they are present.
+ *
+ * @since v0.9.0
+ */
+export function concatenated<T>(arrays: T[][]): T[];
+
+/**
+ * Concatenates given arrays into one array in order they are given.
+ *
+ * @since v0.1.0
+ */
+export function concatenated<T>(initial: T[], ...arrays: T[][]): T[];
+
+export function concatenated<T>(first: T[], ...second: T[][]): T[] {
+    const hasRest = Array.isArray(second) && second.length > 0;
+    const [initial, arrays] = hasRest ? [first, second] : [[], first as T[][]];
     return arrays.reduce((result, array) => result.concat(array), initial);
 }
 
+/**
+ * @see concatenated
+ * @deprecated Since v0.9.0. Use {@linkcode concatenated()}.
+ */
 export function flatten<T>(arrays: T[][]): T[] {
     return arrays.reduce((result, array) => result.concat(array), []);
 }

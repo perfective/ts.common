@@ -4,6 +4,7 @@ export {
     arrayFromIterable,
     concatenated,
     copy,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: remove in v0.10.0-alpha
     flatten,
     intersection,
     isArray,

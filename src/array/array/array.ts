@@ -9,12 +9,29 @@ export function array<T>(...elements: T[]): T[] {
     return Array.of(...elements);
 }
 
+/**
+ * @see elements
+ * @deprecated Since v0.9.0.
+ */
 export function arrayFromIterable<T>(elements: Iterable<T>): T[] {
     return Array.from(elements);
 }
 
+/**
+ * @see elements
+ * @deprecated Since v0.9.0.
+ */
 export function arrayFromArrayLike<T>(elements: ArrayLike<T>): T[] {
     return Array.from(elements);
+}
+
+/**
+ * Creates an array of elements of a given {@linkcode Iterable} or an {@linkcode ArrayLike} {@linkcode value}.
+ *
+ * @since v0.9.0
+ */
+export function elements<T>(value: Iterable<T> | ArrayLike<T>): T[] {
+    return Array.from(value);
 }
 
 export function copy<T>(array: T[]): T[] {

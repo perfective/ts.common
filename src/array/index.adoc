@@ -3,10 +3,12 @@
 The `@perfective/common/array` package provides functions for the standard JS
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]` class:
 
-* Unit functions:
+* Constructors:
 ** `array<T>(...elements: T[]): T[]`
-** `arrayFromIterable<T>(elements: Iterable<T>): T[]`
-** `arrayFromArrayLike<T>(elements: ArrayLike<T>): T[]`
++
+** `elements<T>(value: Iterable<T> | ArrayLike<T>): T[]`
+— creates an array of elements of a given `Iterable` or an `ArrayLike` value.
++
 ** `copy<T>(array: T[]): T[]`
 — creates a shallow copy of an array
 +

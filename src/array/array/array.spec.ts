@@ -6,6 +6,7 @@ import {
     arrayFromIterable,
     concatenated,
     copy,
+    elements,
     flatten,
     intersection,
     isArray,
@@ -26,6 +27,7 @@ describe('array', () => {
     });
 });
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
 describe('arrayFromIterable', () => {
     it('creates an array from an iterable object', () => {
         expect(arrayFromIterable(new Map([
@@ -49,6 +51,35 @@ describe('arrayFromArrayLike', () => {
     it('creates an array from an array-like object', () => {
         expect(arrayFromArrayLike('alphabet'))
             .toStrictEqual(['a', 'l', 'p', 'h', 'a', 'b', 'e', 't']);
+    });
+});
+/* eslint-enable deprecation/deprecation */
+
+describe(elements, () => {
+    describe('elements(ArrayLike)', () => {
+        it('creates an array from an ArrayLike object', () => {
+            expect(elements('alphabet'))
+                .toStrictEqual(['a', 'l', 'p', 'h', 'a', 'b', 'e', 't']);
+        });
+    });
+
+    describe('elements(Iterable)', () => {
+        it('creates an array from an Iterable object', () => {
+            expect(elements(new Map([
+                ['a', 'x'],
+                ['b', 'y'],
+                ['c', 'z'],
+            ]))).toStrictEqual([
+                ['a', 'x'],
+                ['b', 'y'],
+                ['c', 'z'],
+            ]);
+            expect(elements(new Set([
+                'a',
+                'b',
+                'c',
+            ]))).toStrictEqual(['a', 'b', 'c']);
+        });
     });
 });
 

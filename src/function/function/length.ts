@@ -1,27 +1,66 @@
+/**
+ * A type of object that have the {@linkcode length} property.
+ *
+ * @since v0.6.0
+ */
 export interface Length {
     length: number;
 }
 
+/**
+ * Returns value of the {@linkcode Length.length|length} property of a given {@linkcode value}.
+ *
+ * @since v0.6.0
+ */
 export function length<L extends Length>(value: L): number {
     return value.length;
 }
 
+/**
+ * Returns a {@linkcode Predicate} that checks if a value has a given {@linkcode length}.
+ *
+ * @since v0.6.0
+ */
 export function hasLength<L extends Length>(length: number): (value: L) => boolean {
     return (value: L): boolean => value.length === length;
 }
 
+/**
+ * Returns true if a given {@linkcode value} has non-positive length.
+ *
+ * @since v0.6.0
+ */
 export function isEmpty<L extends Length>(value: L): boolean {
     return value.length <= 0;
 }
 
+/**
+ * Returns true if a given {@linkcode value} has length greater than 0.
+ *
+ * @since v0.6.0
+ */
 export function isNotEmpty<L extends Length>(value: L): boolean {
     return value.length > 0;
 }
 
-export function toShortest<T extends Length>(shortest: T, value: T): T {
-    return shortest.length < value.length ? shortest : value;
+/**
+ * Returns the shortest of two given values.
+ *
+ * The function can be used as an {@linkcode Array.reduce} callback.
+ *
+ * @since v0.6.0
+ */
+export function toShortest<T extends Length>(first: T, second: T): T {
+    return first.length < second.length ? first : second;
 }
 
-export function toLongest<T extends Length>(longest: T, array: T): T {
-    return longest.length > array.length ? longest : array;
+/**
+ * Returns the longest of two given values.
+ *
+ * The function can be used as an {@linkcode Array.reduce} callback.
+ *
+ * @since v0.6.0
+ */
+export function toLongest<T extends Length>(first: T, second: T): T {
+    return first.length > second.length ? first : second;
 }

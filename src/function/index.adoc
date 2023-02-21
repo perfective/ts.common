@@ -69,17 +69,38 @@ The functions of higher arity is unlikely to be added to the package.
 
 `Length` type defines a kind of objects that have "length" (arrays, strings, etc).
 
-* Unit functions:
+[source,typescript]
+----
+interface Length {
+    length: number;
+}
+----
+
+* Functions
++
 ** `length<L extends Length>(value: L): number`
+— returns value of the `length` property of a given `value`.
 +
-* Predicates:
-** `hasLength<L extends Length>(length: number): (value: L) => boolean`,
+* Predicates
++
+** `hasLength<L extends Length>(length: number): Predicate<L>`
+— returns a `Predicate` that checks if a value has a given `length`.
++
 ** `isNotEmpty<L extends Length>(value: L): boolean`
-** `isEmpty<L extends Length>(value: L): boolean`
+— returns `true` if a given `value` has non-positive length.
 +
-* Reducers:
+** `isEmpty<L extends Length>(value: L): boolean`
+— returns `true` if a given `value` has `length` greater than 0.
++
+* Reducers
++
+These functions can be used as a callback for `Array.prototype.reduce`.
++
 ** `toShortest<T extends Length>(shortest: T, value: T): T`
+— returns the shortest of two given values.
++
 ** `toLongest<T extends Length>(longest: T, array: T): T`
+— returns the longest of two given values.
 
 
 == Arguments

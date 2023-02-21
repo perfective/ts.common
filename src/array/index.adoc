@@ -5,31 +5,42 @@ The `@perfective/common/array` package provides functions for the standard JS
 
 * Constructors:
 ** `array<T>(...elements: T[]): T[]`
+— creates an array from given elements.
 +
 ** `elements<T>(value: Iterable<T> | ArrayLike<T>): T[]`
-— creates an array of elements of a given `Iterable` or an `ArrayLike` value.
+— creates an array from elements of a given `Iterable` or an `ArrayLike` value.
 +
 ** `copy<T>(array: T[]): T[]`
-— creates a shallow copy of an array
+— creates a shallow copy of a given array.
 +
 ** `concatenated<T>(arrays: T[][]): T[]`
-— flattens a given array of arrays by concatenating them in order they are present.
+— concatenates a given array of arrays in order they are given.
 ** `concatenated<T>(initial: T[], ...arrays: T[][]): T[]`
 — concatenates given arrays into one array in order they are given.
 +
 ** `intersection<T>(array1: T[], array2: T[]): T[]`
+— returns an array of unique elements that are included in both given arrays.
++
 ** `replicated<T>(value: T, length: number): T[]`
 — creates a new array of the given value replicated the given number of times.
 ** `replicated<T>(length: number): Unary<T, T[]>`
 — creates a new function that replicates a given value the given number of times.
++
 ** `reversed<T>(array: T[]): T[]`
-— creates a shallow _reversed_ copy of an array
+— creates a shallow copy of a given array with elements in reversed order.
++
 ** `sorted<T>(array: T[], order?: Compare<T>): T[]`
-— creates a shallow _sorted_ copy of an array
+— creates a shallow copy of a given `array` sorted with a given `order` callback.
+** `sorted<T>(order?: Compare<T>): Unary<T[], T[]>`
+— creates a function to return a shallow copy of a given array with a given `order` callback.
++
 ** `unique<T>(array: T[]): T[]`
-— creates a shallow copy with all duplicate elements removed
+— Remove all duplicates from a given `array`.
+Returns an array with only the first occurrence of each value in the `array`.
++
 ** `wrapped<T>(value: T | T[]): T[]`
-— if value is an array, returns the original array; otherwise returns an array with that value.
+— If a given `value` is an array, returns the original `value`.
+Otherwise, returns an array with only that `value`.
 +
 * Type guards:
 ** `isArray<T, V = unknown>(value: T[] | V): value is T[]`

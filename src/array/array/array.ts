@@ -5,13 +5,18 @@ import { isPresent } from '../../value/value';
 import { isFirstOccurrence } from './filter';
 import { Compare } from './lift';
 
+/**
+ * Creates an array from given {@linkcode elements}.
+ *
+ * @since v0.2.0
+ */
 export function array<T>(...elements: T[]): T[] {
     return Array.of(...elements);
 }
 
 /**
  * @see elements
- * @deprecated Since v0.9.0.
+ * @deprecated Since v0.9.0. Use {@linkcode elements}.
  */
 export function arrayFromIterable<T>(elements: Iterable<T>): T[] {
     return Array.from(elements);
@@ -19,14 +24,14 @@ export function arrayFromIterable<T>(elements: Iterable<T>): T[] {
 
 /**
  * @see elements
- * @deprecated Since v0.9.0.
+ * @deprecated Since v0.9.0. Use {@linkcode elements}.
  */
 export function arrayFromArrayLike<T>(elements: ArrayLike<T>): T[] {
     return Array.from(elements);
 }
 
 /**
- * Creates an array of elements of a given {@linkcode Iterable} or an {@linkcode ArrayLike} {@linkcode value}.
+ * Creates an array from elements of a given {@linkcode Iterable} or an {@linkcode ArrayLike} {@linkcode value}.
  *
  * @since v0.9.0
  */
@@ -34,12 +39,17 @@ export function elements<T>(value: Iterable<T> | ArrayLike<T>): T[] {
     return Array.from(value);
 }
 
+/**
+ * Creates a shallow copy of a given {@linkcode array}.
+ *
+ * @since v0.2.0
+ */
 export function copy<T>(array: T[]): T[] {
     return Array.from(array);
 }
 
 /**
- * Flattens a given array of arrays by concatenating them in order they are present.
+ * Concatenates given {@linkcode arrays} in order they are given.
  *
  * @since v0.9.0
  */
@@ -60,12 +70,17 @@ export function concatenated<T>(first: T[], ...second: T[][]): T[] {
 
 /**
  * @see concatenated
- * @deprecated Since v0.9.0. Use {@linkcode concatenated()}.
+ * @deprecated Since v0.9.0. Use {@linkcode concatenated}.
  */
 export function flatten<T>(arrays: T[][]): T[] {
     return arrays.reduce((result, array) => result.concat(array), []);
 }
 
+/**
+ * Returns an array of unique elements that are included in both given arrays.
+ *
+ * @since v0.4.0
+ */
 export function intersection<T>(array1: T[], array2: T[]): T[] {
     const longest: T[] = [array1, array2].reduce(toLongest);
     const shortest: T[] = [array1, array2].reduce(toShortest);
@@ -81,6 +96,8 @@ export function intersection<T>(array1: T[], array2: T[]): T[] {
  * @param length - A non-negative integer length of a new array.
  *
  * @throws RangeError - An error when the given length is a negative or a real number.
+ *
+ * @since v0.2.1
  */
 export function replicated<T>(value: T, length: number): T[];
 
@@ -90,6 +107,8 @@ export function replicated<T>(value: T, length: number): T[];
  * @param length - A non-negative integer length of a new array.
  *
  * @throws RangeError - An error when the given length is a negative or a real number.
+ *
+ * @since v0.2.1
  */
 export function replicated<T>(length: number): Unary<T, T[]>;
 
@@ -103,12 +122,29 @@ export function replicated<T>(first: T | number, second?: number): T[] | Unary<T
     /* eslint-enable unicorn/new-for-builtins */
 }
 
+/**
+ * Creates a shallow copy of a given array with elements in reversed order.
+ *
+ * @since v0.2.0
+ */
 export function reversed<T>(array: T[]): T[] {
     return Array.from(array).reverse();
 }
 
+/**
+ * Creates a function to return a shallow copy of a given array with a given {@linkcode order} callback.
+ *
+ * @since v0.2.0
+ */
 export function sorted<T>(order?: Compare<T>): Unary<T[], T[]>;
+
+/**
+ * Creates a shallow copy of a given {@linkcode array} sorted with a given {@linkcode order} callback.
+ *
+ * @since v0.2.0
+ */
 export function sorted<T>(array: T[], order?: Compare<T>): T[];
+
 export function sorted<T>(first?: T[] | Compare<T>, second?: Compare<T>): Unary<T[], T[]> | T[] {
     if (Array.isArray(first)) {
         return Array.from(first).sort(second);
@@ -116,12 +152,23 @@ export function sorted<T>(first?: T[] | Compare<T>, second?: Compare<T>): Unary<
     return (array: T[]): T[] => Array.from(array).sort(first);
 }
 
+/**
+ * Remove all duplicates from a given {@linkcode array}.
+ *
+ * @returns An array with only the first occurrence of each value in the {@linkcode array}.
+ *
+ * @since v0.2.0
+ */
 export function unique<T>(array: T[]): T[] {
     return array.filter(isFirstOccurrence);
 }
 
 /**
- * If value is an array, returns the original array; otherwise returns an array with that value.
+ * If a given {@linkcode value} is an array, returns the original {@linkcode value}.
+ *
+ * Otherwise, returns an array with only that {@linkcode value}.
+ *
+ * @since v0.2.1
  */
 export function wrapped<T>(value: T | T[]): T[] {
     if (Array.isArray(value)) {

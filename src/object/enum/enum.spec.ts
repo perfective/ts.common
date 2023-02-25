@@ -14,12 +14,14 @@ enum StringDirection {
     Right = 'right',
 }
 
+/* eslint-disable @typescript-eslint/no-mixed-enums -- testing mixed enums */
 enum MixedDirection {
     Up = 1,
     Right = 'right',
     Down = -1,
     Left = 'left',
 }
+/* eslint-enable @typescript-eslint/no-mixed-enums */
 
 describe('members', () => {
     it('returns keys of a numeric enum', () => {

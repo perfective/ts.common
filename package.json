@@ -40,7 +40,7 @@
     "devDependencies": {
         "@asciidoctor/gulp-asciidoctor": "^2.2.5",
         "@babel/eslint-parser": "^7.19.1",
-        "@perfective/build": "~0.7.2",
+        "@perfective/build": "~0.7.3",
         "@perfective/eslint-config": "~0.20.0",
         "@types/jest": "^29.4.0",
         "@typescript-eslint/eslint-plugin": "~5.53.0",

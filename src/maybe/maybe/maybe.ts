@@ -155,14 +155,22 @@ export abstract class Maybe<T> {
     public abstract or(fallback: Value<T | null | undefined>): T | null | undefined;
 
     /**
+     * @deprecated Since v0.9.0. Use {@linkcode Maybe.through} instead.
+     */
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
+    public abstract run(procedure: (value: T) => void): Maybe<T>;
+
+    /**
      * If an instance is a {@linkcode Just},
      * runs a given {@linkcode procedure} with the {@linkcode Just.value}.
      * Ignores the {@linkcode procedure} result and returns the original {@linkcode Just}.
      *
      * If an instance is a {@linkcode Nothing},
      * ignores the {@linkcode procedure} and returns itself.
+     *
+     * @since v0.9.0
      */
-    public abstract run(procedure: (value: T) => void): Maybe<T>;
+    public abstract through(procedure: (value: T) => void): Maybe<T>;
 
     /**
      * Lifts a function into the Maybe monad.
@@ -307,11 +315,21 @@ export class Just<T> extends Maybe<T> {
     }
 
     /**
+     * @deprecated Since v0.9.0. Use {@linkcode Just.through} instead.
+     */
+    public run(procedure: (value: T) => void): this {
+        procedure(this.value);
+        return this;
+    }
+
+    /**
      * Runs a given {@linkcode procedure} with the {@linkcode Just.value} as an argument.
      *
      * Ignores the {@linkcode procedure} result and returns the original {@linkcode Just}.
+     *
+     * @since v0.9.0
      */
-    public run(procedure: (value: T) => void): this {
+    public through(procedure: (value: T) => void): this {
         procedure(this.value);
         return this;
     }
@@ -463,10 +481,20 @@ export class Nothing<T> extends Maybe<T> {
     }
 
     /**
-     * Ignores a given {@linkcode procedure} callback and returns itself.
+     * @deprecated Since v0.9.0. Use {@linkcode Nothing.through} instead.
      */
     public run(procedure: (value: T) => void): Nothing<T>;
     public run(): this {
+        return this;
+    }
+
+    /**
+     * Ignores a given {@linkcode procedure} callback and returns itself.
+     *
+     * @since v0.9.0
+     */
+    public through(procedure: (value: T) => void): Nothing<T>;
+    public through(): this {
         return this;
     }
 

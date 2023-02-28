@@ -95,9 +95,19 @@ export function or<T>(fallback: Value<T> | Value<T | null | undefined>): Unary<M
 }
 
 /**
- * Creates a function that calls the {@linkcode Maybe.run} method with a given {@linkcode procedure} callback.
+ * Creates a function that calls the {@linkcode Maybe.through} method with a given {@linkcode procedure} callback.
+ *
+ * @since v0.9.0
+ */
+export function through<T>(procedure: (value: T) => void): Unary<Maybe<T>, Maybe<T>> {
+    return (maybe: Maybe<T>): Maybe<T> => maybe.through(procedure);
+}
+
+/**
+ * @deprecated Since v0.9.0. Use {@linkcode through} instead.
  */
 export function run<T>(procedure: (value: T) => void): Unary<Maybe<T>, Maybe<T>> {
+    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
     return (maybe: Maybe<T>): Maybe<T> => maybe.run(procedure);
 }
 

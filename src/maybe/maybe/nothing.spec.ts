@@ -768,9 +768,50 @@ describe(Nothing, () => {
         });
     });
 
+    describe('through', () => {
+        let value: number;
+
+        function assignValue(update: number): Void {
+            return (): void => {
+                value = update;
+            };
+        }
+
+        beforeEach(() => {
+            value = 0;
+        });
+
+        it('does not run the given procedure', () => {
+            expect(value).toBe(0);
+            expect(nothing<number>().through(assignValue(1))).toBe(nothing());
+            expect(value).toBe(0);
+        });
+
+        it('can be assigned to Maybe', () => {
+            const output: Maybe<number> = nothing<number>().through(assignValue(1));
+
+            expect(output).toBe(nothing());
+        });
+
+        it('cannot be assigned to Just', () => {
+            // @ts-expect-error -- TS2322: Type 'Nothing' is not assignable to type 'Just'.
+            const output: Just<number> = nothing<number>().through(assignValue(1));
+
+            expect(output).toBe(nothing());
+        });
+
+        it('returns Nothing', () => {
+            const output: Nothing<number> = nothing<number>().through(assignValue(1));
+
+            expect(output).toBe(nothing());
+        });
+    });
+
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('run', () => {
         let value: number;
 
+        // eslint-disable-next-line sonarjs/no-identical-functions -- to be removed in v0.10.0
         function assignValue(update: number): Void {
             return (): void => {
                 value = update;
@@ -807,7 +848,6 @@ describe(Nothing, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:

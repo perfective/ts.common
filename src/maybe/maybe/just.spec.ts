@@ -720,9 +720,50 @@ describe(Just, () => {
         });
     });
 
+    describe('through', () => {
+        let value: number;
+
+        function assignValue(update: number): Void {
+            return (): void => {
+                value = update;
+            };
+        }
+
+        beforeEach(() => {
+            value = 0;
+        });
+
+        it('runs the given procedure and keeps original value', () => {
+            expect(value).toBe(0);
+            expect(just(value).through(assignValue(1))).toStrictEqual(just(0));
+            expect(value).toBe(1);
+        });
+
+        it('can be assigned to Maybe', () => {
+            const output: Maybe<number> = just(value).through(assignValue(1));
+
+            expect(output).toStrictEqual(just(0));
+        });
+
+        it('returns Just', () => {
+            const output: Just<number> = just(value).through(assignValue(1));
+
+            expect(output).toStrictEqual(just(0));
+        });
+
+        it('cannot be assigned to Nothing', () => {
+            // @ts-expect-error -- TS2322: Type 'Just' is not assignable to type 'Nothing'.
+            const output: Nothing<number> = just(value).through(assignValue(1));
+
+            expect(output).toStrictEqual(just(0));
+        });
+    });
+
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('run', () => {
         let value: number;
 
+        // eslint-disable-next-line sonarjs/no-identical-functions -- to be removed in v0.10.0
         function assignValue(update: number): Void {
             return (): void => {
                 value = update;
@@ -759,7 +800,6 @@ describe(Just, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('accepts functions with strictly-typed input', () => {
             expect(just(0).lift(strictDecimalOutput))

@@ -1022,9 +1022,45 @@ describe(Maybe, () => {
         });
     });
 
+    describe('through', () => {
+        let pi: number;
+
+        function assignPi(update: number): Void {
+            return (): void => {
+                pi = update;
+            };
+        }
+
+        beforeEach(() => {
+            pi = 3.14;
+        });
+
+        it('must be assigned to Maybe', () => {
+            const output: Maybe<number> = maybe(unsafe(pi)).through(assignPi(3.1415));
+
+            expect(output).toStrictEqual(just(3.14));
+        });
+
+        it('cannot be assign to Just', () => {
+            // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
+            const output: Just<number> = maybe(unsafe(pi)).through(assignPi(3.1415));
+
+            expect(output).toStrictEqual(just(3.14));
+        });
+
+        it('cannot be assigned to Nothing', () => {
+            // @ts-expect-error -- TS2322: Type 'Maybe<number>' is not assignable to type 'Nothing<number>'.
+            const output: Nothing<number> = maybe(unsafe(pi)).through(assignPi(3.1415));
+
+            expect(output).toStrictEqual(just(3.14));
+        });
+    });
+
+    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('run', () => {
         let pi: number;
 
+        // eslint-disable-next-line sonarjs/no-identical-functions -- to be removed in v0.10.0
         function assignPi(update: number): Void {
             return (): void => {
                 pi = update;
@@ -1056,7 +1092,6 @@ describe(Maybe, () => {
         });
     });
 
-    /* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
     describe('lift', () => {
         it('does not accept functions with strictly-typed input', () => {
             // @ts-expect-error -- TS2345:

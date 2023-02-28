@@ -7,8 +7,10 @@ export {
     or,
     otherwise,
     pick,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
     run,
     that,
+    through,
     to,
     when,
     which,

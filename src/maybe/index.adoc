@@ -601,15 +601,15 @@ This method is similar to the `orElse`, `orElseGet`, and `orElseThrow` methods i
 ====
 
 
-=== `Maybe.run()`
+=== `Maybe.through()`
 
-* `Maybe.run(procedure: (value: T) => void): Maybe<T>`
+* `Maybe.through(procedure: (value: T) => void): Maybe<T>`
 ** for a `Just`, runs a given `procedure` with the `Just.value` as an argument, the returns the original `Just`.
 ** for a `Nothing`, ignores the `procedure` and returns itself.
 
 [WARNING]
 ====
-The `Maybe.run()` does not check if the given procedure mutates the present value.
+The `Maybe.through()` does not check if the given procedure mutates the present value.
 ====
 
 [source,typescript]
@@ -618,7 +618,7 @@ import { maybe } from '@perfective/common/maybe';
 
 function logError(error?: Error): Error|undefined {
     return maybe(error)
-        .run(console.error);
+        .through(console.error);
 }
 ----
 

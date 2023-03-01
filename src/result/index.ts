@@ -5,6 +5,7 @@ export {
     failureWith,
     successWith,
 } from './result/arguments';
+export { onto } from './result/lift';
 export {
     promisedResult,
     rejection,

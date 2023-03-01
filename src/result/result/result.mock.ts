@@ -14,6 +14,24 @@ export function eitherResult<T>(value: T | Error): T | Error {
 }
 
 /**
+ * Converts a given number into a string and returns as a {@linkcode Success}.
+ * If given an {@linkcode Error}, returns a {@linkcode Failure}.
+ */
+export function resultString(value: number | Error): Result<string> {
+    if (isError(value)) {
+        return failure(value);
+    }
+    return success(String(value));
+}
+
+/**
+ * Converts a given value into a string and returns as a {@linkcode Failure}.
+ */
+export function successFailure(value: number | Error): Failure<string> {
+    return failure(error(String(value)));
+}
+
+/**
  * Converts a given integer into a decimal string.
  *
  * Returns result as a {@linkcode Success} when {@linkcode input} is an integer.

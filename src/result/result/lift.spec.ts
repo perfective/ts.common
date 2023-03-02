@@ -1,8 +1,9 @@
 import { error } from '../../error/error/error';
+import { chained, exception } from '../../error/exception/exception';
 
-import { onto } from './lift';
+import { onto, to } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
-import { resultString, successFailure } from './result.mock';
+import { resultString, safeNumberOutput, successFailure } from './result.mock';
 
 const successNumber: Success<number> = success(0);
 const successError: Success<Error> = success(error('Success'));
@@ -42,6 +43,44 @@ describe(onto, () => {
                 success('0'),
                 failure<string>(error('Success')),
                 failureNumber,
+            ]);
+        });
+    });
+});
+
+describe(to, () => {
+    describe('to(mapValue)', () => {
+        it('applies a given mapValue callback to the Result.to() method', () => {
+            const output: Result<string>[] = results.map(to(safeNumberOutput));
+
+            expect(output).toStrictEqual([
+                success('0'),
+                success('Error: Success'),
+                failureNumber,
+            ]);
+        });
+    });
+
+    describe('to(mapValue, mapError)', () => {
+        it('applies a given mapValue and mapError callbacks to the Result.to() method', () => {
+            const output: Result<string>[] = results.map(to(safeNumberOutput, chained('Exceptional Failure')));
+
+            expect(output).toStrictEqual([
+                success('0'),
+                success('Error: Success'),
+                failure(exception('Exceptional Failure')),
+            ]);
+        });
+    });
+
+    describe('to(maps)', () => {
+        it('applies a given maps callbacks to the Result.to() method', () => {
+            const output: Result<string>[] = results.map(to([safeNumberOutput, chained('Exceptional Failure')]));
+
+            expect(output).toStrictEqual([
+                success('0'),
+                success('Error: Success'),
+                failure(exception('Exceptional Failure')),
             ]);
         });
     });

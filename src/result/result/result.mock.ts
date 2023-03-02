@@ -81,6 +81,11 @@ export function strictNumberOutput(input: number): string {
     return String(input);
 }
 
+// eslint-disable-next-line unicorn/prefer-native-coercion-functions -- a custom function signature for testing.
+export function safeNumberOutput(input: number | Error): string {
+    return String(input);
+}
+
 export function unsafeNumberOutput(input: string): number | Error {
     const output = decimal(input);
     if (isNull(output)) {

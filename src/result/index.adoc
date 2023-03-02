@@ -184,7 +184,8 @@ and an identity function as the first element.
 ** for a `Success`, applies a given `flatMap` callback to the `Success.value` and returns the result;
 ** for a `Failure`, ignores the `flatMap` callback and returns the same `Failure`.
 +
-* `onto<T, U>(flatMap: (value: T) => Result<U>): Unary<Result<T>, Result<U>>`
+* Lift function:
+** `onto<T, U>(flatMap: (value: T) => Result<U>): Unary<Result<T>, Result<U>>`
 — creates a function to apply a given `flatMap` callback to the `Result.onto()` method
 and return the result of the `flatMap` call.
 
@@ -278,6 +279,16 @@ and returns its result wrapped as a `Failure`.
 This method allows to use a pair of `mapValue` and `mapError` functions created dynamically.
 +
 You can also use it with the `failureWith` function to only transform a `Failure.value`.
+
++
+* Lift function:
+** `to<T, U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Unary<Result<T>, Result<U>>`
+— creates a function to apply given `mapValue` and `mapError` callbacks to the `Result.to()` method
+and return the result.
++
+** `to<T, U>(maps: BiMapResult<T, U>): Unary<Result<T>, Result<U>>`
+— creates a function to apply a given `maps` callbacks pair to the `Result.to()` method
+and return the result.
 
 [source,typescript]
 ----

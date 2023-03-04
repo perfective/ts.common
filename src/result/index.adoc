@@ -184,10 +184,13 @@ and an identity function as the first element.
 ** for a `Success`, applies a given `flatMap` callback to the `Success.value` and returns the result;
 ** for a `Failure`, ignores the `flatMap` callback and returns the same `Failure`.
 +
-* Lift function:
-** `onto<T, U>(flatMap: (value: T) => Result<U>): Unary<Result<T>, Result<U>>`
-— creates a function to apply a given `flatMap` callback to the `Result.onto()` method
-and return the result of the `flatMap` call.
+* Lifts:
+** `onto<T, U>(value: Unary<T, Result<U>>): Unary<Result<T>, Result<U>>`
+— creates a function to apply a given `value` callback to the `Result.onto()` method
+and return the result of the `value`.
+** `onto<T, U>(value: Unary<T, Failure<U>>): Unary<Result<T>, Failure<U>>`
+— creates a function to apply a given `value` callback to the `Result.onto()` method
+and return the result of the `value` (a `Failure`).
 
 [source,typescript]
 ----
@@ -281,9 +284,9 @@ This method allows to use a pair of `mapValue` and `mapError` functions created 
 You can also use it with the `failureWith` function to only transform a `Failure.value`.
 
 +
-* Lift function:
-** `to<T, U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Unary<Result<T>, Result<U>>`
-— creates a function to apply given `mapValue` and `mapError` callbacks to the `Result.to()` method
+* Lifts:
+** `to<T, U>(value: Unary<T, U>, error?: Unary<Error, Error>): Unary<Result<T>, Result<U>>`
+— creates a function to apply given `value` and `error` callbacks to the `Result.to()` method
 and return the result.
 +
 ** `to<T, U>(maps: BiMapResult<T, U>): Unary<Result<T>, Result<U>>`
@@ -406,12 +409,12 @@ As in this case,
 the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
 and a `Failure.value` `Error`.
 +
-* Lifting functions:
-** `into<T, U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): Unary<Result<T>, U>`
-— creates a function to apply a given `reduceValue` and `reduceError` callbacks
+* Lifts:
+** `into<T, U>(value: Unary<T, U>, error: Unary<Error, U>): Unary<Result<T>, U>`
+— creates a function to apply given `value` and `error` callbacks
 to the `Result.into()` method and return the result.
 ** `into<T, U>(fold: BiFoldResult<T, U>): Unary<Result<T>, U>`
-— creates a function to apply a given `fold` pair callbacks
+— creates a function to apply a given `fold` callbacks pair
 to the `Result.into()` method and return the result.
 
 
@@ -477,7 +480,7 @@ we use `Result.into()` to switch into the `apiResponse` `Promise`.
 ** For a `Success`, passes the `value` _through_ the first procedure in the `procedures` pair and returns itself.
 ** For a `Failure`, passes the `value` _through_ the second procedure in the `procedures` pair and returns itself.
 +
-* Lifting functions:
+* Lifts:
 ** `through<T>(value: UnaryVoid<T>, error: UnaryVoid<Error>): Unary<Result<T>, Result<T>>`
 — creates a function to apply given `value` and `error` callbacks to the `Result.through()` method
 and return the given `Result`.

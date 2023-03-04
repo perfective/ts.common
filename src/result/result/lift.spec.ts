@@ -14,7 +14,7 @@ const results: Result<number | Error>[] = [successNumber, successError, failureN
 
 describe(onto, () => {
     describe('onto(Failure)', () => {
-        it('applies a given flatMap function to the input Result.onto method', () => {
+        it('applies a given `value` callback to the `Result.onto()` method', () => {
             const output: Failure<string>[] = results.map(onto(successFailure));
 
             expect(output).toStrictEqual([
@@ -24,7 +24,7 @@ describe(onto, () => {
             ]);
         });
 
-        it('cannot be assigned to an array of Success', () => {
+        it('cannot be assigned to an array of `Success`', () => {
             // @ts-expect-error -- TS2322: Type 'Failure<string>[]' is not assignable to type 'Success<string>[]'.
             const output: Success<string>[] = results.map(onto(successFailure));
 
@@ -37,7 +37,7 @@ describe(onto, () => {
     });
 
     describe('onto(Result)', () => {
-        it('applies a given flatMap function to the input Result.onto method', () => {
+        it('applies a given `value` callback to the `Result.onto()` method', () => {
             const output: Result<string>[] = results.map(onto(resultString));
 
             expect(output).toStrictEqual([
@@ -50,8 +50,8 @@ describe(onto, () => {
 });
 
 describe(to, () => {
-    describe('to(mapValue)', () => {
-        it('applies a given mapValue callback to the Result.to() method', () => {
+    describe('to(value)', () => {
+        it('applies a given `value` callback to the `Result.to()` method', () => {
             const output: Result<string>[] = results.map(to(safeNumberOutput));
 
             expect(output).toStrictEqual([
@@ -62,8 +62,8 @@ describe(to, () => {
         });
     });
 
-    describe('to(mapValue, mapError)', () => {
-        it('applies a given mapValue and mapError callbacks to the Result.to() method', () => {
+    describe('to(value, error)', () => {
+        it('applies given `value` and `error` callbacks to the `Result.to()` method', () => {
             const output: Result<string>[] = results.map(to(safeNumberOutput, chained('Exceptional Failure')));
 
             expect(output).toStrictEqual([
@@ -75,7 +75,7 @@ describe(to, () => {
     });
 
     describe('to(maps)', () => {
-        it('applies a given maps callbacks to the Result.to() method', () => {
+        it('applies a given `maps` callbacks pair to the `Result.to()` method', () => {
             const output: Result<string>[] = results.map(to([safeNumberOutput, chained('Exceptional Failure')]));
 
             expect(output).toStrictEqual([
@@ -88,8 +88,8 @@ describe(to, () => {
 });
 
 describe(into, () => {
-    describe('into(reduceValue, reduceError)', () => {
-        it('applies a given reduceValue and reduceError callbacks to the Result.into() method', () => {
+    describe('into(value, error)', () => {
+        it('applies given `value` and `error` callbacks to the `Result.into()` method', () => {
             const output: string[] = results.map(into(safeNumberOutput, strictErrorOutput));
 
             expect(output).toStrictEqual([
@@ -101,7 +101,7 @@ describe(into, () => {
     });
 
     describe('into(fold)', () => {
-        it('applies a given pair of callbacks to the Result.into() method', () => {
+        it('applies a given `fold` callbacks pair to the `Result.into()` method', () => {
             const output: string[] = results.map(into([safeNumberOutput, strictErrorOutput]));
 
             expect(output).toStrictEqual([

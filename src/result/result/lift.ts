@@ -1,36 +1,36 @@
 import { Unary, UnaryVoid } from '../../function/function/unary';
-import { defined, isDefined } from '../../value/value';
+import { defined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 import { Failure, Result } from './result';
 
 /**
- * Creates a function to apply a given {@linkcode flatMap} callback to the {@linkcode Result.onto} method
- * and return the result of the {@linkcode flatMap} (a {@linkcode Failure}).
+ * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method
+ * and return the result of the {@linkcode value} (a {@linkcode Failure}).
  *
  * @since v0.9.0
  */
-export function onto<T, U>(flatMap: (value: T) => Failure<U>): Unary<Result<T>, Failure<U>>;
+export function onto<T, U>(value: Unary<T, Failure<U>>): Unary<Result<T>, Failure<U>>;
 
 /**
- * Creates a function to apply a given {@linkcode flatMap} callback to the {@linkcode Result.onto} method
- * and return the result of the {@linkcode flatMap} call.
+ * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method
+ * and return the result of the {@linkcode value}.
  *
  * @since v0.9.0
  */
-export function onto<T, U>(flatMap: (value: T) => Result<U>): Unary<Result<T>, Result<U>>;
+export function onto<T, U>(value: Unary<T, Result<U>>): Unary<Result<T>, Result<U>>;
 
-export function onto<T, U>(flatMap: (value: T) => Result<U>): Unary<Result<T>, Result<U>> {
-    return (input: Result<T>): Result<U> => input.onto(flatMap);
+export function onto<T, U>(first: Unary<T, Result<U>>): Unary<Result<T>, Result<U>> {
+    return (result: Result<T>): Result<U> => result.onto(first);
 }
 
 /**
- * Creates a function to apply given {@linkcode mapValue} and {@linkcode mapError} callbacks
+ * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
  * to the {@linkcode Result.to} method and return the result.
  *
  * @since v0.9.0
  */
-export function to<T, U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Unary<Result<T>, Result<U>>;
+export function to<T, U>(value: Unary<T, U>, error?: Unary<Error, Error>): Unary<Result<T>, Result<U>>;
 
 /**
  * Creates a function to apply a given {@linkcode maps} callbacks pair to the {@linkcode Result.to} method
@@ -44,22 +44,25 @@ export function to<T, U>(
     first: Unary<T, U> | BiMapResult<T, U>,
     second?: Unary<Error, Error>,
 ): Unary<Result<T>, Result<U>> {
-    const [mapValue, mapError] = Array.isArray(first) ? [first[0], first[1]] : [first, second];
-    if (isDefined(mapError)) {
-        return (result: Result<T>): Result<U> => result.to(mapValue, mapError);
+    if (Array.isArray(first)) {
+        return (result: Result<T>): Result<U> => result.to(first[0], first[1]);
     }
-    return (result: Result<T>): Result<U> => result.to(mapValue);
+    return (result: Result<T>): Result<U> => result.to(first, second);
 }
 
 /**
- * Creates a function to apply a given {@linkcode reduceValue} and {@linkcode reduceError} callbacks
+ * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
  * to the {@linkcode Result.into} method and return the result.
+ *
+ * @since v0.9.0
  */
-export function into<T, U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): Unary<Result<T>, U>;
+export function into<T, U>(value: Unary<T, U>, error: Unary<Error, U>): Unary<Result<T>, U>;
 
 /**
- * Creates a function to apply a given {@linkcode fold} pair callbacks
+ * Creates a function to apply a given {@linkcode fold} callbacks pair
  * to the {@linkcode Result.into} method and return the result.
+ *
+ * @since v0.9.0
  */
 export function into<T, U>(fold: BiFoldResult<T, U>): Unary<Result<T>, U>;
 
@@ -76,12 +79,16 @@ export function into<T, U>(
 /**
  * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
  * to the {@linkcode Result.through} method and return the given {@linkcode Result}.
+ *
+ * @since v0.9.0
  */
 export function through<T>(value: UnaryVoid<T>, error: UnaryVoid<Error>): Unary<Result<T>, Result<T>>;
 
 /**
  * Creates a function to apply a given {@linkcode procedures} callbacks pair to the {@linkcode Result.through} method
  * and return the given {@linkcode Result}.
+ *
+ * @since v0.9.0
  */
 export function through<T>(procedures: BiVoidResult<T>): Unary<Result<T>, Result<T>>;
 

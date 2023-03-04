@@ -405,6 +405,14 @@ It is especially useful when the `Success.value` is an `Error`.
 As in this case,
 the `Result.into(reduce)` call may not be able to distinguish between a `Success.value` `Error`
 and a `Failure.value` `Error`.
++
+* Lifting functions:
+** `into<T, U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): Unary<Result<T>, U>`
+— creates a function to apply a given `reduceValue` and `reduceError` callbacks
+to the `Result.into()` method and return the result.
+** `into<T, U>(fold: BiFoldResult<T, U>): Unary<Result<T>, U>`
+— creates a function to apply a given `fold` pair callbacks
+to the `Result.into()` method and return the result.
 
 
 [source,typescript]

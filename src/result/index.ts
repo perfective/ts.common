@@ -6,6 +6,7 @@ export {
     successWith,
 } from './result/arguments';
 export {
+    into,
     onto,
     to,
 } from './result/lift';

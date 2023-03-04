@@ -1,9 +1,9 @@
 import { error } from '../../error/error/error';
 import { chained, exception } from '../../error/exception/exception';
 
-import { onto, to } from './lift';
+import { into, onto, to } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
-import { resultString, safeNumberOutput, successFailure } from './result.mock';
+import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
 const successNumber: Success<number> = success(0);
 const successError: Success<Error> = success(error('Success'));
@@ -81,6 +81,32 @@ describe(to, () => {
                 success('0'),
                 success('Error: Success'),
                 failure(exception('Exceptional Failure')),
+            ]);
+        });
+    });
+});
+
+describe(into, () => {
+    describe('into(reduceValue, reduceError)', () => {
+        it('applies a given reduceValue and reduceError callbacks to the Result.into() method', () => {
+            const output: string[] = results.map(into(safeNumberOutput, strictErrorOutput));
+
+            expect(output).toStrictEqual([
+                '0',
+                'Error: Success',
+                'Failure',
+            ]);
+        });
+    });
+
+    describe('into(fold)', () => {
+        it('applies a given pair of callbacks to the Result.into() method', () => {
+            const output: string[] = results.map(into([safeNumberOutput, strictErrorOutput]));
+
+            expect(output).toStrictEqual([
+                '0',
+                'Error: Success',
+                'Failure',
             ]);
         });
     });

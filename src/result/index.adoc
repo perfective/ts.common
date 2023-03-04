@@ -476,6 +476,14 @@ we use `Result.into()` to switch into the `apiResponse` `Promise`.
 * `Result.through(procedures: BiVoidResult<T>): this`:
 ** For a `Success`, passes the `value` _through_ the first procedure in the `procedures` pair and returns itself.
 ** For a `Failure`, passes the `value` _through_ the second procedure in the `procedures` pair and returns itself.
++
+* Lifting functions:
+** `through<T>(value: UnaryVoid<T>, error: UnaryVoid<Error>): Unary<Result<T>, Result<T>>`
+— creates a function to apply given `value` and `error` callbacks to the `Result.through()` method
+and return the given `Result`.
+** `through<T>(procedures: BiVoidResult<T>): Unary<Result<T>, Result<T>>`
+— creates a function to apply a given `procedures` callbacks pair to the `Result.through()` method
+and return the given `Result`.
 
 [source,typescript]
 ----

@@ -8,6 +8,7 @@ export {
 export {
     into,
     onto,
+    through,
     to,
 } from './result/lift';
 export {

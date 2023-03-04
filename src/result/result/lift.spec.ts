@@ -1,7 +1,8 @@
+import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, exception } from '../../error/exception/exception';
 
-import { into, onto, to } from './lift';
+import { into, onto, through, to } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
 import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
@@ -108,6 +109,28 @@ describe(into, () => {
                 'Error: Success',
                 'Failure',
             ]);
+        });
+    });
+});
+
+describe(through, () => {
+    describe('through(value, error)', () => {
+        it('applies given `value` and `error` callbacks to the `Result.through()` method', () => {
+            const values: (number | Error)[] = [];
+            const output: Result<number | Error>[] = results.map(through(pushInto(values), pushInto(values)));
+
+            expect(output).toStrictEqual(results);
+            expect(values).toStrictEqual([0, error('Success'), error('Failure')]);
+        });
+    });
+
+    describe('through(procedures)', () => {
+        it('applies a given `procedures` callbacks pair to the `Result.through()` method', () => {
+            const values: (number | Error)[] = [];
+            const output: Result<number | Error>[] = results.map(through([pushInto(values), pushInto(values)]));
+
+            expect(output).toStrictEqual(results);
+            expect(values).toStrictEqual([0, error('Success'), error('Failure')]);
         });
     });
 });

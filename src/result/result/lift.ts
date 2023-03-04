@@ -1,7 +1,7 @@
-import { Unary } from '../../function/function/unary';
+import { Unary, UnaryVoid } from '../../function/function/unary';
 import { defined, isDefined } from '../../value/value';
 
-import { BiFoldResult, BiMapResult } from './arguments';
+import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 import { Failure, Result } from './result';
 
 /**
@@ -71,4 +71,26 @@ export function into<T, U>(
         return (result: Result<T>): U => result.into(first[0], first[1]);
     }
     return (result: Result<T>): U => result.into(first, defined(second));
+}
+
+/**
+ * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
+ * to the {@linkcode Result.through} method and return the given {@linkcode Result}.
+ */
+export function through<T>(value: UnaryVoid<T>, error: UnaryVoid<Error>): Unary<Result<T>, Result<T>>;
+
+/**
+ * Creates a function to apply a given {@linkcode procedures} callbacks pair to the {@linkcode Result.through} method
+ * and return the given {@linkcode Result}.
+ */
+export function through<T>(procedures: BiVoidResult<T>): Unary<Result<T>, Result<T>>;
+
+export function through<T>(
+    first: UnaryVoid<T> | BiVoidResult<T>,
+    second?: UnaryVoid<Error>,
+): Unary<Result<T>, Result<T>> {
+    if (Array.isArray(first)) {
+        return (result: Result<T>): Result<T> => result.through(first[0], first[1]);
+    }
+    return (result: Result<T>): Result<T> => result.through(first, second);
 }

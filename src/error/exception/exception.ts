@@ -17,6 +17,8 @@ export class Exception
         public readonly previous: Error | null,
     ) {
         super(exceptionMessageOutput(message));
+        // See https://www.typescriptlang.org/docs/handbook/2/classes.html#inheriting-built-in-types
+        Object.setPrototypeOf(this, Exception.prototype);
         this.name = 'Exception';
         this.template = message.template;
         this.tokens = message.tokens;

@@ -58,10 +58,10 @@ while TS compiler keeps checks `typeof value === 'undefined'` and `value === und
 * `TypeGuard<T, V extends T> = (value: T) => value is V`
 — a function type to check if the value is of a certain type.
 +
-* `Instance<T> = new(...args: any[]) => T`
+* `Instance<T, U extends any[] = any[]> = abstract new(...args: U) => T`
 — definition for a type reference:
-** `isInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is T`
-** `isNotInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is V`
+** `isInstanceOf<T, U extends any[] = any[], V = unknown>(type: Instance<T, U>): (value: T | V) => value is T`
+** `isNotInstanceOf<T, U extends any[] = any[], V = unknown>(type: Instance<T, U>): (value: T | V) => value is V`
 
 [WARNING]
 ====
@@ -72,7 +72,7 @@ but requires explicit type parameter for the TypeScript classes.
 
 [source,typescript]
 ----
-import { isInstanceOf } from '@perfective/common/function';
+import { isInstanceOf } from '@perfective/common';
 
 
 class A { public readonly value: string = 'a'; }

@@ -1,10 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the only way to describe variadic arguments
-export type Instance<T> = new(...args: any[]) => T;
+/* eslint-disable @typescript-eslint/no-explicit-any -- using `any` to defined arguments of a constructor */
+export type Instance<T, U extends any[] = any[]> = abstract new(...args: U) => T;
 
-export function isInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is T {
+export function isInstanceOf<T, U extends any[] = any[], V = unknown>(
+    type: Instance<T, U>,
+): (value: T | V) => value is T {
     return (value: T | V): value is T => value instanceof type;
 }
 
-export function isNotInstanceOf<T, V = unknown>(type: Instance<T>): (value: T | V) => value is V {
+export function isNotInstanceOf<T, U extends any[] = any[], V = unknown>(
+    type: Instance<T, U>,
+): (value: T | V) => value is V {
     return (value: T | V): value is V => !(value instanceof type);
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

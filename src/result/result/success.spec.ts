@@ -2,7 +2,16 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, Exception, exception } from '../../error/exception/exception';
 
-import { Failure, failure, recovery, Result, Success, success, successFrom } from './result';
+import {
+    Failure,
+    failure,
+    isSuccess,
+    recovery,
+    Result,
+    Success,
+    success,
+    successFrom,
+} from './result';
 import {
     failureDecimal,
     resultDecimal,
@@ -64,6 +73,22 @@ describe(successFrom, () => {
 
         expect(outputNumber(0)).toStrictEqual(success('0'));
         expect(outputError(error('Success'))).toStrictEqual(success('Success'));
+    });
+});
+
+describe(isSuccess, () => {
+    describe('when a given `value` is a `Success`', () => {
+        it('returns true', () => {
+            expect(isSuccess(success(0))).toBe(true);
+            expect(isSuccess(success(error('Failure')))).toBe(true);
+        });
+    });
+
+    describe('when a given `value` is not a `Success`', () => {
+        it('returns false', () => {
+            expect(isSuccess(0)).toBe(false);
+            expect(isSuccess(error('Failure'))).toBe(false);
+        });
     });
 });
 

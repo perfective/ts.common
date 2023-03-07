@@ -5,7 +5,7 @@ import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
 
 import { failureWith, successWith } from './arguments';
-import { Failure, failure, Result, result, resultFrom, resultOf, Success, success } from './result';
+import { Failure, failure, isResult, Result, result, resultFrom, resultOf, Success, success } from './result';
 import {
     eitherResult,
     resultDecimal,
@@ -103,6 +103,22 @@ describe(resultFrom, () => {
             const output: Unary<string, Failure<string>> = resultFrom(error);
 
             expect(output('Failure')).toStrictEqual(failure(error('Failure')));
+        });
+    });
+});
+
+describe(isResult, () => {
+    describe('when a given `value` is a `Result`', () => {
+        it('returns true', () => {
+            expect(isResult(result(0))).toBe(true);
+            expect(isResult(result(error('Failure')))).toBe(true);
+        });
+    });
+
+    describe('when a given `value` is not a `Result`', () => {
+        it('returns false', () => {
+            expect(isResult(0)).toBe(false);
+            expect(isResult(error('Failure'))).toBe(false);
         });
     });
 });

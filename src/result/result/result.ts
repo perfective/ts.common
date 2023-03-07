@@ -503,3 +503,30 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
 export function recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>> {
     return [success, (): Success<T> => success(valueOf(fallback))];
 }
+
+/**
+ * Returns true if a given value is a {@linkcode Result}.
+ *
+ * @since v0.9.0
+ */
+export function isResult<T, U>(value: Result<T> | U): value is Result<T> {
+    return value instanceof Result;
+}
+
+/**
+ * Returns true if a given value is a {@linkcode Success}.
+ *
+ * @since v0.9.0
+ */
+export function isSuccess<T, U>(value: Success<T> | U): value is Success<T> {
+    return value instanceof Success;
+}
+
+/**
+ * Returns true if a given value is a {@linkcode Failure}.
+ *
+ * @since v0.9.0
+ */
+export function isFailure<T, U>(value: Failure<T> | U): value is Failure<T> {
+    return value instanceof Failure;
+}

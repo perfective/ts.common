@@ -178,6 +178,16 @@ with a given `map` callback as the second element
 and an identity function as the first element.
 
 
+=== Type guards
+
+* `isResult<T, U>(value: Result<T> | U): value is Result<T>`
+— returns `true` if a given `value` is a `Result`.
+* `isSuccess<T, U>(value: Success<T> | U): value is Success<T>`
+— returns `true` if a given `value` is a `Success`.
+* `isFailure<T, U>(value: Failure<T> | U): value is Failure<T>`
+— returns `true` if a given `value` is a `Failure`.
+
+
 === `Result.onto()`
 
 * `Result.onto<U>(flatMap: (value: T) => Result<U>): Result<U>`:

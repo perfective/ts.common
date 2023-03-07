@@ -5,7 +5,18 @@ import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
 
 import { failureWith, successWith } from './arguments';
-import { Failure, failure, isResult, Result, result, resultFrom, resultOf, Success, success } from './result';
+import {
+    Failure,
+    failure,
+    isNotResult,
+    isResult,
+    Result,
+    result,
+    resultFrom,
+    resultOf,
+    Success,
+    success,
+} from './result';
 import {
     eitherResult,
     resultDecimal,
@@ -119,6 +130,22 @@ describe(isResult, () => {
         it('returns false', () => {
             expect(isResult(0)).toBe(false);
             expect(isResult(error('Failure'))).toBe(false);
+        });
+    });
+});
+
+describe(isNotResult, () => {
+    describe('when a given `value` is not a `Result`', () => {
+        it('returns true', () => {
+            expect(isNotResult(0)).toBe(true);
+            expect(isNotResult(error('Failure'))).toBe(true);
+        });
+    });
+
+    describe('when a given `value` is a `Result`', () => {
+        it('returns false', () => {
+            expect(isNotResult(result(0))).toBe(false);
+            expect(isNotResult(result(error('Failure')))).toBe(false);
         });
     });
 });

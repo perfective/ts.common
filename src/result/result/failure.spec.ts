@@ -2,7 +2,7 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { causedBy, chained, Exception, exception } from '../../error/exception/exception';
 
-import { Failure, failure, failureFrom, isFailure, Result } from './result';
+import { Failure, failure, failureFrom, isFailure, isNotFailure, Result, success } from './result';
 import { resultDecimal, strictErrorOutput, strictNumberOutput } from './result.mock';
 
 describe(failure, () => {
@@ -48,6 +48,22 @@ describe(isFailure, () => {
     describe('when a given `value` is not a `Failure`', () => {
         it('returns false', () => {
             expect(isFailure(error('Failure'))).toBe(false);
+            expect(isFailure(success(0))).toBe(false);
+        });
+    });
+});
+
+describe(isNotFailure, () => {
+    describe('when a given `value` is not a `Failure`', () => {
+        it('returns true', () => {
+            expect(isNotFailure(error('Failure'))).toBe(true);
+            expect(isNotFailure(success(0))).toBe(true);
+        });
+    });
+
+    describe('when a given `value` is a `Failure`', () => {
+        it('returns true', () => {
+            expect(isNotFailure(failure(error('Failure')))).toBe(false);
         });
     });
 });

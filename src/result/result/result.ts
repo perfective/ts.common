@@ -514,6 +514,15 @@ export function isResult<T, U>(value: Result<T> | U): value is Result<T> {
 }
 
 /**
+ * Returns true if a given value is not a {@linkcode Result}.
+ *
+ * @since v0.9.0
+ */
+export function isNotResult<T, U>(value: Result<T> | U): value is U {
+    return !(value instanceof Result);
+}
+
+/**
  * Returns true if a given value is a {@linkcode Success}.
  *
  * @since v0.9.0
@@ -523,10 +532,28 @@ export function isSuccess<T, U>(value: Success<T> | U): value is Success<T> {
 }
 
 /**
+ * Returns true if a given value is not a {@linkcode Success}.
+ *
+ * @since v0.9.0
+ */
+export function isNotSuccess<T, U>(value: Success<T> | U): value is U {
+    return !(value instanceof Success);
+}
+
+/**
  * Returns true if a given value is a {@linkcode Failure}.
  *
  * @since v0.9.0
  */
 export function isFailure<T, U>(value: Failure<T> | U): value is Failure<T> {
     return value instanceof Failure;
+}
+
+/**
+ * Returns true if a given value is not a {@linkcode Failure}.
+ *
+ * @since v0.9.0
+ */
+export function isNotFailure<T, U>(value: Failure<T> | U): value is U {
+    return !(value instanceof Failure);
 }

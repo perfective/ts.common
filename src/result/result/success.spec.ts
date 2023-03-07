@@ -4,7 +4,7 @@ import { chained, Exception, exception } from '../../error/exception/exception';
 
 import {
     Failure,
-    failure,
+    failure, isNotSuccess,
     isSuccess,
     recovery,
     Result,
@@ -88,6 +88,24 @@ describe(isSuccess, () => {
         it('returns false', () => {
             expect(isSuccess(0)).toBe(false);
             expect(isSuccess(error('Failure'))).toBe(false);
+            expect(isSuccess(failure(error('Failure')))).toBe(false);
+        });
+    });
+});
+
+describe(isNotSuccess, () => {
+    describe('when a given `value` is not a `Success`', () => {
+        it('returns true', () => {
+            expect(isNotSuccess(0)).toBe(true);
+            expect(isNotSuccess(error('Failure'))).toBe(true);
+            expect(isNotSuccess(failure(error('Failure')))).toBe(true);
+        });
+    });
+
+    describe('when a given `value` is a `Success`', () => {
+        it('returns false', () => {
+            expect(isNotSuccess(success(0))).toBe(false);
+            expect(isNotSuccess(success(error('Failure')))).toBe(false);
         });
     });
 });

@@ -5,7 +5,7 @@ import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../o
 import { nullableNumber } from '../nullable/nullable.mock';
 import { optionalNumber } from '../optional/optional.mock';
 
-import { Just, just, Maybe, maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
+import { isMaybe, isNotMaybe, Just, just, Maybe, maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
 import {
     absentNumber,
     justDecimalOutput,
@@ -135,6 +135,52 @@ describe(maybeFrom, () => {
             expect(output(0)).toStrictEqual(just(0));
             expect(output(null)).toBe(naught());
             expect(output(undefined)).toBe(nothing());
+        });
+    });
+});
+
+describe(isMaybe, () => {
+    describe('when given a `Just`', () => {
+        it('returns true', () => {
+            expect(isMaybe(just(0))).toBe(true);
+        });
+    });
+
+    describe('when given a `Nothing`', () => {
+        it('returns true', () => {
+            expect(isMaybe(nothing())).toBe(true);
+            expect(isMaybe(naught())).toBe(true);
+        });
+    });
+
+    describe('when given not a `Maybe`', () => {
+        it('returns false', () => {
+            expect(isMaybe(0)).toBe(false);
+            expect(isMaybe(null)).toBe(false);
+            expect(isMaybe(undefined)).toBe(false);
+        });
+    });
+});
+
+describe(isNotMaybe, () => {
+    describe('when given a `Just`', () => {
+        it('returns false', () => {
+            expect(isNotMaybe(just(0))).toBe(false);
+        });
+    });
+
+    describe('when given a `Nothing`', () => {
+        it('returns false', () => {
+            expect(isNotMaybe(nothing())).toBe(false);
+            expect(isNotMaybe(naught())).toBe(false);
+        });
+    });
+
+    describe('when given not a `Maybe`', () => {
+        it('returns true', () => {
+            expect(isNotMaybe(0)).toBe(true);
+            expect(isNotMaybe(null)).toBe(true);
+            expect(isNotMaybe(undefined)).toBe(true);
         });
     });
 });

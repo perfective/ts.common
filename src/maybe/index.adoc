@@ -274,6 +274,14 @@ and returns the result wrapped into a `Just`.
 — returns a memoized instance of `Nothing` with a `null` value.
 
 
+=== Type Guards
+
+* `isMaybe<T, U>(value: Maybe<T> | U): value is Maybe<T>`
+— returns `true` if a given value is a `Maybe`.
+** `isNotMaybe<T, U>(value: Maybe<T> | U): value is U`
+— returns `true` if a given value is not a `Maybe`.
+
+
 === `Maybe.onto()`
 
 * `Maybe.onto<U>(flatMap: (value: T) => Maybe<Present<U>>): Maybe<Present<U>>`

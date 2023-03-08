@@ -637,3 +637,21 @@ export function nothing<T>(): Nothing<T> {
 export function naught<T>(): Nothing<T> {
     return memo.naught as Nothing<T>;
 }
+
+/**
+ * Returns true if a given value is a {@linkcode Maybe}.
+ *
+ * @since 0.9.0
+ */
+export function isMaybe<T, U>(value: Maybe<T> | U): value is Maybe<T> {
+    return value instanceof Maybe;
+}
+
+/**
+ * Returns true if a given value is not a {@linkcode Maybe}.
+ *
+ * @since 0.9.0
+ */
+export function isNotMaybe<T, U>(value: Maybe<T> | U): value is U {
+    return !(value instanceof Maybe);
+}

@@ -13,7 +13,7 @@ import {
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 
-import { Just, just, justFrom, Maybe, naught, Nothing, nothing } from './maybe';
+import { isJust, isNotJust, Just, just, justFrom, Maybe, naught, Nothing, nothing } from './maybe';
 import {
     Boxed,
     justDecimalOutput,
@@ -57,6 +57,52 @@ describe(justFrom, () => {
         const output: Just<boolean> = justIsPresent(null);
 
         expect(output).toStrictEqual(just(false));
+    });
+});
+
+describe(isJust, () => {
+    describe('when given a `Just`', () => {
+        it('returns true', () => {
+            expect(isJust(just(0))).toBe(true);
+        });
+    });
+
+    describe('when given a `Nothing`', () => {
+        it('returns false', () => {
+            expect(isJust(nothing())).toBe(false);
+            expect(isJust(naught())).toBe(false);
+        });
+    });
+
+    describe('when given not a `Maybe`', () => {
+        it('returns false', () => {
+            expect(isJust(0)).toBe(false);
+            expect(isJust(null)).toBe(false);
+            expect(isJust(undefined)).toBe(false);
+        });
+    });
+});
+
+describe(isNotJust, () => {
+    describe('when given a `Just`', () => {
+        it('returns false', () => {
+            expect(isNotJust(just(0))).toBe(false);
+        });
+    });
+
+    describe('when given a `Nothing`', () => {
+        it('returns true', () => {
+            expect(isNotJust(nothing())).toBe(true);
+            expect(isNotJust(naught())).toBe(true);
+        });
+    });
+
+    describe('when given not a `Maybe`', () => {
+        it('returns true', () => {
+            expect(isNotJust(0)).toBe(true);
+            expect(isNotJust(null)).toBe(true);
+            expect(isNotJust(undefined)).toBe(true);
+        });
     });
 });
 

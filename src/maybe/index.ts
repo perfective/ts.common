@@ -16,7 +16,9 @@ export {
     which,
 } from './maybe/lift';
 export {
+    isJust,
     isMaybe,
+    isNotJust,
     isNotMaybe,
     Just,
     just,

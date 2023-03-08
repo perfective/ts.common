@@ -655,3 +655,21 @@ export function isMaybe<T, U>(value: Maybe<T> | U): value is Maybe<T> {
 export function isNotMaybe<T, U>(value: Maybe<T> | U): value is U {
     return !(value instanceof Maybe);
 }
+
+/**
+ * Returns true if a given value is a {@linkcode Just}.
+ *
+ * @since 0.9.0
+ */
+export function isJust<T, U>(value: Just<T> | U): value is Just<T> {
+    return value instanceof Just;
+}
+
+/**
+ * Returns true if a given value is not a {@linkcode Just}.
+ *
+ * @since 0.9.0
+ */
+export function isNotJust<T, U>(value: Just<T> | U): value is U {
+    return !(value instanceof Just);
+}

@@ -280,6 +280,11 @@ and returns the result wrapped into a `Just`.
 — returns `true` if a given value is a `Maybe`.
 ** `isNotMaybe<T, U>(value: Maybe<T> | U): value is U`
 — returns `true` if a given value is not a `Maybe`.
++
+* `isJust<T, U>(value: Just<T> | U): value is Just<T>`
+— returns `true` if a given value is a `Just`.
+** `isNotJust<T, U>(value: Just<T> | U): value is U`
+— returns `true` if a given value is not a `Just`.
 
 
 === `Maybe.onto()`

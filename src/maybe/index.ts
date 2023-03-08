@@ -18,8 +18,10 @@ export {
 export {
     isJust,
     isMaybe,
+    isNothing,
     isNotJust,
     isNotMaybe,
+    isNotNothing,
     Just,
     just,
     justFrom,

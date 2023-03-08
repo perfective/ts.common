@@ -2,7 +2,7 @@ import { panic } from '../../error/panic/panic';
 import { constant, Void } from '../../function/function/nullary';
 import { hasPresentProperty, ObjectWithPresent } from '../../object/property/property';
 
-import { Just, just, Maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
+import { isNothing, isNotNothing, Just, just, Maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
 import {
     Boxed,
     justDecimalOutput,
@@ -42,6 +42,52 @@ describe(naught, () => {
         const output: Just<number> = naught();
 
         expect(output).toBe(naught());
+    });
+});
+
+describe(isNothing, () => {
+    describe('when given a `Just`', () => {
+        it('returns false', () => {
+            expect(isNothing(just(0))).toBe(false);
+        });
+    });
+
+    describe('when given a `Nothing`', () => {
+        it('returns true', () => {
+            expect(isNothing(nothing())).toBe(true);
+            expect(isNothing(naught())).toBe(true);
+        });
+    });
+
+    describe('when given not a `Maybe`', () => {
+        it('returns false', () => {
+            expect(isNothing(0)).toBe(false);
+            expect(isNothing(null)).toBe(false);
+            expect(isNothing(undefined)).toBe(false);
+        });
+    });
+});
+
+describe(isNotNothing, () => {
+    describe('when given a `Just`', () => {
+        it('returns true', () => {
+            expect(isNotNothing(just(0))).toBe(true);
+        });
+    });
+
+    describe('when given a `Nothing`', () => {
+        it('returns false', () => {
+            expect(isNotNothing(nothing())).toBe(false);
+            expect(isNotNothing(naught())).toBe(false);
+        });
+    });
+
+    describe('when given not a `Maybe`', () => {
+        it('returns true', () => {
+            expect(isNotNothing(0)).toBe(true);
+            expect(isNotNothing(null)).toBe(true);
+            expect(isNotNothing(undefined)).toBe(true);
+        });
     });
 });
 

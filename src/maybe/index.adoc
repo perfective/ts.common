@@ -285,6 +285,11 @@ and returns the result wrapped into a `Just`.
 — returns `true` if a given value is a `Just`.
 ** `isNotJust<T, U>(value: Just<T> | U): value is U`
 — returns `true` if a given value is not a `Just`.
++
+* `isNothing<T, U>(value: Nothing<T> | U): value is Nothing<T>`
+— returns `true` if a given value is a `Nothing`
++ `isNotNothing<T, U>(value: Nothing<T> | U): value is U`
+— returns `true` if a given value is not a `Nothing`.
 
 
 === `Maybe.onto()`

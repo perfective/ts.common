@@ -673,3 +673,21 @@ export function isJust<T, U>(value: Just<T> | U): value is Just<T> {
 export function isNotJust<T, U>(value: Just<T> | U): value is U {
     return !(value instanceof Just);
 }
+
+/**
+ * Returns true if a given value is a {@linkcode Nothing}.
+ *
+ * @since 0.9.0
+ */
+export function isNothing<T, U>(value: Nothing<T> | U): value is Nothing<T> {
+    return value instanceof Nothing;
+}
+
+/**
+ * Returns true if a given value is not a {@linkcode Nothing}.
+ *
+ * @since 0.9.0
+ */
+export function isNotNothing<T, U>(value: Nothing<T> | U): value is U {
+    return !(value instanceof Nothing);
+}

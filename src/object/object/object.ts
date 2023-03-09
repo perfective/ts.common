@@ -17,6 +17,9 @@ export function copy<T>(value: T): T {
     if (value instanceof Map) {
         return new Map(value) as unknown as T;
     }
+    if (value instanceof Set) {
+        return new Set(value) as unknown as T;
+    }
     if (isRecord(value)) {
         return { ...value };
     }

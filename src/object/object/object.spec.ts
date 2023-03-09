@@ -83,6 +83,18 @@ describe('copy', () => {
         expect(output).not.toStrictEqual(input);
     });
 
+    it('returns a copy of a Set value', () => {
+        const input: Set<number> = new Set([0, 1, 3.14]);
+        const output: Set<number> = copy(input);
+
+        expect(output).toStrictEqual(input);
+        expect(output).not.toBe(input);
+
+        input.delete(0);
+
+        expect(output).not.toStrictEqual(input);
+    });
+
     it('returns undefined when the value is undefined', () => {
         // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing undefined value
         expect(copy(undefined)).toBeUndefined();

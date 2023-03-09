@@ -1,6 +1,36 @@
 = Changelog
 
-== v0.9.0-alpha (next)
+== v0.9.0-beta (next)
+
+=== Deprecations
+
+* `@perfective/common/array`:
+** Merged the `flatten()` function into the `concatenated()` function.
+** Merged the `arrayFromIterable()` and `arrayFromArrayLike()` functions into the new `elements()` function.
++
+* `@perfective/common/maybe`:
+** Renamed the `Maybe.run()` method into the `Maybe.through()` method.
+
+
+=== Improvements
+
+* `@perfective/common`:
+** Added support of abstract classes to the `isInstanceOf()`/`isNotInstanceOf()` type guards.
++
+* `@perfective/common/error`:
+** Fixed the `Exception` class prototype for
+the https://www.typescriptlang.org/docs/handbook/2/classes.html#inheriting-built-in-types[ES5 compilation].
++
+* `@perfective/common/maybe`:
+** Added the `isMaybe()`/`isNotMaybe()`, `isJust()`/`isNotJust()`, and `isNothing()`/`isNotNothing()` type guards.
++
+* `@perfective/common/result`:
+** Added the `onto()`, `to()`, `into()`, and `through()` lifting functions.
+** Added the `isResult()`/`isNotResult()`, `isSuccess()`/`isNotSuccess()`,
+and `isFailure()`/`isNotFailure()` type guards.
+
+
+== v0.9.0-alpha
 
 === New `@perfective/common/result` package
 

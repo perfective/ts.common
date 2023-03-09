@@ -13,11 +13,7 @@ The `@perfective/common/object` package provides functions to work with the stan
 ** `RecursivePartial<T>`
 ** `Entry<T = unknown>`
 +
-* Unit functions:
-** `copy<T>(value: T): T`
-— creates a shallow copy of the given value. (Experimental).
-** `clone<T>(value: T): T`
-— creates a clone (deep copy) of the given value. (Experimental).
+* Constructors:
 ** `pick<T, K extends keyof T>(record: T, ...property: readonly K[]): Pick<T, K>`
 — creates a copy of the `record` only with the given `property`.
 ** `omit<T, K extends keyof T>(record: T, ...property: readonly K[]): Omit<T, K>`

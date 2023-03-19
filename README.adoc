@@ -9,19 +9,108 @@ npm install @perfective/common
 ----
 
 
-== Features
+== Key Features
 
-While JavaScript supports the object-oriented paradigm,
-the functional programming style allows writing more readable code in JS.
-Hence, all provided data types (interfaces) are immutable,
-and classes are used only to build fluent method chains
-(considering methods as infix operators).
+The `@perfective/common` package facilitates writing highly readable functional code.
+It focuses on providing functions to handle ECMAScript types
+and to easily compose functions together.
 
-One of the base patterns used is to provide a constructor function named after each class
-to discourage the use of the `new` operator
-(for readability and consistency with the method chains).
-Classes should only be used in types declaration.
-All non-abstract classes should be considered final even TypeScript does not provide a `final` keyword.
+
+=== Maybe monad
+
+The `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]` package
+provides a Maybe monad implementation.
+
+It allows you to write and compose functions that accept only present (defined and non-null) values
+It helps to avoid additional complexity and noise of handling `null` and `undefined` values.
+
+For example, consider you have the `User` and `Name` types below,
+and you want to output a user's full name.
+
+[source,typescript]
+----
+interface User {
+    name?: Name;
+}
+
+interface Name {
+    first: string;
+    last: string;
+}
+----
+
+If you write functions that have to handle `null` and `undefined` values,
+then you would have to write something like:
+
+[source,typescript]
+----
+import { isPresent } from '@perfective/common';
+import { isNotEmpty } from '@perfective/common/string';
+
+function userNameOutput(user: User | null | undefined): string {
+    if (isPresent(user)) {
+        const name = fullName(user.name);
+        if (isPresent(name)) {
+            return name;
+        }
+    }
+    throw new Error('User name is unknown');
+}
+
+function fullName(name: Name | null | undefined): string | null {
+    if (isPresent(name)) {
+        const name = `${name.first} ${name.last}`.trim();
+        if (isNotEmpty(name)) {
+            return name;
+        }
+    }
+    return null;
+}
+----
+
+When using the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[Maybe]` monad you can write
+simpler and more readable functions:
+
+[source,typescript]
+----
+import { panic } from '@perfective/common/error';
+import { just, maybe } from '@perfective/common/maybe';
+import { isNotEmpty, trim } from '@perfective/common/string';
+
+function userNameOutput(user: User | null | undefined): string {
+    return maybe(user)
+        .pick('name') // <.>
+        .onto(fullName) // <.>
+        .or(panic('User name is unknown')); // <.>
+}
+
+function fullName(name: Name): Maybe<string> {
+    return just(`${name.first} ${name.last}`)
+        .to(trim) // <.>
+        .that(isNotEmpty); // <.>
+}
+----
+<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybepick[Maybe.pick()]`
+provides a strictly-typed "optional chaining" of the `Maybe.value` properties.
+<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeonto[Maybe.onto()]`
+(flat) maps a `Maybe.value` to another `Maybe`.
+<.> `https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeor[Maybe.or()]`
+extracts a `value` from the `Maybe` with a given fallback.
+(or allows to throw an error).
+<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethat[Maybe.that()]`
+filters a value inside `Maybe`.
+<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeto[Maybe.to()]` maps a value inside `Maybe` using a given callback.
+
+In addition to these methods,
+the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[Maybe]` type also provides:
+`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeinto[Maybe.into()]`,
+`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybewhich[Maybe.which()]`,
+`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybewhen[Maybe.when()]`,
+`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeotherwise[Maybe.otherwise()]`,
+and `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethrough[Maybe.through()]` methods.
+
+
+== Packages
 
 Packages are organized and named around their primary type:
 
@@ -162,6 +251,18 @@ and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glob
 
 == Common patterns
 
+* While JavaScript supports the object-oriented paradigm,
+the functional programming style allows writing more readable code in JS.
+Hence, all provided data types (interfaces) are immutable,
+and classes are used only to build fluent method chains
+(considering methods as infix operators).
++
+* One of the base patterns used is to provide a constructor function named after each class
+to discourage the use of the `new` operator
+(for readability and consistency with the method chains).
+Classes should only be used in types declaration.
+All non-abstract classes should be considered final even TypeScript does not provide a `final` keyword.
++
 * For each declared `interface` or `class`,
 there is at least one unit function to instantiate it.
 This function has the same name as the interface/class but in camelCase.

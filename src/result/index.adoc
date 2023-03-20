@@ -38,7 +38,7 @@ function apiRequest(method: string): Unary<string, Request> {
     });
 }
 
-async function apiResponse(request: Request): Promise<string> {
+async function apiResponse(request: Request): string {
     if (request.method === 'HEAD') {
         return '501 Not Implemented';
     }

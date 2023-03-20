@@ -110,6 +110,73 @@ the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc
 and `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethrough[Maybe.through()]` methods.
 
 
+== Result monad
+
+The `@perfective/common/result` package provides a Result monad
+(a concrete case of an Either monad).
+It allows you to treat errors as part of function result
+and chain processing of such results.
+
+For example,
+consider you are writing a function that loads a backend entity based on the user input.
+
+.Example of the provided functions and types.
+[source,typescript]
+----
+interface Request {
+    entity: string;
+    id: number;
+}
+
+interface User {
+    id: number;
+    username: string;
+}
+
+/**
+ * @throws {Error} If a given input is empty or is not a number.
+ */
+declare function numberInput(input: string): number;
+
+declare function request(entity: string): (id: number) => Request;
+
+declare function user(request: Request): User;
+----
+
+Writing an imperative code you would have:
+
+[source,typescript]
+----
+function userOutput(input: string): User {
+    let id: number;
+    try {
+        id = numberInput(input);
+    } catch (error: Error) {
+        id = 0;
+    }
+    const userRequest = request('user');
+    return user(userRequest(id));
+}
+----
+
+Using the `Result` your code would be:
+
+[source,typescript]
+----
+import { recovery, Result, resultOf } from '@perfective/common/result';
+
+function userOutput(id: string): Result<User> {
+    return resultOf(() => numberInput(id))
+        .into(recovery(0))
+        .to(request('user'))
+        .to(user);
+}
+----
+
+The `Result` link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc#using-result-with-promise[integrates]
+with the `Promise` using the `promisedResult()` and `settledResult()` functions.
+
+
 == Packages
 
 Packages are organized and named around their primary type:

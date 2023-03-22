@@ -1,0 +1,55 @@
+= Development Documentation
+
+== Common patterns
+
+* While JavaScript supports the object-oriented paradigm,
+the functional programming style allows writing more readable code in JS.
+Hence, all provided data types (interfaces) are immutable,
+and classes are used only to build fluent method chains
+(considering methods as infix operators).
++
+* One of the base patterns used is to provide a constructor function named after each class
+to discourage the use of the `new` operator
+(for readability and consistency with the method chains).
+Classes should only be used in types declaration.
+All non-abstract classes should be considered final even TypeScript does not provide a `final` keyword.
++
+* For each declared `interface` or `class`,
+there is at least one unit function to instantiate it.
+This function has the same name as the interface/class but in camelCase.
++
+* For each declared class,
+there are two https://www.typescriptlang.org/docs/handbook/2/narrowing.html[type guards] to check
+if a given value is an instance of that class or not.
+These functions have prefixes `is` and `isNot`.
++
+* Declared interfaces and types may have other predicates
+with the `is`/`isNot` prefixes.
+
+
+== TypeScript configuration
+
+The project contains a group of TSConfig files to maintain a productive development environment
+with the WebStorm IDE:
+
+* The base file with the TypeScript compiler configuration is `tsconfig.strict.json`.
+It contains all the default (strict) compiler settings.
+* The root `tsconfig.json` is picked up by WebStorm and is used by Jest.
+* `tsconfig.build.json` contains the defaults for the build,
+and is further overridden in `gulpfile.js` for CommonJS, ESM, and declaration files compilation.
+
+
+== Documentation
+
+This project uses the https://asciidoctor.org[AsciiDoc] format for its documentation.
+Each sub-package has an `index.adoc` file that is included into the package `src/index.adoc`.
+It is automatically compiled into the `dist/docs.html` file
+and is published with all other package files.
+
+[NOTE]
+====
+Unfortunately, https://www.npmjs.com[npmjs] only supports Markdown.
+As a result, in addition to this `README.adoc` for the repository,
+there is a `README.md` file with only basic information for the
+https://www.npmjs.com/package/@perfective/common[npm page].
+====

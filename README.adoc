@@ -13,7 +13,7 @@ npm install @perfective/common
 
 The `@perfective/common` package facilitates writing highly readable functional code.
 It focuses on providing functions to handle ECMAScript types
-and to easily compose functions together.
+and to compose functions together easily.
 
 
 === Maybe monad
@@ -21,11 +21,10 @@ and to easily compose functions together.
 The `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]` package
 provides a Maybe monad implementation.
 
-It allows you to write and compose functions that accept only present (defined and non-null) values
-It helps to avoid additional complexity and noise of handling `null` and `undefined` values.
+It allows you to write and compose functions that accept only present (defined and non-null) values.
+It helps avoid additional complexity and noise when handling `null` and `undefined` values.
 
-For example, consider you have the `User` and `Name` types below,
-and you want to output a user's full name.
+For example, consider you have the `User` and `Name` types below and want to output a user’s full name.
 
 [source,typescript]
 ----
@@ -40,13 +39,10 @@ interface Name {
 ----
 
 If you write functions that have to handle `null` and `undefined` values,
-then you would have to write something like:
+then you would have to write something like this:
 
 [source,typescript]
 ----
-import { isPresent } from '@perfective/common';
-import { isNotEmpty } from '@perfective/common/string';
-
 function userNameOutput(user: User | null | undefined): string {
     if (isPresent(user)) {
         const name = fullName(user.name);
@@ -59,22 +55,22 @@ function userNameOutput(user: User | null | undefined): string {
 
 function fullName(name: Name | null | undefined): string | null {
     if (isPresent(name)) {
-        const name = `${name.first} ${name.last}`.trim();
-        if (isNotEmpty(name)) {
-            return name;
+        const trimmed = `${name.first} ${name.last}`.trim();
+        if (isNotEmpty(trimmed)) {
+            return trimmed;
         }
     }
     return null;
 }
 ----
 
-When using the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[Maybe]` monad you can write
-simpler and more readable functions:
+When using the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[Maybe]` monad,
+you can write simpler and more readable functions:
 
 [source,typescript]
 ----
 import { panic } from '@perfective/common/error';
-import { just, maybe } from '@perfective/common/maybe';
+import { just, Maybe, maybe } from '@perfective/common/maybe';
 import { isNotEmpty, trim } from '@perfective/common/string';
 
 function userNameOutput(user: User | null | undefined): string {
@@ -114,7 +110,7 @@ and `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc
 
 The `@perfective/common/result` package provides a Result monad
 (a concrete case of an Either monad).
-It allows you to treat errors as part of function result
+It allows you to treat errors as part of a function result
 and chain processing of such results.
 
 For example,
@@ -123,7 +119,7 @@ consider you are writing a function that loads a backend entity based on the use
 .Example of the provided functions and types.
 [source,typescript]
 ----
-interface Request {
+interface EntityRequest {
     entity: string;
     id: number;
 }
@@ -138,12 +134,12 @@ interface User {
  */
 declare function numberInput(input: string): number;
 
-declare function request(entity: string): (id: number) => Request;
+declare function request(entity: string): (id: number) => EntityRequest;
 
-declare function user(request: Request): User;
+declare function user(request: EntityRequest): User;
 ----
 
-Writing an imperative code you would have:
+Writing an imperative code, you would have:
 
 [source,typescript]
 ----
@@ -151,7 +147,8 @@ function userOutput(input: string): User {
     let id: number;
     try {
         id = numberInput(input);
-    } catch (error: Error) {
+    }
+    catch {
         id = 0;
     }
     const userRequest = request('user');
@@ -180,15 +177,15 @@ with the `Promise` using the `promisedResult()` and `settledResult()` functions.
 === Chained Exceptions
 
 The ECMA `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Error[Error]` class does not store a previous error.
-This is inconvenient, as it requires either manually add previous error message to a new error.
-Or worse, skip providing previous error altogether.
+This is inconvenient, as it requires either manually adding a previous error message to a new error.
+Or worse, skip providing the previous error altogether.
 
 Chaining previous errors is helpful for debugging.
-Especially in async environments, when most of the stack trace is full of useless functions calls like `next()`
+Especially in async environments, when most of the stack trace is full of useless function calls like `next()`
 or on the frontend with packed code and renamed functions.
 
-To make logging and debugging of productions code easier,
-the `link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]` package provides the `Exception` class.
+The `link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]` package provides the `Exception` class
+to make logging and debugging of productions code easier.
 It supports three features:
 
 * providing a previous error (allows to stack errors);
@@ -198,7 +195,14 @@ It supports three features:
 .Using the `Exception` class and its constructors.
 [source,typescript]
 ----
-import { causedBy, chained, exception } from '@perfective/common/error`
+import { causedBy, chained, exception, unknownError } from '@perfective/common/error`
+
+interface FetchRequest {
+    method: string;
+    url: string;
+}
+
+interface User {}
 
 function numberInput(input: string): number {
     const id = Number(input);
@@ -210,27 +214,28 @@ function numberInput(input: string): number {
     return id;
 }
 
-function userRequest(id: string): Request {
+function userRequest(id: string): FetchRequest {
     try {
         const userId = numberInput(id);
         return {
             method: 'GET',
             url: `user/${userId}`,
         };
-    } catch (error: Error) {
-        throw causedBy(error, 'Invalid user id {{id}}', { // <.>
+    }
+    catch (error: unknown) { // <.>
+        throw causedBy(unknownError(error), 'Invalid user id {{id}}', { // <.>
             id,
         });
     }
 }
 
-async function userResponse(request: Request): Promise<User> {
+async function userResponse(request: FetchRequest): Promise<User> {
     return fetch(request.url, {
         method: request.method,
     });
 }
 
-function user(id: string): Promise<User> {
+async function user(id: string): Promise<User> {
     return Promise.resolve(id)
         .then(userRequest)
         .then(userResponse)
@@ -240,16 +245,16 @@ function user(id: string): Promise<User> {
 }
 ----
 <.> Use `exception()` to instantiate an initial `Exception` without previous errors.
+<.> Use the `unknownError()` function to wrap a possible non-`Error` value.
 <.> When you use a `try-catch` block,
 use the `causedBy()` function to create an `Exception` with a previous error.
-<.> Use the `chained()` function,
-when you need to create a callback to chain an `Error`
-(for example, in `Promise` or in a `Result`).
+<.> Use the `chained()` function to create a callback to chain an `Error`
+(for example, in `Promise` or a `Result`).
 
 
 When you want to output a chained `Exception`,
 you can use the `Exception.toString()` method.
-For the example above, the output may look like:
+For the example above, the output may look like this:
 
 [source,text]
 ----
@@ -258,8 +263,7 @@ Exception: Failed to load user `A`
     - Exception: Input `A` is not a number
 ----
 
-If you want to log an `Exception` for debugging purposes,
-you can use the `chainedStack()` function.
+If you want to log an `Exception` for debugging purposes, use the `chainedStack()` function.
 It will return a similar chain of messages as above,
 but each message will also contain a stack trace for each error.
 
@@ -275,7 +279,7 @@ Packages are organized and named around their primary type:
 — functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
 +
 * `link:https://github.com/perfective/ts.common/tree/main/src/array/index.adoc[@perfective/common/array]`
-— functions and types to handle
+— functions and types for handling
 link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[arrays].
 +
 * `link:https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc[@perfective/common/boolean]`
@@ -301,7 +305,7 @@ and related classes.
 link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[numbers].
 +
 * `link:https://github.com/perfective/ts.common/tree/main/src/object/index.adoc[@perfective/common/object]`
-— functions and types to handle the
+— functions and types for handling the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
 * `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/promise]`
 — functions and types to handle the
@@ -313,13 +317,13 @@ link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 — functions and types to handle
 link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[strings].
 
-The packages have full unit tests coverage.
+The packages have full unit test coverage.
 
 [IMPORTANT]
 ====
-The code provided by this project relies on the strict https://www.typescriptlang.org[TypeScript] compiler checks.
-Use of these packages in the regular JS projects may produce unexpected behavior and is undocumented.
+The code provided by this project relies on strict https://www.typescriptlang.org[TypeScript] compiler checks.
+Using these packages in regular JS projects may produce unexpected behavior and is undocumented.
 For example,
 a function that declares an argument as _required_ relies on strict TSC `null` checks
-and does not check value for `null` additionally.
+and may not additionally check the value for `null`.
 ====

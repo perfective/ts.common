@@ -110,7 +110,7 @@ the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc
 and `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethrough[Maybe.through()]` methods.
 
 
-== Result monad
+=== Result monad
 
 The `@perfective/common/result` package provides a Result monad
 (a concrete case of an Either monad).
@@ -175,6 +175,96 @@ function userOutput(id: string): Result<User> {
 
 The `Result` link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc#using-result-with-promise[integrates]
 with the `Promise` using the `promisedResult()` and `settledResult()` functions.
+
+
+=== Chained Exceptions
+
+The ECMA `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Error[Error]` class does not store a previous error.
+This is inconvenient, as it requires either manually add previous error message to a new error.
+Or worse, skip providing previous error altogether.
+
+Chaining previous errors is helpful for debugging.
+Especially in async environments, when most of the stack trace is full of useless functions calls like `next()`
+or on the frontend with packed code and renamed functions.
+
+To make logging and debugging of productions code easier,
+the `link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]` package provides the `Exception` class.
+It supports three features:
+
+* providing a previous error (allows to stack errors);
+* using a message template with string tokens (allows to localize and format messages);
+* storing additional context (simplifies logging and debugging).
+
+.Using the `Exception` class and its constructors.
+[source,typescript]
+----
+import { causedBy, chained, exception } from '@perfective/common/error`
+
+function numberInput(input: string): number {
+    const id = Number(input);
+    if (Number.isNaN(id)) {
+        throw exception('Input {{value}} is not a number', { // <.>
+            value: input,
+        });
+    }
+    return id;
+}
+
+function userRequest(id: string): Request {
+    try {
+        const userId = numberInput(id);
+        return {
+            method: 'GET',
+            url: `user/${userId}`,
+        };
+    } catch (error: Error) {
+        throw causedBy(error, 'Invalid user id {{id}}', { // <.>
+            id,
+        });
+    }
+}
+
+async function userResponse(request: Request): Promise<User> {
+    return fetch(request.url, {
+        method: request.method,
+    });
+}
+
+function user(id: string): Promise<User> {
+    return Promise.resolve(id)
+        .then(userRequest)
+        .then(userResponse)
+        .catch(chained('Failed to load user {{id}}', { // <.>
+            id,
+        }));
+}
+----
+<.> Use `exception()` to instantiate an initial `Exception` without previous errors.
+<.> When you use a `try-catch` block,
+use the `causedBy()` function to create an `Exception` with a previous error.
+<.> Use the `chained()` function,
+when you need to create a callback to chain an `Error`
+(for example, in `Promise` or in a `Result`).
+
+
+When you want to output a chained `Exception`,
+you can use the `Exception.toString()` method.
+For the example above, the output may look like:
+
+[source,text]
+----
+Exception: Failed to load user `A`
+    - Exception: Invalid user id `A`
+    - Exception: Input `A` is not a number
+----
+
+If you want to log an `Exception` for debugging purposes,
+you can use the `chainedStack()` function.
+It will return a similar chain of messages as above,
+but each message will also contain a stack trace for each error.
+
+Read more about the functions to handle the built-in JS errors and the `Exception` class in the
+`link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]` package docs.
 
 
 == Packages

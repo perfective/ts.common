@@ -8,6 +8,7 @@
 npm install @perfective/common
 ----
 
+After the installation you can read the full compiled documentation in the `node_modules/@perfective/common/docs.html`.
 
 == Key Features
 
@@ -108,7 +109,7 @@ and `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc
 
 === Result monad
 
-The `@perfective/common/result` package provides a Result monad
+The `link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc[@perfective/common/result]` package provides a `Result` monad
 (a concrete case of an Either monad).
 It allows you to treat errors as part of a function result
 and chain processing of such results.
@@ -176,7 +177,7 @@ with the `Promise` using the `promisedResult()` and `settledResult()` functions.
 
 === Chained Exceptions
 
-The ECMA `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Error[Error]` class does not store a previous error.
+The ECMA `Error` class does not store a previous error.
 This is inconvenient, as it requires either manually adding a previous error message to a new error.
 Or worse, skip providing the previous error altogether.
 
@@ -195,7 +196,7 @@ It supports three features:
 .Using the `Exception` class and its constructors.
 [source,typescript]
 ----
-import { causedBy, chained, exception, unknownError } from '@perfective/common/error`
+import { causedBy, chained, exception, unknownError } from '@perfective/common/error';
 
 interface FetchRequest {
     method: string;
@@ -244,7 +245,7 @@ async function user(id: string): Promise<User> {
         }));
 }
 ----
-<.> Use `exception()` to instantiate an initial `Exception` without previous errors.
+<.> Use the `exception()` function to instantiate an initial `Exception` without previous errors.
 <.> Use the `unknownError()` function to wrap a possible non-`Error` value.
 <.> When you use a `try-catch` block,
 use the `causedBy()` function to create an `Exception` with a previous error.
@@ -307,12 +308,14 @@ link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 * `link:https://github.com/perfective/ts.common/tree/main/src/object/index.adoc[@perfective/common/object]`
 — functions and types for handling the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
-* `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/promise]`
++
+* `link:https://github.com/perfective/ts.common/tree/main/src/promise/index.adoc[@perfective/common/promise]`
 — functions and types to handle the
 `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
 +
 * `link:https://github.com/perfective/ts.common/tree/main/src/result/index.adoc[@perfective/common/result]`
 — a `Result` monad (https://en.wikipedia.org/wiki/Result_type[Result type]) implementation.
++
 * `link:https://github.com/perfective/ts.common/tree/main/src/string/index.adoc[@perfective/common/string]`
 — functions and types to handle
 link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[strings].

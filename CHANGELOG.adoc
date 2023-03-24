@@ -1,6 +1,11 @@
 = Changelog
 
-== v0.9.0-beta (next)
+== v0.9.0-rc (next)
+
+* Updated documentation.
+
+
+== v0.9.0-beta
 
 === Deprecations
 

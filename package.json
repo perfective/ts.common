@@ -1,6 +1,6 @@
 {
     "name": "@perfective/common",
-    "version": "0.9.0-beta",
+    "version": "0.9.0-rc",
     "description": "Common types and functions for perfective development in TypeScript",
     "keywords": [
         "es6",
@@ -8,15 +8,11 @@
         "typescript",
         "exception",
         "error chaining",
-        "fp",
         "functional programming",
-        "predicate",
-        "pattern matching",
         "option type",
         "maybe monad",
-        "optional",
-        "nullable",
         "result type",
+        "result monad",
         "either monad"
     ],
     "author": "Andrey Mikheychik <a.mikheychik@gmail.com>",

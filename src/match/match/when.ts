@@ -16,16 +16,6 @@ class When<T> {
     /**
      * Creates a statement with a {@linkcode When.condition|condition} and a given {@linkcode value}.
      *
-     * @deprecated Since v0.9.0.
-     */
-    // eslint-disable-next-line unicorn/no-thenable -- deprecated. TODO: Remove in v0.10.0.
-    public then<U>(value: U | Unary<T, U>): Case<T, U> {
-        return this.to(value);
-    }
-
-    /**
-     * Creates a statement with a {@linkcode When.condition|condition} and a given {@linkcode value}.
-     *
      * @since v0.9.0
      */
     public to<U>(value: U | Unary<T, U>): Case<T, U> {

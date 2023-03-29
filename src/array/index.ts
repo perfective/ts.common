@@ -1,14 +1,8 @@
 export {
     array,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: remove in v0.10.0-alpha
-    arrayFromArrayLike,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: remove in v0.10.0-alpha
-    arrayFromIterable,
     concatenated,
     copy,
     elements,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: remove in v0.10.0-alpha
-    flatten,
     intersection,
     isArray,
     isNotArray,

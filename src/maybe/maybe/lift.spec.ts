@@ -11,7 +11,7 @@ import {
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 
-import { into, lift, onto, or, otherwise, pick, run, that, through, to, when, which } from './lift';
+import { into, onto, or, otherwise, pick, that, through, to, when, which } from './lift';
 import { just, Maybe, maybeFrom, naught, nothing } from './maybe';
 import { TypeGuardCheck } from './type-guard-check.mock';
 
@@ -195,23 +195,3 @@ describe('through', () => {
             .toStrictEqual([2.71, 3.14]);
     });
 });
-
-/* eslint-disable deprecation/deprecation -- to be removed in v0.10.0 */
-describe('run', () => {
-    it('lifts a procedure to the Maybe.run()', () => {
-        const a: (number | null | undefined)[] = [];
-
-        expect(list.map(run(v => a.push(v))))
-            .toStrictEqual([just(2.71), just(3.14), nothing(), naught()]);
-        expect(a)
-            .toStrictEqual([2.71, 3.14]);
-    });
-});
-
-describe('lift', () => {
-    it('lifts a map function to the Maybe.lift()', () => {
-        expect(list.map(lift(isPresent)))
-            .toStrictEqual([just(true), just(true), just(false), just(false)]);
-    });
-});
-/* eslint-enable deprecation/deprecation */

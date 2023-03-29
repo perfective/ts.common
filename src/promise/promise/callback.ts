@@ -26,16 +26,3 @@ export function settlement<T, E extends Error = Error>(
         }
     };
 }
-
-/**
- * Use {@linkcode settlement} function instead.
- *
- * @see settlement
- * @deprecated Since v0.9.0.
- */
-export function result<T, E extends Error = Error>(
-    resolve: Resolve<T>,
-    reject: Reject<E>,
-): Callback<T, E> {
-    return settlement(resolve, reject);
-}

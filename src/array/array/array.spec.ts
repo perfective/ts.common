@@ -2,12 +2,9 @@ import { descending } from '../../number/number/order';
 
 import {
     array,
-    arrayFromArrayLike,
-    arrayFromIterable,
     concatenated,
     copy,
     elements,
-    flatten,
     intersection,
     isArray,
     isNotArray,
@@ -26,34 +23,6 @@ describe('array', () => {
             .toStrictEqual(['a', 'b', 'c']);
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-describe('arrayFromIterable', () => {
-    it('creates an array from an iterable object', () => {
-        expect(arrayFromIterable(new Map([
-            ['a', 'x'],
-            ['b', 'y'],
-            ['c', 'z'],
-        ]))).toStrictEqual([
-            ['a', 'x'],
-            ['b', 'y'],
-            ['c', 'z'],
-        ]);
-        expect(arrayFromIterable(new Set([
-            'a',
-            'b',
-            'c',
-        ]))).toStrictEqual(['a', 'b', 'c']);
-    });
-});
-
-describe('arrayFromArrayLike', () => {
-    it('creates an array from an array-like object', () => {
-        expect(arrayFromArrayLike('alphabet'))
-            .toStrictEqual(['a', 'l', 'p', 'h', 'a', 'b', 'e', 't']);
-    });
-});
-/* eslint-enable deprecation/deprecation */
 
 describe(elements, () => {
     describe('elements(ArrayLike)', () => {
@@ -117,17 +86,6 @@ describe(concatenated, () => {
         });
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-describe('flatten', () => {
-    it('creates a new array from an array of arrays', () => {
-        expect(flatten([]))
-            .toStrictEqual([]);
-        expect(flatten([['a', 'b', 'c'], ['d', 'e'], ['f']]))
-            .toStrictEqual(alphabet);
-    });
-});
-/* eslint-enable deprecation/deprecation */
 
 describe('intersection', () => {
     it('returns an array of values that included in both arrays', () => {

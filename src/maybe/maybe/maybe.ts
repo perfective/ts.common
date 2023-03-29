@@ -155,12 +155,6 @@ export abstract class Maybe<T> {
     public abstract or(fallback: Value<T | null | undefined>): T | null | undefined;
 
     /**
-     * @deprecated Since v0.9.0. Use {@linkcode Maybe.through} instead.
-     */
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
-    public abstract run(procedure: (value: T) => void): Maybe<T>;
-
-    /**
      * If an instance is a {@linkcode Just},
      * runs a given {@linkcode procedure} with the {@linkcode Just.value}.
      * Ignores the {@linkcode procedure} result and returns the original {@linkcode Just}.
@@ -171,14 +165,6 @@ export abstract class Maybe<T> {
      * @since v0.9.0
      */
     public abstract through(procedure: (value: T) => void): Maybe<T>;
-
-    /**
-     * Lifts a function into the Maybe monad.
-     *
-     * @deprecated Since v0.9.0. Use `Maybe.into(maybeFrom)` instead.
-     */
-    // eslint-disable-next-line deprecation/deprecation -- to be removed in v0.10.0
-    public abstract lift<U>(map: (value: T | null | undefined) => U | null | undefined): Maybe<U>;
 }
 
 /**
@@ -315,14 +301,6 @@ export class Just<T> extends Maybe<T> {
     }
 
     /**
-     * @deprecated Since v0.9.0. Use {@linkcode Just.through} instead.
-     */
-    public run(procedure: (value: T) => void): this {
-        procedure(this.value);
-        return this;
-    }
-
-    /**
      * Runs a given {@linkcode procedure} with the {@linkcode Just.value} as an argument.
      *
      * Ignores the {@linkcode procedure} result and returns the original {@linkcode Just}.
@@ -332,15 +310,6 @@ export class Just<T> extends Maybe<T> {
     public through(procedure: (value: T) => void): this {
         procedure(this.value);
         return this;
-    }
-
-    /**
-     * Lifts a function into the Maybe monad.
-     *
-     * @deprecated Since v0.9.0. Use `Maybe.into(maybeFrom)` instead.
-     */
-    public lift<U>(map: (value: T) => U | null | undefined): Maybe<U> {
-        return maybe(map(this.value));
     }
 }
 
@@ -481,14 +450,6 @@ export class Nothing<T> extends Maybe<T> {
     }
 
     /**
-     * @deprecated Since v0.9.0. Use {@linkcode Nothing.through} instead.
-     */
-    public run(procedure: (value: T) => void): Nothing<T>;
-    public run(): this {
-        return this;
-    }
-
-    /**
      * Ignores a given {@linkcode procedure} callback and returns itself.
      *
      * @since v0.9.0
@@ -496,15 +457,6 @@ export class Nothing<T> extends Maybe<T> {
     public through(procedure: (value: T) => void): Nothing<T>;
     public through(): this {
         return this;
-    }
-
-    /**
-     * Lifts a function into the Maybe monad.
-     *
-     * @deprecated Since v0.9.0. Use `Maybe.into(maybeFrom)` instead.
-     */
-    public lift<U>(map: (value: null | undefined) => U | null | undefined): Maybe<U> {
-        return maybe(map(this.value));
     }
 }
 

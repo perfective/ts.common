@@ -7,13 +7,11 @@ const roots = [
     when(2.23).to(5),
 ];
 
-/* eslint-disable deprecation/deprecation -- TODO: Change to when.to() in v0.10.0 */
 const powers = [
-    when<number>(v => v < 0).then(v => v ** 2),
-    when<number>(v => v === 0).then(0),
-    when<number>(v => v > 0).then(v => v ** 3),
+    when<number>(v => v < 0).to(v => v ** 2),
+    when<number>(v => v === 0).to(0),
+    when<number>(v => v > 0).to(v => v ** 3),
 ];
-/* eslint-enable deprecation/deprecation */
 
 describe('Match', () => {
     describe('cases', () => {
@@ -34,24 +32,4 @@ describe('Match', () => {
                 .toBeUndefined();
         });
     });
-
-    /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-    describe('to', () => {
-        it('calls `Match.cases`', () => {
-            expect(match(1.73).to(roots))
-                .toStrictEqual(match(1.73).cases(roots));
-            expect(match(() => 0).to(powers))
-                .toStrictEqual(match(() => 0).cases(powers));
-        });
-    });
-
-    describe('that', () => {
-        it('calls `Match.cases`', () => {
-            expect(match(1.73).that(...roots))
-                .toStrictEqual(match(1.73).cases(...roots));
-            expect(match(() => 0).that(...powers))
-                .toStrictEqual(match(() => 0).cases(...powers));
-        });
-    });
-    /* eslint-enable deprecation/deprecation */
 });

@@ -13,26 +13,6 @@ export class Match<T> {
      * Finds the first case with a matching {@linkcode Case.condition}
      * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
      *
-     * @deprecated Since v0.9.0. Use {@linkcode Match.cases} instead.
-     */
-    public that<U>(...cases: Case<T, U>[]): Maybe<U> {
-        return this.cases(cases);
-    }
-
-    /**
-     * Finds the first case with a matching {@linkcode Case.condition}
-     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
-     *
-     * @deprecated Since v0.9.0. Use {@linkcode Match.cases} instead.
-     */
-    public to<U>(cases: Case<T, U>[]): Maybe<U> {
-        return this.cases(cases);
-    }
-
-    /**
-     * Finds the first case with a matching {@linkcode Case.condition}
-     * and applies the {@linkcode Case.statement} to the {@linkcode Match.value}.
-     *
      * @since v0.9.0
      */
     public cases<U>(...cases: Case<T, U>[]): Maybe<U>;

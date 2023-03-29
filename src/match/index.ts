@@ -3,11 +3,6 @@ export {
     CaseEntry,
     caseFromEntry,
     fromEntries,
-    /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-    Statement,
-    StatementEntry,
-    statements,
-    /* eslint-enable deprecation/deprecation */
 } from './match/case';
 export {
     Match,

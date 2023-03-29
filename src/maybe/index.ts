@@ -1,14 +1,10 @@
 // ./maybe
 export {
     into,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
-    lift,
     onto,
     or,
     otherwise,
     pick,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.10.0
-    run,
     that,
     through,
     to,

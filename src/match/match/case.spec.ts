@@ -1,6 +1,6 @@
 import { isNegativeInteger, isPositiveInteger } from '../../number/number/integer';
 
-import { CaseEntry, fromEntries, statements } from './case';
+import { fromEntries } from './case';
 
 function square(x: number): number {
     return x ** 2;
@@ -45,19 +45,3 @@ describe(fromEntries, () => {
         expect(output[1].statement).toBe(cube);
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.10.0 */
-describe(statements, () => {
-    it('calls `fromEntries`', () => {
-        const input: CaseEntry<number, number>[] = [
-            [isZero, 0],
-        ];
-
-        const outputStatements = statements<number, number>(input);
-        const outputCases = fromEntries(input);
-
-        expect(outputStatements[0].condition).toBe(outputCases[0].condition);
-        expect(outputStatements[0].statement.toString()).toBe(outputCases[0].statement.toString());
-    });
-});
-/* eslint-enable deprecation/deprecation */

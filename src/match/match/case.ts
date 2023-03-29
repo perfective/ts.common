@@ -13,19 +13,9 @@ export interface Case<T, U> {
 }
 
 /**
- * @deprecated Since v0.9.0. Use {@linkcode Case} instead.
- */
-export type Statement<T, U> = Case<T, U>;
-
-/**
  * @since v0.9.0
  */
 export type CaseEntry<T, U> = [Predicate<T> | Proposition, Unary<T, U> | Value<U>];
-
-/**
- * @deprecated Since v0.9.0. Use {@linkcode CaseEntry} instead.
- */
-export type StatementEntry<T, U> = CaseEntry<T, U>;
 
 /**
  * Creates a list of {@linkcode Case|cases} from a list of {@linkcode CaseEntry|entries}.
@@ -34,15 +24,6 @@ export type StatementEntry<T, U> = CaseEntry<T, U>;
  */
 export function fromEntries<T, U>(entries: CaseEntry<T, U>[]): Case<T, U>[] {
     return entries.map(caseFromEntry);
-}
-
-/**
- * Creates a list of {@linkcode Case|cases} from a list of {@linkcode CaseEntry|entries}.
- *
- * @deprecated Since v0.9.0. Use {@linkcode fromEntries} instead.
- */
-export function statements<T, U>(entries: CaseEntry<T, U>[]): Case<T, U>[] {
-    return fromEntries(entries);
 }
 
 /**

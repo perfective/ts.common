@@ -15,22 +15,6 @@ export function array<T>(...elements: T[]): T[] {
 }
 
 /**
- * @see elements
- * @deprecated Since v0.9.0. Use {@linkcode elements}.
- */
-export function arrayFromIterable<T>(elements: Iterable<T>): T[] {
-    return Array.from(elements);
-}
-
-/**
- * @see elements
- * @deprecated Since v0.9.0. Use {@linkcode elements}.
- */
-export function arrayFromArrayLike<T>(elements: ArrayLike<T>): T[] {
-    return Array.from(elements);
-}
-
-/**
  * Creates an array from elements of a given {@linkcode Iterable} or an {@linkcode ArrayLike} {@linkcode value}.
  *
  * @since v0.9.0
@@ -66,14 +50,6 @@ export function concatenated<T>(first: T[], ...second: T[][]): T[] {
     const hasRest = Array.isArray(second) && second.length > 0;
     const [initial, arrays] = hasRest ? [first, second] : [[], first as T[][]];
     return arrays.reduce((result, array) => result.concat(array), initial);
-}
-
-/**
- * @see concatenated
- * @deprecated Since v0.9.0. Use {@linkcode concatenated}.
- */
-export function flatten<T>(arrays: T[][]): T[] {
-    return arrays.reduce((result, array) => result.concat(array), []);
 }
 
 /**

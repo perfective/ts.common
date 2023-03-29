@@ -2,8 +2,6 @@ import { constant, Void } from '../../function/function/nullary';
 import { same, Unary } from '../../function/function/unary';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
-import { nullableNumber } from '../nullable/nullable.mock';
-import { optionalNumber } from '../optional/optional.mock';
 
 import { isMaybe, isNotMaybe, Just, just, Maybe, maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
 import {
@@ -12,6 +10,8 @@ import {
     maybeDecimalOutput,
     naughtDecimalOutput,
     nothingDecimalOutput,
+    nullableNumber,
+    optionalNumber,
     safeDecimalOutput,
     splitComma,
     strictDecimalOutput,

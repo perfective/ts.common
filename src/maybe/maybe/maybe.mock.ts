@@ -18,7 +18,7 @@ export function unsafeNumber(input: number | null | undefined): number | null | 
 }
 
 export function absentNumber(input: number | null | undefined): null | undefined {
-    if (isUndefined(input) || isNull(input)) {
+    if (isAbsent(input)) {
         return input;
     }
     return null;
@@ -28,10 +28,7 @@ export function splitComma(input: string): string[] {
     return input.split(',');
 }
 
-export function unsafeDecimalOutput(input: number | null | undefined): string | null | undefined {
-    if (isAbsent(input)) {
-        return input;
-    }
+export function unsafeDecimalOutput(input: number): string | null | undefined {
     return strictDecimalOutput(input);
 }
 
@@ -67,4 +64,12 @@ export function naughtDecimalOutput(): Nothing<string> {
 
 export function nothingDecimalOutput(): Nothing<string> {
     return nothing();
+}
+
+export function optionalNumber(input: number | undefined): number | undefined {
+    return input;
+}
+
+export function nullableNumber(input: number | null): number | null {
+    return input;
 }

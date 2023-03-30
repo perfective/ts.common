@@ -23,8 +23,8 @@ The functions of higher arity is unlikely to be added to the package.
 +
 * `Void`
 — a procedure without arguments:
-** `empty(): Void`
-— creates a function that always returns `void` (`undefined`).
+** `naught(): void`
+— an empty function to be passed as a callback when a no-op behavior is required.
 +
 * `Value<T> = T | Nullary<T>`
 — represent a value, or a function that returns a value

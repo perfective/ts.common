@@ -1,4 +1,4 @@
-import { constant, empty, isNullary, valueOf } from './nullary';
+import { constant, empty, isNullary, naught, valueOf } from './nullary';
 
 describe('isNullary', () => {
     it('returns true when the given function accepts three arguments', () => {
@@ -18,10 +18,19 @@ describe('constant', () => {
     });
 });
 
-describe('empty', () => {
+/* eslint-disable deprecation/deprecation -- TODO: Delete in v0.11.0-alpha */
+describe(empty, () => {
     it('creates an empty function', () => {
         // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
         expect(empty()()).toBeUndefined();
+    });
+});
+/* eslint-enable deprecation/deprecation */
+
+describe(naught, () => {
+    it('returns undefined', () => {
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
+        expect(naught()).toBeUndefined();
     });
 });
 

@@ -21,8 +21,21 @@ export function constant<T>(value: T): Nullary<T> {
     return (): T => value;
 }
 
+/**
+ * @deprecated Since v0.10.0. Use {@linkcode naught} instead.
+ */
 export function empty(): Void {
     return (): void => undefined;
+}
+
+/**
+ * An empty function to be passed as a callback when a no-op behavior is required.
+ *
+ * @since v0.10.0
+ */
+export function naught(): void {
+    // eslint-disable-next-line no-useless-return -- empty no-op function
+    return;
 }
 
 export function valueOf<T>(value: Value<T>): T {

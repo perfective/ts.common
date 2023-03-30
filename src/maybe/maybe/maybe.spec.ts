@@ -3,12 +3,12 @@ import { same, Unary } from '../../function/function/unary';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 import { hasAbsentProperty, hasPresentProperty, ObjectWithAbsent } from '../../object/property/property';
 
-import { isMaybe, isNotMaybe, Just, just, Maybe, maybe, maybeFrom, naught, Nothing, nothing } from './maybe';
+import { isMaybe, isNotMaybe, Just, just, Maybe, maybe, maybeFrom, nil, Nothing, nothing } from './maybe';
 import {
     absentNumber,
     justDecimalOutput,
     maybeDecimalOutput,
-    naughtDecimalOutput,
+    nilDecimalOutput,
     nothingDecimalOutput,
     nullableNumber,
     optionalNumber,
@@ -48,7 +48,7 @@ describe(maybe, () => {
             // @ts-expect-error -- TS2322: Type 'Maybe ' is not assignable to type 'Nothing '.
             const outputUndefined: Nothing<number> = maybe(unsafeNumber(undefined));
 
-            expect(outputNull).toStrictEqual(naught());
+            expect(outputNull).toStrictEqual(nil());
             expect(outputUndefined).toStrictEqual(nothing());
         });
     });
@@ -69,15 +69,15 @@ describe(maybe, () => {
     });
 
     describe('when the value is null', () => {
-        it('returns the memoized "naught" Nothing<T>', () => {
+        it('returns the memoized "nil" Nothing<T>', () => {
             expect(maybe(unsafeNumber(null)))
-                .toBe(naught());
+                .toBe(nil());
         });
 
         it('must be assigned to Nothing<T>', () => {
             const output: Nothing<number> = maybe(null);
 
-            expect(output).toBe(naught());
+            expect(output).toBe(nil());
             expect(output).toBeInstanceOf(Nothing);
             expect(output).toBeInstanceOf(Maybe);
         });
@@ -122,8 +122,8 @@ describe(maybeFrom, () => {
         it('creates an unary function that returns Nothing', () => {
             const output: Unary<number | null | undefined, Nothing<number>> = maybeFrom(absentNumber);
 
-            expect(output(3.14)).toBe(naught());
-            expect(output(null)).toBe(naught());
+            expect(output(3.14)).toBe(nil());
+            expect(output(null)).toBe(nil());
             expect(output(undefined)).toBe(nothing());
         });
     });
@@ -133,7 +133,7 @@ describe(maybeFrom, () => {
             const output: Unary<number | null | undefined, Maybe<number>> = maybeFrom(unsafeNumber);
 
             expect(output(0)).toStrictEqual(just(0));
-            expect(output(null)).toBe(naught());
+            expect(output(null)).toBe(nil());
             expect(output(undefined)).toBe(nothing());
         });
     });
@@ -149,7 +149,7 @@ describe(isMaybe, () => {
     describe('when given a `Nothing`', () => {
         it('returns true', () => {
             expect(isMaybe(nothing())).toBe(true);
-            expect(isMaybe(naught())).toBe(true);
+            expect(isMaybe(nil())).toBe(true);
         });
     });
 
@@ -172,7 +172,7 @@ describe(isNotMaybe, () => {
     describe('when given a `Nothing`', () => {
         it('returns false', () => {
             expect(isNotMaybe(nothing())).toBe(false);
-            expect(isNotMaybe(naught())).toBe(false);
+            expect(isNotMaybe(nil())).toBe(false);
         });
     });
 
@@ -200,7 +200,7 @@ describe(Maybe, () => {
             // Left-identity: unit(a) >>= \x -> f(x) <=> f(a)
             expect(maybe(unsafeNumber(0)).onto(maybeDecimalOutput))
                 .toStrictEqual(maybeDecimalOutput(0));
-            expect(naught<number>().onto(maybeDecimalOutput))
+            expect(nil<number>().onto(maybeDecimalOutput))
                 .toStrictEqual(maybeDecimalOutput(null));
             expect(nothing<number>().onto(maybeDecimalOutput))
                 .toStrictEqual(maybeDecimalOutput(undefined));
@@ -220,8 +220,8 @@ describe(Maybe, () => {
             // Associativity: ma >>= \x -> (f(x) >>= \y -> g(y)) <=> (ma >>= \x -> f(x) >>= \y -> g(y)
             expect(maybe(unsafeNumber(0)).onto(x => maybeDecimalOutput(x).onto(maybeSplit)))
                 .toStrictEqual(maybe(unsafeNumber(0)).onto(maybeDecimalOutput).onto(maybeSplit));
-            expect(naught<number>().onto(x => maybeDecimalOutput(x).onto(maybeSplit)))
-                .toStrictEqual(naught<number>().onto(maybeDecimalOutput).onto(maybeSplit));
+            expect(nil<number>().onto(x => maybeDecimalOutput(x).onto(maybeSplit)))
+                .toStrictEqual(nil<number>().onto(maybeDecimalOutput).onto(maybeSplit));
             expect(nothing<number>().onto(x => maybeDecimalOutput(x).onto(maybeSplit)))
                 .toStrictEqual(nothing<number>().onto(maybeDecimalOutput).onto(maybeSplit));
         });
@@ -272,23 +272,23 @@ describe(Maybe, () => {
 
         describe('when the "flatMap" function returns Nothing(null)', () => {
             it('must be assigned to Maybe', () => {
-                const output: Maybe<string> = maybe(unsafeNumber(0)).onto(naughtDecimalOutput);
+                const output: Maybe<string> = maybe(unsafeNumber(0)).onto(nilDecimalOutput);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
-                const output: Just<string> = maybe(unsafeNumber(0)).onto(naughtDecimalOutput);
+                const output: Just<string> = maybe(unsafeNumber(0)).onto(nilDecimalOutput);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
-                const output: Nothing<string> = maybe(unsafeNumber(0)).onto(naughtDecimalOutput);
+                const output: Nothing<string> = maybe(unsafeNumber(0)).onto(nilDecimalOutput);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
 
@@ -330,8 +330,8 @@ describe(Maybe, () => {
             it('preserved composition of morphisms', () => {
                 expect(maybe(unsafeNumber(0)).to(strictDecimalOutput).to(splitComma))
                     .toStrictEqual(maybe(unsafeNumber(0)).to(strictDecimalSplitComma));
-                expect(naught<number>().to(strictDecimalOutput).to(splitComma))
-                    .toStrictEqual(naught<number>().to(strictDecimalSplitComma));
+                expect(nil<number>().to(strictDecimalOutput).to(splitComma))
+                    .toStrictEqual(nil<number>().to(strictDecimalSplitComma));
                 expect(nothing<number>().to(strictDecimalOutput).to(splitComma))
                     .toStrictEqual(nothing<number>().to(strictDecimalSplitComma));
             });
@@ -385,21 +385,21 @@ describe(Maybe, () => {
             it('must be assigned to Maybe', () => {
                 const output: Maybe<string> = maybe(unsafeNumber(0)).to<string>(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<string> = maybe(unsafeNumber(0)).to<string>(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<string> = maybe(unsafeNumber(0)).to<string>(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
 
@@ -480,21 +480,21 @@ describe(Maybe, () => {
             it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(unsafe(typeGuardCheck)).pick('possible');
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = maybe(unsafe(typeGuardCheck)).pick('possible');
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = maybe(unsafe(typeGuardCheck)).pick('possible');
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
     });
@@ -693,21 +693,21 @@ describe(Maybe, () => {
             it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(unsafeNumber(undefined)).otherwise(null);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = maybe(unsafeNumber(undefined)).otherwise(null);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = maybe(unsafeNumber(undefined)).otherwise(null);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
 
@@ -715,21 +715,21 @@ describe(Maybe, () => {
             it('must be assigned to Maybe', () => {
                 const output: Maybe<number> = maybe(unsafeNumber(undefined)).otherwise(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Just'.
                 const output: Just<number> = maybe(unsafeNumber(undefined)).otherwise(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe' is not assignable to type 'Nothing'.
                 const output: Nothing<number> = maybe(unsafeNumber(undefined)).otherwise(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
 

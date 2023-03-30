@@ -488,7 +488,7 @@ export function maybe<T>(value: T | null | undefined): Maybe<T> {
         return just(value);
     }
     if (isNull(value)) {
-        return naught();
+        return nil();
     }
     return nothing();
 }
@@ -568,12 +568,12 @@ export function justFrom<T, U>(
 
 interface Memo {
     nothing: Nothing<unknown>;
-    naught: Nothing<unknown>;
+    nil: Nothing<unknown>;
 }
 
 const memo: Memo = {
     nothing: new Nothing(undefined),
-    naught: new Nothing(null),
+    nil: new Nothing(null),
 };
 
 /**
@@ -585,9 +585,21 @@ export function nothing<T>(): Nothing<T> {
 
 /**
  * Returns a memoized instance of {@linkcode Nothing} with a {@linkcode null} value.
+ *
+ * @since v0.10.0
+ */
+export function nil<T>(): Nothing<T> {
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Delete in v0.11.0-alpha.
+    return naught();
+}
+
+/**
+ * Returns a memoized instance of {@linkcode Nothing} with a {@linkcode null} value.
+ *
+ * @deprecated Since v0.10.0. Use {@linkcode nil} instead.
  */
 export function naught<T>(): Nothing<T> {
-    return memo.naught as Nothing<T>;
+    return memo.nil as Nothing<T>;
 }
 
 /**

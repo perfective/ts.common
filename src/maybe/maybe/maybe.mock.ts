@@ -1,6 +1,6 @@
 import { isAbsent, isNull, isUndefined } from '../../value/value';
 
-import { Just, just, Maybe, maybe, naught, Nothing, nothing } from './maybe';
+import { Just, just, Maybe, maybe, nil, Nothing, nothing } from './maybe';
 
 export interface Boxed<T> {
     readonly value?: T | null | undefined;
@@ -58,8 +58,8 @@ export function justDecimalOutput(input: number): Just<string> {
     return just(strictDecimalOutput(input));
 }
 
-export function naughtDecimalOutput(): Nothing<string> {
-    return naught();
+export function nilDecimalOutput(): Nothing<string> {
+    return nil();
 }
 
 export function nothingDecimalOutput(): Nothing<string> {

@@ -13,12 +13,12 @@ import {
 } from '../../object/property/property';
 import { isPresent } from '../../value/value';
 
-import { isJust, isNotJust, Just, just, justFrom, Maybe, naught, Nothing, nothing } from './maybe';
+import { isJust, isNotJust, Just, just, justFrom, Maybe, nil, Nothing, nothing } from './maybe';
 import {
     Boxed,
     justDecimalOutput,
     maybeDecimalOutput,
-    naughtDecimalOutput,
+    nilDecimalOutput,
     nothingDecimalOutput,
     strictDecimalOutput,
     unsafe,
@@ -70,7 +70,7 @@ describe(isJust, () => {
     describe('when given a `Nothing`', () => {
         it('returns false', () => {
             expect(isJust(nothing())).toBe(false);
-            expect(isJust(naught())).toBe(false);
+            expect(isJust(nil())).toBe(false);
         });
     });
 
@@ -93,7 +93,7 @@ describe(isNotJust, () => {
     describe('when given a `Nothing`', () => {
         it('returns true', () => {
             expect(isNotJust(nothing())).toBe(true);
-            expect(isNotJust(naught())).toBe(true);
+            expect(isNotJust(nil())).toBe(true);
         });
     });
 
@@ -161,22 +161,22 @@ describe(Just, () => {
 
         describe('when the "flatMap" function returns Nothing(null)', () => {
             it('can be assigned to Maybe', () => {
-                const output: Maybe<string> = just(0).onto(naughtDecimalOutput);
+                const output: Maybe<string> = just(0).onto(nilDecimalOutput);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Nothing<string>' is not assignable to type 'Just<string>'.
-                const output: Just<string> = just(0).onto(naughtDecimalOutput);
+                const output: Just<string> = just(0).onto(nilDecimalOutput);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
-            it('returns naught as Nothing', () => {
-                const output: Nothing<string> = just(0).onto(naughtDecimalOutput);
+            it('returns nil as Nothing', () => {
+                const output: Nothing<string> = just(0).onto(nilDecimalOutput);
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
 
@@ -250,20 +250,20 @@ describe(Just, () => {
             it('can be assigned to Maybe', () => {
                 const output: Maybe<string> = just(0).to<string>(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Nothing' is not assignable to type 'Just'.
                 const output: Just<string> = just(0).to<string>(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
-            it('returns naught as Nothing', () => {
+            it('returns nil as Nothing', () => {
                 const output: Nothing<string> = just(0).to<string>(constant(null));
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
 
@@ -340,21 +340,21 @@ describe(Just, () => {
             it('returns Maybe the value of the property', () => {
                 const output: Maybe<number> = just(typeGuardCheck).pick('possible');
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Just', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe<number>' is not assignable to type 'Just<number>'.
                 const output: Just<number> = just(typeGuardCheck).pick('possible');
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
 
             it('cannot be assigned to Nothing', () => {
                 // @ts-expect-error -- TS2322: Type 'Maybe<number>' is not assignable to type 'Nothing<number>'.
                 const output: Nothing<number> = just(typeGuardCheck).pick('possible');
 
-                expect(output).toBe(naught());
+                expect(output).toBe(nil());
             });
         });
     });

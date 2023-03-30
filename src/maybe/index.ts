@@ -24,7 +24,9 @@ export {
     Maybe,
     maybe,
     maybeFrom,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Delete in v0.11.0-alpha.
     naught,
+    nil,
     Nothing,
     nothing,
 } from './maybe/maybe';

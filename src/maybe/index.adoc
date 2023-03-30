@@ -21,7 +21,7 @@ it has to maintain the value as `null` and should not change it to `undefined`.
 .`Maybe<T>` maintains the original value.
 [source,typescript]
 ----
-import { maybe, naught, nothing } from '@perfective/common/maybe';
+import { maybe, nil, nothing } from '@perfective/common/maybe';
 import { isGreaterThan } from '@perfective/common/number';
 
 maybe(3.14).value === 3.14;
@@ -33,7 +33,7 @@ maybe(3.14)
     .value === undefined; // <.>
 
 maybe(null).value === null;
-naught().value === null; // <.>
+nil().value === null; // <.>
 maybe(null)
     .that(isGreaterThan(4))
     .value === null; // <.>
@@ -41,7 +41,7 @@ maybe(null)
 <.> The `nothing()` function is the default unit function for `Nothing<T>`
 and returns a memoized `new Nothing(undefined)`.
 <.> By default, `Maybe` uses `undefined` for the absent value.
-<.> The `naught()` function is the secondary unit function for `Nothing<T>`
+<.> The `nil()` function is the secondary unit function for `Nothing<T>`
 and returns a memoized `new Nothing(null)`.
 <.> If the original value is `null`,
 `null` will be returned as an absent value after all transformations.
@@ -81,7 +81,7 @@ function username(response: ApiResponse) {
 }
 ----
 <.> As  `Maybe` preserves the original type,
-the result of the `pick()` can be either `nothing()` or `naught()`.
+the result of the `pick()` can be either `nothing()` or `nil()`.
 So `Maybe.into()` will have a correct value on input.
 
 
@@ -270,7 +270,7 @@ A _unit_ (_return_) function for the `Maybe` monad.
 and returns the result wrapped into a `Just`.
 * `nothing<T>(): Nothing<T>`
 — returns a memoized instance of `Nothing` with an `undefined` value.
-* `naught<T>(): Nothing<T>`
+* `nil<T>(): Nothing<T>`
 — returns a memoized instance of `Nothing` with a `null` value.
 
 
@@ -654,13 +654,13 @@ Each method has a corresponding lifting function to be used in the `Array.protot
 
 [source,typescript]
 ----
-import { Maybe, just, naught, nothing, or } from '@perfective/common/maybe';
+import { Maybe, just, nil, nothing, or } from '@perfective/common/maybe';
 
 const numbers: Maybe<number>[] = [
     just(2.71),
     just(3.14),
     nothing<number>(),
-    naught<number>(),
+    nil<number>(),
 ];
 
 numbers.map(or(0)) === [2.71, 3.14, 0, 0];
@@ -718,7 +718,7 @@ you may break the _left-identity_ and the _associativity_ monad laws.
 [source,typescript]
 ----
 import { isNull } from '@perfective/common';
-import { Just, just, naught } from '@perfective/common/maybe';
+import { Just, just, nil } from '@perfective/common/maybe';
 
 function decimal(value: number | null): Just<string> { // <.>
     if (isNull(value)) {
@@ -728,7 +728,7 @@ function decimal(value: number | null): Just<string> { // <.>
 }
 
 just(3.14).onto(decimal) == decimal(3.14); // <.>
-naught().onto(decimal) != decimal(null); // <.>
+nil().onto(decimal) != decimal(null); // <.>
 ----
 <.> `Maybe<T>.onto()` expects the function of type `Unary<number, Maybe<string>>`,
 but the `decimal` function is of type `Unary<number | null, Maybe<string>>`,
@@ -745,7 +745,7 @@ that passed `null` and `undefined` as into the callback.
 [source,typescript]
 ----
 import { isAbsent } from '@perfective/common';
-import { Just, just, nothing, naught } from '@perfective/common/maybe';
+import { Just, just, nothing, nil } from '@perfective/common/maybe';
 
 function decimal(value: number | null | undefined): Just<string> {
     if (isAbsent(value)) {
@@ -760,8 +760,8 @@ just(3.14).into(decimal) == decimal(3.14); // === just('3.14')
 nothing().onto(decimal) == nothing(); // != decimal(undefined);
 nothing().into(decimal) == decimal(undefined); // === just('0')
 
-naught().onto(decimal) == naught(); // != decimal(null);
-naught().into(decimal) == decimal(null); // === just('0')
+nil().onto(decimal) == nil(); // != decimal(null);
+nil().into(decimal) == decimal(null); // === just('0')
 ----
 
 

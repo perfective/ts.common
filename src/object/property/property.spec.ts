@@ -1,4 +1,7 @@
-import { ascending, isEqualTo, isGreaterThan } from '../../number/number/order';
+import { Predicate } from '../../boolean';
+import { Unary } from '../../function';
+import { ascending } from '../../number/number/order';
+import { isPresent } from '../../value/value';
 
 import {
     by,
@@ -11,177 +14,339 @@ import {
     property,
 } from './property';
 
-interface Example {
-    a?: number | null;
-    b?: string | null;
-    c?: boolean | null;
-    d?: Record<string, unknown> | null;
+interface Pair {
+    first: number | null | undefined;
+    second?: string | null;
 }
 
-const optional: Example = {
-    a: 0,
-    b: '',
-};
-
-describe('property', () => {
+describe(property, () => {
     describe('property(property)', () => {
-        it('picks an existing property value from an object', () => {
-            expect(property<Example, 'a'>('a')(optional))
-                .toBe(0);
+        const output: Unary<Pair, number | null | undefined> = property<Pair, 'first'>('first');
+
+        it('returns a value of a given property from a object', () => {
+            expect(output({
+                first: 0,
+            })).toBe(0);
         });
     });
 
     describe('property(property, condition)', () => {
-        it('returns true when "property" of the given value satisfies the "condition"', () => {
-            expect(property<number[], 'length'>('length', isEqualTo(0))([]))
-                .toBe(true);
+        const output: Predicate<Pair> = property<Pair, 'first'>('first', isPresent);
+
+        describe('when the `property` of a given argument satisfies the `condition`', () => {
+            it('returns true', () => {
+                expect(output({
+                    first: 0,
+                })).toBe(true);
+            });
         });
 
-        it('returns false when "property" of the given value does not satisfy the "condition"', () => {
-            expect(property<number[], 'length'>('length', isGreaterThan(0))([]))
-                .toBe(false);
+        describe('when the `property` of a given argument fails the `condition`', () => {
+            it('returns false', () => {
+                expect(output({
+                    first: null,
+                })).toBe(false);
+            });
         });
     });
 });
 
-describe('by', () => {
-    describe('by(property, ordering)', () => {
-        it('returns a comparator based on a comparator for the given property', () => {
-            expect([{ value: 1 }, { value: 0 }, { value: -1 }].sort(by('value', ascending)))
-                .toStrictEqual([{ value: -1 }, { value: 0 }, { value: 1 }]);
+describe(by, () => {
+    describe('by(property, order)', () => {
+        const comparator = by<{ first: number; }, 'first'>('first', ascending);
+
+        it('sorts given values with the given `order` callback applied to the given `property`', () => {
+            expect([{ first: 1 }, { first: 0 }, { first: -1 }].sort(comparator))
+                .toStrictEqual([{ first: -1 }, { first: 0 }, { first: 1 }]);
         });
     });
 });
 
-describe('hasDefinedProperty', () => {
-    it('returns a function that returns true when object property is defined', () => {
-        expect(hasDefinedProperty<Example, 'a'>('a')(optional)).toBe(true);
+describe(hasDefinedProperty, () => {
+    describe('hasDefinedProperty(property)', () => {
+        const typeGuard = hasDefinedProperty<Pair, 'first'>('first');
+
+        describe('when a given argument has defined `property`', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has undefined `property`', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: undefined,
+                })).toBe(false);
+            });
+        });
     });
 
-    it('returns a function that returns false when object property is undefined', () => {
-        expect(hasDefinedProperty<Example, 'c'>('c')(optional)).toBe(false);
-    });
+    describe('hasDefinedProperty(property, ...properties)', () => {
+        const typeGuard = hasDefinedProperty<Pair, 'first' | 'second'>('first', 'second');
 
-    it('returns a function that returns true when all provided properties are defined', () => {
-        expect(hasDefinedProperty<Example, 'a' | 'b'>('a', 'b')(optional)).toBe(true);
-    });
+        describe('when a given argument has all given `properties` defined', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: null,
+                    second: null,
+                })).toBe(true);
+            });
+        });
 
-    it('returns a function that returns false when one of the properties is undefined', () => {
-        expect(hasDefinedProperty<Example, 'a' | 'c'>('a', 'c')(optional)).toBe(false);
-    });
-});
-
-describe('hasUndefinedProperty', () => {
-    it('returns a function that returns true when object property is undefined', () => {
-        expect(hasUndefinedProperty<Example, 'c'>('c')(optional)).toBe(true);
-    });
-
-    it('returns a function that returns false when object property is defined', () => {
-        expect(hasUndefinedProperty<Example, 'a'>('a')(optional)).toBe(false);
-    });
-
-    it('returns a function that returns true when all provided properties are undefined', () => {
-        expect(hasUndefinedProperty<Example, 'c' | 'd'>('c', 'd')(optional)).toBe(true);
-    });
-
-    it('returns a function that returns false when one of the properties is defined', () => {
-        expect(hasUndefinedProperty<Example, 'a' | 'c'>('a', 'c')(optional)).toBe(false);
-    });
-});
-
-const nullable: Example = {
-    a: 0,
-    b: '',
-    c: null,
-    d: null,
-};
-
-describe('hasNotNullProperty', () => {
-    it('returns a function that returns true when object property is not null', () => {
-        expect(hasNotNullProperty<Example, 'a'>('a')(nullable)).toBe(true);
-    });
-
-    it('returns a function that returns false when object property is null', () => {
-        expect(hasNotNullProperty<Example, 'c'>('c')(nullable)).toBe(false);
-    });
-
-    it('returns a function that returns true when all provided properties are not null', () => {
-        expect(hasNotNullProperty<Example, 'a' | 'b'>('a', 'b')(nullable)).toBe(true);
-    });
-
-    it('returns a function that returns false when one of the properties is null', () => {
-        expect(hasNotNullProperty<Example, 'a' | 'c'>('a', 'c')(nullable)).toBe(false);
+        describe('when a given argument has at least one of the `properties` undefined', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(false);
+            });
+        });
     });
 });
 
-describe('hasNullProperty', () => {
-    it('returns a function that returns true when object property is null', () => {
-        expect(hasNullProperty<Example, 'c'>('c')(nullable)).toBe(true);
+describe(hasUndefinedProperty, () => {
+    describe('hasUndefinedProperty(property)', () => {
+        const typeGuard = hasUndefinedProperty<Pair, 'first'>('first');
+
+        describe('when a given argument has undefined `property`', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: undefined,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has defined `property`', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(false);
+            });
+        });
     });
 
-    it('returns a function that returns false when object property is not null', () => {
-        expect(hasNullProperty<Example, 'a'>('a')(nullable)).toBe(false);
-    });
+    describe('hasUndefinedProperty(property, ...properties)', () => {
+        const typeGuard = hasUndefinedProperty<Pair, 'first' | 'second'>('first', 'second');
 
-    it('returns a function that returns true when all provided properties are null', () => {
-        expect(hasNullProperty<Example, 'c' | 'd'>('c', 'd')(nullable)).toBe(true);
-    });
+        describe('when a given argument has all `properties` undefined', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: undefined,
+                })).toBe(true);
+            });
+        });
 
-    it('returns a function that returns false when one of the properties is not null', () => {
-        expect(hasNullProperty<Example, 'a' | 'c'>('a', 'c')(nullable)).toBe(false);
-    });
-});
-
-const absent: Example = {
-    a: 0,
-    b: '',
-    c: null,
-};
-
-describe('hasPresentProperty', () => {
-    it('returns a function that returns true when object property is defined', () => {
-        expect(hasPresentProperty<Example, 'a'>('a')(absent)).toBe(true);
-    });
-
-    it('returns a function that returns false when object property is undefined', () => {
-        expect(hasPresentProperty<Example, 'd'>('d')(absent)).toBe(false);
-    });
-
-    it('returns a function that returns false when object property is null', () => {
-        expect(hasPresentProperty<Example, 'c'>('c')(absent)).toBe(false);
-    });
-
-    it('returns a function that returns true when all provided properties are defined', () => {
-        expect(hasPresentProperty<Example, 'a' | 'b'>('a', 'b')(absent)).toBe(true);
-    });
-
-    it('returns a function that returns false when one of the properties is undefined', () => {
-        expect(hasPresentProperty<Example, 'a' | 'c'>('a', 'c')(absent)).toBe(false);
-    });
-
-    it('returns a function that returns false when one of the properties is null', () => {
-        expect(hasPresentProperty<Example, 'a' | 'd'>('a', 'd')(absent)).toBe(false);
+        describe('when a given arguments has at least one of the `properties` defined', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(false);
+            });
+        });
     });
 });
 
-describe('hasAbsentProperty', () => {
-    it('returns a function that returns true when object property is undefined', () => {
-        expect(hasAbsentProperty<Example, 'd'>('d')(absent)).toBe(true);
+describe(hasNotNullProperty, () => {
+    describe('hasNotNullProperty(property)', () => {
+        const typeGuard = hasNotNullProperty<Pair, 'first'>('first');
+
+        describe('when a given argument has the `property` not null', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: undefined,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has the `property` equal null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(false);
+            });
+        });
     });
 
-    it('returns a function that returns true when object property is null', () => {
-        expect(hasAbsentProperty<Example, 'c'>('c')(absent)).toBe(true);
+    describe('hasNotNullProperty(property, ...properties)', () => {
+        const typeGuard = hasNotNullProperty<Pair, 'first' | 'second'>('first', 'second');
+
+        describe('when a given argument has all `properties` not null', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: undefined,
+                    second: '',
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has at least one of the `properties` equal null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: 0,
+                    second: null,
+                })).toBe(false);
+            });
+        });
+    });
+});
+
+describe(hasNullProperty, () => {
+    describe('hasNullProperty(property)', () => {
+        const typeGuard = hasNullProperty<Pair, 'first'>('first');
+
+        describe('when a given argument has the `property` equal null', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has the `property` not null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: 0,
+                })).toBe(false);
+            });
+        });
     });
 
-    it('returns a function that returns false when object property is defined', () => {
-        expect(hasAbsentProperty<Example, 'a'>('a')(absent)).toBe(false);
+    describe('hasNullProperty(property, ...properties)', () => {
+        const typeGuard = hasNullProperty<Pair, 'first' | 'second'>('first', 'second');
+
+        describe('when a given argument has all `properties` equal null', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: null,
+                    second: null,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has at least one of the `properties` not null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(false);
+            });
+        });
+    });
+});
+
+describe(hasPresentProperty, () => {
+    describe('hasPresentProperty(property)', () => {
+        const typeGuard = hasPresentProperty<Pair, 'first'>('first');
+
+        describe('when a given argument has the `property` defined', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: 0,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has the `property` undefined', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: undefined,
+                })).toBe(false);
+            });
+        });
+
+        describe('when a given argument has the `property` equal null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(false);
+            });
+        });
     });
 
-    it('returns a function that returns true when all provided properties are undefined or null', () => {
-        expect(hasAbsentProperty<Example, 'c' | 'd'>('c', 'd')(absent)).toBe(true);
+    describe('hasPresentProperty(property, ...properties)', () => {
+        const typeGuard = hasPresentProperty<Pair, 'first' | 'second'>('first', 'second');
+
+        describe('when a given argument has all `properties` defined', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: 0,
+                    second: '',
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has one of the `properties` undefined', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: undefined,
+                    second: '',
+                })).toBe(false);
+            });
+        });
+
+        describe('when a given argument has one of the `properties` equal null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: null,
+                    second: '',
+                })).toBe(false);
+            });
+        });
+    });
+});
+
+describe(hasAbsentProperty, () => {
+    describe('hasAbsentProperty(property)', () => {
+        const typeGuard = hasAbsentProperty<Pair, 'first'>('first');
+
+        describe('when a given argument has the `property` undefined', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: undefined,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has the `property` equal null', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: null,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has the `property` defined', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: 0,
+                })).toBe(false);
+            });
+        });
     });
 
-    it('returns a function that returns false when one of the properties is defined', () => {
-        expect(hasAbsentProperty<Example, 'a' | 'c'>('a', 'c')(absent)).toBe(false);
+    describe('hasAbsentProperty(property, ...properties)', () => {
+        const typeGuard = hasAbsentProperty<Pair, 'first' | 'second'>('first', 'second');
+
+        describe('when a given argument has all the `properties` null or undefined', () => {
+            it('returns true', () => {
+                expect(typeGuard({
+                    first: undefined,
+                    second: null,
+                })).toBe(true);
+            });
+        });
+
+        describe('when a given argument has at least on of the `properties` defined and not null', () => {
+            it('returns false', () => {
+                expect(typeGuard({
+                    first: undefined,
+                    second: '',
+                })).toBe(false);
+                expect(typeGuard({
+                    first: 0,
+                    second: null,
+                })).toBe(false);
+            });
+        });
     });
 });

@@ -5,11 +5,17 @@ The `@perfective/common/object` package provides functions to work with the stan
 
 * Types:
 ** `ObjectWithDefined<T, K extends keyof T>`
+— an object of type `T` with a defined value of property `K`.
 ** `ObjectWithUndefined<T, K extends keyof T>`
+— an object of type `T` with an undefined value of property `K`.
 ** `ObjectWithNotNull<T, K extends keyof T>`
+— an object of type `T` with a non-null value of property `K`.
 ** `ObjectWithNull<T, K extends keyof T>`
+— an object of type `T` with a null value of property `K`.
 ** `ObjectWithPresent<T, K extends keyof T>`
+— an object of type `T` with a present value of property `K`.
 ** `ObjectWithAbsent<T, K extends keyof T>`
+— an object of type `T` with an absent value of property `K`.
 ** `RecursivePartial<T>`
 ** `Entry<T = unknown>`
 +
@@ -32,12 +38,18 @@ The `@perfective/common/object` package provides functions to work with the stan
 — partially applies the `filter()` function for the given `condition`.
 +
 * Type guards:
-** `hasDefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`
-** `hasUndefinedProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithUndefined<T, K>`
-** `hasNotNullProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithNotNull<T, K>`
-** `hasNullProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithNull<T, K>`
-** `hasPresentProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithPresent<T, K>`
-** `hasAbsentProperty<T, K extends keyof T>(property: K, ...and: readonly K[]): (value: T) => value is ObjectWithAbsent<T, K>`
+** `hasDefinedProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`
+— returns a type guard that returns `true` if its argument has a defined `property` and all given `properties`.
+** `hasUndefinedProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithUndefined<T, K>`
+— returns a type guard that returns `true` if its argument has an undefined `property` and all given `properties`.
+** `hasNotNullProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithNotNull<T, K>`
+— returns a type guard that returns `true` if its argument has a non-null `property` and all given `properties`.
+** `hasNullProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithNull<T, K>`
+— returns a type guard that returns `true` if its argument has a null `property` and all given `properties`.
+** `hasPresentProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithPresent<T, K>`
+— returns a type guard that returns `true` if its argument has a present `property` and all given `properties`.
+** `hasAbsentProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithAbsent<T, K>`
+— returns a type guard that returns `true` if its argument has an absent `property` and all given `properties`.
 +
 * Predicates:
 ** `isObject<T>(value: T | null): boolean`
@@ -57,8 +69,11 @@ The `@perfective/common/object` package provides functions to work with the stan
 +
 * Property functions:
 ** `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`
+— creates a function that for a given value returns the value of a given `property`.
 ** `property<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Predicate<T>`
-** `by<T, K extends keyof T>(property: K, ordering: Compare<T[K]>): Compare<T>`
+— creates a predicate that for a given value returns `true` if a given `property` satisfies a given `condition`.
+** `by<T, K extends keyof T>(property: K, order: Compare<T[K]>): Compare<T>`
+— returns a function to compare two objects by their `property` with a given `order` callback.
 
 
 == Input

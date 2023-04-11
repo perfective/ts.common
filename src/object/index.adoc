@@ -17,25 +17,35 @@ The `@perfective/common/object` package provides functions to work with the stan
 ** `ObjectWithAbsent<T, K extends keyof T>`
 — an object of type `T` with an absent value of property `K`.
 ** `RecursivePartial<T>`
-** `Entry<T = unknown>`
+— a generic type that recursively marks all properties of a given type `T` as optional.
+** `Entry<K = string, V = unknown>`
+— a key-value pair (array).
 +
 * Constructors:
-** `pick<T, K extends keyof T>(record: T, ...property: readonly K[]): Pick<T, K>`
-— creates a copy of the `record` only with the given `property`.
-** `omit<T, K extends keyof T>(record: T, ...property: readonly K[]): Omit<T, K>`
-— creates a copy of the `record` without the given `property`.
-** `filter<T, K extends keyof T>(record: T, condition: Predicate<T[K]>): Partial<T>`
-— creates a copy of the `record` where each value meets the `condition`.
-** `assign<T, V = Partial<T>>(value: T, ...overrides: (V | Partial<T>)[]): T & V`
-— creates a shallow copy of the given value with the given overrides.
 ** `recordFromArray(array: string[]): Record<string, number>`
+— creates an object from a given array with the array values as keys and their indexes as values.
 ** `recordFromEntries(entries: Entry[]): Record<string, unknown>`
-** `recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<T, Pick<T, K>>`
-— partially applies the `pick()` function for the given `property`.
-** `recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<T, Omit<T, K>>`
-— partially applies the `omit()` function for the given `property`.
-** `recordFiltered<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<T, Partial<T>>`
-— partially applies the `filter()` function for the given `condition`.
+— creates an object from a given array of entries. An inverse for `Object.entries()`.
++
+** `pick<T, K extends keyof T>(record: NonNullable<T>, ...properties: readonly K[]): Pick<T, K>`
+— creates a copy of a given `record` only with given `properties`.
+** `recordWithPicked<T, K extends keyof T>(...properties: readonly K[]): Unary<NonNullable<T>, Pick<T, K>>`
+— creates a function to `pick()` given `properties` from its argument.
++
+** `omit<T, K extends keyof T>(record: NonNullable<T>, ...properties: readonly K[]): Omit<T, K>`
+— creates a copy of a given `record` without given `properties`.
+** `recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<NonNullable<T>, Omit<T, K>>`
+— creates a function to `omit()` given `properties` from its argument.
++
+** `filter<T, K extends keyof T>(record: NonNullable<T>, condition: Predicate<T[K]>): Partial<T>`
+— creates a copy of a given `record` only with properties that meet a given `condition`.
+** `recordFiltered<T, K extends keyof T = keyof T>(condition: Predicate<T[K]>): Unary<NonNullable<T>, Partial<T>>`
+— creates a function to `filter()` properties that satisfy a given `condition` from its argument.
++
+** `assigned<T, V = Partial<T>>(value: T, ...overrides: (V | Partial<T>)[]): T & V`
+— creates a shallow copy of the given value with the given overrides.
+** `function recordWithAssigned<T, V = Partial<T>>(...overrides: (V | Partial<T>)[]): (value: T) => T & V`
+— creates a function to assign given `overrides` to its argument.
 +
 * Type guards:
 ** `hasDefinedProperty<T, K extends keyof T>(property: K, ...properties: readonly K[]): (value: T) => value is ObjectWithDefined<T, K>`
@@ -66,6 +76,7 @@ The `@perfective/common/object` package provides functions to work with the stan
 +
 * Reducers:
 ** `toRecordFromEntries(record: Record<string, unknown>, value: Entry): Record<string, unknown>`
+— a reducer to build a record from entries.
 +
 * Property functions:
 ** `property<T, K extends keyof T>(property: K): Unary<T, T[K]>`

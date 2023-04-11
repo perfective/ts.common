@@ -1,6 +1,11 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { Unary } from '../../function/function/unary';
 
+/**
+ * Creates an object from a given array with the array values as keys and their indexes as values.
+ *
+ * @since v0.2.0
+ */
 export function recordFromArray(array: string[]): Record<string, number> {
     return array.reduce<Record<string, number>>(indexByValue, {});
 }
@@ -10,21 +15,28 @@ function indexByValue(record: Record<string, number>, value: string, index: numb
     return record;
 }
 
+/**
+ * A key-value pair (array).
+ *
+ * @since v0.3.0
+ */
 export type Entry<K = string, V = unknown> = [K, V];
 
 /**
- * Creates an plain object from an array of pairs (entries).
- *
- * This function is an inverse for Object.entries().
+ * Creates an object from a given array of entries. An inverse for `Object.entries()`.
  *
  * @see Object.entries()
+ *
+ * @since v0.3.0
  */
 export function recordFromEntries(entries: Entry[]): Record<string, unknown> {
     return entries.reduce(toRecordFromEntries, {});
 }
 
 /**
- * Reducer to build a record from entries.
+ * A reducer to build a record from entries.
+ *
+ * @since v0.3.0
  */
 export function toRecordFromEntries(record: Record<string, unknown>, value: Entry): Record<string, unknown> {
     record[value[0]] = value[1];
@@ -32,47 +44,57 @@ export function toRecordFromEntries(record: Record<string, unknown>, value: Entr
 }
 
 /**
- * Creates a copy of the record only with the given properties.
+ * Creates a copy of a given {@linkcode record} only with given {@linkcode properties}.
  *
  * @see Pick
+ *
+ * @since v0.3.0
  */
-export function pick<T, K extends keyof T>(record: NonNullable<T>, ...property: readonly K[]): Pick<T, K> {
+export function pick<T, K extends keyof T>(record: NonNullable<T>, ...properties: readonly K[]): Pick<T, K> {
     return Object.entries(record)
-        .filter(([key]: Entry) => property.includes(key as K))
+        .filter(([key]: Entry) => properties.includes(key as K))
         .reduce(toRecordFromEntries, {}) as Pick<T, K>;
 }
 
 /**
- * Partially applies the pick() function for the given properties.
+ * Creates a function to {@linkcode pick} given {@linkcode properties} from its argument.
  *
  * @see pick()
+ *
+ * @since v0.3.0
  */
-export function recordWithPicked<T, K extends keyof T>(...property: readonly K[]): Unary<NonNullable<T>, Pick<T, K>> {
-    return (value: NonNullable<T>): Pick<T, K> => pick<T, K>(value, ...property);
+export function recordWithPicked<T, K extends keyof T>(...properties: readonly K[]): Unary<NonNullable<T>, Pick<T, K>> {
+    return (value: NonNullable<T>): Pick<T, K> => pick<T, K>(value, ...properties);
 }
 
 /**
- * Creates a copy of the record without the given properties.
+ * Creates a copy of a given {@linkcode record} without given {@linkcode properties}.
  *
  * @see Omit
+ *
+ * @since v0.3.0
  */
-export function omit<T, K extends keyof T>(record: NonNullable<T>, ...property: readonly K[]): Omit<T, K> {
+export function omit<T, K extends keyof T>(record: NonNullable<T>, ...properties: readonly K[]): Omit<T, K> {
     return Object.entries(record)
-        .filter(([key]: Entry) => !property.includes(key as K))
+        .filter(([key]: Entry) => !properties.includes(key as K))
         .reduce(toRecordFromEntries, {}) as Omit<T, K>;
 }
 
 /**
- * Partially applies the omit() function for the given properties.
+ * Creates a function to {@linkcode omit} given {@linkcode properties} from its argument.
  *
  * @see omit()
+ *
+ * @since v0.3.0
  */
 export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[]): Unary<NonNullable<T>, Omit<T, K>> {
     return (value: NonNullable<T>): Omit<T, K> => omit<T, K>(value, ...property);
 }
 
 /**
- * Creates a copy of the record where each value meets the condition.
+ * Creates a copy of a given {@linkcode record} only with properties that satisfy a given {@linkcode condition}.
+ *
+ * @since v0.3.0
  */
 export function filter<T, K extends keyof T>(record: NonNullable<T>, condition: Predicate<T[K]>): Partial<T> {
     return Object.entries(record)
@@ -81,9 +103,11 @@ export function filter<T, K extends keyof T>(record: NonNullable<T>, condition: 
 }
 
 /**
- * Partially applies the filter() function for the given condition.
+ * Creates a function to {@linkcode filter} properties that satisfy a given {@linkcode condition} from its argument.
  *
  * @see filter()
+ *
+ * @since v0.3.0
  */
 export function recordFiltered<T, K extends keyof T = keyof T>(
     condition: Predicate<T[K]>,
@@ -92,9 +116,11 @@ export function recordFiltered<T, K extends keyof T = keyof T>(
 }
 
 /**
- * Creates a shallow copy of the given value with the given overrides.
+ * Creates a {@linkcode Record} from a given {@linkcode value} with properties overridden by the {@linkcode overrides}.
  *
  * @see Object.assign()
+ *
+ * @since v0.3.0
  */
 export function assigned<T, V = Partial<T>>(value: T, ...overrides: (V | Partial<T>)[]): T & V {
     return overrides.reduce<T & V>(
@@ -108,7 +134,11 @@ export function assigned<T, V = Partial<T>>(value: T, ...overrides: (V | Partial
 }
 
 /**
- * Partially applies the assign() with the given overrides.
+ * Creates a function to assign given {@linkcode overrides} to its argument.
+ *
+ * @see assigned
+ *
+ * @since v0.3.0
  */
 export function recordWithAssigned<T, V = Partial<T>>(...overrides: (V | Partial<T>)[]): (value: T) => T & V {
     return (value: T): T & V => assigned(value, ...overrides);

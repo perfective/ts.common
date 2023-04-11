@@ -12,39 +12,45 @@ import {
     recordWithPicked,
 } from './record';
 
-describe('recordFromArray', () => {
-    it('creates an empty object from an empty array', () => {
-        expect(recordFromArray([]))
-            .toStrictEqual({});
+describe(recordFromArray, () => {
+    describe('when given an empty array', () => {
+        it('creates an empty object', () => {
+            expect(recordFromArray([])).toStrictEqual({});
+        });
     });
 
-    it('flips a given array of string into an object', () => {
-        expect(recordFromArray(['a', 'b', 'c']))
-            .toStrictEqual({
-                a: 0,
-                b: 1,
-                c: 2,
-            });
+    describe('when given an array', () => {
+        it('creates an object with the given array values as keys and their indexes as values', () => {
+            expect(recordFromArray(['a', 'b', 'c']))
+                .toStrictEqual({
+                    a: 0,
+                    b: 1,
+                    c: 2,
+                });
+        });
     });
 });
 
-describe('recordFromEntries', () => {
-    it('creates an empty object from an empty array', () => {
-        expect(recordFromEntries([]))
-            .toStrictEqual({});
+describe(recordFromEntries, () => {
+    describe('when given an empty array', () => {
+        it('creates an empty object', () => {
+            expect(recordFromEntries([]))
+                .toStrictEqual({});
+        });
     });
 
-    it('creates an object from an object as key-value map of array entries', () => {
-        expect(recordFromEntries([
-            ['number', 0],
-            ['string', 'string'],
-            ['undefined', undefined],
-            ['null', null],
-        ])).toStrictEqual({
-            number: 0,
-            string: 'string',
-            null: null,
-            undefined,
+    describe('when given an array of entries', () => {
+        it('creates an object with entries keys as properties and entries values as their values', () => {
+            expect(recordFromEntries([
+                ['number', 0],
+                ['string', 'string'],
+                ['undefined', undefined],
+                ['null', null],
+            ])).toStrictEqual({
+                number: 0,
+                string: 'string',
+                null: null,
+            });
         });
     });
 });
@@ -63,7 +69,7 @@ const input: Example = {
     d: [],
 };
 
-describe('pick', () => {
+describe(pick, () => {
     it('creates a copy of a record with the given properties', () => {
         const output: Pick<Example, 'a' | 'b'> = pick(input, 'a', 'b');
 
@@ -74,18 +80,20 @@ describe('pick', () => {
     });
 });
 
-describe('recordWithPicked', () => {
-    it('creates a copy of a record with the given properties', async () => {
-        const output: Pick<Example, 'a' | 'b'> = await Promise.resolve(input).then(recordWithPicked('a', 'b'));
+describe(recordWithPicked, () => {
+    describe('recordWithPicked(...properties)', () => {
+        it('creates a copy of a record with the given properties', async () => {
+            const output: Pick<Example, 'a' | 'b'> = await Promise.resolve(input).then(recordWithPicked('a', 'b'));
 
-        expect(output).toStrictEqual({
-            a: '',
-            b: 0,
-        } as Omit<Example, 'c' | 'd'>);
+            expect(output).toStrictEqual({
+                a: '',
+                b: 0,
+            } as Omit<Example, 'c' | 'd'>);
+        });
     });
 });
 
-describe('omit', () => {
+describe(omit, () => {
     it('creates a copy of a record without the given properties', () => {
         const output: Omit<Example, 'a' | 'b'> = omit(input, 'a', 'b');
 
@@ -96,18 +104,20 @@ describe('omit', () => {
     });
 });
 
-describe('recordWithOmitted', () => {
-    it('creates a copy of a record without the given properties', async () => {
-        const output: Omit<Example, 'a' | 'b'> = await Promise.resolve(input).then(recordWithOmitted('a', 'b'));
+describe(recordWithOmitted, () => {
+    describe('recordWithOmitted(properties)', () => {
+        it('creates a copy of a record without the given properties', async () => {
+            const output: Omit<Example, 'a' | 'b'> = await Promise.resolve(input).then(recordWithOmitted('a', 'b'));
 
-        expect(output).toStrictEqual({
-            c: false,
-            d: [],
-        } as Pick<Example, 'c' | 'd'>);
+            expect(output).toStrictEqual({
+                c: false,
+                d: [],
+            } as Pick<Example, 'c' | 'd'>);
+        });
     });
 });
 
-describe('filter', () => {
+describe(filter, () => {
     it('keeps only values that pass the filter', () => {
         const output: Partial<Example> = filter(input, isTruthy);
 
@@ -118,18 +128,20 @@ describe('filter', () => {
     });
 });
 
-describe('recordFiltered', () => {
-    it('keeps only values that pass the filter', async () => {
-        const output: Partial<Example> = await Promise.resolve(input).then(recordFiltered(isTruthy));
+describe(recordFiltered, () => {
+    describe('recordFiltered(condition)', () => {
+        it('keeps only values that pass the filter', async () => {
+            const output: Partial<Example> = await Promise.resolve(input).then(recordFiltered(isTruthy));
 
-        expect(output)
-            .toStrictEqual({
-                d: [],
-            } as Partial<Example>);
+            expect(output)
+                .toStrictEqual({
+                    d: [],
+                } as Partial<Example>);
+        });
     });
 });
 
-describe('assigned', () => {
+describe(assigned, () => {
     interface ExampleA {
         a: number;
         b: number;
@@ -199,7 +211,7 @@ describe('assigned', () => {
     });
 });
 
-describe('recordWithAssigned', () => {
+describe(recordWithAssigned, () => {
     interface ExampleA {
         a: number;
         b: number;

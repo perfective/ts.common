@@ -1,7 +1,7 @@
 import { isPresent } from '../../value/value';
 
 /**
- * Returns true when the value is a non-null object.
+ * Returns true when the value is not null and is not a primitive.
  */
 // eslint-disable-next-line @typescript-eslint/ban-types -- type guard
 export function isObject<T>(value: T | null): value is T & object {
@@ -17,13 +17,14 @@ export function isObject<T>(value: T | null): value is T & object {
  *  - when isRecord() returns true, it is possible to assign the checked value to non-Object value (e.g. Date);
  *  - when isRecord() returns false, it is possible to assign the value to a Record value.
  */
-export function isRecord<T>(value: T): value is T & Record<string, unknown> {
+export function isRecord<T>(value: T): value is (T & Record<string, unknown>) {
     return isObject(value)
         && hasConstructor(Object.name)(value);
 }
 
 /**
- * Returns true when the given value is considered true in boolean context.
+ * Returns true when the value is neither undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero),
+ * "" (an empty string), or the `document.all` builtin.
  *
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Truthy
  */
@@ -33,7 +34,8 @@ export function isTruthy<T>(value: T): boolean {
 }
 
 /**
- * Returns false when the given value is considered false in the boolean context.
+ * Returns true when the value is undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero), "" (an empty string),
+ * or the `document.all` builtin.
  *
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Falsy
  */
@@ -42,7 +44,9 @@ export function isFalsy<T>(value: T): boolean {
 }
 
 /**
- * Returns true when the value is truthy or is not an empty array or object.
+ * Returns true when the value is falsy, an empty array or a {@linkcode Record} without properties.
+ *
+ * @see isFalsy
  */
 export function isEmpty<T>(value: T): boolean {
     return isFalsy(value)

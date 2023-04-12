@@ -7,6 +7,8 @@ import { Entry, toRecordFromEntries } from './record';
  * Creates a shallow copy of the given value.
  *
  * Do not use: this function may not work as intended and needs to be re-written thoroughly.
+ *
+ * @since v0.3.0
  */
 // eslint-disable-next-line complexity -- exhaustive check
 export function copy<T>(value: T): T {
@@ -32,6 +34,8 @@ export function copy<T>(value: T): T {
  * Creates a clone (deep copy) of the given value.
  *
  * Do not use: this function may not work as intended and needs to be re-written thoroughly.
+ *
+ * @since v0.3.0
  */
 export function clone<T>(value: T): T {
     if (Array.isArray(value)) {

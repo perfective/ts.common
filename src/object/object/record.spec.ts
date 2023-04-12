@@ -50,6 +50,7 @@ describe(recordFromEntries, () => {
                 number: 0,
                 string: 'string',
                 null: null,
+                undefined,
             });
         });
     });

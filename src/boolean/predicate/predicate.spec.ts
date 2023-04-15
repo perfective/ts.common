@@ -1,119 +1,177 @@
-import { all, atLeast, atMost, either, exactly, is, isNot, neither, not } from './predicate';
+import { isGreaterThan, isLessThan } from '../../number/number/order';
 
-const list: number[] = [2.71, 3.14];
-const irrational: Record<string, number> = {
-    euler: 2.71,
-    pi: 3.14,
-};
+import { all, atLeast, atMost, either, exactly, is, isNot, neither, not, Predicate } from './predicate';
 
-describe('is', () => {
+describe(is, () => {
     describe('is(T)', () => {
-        it('returns true when value is the same', () => {
-            expect(is(3.14)(3.14)).toBe(true);
-            expect(is('3.14')('3.14')).toBe(true);
-            expect(is(list)(list)).toBe(true);
-            expect(is(irrational)(irrational)).toBe(true);
+        const isZero: Predicate<number> = is(0);
+
+        describe('when value is the same', () => {
+            it('returns true', () => {
+                expect(isZero(0)).toBe(true);
+            });
         });
 
-        it('returns false when value is not the same', () => {
-            expect(is(2.71)(3.14)).toBe(false);
-            expect(is('2.71')('3.14')).toBe(false);
-            expect(is(list)([2.71, 3.14])).toBe(false);
-            expect(is(irrational)({
-                euler: 2.71,
-                pi: 3.14,
-            })).toBe(false);
+        describe('when value is not the same', () => {
+            it('returns false', () => {
+                expect(isZero(3.14)).toBe(false);
+            });
         });
     });
 });
 
-describe('isNot', () => {
+describe(isNot, () => {
     describe('isNot(T)', () => {
-        it('returns false when value is the same', () => {
-            expect(isNot(3.14)(3.14)).toBe(false);
-            expect(isNot('3.14')('3.14')).toBe(false);
-            expect(isNot(list)(list)).toBe(false);
-            expect(isNot(irrational)(irrational)).toBe(false);
+        const isNotZero: Predicate<number> = isNot(0);
+
+        describe('when value is the same', () => {
+            it('returns false', () => {
+                expect(isNotZero(0)).toBe(false);
+            });
         });
 
-        it('returns true when value is not the same', () => {
-            expect(isNot(2.71)(3.14)).toBe(true);
-            expect(isNot('2.71')('3.14')).toBe(true);
-            expect(isNot(list)([2.71, 3.14])).toBe(true);
-            expect(isNot(irrational)({
-                euler: 2.71,
-                pi: 3.14,
-            })).toBe(true);
+        describe('when value is not the same', () => {
+            it('returns true', () => {
+                expect(isNotZero(1)).toBe(true);
+            });
         });
     });
 });
 
-describe('not', () => {
-    it('creates a predicate that is true when the input predicate is false', () => {
-        expect(not(is(3.14))(2.71)).toBe(true);
-    });
+describe(not, () => {
+    describe('not(Predicate)', () => {
+        const isZero: Predicate<number> = is(0);
+        const notIsZero: Predicate<number> = not(isZero);
 
-    it('creates a predicate that is false when the input predicate is true', () => {
-        expect(not(is(3.14))(3.14)).toBe(false);
-    });
-});
+        describe('when the input predicate is false', () => {
+            it('returns true', () => {
+                expect(isZero(2.71)).toBe(false);
+                expect(notIsZero(2.71)).toBe(true);
+            });
+        });
 
-describe('all', () => {
-    it('creates a predicate that is true when all the input predicates are true', () => {
-        expect(all(is(3.14), is(3.14))(3.14)).toBe(true);
-    });
-
-    it('creates a predicate that is false when one of the input predicates is false', () => {
-        expect(all(is(3.14), is(2.71))(3.14)).toBe(false);
-    });
-});
-
-describe('either', () => {
-    it('creates a predicate that is true when any of the input predicates is true', () => {
-        expect(either(is(3.14), is(2.71))(3.14)).toBe(true);
-    });
-
-    it('creates a predicate that is true when neither of the input predicates is true', () => {
-        expect(either(is(3.14), is(2.71))(1.41)).toBe(false);
+        describe('when the input predicate is true', () => {
+            it('returns false', () => {
+                expect(isZero(0)).toBe(true);
+                expect(notIsZero(0)).toBe(false);
+            });
+        });
     });
 });
 
-describe('neither', () => {
-    it('creates a predicate that is true when neither of the input predicates is true', () => {
-        expect(neither(is(3.14), is(2.71))(1.41)).toBe(true);
-    });
+describe(all, () => {
+    describe('all(...Predicate[])', () => {
+        const isBetweenZeroAndOne: Predicate<number> = all(isGreaterThan(0), isLessThan(1));
 
-    it('creates a predicate that is false when either of the input predicates is true', () => {
-        expect(neither(is(3.14), is(2.71))(2.71)).toBe(false);
-    });
-});
+        describe('when all the input predicates are true', () => {
+            it('returns true', () => {
+                expect(isBetweenZeroAndOne(0.5)).toBe(true);
+            });
+        });
 
-describe('atLeast', () => {
-    it('creates a predicate that is true when the threshold is met', () => {
-        expect(atLeast(2, ...[1.41, 1.73, 2.23].map(isNot))(2.23)).toBe(true);
-    });
-
-    it('creates a predicate that is false when the threshold is not met', () => {
-        expect(atLeast(2, ...[1.41, 1.73, 2.23].map(is))(2.23)).toBe(false);
+        describe('when one of the input predicates is false', () => {
+            it('returns false', () => {
+                expect(isBetweenZeroAndOne(3.14)).toBe(false);
+            });
+        });
     });
 });
 
-describe('atMost', () => {
-    it('creates a predicate that is true when the number of true is below a threshold', () => {
-        expect(atMost(1, ...[1.41, 1.73, 2.23].map(is))(2.23)).toBe(true);
-    });
+describe(either, () => {
+    describe('either(...Predicate[])', () => {
+        const isZeroOrPi: Predicate<number> = either(is(0), is(3.14));
 
-    it('creates a predicate that is false when the number of true is above a threshold', () => {
-        expect(atMost(1, ...[1.41, 1.73, 2.23].map(isNot))(2.23)).toBe(false);
+        describe('when any of the input predicates is true', () => {
+            it('returns true', () => {
+                expect(isZeroOrPi(0)).toBe(true);
+                expect(isZeroOrPi(3.14)).toBe(true);
+            });
+        });
+
+        describe('when neither of the input predicates is true', () => {
+            it('returns false', () => {
+                expect(isZeroOrPi(1)).toBe(false);
+            });
+        });
     });
 });
 
-describe('exactly', () => {
-    it('creates a predicate that is true when the number of true is matched', () => {
-        expect(exactly(2, ...[1.41, 1.73, 2.23].map(isNot))(2.23)).toBe(true);
-    });
+describe(neither, () => {
+    describe('neither(...Predicate[])', () => {
+        const neitherZeroOrPi: Predicate<number> = neither(is(0), is(3.14));
 
-    it('creates a predicate that is false when the number of true is not matched', () => {
-        expect(exactly(2, ...[1.41, 1.73, 2.23].map(is))(2.23)).toBe(false);
+        describe('when neither of the input predicates is true', () => {
+            it('returns true', () => {
+                expect(neitherZeroOrPi(1)).toBe(true);
+            });
+        });
+
+        describe('when either of the input predicates is true', () => {
+            it('returns false', () => {
+                expect(neitherZeroOrPi(0)).toBe(false);
+                expect(neitherZeroOrPi(3.14)).toBe(false);
+            });
+        });
+    });
+});
+
+describe(atLeast, () => {
+    describe('atLeast(number, ...Predicate[])', () => {
+        const atLeastTwo: Predicate<number> = atLeast(2, isNot(0), isLessThan(1), isGreaterThan(2));
+
+        describe('when the number of matching predicates is equal or above a givne minimum', () => {
+            it('returns true', () => {
+                expect(atLeastTwo(3)).toBe(true);
+            });
+        });
+
+        describe('when the number of matching predicates is below a given minimum', () => {
+            it('returns false', () => {
+                expect(atLeastTwo(0)).toBe(false);
+            });
+        });
+    });
+});
+
+describe(atMost, () => {
+    describe('atMost(number, ...Predicate[])', () => {
+        const atMostTwo: Predicate<number> = atMost(2, isGreaterThan(1), isGreaterThan(2), is(3));
+
+        describe('when the number of matching predicates is below or equal a given maximum', () => {
+            it('returns true', () => {
+                expect(atMostTwo(2)).toBe(true);
+                expect(atMostTwo(4)).toBe(true);
+            });
+        });
+
+        describe('when the number of matching predicates is above a given maximum', () => {
+            it('returns false', () => {
+                expect(atMostTwo(3)).toBe(false);
+            });
+        });
+    });
+});
+
+describe(exactly, () => {
+    const exactlyTwo: Predicate<number> = exactly(2, isGreaterThan(1), isGreaterThan(2), is(3));
+
+    describe('exactly(number, ...Predicate[])', () => {
+        describe('when the number of matching predicates is exactly a given count', () => {
+            it('returns true', () => {
+                expect(exactlyTwo(4)).toBe(true);
+            });
+        });
+
+        describe('when the number of matching predicates is below a given count', () => {
+            it('returns false', () => {
+                expect(exactlyTwo(2)).toBe(false);
+            });
+        });
+
+        describe('when the number of matching predicates is above a given count', () => {
+            it('returns false', () => {
+                expect(exactlyTwo(3)).toBe(false);
+            });
+        });
     });
 });

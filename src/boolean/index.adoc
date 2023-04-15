@@ -21,28 +21,28 @@ or a nullary function that returns a `boolean` value.
 `Predicate<T>` is a unary function that returns a `boolean` value.
 
 * `is<T>(input: T): Predicate<T>`
-— creates a predicate that is `true` when its argument is the same as the `input`.
+— creates a `Predicate` that is `true` if its argument strictly equals a given `input`.
 +
 * `isNot<T>(input: T): Predicate<T>`
-— creates a predicate that is `true` when its argument is not the same as the `input`.
+— creates a `Predicate` that is `true` if its argument does not equal a given `input`.
 +
 * `not<T>(predicate: Predicate<T>): Predicate<T>`
-— creates a predicate that negates the given predicate.
+— creates a `Predicate` that inverses the result of a given `Predicate`.
 +
 * `all<T>(...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when all predicates are `true` (logical `AND`).
+— creates a `Predicate` that is `true` when all given `predicates` are `true` (logical `AND`).
 +
 * `either<T>(...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when at least one predicate is `true` (logical `OR`).
+— creates a `Predicate` that is `true` when at least one of given `predicates` is `true` (logical `OR`).
 +
 * `neither<T>(...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when none of the predicates is `true`.
+— creates a `Predicate` that is `true` when none of given `predicates` is `true`.
 +
 * `atLeast<T>(minimum: number, ...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when at least the `minimum` number of predicates are `true`.
+— creates a `Predicate` that is `true` when at least a given `minimum` number of given `predicates` is true.
 +
 * `atMost<T>(maximum: number, ...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when at most the `maximum` number of predicates are `true`.
+— creates a `Predicate` that is `true` when no more than a given `maximum` number of given `predicates` is true.
 +
 * `exactly<T>(count: number, ...predicates: Predicate<T>[]): Predicate<T>`
-— creates a predicate that is `true` when exact `count` of predicates are `true`.
+— creates a `Predicate` that is `true` when exactly a given `count` number of given `predicates` is true.

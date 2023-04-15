@@ -9,11 +9,16 @@ The `@perfective/common/boolean` package provides types and functions to work wi
 or a nullary function that returns a `boolean` value.
 
 * `isTrue(proposition: Proposition): boolean`
+— returns `true` if a given `proposition` is `true` or returns `true`.
+Otherwise, returns `false`.
 +
 * `isFalse(proposition: Proposition): boolean`
+— returns `true` if a given `proposition` is `false` or returns `false`.
+Otherwise, returns `false`.
 +
-* `negated(value: Proposition): boolean`
-— negates the given proposition value.
+* `negated(proposition: Proposition): boolean`
+— returns `true` if a given `proposition` is `false` or returns `false`.
+Otherwise, returns `false`.
 
 
 == Predicate

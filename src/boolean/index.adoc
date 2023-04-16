@@ -25,6 +25,12 @@ Otherwise, returns `false`.
 
 `Predicate<T>` is a unary function that returns a `boolean` value.
 
+* `isBoolean<T>(value: T | boolean): value is boolean`
+— returns `true` if a given `value` is `boolean`.
++
+* `isNotBoolean<T>(value: T | boolean): value is T`
+— returns `true` if a given `value` is not `boolean`.
++
 * `isTruthy<T>(value: T): boolean`
 — returns `true` when the value is neither `undefined`, `null`, `false`, `NaN`, `0`, `-0`, `0n` (a `BigInt` zero),
 `""` (an empty string), or the `document.all` builtin.

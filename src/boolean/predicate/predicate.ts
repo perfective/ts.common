@@ -9,6 +9,24 @@ import { isFalse, isTrue } from '../proposition/proposition';
 export type Predicate<T> = (value: T) => boolean;
 
 /**
+ * A type predicate. Returns `true` if a given {@linkcode value} is `boolean`.
+ *
+ * @since v0.10.0
+ */
+export function isBoolean<T>(value: T | boolean): value is boolean {
+    return typeof value === 'boolean';
+}
+
+/**
+ * A type predicate. Returns `true` if a given {@linkcode value} is not `boolean`.
+ *
+ * @since v0.10.0
+ */
+export function isNotBoolean<T>(value: T | boolean): value is T {
+    return typeof value !== 'boolean';
+}
+
+/**
  * Returns true when the value is neither undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero),
  * "" (an empty string), or the `document.all` builtin.
  *

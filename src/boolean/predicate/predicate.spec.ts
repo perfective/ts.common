@@ -7,13 +7,49 @@ import {
     either,
     exactly,
     is,
+    isBoolean,
     isFalsy,
     isNot,
+    isNotBoolean,
     isTruthy,
     neither,
     not,
     Predicate,
 } from './predicate';
+
+describe(isBoolean, () => {
+    describe.each([
+        [true, true],
+        [false, true],
+        [undefined, false],
+        [null, false],
+        ['', false],
+        [0, false],
+        [[], false],
+        [{}, false],
+    ])('when given value is %s', (input: unknown, output: boolean) => {
+        it(`returns ${String(output)}`, () => {
+            expect(isBoolean(input)).toBe(output);
+        });
+    });
+});
+
+describe(isNotBoolean, () => {
+    describe.each([
+        [true, false],
+        [false, false],
+        [undefined, true],
+        [null, true],
+        ['', true],
+        [0, true],
+        [[], true],
+        [{}, true],
+    ])('when given value is %s', (input: unknown, output: boolean) => {
+        it(`returns ${String(output)}`, () => {
+            expect(isNotBoolean(input)).toBe(output);
+        });
+    });
+});
 
 describe(isTruthy, () => {
     describe('when the value is true', () => {

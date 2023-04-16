@@ -1,3 +1,4 @@
+import { testCase } from '../../jest';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 
 import {
@@ -19,15 +20,15 @@ import {
 
 describe(isBoolean, () => {
     describe.each([
-        [true, true],
-        [false, true],
-        [undefined, false],
-        [null, false],
-        ['', false],
-        [0, false],
-        [[], false],
-        [{}, false],
-    ])('when given value is %s', (input: unknown, output: boolean) => {
+        testCase(true, true),
+        testCase(false, true),
+        testCase(undefined, false),
+        testCase(null, false),
+        testCase('string', '', false),
+        testCase('number', 0, false),
+        testCase('array', [], false),
+        testCase('object', {}, false),
+    ])('when a given value is $name', ({ input, output }) => {
         it(`returns ${String(output)}`, () => {
             expect(isBoolean(input)).toBe(output);
         });
@@ -36,15 +37,15 @@ describe(isBoolean, () => {
 
 describe(isNotBoolean, () => {
     describe.each([
-        [true, false],
-        [false, false],
-        [undefined, true],
-        [null, true],
-        ['', true],
-        [0, true],
-        [[], true],
-        [{}, true],
-    ])('when given value is %s', (input: unknown, output: boolean) => {
+        testCase(true, false),
+        testCase(false, false),
+        testCase(undefined, true),
+        testCase(null, true),
+        testCase('string', '', true),
+        testCase('number', 0, true),
+        testCase('array', [], true),
+        testCase('object', {}, true),
+    ])('when a given value is $name', ({ input, output }) => {
         it(`returns ${String(output)}`, () => {
             expect(isNotBoolean(input)).toBe(output);
         });

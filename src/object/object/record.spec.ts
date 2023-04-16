@@ -1,4 +1,5 @@
-import { isTruthy } from './predicate';
+import { isTruthy } from '../../boolean/predicate/predicate';
+
 import {
     assigned,
     filter,

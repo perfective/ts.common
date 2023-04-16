@@ -1,6 +1,201 @@
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 
-import { all, atLeast, atMost, either, exactly, is, isNot, neither, not, Predicate } from './predicate';
+import {
+    all,
+    atLeast,
+    atMost,
+    either,
+    exactly,
+    is,
+    isFalsy,
+    isNot,
+    isTruthy,
+    neither,
+    not,
+    Predicate,
+} from './predicate';
+
+describe(isTruthy, () => {
+    describe('when the value is true', () => {
+        it('returns true', () => {
+            expect(isTruthy(true)).toBe(true);
+        });
+    });
+
+    describe('when the value is false', () => {
+        it('returns false', () => {
+            expect(isTruthy(false)).toBe(false);
+        });
+    });
+
+    describe('when the value is undefined', () => {
+        it('returns false', () => {
+            expect(isTruthy(undefined)).toBe(false);
+        });
+    });
+
+    describe('when the value is null', () => {
+        it('returns false', () => {
+            expect(isTruthy(null)).toBe(false);
+        });
+    });
+
+    describe('when the value is an empty string', () => {
+        it('returns false', () => {
+            expect(isTruthy('')).toBe(false);
+        });
+    });
+
+    describe('when the value is a non-empty string', () => {
+        it('returns true', () => {
+            expect(isTruthy('0')).toBe(true);
+        });
+    });
+
+    describe('when the value is NaN', () => {
+        it('returns false', () => {
+            expect(isTruthy(Number.NaN)).toBe(false);
+        });
+    });
+
+    describe('when the value is zero', () => {
+        it('returns false', () => {
+            expect(isTruthy(0)).toBe(false);
+            expect(isTruthy(-0)).toBe(false);
+        });
+    });
+
+    describe('when the value is a non-zero number', () => {
+        it('returns true', () => {
+            expect(isTruthy(Number.MAX_SAFE_INTEGER)).toBe(true);
+            expect(isTruthy(Number.MAX_VALUE)).toBe(true);
+            expect(isTruthy(Number.MIN_VALUE)).toBe(true);
+            expect(isTruthy(Number.POSITIVE_INFINITY)).toBe(true);
+            expect(isTruthy(Number.NEGATIVE_INFINITY)).toBe(true);
+        });
+    });
+
+    describe('when the value is zero BigInt', () => {
+        it('returns false', () => {
+            expect(isTruthy(BigInt(0))).toBe(false);
+        });
+    });
+
+    describe('when the value is non-zero BigInt', () => {
+        it('returns true', () => {
+            expect(isTruthy(BigInt(Number.MAX_SAFE_INTEGER))).toBe(true);
+        });
+    });
+
+    describe('when the value is an empty object', () => {
+        it('returns true', () => {
+            expect(isTruthy({})).toBe(true);
+        });
+    });
+
+    describe('when the value is an empty array', () => {
+        it('returns true', () => {
+            expect(isTruthy([])).toBe(true);
+        });
+    });
+
+    describe('when the value is an empty RegExp', () => {
+        it('returns true', () => {
+            expect(isTruthy(new RegExp('', 'u'))).toBe(true);
+        });
+    });
+});
+
+describe(isFalsy, () => {
+    describe('when the value is true', () => {
+        it('returns false', () => {
+            expect(isFalsy(true)).toBe(false);
+        });
+    });
+
+    describe('when the value is false', () => {
+        it('returns true', () => {
+            expect(isFalsy(false)).toBe(true);
+        });
+    });
+
+    describe('when the value is undefined', () => {
+        it('returns true', () => {
+            expect(isFalsy(undefined)).toBe(true);
+        });
+    });
+
+    describe('when the value is null', () => {
+        it('returns true', () => {
+            expect(isFalsy(null)).toBe(true);
+        });
+    });
+
+    describe('when the value is an empty string', () => {
+        it('returns true', () => {
+            expect(isFalsy('')).toBe(true);
+        });
+    });
+
+    describe('when the value is a non-empty string', () => {
+        it('returns false', () => {
+            expect(isFalsy('0')).toBe(false);
+        });
+    });
+
+    describe('when the value is NaN', () => {
+        it('returns true', () => {
+            expect(isFalsy(Number.NaN)).toBe(true);
+        });
+    });
+
+    describe('when the value is zero', () => {
+        it('returns true', () => {
+            expect(isFalsy(0)).toBe(true);
+            expect(isFalsy(-0)).toBe(true);
+        });
+    });
+
+    describe('when the value is a non-zero number', () => {
+        it('returns false', () => {
+            expect(isFalsy(Number.MAX_SAFE_INTEGER)).toBe(false);
+            expect(isFalsy(Number.MAX_VALUE)).toBe(false);
+            expect(isFalsy(Number.MIN_VALUE)).toBe(false);
+            expect(isFalsy(Number.POSITIVE_INFINITY)).toBe(false);
+            expect(isFalsy(Number.NEGATIVE_INFINITY)).toBe(false);
+        });
+    });
+
+    describe('when the value is zero BigInt', () => {
+        it('returns true', () => {
+            expect(isFalsy(BigInt(0))).toBe(true);
+        });
+    });
+
+    describe('when the value is non-zero BigInt', () => {
+        it('returns false', () => {
+            expect(isFalsy(BigInt(Number.MAX_SAFE_INTEGER))).toBe(false);
+        });
+    });
+
+    describe('when the value is an empty object', () => {
+        it('returns false', () => {
+            expect(isFalsy({})).toBe(false);
+        });
+    });
+
+    describe('when the value is an empty array', () => {
+        it('returns false', () => {
+            expect(isFalsy([])).toBe(false);
+        });
+    });
+
+    describe('when the value is an empty RegExp', () => {
+        it('returns false', () => {
+            expect(isFalsy(new RegExp('', 'u'))).toBe(false);
+        });
+    });
+});
 
 describe(is, () => {
     describe('is(T)', () => {

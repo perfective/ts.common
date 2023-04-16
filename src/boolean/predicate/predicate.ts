@@ -9,6 +9,31 @@ import { isFalse, isTrue } from '../proposition/proposition';
 export type Predicate<T> = (value: T) => boolean;
 
 /**
+ * Returns true when the value is neither undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero),
+ * "" (an empty string), or the `document.all` builtin.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Glossary/Truthy
+ *
+ * @since v0.3.0
+ */
+// eslint-disable-next-line unicorn/prefer-native-coercion-functions -- function name increases readability
+export function isTruthy<T>(value: T): boolean {
+    return Boolean(value);
+}
+
+/**
+ * Returns true when the value is undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero), "" (an empty string),
+ * or the `document.all` builtin.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Glossary/Falsy
+ *
+ * @since v0.3.0
+ */
+export function isFalsy<T>(value: T): boolean {
+    return !isTruthy(value);
+}
+
+/**
  * Creates a {@linkcode Predicate} that is true if its argument strictly equals a given {@linkcode input}.
  *
  * @since v0.2.0

@@ -33,6 +33,7 @@ export function isRecord<T>(value: T): value is (T & Record<string, unknown>) {
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Truthy
  *
  * @since v0.3.0
+ * @deprecated Since v0.10.0. Use isTruthy() from @perfective/common/boolean.
  */
 // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- function name increases readability
 export function isTruthy<T>(value: T): boolean {
@@ -46,8 +47,10 @@ export function isTruthy<T>(value: T): boolean {
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Falsy
  *
  * @since v0.3.0
+ * @deprecated Since v0.10.0. Use isTruthy() from @perfective/common/boolean.
  */
 export function isFalsy<T>(value: T): boolean {
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha
     return !isTruthy(value);
 }
 
@@ -59,6 +62,7 @@ export function isFalsy<T>(value: T): boolean {
  * @since v0.3.0
  */
 export function isEmpty<T>(value: T): boolean {
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Replace with isFalsy() in v0.11.0-alpha
     return isFalsy(value)
         || isEmptyArray(value)
         || isEmptyRecord(value);

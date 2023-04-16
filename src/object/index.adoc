@@ -66,12 +66,6 @@ The `@perfective/common/object` package provides functions to work with the stan
 — returns `true` when the value is not null and is not a primitive.
 ** `isRecord<T>(value: T): boolean`
 — returns `true` when the value is an object created from the `Object` class (not an `Array`, `Date`, etc.).
-** `isTruthy<T>(value: T): boolean`
-— returns `true` when the value is neither `undefined`, `null`, `false`, `NaN`, `0`, `-0`, `0n` (a `BigInt` zero),
-`""` (an empty string), or the `document.all` builtin.
-** `isFalsy<T>(value: T): boolean`
-— returns `true` when the value is `undefined`, `null`, `false`, `NaN`, `0`, `-0`, `0n` (a `BigInt` zero),
-`""` (an empty string), or the `document.all` builtin.
 ** `isEmpty<T>(value: T): boolean`
 — returns `true` when the value is falsy, an empty array or a `Record` without properties.
 ** `hasMethod(value: unknown, method: string): boolean`

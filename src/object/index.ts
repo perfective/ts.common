@@ -29,9 +29,11 @@ export {
 } from './object/object';
 export {
     isEmpty,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha
     isFalsy,
     isObject,
     isRecord,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha
     isTruthy,
 } from './object/predicate';
 export {

@@ -25,6 +25,14 @@ Otherwise, returns `false`.
 
 `Predicate<T>` is a unary function that returns a `boolean` value.
 
+* `isTruthy<T>(value: T): boolean`
+— returns `true` when the value is neither `undefined`, `null`, `false`, `NaN`, `0`, `-0`, `0n` (a `BigInt` zero),
+`""` (an empty string), or the `document.all` builtin.
++
+* `isFalsy<T>(value: T): boolean`
+— returns `true` when the value is `undefined`, `null`, `false`, `NaN`, `0`, `-0`, `0n` (a `BigInt` zero),
+`""` (an empty string), or the `document.all` builtin.
++
 * `is<T>(input: T): Predicate<T>`
 — creates a `Predicate` that is `true` if its argument strictly equals a given `input`.
 +

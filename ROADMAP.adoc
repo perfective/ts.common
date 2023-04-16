@@ -1,4 +1,7 @@
 = Roadmap
+:eslint-rules: https://eslint.org/docs/latest/rules
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
+:mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
 
 The primary development focus is to provide convenient functions
 and detailed documentation in the existing packages.
@@ -71,10 +74,106 @@ and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glob
 ** Add support for the
 `link:https://developer.mozilla.org/en-US/docs/Web/API/URL[URL]` WebAPI.
 
+== ECMAScript Coverage
+
+* Only versions starting from ECMAScript 2015 (`ES6`) are considered.
+* The version `ES6` means that the feature is available in `ES6`,
+even if it was introduced earlier.
+* All versions after `ES6` are written in their year-based format (e.g. `ES2016`).
+
+=== `link:{mdn-js-globals}/Boolean[Boolean]`
+
+The `@perfective/common/boolean` package covers the `Boolean` type.
+
+[cols="~,1,~"]
+|===
+| JavaScript | Version | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Boolean/Boolean[new Boolean()]`
+| ES6
+| *Disallowed*.
+Use ESLint the `link:{eslint-rules}/no-new-wrappers[no-new-wrappers]` to enforce.
+
+In conditional statements, `new Boolean(false)` evaluates to `true`,
+so using the `Boolean` object is strongly discouraged.
+
+| `link:{mdn-js-globals}/Boolean/Boolean[Boolean]`
+| ES6
+| Use the `isTruthy()`/`isFalsy()` predicates.
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Boolean/toString[toString()]`
+| ES6
+| Use the `link:{mdn-js-globals}/String/String[String()]` function.
+
+| `link:{mdn-js-globals}/Boolean/valueOf[valueOf()]`
+| ES6
+| *Not Supported*. As the `new Boolean()` constructor is _disallowed_,
+there is no need in using the `valueOf()` method.
+
+When a primitive value is expected, JavaScript invokes `valueOf()` automatically.
+
+3+| *Operators*
+
+| link:{mdn-js-operators}/Equality[Equality] (`==`)
+| ES6
+| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
+
+The loose equality has obscure behavior:
+`'0' == false` and `[] == false`,
+but `null != false`, `undefined != false`, and `{} != false`.
+
+_Always_ use strict equality.
+When you need to coerce multiple types with logic that does not match `isTruthy()`/`isFalsy()`,
+write an explicit `Predicate`.
+
+| link:{mdn-js-operators}/Inequality[Inequality] (`!=`)
+| ES6
+| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
+
+| link:{mdn-js-operators}/Logical_AND[Logical AND] (`&&`)
+| ES6
+| *Allowed*.
+Use `all()`/`neither()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Logical_AND_assignment[Logical AND assignment] (`&&=`)
+| ES6
+| *Discouraged* as it mutates the value.
+
+| link:{mdn-js-operators}/Logical_NOT[Logical NOT] (`!`)
+| ES6
+| *Allowed*.
+Use `not()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Logical_NOT#double_not_!![Double NOT] (`!!`)
+| ES6
+| *Disallowed*. Use the `isTruthy()` /`isFalsy()` predicates.
+
+| link:{mdn-js-operators}/Logical_OR[Logical OR] (`\|\|`)
+| ES6
+| *Allowed*.
+Use `either()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Logical_OR_assignment[Logical OR assignment] (`\|\|=`)
+| ES6
+| *Discouraged* as it mutates the value.
+
+| link:{mdn-js-operators}/Strict_equality[Strict equality] (`===`)
+| ES6
+| *Allowed*. Use `is()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Strict_inequality[Strict inequality] (`!==`)
+| ES6
+| *Allowed*. Use `isNot()` for lazy evaluation and callbacks.
+
+|===
+
 
 == References
 
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference[MDN JavaScript Reference]
 * https://en.wikipedia.org/wiki/ECMAScript[ECMAScript Wikipedia]
 * https://262.ecma-international.org/6.0/[ECMA Script 2015 Specification]
-

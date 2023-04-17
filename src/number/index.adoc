@@ -1,8 +1,9 @@
 = Number
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/number` package declares types and functions to work with real numbers,
 including the JavaScript
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[Number]` class.
+`link:{mdn-js-globals}/Number[Number]` class.
 
 
 == Number
@@ -195,9 +196,9 @@ returns `null` if `min > max`.
 
 == Roadmap
 
-* Add support for the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]` object.
+* Add support for the `link:{mdn-js-globals}/Math[Math]` object.
 * Export the `base()` function to allow generic base values conversions.
-* Research support of the `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt[BigInt]` type.
+* Research support of the `link:{mdn-js-globals}/BigInt[BigInt]` type.
 * `Interval`:
 ** `midpoint()`;
 ** `radius()`;

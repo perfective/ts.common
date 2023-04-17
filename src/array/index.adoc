@@ -1,7 +1,8 @@
 = Array
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/array` package provides functions for the standard JS
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[Array]` class:
+`link:{mdn-js-globals}/Array[Array]` class:
 
 * Constructors:
 ** `array<T>(...elements: T[]): T[]`
@@ -150,4 +151,4 @@ Otherwise, returns an array with only that `value`.
 * Add `Index` type for readability.
 * Add `flat`, `flatMap` functions.
 * Implement with the `@perfective/common/locale` package:
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toLocaleString[Array.prototype.toLocaleString]`.
+** `link:{mdn-js-globals}/Array/toLocaleString[Array.prototype.toLocaleString]`.

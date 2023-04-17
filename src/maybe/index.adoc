@@ -1,4 +1,5 @@
 = Maybe monad
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 `@perfective/common/maybe` package provides an https://en.wikipedia.org/wiki/Option_type[Option type] implementation.
 It is inspired by the Haskell
@@ -186,7 +187,7 @@ function formattedCreatedAt(input: BlogPost): string { <.>
 }
 ----
 <.> The `new Date()` constructor creates a `Date` object even for
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date#return_value[invalid inputs].
+{mdn-js-globals}/Date/Date#return_value[invalid inputs].
 <.> We postpone the decision of how to handle an invalid value.
 By returning `Maybe<Date>` (instead of `Date|null` or throwing an error)
 we allow consumers of the function to make a decision that is most appropriate to their situation.

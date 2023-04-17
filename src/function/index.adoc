@@ -1,4 +1,5 @@
 = Function
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/function` package provides types and functions for the functional programming style.
 As functions with more than three arguments are considered a code smell,
@@ -115,5 +116,5 @@ These functions can be used as a callback for `Array.prototype.reduce`.
 == Roadmap
 
 * Provide functions for the standard
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function[Function]` object.
+`link:{mdn-js-globals}/Function[Function]` object.
 * Add currying and partial application support.

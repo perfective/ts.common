@@ -1,7 +1,8 @@
 = Object
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/object` package provides functions to work with the standard JS
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
+`link:{mdn-js-globals}/Object[Object]` class.
 
 * Types:
 ** `ObjectWithDefined<T, K extends keyof T>`

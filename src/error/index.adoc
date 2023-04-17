@@ -1,8 +1,9 @@
 = Error
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/error` package helps organize exceptions and error handling.
 It defines an `Exception`, based on the JS
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]` class,
+`link:{mdn-js-globals}/Error[Error]` class,
 that supports localizable error messages and error chaining;
 and provides functions to handle error stack output.
 
@@ -118,7 +119,7 @@ which can be convenient for localization or logging purposes.
 It supports message context as well.
 <4> `error.toString()` is explicitly re-defined on `Exception` to output all error messages.
 <5> `chainStack()` allows to output all errors with their stack information
-(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack[platform dependent]).
+({mdn-js-globals}/Error/stack[platform dependent]).
 
 
 == Throws and Panic
@@ -184,7 +185,7 @@ It omits stack information, but keeps the list of previous errors.
 
 == Standard built-in JS Error types
 
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`:
+* `link:{mdn-js-globals}/Error[Error]`:
 ** `error(message: string): Error`
 — instantiates a new `Error`.
 ** `isError<T>(value: Error | T): value is Error`
@@ -192,7 +193,7 @@ It omits stack information, but keeps the list of previous errors.
 ** `isNotError<T>(value: Error | T): value is T`
 — returns `true` when the value is not an instance of `Error`.
 +
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError[EvalError]`:
+* `link:{mdn-js-globals}/EvalError[EvalError]`:
 ** `evalError(message: string): EvalError`
 — instantiates a new `EvalError`.
 ** `isEvalError<T>(value: EvalError | T): value is EvalError`
@@ -200,7 +201,7 @@ It omits stack information, but keeps the list of previous errors.
 ** `isNotEvalError<T>(value: EvalError | T): value is T`
 — returns `true` when the value is not an instance of `EvalError`.
 +
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError[RangeError]`:
+* `link:{mdn-js-globals}/RangeError[RangeError]`:
 ** `rangeError(message: string): RangeError`
 — instantiates a new `RangeError`.
 ** `isRangeError<T>(value: RangeError | T): value is RangeError`
@@ -208,7 +209,7 @@ It omits stack information, but keeps the list of previous errors.
 ** `isNotRangeError<T>(value: RangeError | T): value is T`
 — returns `true` when the value is not an instance of `RangeError`.
 +
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError[ReferenceError]`:
+* `link:{mdn-js-globals}/ReferenceError[ReferenceError]`:
 ** `referenceError(message: string): ReferenceError`
 — instantiates a new `ReferenceError`.
 ** `isReferenceError<T>(value: ReferenceError | T): value is ReferenceError`
@@ -216,7 +217,7 @@ It omits stack information, but keeps the list of previous errors.
 ** `isNotReferenceError<T>(value: ReferenceError | T): value is T`
 — returns `true` when the value is not an instance of `ReferenceError`.
 +
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError[SyntaxError]`:
+* `link:{mdn-js-globals}/SyntaxError[SyntaxError]`:
 ** `syntaxError(message: string): SyntaxError`
 — instantiates a new `SyntaxError`.
 ** `isSyntaxError<T>(value: SyntaxError | T): value is SyntaxError`
@@ -224,7 +225,7 @@ It omits stack information, but keeps the list of previous errors.
 ** `isNotSyntaxError<T>(value: SyntaxError | T): value is T`
 — returns `true` when the value is not an instance of `SyntaxError`.
 +
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError[TypeError]`:
+* `link:{mdn-js-globals}/TypeError[TypeError]`:
 ** `typeError(message: string): TypeError`
 — instantiates a new `TypeError`.
 ** `isTypeError<T>(value: TypeError | T): value is TypeError`
@@ -234,9 +235,9 @@ It omits stack information, but keeps the list of previous errors.
 
 [NOTE]
 ====
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError[InternalError]`
+* `link:{mdn-js-globals}/InternalError[InternalError]`
 is non-standard and won't be supported.
-* `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError[URIError]`
+* `link:{mdn-js-globals}/URIError[URIError]`
 will be supported in the `@perfective/common/url` package.
 ====
 

@@ -17,58 +17,58 @@ and detailed documentation in the existing packages.
 
 * `@perfective/common/date`:
 ** Add support for the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date[Date]` type.
+`link:{mdn-js-globals}/Date[Date]` type.
 +
 * `@perfective/common/function`:
 ** Ensure coverage of the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function[Function]`,
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator[Generator]`,
-and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction[GeneratorFunction]` types.
+`link:{mdn-js-globals}/Function[Function]`,
+`link:{mdn-js-globals}/Generator[Generator]`,
+and `link:{mdn-js-globals}/GeneratorFunction[GeneratorFunction]` types.
 ** Consider support for
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction[AsyncFunction]` (ES 8)
+`link:{mdn-js-globals}/AsyncFunction[AsyncFunction]` (ES 8)
 +
 * `@perfective/common/i18n`:
 ** Add support for localization functions.
 +
 * `@perfective/common/number`:
 ** Ensure coverage of:
-*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[Number]`
-*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math[Math]`
-*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity[Infinity]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/NEGATIVE_INFINITY[Number.NEGATIVE_INFINITY]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/POSITIVE_INFINITY[Number.POSITIVE_INFINITY]`
-*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite[Number.isFinite()]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isFinite[isFinite()]`
-*** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN[NaN]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN[isNaN()]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN[Number.isNaN()]`
+*** `link:{mdn-js-globals}/Number[Number]`
+*** `link:{mdn-js-globals}/Math[Math]`
+*** `link:{mdn-js-globals}/Infinity[Infinity]`
+/ `link:{mdn-js-globals}/Number/NEGATIVE_INFINITY[Number.NEGATIVE_INFINITY]`
+/ `link:{mdn-js-globals}/Number/POSITIVE_INFINITY[Number.POSITIVE_INFINITY]`
+*** `link:{mdn-js-globals}/Number/isFinite[Number.isFinite()]`
+/ `link:{mdn-js-globals}/isFinite[isFinite()]`
+*** `link:{mdn-js-globals}/NaN[NaN]`
+/ `link:{mdn-js-globals}/isNaN[isNaN()]`
+/ `link:{mdn-js-globals}/Number/isNaN[Number.isNaN()]`
 +
 * `@perfective/common/promise`:
 ** Ensure coverage of the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` type.
+`link:{mdn-js-globals}/Promise[Promise]` type.
 +
 * `@perfective/common/reflect`:
 ** Add support for the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect[Reflect]` type.
+`link:{mdn-js-globals}/Reflect[Reflect]` type.
 +
 * `@perfective/common/regexp`:
 ** Add support for the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp[RegExp]` type.
+`link:{mdn-js-globals}/RegExp[RegExp]` type.
 +
 * `@perfective/common/symbol`:
 ** Add support for the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol[Symbol]` type.
+`link:{mdn-js-globals}/Symbol[Symbol]` type.
 +
 * `@perfective/common/uri`:
 ** Ensure support of:
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI[encodeURI]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent[encodeURIComponent]`,
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI[decodeURI]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent[decodeURIComponent]`,
-and `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError[URIError]`.
+`link:{mdn-js-globals}/encodeURI[encodeURI]`
+/ `link:{mdn-js-globals}/encodeURIComponent[encodeURIComponent]`,
+`link:{mdn-js-globals}/decodeURI[decodeURI]`
+/ `link:{mdn-js-globals}/decodeURIComponent[decodeURIComponent]`,
+and `link:{mdn-js-globals}/URIError[URIError]`.
 ** Consider custom support for:
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape[escape]`
-/ `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/unescape[unescape]`.
+`link:{mdn-js-globals}/escape[escape]`
+/ `link:{mdn-js-globals}/unescape[unescape]`.
 +
 * `@perfective/common/url`
 ** Add support for the

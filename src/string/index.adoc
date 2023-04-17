@@ -1,7 +1,8 @@
 = String
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/string` package works with the standard JS
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[String]` type.
+`link:{mdn-js-globals}/String[String]` type.
 It provides the following functions and additional types.
 
 * Unit functions:
@@ -70,12 +71,12 @@ It provides the following functions and additional types.
 == Roadmap
 
 * Implement with the `@perfective/common/locale` package:
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare[String.prototype.localeCompare]`;
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleLowerCase[String.prototype.toLocaleLowerCase]`;
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLocaleUpperCase[String.prototype.toLocaleUpperCase]`.
+** `link:{mdn-js-globals}/String/localeCompare[String.prototype.localeCompare]`;
+** `link:{mdn-js-globals}/String/toLocaleLowerCase[String.prototype.toLocaleLowerCase]`;
+** `link:{mdn-js-globals}/String/toLocaleUpperCase[String.prototype.toLocaleUpperCase]`.
 * Implement with the `@perfective/common/regexp` package:
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match[String.prototype.match]`;
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll[String.prototype.matchAll]`;
+** `link:{mdn-js-globals}/String/match[String.prototype.match]`;
+** `link:{mdn-js-globals}/String/matchAll[String.prototype.matchAll]`;
 * Implement with a polyfill:
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd[String.prototype.trimEnd]`;
-** `link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trimEnd[String.prototype.trimStart]`.
+** `link:{mdn-js-globals}/String/trimEnd[String.prototype.trimEnd]`;
+** `link:{mdn-js-globals}/String/trimEnd[String.prototype.trimStart]`.

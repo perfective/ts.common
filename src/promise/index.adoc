@@ -1,7 +1,8 @@
 = Promise
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 The `@perfective/common/promise` package provides functions to work with the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
+`link:{mdn-js-globals}/Promise[Promise]` class.
 
 == Reference
 

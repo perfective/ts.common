@@ -1,5 +1,6 @@
 = Perfective Common for TypeScript
-
+:mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
+:perfective-common: https://github.com/perfective/ts.common/tree/main
 
 == Installation
 
@@ -19,7 +20,7 @@ and to compose functions together easily.
 
 === Maybe monad
 
-The `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]` package
+The `link:{perfective-common}/src/maybe/index.adoc[@perfective/common/maybe]` package
 provides a Maybe monad implementation.
 
 It allows you to write and compose functions that accept only present (defined and non-null) values.
@@ -65,7 +66,7 @@ function fullName(name: Name | null | undefined): string | null {
 }
 ----
 
-When using the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[Maybe]` monad,
+When using the `link:{perfective-common}/src/maybe/index.adoc[Maybe]` monad,
 you can write simpler and more readable functions:
 
 [source,typescript]
@@ -87,29 +88,29 @@ function fullName(name: Name): Maybe<string> {
         .that(isNotEmpty); // <.>
 }
 ----
-<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybepick[Maybe.pick()]`
+<.> `link:{perfective-common}/src/maybe/index.adoc#maybepick[Maybe.pick()]`
 provides a strictly-typed "optional chaining" of the `Maybe.value` properties.
-<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeonto[Maybe.onto()]`
+<.> `link:{perfective-common}/src/maybe/index.adoc#maybeonto[Maybe.onto()]`
 (flat) maps a `Maybe.value` to another `Maybe`.
-<.> `https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeor[Maybe.or()]`
+<.> `{perfective-common}/src/maybe/index.adoc#maybeor[Maybe.or()]`
 extracts a `value` from the `Maybe` with a given fallback.
 (or allows to throw an error).
-<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethat[Maybe.that()]`
+<.> `link:{perfective-common}/src/maybe/index.adoc#maybethat[Maybe.that()]`
 filters a value inside `Maybe`.
-<.> `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeto[Maybe.to()]` maps a value inside `Maybe` using a given callback.
+<.> `link:{perfective-common}/src/maybe/index.adoc#maybeto[Maybe.to()]` maps a value inside `Maybe` using a given callback.
 
 In addition to these methods,
-the `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[Maybe]` type also provides:
-`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeinto[Maybe.into()]`,
-`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybewhich[Maybe.which()]`,
-`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybewhen[Maybe.when()]`,
-`link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeotherwise[Maybe.otherwise()]`,
-and `link:https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethrough[Maybe.through()]` methods.
+the `link:{perfective-common}/src/maybe/index.adoc[Maybe]` type also provides:
+`link:{perfective-common}/src/maybe/index.adoc#maybeinto[Maybe.into()]`,
+`link:{perfective-common}/src/maybe/index.adoc#maybewhich[Maybe.which()]`,
+`link:{perfective-common}/src/maybe/index.adoc#maybewhen[Maybe.when()]`,
+`link:{perfective-common}/src/maybe/index.adoc#maybeotherwise[Maybe.otherwise()]`,
+and `link:{perfective-common}/src/maybe/index.adoc#maybethrough[Maybe.through()]` methods.
 
 
 === Result monad
 
-The `link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc[@perfective/common/result]` package provides a `Result` monad
+The `link:{perfective-common}/src/result/index.adoc[@perfective/common/result]` package provides a `Result` monad
 (a concrete case of an Either monad).
 It allows you to treat errors as part of a function result
 and chain processing of such results.
@@ -171,7 +172,7 @@ function userOutput(id: string): Result<User> {
 }
 ----
 
-The `Result` link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc#using-result-with-promise[integrates]
+The `Result` link:{perfective-common}/src/result/index.adoc#using-result-with-promise[integrates]
 with the `Promise` using the `promisedResult()` and `settledResult()` functions.
 
 
@@ -185,7 +186,7 @@ Chaining previous errors is helpful for debugging.
 Especially in async environments, when most of the stack trace is full of useless function calls like `next()`
 or on the frontend with packed code and renamed functions.
 
-The `link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]` package provides the `Exception` class
+The `link:{perfective-common}/src/error/index.adoc[@perfective/common/error]` package provides the `Exception` class
 to make logging and debugging of productions code easier.
 It supports three features:
 
@@ -269,56 +270,56 @@ It will return a similar chain of messages as above,
 but each message will also contain a stack trace for each error.
 
 Read more about the functions to handle the built-in JS errors and the `Exception` class in the
-`link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]` package docs.
+`link:{perfective-common}/src/error/index.adoc[@perfective/common/error]` package docs.
 
 
 == Packages
 
 Packages are organized and named around their primary type:
 
-* `link:https://github.com/perfective/ts.common/blob/main/src/value/index.adoc[@perfective/common]`
+* `link:{perfective-common}/src/value/index.adoc[@perfective/common]`
 — functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/array/index.adoc[@perfective/common/array]`
+* `link:{perfective-common}/src/array/index.adoc[@perfective/common/array]`
 — functions and types for handling
-link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[arrays].
+link:{mdn-js-globals}/Array[arrays].
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc[@perfective/common/boolean]`
+* `link:{perfective-common}/src/boolean/index.adoc[@perfective/common/boolean]`
 — functions and types to handle
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean[boolean]` values.
+`link:{mdn-js-globals}/Boolean[boolean]` values.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/error/index.adoc[@perfective/common/error]`
+* `link:{perfective-common}/src/error/index.adoc[@perfective/common/error]`
 — functions and types to handle
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error[Error]`
+`link:{mdn-js-globals}/Error[Error]`
 and related classes.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/function/index.adoc[@perfective/common/function]`
+* `link:{perfective-common}/src/function/index.adoc[@perfective/common/function]`
 — functions and types for functional programming.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/match/index.adoc[@perfective/common/match]`
+* `link:{perfective-common}/src/match/index.adoc[@perfective/common/match]`
 — functions and types for a functional style `switch-case`.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc[@perfective/common/maybe]`
+* `link:{perfective-common}/src/maybe/index.adoc[@perfective/common/maybe]`
 — a `Maybe` monad (https://en.wikipedia.org/wiki/Option_type[Option type]) implementation.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/number/index.adoc[@perfective/common/number]`
+* `link:{perfective-common}/src/number/index.adoc[@perfective/common/number]`
 — functions and types to handle
-link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[numbers].
+link:{mdn-js-globals}/Number[numbers].
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/object/index.adoc[@perfective/common/object]`
+* `link:{perfective-common}/src/object/index.adoc[@perfective/common/object]`
 — functions and types for handling the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[Object]` class.
+`link:{mdn-js-globals}/Object[Object]` class.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/promise/index.adoc[@perfective/common/promise]`
+* `link:{perfective-common}/src/promise/index.adoc[@perfective/common/promise]`
 — functions and types to handle the
-`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise[Promise]` class.
+`link:{mdn-js-globals}/Promise[Promise]` class.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/result/index.adoc[@perfective/common/result]`
+* `link:{perfective-common}/src/result/index.adoc[@perfective/common/result]`
 — a `Result` monad (https://en.wikipedia.org/wiki/Result_type[Result type]) implementation.
 +
-* `link:https://github.com/perfective/ts.common/tree/main/src/string/index.adoc[@perfective/common/string]`
+* `link:{perfective-common}/src/string/index.adoc[@perfective/common/string]`
 — functions and types to handle
-link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[strings].
+link:{mdn-js-globals}/String[strings].
 
 The packages have full unit test coverage.
 

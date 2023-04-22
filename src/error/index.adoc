@@ -26,7 +26,7 @@ class Exception extends Error {
 ----
 <1> Inherited from `Error`, message is generated from the `template` and `tokens`.
 <2> Message template with tokens wrapped in `{{ }}`,
-e.g. `User ID {{id}}` or `User {{user_id}}`.
+e.g. `User ID {\{id\}}` or `User {\{user_id\}}`.
 <3> Token/Value map to be used in the error message.
 <4> Additional context information.
 Context is not rendered by default,

@@ -7,7 +7,7 @@ import { TypeGuard } from '../../value/type-guard/type-guard';
 import { isNull, isPresent, isUndefined, Present } from '../../value/value';
 
 /**
- * Type {@linkcode Maybe} contains a defined and non-null value {@linkcode T}
+ * Type {@linkcode Maybe} contains a defined and non-null value `T`
  * (as an instance of {@linkcode Just})
  * or a {@linkcode null} or an {@linkcode undefined} value
  * (as an instance of {@linkcode Nothing}).
@@ -17,7 +17,7 @@ import { isNull, isPresent, isUndefined, Present } from '../../value/value';
  */
 export abstract class Maybe<T> {
     /**
-     * Either a present value of type {@linkcode T} or an absent value (null or undefined).
+     * Either a present value of type `T` or an absent value (null or undefined).
      */
     public abstract readonly value: T | null | undefined;
 
@@ -168,7 +168,7 @@ export abstract class Maybe<T> {
 }
 
 /**
- * Type {@linkcode Just} represents a defined non-null value of type {@linkcode T}.
+ * Type {@linkcode Just} represents a defined non-null value of type `T`.
  *
  * @final
  */
@@ -314,7 +314,7 @@ export class Just<T> extends Maybe<T> {
 }
 
 /**
- * Type {@linkcode Nothing} represents an undefined or a null value of type {@linkcode T}.
+ * Type {@linkcode Nothing} represents an undefined or a null value of type `T`.
  *
  * @final
  */

@@ -351,7 +351,7 @@ describe(atLeast, () => {
     describe('atLeast(number, ...Predicate[])', () => {
         const atLeastTwo: Predicate<number> = atLeast(2, isNot(0), isLessThan(1), isGreaterThan(2));
 
-        describe('when the number of matching predicates is equal or above a givne minimum', () => {
+        describe('when the number of matching predicates is equal or above a given minimum', () => {
             it('returns true', () => {
                 expect(atLeastTwo(3)).toBe(true);
             });

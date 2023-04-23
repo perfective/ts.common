@@ -1,15 +1,16 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { causedBy, chained, Exception, exception } from '../../error/exception/exception';
+import { isGreaterThan } from '../../number/number/order';
 
 import { Failure, failure, failureFrom, isFailure, isNotFailure, Result, success } from './result';
 import { resultDecimal, strictErrorOutput, strictNumberOutput } from './result.mock';
 
 describe(failure, () => {
     describe('when a given input is an instance of an Error', () => {
-        it('creates an instance of a Failure', () => {
-            const output: Failure<unknown> = failure(exception('Error'));
+        const output: Failure<unknown> = failure(exception('Error'));
 
+        it('creates an instance of a Failure', () => {
             expect(output).toBeInstanceOf(Failure);
             expect(output).toBeInstanceOf(Result);
             expect(output.value).toBeInstanceOf(Error);
@@ -17,13 +18,13 @@ describe(failure, () => {
         });
     });
 
-    describe('when a given input is not an instance of an Error', () => {
+    describe('when a given input is not an instance of an Error or a string', () => {
         it('throws a TypeError', () => {
             // @ts-expect-error -- TS2345: Argument of type 'number' is not assignable to parameter of type 'Error'.
-            expect(() => failure('Error'))
+            expect(() => failure(404))
                 .toThrow(TypeError);
             // @ts-expect-error -- TS2345: Argument of type 'number' is not assignable to parameter of type 'Error'.
-            expect(() => failure('Error'))
+            expect(() => failure(404))
                 .toThrow('The value of `Failure` must be an instance of an `Error`');
         });
     });
@@ -116,6 +117,12 @@ describe(Failure, () => {
             it('returns the result of the second callback of the `fold` pair applied to the Failure.value', () => {
                 expect(input.into([strictNumberOutput, strictErrorOutput])).toBe('Failure');
             });
+        });
+    });
+
+    describe('that', () => {
+        it('returns itself', () => {
+            expect(input.that(isGreaterThan(0), 'Is not greater than 0')).toBe(input);
         });
     });
 

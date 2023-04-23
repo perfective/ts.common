@@ -1,8 +1,9 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, exception } from '../../error/exception/exception';
+import { isGreaterThan } from '../../number/number/order';
 
-import { into, onto, through, to } from './lift';
+import { into, onto, that, through, to } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
 import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
@@ -108,6 +109,25 @@ describe(into, () => {
                 '0',
                 'Error: Success',
                 'Failure',
+            ]);
+        });
+    });
+});
+
+describe(that, () => {
+    describe('that(filter, error)', () => {
+        it('applies given `filter` predicate and `error` fallback to the `Result.that()` method', () => {
+            const output: Result<number>[] = [successNumber, success(1), failureNumber]
+                .map(that(isGreaterThan(0), 'Value {{value}} must be greater than zero'));
+
+            expect(output).toStrictEqual([
+                failure(exception('Value {{value}} must be greater than zero', {
+                    value: '0',
+                }, {
+                    value: 0,
+                })),
+                success(1),
+                failureNumber,
             ]);
         });
     });

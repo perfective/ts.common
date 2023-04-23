@@ -488,6 +488,54 @@ we use `Result.into()` to switch into the `apiResponse` `Promise`.
 <.> Now we have a `Promise` chain and can continue computation.
 
 
+=== `Result.that()`
+
+* `Result.that(filter: Predicate<T>, error: Value<Error>): Result<T>`
+** For a `Success`, if the `value` satisfies a given `filter`, returns itself.
+Otherwise, returns a `Failure` with a given `error`.
+** For a `Failure`, ignores both arguments and returns itself.
++
+* `Result.that(filter: Predicate<T>, message: Value<string>): Result<T>`
+** For a `Success`, if the `value` satisfies a given `filter`, returns itself.
+Otherwise, returns a `Failure` with an `Exception` created with a given `message`,
+a `{\{value\}}` token created from the `Success.value`,
+and the `Success.value` passed as an `ExceptionContext`.
+** For a `Failure`, ignores both arguments and returns itself.
++
+* Lifts:
+** `that<T>(filter: Predicate<T>, error: Value<Error>): Unary<Result<T>, Result<T>>`
+— creates a function to apply given `filter` predicate and `error` to the `Result.that()` method and return the result.
+** `that<T>(filter: Predicate<T>, message: Value<string>): Unary<Result<T>, Result<T>>`
+— creates a function to apply given `filter` predicate and `message`
+to the `Result.that()` method and return the result.
+
+.Use `Result.that()` to build validation chains.
+[source,typescript]
+----
+import { typeError } from '@perfective/common/error';
+import { isGreaterThan, isNumber } from '@perfective/common/number';
+import { Result, success } from '@perfective/common/result';
+import { isNotEmpty } from '@perfective/common/string';
+
+
+function validId(id: string): Result<number> { // <.>
+    return success(id)
+        .that(isNotEmpty, typeError('Input id is empty')) // <.>
+        .to(Number)
+        .that(isNumber, 'Failed to parse input {{value}} as a number') // <.>
+        .that(isGreaterThan(0), 'Input id must be greater than 0'); // <.>
+}
+----
+<.> If the input can be parsed as a number and is greater than zero,
+the function returns `Success` with a parsed number `value`.
+<.> For an empty string, the function returns a `Failure` with a `TypeError` message `Input id is empty`.
+<.> For an input that cannot be parsed as a number, like `Zero`,
+the function returns a `Failure` with an `Exception` an a tokenized message
+(e.g. `Failed to parse input 'Zero' as a number`)
+<.> For an input that is not greater than 0,
+the function returns a `Failure` with an `Exception` with message `Input id must be greater than 0`.
+
+
 === `Result.through()`
 
 * `Result.through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this`:

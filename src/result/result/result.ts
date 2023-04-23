@@ -1,6 +1,7 @@
 // eslint-disable-next-line max-classes-per-file -- Result, Success, and Failure are interdependent.
-import { isNotError } from '../../error/error/error';
-import { unknownError } from '../../error/exception/exception';
+import { Predicate } from '../../boolean/predicate/predicate';
+import { isError, isNotError } from '../../error/error/error';
+import { exception, unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { defined, isDefined } from '../../value/value';
@@ -83,6 +84,29 @@ export abstract class Result<T> {
      * @since v0.9.0
      */
     public abstract into<U>(fold: BiFoldResult<T, U>): U;
+
+    /**
+     * When the instance is a {@linkcode Success},
+     * returns itself if the {@linkcode Success.value} satisfies a given {@linkcode filter}.
+     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     *
+     * When the instance is a {@linkcode Failure}, returns itself.
+     *
+     * @since v0.10.0
+     */
+    public abstract that(filter: Predicate<T>, error: Value<Error>): Result<T>;
+
+    /**
+     * When the instance is a {@linkcode Success},
+     * returns itself if the {@linkcode Success.value} satisfies a given {@linkcode filter}.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} with a given {@linkcode message}
+     * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
+     *
+     * When the instance is a {@linkcode Failure}, returns itself.
+     *
+     * @since v0.10.0
+     */
+    public abstract that(filter: Predicate<T>, message: Value<string>): Result<T>;
 
     /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
@@ -207,6 +231,38 @@ export class Success<T> extends Result<T> {
     }
 
     /**
+     * If the {@linkcode Success.value|value} satisfies a given {@linkcode filter} returns itself.
+     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     *
+     * @since v0.10.0
+     */
+    public override that(filter: Predicate<T>, error: Value<Error>): Result<T>;
+
+    /**
+     * If the {@linkcode Success.value|value} satisfies a given {@linkcode filter} returns itself.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}
+     * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
+     *
+     * @since v0.10.0
+     */
+    public override that(filter: Predicate<T>, message: Value<string>): Result<T>;
+
+    public override that(first: Predicate<T>, second: Value<Error> | Value<string>): this | Failure<T> {
+        if (first(this.value)) {
+            return this;
+        }
+        const error = valueOf(second);
+        if (isError(error)) {
+            return failure(error);
+        }
+        return failure(exception(error, {
+            value: String(this.value),
+        }, {
+            value: this.value,
+        }));
+    }
+
+    /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      * Ignores a given {@linkcode errorProcedure} callback.
      *
@@ -324,6 +380,24 @@ export class Failure<T> extends Result<T> {
     ): U {
         const reduceError = Array.isArray(first) ? first[1] : defined(second);
         return reduceError(this.value);
+    }
+
+    /**
+     * Ignores both arguments and returns itself.
+     *
+     * @since v0.10.0
+     */
+    public override that(filter: Predicate<T>, error: Value<Error>): Failure<T>;
+
+    /**
+     * Ignores both arguments and returns itself.
+     *
+     * @since v0.10.0
+     */
+    public override that(filter: Predicate<T>, message: Value<string>): Failure<T>;
+
+    public override that(): this {
+        return this;
     }
 
     /**

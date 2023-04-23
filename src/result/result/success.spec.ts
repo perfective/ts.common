@@ -1,6 +1,7 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, Exception, exception } from '../../error/exception/exception';
+import { isEqualTo, isGreaterThan } from '../../number/number/order';
 
 import {
     Failure,
@@ -209,6 +210,40 @@ describe(Success, () => {
 
                 expect(sb.into([strictExceptionOutput, strictErrorOutput]))
                     .toBe('Success of {{number}}');
+            });
+        });
+    });
+
+    describe('that', () => {
+        const input = success(0);
+
+        describe('when the Success.value satisfies a given Predicate', () => {
+            it('returns itself', () => {
+                expect(input.that(isEqualTo(0), 'Is not zero')).toBe(input);
+            });
+        });
+
+        describe('when the Success.value does not satisfy a given Predicate', () => {
+            describe('when a given error is an Error', () => {
+                const errorInput = error('Is not greater than zero');
+
+                it('returns a Failure with the given error', () => {
+                    expect(input.that(isGreaterThan(0), errorInput))
+                        .toStrictEqual(failure(errorInput));
+                });
+            });
+
+            describe('when a given error is a string', () => {
+                const errorInput = 'Value {{value}} is not greater than zero';
+
+                it('returns a Failure with the given error', () => {
+                    expect(input.that(isGreaterThan(0), errorInput))
+                        .toStrictEqual(failure(exception(errorInput, {
+                            value: '0',
+                        }, {
+                            value: 0,
+                        })));
+                });
             });
         });
     });

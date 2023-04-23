@@ -1,3 +1,5 @@
+import { Predicate } from '../../boolean/predicate/predicate';
+import { Value } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { defined } from '../../value/value';
 
@@ -74,6 +76,27 @@ export function into<T, U>(
         return (result: Result<T>): U => result.into(first[0], first[1]);
     }
     return (result: Result<T>): U => result.into(first, defined(second));
+}
+
+/**
+ * Creates a function to apply given {@linkcode filter} predicate and {@linkcode error}
+ * to the {@linkcode Result.that} method and return the result.
+ *
+ * @since v0.9.0
+ */
+export function that<T>(filter: Predicate<T>, error: Value<Error>): Unary<Result<T>, Result<T>>;
+
+/**
+ * Creates a function to apply a {@linkcode filter} predicate and {@linkcode message}
+ * to the {@linkcode Result.that} method and return the result.
+ *
+ * @since v0.9.0
+ */
+export function that<T>(filter: Predicate<T>, message: Value<string>): Unary<Result<T>, Result<T>>;
+
+export function that<T>(first: Predicate<T>, second: Value<Error> | Value<string>): Unary<Result<T>, Result<T>> {
+    // Second argument always matches signature of the `Result.that()`, but TSC does not recognize it.
+    return (result: Result<T>): Result<T> => result.that(first, second as Value<Error>);
 }
 
 /**

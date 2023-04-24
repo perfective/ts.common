@@ -1,6 +1,7 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { Value } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
+import { TypeGuard } from '../../value/type-guard/type-guard';
 import { defined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
@@ -82,21 +83,44 @@ export function into<T, U>(
  * Creates a function to apply given {@linkcode filter} predicate and {@linkcode error}
  * to the {@linkcode Result.that} method and return the result.
  *
- * @since v0.9.0
+ * @since v0.10.0
  */
 export function that<T>(filter: Predicate<T>, error: Value<Error>): Unary<Result<T>, Result<T>>;
 
 /**
- * Creates a function to apply a {@linkcode filter} predicate and {@linkcode message}
+ * Creates a function to apply a {@linkcode filter} predicate and error {@linkcode message}
  * to the {@linkcode Result.that} method and return the result.
  *
- * @since v0.9.0
+ * @since v0.10.0
  */
 export function that<T>(filter: Predicate<T>, message: Value<string>): Unary<Result<T>, Result<T>>;
 
 export function that<T>(first: Predicate<T>, second: Value<Error> | Value<string>): Unary<Result<T>, Result<T>> {
     // Second argument always matches signature of the `Result.that()`, but TSC does not recognize it.
     return (result: Result<T>): Result<T> => result.that(first, second as Value<Error>);
+}
+
+/**
+ * Creates a function to apply given {@linkcode typeGuard} and {@linkcode error} to the {@linkcode Result.which} method
+ * and return the result.
+ *
+ * @since v0.10.0
+ */
+export function which<T, U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Unary<Result<T>, Result<U>>;
+
+/**
+ * Creates a function to apply given {@linkcode typeGuard} and error {@linkcode message}
+ * to the {@linkcode Result.which} method and return the result.
+ *
+ * @since v0.10.0
+ */
+export function which<T, U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Unary<Result<T>, Result<U>>;
+
+export function which<T, U extends T>(
+    first: TypeGuard<T, U>, second: Value<Error> | Value<string>,
+): Unary<Result<T>, Result<U>> {
+    // Second argument always matches signature of the `Result.which()`, but TSC does not recognize it.
+    return (result: Result<T>): Result<U> => result.which(first, second as Value<Error>);
 }
 
 /**

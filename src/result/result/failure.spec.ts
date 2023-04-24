@@ -2,6 +2,7 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { causedBy, chained, Exception, exception } from '../../error/exception/exception';
 import { isGreaterThan } from '../../number/number/order';
+import { isNotNull } from '../../value/value';
 
 import { Failure, failure, failureFrom, isFailure, isNotFailure, Result, success } from './result';
 import { resultDecimal, strictErrorOutput, strictNumberOutput } from './result.mock';
@@ -123,6 +124,26 @@ describe(Failure, () => {
     describe('that', () => {
         it('returns itself', () => {
             expect(input.that(isGreaterThan(0), 'Is not greater than 0')).toBe(input);
+        });
+    });
+
+    describe('which', () => {
+        const input: Failure<number | null> = failure(error('Failure'));
+
+        describe('when given an Error fallback', () => {
+            const output: Failure<number> = input.which(isNotNull, error('Value is null'));
+
+            it('returns itself', () => {
+                expect(output).toBe(input);
+            });
+        });
+
+        describe('when given an error message fallback', () => {
+            const output: Failure<number> = input.which(isNotNull, 'Value is null');
+
+            it('returns itself', () => {
+                expect(output).toBe(input);
+            });
         });
     });
 

@@ -11,6 +11,7 @@ export {
     that,
     through,
     to,
+    which,
 } from './result/lift';
 export {
     promisedResult,

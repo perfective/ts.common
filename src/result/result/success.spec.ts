@@ -2,6 +2,7 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, Exception, exception } from '../../error/exception/exception';
 import { isEqualTo, isGreaterThan } from '../../number/number/order';
+import { isNotNull, isNull } from '../../value/value';
 
 import {
     Failure,
@@ -243,6 +244,40 @@ describe(Success, () => {
                         }, {
                             value: 0,
                         })));
+                });
+            });
+        });
+    });
+
+    describe('which', () => {
+        const input = success<number | null>(0);
+
+        describe('when the Success.value satisfies a given TypeGuard', () => {
+            const output: Result<number> = input.which(isNotNull, 'The value is null');
+
+            it('returns itself', () => {
+                expect(output).toBe(input);
+            });
+        });
+
+        describe('when the Success.value does not satisfy a given TypeGuard', () => {
+            describe('when given an Error', () => {
+                const output: Result<null> = input.which(isNull, error('The value is null'));
+
+                it('returns a Failure with a given error', () => {
+                    expect(output).toStrictEqual(failure(error('The value is null')));
+                });
+            });
+
+            describe('when given an error message', () => {
+                const output: Result<null> = input.which(isNull, 'The value is {{value}}');
+
+                it('returns a Failure with an Exception with the given message', () => {
+                    expect(output).toStrictEqual(failure(exception('The value is {{value}}', {
+                        value: '0',
+                    }, {
+                        context: 0,
+                    })));
                 });
             });
         });

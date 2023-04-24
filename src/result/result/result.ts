@@ -4,6 +4,7 @@ import { isError, isNotError } from '../../error/error/error';
 import { exception, unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
+import { TypeGuard } from '../../value/type-guard/type-guard';
 import { defined, isDefined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
@@ -107,6 +108,31 @@ export abstract class Result<T> {
      * @since v0.10.0
      */
     public abstract that(filter: Predicate<T>, message: Value<string>): Result<T>;
+
+    /**
+     * When the instance is a {@linkcode Success},
+     * returns itself with the type narrowed down by the {@linkcode typeGuard},
+     * if the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}.
+     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     *
+     * When the instance is a {@linkcode Failure}, returns itself.
+     *
+     * @since v0.10.0
+     */
+    public abstract which<U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Result<U>;
+
+    /**
+     * When the instance is a {@linkcode Success},
+     * returns itself with the type narrowed down by the {@linkcode typeGuard},
+     * if the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}
+     * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
+     *
+     * When the instance is a {@linkcode Failure}, returns itself.
+     *
+     * @since v0.10.0
+     */
+    public abstract which<U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Result<U>;
 
     /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
@@ -263,6 +289,42 @@ export class Success<T> extends Result<T> {
     }
 
     /**
+     * If the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}
+     * returns itself but with the type narrowed down by the {@linkcode typeGuard}.
+     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     *
+     * @since v0.10.0
+     */
+    public override which<U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Result<U>;
+
+    /**
+     * If the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}
+     * returns itself but with the type narrowed down by the {@linkcode typeGuard}.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}
+     * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
+     *
+     * @since v0.10.0
+     */
+    public override which<U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Result<U>;
+
+    public override which<U extends T>(first: TypeGuard<T, U>, second: Value<Error> | Value<string>): Result<U> {
+        if (first(this.value)) {
+            // When condition is true, this.value is of type U extends T.
+            // Return it as is instead of passing it through just(this.value).
+            return this as unknown as Result<U>;
+        }
+        const error = valueOf(second);
+        if (isError(error)) {
+            return failure(error);
+        }
+        return failure(exception(error, {
+            value: String(this.value),
+        }, {
+            value: this.value,
+        }));
+    }
+
+    /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      * Ignores a given {@linkcode errorProcedure} callback.
      *
@@ -397,6 +459,24 @@ export class Failure<T> extends Result<T> {
     public override that(filter: Predicate<T>, message: Value<string>): Failure<T>;
 
     public override that(): this {
+        return this;
+    }
+
+    /**
+     * Ignores both arguments and returns itself.
+     *
+     * @since v0.10.0
+     */
+    public override which<U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Failure<U>;
+
+    /**
+     * Ignores both arguments and returns itself.
+     *
+     * @since v0.10.0
+     */
+    public override which<U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Failure<U>;
+
+    public override which(): this {
         return this;
     }
 

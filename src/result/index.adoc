@@ -499,7 +499,7 @@ Otherwise, returns a `Failure` with a given `error`.
 ** For a `Success`, if the `value` satisfies a given `filter`, returns itself.
 Otherwise, returns a `Failure` with an `Exception` created with a given `message`,
 a `{\{value\}}` token created from the `Success.value`,
-and the `Success.value` passed as an `ExceptionContext`.
+and the `Success.value` passed into the `ExceptionContext`.
 ** For a `Failure`, ignores both arguments and returns itself.
 +
 * Lifts:
@@ -534,6 +534,47 @@ the function returns a `Failure` with an `Exception` an a tokenized message
 (e.g. `Failed to parse input 'Zero' as a number`)
 <.> For an input that is not greater than 0,
 the function returns a `Failure` with an `Exception` with message `Input id must be greater than 0`.
+
+
+=== `Result.which()`
+
+* `Result.which<U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Result<U>`
+** For a `Success`, if the `value` satisfies a given `typeGuard`,
+returns itself with the type narrowed down by the `typeGuard`.
+Otherwise, returns a `Failure` with a given `error`.
+** For a `Failure`, returns itself.
++
+* `Result.which<U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Result<U>`
+** For a `Success`, if the `value` satisfies a given `typeGuard`,
+returns itself with the type narrowed down by the `typeGuard`.
+Otherwise, returns a `Failure` with an `Exception` created with a given `message`,
+a `{\{value\}}` token created from the `Success.value`,
+and the `Success.value` passed into the `ExceptionContext`.
++
+* Lifts:
+** `which<T, U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Unary<Result<T>, Result<U>>`
+— creates a function to apply given `typeGuard` and `error` to the `Result.which()` method and return the result.
+** `which<T, U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Unary<Result<T>, Result<U>>`
+— creates a function to apply given `typeGuard` and error `message` to the `Result.which()` method
+and return the result.
+
+.Use `Result.which()` to build validation chains.
+[source,typescript]
+----
+import { isNotNull } from '@perfective/common';
+import { decimal } from '@perfective/common/number';
+import { Result, success } from '@perfective/common/result';
+
+
+function validId(id: string): Result<number> {
+    return success(id)
+        .to(decimal) // == Result<number | null>
+        .which(isNotNull, 'Failed to parse id as a number'); // <.>
+}
+----
+<.> The `decimal()` function parses a `string` and returns `number` or `null` (if parsing failed).
+`Result.which()` allows to narrow the type with a type guard (`isNotNull`),
+so the type becomes `Result<number>`.
 
 
 === `Result.through()`

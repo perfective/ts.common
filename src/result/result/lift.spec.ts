@@ -2,8 +2,9 @@ import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, exception } from '../../error/exception/exception';
 import { isGreaterThan } from '../../number/number/order';
+import { isNotNull } from '../../value/value';
 
-import { into, onto, that, through, to } from './lift';
+import { into, onto, that, through, to, which } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
 import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
@@ -115,21 +116,36 @@ describe(into, () => {
 });
 
 describe(that, () => {
-    describe('that(filter, error)', () => {
-        it('applies given `filter` predicate and `error` fallback to the `Result.that()` method', () => {
-            const output: Result<number>[] = [successNumber, success(1), failureNumber]
-                .map(that(isGreaterThan(0), 'Value {{value}} must be greater than zero'));
+    it('applies given `filter` predicate and `error` fallback to the `Result.that()` method', () => {
+        const output: Result<number>[] = [successNumber, success(1), failureNumber]
+            .map(that(isGreaterThan(0), 'Value {{value}} must be greater than zero'));
 
-            expect(output).toStrictEqual([
-                failure(exception('Value {{value}} must be greater than zero', {
-                    value: '0',
-                }, {
-                    value: 0,
-                })),
-                success(1),
-                failureNumber,
-            ]);
-        });
+        expect(output).toStrictEqual([
+            failure(exception('Value {{value}} must be greater than zero', {
+                value: '0',
+            }, {
+                value: 0,
+            })),
+            success(1),
+            failureNumber,
+        ]);
+    });
+});
+
+describe(which, () => {
+    it('applies given `typeGuard` predicate and `error` fallback to the `Result.which()` method', () => {
+        const output: Result<number | null>[] = [successNumber, success(null), failureNumber]
+            .map(which<number | null, number>(isNotNull, 'Value is {{value}}'));
+
+        expect(output).toStrictEqual([
+            successNumber,
+            failure(exception('Value is {{value}}', {
+                value: 'null',
+            }, {
+                value: null,
+            })),
+            failureNumber,
+        ]);
     });
 });
 

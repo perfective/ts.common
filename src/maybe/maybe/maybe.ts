@@ -49,6 +49,7 @@ export abstract class Maybe<T> {
      * Applies a given {@linkcode reduce} callback to the {@linkcode Maybe.value}.
      *
      * @returns The result of the {@linkcode reduce}.
+     *
      * @since 0.9.0
      */
     public abstract into<U>(
@@ -224,6 +225,7 @@ export class Just<T> extends Maybe<T> {
      * Applies a given {@linkcode reduce} callback to the {@linkcode Just.value}.
      *
      * @returns The result of the {@linkcode reduce}.
+     *
      * @since 0.9.0
      */
     public into<U>(reduce: (value: T) => U): U {
@@ -355,6 +357,7 @@ export class Nothing<T> extends Maybe<T> {
      * Applies a given {@linkcode reduce} callback to the {@linkcode Nothing.value}.
      *
      * @returns The result of the {@linkcode reduce}.
+     *
      * @since 0.9.0
      */
     public into<U>(reduce: (value: (null | undefined)) => U): U {

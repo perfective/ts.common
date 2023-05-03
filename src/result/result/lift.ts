@@ -1,4 +1,5 @@
 import { Predicate } from '../../boolean/predicate/predicate';
+import { Proposition } from '../../boolean/proposition/proposition';
 import { Value } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
@@ -121,6 +122,26 @@ export function which<T, U extends T>(
 ): Unary<Result<T>, Result<U>> {
     // Second argument always matches signature of the `Result.which()`, but TSC does not recognize it.
     return (result: Result<T>): Result<U> => result.which(first, second as Value<Error>);
+}
+
+/**
+ * Creates a function to apply given {@linkcode condition} and {@linkcode error} to the {@linkcode Result.when} method
+ * and return the result.
+ *
+ * @since v0.10.0
+ */
+export function when<T>(condition: Proposition, error: Value<Error>): Unary<Result<T>, Result<T>>;
+
+/**
+ * Creates a function to apply given {@linkcode condition} and error {@linkcode message}
+ * to the {@linkcode Result.when} method and return the result.
+ *
+ * @since v0.10.0
+ */
+export function when<T>(condition: Proposition, message: Value<string>): Unary<Result<T>, Result<T>>;
+
+export function when<T>(first: Proposition, second: Value<Error> | Value<string>): Unary<Result<T>, Result<T>> {
+    return (result: Result<T>): Result<T> => result.when(first, second as Value<Error>);
 }
 
 /**

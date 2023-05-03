@@ -577,6 +577,61 @@ function validId(id: string): Result<number> {
 so the type becomes `Result<number>`.
 
 
+=== `Result.when()`
+
+* `Result.when(condition: Proposition, error: Value<Error>): Result<T>`
+** For a `Success`, if the `condition` is true, returns itself.
+Otherwise, returns a `Failure` with a given `error`.
+** For a `Failure`, returns itself.
++
+* `Result.when(condition: Proposition, message: Value<string>): Result<T>`
+** For a `Success`, if the `condition` is true, returns itself.
+Otherwise, returns a `Failure` with a given `message`.
+** For a `Failure`, returns itself.
++
+* Lifts:
+** `when<T>(condition: Proposition, error: Value<Error>): Unary<Result<T>, Result<T>>`
+— creates a function to apply given `condition` and `error` to the `Result.when()` method
+and return the result.
+** `when<T>(condition: Proposition, message: Value<string>): Unary<Result<T>, Result<T>>`
+— creates a function to apply given `condition` and `message` to the `Result.when()` method
+and return the result.
+
+.Use `Result.when()` to guard based on an external condition.
+----
+import { Result } from '@perfective/common/result';
+
+interface Book {
+    isbn: string;
+    title: string;
+}
+
+interface UserService {
+    hasPermission: (permission: string) => boolean;
+}
+
+interface BookStore {
+    byIsbn: (isbn: string) => Result<Book>;
+}
+
+class BooksService {
+    public constructor(
+        private readonly user: UserService,
+        private readonly books: BookStore,
+    ) {}
+
+    public bookByIsbn(isbn: string): Result<Book> { // <.>
+        return this.books.byIsbn(isbn)
+            .when(() => this.user.hasPermission('read book'), 'Access denied'); // <.>
+    }
+}
+----
+<.> The `booksByIsbn()` method composes `UserService` and `BookService` to load books
+only when an active user has permissions to read them.
+<.> If the `hasPermissions()` method returns `false`,
+then the `bookByIsbn()` method returns a `Failure` with an "Access denied" `Exception`.
+
+
 === `Result.through()`
 
 * `Result.through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this`:

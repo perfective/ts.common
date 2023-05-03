@@ -147,6 +147,46 @@ describe(Failure, () => {
         });
     });
 
+    describe('when', () => {
+        const input: Failure<number> = failure(error('Failure'));
+
+        describe('when condition is true', () => {
+            describe('when given an error', () => {
+                const output: Failure<number> = input.when(true, error('Never'));
+
+                it('returns itself', () => {
+                    expect(output).toBe(input);
+                });
+            });
+
+            describe('when given a message', () => {
+                const output: Failure<number> = input.when(true, 'Never');
+
+                it('returns itself', () => {
+                    expect(output).toBe(input);
+                });
+            });
+        });
+
+        describe('when condition is false', () => {
+            describe('when given an error', () => {
+                const output: Failure<number> = input.when(false, error('Never'));
+
+                it('returns itself', () => {
+                    expect(output).toBe(input);
+                });
+            });
+
+            describe('when given a message', () => {
+                const output: Failure<number> = input.when(false, 'Never');
+
+                it('returns itself', () => {
+                    expect(output).toBe(input);
+                });
+            });
+        });
+    });
+
     describe('through', () => {
         describe('through(valueProcedure, errorProcedure)', () => {
             it('executes a given `errorProcedure`, ignores a `valueProcedure`, and returns itself', () => {

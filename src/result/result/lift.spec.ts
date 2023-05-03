@@ -4,7 +4,7 @@ import { chained, exception } from '../../error/exception/exception';
 import { isGreaterThan } from '../../number/number/order';
 import { isNotNull } from '../../value/value';
 
-import { into, onto, that, through, to, which } from './lift';
+import { into, onto, that, through, to, when, which } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
 import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
@@ -146,6 +146,15 @@ describe(which, () => {
             })),
             failureNumber,
         ]);
+    });
+});
+
+describe(when, () => {
+    it('applies given `condition` and `error` to the `Result.when()` method', () => {
+        const output: Result<number | Error>[] = [successNumber, successError, failureNumber]
+            .map(when<number | Error>(true, 'Never'));
+
+        expect(output).toStrictEqual([successNumber, successError, failureNumber]);
     });
 });
 

@@ -1,5 +1,6 @@
 // eslint-disable-next-line max-classes-per-file -- Result, Success, and Failure are interdependent.
 import { Predicate } from '../../boolean/predicate/predicate';
+import { Proposition } from '../../boolean/proposition/proposition';
 import { isError, isNotError } from '../../error/error/error';
 import { exception, unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
@@ -133,6 +134,28 @@ export abstract class Result<T> {
      * @since v0.10.0
      */
     public abstract which<U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Result<U>;
+
+    /**
+     * When the instance is a {@linkcode Success},
+     * returns itself if the {@linkcode condition} is `true`.
+     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     *
+     * When the instance is a {@linkcode Failure}, returns itself.
+     *
+     * @since v0.10.0
+     */
+    public abstract when(condition: Proposition, error: Value<Error>): Result<T>;
+
+    /**
+     * When the instance is a {@linkcode Success},
+     * returns itself if the {@linkcode condition} is `true`.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}.
+     *
+     * When the instance is a {@linkcode Failure}, returns itself.
+     *
+     * @since v0.10.0
+     */
+    public abstract when(condition: Proposition, message: Value<string>): Result<T>;
 
     /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
@@ -325,6 +348,33 @@ export class Success<T> extends Result<T> {
     }
 
     /**
+     * If the {@linkcode condition} is `true`, returns itself.
+     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     *
+     * @since v0.10.0
+     */
+    public override when(condition: Proposition, error: Value<Error>): Result<T>;
+
+    /**
+     * If the {@linkcode condition} is `true`, returns itself.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}.
+     *
+     * @since v0.10.0
+     */
+    public override when(condition: Proposition, message: Value<string>): Result<T>;
+
+    public override when(first: Proposition, second: Value<Error> | Value<string>): Result<T> {
+        if (valueOf(first)) {
+            return this;
+        }
+        const error = valueOf(second);
+        if (isError(error)) {
+            return failure(error);
+        }
+        return failure(exception(error));
+    }
+
+    /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      * Ignores a given {@linkcode errorProcedure} callback.
      *
@@ -477,6 +527,24 @@ export class Failure<T> extends Result<T> {
     public override which<U extends T>(typeGuard: TypeGuard<T, U>, message: Value<string>): Failure<U>;
 
     public override which(): this {
+        return this;
+    }
+
+    /**
+     * Ignores both arguments and returns itself.
+     *
+     * @since v0.10.0
+     */
+    public override when(condition: Proposition, error: Value<Error>): Failure<T>;
+
+    /**
+     * Ignores both arguments and returns itself.
+     *
+     * @since v0.10.0
+     */
+    public override when(condition: Proposition, message: Value<string>): Failure<T>;
+
+    public override when(): this {
         return this;
     }
 

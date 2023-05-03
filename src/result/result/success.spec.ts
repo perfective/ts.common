@@ -283,6 +283,36 @@ describe(Success, () => {
         });
     });
 
+    describe('when', () => {
+        const input: Result<number> = success(0);
+
+        describe('when a given `condition` is true', () => {
+            const output: Result<number> = input.when(true, error('Never'));
+
+            it('returns itself', () => {
+                expect(input).toBe(output);
+            });
+        });
+
+        describe('when a given `condition` is false', () => {
+            describe('when given an Error', () => {
+                const output: Result<number> = input.when(false, error('Condition is false'));
+
+                it('returns a Failure with a given error', () => {
+                    expect(output).toStrictEqual(failure(error('Condition is false')));
+                });
+            });
+
+            describe('when given an error message', () => {
+                const output: Result<number> = input.when(false, 'Condition is false');
+
+                it('returns a Failure with an Exception with a given error message', () => {
+                    expect(output).toStrictEqual(failure(exception('Condition is false')));
+                });
+            });
+        });
+    });
+
     describe('through', () => {
         describe('through(valueProcedure)', () => {
             it('executes a given `valueProcedure` and returns itself', () => {

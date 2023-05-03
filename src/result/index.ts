@@ -11,6 +11,7 @@ export {
     that,
     through,
     to,
+    when,
     which,
 } from './result/lift';
 export {

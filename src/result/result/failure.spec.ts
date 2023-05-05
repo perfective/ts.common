@@ -5,7 +5,7 @@ import { rethrow } from '../../error/panic/panic';
 import { isGreaterThan } from '../../number/number/order';
 import { isNotNull } from '../../value/value';
 
-import { Failure, failure, failureFrom, isFailure, isNotFailure, Result, success } from './result';
+import { Failure, failure, failureFrom, isFailure, isNotFailure, Result, Success, success } from './result';
 import { resultDecimal, strictErrorOutput, strictNumberOutput } from './result.mock';
 
 describe(failure, () => {
@@ -188,10 +188,29 @@ describe(Failure, () => {
         });
     });
 
+    describe('otherwise', () => {
+        const input: Failure<number> = failure(error('Failure'));
+
+        describe('when a given callback returns value', () => {
+            const output: Success<number> = input.otherwise(() => 0);
+
+            it('returns a Success with the result of the given callback', () => {
+                expect(output).toStrictEqual(success(0));
+            });
+        });
+
+        describe('when a given callback throws an error', () => {
+            it('throws an error', () => {
+                expect(() => input.otherwise(rethrow('Rethrow Failure')))
+                    .toThrow(causedBy(error('Failure'), 'Rethrow Failure'));
+            });
+        });
+    });
+
     describe('or', () => {
         const input: Failure<number> = failure(error('Failure'));
 
-        describe('when given a callback that returns a value', () => {
+        describe('when a given callback returns value', () => {
             const output: number = input.or(() => 0);
 
             it('returns the result of the given callback', () => {

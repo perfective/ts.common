@@ -5,7 +5,7 @@ import { constant } from '../../function/function/nullary';
 import { isGreaterThan } from '../../number/number/order';
 import { isNotNull } from '../../value/value';
 
-import { into, onto, or, that, through, to, when, which } from './lift';
+import { into, onto, or, otherwise, that, through, to, when, which } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
 import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
@@ -159,12 +159,21 @@ describe(when, () => {
     });
 });
 
+describe(otherwise, () => {
+    it('applies a given `recovery` callback to the `Result.otherwise()` method', () => {
+        const output: Success<number>[] = [successNumber, failureNumber]
+            .map(otherwise(constant(1)));
+
+        expect(output).toStrictEqual([successNumber, success(1)]);
+    });
+});
+
 describe(or, () => {
     it('applies a given `recovery` callback to the `Result.or()` method', () => {
-        const output: (number | Error)[] = [successNumber, successError, failureNumber]
-            .map(or<number | Error>(constant(-1)));
+        const output: number[] = [successNumber, failureNumber]
+            .map(or<number>(constant(-1)));
 
-        expect(output).toStrictEqual([0, error('Success'), -1]);
+        expect(output).toStrictEqual([0, -1]);
     });
 });
 

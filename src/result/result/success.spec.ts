@@ -315,10 +315,22 @@ describe(Success, () => {
         });
     });
 
+    describe('otherwise', () => {
+        const input: Success<number> = success(0);
+
+        describe('when a given callback that returns value', () => {
+            const output: Success<number> = input.otherwise(constant(1));
+
+            it('returns itself', () => {
+                expect(input).toBe(output);
+            });
+        });
+    });
+
     describe('or', () => {
         const input: Success<number> = success(0);
 
-        describe('when given a callback that returns a fallback value', () => {
+        describe('when a given callback that returns value', () => {
             const output: number = input.or(constant(1));
 
             it('returns its own value', () => {

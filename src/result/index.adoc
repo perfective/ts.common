@@ -633,6 +633,68 @@ only when an active user has permissions to read them.
 then the `bookByIsbn()` method returns a `Failure` with "Access denied" `Exception`.
 
 
+=== `Result.otherwise()`
+
+* `Result.otherwise(recovery: Unary<Error, T>): Success<T>`
+** For a `Success`, returns itself.
+** For a `Failure`, applies its `value` (`Error`) to a given `recovery` callback
+and returns the result wrapped into a `Success`.
++
+* Lift:
+** `otherwise<T>(recovery: Unary<Error, T>): Unary<Result<T>, Success<T>>`
+— creates a function to apply a given `recovery` callback to the `Result.otherwise()` method and return the result.
+
+.Use `Result.otherwise()` to recover from an error and continue the computation chain
+[source,typescript]
+----
+import { NonNegativeInteger, PositiveInteger } from '@perfective/common/number';
+import { Result } from '@perfective/common/result';
+
+interface User {
+    id: NonNegativeInteger;
+    username: string;
+}
+
+interface UserStore {
+    byId: (id: PositiveInteger) => Result<User>;
+}
+
+interface Log {
+    error: (error: Error) => void;
+}
+
+function fallback<T>(log: Log, value: T): (error: Error) => T {
+    return (error: Error): T => {
+        log.error(error);
+        return value;
+    };
+}
+
+function anonymousUser(): User {
+    return {
+        id: 0,
+        username: 'anonymous',
+    };
+}
+
+class UserService {
+    public constructor(
+        private readonly users: UserStore,
+        private readonly log: Log,
+    ) {}
+
+    public usernameById(id: number): string {
+        return this.users.byId(id) // <.>
+            .otherwise(fallback(this.log, anonymousUser())) // <.>
+            .to(user => user.username)
+            .value;
+    }
+}
+----
+<.> `UserStore.byId()` returns a `Result<User>`, so it may return a `Failure`.
+<.> Log the failure and return a fallback, so the chain can be completed.
+
+
 === `Result.or()`
 
 * `Result.or(recovery: Unary<Error, T>): T`
@@ -643,7 +705,7 @@ then the `bookByIsbn()` method returns a `Failure` with "Access denied" `Excepti
 ** `or<T>(recovery: Unary<Error, T>): Unary<Result<T>, T>`
 — creates a function to apply a given `recovery` callback to the `Result.or()` method and return the result.
 
-.Use `Result.or()` to recover from an error
+.Use `Result.or()` to recover from an error and return the result of computation
 [source,typescript]
 ----
 import { isNotNull } from '@perfective/common';

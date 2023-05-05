@@ -6,7 +6,7 @@ import { TypeGuard } from '../../value/type-guard/type-guard';
 import { defined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
-import { Failure, Result } from './result';
+import { Failure, Result, Success } from './result';
 
 /**
  * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method
@@ -142,6 +142,16 @@ export function when<T>(condition: Proposition, message: Value<string>): Unary<R
 
 export function when<T>(first: Proposition, second: Value<Error> | Value<string>): Unary<Result<T>, Result<T>> {
     return (result: Result<T>): Result<T> => result.when(first, second as Value<Error>);
+}
+
+/**
+ * Creates a function to apply a given {@linkcode recovery} callback to the {@linkcode Result.otherwise} method
+ * and return the result.
+ *
+ * @since v0.10.0
+ */
+export function otherwise<T>(recovery: Unary<Error, T>): Unary<Result<T>, Success<T>> {
+    return (result: Result<T>): Success<T> => result.otherwise(recovery);
 }
 
 /**

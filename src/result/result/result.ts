@@ -158,6 +158,17 @@ export abstract class Result<T> {
     public abstract when(condition: Proposition, message: Value<string>): Result<T>;
 
     /**
+     * When the instance is a {@linkcode Success},
+     * returns its own {@linkcode Success.value|value}.
+     *
+     * When the instance is a {@linkcode Failure},
+     * returns the result of a given {@linkcode recovery} callback applied to the {@linkcode Failure.value}.
+     *
+     * @since v0.10.0
+     */
+    public abstract or(recovery: Unary<Error, T>): T;
+
+    /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
      * when the instance is a {@linkcode Success}.
      * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
@@ -375,6 +386,17 @@ export class Success<T> extends Result<T> {
     }
 
     /**
+     * Ignores a given callback {@linkcode recovery} callback and returns its own {@linkcode Success.value|value}.
+     *
+     * @since v0.10.0
+     */
+    public override or(recovery: Unary<Error, T>): T;
+
+    public override or(): T {
+        return this.value;
+    }
+
+    /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
      * Ignores a given {@linkcode errorProcedure} callback.
      *
@@ -546,6 +568,15 @@ export class Failure<T> extends Result<T> {
 
     public override when(): this {
         return this;
+    }
+
+    /**
+     * Returns the result of a given {@linkcode recovery} function applied to the {@linkcode Failure.value}.
+     *
+     * @since v0.10.0
+     */
+    public override or(recovery: Unary<Error, T>): T {
+        return recovery(this.value);
     }
 
     /**

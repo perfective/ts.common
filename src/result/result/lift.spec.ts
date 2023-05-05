@@ -1,10 +1,11 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, exception } from '../../error/exception/exception';
+import { constant } from '../../function/function/nullary';
 import { isGreaterThan } from '../../number/number/order';
 import { isNotNull } from '../../value/value';
 
-import { into, onto, that, through, to, when, which } from './lift';
+import { into, onto, or, that, through, to, when, which } from './lift';
 import { Failure, failure, Result, Success, success } from './result';
 import { resultString, safeNumberOutput, strictErrorOutput, successFailure } from './result.mock';
 
@@ -155,6 +156,15 @@ describe(when, () => {
             .map(when<number | Error>(true, 'Never'));
 
         expect(output).toStrictEqual([successNumber, successError, failureNumber]);
+    });
+});
+
+describe(or, () => {
+    it('applies a given `recovery` callback to the `Result.or()` method', () => {
+        const output: (number | Error)[] = [successNumber, successError, failureNumber]
+            .map(or<number | Error>(constant(-1)));
+
+        expect(output).toStrictEqual([0, error('Success'), -1]);
     });
 });
 

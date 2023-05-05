@@ -1,6 +1,7 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { causedBy, chained, Exception, exception } from '../../error/exception/exception';
+import { rethrow } from '../../error/panic/panic';
 import { isGreaterThan } from '../../number/number/order';
 import { isNotNull } from '../../value/value';
 
@@ -183,6 +184,25 @@ describe(Failure, () => {
                 it('returns itself', () => {
                     expect(output).toBe(input);
                 });
+            });
+        });
+    });
+
+    describe('or', () => {
+        const input: Failure<number> = failure(error('Failure'));
+
+        describe('when given a callback that returns a value', () => {
+            const output: number = input.or(() => 0);
+
+            it('returns the result of the given callback', () => {
+                expect(output).toBe(0);
+            });
+        });
+
+        describe('when given a callback that throws an error', () => {
+            it('throws an error', () => {
+                expect(() => input.or(rethrow('Rethrow Failure')))
+                    .toThrow(causedBy(error('Failure'), 'Rethrow Failure'));
             });
         });
     });

@@ -1,12 +1,14 @@
 import { pushInto } from '../../array/array/lift';
 import { error } from '../../error/error/error';
 import { chained, Exception, exception } from '../../error/exception/exception';
+import { constant } from '../../function/function/nullary';
 import { isEqualTo, isGreaterThan } from '../../number/number/order';
 import { isNotNull, isNull } from '../../value/value';
 
 import {
     Failure,
-    failure, isNotSuccess,
+    failure,
+    isNotSuccess,
     isSuccess,
     recovery,
     Result,
@@ -309,6 +311,18 @@ describe(Success, () => {
                 it('returns a Failure with an Exception with a given error message', () => {
                     expect(output).toStrictEqual(failure(exception('Condition is false')));
                 });
+            });
+        });
+    });
+
+    describe('or', () => {
+        const input: Success<number> = success(0);
+
+        describe('when given a callback that returns a fallback value', () => {
+            const output: number = input.or(constant(1));
+
+            it('returns its own value', () => {
+                expect(output).toBe(input.value);
             });
         });
     });

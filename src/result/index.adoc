@@ -598,6 +598,7 @@ and return the result.
 and return the result.
 
 .Use `Result.when()` to guard based on an external condition.
+[source,typescript]
 ----
 import { Result } from '@perfective/common/result';
 
@@ -629,7 +630,77 @@ class BooksService {
 <.> The `booksByIsbn()` method composes `UserService` and `BookService` to load books
 only when an active user has permissions to read them.
 <.> If the `hasPermissions()` method returns `false`,
-then the `bookByIsbn()` method returns a `Failure` with an "Access denied" `Exception`.
+then the `bookByIsbn()` method returns a `Failure` with "Access denied" `Exception`.
+
+
+=== `Result.or()`
+
+* `Result.or(recovery: Unary<Error, T>): T`
+** For a `Success`, returns its own `value`.
+** For a `Failure`, applies its `value` (`Error`) to a given `recovery` callback and returns the result.
++
+* Lift:
+** `or<T>(recovery: Unary<Error, T>): Unary<Result<T>, T>`
+— creates a function to apply a given `recovery` callback to the `Result.or()` method and return the result.
+
+.Use `Result.or()` to recover from an error
+[source,typescript]
+----
+import { isNotNull } from '@perfective/common';
+import { decimal, isGreaterThan, isInteger, NonNegativeInteger, PositiveInteger } from '@perfective/common/number';
+import { Result, success } from '@perfective/common/result';
+
+interface User {
+    id: NonNegativeInteger;
+    username: string;
+}
+
+interface UserStore {
+    byId: (id: PositiveInteger) => Result<User>;
+}
+
+interface Log {
+    error: (error: Error) => void;
+}
+
+function fallback<T>(log: Log, value: T): (error: Error) => T {
+    return (error: Error): T => {
+        log.error(error);
+        return value;
+    };
+}
+
+function validId(id: string): Result<PositiveInteger> { // <.>
+    return success(id)
+        .to(decimal) // == Result<number | null>
+        .which(isNotNull, 'Failed to parse id as a number')
+        .that(isInteger, 'User ID must be an integer')
+        .that(isGreaterThan(0), 'User ID must be positive');
+}
+
+function anonymousUser(): User {
+    return {
+        id: 0,
+        username: 'anonymous',
+    };
+}
+
+class UserService {
+    public constructor(
+        private readonly users: UserStore,
+        private readonly log: Log,
+    ) {}
+
+    public userById(id: string): User {
+        return validId(id)
+            .onto(id => this.users.byId(id)) // <.>
+            .or(fallback(this.log, anonymousUser())); // <.>
+    }
+}
+----
+<.> The `validId()` function may return a handful of different failures.
+<.> The `UserStore.byId()` method returns a `Result`, so it may also return a failure.
+<.> In case of a failure we log the error and return an anonymous user object.
 
 
 === `Result.through()`

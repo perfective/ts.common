@@ -145,6 +145,16 @@ export function when<T>(first: Proposition, second: Value<Error> | Value<string>
 }
 
 /**
+ * Creates a function to apply a given {@linkcode recovery} callback to the {@linkcode Result.or} method
+ * and return the result.
+ *
+ * @since v0.10.0
+ */
+export function or<T>(recovery: Unary<Error, T>): Unary<Result<T>, T> {
+    return (result: Result<T>): T => result.or(recovery);
+}
+
+/**
  * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
  * to the {@linkcode Result.through} method and return the given {@linkcode Result}.
  *

@@ -385,7 +385,7 @@ export class Success<T> extends Result<T> {
      */
     public override when(condition: Proposition, message: Value<string>): Result<T>;
 
-    public override when(first: Proposition, second: Value<Error> | Value<string>): Result<T> {
+    public override when(first: Proposition, second: Value<Error> | Value<string>): this | Failure<T> {
         if (valueOf(first)) {
             return this;
         }
@@ -543,14 +543,14 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.10.0
      */
-    public override that(filter: Predicate<T>, error: Value<Error>): Failure<T>;
+    public override that(filter: Predicate<T>, error: Value<Error>): this;
 
     /**
      * Ignores both arguments and returns itself.
      *
      * @since v0.10.0
      */
-    public override that(filter: Predicate<T>, message: Value<string>): Failure<T>;
+    public override that(filter: Predicate<T>, message: Value<string>): this;
 
     public override that(): this {
         return this;
@@ -579,14 +579,14 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.10.0
      */
-    public override when(condition: Proposition, error: Value<Error>): Failure<T>;
+    public override when(condition: Proposition, error: Value<Error>): this;
 
     /**
      * Ignores both arguments and returns itself.
      *
      * @since v0.10.0
      */
-    public override when(condition: Proposition, message: Value<string>): Failure<T>;
+    public override when(condition: Proposition, message: Value<string>): this;
 
     public override when(): this {
         return this;

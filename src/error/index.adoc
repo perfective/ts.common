@@ -122,36 +122,23 @@ It supports message context as well.
 ({mdn-js-globals}/Error/stack[platform dependent]).
 
 
-== Throws and Panic
+== Panic and Throws
 
-The package declares two functions to throw errors and two functions to rethrow them.
-
-* `throws<E extends Error>(error: E | (() => E) | string): never`
+* `type Panic = () => never`
+— a function that throws an `Error`.
+** `panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic`
+— creates a function that throws an `Exception` with a given `message` template with `tokens`
+and additional `context` data.
+** `panic<E extends Error>(error: Value<E>): Panic`
+— creates a function that throws a given `Error`.
 +
-`throws<E extends Error>(message: string, context?: ExceptionContext): never`
-+
-The `throws` function is a syntax sugar around the `throw` operator
-that checks if the input is an `Error`, a function that returns an `Error`, or a `string`,
-and throws an exception immediately.
-It may be used instead of the `throw new Exception()`,
-to handle a union type of `E extends Error | string`,
-to throw an exception in a one-line arrow function,
-or to avoid issues with the `@typescript-eslint/no-throw-literal` linter rule.
-+
-* `panic<E extends Error>(error: E | (() => E) | string): Panic`
-+
-`panic<E extends Error>(message: string, context?: ExceptionContext): Panic`
-+
-The `panic` function creates a new function that throws an error.
-It is used for lazy evaluation,
-e.g. when an exceptional situation is optional.
-+
+.Use `panic` to create a callback for lazy evaluation.
 [source,typescript]
 ----
 import { panic } from '@perfective/common/error';
 import { maybe } from '@perfective/common/maybe';
 
-export function example(input?: string | null): string {
+export function example(input: string | null | undefined): string {
     return maybe(input)
         .or(panic('Input is not present')); // <.>
 }
@@ -159,15 +146,30 @@ export function example(input?: string | null): string {
 <.> Must use `panic()`,
 as the fallback in `Maybe.or()` is called only when the `input` is not present.
 Using `throws()` will result in throwing an exception every time a function is called.
+
+* `type Rethrow<E extends Error = Error> = (previous: E) => never`
+— a function that throws an `Error` with a given `previous` error.
 +
-* `rethrows(previous: Error, message: string, context: ExceptionContext = {}): never`
+** `throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never`
+— throws an `Exception` with a given `message` template with `tokens` and additional `context` data.
+** `throws<E extends Error>(error: Value<E>): never`
+— throws a given `Error`.
+If given a callback, throws an `Error` returned by the callback.
++
+Can be used to throw an exception from a one-line arrow function.
++
+** `rethrows(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): never`
+— throws an `Exception` with a given `message` caused by a `previous` `Error`.
+Exception message may contain given `tokens` and additional `context` data.
 +
 Similar to `throws`, but requires to provide a previous error.
 +
-* `rethrow( message: string, context: ExceptionContext = {}): Rethrow`
+** `rethrow(message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Rethrow`
+— creates a function that throws an `Exception` with a given `message`
+and a passed `previous` `Error`.
+Exception message may contain given `tokens` and additional `context` data.
 +
-Similar to `panic`: creates a function that will wrap up an error with additional context.
-Can be useful working with promises or RxJS `catchError`.
+Useful working with `Promise.catch()` and RxJS `catchError()`.
 
 
 == Failure

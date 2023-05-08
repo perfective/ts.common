@@ -1,43 +1,89 @@
+import { Value, valueOf } from '../../function/function/nullary';
 import { isError } from '../error/error';
-import { causedBy, Exception } from '../exception/exception';
+import { Exception, exception } from '../exception/exception';
 import { ExceptionContext } from '../exception/exception-context';
 import { exceptionMessage } from '../exception/exception-message';
 import { ExceptionTokens } from '../exception/exception-tokens';
 
+/**
+ * A function that throws an {@linkcode Error}.
+ *
+ * @since v0.2.2
+ */
 export type Panic = () => never;
+
+/**
+ * A function that throws an {@linkcode Error} with a given {@linkcode previous} error.
+ *
+ * @since v0.2.4
+ */
 export type Rethrow<E extends Error = Error> = (previous: E) => never;
 
+/**
+ * Throws an {@linkcode Exception} with a given {@linkcode message} template with {@linkcode tokens}
+ * and additional {@linkcode context} data.
+ *
+ * @since v0.2.0
+ */
 export function throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
-export function throws<E extends Error>(error: E | (() => E) | string): never;
+
+/**
+ * Throws a given {@linkcode Error}.
+ * If given a callback, throws an {@linkcode Error} returned by the callback.
+ *
+ * @since v0.1.0
+ */
+export function throws<E extends Error>(error: Value<E>): never;
+
 export function throws<E extends Error>(
-    error: E | (() => E) | string,
-    tokens: ExceptionTokens = {},
-    context: ExceptionContext = {},
+    first: Value<E> | string,
+    second: ExceptionTokens = {},
+    third: ExceptionContext = {},
 ): never {
+    const error: Error | string = valueOf(first);
     if (isError(error)) {
-        throw error as Error;
+        throw error;
     }
-    if (typeof error === 'function') {
-        throw error() as Error;
-    }
-    throw new Exception(exceptionMessage(error, tokens), context, null);
+    throw exception(error, second, third);
 }
 
+/**
+ * Creates a function that throws an {@linkcode Exception} with a given {@linkcode message} template
+ * with {@linkcode tokens} and additional {@linkcode context} data.
+ *
+ * @since v0.2.0
+ */
 export function panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic;
-export function panic<E extends Error>(error: E | (() => E) | string): Panic;
+
+/**
+ * Creates a function that throws a given {@linkcode Error}.
+ *
+ * @since v0.1.0
+ */
+export function panic<E extends Error>(error: Value<E>): Panic;
+
 export function panic<E extends Error>(
-    error: E | (() => E) | string,
-    tokens: ExceptionTokens = {},
-    context: ExceptionContext = {},
+    first: Value<E> | string,
+    second: ExceptionTokens = {},
+    third: ExceptionContext = {},
 ): Panic {
     return (): never => {
-        if (isError(error) || typeof error === 'function') {
-            return throws(error);
+        const error: Error | string = valueOf(first);
+        if (isError(error)) {
+            throw error;
         }
-        return throws(error, tokens, context);
+        throw exception(error, second, third);
     };
 }
 
+/**
+ * Throws an {@linkcode Exception} with a given {@linkcode message} caused by a {@linkcode previous} {@linkcode Error}.
+ * Exception message may contain given {@linkcode tokens} and additional {@linkcode context} data.
+ *
+ * @throws Exception - created with given parameters.
+ *
+ * @since v0.2.0
+ */
 export function rethrows(
     previous: Error,
     message: string,
@@ -47,10 +93,19 @@ export function rethrows(
     throw new Exception(exceptionMessage(message, tokens), context, previous);
 }
 
+/**
+ * Creates a function that throws an {@linkcode Exception} with a given {@linkcode message}
+ * and a passed {@linkcode previous} {@linkcode Error}.
+ * Exception message may contain given {@linkcode tokens} and additional {@linkcode context} data.
+ *
+ * @since v0.2.0
+ */
 export function rethrow(
     message: string,
     tokens: ExceptionTokens = {},
     context: ExceptionContext = {},
 ): Rethrow {
-    return (previous: Error): never => throws(causedBy(previous, message, tokens, context));
+    return (previous: Error): never => {
+        throw new Exception(exceptionMessage(message, tokens), context, previous);
+    };
 }

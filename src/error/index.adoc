@@ -122,16 +122,19 @@ It supports message context as well.
 ({mdn-js-globals}/Error/stack[platform dependent]).
 
 
-== Panic and Throws
+== Panic
 
-* `type Panic = (cause?: unknown) => never`
+`type Panic = (cause?: unknown) => never`
 — a function that throws an `Error`.
-** `panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic`
+
+* `panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic`
 — creates a function that throws an `Exception` with a given `message` template with `tokens`
 and additional `context` data.
 If the `cause` is defined, sets the `cause` as a `previous` error.
 +
-** `panic<E extends Error>(error: Value<E>): Panic`
+Useful working with `Promise.catch()` and RxJS `catchError()`.
++
+* `panic<E extends Error>(error: Value<E>): Panic`
 — creates a function that throws a given `Error`.
 Ignores the `cause`, even when if is defined.
 +
@@ -150,29 +153,20 @@ export function example(input: string | null | undefined): string {
 as the fallback in `Maybe.or()` is called only when the `input` is not present.
 Using `throws()` will result in throwing an exception every time a function is called.
 
-* `type Rethrow<E extends Error = Error> = (previous: E) => never`
-— a function that throws an `Error` with a given `previous` error.
-+
-** `throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never`
+* `throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never`
 — throws an `Exception` with a given `message` template with `tokens` and additional `context` data.
-** `throws<E extends Error>(error: Value<E>): never`
+* `throws<E extends Error>(error: Value<E>): never`
 — throws a given `Error`.
 If given a callback, throws an `Error` returned by the callback.
 +
 Can be used to throw an exception from a one-line arrow function.
 +
-** `rethrows(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): never`
+* `rethrows(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): never`
 — throws an `Exception` with a given `message` caused by a `previous` `Error`.
 Exception message may contain given `tokens` and additional `context` data.
 +
 Similar to `throws`, but requires to provide a previous error.
-+
-** `rethrow(message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Rethrow`
-— creates a function that throws an `Exception` with a given `message`
-and a passed `previous` `Error`.
-Exception message may contain given `tokens` and additional `context` data.
-+
-Useful working with `Promise.catch()` and RxJS `catchError()`.
+
 
 
 == Failure

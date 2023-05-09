@@ -13,10 +13,12 @@ import { ExceptionTokens } from '../exception/exception-tokens';
  */
 export type Panic = (cause?: unknown) => never;
 
+/* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
 /**
  * A function that throws an {@linkcode Error} with a given {@linkcode previous} error.
  *
  * @since v0.2.4
+ * @deprecated Since v0.10.0. Use {@linkcode Panic} instead.
  */
 export type Rethrow<E extends Error = Error> = (previous: E) => never;
 
@@ -106,6 +108,7 @@ export function rethrows(
  * Exception message may contain given {@linkcode tokens} and additional {@linkcode context} data.
  *
  * @since v0.2.0
+ * @deprecated Since v0.10.0. Use {@linkcode panic} instead.
  */
 export function rethrow(
     message: string,
@@ -116,3 +119,4 @@ export function rethrow(
         throw new Exception(exceptionMessage(message, tokens), context, previous);
     };
 }
+/* eslint-enable deprecation/deprecation */

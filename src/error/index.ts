@@ -70,8 +70,10 @@ export {
 export {
     Panic,
     panic,
+    /* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
     Rethrow,
     rethrow,
+    /* eslint-enable deprecation/deprecation */
     rethrows,
     throws,
 } from './panic/panic';

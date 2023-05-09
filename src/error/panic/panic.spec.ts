@@ -155,6 +155,7 @@ describe(rethrows, () => {
     });
 });
 
+/* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
 describe(rethrow, () => {
     const previous: ReferenceError = referenceError('reference to undefined property "x"');
 
@@ -191,3 +192,4 @@ describe(rethrow, () => {
         });
     });
 });
+/* eslint-enable deprecation/deprecation */

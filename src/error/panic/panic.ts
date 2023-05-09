@@ -1,6 +1,7 @@
 import { Value, valueOf } from '../../function/function/nullary';
+import { isDefined } from '../../value/value';
 import { isError } from '../error/error';
-import { Exception, exception } from '../exception/exception';
+import { Exception, exception, unknownError } from '../exception/exception';
 import { ExceptionContext } from '../exception/exception-context';
 import { exceptionMessage } from '../exception/exception-message';
 import { ExceptionTokens } from '../exception/exception-tokens';
@@ -10,7 +11,7 @@ import { ExceptionTokens } from '../exception/exception-tokens';
  *
  * @since v0.2.2
  */
-export type Panic = () => never;
+export type Panic = (cause?: unknown) => never;
 
 /**
  * A function that throws an {@linkcode Error} with a given {@linkcode previous} error.
@@ -50,6 +51,7 @@ export function throws<E extends Error>(
 /**
  * Creates a function that throws an {@linkcode Exception} with a given {@linkcode message} template
  * with {@linkcode tokens} and additional {@linkcode context} data.
+ * If the `cause` is defined, sets the `cause` as a {@linkcode previous} error.
  *
  * @since v0.2.0
  */
@@ -57,6 +59,7 @@ export function panic(message: string, tokens?: ExceptionTokens, context?: Excep
 
 /**
  * Creates a function that throws a given {@linkcode Error}.
+ * Ignores the `cause`, even when if is defined.
  *
  * @since v0.1.0
  */
@@ -67,12 +70,16 @@ export function panic<E extends Error>(
     second: ExceptionTokens = {},
     third: ExceptionContext = {},
 ): Panic {
-    return (): never => {
+    return (cause?: unknown): never => {
         const error: Error | string = valueOf(first);
         if (isError(error)) {
             throw error;
         }
-        throw exception(error, second, third);
+        throw new Exception(
+            exceptionMessage(error, second),
+            third,
+            isDefined(cause) ? unknownError(cause) : null,
+        );
     };
 }
 

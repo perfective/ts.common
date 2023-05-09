@@ -124,13 +124,16 @@ It supports message context as well.
 
 == Panic and Throws
 
-* `type Panic = () => never`
+* `type Panic = (cause?: unknown) => never`
 — a function that throws an `Error`.
 ** `panic(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): Panic`
 — creates a function that throws an `Exception` with a given `message` template with `tokens`
 and additional `context` data.
+If the `cause` is defined, sets the `cause` as a `previous` error.
++
 ** `panic<E extends Error>(error: Value<E>): Panic`
 — creates a function that throws a given `Error`.
+Ignores the `cause`, even when if is defined.
 +
 .Use `panic` to create a callback for lazy evaluation.
 [source,typescript]

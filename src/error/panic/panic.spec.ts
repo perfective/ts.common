@@ -1,3 +1,4 @@
+import { error } from '../error/error';
 import { rangeError } from '../error/range-error';
 import { referenceError } from '../error/reference-error';
 import { typeError } from '../error/type-error';
@@ -52,26 +53,49 @@ describe(throws, () => {
 
 describe(panic, () => {
     describe('panic(String)', () => {
-        it('creates a function that throws an Exception with a message', () => {
-            expect(panic('Failure')).toThrow(exception('Failure'));
+        const input = panic('Failure');
+        const cause = error('Previous');
+
+        describe('when `cause` is undefined', () => {
+            it('throws an Exception with a message', () => {
+                expect(input).toThrow(exception('Failure'));
+            });
+        });
+
+        describe('when `cause` is defined', () => {
+            it('throws an Exception with a message and the previous error', () => {
+                expect(() => input(cause)).toThrow(causedBy(cause, 'Failure', {}, {}));
+            });
+        });
+
+        describe('when `cause` is null', () => {
+            it('throws an Exception with a message and the previous unknown error', () => {
+                expect(() => input(null)).toThrow(causedBy(exception('Unknown error {{error}}', {
+                    error: 'null',
+                }), 'Failure', {}, {}));
+            });
         });
     });
 
     describe('panic(String, ExceptionTokens)', () => {
-        it('creates a function that throws an Exception with a tokenized message', () => {
-            expect(panic('Failed to load user {{id}}', {
-                id: '42',
-            })).toThrow('Failed to load user `42`');
+        const input = panic('Failed to load user {{id}}', {
+            id: '42',
+        });
+
+        it('throws an Exception with a tokenized message', () => {
+            expect(input).toThrow('Failed to load user `42`');
         });
     });
 
     describe('panic(String, ExceptionTokens, ExceptionContext)', () => {
-        it('creates a function that throws an Exception with a tokenized message and context', () => {
-            expect(panic('Failed to load user {{id}}', {
-                name: 'Forty Two',
-            }, {
-                id: 42,
-            })).toThrow(exception('Failed to load user {{id}}', {
+        const input = panic('Failed to load user {{id}}', {
+            name: 'Forty Two',
+        }, {
+            id: 42,
+        });
+
+        it('throws an Exception with a tokenized message and context', () => {
+            expect(input).toThrow(exception('Failed to load user {{id}}', {
                 name: 'Forty Two',
             }, {
                 id: 42,
@@ -80,16 +104,18 @@ describe(panic, () => {
     });
 
     describe('panic(Error)', () => {
-        it('creates a function that throws a given error', () => {
-            expect(panic(typeError('Error')))
-                .toThrow(TypeError);
+        const input = panic(typeError('Error'));
+
+        it('throws a given error', () => {
+            expect(input).toThrow(TypeError);
         });
     });
 
     describe('panic(Function)', () => {
-        it('creates a function that throws an error created by a given function', () => {
-            expect(panic(() => rangeError('Error')))
-                .toThrow(RangeError);
+        const input = panic(() => rangeError('Error'));
+
+        it('throws an error created by a given function', () => {
+            expect(input).toThrow(RangeError);
         });
     });
 });

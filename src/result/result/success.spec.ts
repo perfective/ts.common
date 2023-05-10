@@ -382,6 +382,7 @@ describe(Success, () => {
     });
 });
 
+/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.11.0 */
 describe(recovery, () => {
     const [ifSuccess, ifFailure] = recovery(1);
 
@@ -397,3 +398,4 @@ describe(recovery, () => {
         });
     });
 });
+/* eslint-enable deprecation/deprecation */

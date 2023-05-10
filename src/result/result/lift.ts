@@ -1,5 +1,6 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { Proposition } from '../../boolean/proposition/proposition';
+import { Recovery } from '../../error/error/recovery/recovery';
 import { Value } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
@@ -7,7 +8,6 @@ import { defined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 import { Failure, Result, Success } from './result';
-import { Recovery } from '../../error/error/recovery/recovery';
 
 /**
  * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method

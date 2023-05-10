@@ -162,11 +162,11 @@ Using the `Result` your code would be:
 
 [source,typescript]
 ----
-import { recovery, Result, resultOf } from '@perfective/common/result';
+import { Result, resultOf } from '@perfective/common/result';
 
 function userOutput(id: string): Result<User> {
     return resultOf(() => numberInput(id))
-        .into(recovery(0))
+        .otherwise(0)
         .to(request('user'))
         .to(user);
 }

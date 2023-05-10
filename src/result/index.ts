@@ -31,6 +31,7 @@ export {
     isNotSuccess,
     isResult,
     isSuccess,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0
     recovery,
     Result,
     result,

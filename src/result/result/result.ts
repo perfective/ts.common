@@ -2,6 +2,7 @@
 import { Predicate } from '../../boolean/predicate/predicate';
 import { Proposition } from '../../boolean/proposition/proposition';
 import { isError, isNotError } from '../../error/error/error';
+import { Recovery } from '../../error/error/recovery/recovery';
 import { exception, unknownError } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
@@ -9,7 +10,6 @@ import { TypeGuard } from '../../value/type-guard/type-guard';
 import { defined, isDefined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
-import { Recovery } from '../../error/error/recovery/recovery';
 
 /**
  * A monadic type that represents a result of a function. It can be a successful value or an error value.
@@ -785,6 +785,7 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
  * Use this function with the {@linkcode Result.into} method to recover from a {@linkcode Failure}.
  *
  * @since v0.9.0
+ * @deprecated Since v0.10.0. Use {@linkcode Result.otherwise} instead.
  */
 export function recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>> {
     return [success, (): Success<T> => success(valueOf(fallback))];

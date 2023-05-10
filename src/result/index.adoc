@@ -159,14 +159,6 @@ Otherwise, it returns a `Success`.
 * `settledResult<T>(result: Result<T>): Promise<T>`
 — creates a _settled_ `Promise` from a given `Result`.
 +
-* `recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>>`
-— returns a pair of unary callbacks to fold a given `value` into a `Success`.
-** The first callback returns a given value as a `Success`.
-** The second callback ignores a given value and returns a given `fallback` value as a `Success`.
-
-+
-Use `recovery()` with the `Result.into()` method to recover from a `Failure`.
-+
 * `successWith<T, U>(map: Unary<T, U>): BiMapResult<T, U>`
 — creates a `BiMapResult` pair
 with a given `map` callback as the first element
@@ -437,12 +429,12 @@ to the `Result.into()` method and return the result.
 
 
 [source,typescript]
-.Using the `Result.into()` method to recover from an error and switch to a `Promise`.
+.Using the `Result.into()` method to switch to a `Promise`.
 ----
 import { typeError } from '@perfective/common/error';
 import { Unary } from '@perfective/common/function';
 import { rejected } from '@perfective/common/promise';
-import { failure, recovery, Result, success } from '@perfective/common/result';
+import { failure, Result, success } from '@perfective/common/result';
 import { isEmpty } from '@perfective/common/string';
 
 interface Request {
@@ -473,15 +465,15 @@ async function apiResponse(request: Request): Promise<string> {
 
 async function entityById(id: string): Promise<string> {
     return validInput('') // <.>
-        .into(recovery('abc')) // <.>
+        .otherwise('abc') // <.>
         .to(apiRequest('HEAD')) // <.>
         .into(apiResponse) // <.>
         .catch(() => '503 Service Unavailable'); // <.>
 }
 ----
 <.> The `id` input is not valid.
-<.> We use the `Result.into()` method with the `recovery()` function to recover from an `Error`.
-<.> The `recovery()` callback always returns a `Success`,
+<.> Fallback to `abc` as a valid id.
+<.> The `Result.otherwise()` always returns a `Success`,
 so the whole chain now is strictly a `Success`.
 <.> When we have a `Request`,
 we use `Result.into()` to switch into the `apiResponse` `Promise`.

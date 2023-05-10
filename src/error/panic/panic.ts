@@ -1,7 +1,7 @@
 import { Value, valueOf } from '../../function/function/nullary';
 import { isDefined } from '../../value/value';
 import { isError } from '../error/error';
-import { Exception, exception, unknownError } from '../exception/exception';
+import { caughtError, Exception, exception } from '../exception/exception';
 import { ExceptionContext } from '../exception/exception-context';
 import { exceptionMessage } from '../exception/exception-message';
 import { ExceptionTokens } from '../exception/exception-tokens';
@@ -80,7 +80,7 @@ export function panic<E extends Error>(
         throw new Exception(
             exceptionMessage(error, second),
             third,
-            isDefined(cause) ? unknownError(cause) : null,
+            isDefined(cause) ? caughtError(cause) : null,
         );
     };
 }

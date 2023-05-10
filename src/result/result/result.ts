@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { Proposition } from '../../boolean/proposition/proposition';
 import { isError, isNotError } from '../../error/error/error';
 import { Recovery } from '../../error/error/recovery/recovery';
-import { exception, unknownError } from '../../error/exception/exception';
+import { caughtError, exception } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
@@ -697,7 +697,7 @@ export function resultOf<T>(callback: Nullary<T>): Result<T> {
         return success(callback());
     }
     catch (error: unknown) {
-        return failure(unknownError(error));
+        return failure(caughtError(error));
     }
 }
 

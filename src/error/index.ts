@@ -44,6 +44,7 @@ export {
 
 // ./exception
 export {
+    caughtError,
     causedBy,
     chained,
     chainStack,
@@ -53,6 +54,7 @@ export {
     isException,
     isNotException,
     unchained,
+    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0
     unknownError,
 } from './exception/exception';
 export { ExceptionContext } from './exception/exception-context';
@@ -73,7 +75,7 @@ export {
 export {
     Panic,
     panic,
-    /* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
+    /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.11.0 */
     Rethrow,
     rethrow,
     /* eslint-enable deprecation/deprecation */

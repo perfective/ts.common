@@ -197,7 +197,7 @@ It supports three features:
 .Using the `Exception` class and its constructors.
 [source,typescript]
 ----
-import { causedBy, chained, exception, unknownError } from '@perfective/common/error';
+import { caughtError, causedBy, chained, exception } from '@perfective/common/error';
 
 interface FetchRequest {
     method: string;
@@ -225,7 +225,7 @@ function userRequest(id: string): FetchRequest {
         };
     }
     catch (error: unknown) { // <.>
-        throw causedBy(unknownError(error), 'Invalid user id {{id}}', { // <.>
+        throw causedBy(caughtError(error), 'Invalid user id {{id}}', { // <.>
             id,
         });
     }
@@ -247,7 +247,7 @@ async function user(id: string): Promise<User> {
 }
 ----
 <.> Use the `exception()` function to instantiate an initial `Exception` without previous errors.
-<.> Use the `unknownError()` function to wrap a possible non-`Error` value.
+<.> Use the `caughtError()` function to wrap a possible non-`Error` value.
 <.> When you use a `try-catch` block,
 use the `causedBy()` function to create an `Exception` with a previous error.
 <.> Use the `chained()` function to create a callback to chain an `Error`

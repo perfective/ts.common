@@ -60,20 +60,28 @@ export function causedBy(
 
 /**
  * Wraps a non-{@linkcode Error} {@linkcode value} into an {@linkcode Exception}.
- * The {@linkcode Exception.message} starts with `Unknown error`
- * and contains the given {@linkcode value} coerced to a string.
+ * The {@linkcode Exception.message} starts with `Caught`
+ * and contains the caught {@linkcode value} coerced to a string.
  *
- * Returns an original {@linkcode value} when given an {@linkcode Error}.
+ * Returns a given {@linkcode Error} {@linkcode value} as is.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#string_coercion
  */
-export function unknownError(value: unknown): Error | Exception {
+export function caughtError(value: unknown): Error | Exception {
     if (isError(value)) {
         return value;
     }
-    return exception('Unknown error: {{error}}', {
+    return exception('Caught {{error}}', {
         error: String(value),
     }, { error: value });
+}
+
+/**
+ * @since v0.2.1
+ * @deprecated Since v0.10.0. Use {@linkcode caughtError} instead.
+ */
+export function unknownError(value: unknown): Error | Exception {
+    return caughtError(value);
 }
 
 export function isException<T>(value: Exception | T): value is Exception {

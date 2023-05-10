@@ -7,6 +7,7 @@ It defines an `Exception`, based on the JS
 that supports localizable error messages and error chaining;
 and provides functions to handle error stack output.
 
+
 == Exception
 
 .`Exception` type definition.
@@ -43,7 +44,11 @@ but may be useful in applications.
 — creates a function to wrap a previous `Error` into an `Exception`.
 * `causedBy(previous: Error, message: string, tokens: ExceptionTokens = {}, context: ExceptionContext = {}): Exception`
 — creates an `Exception` with a previous `Error`.
-
+* `caughtError(value: unknown): Error | Exception`
+— wraps a non-`Error` `value` into an `Exception`.
+The `Exception.message` starts with `Caught` and contains the caught `value` coerced to a string.
++
+If given an `Error`, returns it as is.
 
 === Usage
 

@@ -2,7 +2,7 @@
  * @file Contains functions that establish relationship between the {@linkcode Result} and {@linkcode Promise} types.
  */
 
-import { unknownError } from '../../error/exception/exception';
+import { caughtError } from '../../error/exception/exception';
 import { fulfilled, rejected } from '../../promise/promise/promise';
 
 import { Failure, failure, Result, success } from './result';
@@ -16,7 +16,7 @@ import { Failure, failure, Result, success } from './result';
  * @since v0.9.0
  */
 export function rejection<T = never>(reason: unknown): Failure<T> {
-    return failure(unknownError(reason));
+    return failure(caughtError(reason));
 }
 
 /**

@@ -166,25 +166,30 @@ describe('causedBy', () => {
     });
 });
 
+/* eslint-disable deprecation/deprecation -- TODO: Replace with caughtError in v0.11.0 */
 describe(unknownError, () => {
-    it('returns the passed value as is when the value is an Error', () => {
-        const error: Exception = exception('Failure');
+    describe('when a given value is an Error', () => {
+        const input: Error = error('Failure');
 
-        expect(unknownError(error))
-            .toBe(error);
+        it('returns the given value', () => {
+            expect(unknownError(input)).toBe(input);
+        });
     });
 
-    it('returns an exception with the passed value in context when the value is not an Error', () => {
-        expect(unknownError('Failure'))
-            .toStrictEqual(exception('Unknown error: `Failure`', {}, {
-                error: 'Failure',
-            }));
-        expect(unknownError({ code: 404 }))
-            .toStrictEqual(exception('Unknown error: `[object Object]`', {}, {
-                error: 404,
-            }));
+    describe('when a given value is not an Error', () => {
+        it('returns an Exception with the given value', () => {
+            expect(unknownError('Failure'))
+                .toStrictEqual(exception('Caught `Failure`', {}, {
+                    error: 'Failure',
+                }));
+            expect(unknownError({ code: 404 }))
+                .toStrictEqual(exception('Caught `[object Object]`', {}, {
+                    error: 404,
+                }));
+        });
     });
 });
+/* eslint-enable deprecation/deprecation */
 
 describe('isException', () => {
     it('returns true when value is an instance of Exception', () => {

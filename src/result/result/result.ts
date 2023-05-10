@@ -9,6 +9,7 @@ import { TypeGuard } from '../../value/type-guard/type-guard';
 import { defined, isDefined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
+import { Recovery } from '../../error/error/recovery/recovery';
 
 /**
  * A monadic type that represents a result of a function. It can be a successful value or an error value.
@@ -166,7 +167,7 @@ export abstract class Result<T> {
      *
      * @since v0.10.0
      */
-    public abstract otherwise(recovery: Unary<Error, T>): Success<T>;
+    public abstract otherwise(recovery: Recovery<T>): Success<T>;
 
     /**
      * When the instance is a {@linkcode Success},
@@ -177,7 +178,7 @@ export abstract class Result<T> {
      *
      * @since v0.10.0
      */
-    public abstract or(recovery: Unary<Error, T>): T;
+    public abstract or(recovery: Recovery<T>): T;
 
     /**
      * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
@@ -401,7 +402,7 @@ export class Success<T> extends Result<T> {
      *
      * @since v0.10.0
      */
-    public override otherwise(recovery: Unary<Error, T>): this;
+    public override otherwise(recovery: Recovery<T>): this;
 
     public override otherwise(): this {
         return this;
@@ -412,7 +413,7 @@ export class Success<T> extends Result<T> {
      *
      * @since v0.10.0
      */
-    public override or(recovery: Unary<Error, T>): T;
+    public override or(recovery: Recovery<T>): T;
 
     public override or(): T {
         return this.value;
@@ -598,7 +599,7 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.10.0
      */
-    public override otherwise(recovery: Unary<Error, T>): Success<T> {
+    public override otherwise(recovery: Recovery<T>): Success<T> {
         return success(recovery(this.value));
     }
 
@@ -607,7 +608,7 @@ export class Failure<T> extends Result<T> {
      *
      * @since v0.10.0
      */
-    public override or(recovery: Unary<Error, T>): T {
+    public override or(recovery: Recovery<T>): T {
         return recovery(this.value);
     }
 

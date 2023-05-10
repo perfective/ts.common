@@ -7,6 +7,7 @@ import { defined } from '../../value/value';
 
 import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 import { Failure, Result, Success } from './result';
+import { Recovery } from '../../error/error/recovery/recovery';
 
 /**
  * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method
@@ -150,7 +151,7 @@ export function when<T>(first: Proposition, second: Value<Error> | Value<string>
  *
  * @since v0.10.0
  */
-export function otherwise<T>(recovery: Unary<Error, T>): Unary<Result<T>, Success<T>> {
+export function otherwise<T>(recovery: Recovery<T>): Unary<Result<T>, Success<T>> {
     return (result: Result<T>): Success<T> => result.otherwise(recovery);
 }
 
@@ -160,7 +161,7 @@ export function otherwise<T>(recovery: Unary<Error, T>): Unary<Result<T>, Succes
  *
  * @since v0.10.0
  */
-export function or<T>(recovery: Unary<Error, T>): Unary<Result<T>, T> {
+export function or<T>(recovery: Recovery<T>): Unary<Result<T>, T> {
     return (result: Result<T>): T => result.or(recovery);
 }
 

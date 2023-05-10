@@ -32,6 +32,9 @@ export {
     typeError,
 } from './error/type-error';
 
+// ./error/recovery
+export { Recovery } from './error/recovery/recovery';
+
 // ./error/trace
 export {
     stackTrace,

@@ -168,6 +168,11 @@ Exception message may contain given `tokens` and additional `context` data.
 Similar to `throws`, but requires to provide a previous error.
 
 
+== Recovery
+
+`type Recovery<T> = (error: Error) => T`
+— a function that handles a given `Error` and returns a recovery value.
+
 
 == Failure
 

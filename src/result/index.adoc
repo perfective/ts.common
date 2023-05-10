@@ -635,13 +635,13 @@ then the `bookByIsbn()` method returns a `Failure` with "Access denied" `Excepti
 
 === `Result.otherwise()`
 
-* `Result.otherwise(recovery: Unary<Error, T>): Success<T>`
+* `Result.otherwise(recovery: Recovery<T>): Success<T>`
 ** For a `Success`, returns itself.
 ** For a `Failure`, applies its `value` (`Error`) to a given `recovery` callback
 and returns the result wrapped into a `Success`.
 +
 * Lift:
-** `otherwise<T>(recovery: Unary<Error, T>): Unary<Result<T>, Success<T>>`
+** `otherwise<T>(recovery: Recovery<T>): Unary<Result<T>, Success<T>>`
 — creates a function to apply a given `recovery` callback to the `Result.otherwise()` method and return the result.
 
 .Use `Result.otherwise()` to recover from an error and continue the computation chain
@@ -697,12 +697,12 @@ class UserService {
 
 === `Result.or()`
 
-* `Result.or(recovery: Unary<Error, T>): T`
+* `Result.or(recovery: Recovery<T>): T`
 ** For a `Success`, returns its own `value`.
 ** For a `Failure`, applies its `value` (`Error`) to a given `recovery` callback and returns the result.
 +
 * Lift:
-** `or<T>(recovery: Unary<Error, T>): Unary<Result<T>, T>`
+** `or<T>(recovery: Recovery<T>): Unary<Result<T>, T>`
 — creates a function to apply a given `recovery` callback to the `Result.or()` method and return the result.
 
 .Use `Result.or()` to recover from an error and return the result of computation

@@ -9,7 +9,7 @@ export type Callback<T, E extends Error = Error> = (error: E | null | undefined,
 
 /**
  * Returns an error-first {@linkcode Callback} to promisify a function
- * with given {@linkcode resolve} and {@linkcode reject} callbacks from an executor.
+ * with given `resolve` and `reject` callbacks from an executor.
  *
  * @since v0.9.0
  */

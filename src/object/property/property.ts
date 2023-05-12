@@ -70,7 +70,7 @@ export type ObjectWithAbsent<T, K extends keyof T> = T & {
 };
 
 /**
- * Creates a function that for a given value returns the value of a given {@linkcode property}.
+ * Creates a function that for a given value returns the value of a given `property`.
  *
  * @since v0.2.0
  */
@@ -78,7 +78,7 @@ export function property<T, K extends keyof T>(property: K): Unary<T, T[K]>;
 
 /**
  * Creates a predicate that for a given value returns true
- * if a given {@linkcode property} satisfies a given {@linkcode condition}.
+ * if a given `property` satisfies a given `condition`.
  *
  * @since v0.2.0
  */
@@ -95,7 +95,7 @@ export function property<T, K extends keyof T>(
 }
 
 /**
- * Returns a function to compare two objects by their {@linkcode property} with a given {@linkcode order} callback.
+ * Returns a function to compare two objects by their `property` with a given `order` callback.
  *
  * @since v0.2.0
  */
@@ -104,8 +104,8 @@ export function by<T, K extends keyof T>(property: K, order: Compare<T[K]>): Com
 }
 
 /**
- * Returns a type guard that returns true if its argument has a defined {@linkcode property}
- * and all given {@linkcode properties}.
+ * Returns a type guard that returns true if its argument has a defined `property`
+ * and all given `properties`.
  *
  * @since v0.2.0
  */
@@ -121,8 +121,8 @@ export function hasDefinedProperty<T, K extends keyof T>(
 }
 
 /**
- * Returns a type guard that returns true if its argument has an undefined {@linkcode property}
- * and all given {@linkcode properties}.
+ * Returns a type guard that returns true if its argument has an undefined `property`
+ * and all given `properties`.
  *
  * @since v0.2.0
  */
@@ -138,8 +138,8 @@ export function hasUndefinedProperty<T, K extends keyof T>(
 }
 
 /**
- * Returns a type guard that returns true if its argument has a non-null {@linkcode property}
- * and all given {@linkcode properties}.
+ * Returns a type guard that returns true if its argument has a non-null `property`
+ * and all given `properties`.
  *
  * @since v0.2.0
  */
@@ -155,8 +155,8 @@ export function hasNotNullProperty<T, K extends keyof T>(
 }
 
 /**
- * Returns a type guard that returns true if its argument has a `null` {@linkcode property}
- * and all given {@linkcode properties}.
+ * Returns a type guard that returns true if its argument has a `null` `property`
+ * and all given `properties`.
  *
  * @since v0.2.0
  */
@@ -172,8 +172,8 @@ export function hasNullProperty<T, K extends keyof T>(
 }
 
 /**
- * Returns a type guard that returns true if its argument has a present {@linkcode property}
- * and all given {@linkcode properties}.
+ * Returns a type guard that returns true if its argument has a present `property`
+ * and all given `properties`.
  *
  * @since v0.2.0
  */
@@ -189,8 +189,8 @@ export function hasPresentProperty<T, K extends keyof T>(
 }
 
 /**
- * Returns a type guard that returns true if its argument has an absent {@linkcode property}
- * and all given {@linkcode properties}.
+ * Returns a type guard that returns true if its argument has an absent `property`
+ * and all given `properties`.
  *
  * @since v0.2.0
  */
@@ -206,7 +206,7 @@ export function hasAbsentProperty<T, K extends keyof T>(
 }
 
 /**
- * Returns true if a given {@linkcode value} has all its {@linkcode properties} satisfy a given {@linkcode condition}.
+ * Returns true if a given `value` has all its `properties` satisfy a given `condition`.
  */
 function hasPropertiesThat<T, K extends keyof T>(
     condition: Predicate<T[K]>,

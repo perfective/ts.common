@@ -34,7 +34,7 @@ export function successFailure(value: number | Error): Failure<string> {
 /**
  * Converts a given integer into a decimal string.
  *
- * Returns result as a {@linkcode Success} when {@linkcode input} is an integer.
+ * Returns result as a {@linkcode Success} when `input` is an integer.
  * Returns result as a {@linkcode Failure} otherwise.
  */
 export function resultDecimal(input: number): Result<string> {

@@ -2,14 +2,14 @@ import { Unary } from '../../function/function/unary';
 import { isFalse, isTrue } from '../proposition/proposition';
 
 /**
- * A unary function that returns true or false for a given {@linkcode value}.
+ * A unary function that returns true or false for a given `value`.
  *
  * @since v0.1.2
  */
 export type Predicate<T> = (value: T) => boolean;
 
 /**
- * A type predicate. Returns `true` if a given {@linkcode value} is `boolean`.
+ * A type predicate. Returns `true` if a given `value` is `boolean`.
  *
  * @since v0.10.0
  */
@@ -18,7 +18,7 @@ export function isBoolean<T>(value: T | boolean): value is boolean {
 }
 
 /**
- * A type predicate. Returns `true` if a given {@linkcode value} is not `boolean`.
+ * A type predicate. Returns `true` if a given `value` is not `boolean`.
  *
  * @since v0.10.0
  */
@@ -52,7 +52,7 @@ export function isFalsy<T>(value: T): boolean {
 }
 
 /**
- * Creates a {@linkcode Predicate} that is true if its argument strictly equals a given {@linkcode input}.
+ * Creates a {@linkcode Predicate} that is true if its argument strictly equals a given `input`.
  *
  * @since v0.2.0
  */
@@ -61,7 +61,7 @@ export function is<T>(input: T): Predicate<T> {
 }
 
 /**
- * Creates a {@linkcode Predicate} that is true if its argument does not equal a given {@linkcode input}.
+ * Creates a {@linkcode Predicate} that is true if its argument does not equal a given `input`.
  *
  * @since v0.2.0
  */
@@ -79,7 +79,7 @@ export function not<T>(predicate: Predicate<T>): Predicate<T> {
 }
 
 /**
- * Creates a {@linkcode Predicate} that is true when all given {@linkcode predicates} are true.
+ * Creates a {@linkcode Predicate} that is true when all given `predicates` are true.
  *
  * This is a logical `AND` operation.
  *
@@ -90,7 +90,7 @@ export function all<T>(...predicates: Predicate<T>[]): Predicate<T> {
 }
 
 /**
- * Creates a {@linkcode Predicate} that is true when at least one of given {@linkcode predicates} is true.
+ * Creates a {@linkcode Predicate} that is true when at least one of given `predicates` is true.
  *
  * This is a logical `OR` operation.
  *
@@ -101,7 +101,7 @@ export function either<T>(...predicates: Predicate<T>[]): Predicate<T> {
 }
 
 /**
- * Creates a {@linkcode Predicate} that is true when none of given {@linkcode predicates} is true.
+ * Creates a {@linkcode Predicate} that is true when none of given `predicates` is true.
  *
  * @since v0.2.0
  */
@@ -111,7 +111,7 @@ export function neither<T>(...predicates: Predicate<T>[]): Predicate<T> {
 
 /**
  * Creates a {@linkcode Predicate} that is true
- * when at least a given {@linkcode minimum} number of given {@linkcode predicates} is true.
+ * when at least a given `minimum` number of given `predicates` is true.
  *
  * @since v0.2.0
  */
@@ -121,7 +121,7 @@ export function atLeast<T>(minimum: number, ...predicates: Predicate<T>[]): Pred
 
 /**
  * Creates a {@linkcode Predicate} that is true
- * when no more than a given {@linkcode maximum} number of given {@linkcode predicates} is true.
+ * when no more than a given `maximum` number of given `predicates` is true.
  *
  * @since v0.2.0
  */
@@ -131,7 +131,7 @@ export function atMost<T>(maximum: number, ...predicates: Predicate<T>[]): Predi
 
 /**
  * Creates a {@linkcode Predicate} that is true
- * when exactly a given {@linkcode count} of given {@linkcode predicates} is true.
+ * when exactly a given `count` of given `predicates` is true.
  *
  * @since v0.2.0
  */
@@ -140,7 +140,7 @@ export function exactly<T>(count: number, ...predicates: Predicate<T>[]): Predic
 }
 
 /**
- * Returns a function that applies a given {@linkcode value} to a {@linkcode Predicate}.
+ * Returns a function that applies a given `value` to a {@linkcode Predicate}.
  */
 function bool<T>(value: T): Unary<Predicate<T>, boolean> {
     return (predicate: Predicate<T>): boolean => predicate(value);

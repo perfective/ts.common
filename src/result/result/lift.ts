@@ -10,16 +10,16 @@ import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
 import { Failure, Result, Success } from './result';
 
 /**
- * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method
- * and return the result of the {@linkcode value} (a {@linkcode Failure}).
+ * Creates a function to apply a given `value` callback to the {@linkcode Result.onto} method
+ * and return the result of the `value` (a {@linkcode Failure}).
  *
  * @since v0.9.0
  */
 export function onto<T, U>(value: Unary<T, Failure<U>>): Unary<Result<T>, Failure<U>>;
 
 /**
- * Creates a function to apply a given {@linkcode value} callback to the {@linkcode Result.onto} method
- * and return the result of the {@linkcode value}.
+ * Creates a function to apply a given `value` callback to the {@linkcode Result.onto} method
+ * and return the result of the `value`.
  *
  * @since v0.9.0
  */
@@ -30,7 +30,7 @@ export function onto<T, U>(first: Unary<T, Result<U>>): Unary<Result<T>, Result<
 }
 
 /**
- * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
+ * Creates a function to apply given `value` and `error` callbacks
  * to the {@linkcode Result.to} method and return the result.
  *
  * @since v0.9.0
@@ -38,7 +38,7 @@ export function onto<T, U>(first: Unary<T, Result<U>>): Unary<Result<T>, Result<
 export function to<T, U>(value: Unary<T, U>, error?: Unary<Error, Error>): Unary<Result<T>, Result<U>>;
 
 /**
- * Creates a function to apply a given {@linkcode maps} callbacks pair to the {@linkcode Result.to} method
+ * Creates a function to apply a given `maps` callbacks pair to the {@linkcode Result.to} method
  * and return the result.
  *
  * @since v0.9.0
@@ -56,7 +56,7 @@ export function to<T, U>(
 }
 
 /**
- * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
+ * Creates a function to apply given `value` and `error` callbacks
  * to the {@linkcode Result.into} method and return the result.
  *
  * @since v0.9.0
@@ -64,7 +64,7 @@ export function to<T, U>(
 export function into<T, U>(value: Unary<T, U>, error: Unary<Error, U>): Unary<Result<T>, U>;
 
 /**
- * Creates a function to apply a given {@linkcode fold} callbacks pair
+ * Creates a function to apply a given `fold` callbacks pair
  * to the {@linkcode Result.into} method and return the result.
  *
  * @since v0.9.0
@@ -82,7 +82,7 @@ export function into<T, U>(
 }
 
 /**
- * Creates a function to apply given {@linkcode filter} predicate and {@linkcode error}
+ * Creates a function to apply given `filter` predicate and `error`
  * to the {@linkcode Result.that} method and return the result.
  *
  * @since v0.10.0
@@ -90,7 +90,7 @@ export function into<T, U>(
 export function that<T>(filter: Predicate<T>, error: Value<Error>): Unary<Result<T>, Result<T>>;
 
 /**
- * Creates a function to apply a {@linkcode filter} predicate and error {@linkcode message}
+ * Creates a function to apply a `filter` predicate and error `message`
  * to the {@linkcode Result.that} method and return the result.
  *
  * @since v0.10.0
@@ -103,7 +103,7 @@ export function that<T>(first: Predicate<T>, second: Value<Error> | Value<string
 }
 
 /**
- * Creates a function to apply given {@linkcode typeGuard} and {@linkcode error} to the {@linkcode Result.which} method
+ * Creates a function to apply given `typeGuard` and `error` to the {@linkcode Result.which} method
  * and return the result.
  *
  * @since v0.10.0
@@ -111,7 +111,7 @@ export function that<T>(first: Predicate<T>, second: Value<Error> | Value<string
 export function which<T, U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Unary<Result<T>, Result<U>>;
 
 /**
- * Creates a function to apply given {@linkcode typeGuard} and error {@linkcode message}
+ * Creates a function to apply given `typeGuard` and error `message`
  * to the {@linkcode Result.which} method and return the result.
  *
  * @since v0.10.0
@@ -126,7 +126,7 @@ export function which<T, U extends T>(
 }
 
 /**
- * Creates a function to apply given {@linkcode condition} and {@linkcode error} to the {@linkcode Result.when} method
+ * Creates a function to apply given `condition` and `error` to the {@linkcode Result.when} method
  * and return the result.
  *
  * @since v0.10.0
@@ -134,7 +134,7 @@ export function which<T, U extends T>(
 export function when<T>(condition: Proposition, error: Value<Error>): Unary<Result<T>, Result<T>>;
 
 /**
- * Creates a function to apply given {@linkcode condition} and error {@linkcode message}
+ * Creates a function to apply given `condition` and error `message`
  * to the {@linkcode Result.when} method and return the result.
  *
  * @since v0.10.0
@@ -146,7 +146,7 @@ export function when<T>(first: Proposition, second: Value<Error> | Value<string>
 }
 
 /**
- * Creates a function to apply a given {@linkcode recovery} callback to the {@linkcode Result.otherwise} method
+ * Creates a function to apply a given `recovery` callback to the {@linkcode Result.otherwise} method
  * and return the result.
  *
  * @since v0.10.0
@@ -156,7 +156,7 @@ export function otherwise<T>(recovery: Recovery<T>): Unary<Result<T>, Success<T>
 }
 
 /**
- * Creates a function to apply a given {@linkcode recovery} callback to the {@linkcode Result.or} method
+ * Creates a function to apply a given `recovery` callback to the {@linkcode Result.or} method
  * and return the result.
  *
  * @since v0.10.0
@@ -166,7 +166,7 @@ export function or<T>(recovery: Recovery<T>): Unary<Result<T>, T> {
 }
 
 /**
- * Creates a function to apply given {@linkcode value} and {@linkcode error} callbacks
+ * Creates a function to apply given `value` and `error` callbacks
  * to the {@linkcode Result.through} method and return the given {@linkcode Result}.
  *
  * @since v0.9.0
@@ -174,7 +174,7 @@ export function or<T>(recovery: Recovery<T>): Unary<Result<T>, T> {
 export function through<T>(value: UnaryVoid<T>, error: UnaryVoid<Error>): Unary<Result<T>, Result<T>>;
 
 /**
- * Creates a function to apply a given {@linkcode procedures} callbacks pair to the {@linkcode Result.through} method
+ * Creates a function to apply a given `procedures` callbacks pair to the {@linkcode Result.through} method
  * and return the given {@linkcode Result}.
  *
  * @since v0.9.0

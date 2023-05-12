@@ -5,10 +5,10 @@
 import { caughtError } from '../../error/exception/exception';
 import { fulfilled, rejected } from '../../promise/promise/promise';
 
-import { Failure, failure, Result, success } from './result';
+import { Failure, failure, Result, Success, success } from './result';
 
 /**
- * Creates a {@linkcode Failure} from an {@linkcode unknown} {@linkcode reason}.
+ * Creates a {@linkcode Failure} from an `unknown` `reason`.
  *
  * Pass this function into {@linkcode Promise.catch} or {@linkcode Promise.then} as an `onRejection` callback
  * to wrap a `reason` into a {@linkcode Failure}.
@@ -34,8 +34,8 @@ export async function promisedResult<T>(promise: Promise<T>): Promise<Result<T>>
 /**
  * Creates a settled {@linkcode Promise} from a given {@linkcode Result}.
  *
- * Returns a fulfilled {@linkcode Promise} if {@linkcode result} is a {@linkcode Success}.
- * Returns a rejected {@linkcode Promise} if {@linkcode result} is a {@linkcode Failure}.
+ * Returns a fulfilled {@linkcode Promise} if `result` is a {@linkcode Success}.
+ * Returns a rejected {@linkcode Promise} if `result` is a {@linkcode Failure}.
  *
  * @since v0.9.0
  */

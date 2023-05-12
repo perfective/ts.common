@@ -15,7 +15,7 @@ export type Panic = (cause?: unknown) => never;
 
 /* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
 /**
- * A function that throws an {@linkcode Error} with a given {@linkcode previous} error.
+ * A function that throws an {@linkcode Error} with a given `previous` error.
  *
  * @since v0.2.4
  * @deprecated Since v0.10.0. Use {@linkcode Panic} instead.
@@ -23,8 +23,8 @@ export type Panic = (cause?: unknown) => never;
 export type Rethrow<E extends Error = Error> = (previous: E) => never;
 
 /**
- * Throws an {@linkcode Exception} with a given {@linkcode message} template with {@linkcode tokens}
- * and additional {@linkcode context} data.
+ * Throws an {@linkcode Exception} with a given `message` template with `tokens`
+ * and additional `context` data.
  *
  * @since v0.2.0
  */
@@ -51,9 +51,9 @@ export function throws<E extends Error>(
 }
 
 /**
- * Creates a function that throws an {@linkcode Exception} with a given {@linkcode message} template
- * with {@linkcode tokens} and additional {@linkcode context} data.
- * If the `cause` is defined, sets the `cause` as a {@linkcode previous} error.
+ * Creates a function that throws an {@linkcode Exception} with a given `message` template
+ * with `tokens` and additional `context` data.
+ * If the `cause` is defined, sets the `cause` as a `previous` error.
  *
  * @since v0.2.0
  */
@@ -86,8 +86,8 @@ export function panic<E extends Error>(
 }
 
 /**
- * Throws an {@linkcode Exception} with a given {@linkcode message} caused by a {@linkcode previous} {@linkcode Error}.
- * Exception message may contain given {@linkcode tokens} and additional {@linkcode context} data.
+ * Throws an {@linkcode Exception} with a given `message` caused by a `previous` {@linkcode Error}.
+ * Exception message may contain given `tokens` and additional `context` data.
  *
  * @throws Exception - created with given parameters.
  *
@@ -103,12 +103,12 @@ export function rethrows(
 }
 
 /**
- * Creates a function that throws an {@linkcode Exception} with a given {@linkcode message}
- * and a passed {@linkcode previous} {@linkcode Error}.
- * Exception message may contain given {@linkcode tokens} and additional {@linkcode context} data.
+ * Creates a function that throws an {@linkcode Exception} with a given `message`
+ * and a passed `previous` {@linkcode Error}.
+ * Exception message may contain given `tokens` and additional `context` data.
  *
  * @since v0.2.0
- * @deprecated Since v0.10.0. Use {@linkcode panic} instead.
+ * @deprecated Since v0.10.0. Use `panic` instead.
  */
 export function rethrow(
     message: string,

@@ -6,7 +6,7 @@ import { isFirstOccurrence } from './filter';
 import { Compare } from './lift';
 
 /**
- * Creates an array from given {@linkcode elements}.
+ * Creates an array from given `elements`.
  *
  * @since v0.2.0
  */
@@ -15,7 +15,7 @@ export function array<T>(...elements: T[]): T[] {
 }
 
 /**
- * Creates an array from elements of a given {@linkcode Iterable} or an {@linkcode ArrayLike} {@linkcode value}.
+ * Creates an array from elements of a given {@linkcode Iterable} or an {@linkcode ArrayLike} `value`.
  *
  * @since v0.9.0
  */
@@ -24,7 +24,7 @@ export function elements<T>(value: Iterable<T> | ArrayLike<T>): T[] {
 }
 
 /**
- * Creates a shallow copy of a given {@linkcode array}.
+ * Creates a shallow copy of a given `array`.
  *
  * @since v0.2.0
  */
@@ -33,7 +33,7 @@ export function copy<T>(array: T[]): T[] {
 }
 
 /**
- * Concatenates given {@linkcode arrays} in order they are given.
+ * Concatenates given `arrays` in order they are given.
  *
  * @since v0.9.0
  */
@@ -108,14 +108,14 @@ export function reversed<T>(array: T[]): T[] {
 }
 
 /**
- * Creates a function to return a shallow copy of a given array with a given {@linkcode order} callback.
+ * Creates a function to return a shallow copy of a given array with a given `order` callback.
  *
  * @since v0.2.0
  */
 export function sorted<T>(order?: Compare<T>): Unary<T[], T[]>;
 
 /**
- * Creates a shallow copy of a given {@linkcode array} sorted with a given {@linkcode order} callback.
+ * Creates a shallow copy of a given `array` sorted with a given `order` callback.
  *
  * @since v0.2.0
  */
@@ -129,9 +129,9 @@ export function sorted<T>(first?: T[] | Compare<T>, second?: Compare<T>): Unary<
 }
 
 /**
- * Remove all duplicates from a given {@linkcode array}.
+ * Remove all duplicates from a given `array`.
  *
- * @returns An array with only the first occurrence of each value in the {@linkcode array}.
+ * @returns An array with only the first occurrence of each value in the `array`.
  *
  * @since v0.2.0
  */
@@ -140,9 +140,9 @@ export function unique<T>(array: T[]): T[] {
 }
 
 /**
- * If a given {@linkcode value} is an array, returns the original {@linkcode value}.
+ * If a given `value` is an array, returns the original `value`.
  *
- * Otherwise, returns an array with only that {@linkcode value}.
+ * Otherwise, returns an array with only that `value`.
  *
  * @since v0.2.1
  */

@@ -77,7 +77,7 @@ export function push<T>(...items: T[]): Unary<T[], number> {
 }
 
 /**
- * Creates a function that pushes {@linkcode items} into a given {@linkcode array}.
+ * Creates a function that pushes `items` into a given `array`.
  *
  * @since v0.9.0
  */

@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { Proposition } from '../../boolean/proposition/proposition';
 import { isError, isNotError } from '../../error/error/error';
 import { Recovery } from '../../error/error/recovery/recovery';
-import { caughtError, exception } from '../../error/exception/exception';
+import { caughtError, Exception, exception } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
@@ -28,12 +28,12 @@ export abstract class Result<T> {
     public abstract readonly value: T | Error;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Result.value|value} property,
+     * Applies a given `flatMap` callback to the {@linkcode Result.value|value} property,
      * if the instance is a {@linkcode Success}.
      *
-     * Ignores the {@linkcode flatMap} for the Failure.
+     * Ignores the `flatMap` for the Failure.
      *
-     * @returns The result of the {@linkcode flatMap}.
+     * @returns The result of the `flatMap`.
      *
      * @since v0.9.0
      */
@@ -42,10 +42,10 @@ export abstract class Result<T> {
     ): Result<U>;
 
     /**
-     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value},
+     * Applies a given `mapValue` callback to the {@linkcode Success.value},
      * when the instance is a {@linkcode Success}.
      *
-     * If given a {@linkcode mapError} callback,
+     * If given a `mapError` callback,
      * applies it to the {@linkcode Failure.value} when the instance is a {@linkcode Failure}.
      *
      * @since v0.9.0
@@ -54,10 +54,10 @@ export abstract class Result<T> {
 
     /**
      * If the instance is a {@linkcode Success},
-     * applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
+     * applies the first callback of a given `maps` pair to the {@linkcode Success.value}
      * and returns its result wrapped into a {@linkcode Success}.
      *
-     * Otherwise, applies the second callback of a given {@linkcode maps} pair to the {@linkcode Failure.value}
+     * Otherwise, applies the second callback of a given `maps` pair to the {@linkcode Failure.value}
      * and returns its result wrapped into a {@linkcode Failure}.
      *
      * @since v0.9.0
@@ -65,11 +65,11 @@ export abstract class Result<T> {
     public abstract to<U>(maps: BiMapResult<T, U>): Result<U>;
 
     /**
-     * Applies a given {@linkcode reduceValue} callback to the {@linkcode Success.value} property.
-     * Or applies a given {@linkcode reduceError} callback to the {@linkcode Error.value}.
+     * Applies a given `reduceValue` callback to the {@linkcode Success.value} property.
+     * Or applies a given `reduceError` callback to the {@linkcode Error.value}.
      *
-     * Returns the result of the {@linkcode reduceValue} for a {@linkcode Success}
-     * or the result of the {@linkcode reduceError} for a {@linkcode Failure}.
+     * Returns the result of the `reduceValue` for a {@linkcode Success}
+     * or the result of the `reduceError` for a {@linkcode Failure}.
      *
      * @since v0.9.0
      */
@@ -77,11 +77,11 @@ export abstract class Result<T> {
 
     /**
      * If the instance is a {@linkcode Success},
-     * applies the first callback of a given {@linkcode fold} pair to the {@linkcode Success.value}
+     * applies the first callback of a given `fold` pair to the {@linkcode Success.value}
      * and returns the result.
      *
      * If the instance is a {@linkcode Failure},
-     * applies the second callback of a given {@linkcode fold} pair to the {@linkcode Failure.value}
+     * applies the second callback of a given `fold` pair to the {@linkcode Failure.value}
      * and returns the result.
      *
      * @since v0.9.0
@@ -90,8 +90,8 @@ export abstract class Result<T> {
 
     /**
      * When the instance is a {@linkcode Success},
-     * returns itself if the {@linkcode Success.value} satisfies a given {@linkcode filter}.
-     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     * returns itself if the {@linkcode Success.value} satisfies a given `filter`.
+     * Otherwise, returns a {@linkcode Failure} with a given `error`.
      *
      * When the instance is a {@linkcode Failure}, returns itself.
      *
@@ -101,8 +101,8 @@ export abstract class Result<T> {
 
     /**
      * When the instance is a {@linkcode Success},
-     * returns itself if the {@linkcode Success.value} satisfies a given {@linkcode filter}.
-     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} with a given {@linkcode message}
+     * returns itself if the {@linkcode Success.value} satisfies a given `filter`.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} with a given `message`
      * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
      *
      * When the instance is a {@linkcode Failure}, returns itself.
@@ -113,9 +113,9 @@ export abstract class Result<T> {
 
     /**
      * When the instance is a {@linkcode Success},
-     * returns itself with the type narrowed down by the {@linkcode typeGuard},
-     * if the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}.
-     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     * returns itself with the type narrowed down by the `typeGuard`,
+     * if the {@linkcode Success.value|value} satisfies a given `typeGuard`.
+     * Otherwise, returns a {@linkcode Failure} with a given `error`.
      *
      * When the instance is a {@linkcode Failure}, returns itself.
      *
@@ -125,9 +125,9 @@ export abstract class Result<T> {
 
     /**
      * When the instance is a {@linkcode Success},
-     * returns itself with the type narrowed down by the {@linkcode typeGuard},
-     * if the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}
-     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}
+     * returns itself with the type narrowed down by the `typeGuard`,
+     * if the {@linkcode Success.value|value} satisfies a given `typeGuard`
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given `message`
      * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
      *
      * When the instance is a {@linkcode Failure}, returns itself.
@@ -138,8 +138,8 @@ export abstract class Result<T> {
 
     /**
      * When the instance is a {@linkcode Success},
-     * returns itself if the {@linkcode condition} is `true`.
-     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     * returns itself if the `condition` is `true`.
+     * Otherwise, returns a {@linkcode Failure} with a given `error`.
      *
      * When the instance is a {@linkcode Failure}, returns itself.
      *
@@ -149,8 +149,8 @@ export abstract class Result<T> {
 
     /**
      * When the instance is a {@linkcode Success},
-     * returns itself if the {@linkcode condition} is `true`.
-     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}.
+     * returns itself if the `condition` is `true`.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given `message`.
      *
      * When the instance is a {@linkcode Failure}, returns itself.
      *
@@ -174,16 +174,16 @@ export abstract class Result<T> {
      * returns its own {@linkcode Success.value|value}.
      *
      * When the instance is a {@linkcode Failure},
-     * returns the result of a given {@linkcode recovery} callback applied to the {@linkcode Failure.value}.
+     * returns the result of a given `recovery` callback applied to the {@linkcode Failure.value}.
      *
      * @since v0.10.0
      */
     public abstract or(recovery: Recovery<T>): T;
 
     /**
-     * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}
+     * Executes a given `valueProcedure` callback with the {@linkcode Success.value}
      * when the instance is a {@linkcode Success}.
-     * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}
+     * Executes a given `errorProcedure` callback with the {@linkcode Failure.value}
      * when the instance is a {@linkcode Failure}.
      *
      * Returns the original {@linkcode Result} object.
@@ -194,10 +194,10 @@ export abstract class Result<T> {
 
     /**
      * If the instance is a {@linkcode Success},
-     * executes the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     * executes the first callback of a given `procedures` pair with the {@linkcode Success.value}.
      *
      * If the instance is a {@linkcode Failure},
-     * executes the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     * executes the second callback of a given `procedures` pair with the {@linkcode Failure.value}.
      *
      * Returns the original {@linkcode Result} object.
      *
@@ -219,36 +219,36 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
+     * Applies a given `flatMap` callback to the {@linkcode Success.value|value}.
      *
-     * @returns The result of the {@linkcode flatMap}.
+     * @returns The result of the `flatMap`.
      *
      * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Failure<U>): Failure<U>;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
+     * Applies a given `flatMap` callback to the {@linkcode Success.value|value}.
      *
-     * @returns The result of the {@linkcode flatMap}.
+     * @returns The result of the `flatMap`.
      *
      * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Success<U>): Success<U>;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
+     * Applies a given `flatMap` callback to the {@linkcode Success.value|value}.
      *
-     * @returns The result of the {@linkcode flatMap}.
+     * @returns The result of the `flatMap`.
      *
      * @since v0.9.0
      */
     public override onto<U>(flatMap: (value: T) => Result<U>): Result<U>;
 
     /**
-     * Applies a given {@linkcode flatMap} callback to the {@linkcode Success.value|value}.
+     * Applies a given `flatMap` callback to the {@linkcode Success.value|value}.
      *
-     * @returns The result of the {@linkcode flatMap}.
+     * @returns The result of the `flatMap`.
      *
      * @since v0.9.0
      */
@@ -257,17 +257,17 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode mapValue} callback to the {@linkcode Success.value}.
-     * Ignores a given {@linkcode mapError} callback.
+     * Applies a given `mapValue` callback to the {@linkcode Success.value}.
+     * Ignores a given `mapError` callback.
      *
-     * Returns the result of the {@linkcode mapValue} call wrapped into a {@linkcode Success}.
+     * Returns the result of the `mapValue` call wrapped into a {@linkcode Success}.
      *
      * @since v0.9.0
      */
     public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Success<U>;
 
     /**
-     * Applies the first callback of a given {@linkcode maps} pair to the {@linkcode Success.value}
+     * Applies the first callback of a given `maps` pair to the {@linkcode Success.value}
      * and returns its result wrapped into a {@linkcode Success}.
      *
      * @since v0.9.0
@@ -280,17 +280,17 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode reduce} callback to the {@linkcode Success.value|value}.
-     * Ignores the {@linkcode reduceError} callback.
+     * Applies a given `reduce` callback to the {@linkcode Success.value|value}.
+     * Ignores the `reduceError` callback.
      *
-     * @returns The result of the {@linkcode reduce}.
+     * @returns The result of the `reduce`.
      *
      * @since v0.9.0
      */
     public override into<U>(reduceValue: Unary<T, U>, reduceError?: Unary<Error, U>): U;
 
     /**
-     * Applies the first callback of a given {@linkcode fold} pair to the {@linkcode Success.value}
+     * Applies the first callback of a given `fold` pair to the {@linkcode Success.value}
      * and returns the result.
      *
      * @since v0.9.0
@@ -303,16 +303,16 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * If the {@linkcode Success.value|value} satisfies a given {@linkcode filter} returns itself.
-     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     * If the {@linkcode Success.value|value} satisfies a given `filter` returns itself.
+     * Otherwise, returns a {@linkcode Failure} with a given `error`.
      *
      * @since v0.10.0
      */
     public override that(filter: Predicate<T>, error: Value<Error>): Result<T>;
 
     /**
-     * If the {@linkcode Success.value|value} satisfies a given {@linkcode filter} returns itself.
-     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}
+     * If the {@linkcode Success.value|value} satisfies a given `filter` returns itself.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given `message`
      * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
      *
      * @since v0.10.0
@@ -335,18 +335,18 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * If the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}
-     * returns itself but with the type narrowed down by the {@linkcode typeGuard}.
-     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     * If the {@linkcode Success.value|value} satisfies a given `typeGuard`
+     * returns itself but with the type narrowed down by the `typeGuard`.
+     * Otherwise, returns a {@linkcode Failure} with a given `error`.
      *
      * @since v0.10.0
      */
     public override which<U extends T>(typeGuard: TypeGuard<T, U>, error: Value<Error>): Result<U>;
 
     /**
-     * If the {@linkcode Success.value|value} satisfies a given {@linkcode typeGuard}
-     * returns itself but with the type narrowed down by the {@linkcode typeGuard}.
-     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}
+     * If the {@linkcode Success.value|value} satisfies a given `typeGuard`
+     * returns itself but with the type narrowed down by the `typeGuard`.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given `message`
      * and the {@linkcode Success.value} as a message `{{value}}` token and context property.
      *
      * @since v0.10.0
@@ -371,16 +371,16 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * If the {@linkcode condition} is `true`, returns itself.
-     * Otherwise, returns a {@linkcode Failure} with a given {@linkcode error}.
+     * If the `condition` is `true`, returns itself.
+     * Otherwise, returns a {@linkcode Failure} with a given `error`.
      *
      * @since v0.10.0
      */
     public override when(condition: Proposition, error: Value<Error>): Result<T>;
 
     /**
-     * If the {@linkcode condition} is `true`, returns itself.
-     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given {@linkcode message}.
+     * If the `condition` is `true`, returns itself.
+     * Otherwise, returns a {@linkcode Failure} with an {@linkcode Exception} created with a given `message`.
      *
      * @since v0.10.0
      */
@@ -398,7 +398,7 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Ignores a given {@linkcode recovery} callback and returns itself.
+     * Ignores a given `recovery` callback and returns itself.
      *
      * @since v0.10.0
      */
@@ -409,7 +409,7 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Ignores a given {@linkcode recovery} callback and returns its own {@linkcode Success.value|value}.
+     * Ignores a given `recovery` callback and returns its own {@linkcode Success.value|value}.
      *
      * @since v0.10.0
      */
@@ -420,8 +420,8 @@ export class Success<T> extends Result<T> {
     }
 
     /**
-     * Executes a given {@linkcode valueProcedure} callback with the {@linkcode Success.value}.
-     * Ignores a given {@linkcode errorProcedure} callback.
+     * Executes a given `valueProcedure` callback with the {@linkcode Success.value}.
+     * Ignores a given `errorProcedure` callback.
      *
      * Returns the original {@linkcode Success} object.
      *
@@ -430,7 +430,7 @@ export class Success<T> extends Result<T> {
     public override through(valueProcedure: UnaryVoid<T>, errorProcedure?: UnaryVoid<Error>): this;
 
     /**
-     * Executes the first callback of a given {@linkcode procedures} pair with the {@linkcode Success.value}.
+     * Executes the first callback of a given `procedures` pair with the {@linkcode Success.value}.
      * Returns the original {@linkcode Success} object.
      *
      * @since v0.9.0
@@ -467,7 +467,7 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Ignores a given {@linkcode flatMap} callback and returns itself.
+     * Ignores a given `flatMap` callback and returns itself.
      *
      * @since v0.9.0
      */
@@ -483,19 +483,19 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * If given a {@linkcode mapError} callback,
+     * If given a `mapError` callback,
      * applies it to the {@linkcode Failure.value}
      * and returns the result wrapped into a {@linkcode Failure}.
-     * Returns itself, if a {@linkcode mapError} callback is omitted.
+     * Returns itself, if a `mapError` callback is omitted.
      *
-     * Always ignores a given {@linkcode mapValue} callback.
+     * Always ignores a given `mapValue` callback.
      *
      * @since v0.9.0
      */
     public override to<U>(mapValue: Unary<T, U>, mapError?: Unary<Error, Error>): Failure<U>;
 
     /**
-     * Applies the second callback of a given {@linkcode maps} pair to the {@linkcode Failure.value}
+     * Applies the second callback of a given `maps` pair to the {@linkcode Failure.value}
      * and returns its result wrapped into a {@linkcode Failure}.
      *
      * @since v0.9.0
@@ -514,17 +514,17 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Applies a given {@linkcode reduceError} callback to the {@linkcode Failure.value} {@linkcode Error}.
-     * Ignores a given {@linkcode reduceValue} callback.
+     * Applies a given `reduceError` callback to the {@linkcode Failure.value} {@linkcode Error}.
+     * Ignores a given `reduceValue` callback.
      *
-     * @returns The result of the {@linkcode reduceError} call.
+     * @returns The result of the `reduceError` call.
      *
      * @since v0.9.0
      */
     public override into<U>(reduceValue: Unary<T, U>, reduceError: Unary<Error, U>): U;
 
     /**
-     * Applies the second callback of a given {@linkcode fold} pair to the {@linkcode Failure.value}
+     * Applies the second callback of a given `fold` pair to the {@linkcode Failure.value}
      * and returns the result.
      *
      * @since v0.9.0
@@ -594,7 +594,7 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Returns a {@linkcode Success} with the result of a given {@linkcode recovery} callback
+     * Returns a {@linkcode Success} with the result of a given `recovery` callback
      * applied to the {@linkcode Failure.value}.
      *
      * @since v0.10.0
@@ -604,7 +604,7 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Returns the result of a given {@linkcode recovery} function applied to the {@linkcode Failure.value}.
+     * Returns the result of a given `recovery` function applied to the {@linkcode Failure.value}.
      *
      * @since v0.10.0
      */
@@ -613,8 +613,8 @@ export class Failure<T> extends Result<T> {
     }
 
     /**
-     * Executes a given {@linkcode errorProcedure} callback with the {@linkcode Failure.value}.
-     * Ignores a given {@linkcode valueProcedure} callback.
+     * Executes a given `errorProcedure` callback with the {@linkcode Failure.value}.
+     * Ignores a given `valueProcedure` callback.
      *
      * Returns itself.
      *
@@ -623,7 +623,7 @@ export class Failure<T> extends Result<T> {
     public override through(valueProcedure: UnaryVoid<T>, errorProcedure: UnaryVoid<Error>): this;
 
     /**
-     * Executes the second callback of a given {@linkcode procedures} pair with the {@linkcode Failure.value}.
+     * Executes the second callback of a given `procedures` pair with the {@linkcode Failure.value}.
      *
      * Returns the original {@linkcode Failure} object.
      *
@@ -645,7 +645,7 @@ export class Failure<T> extends Result<T> {
 /**
  * Creates a {@linkcode Failure} from a given error value.
  *
- * Use the {@linkcode success} function if you need to return an {@linkcode Error} as a {@linkcode Success}.
+ * Use the `success` function if you need to return an {@linkcode Error} as a {@linkcode Success}.
  *
  * @see success()
  *
@@ -661,7 +661,7 @@ export function result<T>(value: Error): Failure<T>;
 export function result<T>(value: T): Success<T>;
 
 /**
- * Creates a {@linkcode Failure} if the {@linkcode value} is an {@linkcode Error}
+ * Creates a {@linkcode Failure} if the `value` is an {@linkcode Error}
  * or a {@linkcode Success} for non-error values.
  *
  * @since v0.9.0
@@ -669,7 +669,7 @@ export function result<T>(value: T): Success<T>;
 export function result<T>(value: T | Error): Result<T>;
 
 /**
- * Creates a {@linkcode Failure} if the {@linkcode value} is an {@linkcode Error}
+ * Creates a {@linkcode Failure} if the `value` is an {@linkcode Error}
  * or a {@linkcode Success} for non-error values.
  *
  * @since v0.9.0
@@ -682,11 +682,11 @@ export function result<T>(value: T | Error): Result<T> {
 }
 
 /**
- * Calls a given {@linkcode callback} in a try-catch block.
+ * Calls a given `callback` in a try-catch block.
  *
- * If the {@linkcode callback} call throws an error,
+ * If the `callback` call throws an error,
  * catches that error and returns it as a {@linkcode Failure}.
- * Otherwise, returns a result of the {@linkcode callback} wrapped into a {@linkcode Success}.
+ * Otherwise, returns a result of the `callback` wrapped into a {@linkcode Success}.
  *
  * Use this function to wrap up legacy functions that throw errors into a {@linkcode Result}.
  *
@@ -702,7 +702,7 @@ export function resultOf<T>(callback: Nullary<T>): Result<T> {
 }
 
 /**
- * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * Creates a function to transform a `value` with a given `map` callback
  * and return it as a {@linkcode Failure}.
  *
  * @since v0.9.0
@@ -710,7 +710,7 @@ export function resultOf<T>(callback: Nullary<T>): Result<T> {
 export function resultFrom<T, U>(map: (value: T) => Error): Unary<T, Failure<U>>;
 
 /**
- * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * Creates a function to transform a `value` with a given `map` callback
  * and return it as a {@linkcode Success}.
  *
  * @since v0.9.0
@@ -718,7 +718,7 @@ export function resultFrom<T, U>(map: (value: T) => Error): Unary<T, Failure<U>>
 export function resultFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>>;
 
 /**
- * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * Creates a function to transform a `value` with a given `map` callback
  * and return it as a {@linkcode Result}.
  *
  * @since v0.9.0
@@ -726,7 +726,7 @@ export function resultFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>>;
 export function resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>;
 
 /**
- * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * Creates a function to transform a `value` with a given `map` callback
  * and return it as a {@linkcode Result}.
  *
  * @since v0.9.0
@@ -745,7 +745,7 @@ export function success<T>(value: T): Success<T> {
 }
 
 /**
- * Creates a function to transform a {@linkcode value} with a given {@linkcode map} callback
+ * Creates a function to transform a `value` with a given `map` callback
  * and return it as a {@linkcode Success}.
  *
  * @since v0.9.0
@@ -766,7 +766,7 @@ export function failure<T>(error: Error): Failure<T> {
 }
 
 /**
- * Creates a function to transform an {@linkcode value} with a given {@linkcode map} callback
+ * Creates a function to transform an `value` with a given `map` callback
  * and return it as a {@linkcode Failure}.
  *
  * @since v0.9.0
@@ -780,7 +780,7 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
  *
  * The first callback returns a given value as a {@linkcode Success}.
  * The second callback ignores a given value
- * and returns a given {@linkcode fallback} value as a {@linkcode Success}.
+ * and returns a given `fallback` value as a {@linkcode Success}.
  *
  * Use this function with the {@linkcode Result.into} method to recover from a {@linkcode Failure}.
  *

@@ -53,7 +53,7 @@ export function clone<T>(value: T): T {
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- check if method is defined */
 
 /**
- * Returns true if a given {@linkcode value} implements a given {@linkcode method}.
+ * Returns true if a given `value` implements a given `method`.
  * Otherwise returns false.
  *
  * @since v0.9.0
@@ -63,7 +63,7 @@ export function hasMethod(value: unknown, method: string): boolean {
 }
 
 /**
- * Returns true if a given {@linkcode value} does not implement a given {@linkcode method}.
+ * Returns true if a given `value` does not implement a given `method`.
  * Otherwise returns false.
  *
  * @since v0.9.0

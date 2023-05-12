@@ -18,7 +18,7 @@ export type Resolve<T> = (value: Resolvable<T>) => void;
  * A type of a callback called to reject a {@linkcode Promise} with a reason.
  *
  * This type is stricter than the default type of the reject callback,
- * as it requires an {@linkcode Error} as a {@linkcode reason}.
+ * as it requires an {@linkcode Error} as a `reason`.
  */
 export type Reject<E extends Error = Error> = (reason?: E) => void;
 
@@ -44,7 +44,7 @@ export type OnFulfilled<T, U = T> = (value: T) => Resolvable<U>;
 export type OnRejected<T = never> = (reason: unknown) => Resolvable<T>;
 
 /**
- * Creates a new {@linkcode Promise} with a given {@linkcode executor} callback.
+ * Creates a new {@linkcode Promise} with a given `executor` callback.
  */
 export async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T> {
     return new Promise<T>(executor);

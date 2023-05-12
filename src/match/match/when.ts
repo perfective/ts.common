@@ -14,7 +14,7 @@ class When<T> {
     ) {}
 
     /**
-     * Creates a statement with a {@linkcode When.condition|condition} and a given {@linkcode value}.
+     * Creates a statement with a {@linkcode When.condition|condition} and a given `value`.
      *
      * @since v0.9.0
      */

@@ -8,7 +8,7 @@ import { Value, valueOf } from '../../function/function/nullary';
 export type Proposition = Value<boolean>;
 
 /**
- * Returns `true` if a given {@linkcode proposition} is `true` or returns `true`.
+ * Returns `true` if a given `proposition` is `true` or returns `true`.
  * Otherwise, returns `false`.
  *
  * @since v0.2.0
@@ -18,7 +18,7 @@ export function isTrue(proposition: Proposition): boolean {
 }
 
 /**
- * Returns `true` if a given {@linkcode proposition} is `false` or returns `false`.
+ * Returns `true` if a given `proposition` is `false` or returns `false`.
  * Otherwise, returns `false`.
  *
  * @since v0.2.0
@@ -28,7 +28,7 @@ export function isFalse(proposition: Proposition): boolean {
 }
 
 /**
- * Returns `true` if a given {@linkcode proposition} is `false` or returns `false`.
+ * Returns `true` if a given `proposition` is `false` or returns `false`.
  * Otherwise, returns `false`.
  *
  * @since v0.5.1

@@ -44,7 +44,7 @@ export function toRecordFromEntries(record: Record<string, unknown>, value: Entr
 }
 
 /**
- * Creates a copy of a given {@linkcode record} only with given {@linkcode properties}.
+ * Creates a copy of a given `record` only with given `properties`.
  *
  * @see Pick
  *
@@ -57,7 +57,7 @@ export function pick<T, K extends keyof T>(record: NonNullable<T>, ...properties
 }
 
 /**
- * Creates a function to {@linkcode pick} given {@linkcode properties} from its argument.
+ * Creates a function to `pick` given `properties` from its argument.
  *
  * @see pick()
  *
@@ -68,7 +68,7 @@ export function recordWithPicked<T, K extends keyof T>(...properties: readonly K
 }
 
 /**
- * Creates a copy of a given {@linkcode record} without given {@linkcode properties}.
+ * Creates a copy of a given `record` without given `properties`.
  *
  * @see Omit
  *
@@ -81,7 +81,7 @@ export function omit<T, K extends keyof T>(record: NonNullable<T>, ...properties
 }
 
 /**
- * Creates a function to {@linkcode omit} given {@linkcode properties} from its argument.
+ * Creates a function to `omit` given `properties` from its argument.
  *
  * @see omit()
  *
@@ -92,7 +92,7 @@ export function recordWithOmitted<T, K extends keyof T>(...property: readonly K[
 }
 
 /**
- * Creates a copy of a given {@linkcode record} only with properties that satisfy a given {@linkcode condition}.
+ * Creates a copy of a given `record` only with properties that satisfy a given `condition`.
  *
  * @since v0.3.0
  */
@@ -103,7 +103,7 @@ export function filter<T, K extends keyof T>(record: NonNullable<T>, condition: 
 }
 
 /**
- * Creates a function to {@linkcode filter} properties that satisfy a given {@linkcode condition} from its argument.
+ * Creates a function to `filter` properties that satisfy a given `condition` from its argument.
  *
  * @see filter()
  *
@@ -116,7 +116,7 @@ export function recordFiltered<T, K extends keyof T = keyof T>(
 }
 
 /**
- * Creates a {@linkcode Record} from a given {@linkcode value} with properties overridden by the {@linkcode overrides}.
+ * Creates a {@linkcode Record} from a given `value` with properties overridden by the `overrides`.
  *
  * @see Object.assign()
  *
@@ -134,7 +134,7 @@ export function assigned<T, V = Partial<T>>(value: T, ...overrides: (V | Partial
 }
 
 /**
- * Creates a function to assign given {@linkcode overrides} to its argument.
+ * Creates a function to assign given `overrides` to its argument.
  *
  * @see assigned
  *

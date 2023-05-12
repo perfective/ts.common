@@ -37,7 +37,7 @@ export function exception(message: string, tokens: ExceptionTokens = {}, context
 
 /**
  * Creates a function to wrap a previous {@linkcode Error}
- * into an {@linkcode Exception} with a given {@linkcode message}.
+ * into an {@linkcode Exception} with a given `message`.
  *
  * @since v0.9.0
  */
@@ -59,11 +59,11 @@ export function causedBy(
 }
 
 /**
- * Wraps a non-{@linkcode Error} {@linkcode value} into an {@linkcode Exception}.
+ * Wraps a non-{@linkcode Error} `value` into an {@linkcode Exception}.
  * The {@linkcode Exception.message} starts with `Caught`
- * and contains the caught {@linkcode value} coerced to a string.
+ * and contains the caught `value` coerced to a string.
  *
- * Returns a given {@linkcode Error} {@linkcode value} as is.
+ * Returns a given {@linkcode Error} `value` as is.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#string_coercion
  */
@@ -78,7 +78,7 @@ export function caughtError(value: unknown): Error | Exception {
 
 /**
  * @since v0.2.1
- * @deprecated Since v0.10.0. Use {@linkcode caughtError} instead.
+ * @deprecated Since v0.10.0. Use `caughtError` instead.
  */
 export function unknownError(value: unknown): Error | Exception {
     return caughtError(value);

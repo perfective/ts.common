@@ -1,9 +1,9 @@
 export type Defined<T> = T extends undefined ? never : T;
 
 /**
- * Returns a given {@linkcode value}, if it is defined.
+ * Returns a given `value`, if it is defined.
  *
- * @throws {TypeError} If the {@linkcode value} is undefined.
+ * @throws {TypeError} If the `value` is undefined.
  */
 export function defined<T>(value: T | undefined): T {
     if (isDefined(value)) {
@@ -27,9 +27,9 @@ export function isUndefined<T>(value: T | undefined): value is undefined {
 export type NotNull<T> = T extends null ? never : T;
 
 /**
- * Returns a given {@linkcode value}, if it is not null.
+ * Returns a given `value`, if it is not null.
  *
- * @throws {TypeError} If the {@linkcode value} is null.
+ * @throws {TypeError} If the `value` is null.
  */
 export function notNull<T>(value: T | null): T {
     if (isNotNull(value)) {
@@ -56,9 +56,9 @@ export function isNull<T>(value: T | null): value is null {
 export type Present<T> = T extends null | undefined ? never : T;
 
 /**
- * Returns a given {@linkcode value}, if it is defined and is not null.
+ * Returns a given `value`, if it is defined and is not null.
  *
- * @throws {TypeError} If the {@linkcode value} is null or undefined.
+ * @throws {TypeError} If the `value` is null or undefined.
  */
 export function present<T>(value: T | null | undefined): T {
     if (isUndefined(value)) {

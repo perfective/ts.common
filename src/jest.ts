@@ -17,14 +17,14 @@ export interface TestCase<T, U> {
 }
 
 /**
- * Creates a Jest {@linkcode TestCase} with a given {@linkcode input} and {@linkcode output}.
+ * Creates a Jest {@linkcode TestCase} with a given `input` and `output`.
  *
- * Use this shortcut signature when a {@linkcode TestCase.name} can be derived from the {@linkcode input}.
+ * Use this shortcut signature when a {@linkcode TestCase.name} can be derived from the `input`.
  */
 export function testCase<T, U>(input: T, output: U): TestCase<T, U>;
 
 /**
- * Creates a Jest {@linkcode TestCase} with given {@linkcode name}, {@linkcode input}, and {@linkcode output}.
+ * Creates a Jest {@linkcode TestCase} with given `name`, `input`, and `output`.
  */
 export function testCase<T, U>(name: string, input: T, output: U): TestCase<T, U>;
 

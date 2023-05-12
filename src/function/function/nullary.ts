@@ -22,7 +22,7 @@ export function constant<T>(value: T): Nullary<T> {
 }
 
 /**
- * @deprecated Since v0.10.0. Use {@linkcode naught} instead.
+ * @deprecated Since v0.10.0. Use `naught` instead.
  */
 export function empty(): Void {
     return (): void => undefined;

@@ -1,5 +1,5 @@
-import { Exception } from '../../error';
 import { error, isError } from '../../error/error/error';
+import { caughtError, Exception } from '../../error/exception/exception';
 import { decimal } from '../../number/number/base';
 import { isInteger } from '../../number/number/integer';
 import { isNull } from '../../value/value';
@@ -65,11 +65,12 @@ export function failureDecimal<T>(input: number): Failure<T> {
  * Returns a {@linkcode Failure} when a decimal number cannot be parsed.
  */
 export function resultNumber(input: string): Result<number> {
-    const output = unsafeNumberOutput(input);
-    if (isError(output)) {
-        return failure(output);
+    try {
+        return success(unsafeNumberOutput(input));
     }
-    return success(output);
+    catch (error: unknown) {
+        return failure(caughtError(error));
+    }
 }
 
 export function successErrorMessage(error: Error): Success<string> {
@@ -86,10 +87,10 @@ export function safeNumberOutput(input: number | Error): string {
     return String(input);
 }
 
-export function unsafeNumberOutput(input: string): number | Error {
+export function unsafeNumberOutput(input: string): number {
     const output = decimal(input);
     if (isNull(output)) {
-        return error('Failed to parse a number');
+        throw error('Failed to parse a number');
     }
     return output;
 }

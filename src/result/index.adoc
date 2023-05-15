@@ -148,10 +148,9 @@ Otherwise, returns the result of the `callback` as a `Success`.
 +
 Use the `resultOf` to wrap up unsafe functions into a `Result`.
 +
-* `resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>`
-— creates a function to transform a `value` with a given `map` callback
-and return the result as a `Failure`, if the result is an `Error`.
-Otherwise, it returns a `Success`.
+* `resultFrom<T, U>(map: (value: T) => U): Unary<T, Result<U>>`
+— creates a function to try transforming a `value` with a given `map` callback and return it as a `Success`.
+If the `map` callback throws, returns a `Failure`.
 +
 * `promisedResult<T>(promise: Promise<T>): Promise<Result<T>>`
 — wraps a `Promise` _value_ into a `Result`.

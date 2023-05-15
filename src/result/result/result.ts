@@ -702,37 +702,21 @@ export function resultOf<T>(callback: Nullary<T>): Result<T> {
 }
 
 /**
- * Creates a function to transform a `value` with a given `map` callback
- * and return it as a {@linkcode Failure}.
- *
- * @since v0.9.0
- */
-export function resultFrom<T, U>(map: (value: T) => Error): Unary<T, Failure<U>>;
-
-/**
- * Creates a function to transform a `value` with a given `map` callback
+ * Creates a function to try transforming a `value` with a given `map` callback
  * and return it as a {@linkcode Success}.
+ * If the `map` callback throws, returns a {@linkcode Failure}.
  *
  * @since v0.9.0
  */
-export function resultFrom<T, U>(map: (value: T) => U): Unary<T, Success<U>>;
-
-/**
- * Creates a function to transform a `value` with a given `map` callback
- * and return it as a {@linkcode Result}.
- *
- * @since v0.9.0
- */
-export function resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>>;
-
-/**
- * Creates a function to transform a `value` with a given `map` callback
- * and return it as a {@linkcode Result}.
- *
- * @since v0.9.0
- */
-export function resultFrom<T, U>(map: (value: T) => U | Error): Unary<T, Result<U>> {
-    return (value: T): Result<U> => result<U>(map(value));
+export function resultFrom<T, U>(map: (value: T) => U): Unary<T, Result<U>> {
+    return (value: T): Result<U> => {
+        try {
+            return success(map(value));
+        }
+        catch (error: unknown) {
+            return failure(caughtError(error));
+        }
+    };
 }
 
 /**

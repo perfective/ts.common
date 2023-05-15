@@ -83,37 +83,17 @@ describe(resultOf, () => {
 });
 
 describe(resultFrom, () => {
-    describe('when a given a function to convert a value into either a value or an Error', () => {
-        it('cannot be assigned to a `Success`', () => {
-            // @ts-expect-error -- TS2322:
-            //  Type 'Unary<string, Result<string>>' is not assignable to type 'Unary<string, Success<string>>'.
-            const output: Unary<string, Success<string>> = resultFrom<string, string>(eitherResult);
+    const output: Unary<string, Result<number>> = resultFrom(unsafeNumberOutput);
 
-            expect(output('Success')).toStrictEqual(success('Success'));
-        });
-
-        it('cannot be assigned to a `Failure`', () => {
-            // @ts-expect-error -- TS2322:
-            //  Type 'Unary<string, Result<number>>' is not assignable to type 'Unary<string, Failure<number>>'.
-            const output: Unary<string, Failure<number>> = resultFrom<string, number>(unsafeNumberOutput);
-
-            expect(output('NaN')).toStrictEqual(failure(error('Failed to parse a number')));
+    describe('when a given callback does not throw', () => {
+        it('returns a Success', () => {
+            expect(output('0')).toStrictEqual(success(0));
         });
     });
 
-    describe('when a given a function to convert a value into a value', () => {
-        it('returns an instance of `Success`', () => {
-            const output: Unary<number, Success<string>> = resultFrom(strictNumberOutput);
-
-            expect(output(0)).toStrictEqual(success('0'));
-        });
-    });
-
-    describe('when a given a function to convert a value into an Error', () => {
-        it('returns an instance of `Failure`', () => {
-            const output: Unary<string, Failure<string>> = resultFrom(error);
-
-            expect(output('Failure')).toStrictEqual(failure(error('Failure')));
+    describe('when a given callback throws an error', () => {
+        it('returns a Failure', () => {
+            expect(output('abc')).toStrictEqual(failure(error('Failed to parse a number')));
         });
     });
 });

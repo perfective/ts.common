@@ -39,6 +39,17 @@ It contains all the default (strict) compiler settings.
 and is further overridden in `gulpfile.js` for CommonJS, ESM, and declaration files compilation.
 
 
+== Testing
+
+* All functions and classes _must_ have 100% test coverage.
+* Top-level `describe()` blocks _must_ reference a function or a class directly, not as a string.
+* `it()` statements _must not_ have any conditions.
+* Conditions should be defined by using (nested) `describe()` blocks.
+* Group tests for each signature using second-level `describe()` blocks with the name of the arguments.
+For example `describe('elements(Iterable)')` with tests for the `elements()` function.
+* Higher-order functions should use second-level `describe()` to define used functions.
+
+
 == Documentation
 
 This project uses the https://asciidoctor.org[AsciiDoc] format for its documentation.
@@ -53,3 +64,7 @@ As a result, in addition to this `README.adoc` for the repository,
 there is a `README.md` file with only basic information for the
 https://www.npmjs.com/package/@perfective/common[npm page].
 ====
+
+* Every type or function _must_ have a JSDoc description.
+JSDocs are visible in IDEs from a caller location
+which allows to understand the behavior of a function without reading it.

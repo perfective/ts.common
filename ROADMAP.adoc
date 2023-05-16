@@ -172,6 +172,17 @@ Use `either()` for lazy evaluation and callbacks.
 |===
 
 
+=== Array
+
+* [Consider] Rename `Compare` into `Order`.
+
+
+=== Object
+
+* [Consider] Rename `hasDefinedProperty()` into `hasDefined(property)` (and other similar functions).
+* [Consider] Rename `ObjectWithDefined` into `HasDefined` (and other similar types).
+
+
 == References
 
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference[MDN JavaScript Reference]

@@ -1,8 +1,10 @@
 import { array } from '../../array/array/array';
 import { error } from '../../error/error/error';
+import { typeError } from '../../error/error/type-error';
 import { chained, exception } from '../../error/exception/exception';
 import { panic } from '../../error/panic/panic';
 import { same, Unary } from '../../function/function/unary';
+import { present } from '../../value/value';
 
 import { failureWith, successWith } from './arguments';
 import {
@@ -25,7 +27,6 @@ import {
     strictExceptionOutput,
     strictNumberOutput,
     successErrorMessage,
-    unsafeNumberOutput,
 } from './result.mock';
 
 describe(result, () => {
@@ -83,17 +84,18 @@ describe(resultOf, () => {
 });
 
 describe(resultFrom, () => {
-    const output: Unary<string, Result<number>> = resultFrom(unsafeNumberOutput);
+    const output: Unary<string | null | undefined, Result<string>> = resultFrom(present);
 
     describe('when a given callback does not throw', () => {
         it('returns a Success', () => {
-            expect(output('0')).toStrictEqual(success(0));
+            expect(output('')).toStrictEqual(success(''));
         });
     });
 
     describe('when a given callback throws an error', () => {
         it('returns a Failure', () => {
-            expect(output('abc')).toStrictEqual(failure(error('Failed to parse a number')));
+            expect(output(null)).toStrictEqual(failure(typeError('Value is null')));
+            expect(output(undefined)).toStrictEqual(failure(typeError('Value is undefined')));
         });
     });
 });

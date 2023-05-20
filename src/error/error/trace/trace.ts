@@ -1,18 +1,48 @@
+import { isNotNull } from '../../../value/value';
 import { stack } from '../error';
 
+/**
+ * One line of a stack trace.
+ *
+ * @since v0.2.0
+ */
 export interface Trace {
+    /**
+     * Present only in object and promise traces.
+     */
     class?: string;
+
+    /**
+     * Present in object, function, and promise traces.
+     */
     method?: string;
+
+    /**
+     * Present in object, function, and file traces.
+     */
     filename?: string;
+
+    /**
+     * Present in object, function, and file traces.
+     */
     line?: number;
+
+    /**
+     * Present in object, function, and file traces.
+     */
     column?: number;
 }
 
+/**
+ * Parses an {@linkcode Error} input and returns its stack trace as a list of single parsed {@linkcode Trace} line.
+ *
+ * @since v0.2.0
+ */
 export function stackTrace(error: Error): Trace[] {
     return stack(error)
         .split('\n')
         .map(traceLine)
-        .filter((line): line is string => line !== null)
+        .filter(isNotNull)
         .map(trace);
 }
 
@@ -25,10 +55,16 @@ const tracers: Tracer[] = [
     promiseTrace,
 ];
 
+/**
+ * Creates a {@linkcode Trace} by parsing a given `line` with a function, object, file, or promise tracer.
+ * If a line cannot be parsed, returns the same line set as a {@linkcode Trace.method}.
+ *
+ * @since v0.2.0
+ */
 export function trace(line: string): Trace {
     const traces: Trace[] = tracers
         .map(tracer => tracer(line))
-        .filter((trace: Trace | null): trace is Trace => trace !== null);
+        .filter(isNotNull);
     if (traces.length > 0) {
         return traces[0];
     }

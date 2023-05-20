@@ -4,6 +4,8 @@ import { ExceptionMessage } from '../exception/exception-message';
 
 /**
  * Failure type should be used to transform Error objects into a plain transferable record.
+ *
+ * @since v0.3.0
  */
 export interface Failure {
     readonly name: string;
@@ -11,14 +13,21 @@ export interface Failure {
     readonly chain: string[];
 }
 
-export function failure<E extends Error>(error: E): Failure {
+/**
+ * Creates a {@linkcode Failure} from a given {@linkcode Error}.
+ * When given an {@linkcode Exception}, unpacks its chain of previous {@linkcode Error|errors}.
+ * Otherwise, {@linkcode Failure.chain} will have only the given `error`.
+ *
+ * @since v0.3.0
+ */
+export function failure(error: Error): Failure {
     if (isException(error)) {
         return failureFromException(error);
     }
     return failureFromError(error);
 }
 
-export function failureFromError<E extends Error>(error: E): Failure {
+function failureFromError<E extends Error>(error: E): Failure {
     return {
         name: error.name,
         message: {
@@ -31,7 +40,7 @@ export function failureFromError<E extends Error>(error: E): Failure {
     };
 }
 
-export function failureFromException<E extends Exception>(exception: E): Failure {
+function failureFromException<E extends Exception>(exception: E): Failure {
     return {
         name: exception.name,
         message: {

@@ -1,64 +1,80 @@
 import { error, errorOutput, isError, isNotError, stack } from './error';
 
-describe('error', () => {
-    it('creates a new Error with a message', () => {
+describe(error, () => {
+    it('creates an Error with a given message', () => {
         expect(error('Exception'))
             .toStrictEqual(new Error('Exception'));
     });
 });
 
-describe('isError', () => {
-    it('returns true when value is an Error', () => {
-        expect(isError(new Error('Error')))
-            .toBe(true);
+describe(isError, () => {
+    describe('when a given value is an Error', () => {
+        it('returns true', () => {
+            expect(isError(error('Error')))
+                .toBe(true);
+        });
     });
 
-    it('returns false when value is not an Error', () => {
-        expect(isError('Error'))
-            .toBe(false);
-    });
-});
-
-describe('isNotError', () => {
-    it('returns false when value is an Error', () => {
-        expect(isNotError(new Error('Error')))
-            .toBe(false);
-    });
-
-    it('returns true when value is not an Error', () => {
-        expect(isNotError('Error'))
-            .toBe(true);
+    describe('when a given value is not an Error', () => {
+        it('returns false', () => {
+            expect(isError('Error'))
+                .toBe(false);
+        });
     });
 });
 
-describe('errorOutput', () => {
-    it('returns only error name when message is undefined', () => {
+describe(isNotError, () => {
+    describe('when a given value is not an Error', () => {
+        it('returns true when value is not an Error', () => {
+            expect(isNotError('Error'))
+                .toBe(true);
+        });
+    });
+
+    describe('when a given value is an Error', () => {
+        it('returns false when value is an Error', () => {
+            expect(isNotError(error('Error')))
+                .toBe(false);
+        });
+    });
+});
+
+describe(errorOutput, () => {
+    describe('when a given error has no message', () => {
+        it('returns only the error name', () => {
         // eslint-disable-next-line unicorn/error-message -- testing undefined message
-        expect(errorOutput(new ReferenceError()))
-            .toBe('ReferenceError');
+            expect(errorOutput(new ReferenceError()))
+                .toBe('ReferenceError');
+        });
     });
 
-    it('returns human-readable string matching Error.toString() on Node.js', () => {
-        expect(errorOutput(new Error('Failure!')))
-            .toBe('Error: Failure!');
-        expect(errorOutput(new TypeError('Invalid type')))
-            .toBe('TypeError: Invalid type');
+    describe('when a given error has message', () => {
+        it('returns human-readable string matching Error.toString() on Node.js', () => {
+            expect(errorOutput(error('Failure!')))
+                .toBe('Error: Failure!');
+            expect(errorOutput(new TypeError('Invalid type')))
+                .toBe('TypeError: Invalid type');
+        });
     });
 });
 
-describe('errorStack', () => {
-    it('returns stack when Error.stack property present', () => {
-        const error: Error = new Error('Stack');
+describe(stack, () => {
+    describe('when Error.stack property is defined', () => {
+        it('returns Error.stack', () => {
+            const error: Error = new Error('Stack');
 
-        expect(stack(error))
-            .toMatch('Error: Stack\n    at Object.<anonymous>');
+            expect(stack(error))
+                .toMatch('Error: Stack\n    at Object.<anonymous>');
+        });
     });
 
-    it('returns message with "at <unknown>" stack, when Error.stack property is not defined', () => {
-        const error: Error = new Error('No Stack');
-        delete error.stack;
+    describe('when Error.stack property is undefined', () => {
+        it('returns message with "at <unknown>" suffix', () => {
+            const error: Error = new Error('No Stack');
+            delete error.stack;
 
-        expect(stack(error))
-            .toBe('No Stack\n    at <unknown>');
+            expect(stack(error))
+                .toBe('No Stack\n    at <unknown>');
+        });
     });
 });

@@ -1,32 +1,40 @@
 import { isNotReferenceError, isReferenceError, referenceError } from './reference-error';
 
-describe('referenceError', () => {
-    it('creates a new ReferenceError with a message', () => {
+describe(referenceError, () => {
+    it('creates a ReferenceError with a given message', () => {
         expect(referenceError('Exception'))
             .toStrictEqual(new ReferenceError('Exception'));
     });
 });
 
-describe('isReferenceError', () => {
-    it('returns true when value is an ReferenceError', () => {
-        expect(isReferenceError(new ReferenceError('Error')))
-            .toBe(true);
+describe(isReferenceError, () => {
+    describe('when a given value is an ReferenceError', () => {
+        it('returns true', () => {
+            expect(isReferenceError(new ReferenceError('Error')))
+                .toBe(true);
+        });
     });
 
-    it('returns false when value is not an ReferenceError', () => {
-        expect(isReferenceError('ReferenceError'))
-            .toBe(false);
+    describe('when a given value is not an ReferenceError', () => {
+        it('returns false', () => {
+            expect(isReferenceError('ReferenceError'))
+                .toBe(false);
+        });
     });
 });
 
-describe('isNotReferenceError', () => {
-    it('returns false when value is an ReferenceError', () => {
-        expect(isNotReferenceError(new ReferenceError('Error')))
-            .toBe(false);
+describe(isNotReferenceError, () => {
+    describe('when a given value is not an ReferenceError', () => {
+        it('returns true', () => {
+            expect(isNotReferenceError('ReferenceError'))
+                .toBe(true);
+        });
     });
 
-    it('returns true when value is not an ReferenceError', () => {
-        expect(isNotReferenceError('ReferenceError'))
-            .toBe(true);
+    describe('when a given value is an ReferenceError', () => {
+        it('returns false', () => {
+            expect(isNotReferenceError(new ReferenceError('Error')))
+                .toBe(false);
+        });
     });
 });

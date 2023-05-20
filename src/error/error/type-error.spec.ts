@@ -1,32 +1,40 @@
 import { isNotTypeError, isTypeError, typeError } from './type-error';
 
-describe('typeError', () => {
-    it('creates a new TypeError with a message', () => {
+describe(typeError, () => {
+    it('creates a TypeError with a given message', () => {
         expect(typeError('Exception'))
             .toStrictEqual(new TypeError('Exception'));
     });
 });
 
-describe('isTypeError', () => {
-    it('returns true when value is an TypeError', () => {
-        expect(isTypeError(new TypeError('Error')))
-            .toBe(true);
+describe(isTypeError, () => {
+    describe('when a given value is an TypeError', () => {
+        it('returns true', () => {
+            expect(isTypeError(new TypeError('Error')))
+                .toBe(true);
+        });
     });
 
-    it('returns false when value is not an TypeError', () => {
-        expect(isTypeError('TypeError'))
-            .toBe(false);
+    describe('when a given value is not an TypeError', () => {
+        it('returns false', () => {
+            expect(isTypeError('TypeError'))
+                .toBe(false);
+        });
     });
 });
 
-describe('isNotTypeError', () => {
-    it('returns false when value is an TypeError', () => {
-        expect(isNotTypeError(new TypeError('Error')))
-            .toBe(false);
+describe(isNotTypeError, () => {
+    describe('when a given value is not an TypeError', () => {
+        it('returns true', () => {
+            expect(isNotTypeError('TypeError'))
+                .toBe(true);
+        });
     });
 
-    it('returns true when value is not an TypeError', () => {
-        expect(isNotTypeError('TypeError'))
-            .toBe(true);
+    describe('when a given value is an TypeError', () => {
+        it('returns false', () => {
+            expect(isNotTypeError(new TypeError('Error')))
+                .toBe(false);
+        });
     });
 });

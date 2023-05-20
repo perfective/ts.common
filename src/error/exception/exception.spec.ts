@@ -16,51 +16,148 @@ import {
     unknownError,
 } from './exception';
 
-describe('exception', () => {
-    const error: Exception = exception('User not found');
-    const contextError: Exception = exception('User {{id}} not found', {
-        id: '42',
-    }, {
-        user: {},
+describe(exception, () => {
+    describe('exception(message)', () => {
+        const error: Exception = exception('User not found');
+
+        it('creates an instance of an Exception', () => {
+            expect(error).toBeInstanceOf(Exception);
+            expect(error.name).toBe('Exception');
+        });
+
+        it('has message that matches a given template', () => {
+            expect(error.message).toBe('User not found');
+        });
+
+        it('has a given template', () => {
+            expect(error.template).toBe('User not found');
+        });
+
+        it('has empty tokens', () => {
+            expect(error.tokens).toStrictEqual({});
+        });
+
+        it('has empty context', () => {
+            expect(error.context).toStrictEqual({});
+        });
+
+        it('has no previous error', () => {
+            expect(error.previous).toBeNull();
+        });
+
+        it('provides an error stack', () => {
+            expect(error.stack).toBeDefined();
+        });
+
+        describe('toString()', () => {
+            it('returns error name and message', () => {
+                expect(error.toString()).toBe('Exception: User not found');
+            });
+        });
     });
 
-    it('creates an instance of an Exception', () => {
-        /* eslint-disable jest/max-expects -- check error properties */
-        expect(error.name).toBe('Exception');
-        expect(error.message).toBe('User not found');
-        expect(error.template).toBe('User not found');
-        expect(error.tokens).toStrictEqual({});
-        expect(error.context).toStrictEqual({});
-        expect(error.previous).toBeNull();
-        /* eslint-enable jest/max-expects */
-    });
-
-    it('creates an instance of an Exception with context data', () => {
-        expect(contextError.name).toBe('Exception');
-        expect(contextError.message).toBe('User `42` not found');
-        expect(contextError.template).toBe('User {{id}} not found');
-        expect(contextError.tokens).toStrictEqual({
+    describe('exception(message, tokens)', () => {
+        const error: Exception = exception('User {{id}} not found', {
             id: '42',
         });
-        expect(contextError.context).toStrictEqual({
-            user: {},
+
+        it('has message with given tokens inlined into a given template', () => {
+            expect(error.message).toBe('User `42` not found');
+        });
+
+        it('has given tokens', () => {
+            expect(error.tokens).toStrictEqual({
+                id: '42',
+            });
+        });
+
+        it('has empty context', () => {
+            expect(error.context).toStrictEqual({});
+        });
+
+        describe('toString()', () => {
+            it('returns error name and tokenized message', () => {
+                expect(error.toString()).toBe('Exception: User `42` not found');
+            });
         });
     });
 
-    it('provides an error stack', () => {
-        expect(error.stack).toBeDefined();
-        expect(contextError.stack).toBeDefined();
-    });
+    describe('exception(message, tokens, context)', () => {
+        const error: Exception = exception('User {{id}} not found', {
+            id: '42',
+        }, {
+            user: {
+                id: 42,
+            },
+        });
 
-    it('outputs error message', () => {
-        expect(error.toString()).toBe('Exception: User not found');
+        it('has given context', () => {
+            expect(error.context).toStrictEqual({
+                user: {
+                    id: 42,
+                },
+            });
+        });
+
+        describe('toString()', () => {
+            it('returns error name and tokenized message without context', () => {
+                expect(error.toString()).toBe('Exception: User `42` not found');
+            });
+        });
     });
 });
 
 describe(chained, () => {
     const previous = error('Previous');
 
-    it('creates a function to wrap a previous error into an exception', () => {
+    describe('chained(message)', () => {
+        const chainedCausedBy = chained('Exception {{code}}');
+        const output = chainedCausedBy(previous);
+
+        it('creates an instance of Exception', () => {
+            expect(output).toBeInstanceOf(Exception);
+            expect(output.name).toBe('Exception');
+        });
+
+        it('has a given template as a message', () => {
+            expect(output.message).toBe('Exception {{code}}');
+        });
+
+        it('has a given template', () => {
+            expect(output.template).toBe('Exception {{code}}');
+        });
+
+        it('has empty tokens', () => {
+            expect(output.tokens).toStrictEqual({});
+        });
+
+        it('has empty context by default', () => {
+            expect(output.context).toStrictEqual({});
+        });
+
+        it('has previous error', () => {
+            expect(output.previous).toBe(previous);
+        });
+    });
+
+    describe('chained(message, tokens)', () => {
+        const chainedCausedBy = chained('Exception {{code}}', {
+            code: '0',
+        });
+        const output = chainedCausedBy(previous);
+
+        it('has message with a given template and inlined tokens', () => {
+            expect(output.message).toBe('Exception `0`');
+        });
+
+        it('has given tokens', () => {
+            expect(output.tokens).toStrictEqual({
+                code: '0',
+            });
+        });
+    });
+
+    describe('chained(message, tokens, context)', () => {
         const chainedCausedBy = chained('Exception {{code}}', {
             code: '0',
         }, {
@@ -68,101 +165,107 @@ describe(chained, () => {
         });
         const output = chainedCausedBy(previous);
 
-        expect(output).toBeInstanceOf(Exception);
-        expect(output.previous).toBe(previous);
-        expect(output.message).toBe('Exception `0`');
-        expect(output.context).toStrictEqual({
-            context: 'spec',
+        it('has given context', () => {
+            expect(output.context).toStrictEqual({
+                context: 'spec',
+            });
         });
-    });
-
-    it('has empty tokens by default', () => {
-        const chainedCausedBy = chained('Exception {{code}}');
-        const output = chainedCausedBy(previous);
-
-        expect(output.tokens).toStrictEqual({});
-    });
-
-    it('has empty context by default', () => {
-        const chainedCausedBy = chained('Exception {{code}}');
-        const output = chainedCausedBy(previous);
-
-        expect(output.context).toStrictEqual({});
     });
 });
 
-describe('causedBy', () => {
-    const chain: Exception = causedBy(error('Resource not found'), 'API request failed');
-    const contextChain: Exception = causedBy(error('Resource not found'), '{{api}} request failed', {
-        api: 'User API',
-    }, {
-        user: {
-            id: '42',
-        },
-    });
+describe(causedBy, () => {
+    const cause = error('Resource not found');
 
-    it('creates an instance of an Exception', () => {
-        expect(chain.name).toBe('Exception');
-        expect(chain.message).toBe('API request failed');
-        expect(chain.template).toBe('API request failed');
-        expect(chain.context).toStrictEqual({});
-        expect(chain.previous).toStrictEqual(error('Resource not found'));
-    });
+    describe('causedBy(previous, message)', () => {
+        const output: Exception = causedBy(cause, 'API request failed');
 
-    it('creates an instance of an Exception with context data', () => {
-        /* eslint-disable jest/max-expects -- check all test properties */
-        expect(contextChain.name).toBe('Exception');
-        expect(contextChain.message).toBe('`User API` request failed');
-        expect(contextChain.template).toBe('{{api}} request failed');
-        expect(contextChain.tokens).toStrictEqual({
-            api: 'User API',
+        it('creates an instance of an Exception', () => {
+            expect(output).toBeInstanceOf(Exception);
+            expect(output.name).toBe('Exception');
         });
-        expect(contextChain.context).toStrictEqual({
+
+        it('has a message from a given template', () => {
+            expect(output.message).toBe('API request failed');
+        });
+
+        it('has a given template', () => {
+            expect(output.template).toBe('API request failed');
+        });
+
+        it('has empty tokens', () => {
+            expect(output.tokens).toStrictEqual({});
+        });
+
+        it('has empty context', () => {
+            expect(output.context).toStrictEqual({});
+        });
+
+        it('has a given previous error', () => {
+            expect(output.previous).toBe(cause);
+        });
+
+        it('provides an error stack', () => {
+            expect(output.stack).toBeDefined();
+        });
+
+        describe('toString()', () => {
+            const chain = causedBy(output, 'Internal Server Error');
+
+            it('returns messages for all chained errors', () => {
+                expect(output.toString()).toStrictEqual([
+                    'Exception: API request failed',
+                    '\t- Error: Resource not found',
+                ].join('\n'));
+                expect(chain.toString())
+                    .toStrictEqual([
+                        'Exception: Internal Server Error',
+                        '\t- Exception: API request failed',
+                        '\t- Error: Resource not found',
+                    ].join('\n'));
+            });
+        });
+    });
+
+    describe('causedBy(previous, message, tokens)', () => {
+        const output: Exception = causedBy(cause, '{{api}} request failed', {
+            api: 'User API',
+        }, {
             user: {
                 id: '42',
             },
         });
-        expect(chain.previous).toStrictEqual(error('Resource not found'));
-        /* eslint-enable jest/max-expects */
+
+        it('has a message with inlined tokens into a given template', () => {
+            expect(output.message).toBe('`User API` request failed');
+        });
+
+        it('has a given template', () => {
+            expect(output.template).toBe('{{api}} request failed');
+        });
+
+        it('has given tokens', () => {
+            expect(output.tokens).toStrictEqual({
+                api: 'User API',
+            });
+        });
     });
 
-    it('provides an error stack', () => {
-        expect(chain.stack).toBeDefined();
-        expect(contextChain.stack).toBeDefined();
-    });
-
-    it('outputs all previous messages', () => {
-        expect(chain.toString()).toStrictEqual([
-            'Exception: API request failed',
-            '\t- Error: Resource not found',
-        ].join('\n'));
-        expect(contextChain.toString()).toStrictEqual([
-            'Exception: `User API` request failed',
-            '\t- Error: Resource not found',
-        ].join('\n'));
-        expect(causedBy(chain, 'Internal Server Error').toString())
-            .toStrictEqual([
-                'Exception: Internal Server Error',
-                '\t- Exception: API request failed',
-                '\t- Error: Resource not found',
-            ].join('\n'));
-        expect(causedBy(
-            causedBy(
-                typeError(`Cannot read property 'toString' of undefined`),
-                'Failed to output user {{user}}',
-                {
-                    user: 'John Doe',
-                },
-            ),
-            'Failed request {{request}}',
-            {
-                request: 'GET http://localhost',
+    describe('causedBy(previous, message, tokens, context)', () => {
+        const output: Exception = causedBy(cause, '{{api}} request failed', {
+            api: 'User API',
+        }, {
+            user: {
+                id: 42,
             },
-        ).toString()).toStrictEqual([
-            'Exception: Failed request `GET http://localhost`',
-            '\t- Exception: Failed to output user `John Doe`',
-            `\t- TypeError: Cannot read property 'toString' of undefined`,
-        ].join('\n'));
+        });
+
+        it('has given context', () => {
+            expect(output.context).toStrictEqual({
+                user: {
+                    id: 42,
+                },
+            });
+        });
     });
 });
 
@@ -191,77 +294,97 @@ describe(unknownError, () => {
 });
 /* eslint-enable deprecation/deprecation */
 
-describe('isException', () => {
-    it('returns true when value is an instance of Exception', () => {
-        expect(isException(exception('User-defined Exception')))
-            .toBe(true);
+describe(isException, () => {
+    describe('when a given value is an Exception', () => {
+        it('returns true', () => {
+            expect(isException(exception('User-defined Exception'))).toBe(true);
+        });
     });
 
-    it('returns false when value is not an instance of Exception', () => {
-        expect(isException(error('Previous')))
-            .toBe(false);
-        expect(isException('Previous'))
-            .toBe(false);
-    });
-});
-
-describe('isNotException', () => {
-    it('returns false when value is an instance of Exception', () => {
-        expect(isNotException(exception('User-defined Exception')))
-            .toBe(false);
-    });
-
-    it('returns true when value is not an instance of Exception', () => {
-        expect(isNotException(error('Previous')))
-            .toBe(true);
-        expect(isNotException('Previous'))
-            .toBe(true);
+    describe('when a given value is not an Exception', () => {
+        it('returns false', () => {
+            expect(isException(error('Previous'))).toBe(false);
+            expect(isException('Previous')).toBe(false);
+        });
     });
 });
 
-describe('chainStack', () => {
-    it('returns stack of the given error', () => {
-        expect(chainStack(typeError('"x" is not a function')))
-            .toMatch('TypeError: "x" is not a function\n    at typeError (');
+describe(isNotException, () => {
+    describe('when a given value is not an Exception', () => {
+        it('returns true', () => {
+            expect(isNotException(error('Previous'))).toBe(true);
+            expect(isNotException('Previous')).toBe(true);
+        });
     });
 
-    it('returns stack of stack of all the chained errors', () => {
-        const trace: string = chainStack(
-            causedBy(typeError('"x" is not a function'), 'Failed to process input'),
-        );
-
-        expect(trace)
-            .toMatch(/^Exception: Failed to process input\n {4}at causedBy \(/u);
-        expect(trace)
-            .toMatch('Caused by: TypeError: "x" is not a function\n    at typeError (');
+    describe('when a given value is an Exception', () => {
+        it('returns false', () => {
+            expect(isNotException(exception('User-defined Exception')))
+                .toBe(false);
+        });
     });
 });
 
-describe('fault', () => {
-    it('returns the error itself for a single error', () => {
-        expect(fault(syntaxError('missing variable name')))
-            .toStrictEqual(syntaxError('missing variable name'));
+describe(chainStack, () => {
+    const cause = typeError('"x" is not a function');
+
+    describe('when given an error without a previous error', () => {
+        it('returns stack of the given error', () => {
+            expect(chainStack(cause))
+                .toMatch('TypeError: "x" is not a function\n    at typeError (');
+        });
     });
 
-    it('returns the original error in the error chain', () => {
-        expect(fault(causedBy(syntaxError('missing variable name'), 'Build failed')))
-            .toStrictEqual(syntaxError('missing variable name'));
+    describe('when given an error with a previous error', () => {
+        const output: string = chainStack(causedBy(cause, 'Failed to process input'));
+
+        it('contains the given error stack', () => {
+            expect(output).toMatch(/^Exception: Failed to process input\n {4}at causedBy \(/u);
+        });
+
+        it('contains the cause error stack', () => {
+            expect(output).toMatch('Caused by: TypeError: "x" is not a function\n    at typeError (');
+        });
     });
 });
 
-describe('unchained', () => {
-    it('returns an array with the error itself for a single error', () => {
-        expect(unchained(rangeError('The precision is out of range')))
-            .toStrictEqual([rangeError('The precision is out of range')]);
+describe(fault, () => {
+    const cause = syntaxError('missing variable name');
+
+    describe('when given an error without a previous error', () => {
+        it('returns the error itself', () => {
+            expect(fault(cause)).toStrictEqual(cause);
+        });
     });
 
-    it('returns an array with all the errors in the chain, starting from the latest', () => {
-        expect(unchained(causedBy(
-            rangeError('The precision is out of range'),
-            'Failed to output a float',
-        ))).toStrictEqual([
-            exception('Failed to output a float'),
-            rangeError('The precision is out of range'),
-        ]);
+    describe('when given an error with a previous error', () => {
+        const input = causedBy(cause, 'Build failed');
+
+        it('returns the original cause error', () => {
+            expect(fault(input)).toStrictEqual(cause);
+        });
+    });
+});
+
+describe(unchained, () => {
+    describe('when given an error without previous errors', () => {
+        const input = rangeError('The precision is out of range');
+
+        it('returns an array with the error itself for a single error', () => {
+            expect(unchained(input))
+                .toStrictEqual([input]);
+        });
+    });
+
+    describe('when given an error with previous error', () => {
+        const cause = rangeError('The precision is out of range');
+        const input = causedBy(cause, 'Failed to output a float');
+
+        it('returns an array with all the errors in the chain starting from the latest', () => {
+            expect(unchained(input)).toStrictEqual([
+                exception('Failed to output a float'),
+                cause,
+            ]);
+        });
     });
 });

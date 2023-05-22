@@ -1,5 +1,77 @@
 = Changelog
 
+== v0.10.0-alpha
+
+=== `@perfective/common/result`
+
+* Added the `Result.that()` filter method.
+* Added the `Result.which()` type-guard method.
+* Added the `Result.when()` filter method.
+* Added the `Result.or()` fold method.
+* Added the `Result.otherwise()` recovery method.
+** Deprecated the `recovery()` function.
++
+* *[Breaking]* Change the `resultFrom()` to use `try-catch` instead of the `T | Error` union type.
++
+This makes the function behavior safer and allows wider usage.
+
+=== Breaking changes
+
+* Removed deprecated functions and types:
+** `@perfective/common/array`:
+*** `arrayFromArrayLike()`, `arrayFromIterable()`, `flatten()`.
+** `@perfective/common/match`:
+*** `Match.that()`, `Match.to()`;
+*** `Statement`, `StatementEntry`, `statements()`;
+*** `When.then()`.
+** `@perfective/common/maybe`:
+*** `Maybe.lift()`/`lift()`, `Maybe.run()`/`run()`;
+*** `Nullable`, `Nil`, `Only`/`Solum`, `nullable()`, `nil()`, `only()`/`solum()`;
+*** `Optional`, `None`, `Some`, `optional()`, `none()`, `some()`.
+** `@perfective/common/promise`:
+*** `Run`, `result()`.
+** `@perfective/common/string`:
+*** `Output`, `isNotOutput()`, `isOutput()`, `output()`.
+
+
+=== Deprecations
+
+* `@perfective/common/function`:
+** Deprecated the `emtpy()` function.
+Use `naught()` as an empty no-op function instead.
++
+* `@perfective/common/error`:
+** Deprecated the `Rethrow` type. Use `Panic` instead.
+** Deprecated the `rethrow()` function. Use `rethrow()` instead.
+** Renamed the `unknownError()` function into `caughtError()`.
++
+* `@perfective/common/maybe`:
+** Renamed the `naught()` function into `nil()`.
++
+* `@perfective/common/object`:
+** Moved the `isTruthy()`/`isFalsy()` functions into `@perfective/common/boolean`.
++
+* `@perfective/common/result`:
+** Deprecated the `recovery()` function.
+Use `Result.otherwise()` instead.
+
+=== Improvements
+
+* `@perfective/common/boolean`:
+** Added JsDocs for all types and functions.
+** Add ES Coverage documentation for the `Boolean` type.
+** Added the `isBoolean()`/`isNotBoolean()` predicates.
+** Moved the `isTruthy()`/`isFalsy()` functions from `@perfective/common/object`.
++
+* `@perfective/common/error`:
+** Added `Recovery` type.
+** Added JsDocs for all types and functions.
+** Added support for `cause` (previous) error to the `Panic` type and `panic()` function.
++
+* `@perfective/common/object`:
+** Added JsDocs for all types and functions.
+
+
 == v0.9.0
 
 Changes since v0.8.3.

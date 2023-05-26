@@ -11,7 +11,7 @@
 * Added the `Result.otherwise()` recovery method.
 ** Deprecated the `recovery()` function.
 +
-* *[Breaking]* Change the `resultFrom()` to use `try-catch` instead of the `T | Error` union type.
+* *[Breaking]* Changed the `resultFrom()` to use `try-catch` instead of the `T | Error` union type.
 +
 This makes the function behavior safer and allows wider usage.
 
@@ -59,7 +59,7 @@ Use `Result.otherwise()` instead.
 
 * `@perfective/common/boolean`:
 ** Added JsDocs for all types and functions.
-** Add ES Coverage documentation for the `Boolean` type.
+** Added ES Coverage documentation for the `Boolean` type.
 ** Added the `isBoolean()`/`isNotBoolean()` predicates.
 ** Moved the `isTruthy()`/`isFalsy()` functions from `@perfective/common/object`.
 +

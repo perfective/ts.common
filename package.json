@@ -37,7 +37,7 @@
         "@asciidoctor/gulp-asciidoctor": "^2.2.5",
         "@babel/eslint-parser": "^7.22.9",
         "@perfective/build": "~0.9.0-alpha",
-        "@perfective/eslint-config": "~0.21.0-beta.3",
+        "@perfective/eslint-config": "~0.21.0",
         "@types/jest": "^29.5.3",
         "@typescript-eslint/eslint-plugin": "~5.62.0",
         "@typescript-eslint/eslint-plugin-tslint": "~5.62.0",

@@ -2,6 +2,7 @@
 :eslint-rules: https://eslint.org/docs/latest/rules
 :mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
+:perfective-common: https://github.com/perfective/ts.common/blob/main/src/
 
 The primary development focus is to provide convenient functions
 and detailed documentation in the existing packages.
@@ -15,6 +16,9 @@ and detailed documentation in the existing packages.
 
 == Packages
 
+* `@perfective/common/array`:
+** [Consider] Rename `Compare` into `Order`.
++
 * `@perfective/common/date`:
 ** Add support for the
 `link:{mdn-js-globals}/Date[Date]` type.
@@ -42,6 +46,10 @@ and `link:{mdn-js-globals}/GeneratorFunction[GeneratorFunction]` types.
 *** `link:{mdn-js-globals}/NaN[NaN]`
 / `link:{mdn-js-globals}/isNaN[isNaN()]`
 / `link:{mdn-js-globals}/Number/isNaN[Number.isNaN()]`
++
+* `@perfective/common/object`:
+** [Consider] Rename `hasDefinedProperty()` into `hasDefined(property)` (and other similar functions).
+** [Consider] Rename `ObjectWithDefined` into `HasDefined` (and other similar types).
 +
 * `@perfective/common/promise`:
 ** Ensure coverage of the
@@ -83,7 +91,7 @@ even if it was introduced earlier.
 
 === `link:{mdn-js-globals}/Boolean[Boolean]`
 
-The `@perfective/common/boolean` package covers the `Boolean` type.
+The `link:{perfective-common}}/boolean/index.adoc[@perfective/common/boolean]` package covers the `Boolean` type.
 
 [cols="~,1,~"]
 |===
@@ -172,15 +180,83 @@ Use `either()` for lazy evaluation and callbacks.
 |===
 
 
-=== Array
+=== `link:{mdn-js-globals}/Function[Function]`
 
-* [Consider] Rename `Compare` into `Order`.
+The `link:{perfective-common}/function/index.adoc[@perfective/common/function]` package covers the `Function` type.
 
+[cols="~,1,~"]
+|===
+| JavaScript | Version | Perfective
 
-=== Object
+3+| *Constructor*
 
-* [Consider] Rename `hasDefinedProperty()` into `hasDefined(property)` (and other similar functions).
-* [Consider] Rename `ObjectWithDefined` into `HasDefined` (and other similar types).
+| `link:{mdn-js-globals}/Function/Function[new Function()]`
+| ES6
+| *Disallowed* as unsafe.
+
+| `link:{mdn-js-globals}/Function/Function[Function()]`
+| ES6
+| *Disallowed* as unsafe.
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Function/arguments[arguments]`
+|
+| *Disallowed* as deprecated and non-standard.
+
+| `link:{mdn-js-globals}/Function/caller[caller]`
+|
+| *Disallowed* as deprecated and non-standard.
+
+| `link:{mdn-js-globals}/Function/displayName[displayName]`
+|
+| *Disallowed* as non-standard.
+
+| `link:{mdn-js-globals}/Function/length[length]`
+| ES6
+a|
+* `Length` type and its functions.
+* `isNullary()`, `isUnary()`, `isBinary()`, and `isTernary()` predicates.
+
+| `link:{mdn-js-globals}/Function/name[name]`
+| ES6
+| *TODO*
+
+| `link:{mdn-js-globals}/Function/prototype[prototype]`
+| ES6
+| *Allowed* but without custom support.
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Function/@@hasInstance[@@hasInstance]`
+| ES6
+| *Supported* via the `instanceof` operator.
+
+| `link:{mdn-js-globals}/Function/apply[apply()]`
+| ES6
+| *TODO*.
+
+| `link:{mdn-js-globals}/Function/bind[bind()]`
+| ES6
+| *TODO*.
+
+| `link:{mdn-js-globals}/Function/call[call()]`
+| ES6
+| *TODO*.
+
+| `link:{mdn-js-globals}/Function/toString[toString()]`
+| ES6
+| Use the `link:{mdn-js-globals}/String/String[String()]` function.
+
+3+| *Operators*
+
+| `link:{mdn-js-operators}/instanceof[instanceof]`
+| ES6
+a|
+* `Instance`, `isInstanceOf()`, `isNotInstanceOf()`
+(from `link:{perfective-common}/value/index.adoc[@perfective/common]`).
+
+|===
 
 
 == References

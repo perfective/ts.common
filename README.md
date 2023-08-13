@@ -273,6 +273,9 @@ Packages are organized and named around their primary type:
 -   [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc)
     — functions and types to handle
     [`boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
+-   [`@perfective/common/date`](https://github.com/perfective/ts.common/tree/main/src/date/index.adoc)
+    — functions and types to handle
+    [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) values.
 -   [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc)
     — functions and types to handle
     [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)

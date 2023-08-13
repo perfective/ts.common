@@ -1,0 +1,73 @@
+= Date
+
+The `@perfective/common/date` package provides functions to work with the
+`link:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date[Date]` type.
+
+There are a couple important differences in how `@perfective` handles the `Date` values.
+
+* `@perfective` treats `Date` objects as immutable, so setter methods are not supported.
++
+* `@perfective` functions return `null` instead of the `Invalid Date` instances.
++
+Using `null` allows to combine the results of the functions using `Maybe`:
++
+[source,typescript]
+----
+import { date, Timestamp, timestamp } from '@perfective/common/date`;
+import { Maybe, just } from '@perfective/common/maybe';
+
+function parseTime(input: string): Maybe<number> { // <.>
+    const time = Date.parse(input);
+    if (Number.isNaN(time)) {
+        return nothing();
+    }
+    return just(time);
+}
+
+function maybeTime(input: string): Maybe<Timestamp> { // <.>
+    return just(input).to(date).to(timestamp);
+}
+----
+<.> `Date.parse(input)` returns a `number` or `NaN`, so additional checks are required.
+<.> `date()` function returns `Date | null`, so it's easily chained into `Maybe`.
+
+
+== `Date`
+
+* Constructors:
++
+** `date(date: Date): Date | null;`
+— creates a copy of a given `date`.
+If the given `date` is `Invalid Date`, returns `null`.
+** `date(timestamp: Timestamp): Date`
+— creates a `Date` for a given `Timestamp`.
+If the given `Timestamp` is invalid, returns `null`.
+** `date(input: string): Date | null`
+— parses a `Date` from a given input `string`.
+If the given input cannot be parsed, returns `null`.
++
+** `now(): Date`
+— creates a `Date` for the current moment.
+Uses `Date.now()`, so it can be mocked in the tests
+(for example, in https://jestjs.io/docs/mock-function-api#jestspiedsource[Jest]).
++
+** `epoch(): Date`
+— creates a `Date` for the Unix epoch
+(i.e., `January 1, 1970, 00:00:00 UTC`).
++
+* Predicates:
++
+** `isValid(date: Date): boolean`
+— returns `true` if a given `Date` is a valid (not an `Invalid Date`).
+** `isInvalid(date: Date): boolean`
+— returns `true` if a given `Date` is an `Invalid Date`.
+
+
+== `Timestamp`
+
+* `Timestamp = number`
+— an alias type for `number` and is specified in milliseconds since the Unix epoch.
++
+* `timestamp(date: Date): Timestamp | null`
+— returns a `Timestamp` for a given date.
+If the given `Date` is `Invalid Date`, returns `null`.

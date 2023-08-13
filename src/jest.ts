@@ -42,3 +42,12 @@ export function testCase<T, U>(first: string | T, second: T | U, third?: U): Tes
         output: third,
     };
 }
+
+/**
+ * Creates a Jest Spy for the `Date.now()` function to always return a given {@link Date}.
+ *
+ * @see https://jestjs.io/docs/mock-function-api#jestspiedsource
+ */
+export function dateNowMock(now: Date): jest.Spied<typeof Date.now> {
+    return jest.spyOn(Date, 'now').mockReturnValue(now.getTime());
+}

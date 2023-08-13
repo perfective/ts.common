@@ -288,6 +288,10 @@ link:{mdn-js-globals}/Array[arrays].
 — functions and types to handle
 `link:{mdn-js-globals}/Boolean[boolean]` values.
 +
+* `link:{perfective-common}/src/date/index.adoc[@perfective/common/date]`
+— functions and types to handle
+`link:{mdn-js-globals}/Date[Date]` object.
++
 * `link:{perfective-common}/src/error/index.adoc[@perfective/common/error]`
 — functions and types to handle
 `link:{mdn-js-globals}/Error[Error]`

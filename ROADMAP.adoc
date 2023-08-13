@@ -1,4 +1,5 @@
 = Roadmap
+:ecma-es6: https://262.ecma-international.org/6.0
 :eslint-rules: https://eslint.org/docs/latest/rules
 :mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
@@ -91,7 +92,7 @@ even if it was introduced earlier.
 
 === `link:{mdn-js-globals}/Boolean[Boolean]`
 
-The `link:{perfective-common}}/boolean/index.adoc[@perfective/common/boolean]` package covers the `Boolean` type.
+The `link:{perfective-common}/boolean/index.adoc[@perfective/common/boolean]` package covers the `Boolean` type.
 
 [cols="~,1,~"]
 |===
@@ -176,6 +177,253 @@ Use `either()` for lazy evaluation and callbacks.
 | link:{mdn-js-operators}/Strict_inequality[Strict inequality] (`!==`)
 | ES6
 | *Allowed*. Use `isNot()` for lazy evaluation and callbacks.
+
+|===
+
+
+=== `link:{mdn-js-globals}/Date[Date]`
+
+The `link:{perfective-common}/date/index.adoc[@perfective/common/date]` package covers the  link:{ecma-es6}/#sec-date-objects[ES6 Date objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | Version | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Date/Date[new Date()]`
+| `link:{ecma-es6}/#sec-date-constructor-date[ES6]`
+| *Discouraged*. Instead, use the `now()` function to create the current `Date` object,
+as it relies on the `Date.now` function that can be mocked in the tests.
+
+| `link:{mdn-js-globals}/Date/Date[new Date(value)]`
+| `link:{ecma-es6}/#sec-date-value[ES6]`
+| *Supported*. Use the `date()` function to pass a timestamp.
+(Note: it returns `null` instead of "Invalid Date", if the timestamp is invalid).
+
+| `link:{mdn-js-globals}/Date/Date[new Date(dateString)]`
+| `link:{ecma-es6}/#sec-date-value[ES6]`
+| *Supported*. Use the `date()` function to pass a string.
+(Note: it returns `null` instead of "Invalid Date", if parsing fails).
+
+| `link:{mdn-js-globals}/Date/Date[new Date(dateObject)]`
+| `link:{ecma-es6}/#sec-date-value[ES6]`
+| *Supported*. Use the `date()` function to copy a `Date`.
+(Note: it returns `null` when given an "Invalid Date").
+
+| `link:{mdn-js-globals}/Date/Date[new Date(year, monthIndex, ...)]`
+| `link:{ecma-es6}/#sec-date-year-month-date-hours-minutes-seconds-ms[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/Date[Date()]`
+| `link:{ecma-es6}/#sec-date-constructor-date[ES6]`
+| *Discouraged*. Use the `date()` function instead.
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Date/@@toPrimitive[@@toPrimitive()]`
+| `link:{ecma-es6}/#sec-date.prototype.[ES6]`
+| *Discouraged*. Use explicit conversions instead.
+
+| `link:{mdn-js-globals}/Date/getDate[getDate()]`
+| `link:{ecma-es6}/#sec-date.prototype.getdate[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getDay[getDay()]`
+| `link:{ecma-es6}/#sec-date.prototype.getday[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getFullYear[getFullYear()]`
+| `link:{ecma-es6}/#sec-date.prototype.getfullyear[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getHours[getHours()]`
+| `link:{ecma-es6}/#sec-date.prototype.gethours[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getMilliseconds[getMilliseconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.getmilliseconds[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getMinutes[getMinutes()]`
+| `link:{ecma-es6}/#sec-date.prototype.getminutes[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getMonth[getMonth()]`
+| `link:{ecma-es6}/#sec-date.prototype.getmonth[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getSeconds[getSeconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.getseconds[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getTime[getTime()]`
+| `link:{ecma-es6}/#sec-date.prototype.gettime[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getTimezoneOffset[getTimezoneOffset()]`
+| `link:{ecma-es6}/#sec-date.prototype.gettimezoneoffset[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCDate[getUTCDate()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcdate[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCDay[getUTCDay()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcday[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCFullYear[getUTCFullYear()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcfullyear[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCHours[getUTCHours()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutchours[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCMilliseconds[getUTCMilliseconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcmilliseconds[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCMinutes[getUTCMinutes()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcminutes[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCMonth[getUTCMonth()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcmonth[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getUTCSeconds[getUTCSeconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.getutcseconds[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/getYear[getYear()]`
+| link:{ecma-es6}/#sec-date.prototype.getyear[ES6]
+| *Disallowed*. The method is deprecated.
+
+| `link:{mdn-js-globals}/Date/now[Date.now()]`
+| `link:{ecma-es6}/#sec-date.now[ES6]`
+a|
+* Use the `now()` function to create the current `Date`.
+`now()` uses `Date.now()`, so it can be mocked in tests.
++
+* Use the `Date.now()` when you need a timestamp.
+
+| `link:{mdn-js-globals}/Date/parse[Date.parse()]`
+| `link:{ecma-es6}/#sec-date.parse[ES6]`
+| *Discouraged*. `Date.parse()` returns `NaN` if the value cannot be parsed.
+Instead, use the `date()` and `timestamp()` functions with `maybe()`.
+
+| `link:{mdn-js-globals}/Date/setDate[setDate()]`
+| `link:{ecma-es6}/#sec-date.prototype.setdate[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setFullYear[setFullYear()]`
+| `link:{ecma-es6}/#sec-date.prototype.setfullyear[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setHours[setHours()]`
+| `link:{ecma-es6}/#sec-date.prototype.sethours[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setMilliseconds[setMilliseconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.setmilliseconds[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setMinutes[setMinutes()]`
+| `link:{ecma-es6}/#sec-date.prototype.setminutes[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setMonth[setMonth()]`
+| `link:{ecma-es6}/#sec-date.prototype.setmonth[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setSeconds[setSeconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.setseconds[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setTime[setTime()]`
+| `link:{ecma-es6}/#sec-date.prototype.settime[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCDate[setUTCDate()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutcdate[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCFullYear[setUTCFullYear()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutcfullyear[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCHours[setUTCHours()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutchours[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCMilliseconds[setUTCMilliseconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutcmilliseconds[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCMinutes[setUTCMinutes()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutcminutes[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCMonth[setUTCMonth()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutcmonth[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setUTCSeconds[setUTCSeconds()]`
+| `link:{ecma-es6}/#sec-date.prototype.setutcseconds[ES6]`
+| *Disallowed*. The method mutates the date.
+
+| `link:{mdn-js-globals}/Date/setYear[setYear()]`
+| link:{ecma-es6}/#sec-date.prototype.setyear[ES6]
+| *Disallowed*. The method is deprecated and mutates the date.
+
+| `link:{mdn-js-globals}/Date/toDateString[toDateString()]`
+| `link:{ecma-es6}/#sec-date.prototype.todatestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toISOString[toISOString()]`
+| `link:{ecma-es6}/#sec-date.prototype.toisostring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toJSON[toJSON()]`
+| `link:{ecma-es6}/#sec-date.prototype.tojson[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toLocaleDateString[toLocaleDateString()]`
+| `link:{ecma-es6}/#sec-date.prototype.tolocaledatestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toLocaleString[toLocaleString()]`
+| `link:{ecma-es6}/#sec-date.prototype.tolocalestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toLocaleTimeString[toLocaleTimeString()]`
+| `link:{ecma-es6}/#sec-date.prototype.tolocaletimestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toString[toString()]`
+| `link:{ecma-es6}/#sec-date.prototype.tostring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toTimeString[toTimeString()]`
+| `link:{ecma-es6}/#sec-date.prototype.totimestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/toUTCString[toUTCString()]`
+| `link:{ecma-es6}/#sec-date.prototype.toutcstring[ES6]`
+| *TBD* (Alias: `link:{ecma-es6}/#sec-date.prototype.togmtstring[toGMTString()]`).
+
+| `link:{mdn-js-globals}/Date/UTC[Date.UTC()]`
+| `link:{ecma-es6}/#sec-date.utc[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Date/valueOf[valueOf()]`
+| `link:{ecma-es6}/#sec-date.prototype.valueof[ES6]`
+a| *Discouraged*. Use the `timestamp()` function to get the timestamp.
+
+* `valueOf()` returns `NaN` for invalid dates.
+* `timestamp()` returns `null` for invalid dates.
 
 |===
 

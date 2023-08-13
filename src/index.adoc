@@ -8,6 +8,7 @@ include::./value/index.adoc[leveloffset=+1]
 
 include::./array/index.adoc[leveloffset=+1]
 include::./boolean/index.adoc[leveloffset=+1]
+include::./date/index.adoc[leveloffset=+1]
 include::./error/index.adoc[leveloffset=+1]
 include::./function/index.adoc[leveloffset=+1]
 include::./match/index.adoc[leveloffset=+1]

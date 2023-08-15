@@ -11,84 +11,37 @@ and detailed documentation in the existing packages.
 == Version 1.0
 
 * Must target https://262.ecma-international.org/6.0/[ECMAScript 6].
-* May support newer versions of ECMAScript if they have wide browser or TypeScript support.
+** Only versions starting from ECMAScript 2015 (`ES6`) are considered.
+** The version `ES6` means that the feature is available in `ES6`,
+even if it was introduced earlier.
+** All versions after `ES6` are written in their year-based format (e.g. `ES2016`).
+* May support newer versions of ECMAScript if they have wide browser and TypeScript support.
 * Legacy browsers support may be provided using `@babel`.
 
 
-== Packages
+== link:{mdn-js-globals}[Built-in objects]
 
-* `@perfective/common/array`:
-** [Consider] Rename `Compare` into `Order`.
-+
-* `@perfective/common/date`:
-** Add support for the
-`link:{mdn-js-globals}/Date[Date]` type.
-+
-* `@perfective/common/function`:
-** Ensure coverage of the
-`link:{mdn-js-globals}/Function[Function]`,
-`link:{mdn-js-globals}/Generator[Generator]`,
-and `link:{mdn-js-globals}/GeneratorFunction[GeneratorFunction]` types.
-** Consider support for
-`link:{mdn-js-globals}/AsyncFunction[AsyncFunction]` (ES 8)
-+
-* `@perfective/common/i18n`:
-** Add support for localization functions.
-+
-* `@perfective/common/number`:
-** Ensure coverage of:
-*** `link:{mdn-js-globals}/Number[Number]`
-*** `link:{mdn-js-globals}/Math[Math]`
-*** `link:{mdn-js-globals}/Infinity[Infinity]`
-/ `link:{mdn-js-globals}/Number/NEGATIVE_INFINITY[Number.NEGATIVE_INFINITY]`
-/ `link:{mdn-js-globals}/Number/POSITIVE_INFINITY[Number.POSITIVE_INFINITY]`
-*** `link:{mdn-js-globals}/Number/isFinite[Number.isFinite()]`
-/ `link:{mdn-js-globals}/isFinite[isFinite()]`
-*** `link:{mdn-js-globals}/NaN[NaN]`
-/ `link:{mdn-js-globals}/isNaN[isNaN()]`
-/ `link:{mdn-js-globals}/Number/isNaN[Number.isNaN()]`
-+
-* `@perfective/common/object`:
-** [Consider] Rename `hasDefinedProperty()` into `hasDefined(property)` (and other similar functions).
-** [Consider] Rename `ObjectWithDefined` into `HasDefined` (and other similar types).
-+
-* `@perfective/common/promise`:
-** Ensure coverage of the
-`link:{mdn-js-globals}/Promise[Promise]` type.
-+
-* `@perfective/common/reflect`:
-** Add support for the
-`link:{mdn-js-globals}/Reflect[Reflect]` type.
-+
-* `@perfective/common/regexp`:
-** Add support for the
-`link:{mdn-js-globals}/RegExp[RegExp]` type.
-+
-* `@perfective/common/symbol`:
-** Add support for the
-`link:{mdn-js-globals}/Symbol[Symbol]` type.
-+
-* `@perfective/common/uri`:
-** Ensure support of:
-`link:{mdn-js-globals}/encodeURI[encodeURI]`
-/ `link:{mdn-js-globals}/encodeURIComponent[encodeURIComponent]`,
-`link:{mdn-js-globals}/decodeURI[decodeURI]`
-/ `link:{mdn-js-globals}/decodeURIComponent[decodeURIComponent]`,
-and `link:{mdn-js-globals}/URIError[URIError]`.
-** Consider custom support for:
-`link:{mdn-js-globals}/escape[escape]`
-/ `link:{mdn-js-globals}/unescape[unescape]`.
-+
-* `@perfective/common/url`
-** Add support for the
-`link:https://developer.mozilla.org/en-US/docs/Web/API/URL[URL]` WebAPI.
+=== `link:{mdn-js-globals}/AggregateError[AggregateError]`
 
-== ECMAScript Coverage
+=== `link:{mdn-js-globals}/Array[Array]`
 
-* Only versions starting from ECMAScript 2015 (`ES6`) are considered.
-* The version `ES6` means that the feature is available in `ES6`,
-even if it was introduced earlier.
-* All versions after `ES6` are written in their year-based format (e.g. `ES2016`).
+=== `link:{mdn-js-globals}/ArrayBuffer[ArrayBuffer]`
+
+=== `link:{mdn-js-globals}/AsyncFunction[AsyncFunction]`
+
+=== `link:{mdn-js-globals}/AsyncGenerator[AsyncGenerator]`
+
+=== `link:{mdn-js-globals}/AsyncGeneratorFunction[AsyncGeneratorFunction]`
+
+=== `link:{mdn-js-globals}/AsyncIterator[AsyncIterator]`
+
+=== `link:{mdn-js-globals}/Atomics[Atomics]`
+
+=== `link:{mdn-js-globals}/BigInt[BigInt]`
+
+=== `link:{mdn-js-globals}/BigInt64Array[BigInt64Array]`
+
+=== `link:{mdn-js-globals}/BigUint64Array[BigUint64Array]`
 
 === `link:{mdn-js-globals}/Boolean[Boolean]`
 
@@ -125,61 +78,9 @@ there is no need in using the `valueOf()` method.
 
 When a primitive value is expected, JavaScript invokes `valueOf()` automatically.
 
-3+| *Operators*
-
-| link:{mdn-js-operators}/Equality[Equality] (`==`)
-| ES6
-| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
-
-The loose equality has obscure behavior:
-`'0' == false` and `[] == false`,
-but `null != false`, `undefined != false`, and `{} != false`.
-
-_Always_ use strict equality.
-When you need to coerce multiple types with logic that does not match `isTruthy()`/`isFalsy()`,
-write an explicit `Predicate`.
-
-| link:{mdn-js-operators}/Inequality[Inequality] (`!=`)
-| ES6
-| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
-
-| link:{mdn-js-operators}/Logical_AND[Logical AND] (`&&`)
-| ES6
-| *Allowed*.
-Use `all()`/`neither()` for lazy evaluation and callbacks.
-
-| link:{mdn-js-operators}/Logical_AND_assignment[Logical AND assignment] (`&&=`)
-| ES6
-| *Discouraged* as it mutates the value.
-
-| link:{mdn-js-operators}/Logical_NOT[Logical NOT] (`!`)
-| ES6
-| *Allowed*.
-Use `not()` for lazy evaluation and callbacks.
-
-| link:{mdn-js-operators}/Logical_NOT#double_not_!![Double NOT] (`!!`)
-| ES6
-| *Disallowed*. Use the `isTruthy()` /`isFalsy()` predicates.
-
-| link:{mdn-js-operators}/Logical_OR[Logical OR] (`\|\|`)
-| ES6
-| *Allowed*.
-Use `either()` for lazy evaluation and callbacks.
-
-| link:{mdn-js-operators}/Logical_OR_assignment[Logical OR assignment] (`\|\|=`)
-| ES6
-| *Discouraged* as it mutates the value.
-
-| link:{mdn-js-operators}/Strict_equality[Strict equality] (`===`)
-| ES6
-| *Allowed*. Use `is()` for lazy evaluation and callbacks.
-
-| link:{mdn-js-operators}/Strict_inequality[Strict inequality] (`!==`)
-| ES6
-| *Allowed*. Use `isNot()` for lazy evaluation and callbacks.
-
 |===
 
+=== `link:{mdn-js-globals}/DataView[DataView]`
 
 === `link:{mdn-js-globals}/Date[Date]`
 
@@ -427,6 +328,27 @@ a| *Discouraged*. Use the `timestamp()` function to get the timestamp.
 
 |===
 
+=== `link:{mdn-js-globals}/decodeURI[decodeURI()]`
+
+=== `link:{mdn-js-globals}/decodeURIComponent[decodeURIComponent()]`
+
+=== `link:{mdn-js-globals}/encodeURI[encodeURI()]`
+
+=== `link:{mdn-js-globals}/encodeURIComponent[encodeURIComponent()]`
+
+=== `link:{mdn-js-globals}/Error[Error]`
+
+=== `link:{mdn-js-globals}/escape[escape()]`
+
+=== `link:{mdn-js-globals}/eval[eval()]`
+
+=== `link:{mdn-js-globals}/EvalError[EvalError]`
+
+=== `link:{mdn-js-globals}/FinalizationRegistry[FinalizationRegistry]`
+
+=== `link:{mdn-js-globals}/Float32Array[Float32Array]`
+
+=== `link:{mdn-js-globals}/Float64Array[Float64Array]`
 
 === `link:{mdn-js-globals}/Function[Function]`
 
@@ -496,16 +418,414 @@ a|
 | ES6
 | Use the `link:{mdn-js-globals}/String/String[String()]` function.
 
-3+| *Operators*
+|===
 
-| `link:{mdn-js-operators}/instanceof[instanceof]`
+=== `link:{mdn-js-globals}/Generator[Generator]`
+
+=== `link:{mdn-js-globals}/GeneratorFunction[GeneratorFunction]`
+
+=== `link:{mdn-js-globals}/globalThis[globalThis]`
+
+=== `link:{mdn-js-globals}/Infinity[Infinity]`
+
+=== `link:{mdn-js-globals}/Int16Array[Int16Array]`
+
+=== `link:{mdn-js-globals}/Int32Array[Int32Array]`
+
+=== `link:{mdn-js-globals}/Int8Array[Int8Array]`
+
+=== `link:{mdn-js-globals}/InternalError[InternalError]`
+
+=== `link:{mdn-js-globals}/Intl[Intl]`
+
+=== `link:{mdn-js-globals}/isFinite[isFinite()]`
+
+=== `link:{mdn-js-globals}/isNaN[isNaN()]`
+
+=== `link:{mdn-js-globals}/Iterator[Iterator]`
+
+=== `link:{mdn-js-globals}/JSON[JSON]`
+
+=== `link:{mdn-js-globals}/Map[Map]`
+
+=== `link:{mdn-js-globals}/Math[Math]`
+
+=== `link:{mdn-js-globals}/NaN[NaN]`
+
+=== `link:{mdn-js-globals}/Number[Number]`
+
+=== `link:{mdn-js-globals}/Object[Object]`
+
+=== `link:{mdn-js-globals}/parseFloat[parseFloat()]`
+
+=== `link:{mdn-js-globals}/parseInt[parseInt()]`
+
+=== `link:{mdn-js-globals}/Promise[Promise]`
+
+=== `link:{mdn-js-globals}/Proxy[Proxy]`
+
+=== `link:{mdn-js-globals}/RangeError[RangeError]`
+
+=== `link:{mdn-js-globals}/ReferenceError[ReferenceError]`
+
+=== `link:{mdn-js-globals}/Reflect[Reflect]`
+
+=== `link:{mdn-js-globals}/RegExp[RegExp]`
+
+=== `link:{mdn-js-globals}/Set[Set]`
+
+=== `link:{mdn-js-globals}/SharedArrayBuffer[SharedArrayBuffer]`
+
+=== `link:{mdn-js-globals}/String[String]`
+
+=== `link:{mdn-js-globals}/Symbol[Symbol]`
+
+=== `link:{mdn-js-globals}/SyntaxError[SyntaxError]`
+
+=== `link:{mdn-js-globals}/TypedArray[TypedArray]`
+
+=== `link:{mdn-js-globals}/TypeError[TypeError]`
+
+=== `link:{mdn-js-globals}/Uint16Array[Uint16Array]`
+
+=== `link:{mdn-js-globals}/Uint32Array[Uint32Array]`
+
+=== `link:{mdn-js-globals}/Uint8Array[Uint8Array]`
+
+=== `link:{mdn-js-globals}/Uint8ClampedArray[Uint8ClampedArray]`
+
+=== `link:{mdn-js-globals}/undefined[undefined]`
+
+=== `link:{mdn-js-globals}/unescape[unescape()]`
+
+=== `link:{mdn-js-globals}/URIError[URIError]`
+
+=== `link:{mdn-js-globals}/WeakMap[WeakMap]`
+
+=== `link:{mdn-js-globals}/WeakRef[WeakRef]`
+
+=== `link:{mdn-js-globals}/WeakSet[WeakSet]`
+
+
+== link:{mdn-js-operators}[Expressions & operators]
+
+[cols="~,1,~"]
+|===
+
+| link:{mdn-js-operators}/Addition[Addition] (`+`)
+|
+|
+
+| link:{mdn-js-operators}/Addition_assignment[Addition assignment] (`+=`)
+|
+|
+
+| link:{mdn-js-operators}/Assignment[Assignment] (`=`)
+|
+|
+
+| link:{mdn-js-operators}/async_function[async function expression]
+|
+|
+
+| link:{mdn-js-operators}/async_function*[async function* expression]
+|
+|
+
+| link:{mdn-js-operators}/await[await]
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_AND[Bitwise AND] (`&`)
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_AND_assignment[Bitwise AND assignment] (`&=`)
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_NOT[Bitwise NOT] (`~`)
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_OR[Bitwise OR] (`\|`)
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_OR_assignment[Bitwise OR assignment] (`\|=`)
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_XOR[Bitwise XOR] (`^`)
+|
+|
+
+| link:{mdn-js-operators}/Bitwise_XOR_assignment[Bitwise XOR assignment] (`^=`)
+|
+|
+
+| link:{mdn-js-operators}/class[class expression]
+|
+|
+
+| link:{mdn-js-operators}/Comma_operator[Comma operator] (`,`)
+|
+|
+
+| link:{mdn-js-operators}/Conditional_operator[Conditional (ternary) operator]
+|
+|
+
+| link:{mdn-js-operators}/Decrement[Decrement] (`--`)
+|
+|
+
+| link:{mdn-js-operators}/delete[delete operator]
+|
+|
+
+| link:{mdn-js-operators}/Destructuring_assignment[Destructuring assignment]
+|
+|
+
+| link:{mdn-js-operators}/Division[Division] (`/`)
+|
+|
+
+| link:{mdn-js-operators}/Division_assignment[Division assignment] (`/=`)
+|
+|
+
+| link:{mdn-js-operators}/Equality[Equality] (`==`)
+| ES6
+| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
+
+The loose equality has obscure behavior:
+`'0' == false` and `[] == false`,
+but `null != false`, `undefined != false`, and `{} != false`.
+
+_Always_ use strict equality.
+When you need to coerce multiple types with logic that does not match `isTruthy()`/`isFalsy()`,
+write an explicit `Predicate`.
+
+| link:{mdn-js-operators}/Exponentiation[Exponentiation] (`**`)
+|
+|
+
+| link:{mdn-js-operators}/Exponentiation_assignment[Exponentiation assignment] (`**=`)
+|
+|
+
+| link:{mdn-js-operators}/function[Function expression]
+|
+|
+
+| link:{mdn-js-operators}/function*[function* expression]
+|
+|
+
+| link:{mdn-js-operators}/Greater_than[Greater than] (`>`)
+|
+|
+
+| link:{mdn-js-operators}/Greater_than_or_equal[Greater than or equal] (`>=`)
+|
+|
+
+| link:{mdn-js-operators}/Grouping[Grouping operator] (`()`)
+|
+|
+
+| link:{mdn-js-operators}/import.meta[import.meta]
+|
+|
+
+| link:{mdn-js-operators}/import[import()]
+|
+|
+
+| link:{mdn-js-operators}/in[in operator]
+|
+|
+
+| link:{mdn-js-operators}/Increment[Increment] (`++`)
+|
+|
+
+| link:{mdn-js-operators}/Inequality[Inequality] (`!=`)
+| ES6
+| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
+
+| link:{mdn-js-operators}/instanceof[instanceof]
 | ES6
 a|
 * `Instance`, `isInstanceOf()`, `isNotInstanceOf()`
 (from `link:{perfective-common}/value/index.adoc[@perfective/common]`).
 
-|===
+| link:{mdn-js-operators}/Left_shift[Left shift] (`<<`)
+|
+|
 
+| link:{mdn-js-operators}/Left_shift_assignment[Left shift assignment] (`<<=`)
+|
+|
+
+| link:{mdn-js-operators}/Less_than[Less than] (`<`)
+|
+|
+
+| link:{mdn-js-operators}/Less_than_or_equal[Less than or equal] (`<=`)
+|
+|
+
+| link:{mdn-js-operators}/Logical_AND[Logical AND] (`&&`)
+| ES6
+| *Allowed*.
+Use `all()`/`neither()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Logical_AND_assignment[Logical AND assignment] (`&&=`)
+| ES6
+| *Discouraged* as it mutates the value.
+
+| link:{mdn-js-operators}/Logical_NOT[Logical NOT] (`!`)
+| ES6
+| *Allowed*.
+Use `not()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Logical_NOT#double_not_!![Double NOT] (`!!`)
+| ES6
+| *Disallowed*. Use the `isTruthy()` /`isFalsy()` predicates.
+
+| link:{mdn-js-operators}/Logical_OR[Logical OR] (`\|\|`)
+| ES6
+| *Allowed*.
+Use `either()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Logical_OR_assignment[Logical OR assignment] (`\|\|=`)
+| ES6
+| *Discouraged* as it mutates the value.
+
+| link:{mdn-js-operators}/Multiplication[Multiplication] (`*`)
+|
+|
+
+| link:{mdn-js-operators}/Multiplication_assignment[Multiplication assignment] (`*=`)
+|
+|
+
+| link:{mdn-js-operators}/new[new operator]
+|
+|
+
+| link:{mdn-js-operators}/new.target[new.target]
+|
+|
+
+| link:{mdn-js-operators}/null[null]
+|
+|
+
+| link:{mdn-js-operators}/Nullish_coalescing_assignment[Nullish coalescing assignment] (`??=`)
+|
+|
+
+| link:{mdn-js-operators}/Nullish_coalescing[Nullish coalescing operator] (`??`)
+|
+|
+
+| link:{mdn-js-operators}/Object_initializer[Object initializer]
+|
+|
+
+| link:{mdn-js-operators}/Operator_precedence[Operator precedence]
+|
+|
+
+| link:{mdn-js-operators}/Optional_chaining[Optional chaining] (`?.`)
+|
+|
+
+| link:{mdn-js-operators}/Property_accessors[Property accessors]
+|
+|
+
+| link:{mdn-js-operators}/Remainder[Remainder] (`%`)
+|
+|
+
+| link:{mdn-js-operators}/Remainder_assignment[Remainder assignment] (`%=`)
+|
+|
+
+| link:{mdn-js-operators}/Right_shift[Right shift] (`>>`)
+|
+|
+
+| link:{mdn-js-operators}/Right_shift_assignment[Right shift assignment] (`>>=`)
+|
+|
+
+| link:{mdn-js-operators}/Spread_syntax[Spread syntax]
+|
+|
+
+| link:{mdn-js-operators}/Strict_equality[Strict equality] (`===`)
+| ES6
+| *Allowed*. Use `is()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Strict_inequality[Strict inequality] (`!==`)
+| ES6
+| *Allowed*. Use `isNot()` for lazy evaluation and callbacks.
+
+| link:{mdn-js-operators}/Subtraction[Subtraction] (`-`)
+|
+|
+
+| link:{mdn-js-operators}/Subtraction_assignment[Subtraction assignment] (`-=`)
+|
+|
+
+| link:{mdn-js-operators}/super[super]
+|
+|
+
+| link:{mdn-js-operators}/this[this]
+|
+|
+
+| link:{mdn-js-operators}/typeof[typeof]
+|
+|
+
+| link:{mdn-js-operators}/Unary_negation[Unary negation] (`-`)
+|
+|
+
+| link:{mdn-js-operators}/Unary_plus[Unary plus] (`+`)
+|
+|
+
+| link:{mdn-js-operators}/Unsigned_right_shift[Unsigned right shift] (`>>>`)
+|
+|
+
+| link:{mdn-js-operators}/Unsigned_right_shift_assignment[Unsigned right shift assignment] (`>>>=`)
+|
+|
+
+| link:{mdn-js-operators}/void[void operator]
+|
+|
+
+| link:{mdn-js-operators}/yield[yield]
+|
+|
+
+| link:{mdn-js-operators}/yield*[yield*]
+|
+|
+
+|===
 
 == References
 

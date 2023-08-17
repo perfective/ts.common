@@ -51,6 +51,233 @@ even if it was introduced earlier.
 
 === `link:{mdn-js-globals}/Array[Array]`
 
+The `link:{perfective-common}/array/index.adoc[@perfective/common/array]` package covers the link:{ecma-es6}/#sec-array-objects[ES6 Array objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Array/Array[Array()]`
+| `link:{ecma-es6}/#sec-array-constructor-array[ES6]`
+| *Prohibited*. Use `array()` as a callback.
+
+| `link:{mdn-js-globals}/Array/Array[Array(length)]`
+| `link:{ecma-es6}/#sec-array-len[ES6]`
+| *Prohibited*. Use `replicated()` to create an array of a certain length.
+
+| `link:{mdn-js-globals}/Array/Array[Array(...items)]`
+| `link:{ecma-es6}/#sec-array-items[ES6]`
+| *Prohibited*. Use `array()` as a callback.
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Array/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-array-@@species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/@@unscopables[[@@unscopables\]]`
+| `link:{ecma-es2016}/#sec-array.prototype-@@unscopables[ES2016]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/length[length]`
+| `link:{ecma-es6}/#sec-properties-of-the-array-prototype-object[ES6]`
+a|
+* Use `isEmpty()`/`isNotEmpty()` predicates.
+* Use `length()` from `@perfective/common/function` to check length.
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Array/@@iterator[[@@iterator\]()]`
+| `link:{ecma-es2016}/#sec-array.prototype-@@iterator[ES2016]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/at[at()]`
+| `link:{ecma-es2022}/#sec-array.prototype.at[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/concat[concat()]`
+| `link:{ecma-es6}/#sec-array.prototype.concat[ES6]`
+| Use `concat()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/copyWithin[copyWithin()]`
+| `link:{ecma-es6}/#sec-array.prototype.copywithin[ES6]`
+| Use `copyWithin()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/entries[entries()]`
+| `link:{ecma-es6}/#sec-array.prototype.entries[ES6]`
+| Use `entries()` as a callback.
+
+| `link:{mdn-js-globals}/Array/every[every()]`
+| `link:{ecma-es6}/#sec-array.prototype.every[ES6]`
+| Use `every()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/fill[fill()]`
+| `link:{ecma-es6}/#sec-array.prototype.fill[ES6]`
+| Use `fill()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/filter[filter()]`
+| `link:{ecma-es6}/#sec-array.prototype.filter[ES6]`
+| Use `filter()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/find[find()]`
+| `link:{ecma-es6}/#sec-array.prototype.find[ES6]`
+| Use `find()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/findIndex[findIndex()]`
+| `link:{ecma-es6}/#sec-array.prototype.findindex[ES6]`
+| Use `findIndex()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/findLast[findLast()]`
+| `link:{ecma-es2023}/#sec-array.prototype.findlast[ES2023]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/findLastIndex[findLastIndex()]`
+| `link:{ecma-es2023}/#sec-array.prototype.findlastindex[ES2023]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/flat[flat()]`
+| `link:{ecma-es2019}/#sec-array.prototype.flat[ES2019]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/flatMap[flatMap()]`
+| `link:{ecma-es2019}/#sec-array.prototype.flatmap[ES2019]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/forEach[forEach()]`
+| `link:{ecma-es6}/#sec-array.prototype.foreach[ES6]`
+| Use `forEach()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/from[from()]`
+| `link:{ecma-es6}/#sec-array.from[ES6]`
+a|
+* Use `elements()` to create an array from `Iterable` and `ArrayLike`
+* Use `copy()` to copy an array.
+
+| `link:{mdn-js-globals}/Array/fromAsync[fromAsync()]`
+| `link:https://tc39.es/proposal-array-from-async/#sec-array.fromAsync[Draft]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/includes[includes()]`
+| `link:{ecma-es2016}/#sec-array.prototype.includes[ES2016]`
+a|
+* Use `includes()`/`includedIn()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/indexOf[indexOf()]`
+| `link:{ecma-es6}/#sec-array.prototype.indexof[ES6]`
+| Use `indexOf()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/isArray[isArray()]`
+| `link:{ecma-es6}/#sec-array.isarray[ES6]`
+| Use `isArray()`/`isNotArray()` as callbacks and shortcuts.
+
+| `link:{mdn-js-globals}/Array/join[join()]`
+| `link:{ecma-es6}/#sec-array.prototype.join[ES6]`
+| Use `join()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/keys[keys()]`
+| `link:{ecma-es6}/#sec-array.prototype.keys[ES6]`
+| Use `keys()` as a callback.
+
+| `link:{mdn-js-globals}/Array/lastIndexOf[lastIndexOf()]`
+| `link:{ecma-es6}/#sec-array.prototype.lastindexof[ES6]`
+| Use `lastIndexOf()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/map[map()]`
+| `link:{ecma-es6}/#sec-array.prototype.map[ES6]`
+| Use `map()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/of[of()]`
+| `link:{ecma-es6}/#sec-array.of[ES6]`
+| Use `array()` to create an array.
+
+| `link:{mdn-js-globals}/Array/pop[pop()]`
+| `link:{ecma-es6}/#sec-array.prototype.pop[ES6]`
+a|
+* Use `pop()` as a mutating callback.
+* Use `end()` to return the last element.
+
+| `link:{mdn-js-globals}/Array/push[push()]`
+| `link:{ecma-es6}/#sec-array.prototype.push[ES6]`
+a|
+* Use `push()`/`pushInto()` to create a callback.
+* Use `append()`  as a callback to create a shallow copy.
+
+| `link:{mdn-js-globals}/Array/reduce[reduce()]`
+| `link:{ecma-es6}/#sec-array.prototype.reduce[ES6]`
+| Use `reduce()`/`reduceTo()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/reduceRight[reduceRight()]`
+| `link:{ecma-es6}/#sec-array.prototype.reduceright[ES6]`
+| Use `reduceRight()`/`reduceRightTo()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/reverse[reverse()]`
+| `link:{ecma-es6}/#sec-array.prototype.reverse[ES6]`
+a|
+* Use `reverse()` as a mutating callback.
+* Use `reversed()` to reverse a shallow copy.
+
+| `link:{mdn-js-globals}/Array/shift[shift()]`
+| `link:{ecma-es6}/#sec-array.prototype.shift[ES6]`
+a|
+* Use `shift()` as a mutating callback.
+* Use `head()` to return the first element.
+
+| `link:{mdn-js-globals}/Array/slice[slice()]`
+| `link:{ecma-es6}/#sec-array.prototype.slice[ES6]`
+| Use `slice()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/some[some()]`
+| `link:{ecma-es6}/#sec-array.prototype.some[ES6]`
+| Use `some()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/sort[sort()]`
+| `link:{ecma-es6}/#sec-array.prototype.sort[ES6]`
+a|
+* Use `sort()` to create a mutating callback.
+* Use `sorted()` to sort a shallow copy.
+
+| `link:{mdn-js-globals}/Array/splice[splice()]`
+| `link:{ecma-es6}/#sec-array.prototype.splice[ES6]`
+| Use `slice()`/`spliceWith()` to create a callback.
+
+| `link:{mdn-js-globals}/Array/toLocaleString[toLocaleString()]`
+| `link:{ecma-es6}/#sec-array.prototype.tolocalestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/toReversed[toReversed()]`
+| `link:{ecma-es2023}/#sec-array.prototype.toreversed[ES2023]`
+| Use `reversed()` to reverse a shallow copy.
+
+| `link:{mdn-js-globals}/Array/toSorted[toSorted()]`
+| `link:{ecma-es2023}/#sec-array.prototype.tosorted[ES2023]`
+| Use `sorted()` to sort a shallow copy.
+
+| `link:{mdn-js-globals}/Array/toSpliced[toSpliced()]`
+| `link:{ecma-es2023}/#sec-array.prototype.tospliced[ES2023]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/toString[toString()]`
+| `link:{ecma-es6}/#sec-array.prototype.tostring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Array/unshift[unshift()]`
+| `link:{ecma-es6}/#sec-array.prototype.unshift[ES6]`
+a|
+* Use `unshift()` to create a mutating callback.
+* Use `prepend()` to create a shallow copy callback.
+
+| `link:{mdn-js-globals}/Array/values[values()]`
+| `link:{ecma-es6}/#sec-array.prototype.values[ES6]`
+| Use `values()` as a callback.
+
+| `link:{mdn-js-globals}/Array/with[with()]`
+| `link:{ecma-es2023}/#sec-array.prototype.with[ES2023]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/ArrayBuffer[ArrayBuffer]`
 
 === `link:{mdn-js-globals}/AsyncFunction[AsyncFunction]`

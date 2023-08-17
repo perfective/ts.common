@@ -31,6 +31,24 @@ even if it was introduced earlier.
 
 === `link:{mdn-js-globals}/AggregateError[AggregateError]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/AggregateError/AggregateError[AggregateError()]`
+| `link:{ecma-es2021}/#sec-aggregate-error-constructor[ES2021]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/AggregateError/errors[errors]`
+| `link:{ecma-es2021}/#sec-aggregate-error[ES2021]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Array[Array]`
 
 === `link:{mdn-js-globals}/ArrayBuffer[ArrayBuffer]`

@@ -469,6 +469,40 @@ a|
 
 === `link:{mdn-js-globals}/BigInt[BigInt]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/BigInt/BigInt[BigInt()]`
+| `link:{ecma-es2020}/#sec-bigint-constructor[ES2020]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/BigInt/asIntN[asIntN()]`
+| `link:{ecma-es2020}/#sec-bigint.asintn[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/BigInt/asUintN[asUintN()]`
+| `link:{ecma-es2020}/#sec-bigint.asuintn[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/BigInt/toLocaleString[toLocaleString()]`
+| `link:{ecma-es2020}/#sec-bigint.prototype.tolocalestring[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/BigInt/toString[toString()]`
+| `link:{ecma-es2020}/#sec-bigint.prototype.tostring[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/BigInt/valueOf[valueOf()]`
+| `link:{ecma-es2020}/#sec-bigint.prototype.valueof[ES2020]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/BigInt64Array[BigInt64Array]`
 
 === `link:{mdn-js-globals}/BigUint64Array[BigUint64Array]`

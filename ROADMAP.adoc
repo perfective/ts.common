@@ -374,6 +374,18 @@ a|
 
 === `link:{mdn-js-globals}/AsyncGeneratorFunction[AsyncGeneratorFunction]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/AsyncGeneratorFunction/AsyncGeneratorFunction[AsyncGeneratorFunction()]`
+| `link:{ecma-es2018}/#sec-asyncgeneratorfunction-constructor[ES2018]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/AsyncIterator[AsyncIterator]`
 
 === `link:{mdn-js-globals}/Atomics[Atomics]`

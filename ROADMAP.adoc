@@ -338,6 +338,18 @@ a|
 
 === `link:{mdn-js-globals}/AsyncFunction[AsyncFunction]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/AsyncFunction/AsyncFunction[AsyncFunction()]`
+| `link:{ecma-es2017}/#sec-async-function-constructor[ES2017]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/AsyncGenerator[AsyncGenerator]`
 
 === `link:{mdn-js-globals}/AsyncGeneratorFunction[AsyncGeneratorFunction]`

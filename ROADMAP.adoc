@@ -8,6 +8,7 @@
 :ecma-es2021: https://262.ecma-international.org/12.0
 :ecma-es2022: https://262.ecma-international.org/13.0
 :ecma-es2023: https://262.ecma-international.org/14.0
+:ecma-esnext: https://tc39.es/ecma262
 :eslint-rules: https://eslint.org/docs/latest/rules
 :mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
@@ -401,6 +402,70 @@ a|
 |===
 
 === `link:{mdn-js-globals}/Atomics[Atomics]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Atomics/add[add()]`
+| `link:{ecma-es2017}/#sec-atomics.add[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/and[and()]`
+| `link:{ecma-es2017}/#sec-atomics.and[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/compareExchange[compareExchange()]`
+| `link:{ecma-es2017}/#sec-atomics.compareexchange[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/exchange[exchange()]`
+| `link:{ecma-es2017}/#sec-atomics.exchange[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/isLockFree[isLockFree()]`
+| `link:{ecma-es2017}/#sec-atomics.islockfree[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/load[load()]`
+| `link:{ecma-es2017}/#sec-atomics.load[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/notify[notify()]`
+| `link:{ecma-es2017}/#sec-atomics.load[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/or[or()]`
+| `link:{ecma-es2017}/#sec-atomics.or[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/store[store()]`
+| `link:{ecma-es2017}/#sec-atomics.store[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/sub[sub()]`
+| `link:{ecma-es2017}/#sec-atomics.sub[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/wait[wait()]`
+| `link:{ecma-es2017}/#sec-atomics.wait[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/waitAsync[waitAsync()]`
+| `link:{ecma-esnext}/#sec-atomics.waitasync[ESNext]`
+| *TBD*
+
+| `wake()`
+| `link:{ecma-es2018}/#sec-atomics.wake[ES2017]`-`ES2018`
+| *TBD*
+
+| `link:{mdn-js-globals}/Atomics/xor[xor()]`
+| `link:{ecma-es2017}/#sec-atomics.xor[ES2017]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/BigInt[BigInt]`
 

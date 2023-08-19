@@ -388,6 +388,18 @@ a|
 
 === `link:{mdn-js-globals}/AsyncIterator[AsyncIterator]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/AsyncIterator/@@asyncIterator[[@@asyncIterator\]()]`
+| `link:{ecma-es2018}/#sec-asynciteratorprototype-asynciterator[ES2018]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Atomics[Atomics]`
 
 === `link:{mdn-js-globals}/BigInt[BigInt]`

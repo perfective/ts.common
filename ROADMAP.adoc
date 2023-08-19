@@ -546,6 +546,114 @@ When a primitive value is expected, JavaScript invokes `valueOf()` automatically
 
 === `link:{mdn-js-globals}/DataView[DataView]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/DataView/DataView[DataView()]`
+| `link:{ecma-es6}/#sec-dataview-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/DataView/buffer[buffer]`
+| `link:{ecma-es6}/#sec-get-dataview.prototype.buffer[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/byteLength[byteLength]`
+| `link:{ecma-es6}/#sec-get-dataview.prototype.bytelength[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/byteOffset[byteOffset]`
+| `link:{ecma-es6}/#sec-get-dataview.prototype.byteoffset[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/DataView/getBigInt64[getBigInt64()]`
+| `link:{ecma-es2020}/#sec-dataview.prototype.getbigint64[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getBigUint64[getBigUint64()]`
+| `link:{ecma-es2020}/#sec-dataview.prototype.getbiguint64[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getFloat32[getFloat32()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getfloat32[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getFloat64[getFloat64()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getfloat64[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getInt16[getInt16()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getint16[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getInt32[getInt32()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getint32[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getInt8[getInt8()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getint8[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getUint16[getUint16()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getuint16[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getUint32[getUint32()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getuint32[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/getUint8[getUint8()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.getuint8[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setBigInt64[setBigInt64()]`
+| `link:{ecma-es2020}/#sec-dataview.prototype.setbigint64[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setBigUint64[setBigUint64()]`
+| `link:{ecma-es2020}/#sec-dataview.prototype.setbiguint64[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setFloat32[setFloat32()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setfloat32[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setFloat64[setFloat64()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setfloat64[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setInt16[setInt16()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setint16[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setInt32[setInt32()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setint32[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setInt8[setInt8()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setint8[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setUint16[setUint16()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setuint16[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setUint32[setUint32()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setuint32[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/DataView/setUint8[setUint8()]`
+| `link:{ecma-es6}/#sec-dataview.prototype.setuint8[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Date[Date]`
 
 The `link:{perfective-common}/date/index.adoc[@perfective/common/date]` package covers the  link:{ecma-es6}/#sec-date-objects[ES6 Date objects].

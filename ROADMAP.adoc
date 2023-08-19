@@ -280,6 +280,62 @@ a|
 
 === `link:{mdn-js-globals}/ArrayBuffer[ArrayBuffer]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/ArrayBuffer/ArrayBuffer[ArrayBuffer()]`
+| `link:{ecma-es6}/#sec-arraybuffer-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/ArrayBuffer/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-arraybuffer-@@species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/byteLength[byteLength]`
+| `link:{ecma-es6}/#sec-get-arraybuffer.prototype.bytelength[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/detached[detached]`
+| `link:https://tc39.es/proposal-arraybuffer-transfer/#sec-get-arraybuffer.prototype.detached[Stage 3]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/maxByteLength[maxByteLength]`
+| `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-arraybuffer.prototype.maxbytelength[Stage 4]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/resizable[resizable]`
+| `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-arraybuffer.prototype.resizable[Stage 4]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/ArrayBuffer/isView[isView()]`
+| `link:{ecma-es6}/#sec-arraybuffer.isview[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/resize[resize()]`
+| `link:https://tc39.es/proposal-resizablearraybuffer/#sec-arraybuffer.prototype.resize[Stage 4]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/slice[slice()]`
+| `link:{ecma-es6}/#sec-arraybuffer.prototype.slice[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/transfer[transfer()]`
+| `link:https://tc39.es/proposal-arraybuffer-transfer/#sec-arraybuffer.prototype.transfer[Stage 3]`
+| *TBD*
+
+| `link:{mdn-js-globals}/ArrayBuffer/transferToFixedLength[transferToFixedLength()]`
+| `link:https://tc39.es/proposal-arraybuffer-transfer/#sec-arraybuffer.prototype.transfertofixedlength[Stage 3]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/AsyncFunction[AsyncFunction]`
 
 === `link:{mdn-js-globals}/AsyncGenerator[AsyncGenerator]`

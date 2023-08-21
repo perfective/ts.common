@@ -505,7 +505,31 @@ a|
 
 === `link:{mdn-js-globals}/BigInt64Array[BigInt64Array]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/BigInt64Array/BigInt64Array[BigInt64Array()]`
+| `link:{ecma-es2020}/#sec-typedarray-objects[ES2020]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/BigUint64Array[BigUint64Array]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/BigUint64Array/BigUint64Array[BigUint64Array()]`
+| `link:{ecma-es2020}/#sec-typedarray-objects[ES2020]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/Boolean[Boolean]`
 
@@ -920,7 +944,31 @@ a| *Discouraged*. Use the `timestamp()` function to get the timestamp.
 
 === `link:{mdn-js-globals}/Float32Array[Float32Array]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Float32Array/Float32Array[Float32Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Float64Array[Float64Array]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Float64Array/Float64Array[Float64Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/Function[Function]`
 
@@ -1002,9 +1050,45 @@ a|
 
 === `link:{mdn-js-globals}/Int16Array[Int16Array]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Int16Array/Int16Array[Int16Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Int32Array[Int32Array]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Int32Array/Int32Array[Int32Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Int8Array[Int8Array]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Int8Array/Int8Array[Int8Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/InternalError[InternalError]`
 
@@ -1056,15 +1140,229 @@ a|
 
 === `link:{mdn-js-globals}/TypedArray[TypedArray]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/TypedArray/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-%25typedarray%25-@@species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/buffer[buffer]`
+| `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.buffer[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/byteLength[byteLength]`
+| `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.bytelength[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/byteOffset[byteOffset]`
+| `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.byteoffset[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/BYTES_PER_ELEMENT[BYTES_PER_ELEMENT]`
+| `link:{ecma-es6}/#sec-typedarray.bytes_per_element[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/length[length]`
+| `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.length[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/TypedArray/@@iterator[[@@iterator\]()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype-@@iterator[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/at[at()]`
+| `link:{ecma-es2022}/#sec-%25typedarray%25.prototype.at[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/copyWithin[copyWithin()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.copywithin[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/entries[entries()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.entries[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/every[every()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.every[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/fill[fill()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.fill[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/filter[filter()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.filter[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/find[find()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.find[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/findIndex[findIndex()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.findindex[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/findLastIndex[findLastIndex()]`
+| `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.findlastindex[ES2023]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/forEach[forEach()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.foreach[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/from[from()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.from[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/includes[includes()]`
+| `link:{ecma-es2016}/#sec-%25typedarray%25.prototype.includes[ES2016]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/indexOf[indexOf()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.indexof[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/join[join()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.join[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/keys[keys()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.keys[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/lastIndexOf[lastIndexOf()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.lastindexof[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/map[map()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.map[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/of[of()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.of[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/reduce[reduce()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.reduce[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/reduceRight[reduceRight()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.reduceright[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/reverse[reverse()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.reverse[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/set[set()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.set-overloaded-offset[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/slice[slice()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.slice[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/some[some()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.some[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/sort[sort()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.sort[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/subarray[subarray()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.subarray[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/toLocaleString[toLocaleString()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.tolocalestring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/toReversed[toReversed()]`
+| `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.toreversed[ES2023]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/toSorted[toSorted()]`
+| `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.tosorted[ES2023]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/toString[toString()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.tostring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/values[values()]`
+| `link:{ecma-es6}/#sec-%25typedarray%25.prototype.values[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/TypedArray/with[with()]`
+| `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.with[ES2023]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/TypeError[TypeError]`
 
 === `link:{mdn-js-globals}/Uint16Array[Uint16Array]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Uint16Array/Uint16Array[Uint16Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Uint32Array[Uint32Array]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Uint32Array/Uint32Array[Uint32Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/Uint8Array[Uint8Array]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Uint8Array/Uint8Array[Uint8Array()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Uint8ClampedArray[Uint8ClampedArray]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Uint8ClampedArray/Uint8ClampedArray[Uint8ClampedArray()]`
+| `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/undefined[undefined]`
 

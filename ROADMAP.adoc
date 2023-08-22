@@ -923,17 +923,77 @@ a| *Discouraged*. Use the `timestamp()` function to get the timestamp.
 
 === `link:{mdn-js-globals}/decodeURI[decodeURI()]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/decodeURI[decodeURI()]`
+| `link:{ecma-es6}/#sec-decodeuri-encodeduri[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/decodeURIComponent[decodeURIComponent()]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/decodeURIComponent[decodeURIComponent()]`
+| `link:{ecma-es6}/#sec-decodeuricomponent-encodeduricomponent[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/encodeURI[encodeURI()]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/encodeURI[encodeURI()]`
+| `link:{ecma-es6}/#sec-encodeuri-uri[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/encodeURIComponent[encodeURIComponent()]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/encodeURIComponent[encodeURIComponent()]`
+| `link:{ecma-es6}/#sec-encodeuricomponent-uricomponent[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/Error[Error]`
 
 === `link:{mdn-js-globals}/escape[escape()]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/escape[escape()]`
+| `link:{ecma-es6}/#sec-escape-string[ES6]`
+| *Prohibited* as deprecated.
+
+|===
+
 === `link:{mdn-js-globals}/eval[eval()]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/eval[eval()]`
+| `link:{ecma-es6}/#sec-eval-x[ES6]`
+| *Prohibited* as unsafe.
+
+|===
 
 === `link:{mdn-js-globals}/EvalError[EvalError]`
 
@@ -1115,7 +1175,29 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/isFinite[isFinite()]`
+| `link:{ecma-es6}/#sec-isfinite-number[ES6]`
+| *Prohibited*. Use `Number.isFinite` instead.
+Use `unicorn/prefer-number-properties` ESLint rule to enforce.
+
+|===
+
 === `link:{mdn-js-globals}/isNaN[isNaN()]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/isNaN[iNaN()]`
+| `link:{ecma-es6}/#sec-isnan-number[ES6]`
+| *Prohibited*. Use `Number.isNaN` instead.
+Use `unicorn/prefer-number-properties` ESLint rule to enforce.
+
+|===
 
 === `link:{mdn-js-globals}/Iterator[Iterator]`
 
@@ -1145,7 +1227,30 @@ Use `Number.isNaN()` to check for `NaN`.
 
 === `link:{mdn-js-globals}/parseFloat[parseFloat()]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/parseFloat[parseFloat()]`
+| `link:{ecma-es6}/#sec-parsefloat-string[ES6]`
+| *Prohibited*. Use `decimal()` from `@perfective/common/number` instead.
+
+|===
+
 === `link:{mdn-js-globals}/parseInt[parseInt()]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/parseInt[parseInt()]`
+| `link:{ecma-es6}/#sec-parseint-string-radix[ES6]`
+a| *Prohibited*. Use `decimal()`, `binary()`, `octal()`, and `hexadecimal()` from `@perfective/common/number` instead.
+
+Use `Number.parseInt()`, if a custom `radix` is required.
+Use `unicorn/prefer-number-properties` ESLint rule to enforce.
+
+|===
 
 === `link:{mdn-js-globals}/Promise[Promise]`
 
@@ -1413,6 +1518,16 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 |===
 
 === `link:{mdn-js-globals}/unescape[unescape()]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/unescape[unescape()]`
+| `link:{ecma-es6}/#sec-unescape-string[ES6]`
+| *Prohibited* as deprecated.
+
+|===
 
 === `link:{mdn-js-globals}/URIError[URIError]`
 

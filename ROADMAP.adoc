@@ -1349,6 +1349,22 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/JSON[JSON]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/JSON/parse[parse()]`
+| `link:{ecma-es6}/#sec-json.parse[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/JSON/stringify[stringify()]`
+| `link:{ecma-es6}/#sec-json.stringify[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Map[Map]`
 
 === `link:{mdn-js-globals}/Math[Math]`

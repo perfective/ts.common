@@ -1416,6 +1416,66 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/Promise[Promise]`
 
+The `link:{perfective-common}/promise/index.adoc[@perfective/common/promise]` package provides support for the link:{ecma-es6}/#sec-promise-jobs[Promise Jobs].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Promise/Promise[Promise()]`
+| `link:{ecma-es6}/#sec-promise-constructor[ES6]`
+a|
+* Use `promise()` to create a `Promise`.
+* Use `settlement()` to promisify error-first callback functions.
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Promise/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-promise-@@species[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Promise/all[all()]`
+| `link:{ecma-es6}/#sec-promise.all[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Promise/allSettled[allSettled()]`
+| `link:{ecma-es2020}/#sec-promise.allsettled[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Promise/any[any()]`
+| `link:{ecma-es2021}/#sec-promise.any[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Promise/catch[catch()]`
+| `link:{ecma-es6}/#sec-promise.prototype.catch[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Promise/finally[finally()]`
+| `link:{ecma-es2018}/#sec-promise.prototype.finally[ES2018]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Promise/race[race()]`
+| `link:{ecma-es6}/#sec-promise.race[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Promise/reject[reject()]`
+| `link:{ecma-es6}/#sec-promise.reject[ES6]`
+| Use `rejected()` to create a rejected `Promise`.
+
+| `link:{mdn-js-globals}/Promise/resolve[resolve()]`
+| `link:{ecma-es6}/#sec-promise.resolve[ES6]`
+| Use `fulfilled()` to create a resolved `Promise`.
+
+| `link:{mdn-js-globals}/Promise/then[then()]`
+| `link:{ecma-es6}/#sec-promise.prototype.then[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Proxy[Proxy]`
 
 === `link:{mdn-js-globals}/RangeError[RangeError]`

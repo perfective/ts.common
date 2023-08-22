@@ -1189,6 +1189,26 @@ a|
 
 === `link:{mdn-js-globals}/Generator[Generator]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Generator/next[next()]`
+| `link:{ecma-es6}/#sec-generator.prototype.next[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Generator/return[return()]`
+| `link:{ecma-es6}/#sec-generator.prototype.return[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Generator/throw[throw()]`
+| `link:{ecma-es6}/#sec-generator.prototype.throw[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/GeneratorFunction[GeneratorFunction]`
 
 === `link:{mdn-js-globals}/globalThis[globalThis]`

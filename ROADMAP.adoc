@@ -14,19 +14,16 @@
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
 :perfective-common: https://github.com/perfective/ts.common/blob/main/src/
 
-The primary development focus is to provide convenient functions
-and detailed documentation in the existing packages.
+The primary development focus is to provide convenient functions and detailed documentation in the existing packages.
 
 == Version 1.0
 
 * Must target https://262.ecma-international.org/6.0/[ECMAScript 6].
 ** Only versions starting from ECMAScript 2015 (`ES6`) are considered.
-** The version `ES6` means that the feature is available in `ES6`,
-even if it was introduced earlier.
+** The version `ES6` means that the feature is available in `ES6`, even if it was introduced earlier.
 ** All versions after `ES6` are written in their year-based format (e.g. `ES2016`).
 * May support newer versions of ECMAScript if they have wide browser and TypeScript support.
 * Legacy browsers support may be provided using `@babel`.
-
 
 == link:{mdn-js-globals}[Built-in objects]
 
@@ -1046,7 +1043,29 @@ a|
 
 === `link:{mdn-js-globals}/globalThis[globalThis]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/globalThis[globalThis]`
+| `link:{ecma-es2020}/#sec-globalthis[ES2020]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Infinity[Infinity]`
+
+The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` package provides functions to work with `Infinity`.
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/Infinity[Infinity]`
+| `link:{ecma-es6}/#sec-value-properties-of-the-global-object-infinity[ES6]`
+| Use `isEqualTo()`/`isNotEqualTo()` and other predicates to create a callback to check for `Infinity`.
+
+|===
 
 === `link:{mdn-js-globals}/Int16Array[Int16Array]`
 
@@ -1107,6 +1126,18 @@ a|
 === `link:{mdn-js-globals}/Math[Math]`
 
 === `link:{mdn-js-globals}/NaN[NaN]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/NaN[NaN]`
+| `link:{ecma-es6}/#sec-value-properties-of-the-global-object-nan[ES6]`
+| *Discouraged*.
+Return `null` instead of `NaN` for "not a number".
+Use `Number.isNaN()` to check for `NaN`.
+
+|===
 
 === `link:{mdn-js-globals}/Number[Number]`
 
@@ -1366,6 +1397,21 @@ a|
 
 === `link:{mdn-js-globals}/undefined[undefined]`
 
+`link:{perfective-common}/value/index.adoc[@perfective/common]` provides functions to work with `undefined`.
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+| `link:{mdn-js-globals}/undefined[undefined]`
+| `link:{ecma-es6}/#sec-undefined[ES6]`
+a|
+* `isDefined()`/`isUndefined()` to check for `undefined` values.
+or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
+* Use `Maybe` from `link:{perfective-common}/maybe/index.adoc[@perfective/common/maybe]` to avoid `undefined`.
+
+|===
+
 === `link:{mdn-js-globals}/unescape[unescape()]`
 
 === `link:{mdn-js-globals}/URIError[URIError]`
@@ -1375,7 +1421,6 @@ a|
 === `link:{mdn-js-globals}/WeakRef[WeakRef]`
 
 === `link:{mdn-js-globals}/WeakSet[WeakSet]`
-
 
 == link:{mdn-js-operators}[Expressions & operators]
 

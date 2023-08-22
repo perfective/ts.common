@@ -1518,6 +1518,46 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/SharedArrayBuffer[SharedArrayBuffer]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/SharedArrayBuffer[SharedArrayBuffer()]`
+| `link:{ecma-es2017}/#sec-sharedarraybuffer-constructor[ES2017]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/@@species[[@@species\]()]`
+| `link:{ecma-es2017}/#sec-sharedarraybuffer-@@species[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/byteLength[byteLength]`
+| `link:{ecma-es2017}/#sec-get-sharedarraybuffer.prototype.bytelength[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/growable[growable]`
+| `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-sharedarraybuffer.prototype.growable[Stage 4]`
+| *TBD*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/maxByteLength[maxByteLength]`
+| `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-sharedarraybuffer.prototype.maxbytelength[Stage 4]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/grow[grow()]`
+| `link:https://tc39.es/proposal-resizablearraybuffer/#sec-sharedarraybuffer.prototype.grow[Stage 4]`
+| *TBD*
+
+| `link:{mdn-js-globals}/SharedArrayBuffer/slice[slice()]`
+| `link:{ecma-es2017}/#sec-sharedarraybuffer.prototype.slice[ES2017]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/String[String]`
 
 === `link:{mdn-js-globals}/Symbol[Symbol]`

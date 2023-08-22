@@ -1825,6 +1825,24 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 
 === `link:{mdn-js-globals}/WeakRef[WeakRef]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/WeakRef/WeakRef[WeakRef()]`
+| `link:{ecma-es2021}/#sec-weak-ref-constructor[ES2021]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/WeakRef/deref[deref()]`
+| `link:{ecma-es2021}/#sec-weak-ref.prototype.deref[ES2021]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/WeakSet[WeakSet]`
 
 == link:{mdn-js-operators}[Expressions & operators]

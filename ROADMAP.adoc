@@ -1067,6 +1067,28 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/FinalizationRegistry[FinalizationRegistry]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/FinalizationRegistry/FinalizationRegistry[FinalizationRegistry()]`
+| `link:{ecma-es2021}/#sec-finalization-registry-constructor[ES2021]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/FinalizationRegistry/register[register()]`
+| `link:{ecma-es2021}/#sec-finalization-registry.prototype.register[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/FinalizationRegistry/unregister[unregister()]`
+| `link:{ecma-es2021}/#sec-finalization-registry.prototype.unregister[ES2021]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Float32Array[Float32Array]`
 
 [cols="~,1,~"]

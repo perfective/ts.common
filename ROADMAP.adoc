@@ -1211,6 +1211,18 @@ a|
 
 === `link:{mdn-js-globals}/GeneratorFunction[GeneratorFunction]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/GeneratorFunction/GeneratorFunction[GeneratorFunction()]`
+| `link:{ecma-es6}/#sec-generatorfunction-constructor[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/globalThis[globalThis]`
 
 [cols="~,1,~"]

@@ -12,7 +12,7 @@
 :eslint-rules: https://eslint.org/docs/latest/rules
 :mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
-:perfective-common: https://github.com/perfective/ts.common/blob/main/src/
+:perfective-common: https://github.com/perfective/ts.common/blob/main/src
 
 The primary development focus is to provide convenient functions and detailed documentation in the existing packages.
 
@@ -971,6 +971,60 @@ a| *Discouraged*. Use the `timestamp()` function to get the timestamp.
 
 === `link:{mdn-js-globals}/Error[Error]`
 
+The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].
+
+[cols="1,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Error/Error[Error()]`
+| `link:{ecma-es6}/#sec-error-constructor[ES6]`
+| Use `error()` to create a new `Error`.
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Error/cause[cause]`
+| `link:{ecma-es2022}/#sec-installerrorcause[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Error/columnNumber[columnNumber]`
+| `None`
+| *Not supported* as non-standard. Use `stackTrace()` to parse out `Trace.column` from the `Error.stack`.
+
+| `link:{mdn-js-globals}/Error/fileName[fileName]`
+| `None`
+| *Not supported* as non-standard. Use `stackTrace()` to parse out `Trace.filename` from the `Error.stack`.
+
+| `link:{mdn-js-globals}/Error/lineNumber[lineNumber]`
+| `None`
+| *Not supported* as non-standard. Use `stackTrace()` to parse out `Trace.line` from the `Error.stack`.
+
+| `link:{mdn-js-globals}/Error/message[message]`
+| `link:{ecma-es6}/#sec-error.prototype.message[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Error/name[name]`
+| `link:{ecma-es6}/#sec-error.prototype.name[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Error/stack[stack]`
+| `None`
+a|
+* Use `stack()` to return the `Error.stack`, if it is defined.
+* Use `stackTrace()` to return a parsed stack trace.
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Error/toString[toString()]`
+| `link:{ecma-es6}/#sec-error.prototype.tostring[ES6]`
+a|
+* Use `String()` as a callback.
+* Use `errorOutput()` as a generic standardized output callback.
+
+|===
+
 === `link:{mdn-js-globals}/escape[escape()]`
 
 [cols="~,1,~"]
@@ -996,6 +1050,20 @@ a| *Discouraged*. Use the `timestamp()` function to get the timestamp.
 |===
 
 === `link:{mdn-js-globals}/EvalError[EvalError]`
+
+The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/EvalError/EvalError[EvalError()]`
+| `link:{ecma-es6}/#sec-native-error-types-used-in-this-standard-evalerror[ES6]`
+| Use `evalError()` to create an `EvalError`.
+
+|===
 
 === `link:{mdn-js-globals}/FinalizationRegistry[FinalizationRegistry]`
 
@@ -1171,6 +1239,18 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 === `link:{mdn-js-globals}/InternalError[InternalError]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/InternalError/InternalError[InternalError()]`
+| `None`
+| *Not supported* as non-standard.
+
+|===
+
 === `link:{mdn-js-globals}/Intl[Intl]`
 
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
@@ -1258,7 +1338,35 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/RangeError[RangeError]`
 
+The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/RangeError/RangeError[RangeError()]`
+| `link:{ecma-es6}/#sec-native-error-types-used-in-this-standard-rangeerror[ES6]`
+| Use `rangeError()` to create a `RangeError`.
+
+|===
+
 === `link:{mdn-js-globals}/ReferenceError[ReferenceError]`
+
+The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/ReferenceError/ReferenceError[ReferenceError()]`
+| `link:{ecma-es6}/#sec-native-error-types-used-in-this-standard-referenceerror[ES6]`
+| Use `referenceError()` to create a `ReferenceError`.
+
+|===
 
 === `link:{mdn-js-globals}/Reflect[Reflect]`
 
@@ -1273,6 +1381,20 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 === `link:{mdn-js-globals}/Symbol[Symbol]`
 
 === `link:{mdn-js-globals}/SyntaxError[SyntaxError]`
+
+The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/SyntaxError/SyntaxError[SyntaxError()]`
+| `link:{ecma-es6}/#sec-native-error-types-used-in-this-standard-syntaxerror[ES6]`
+| Use `syntaxError()` to create a `SyntaxError`.
+
+|===
 
 === `link:{mdn-js-globals}/TypedArray[TypedArray]`
 
@@ -1444,6 +1566,20 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/TypeError[TypeError]`
 
+The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/TypeError/TypeError[TypeError()]`
+| `link:{ecma-es6}/#sec-native-error-types-used-in-this-standard-typeerror[ES6]`
+| Use `TypeError()` to create a `TypeError`.
+
+|===
+
 === `link:{mdn-js-globals}/Uint16Array[Uint16Array]`
 
 [cols="~,1,~"]
@@ -1530,6 +1666,18 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 |===
 
 === `link:{mdn-js-globals}/URIError[URIError]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/URIError/URIError[URIError()]`
+| `link:{ecma-es6}/#sec-native-error-types-used-in-this-standard-urierror[ES6]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/WeakMap[WeakMap]`
 

@@ -1335,6 +1335,18 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/Iterator[Iterator]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Iterator/@@iterator[[@@iterator\]()]`
+| `link:{ecma-es6}/#sec-@@iterator[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/JSON[JSON]`
 
 === `link:{mdn-js-globals}/Map[Map]`

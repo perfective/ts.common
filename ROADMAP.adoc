@@ -2043,6 +2043,32 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 
 === `link:{mdn-js-globals}/WeakSet[WeakSet]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/WeakSet/WeakSet[WeakSet()]`
+| `link:{ecma-es6}/#sec-weakset-constructor[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/WeakSet/add[add()]`
+| `link:{ecma-es6}/#sec-weakset.prototype.add[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/WeakSet/delete[delete()]`
+| `link:{ecma-es6}/#sec-weakset.prototype.delete[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/WeakSet/has[has()]`
+| `link:{ecma-es6}/#sec-weakset.prototype.has[ES6]`
+| *TBD*
+
+|===
+
 == link:{mdn-js-operators}[Expressions & operators]
 
 [cols="~,1,~"]

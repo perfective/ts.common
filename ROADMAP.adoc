@@ -1546,6 +1546,78 @@ a|
 
 === `link:{mdn-js-globals}/Proxy[Proxy]`
 
+https://262.ecma-international.org/6.0/#sec-proxy-object-internal-methods-and-internal-slots[ES6 Proxy object] internal methods and internal slots.
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Proxy/Proxy[Proxy()]`
+| `link:{ecma-es6}/#sec-proxy-constructor[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/apply[handler.apply()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-call-thisargument-argumentslist[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/construct[handler.construct()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-construct-argumentslist-newtarget[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/defineProperty[handler.defineProperty()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-defineownproperty-p-desc[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/deleteProperty[handler.deleteProperty()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-delete-p[ES6]`
+| *TBD*
+
+| `handler.enumerate()`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-enumerate[ES6]` only
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/get[handler.get()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-get-p-receiver[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/getOwnPropertyDescriptor[handler.getOwnPropertyDescriptor()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-getownproperty-p[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/getPrototypeOf[handler.getPrototypeOf()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-getprototypeof[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/has[handler.has()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-hasproperty-p[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/isExtensible[handler.isExtensible()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-isextensible[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/ownKeys[handler.ownKeys()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-ownpropertykeys[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/preventExtensions[handler.preventExtensions()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-preventextensions[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/set[handler.set()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-set-p-v-receiver[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Proxy/Proxy/setPrototypeOf[handler.setPrototypeOf()]`
+| `link:{ecma-es6}/#sec-proxy-object-internal-methods-and-internal-slots-setprototypeof-v[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/RangeError[RangeError]`
 
 The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].

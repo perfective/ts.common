@@ -1584,6 +1584,66 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/Set[Set]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Set/Set[Set()]`
+| `link:{ecma-es6}/#sec-set-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Set/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-set-@@species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/size[size]`
+| `link:{ecma-es6}/#sec-get-set.prototype.size[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Set/@@iterator[[@@iterator\]()]`
+| `link:{ecma-es6}/#sec-set.prototype-@@iterator[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/add[add()]`
+| `link:{ecma-es6}/#sec-set.prototype.add[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/clear[clear()]`
+| `link:{ecma-es6}/#sec-set.prototype.clear[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/delete[delete()]`
+| `link:{ecma-es6}/#sec-set.prototype.delete[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/entries[entries()]`
+| `link:{ecma-es6}/#sec-set.prototype.entries[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/forEach[forEach()]`
+| `link:{ecma-es6}/#sec-set.prototype.foreach[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/has[has()]`
+| `link:{ecma-es6}/#sec-set.prototype.has[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/keys[keys()]`
+| `link:{ecma-es6}/#sec-set.prototype.keys[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Set/values[values()]`
+| `link:{ecma-es6}/#sec-set.prototype.values[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/SharedArrayBuffer[SharedArrayBuffer]`
 
 [cols="~,1,~"]

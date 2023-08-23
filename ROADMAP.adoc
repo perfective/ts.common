@@ -1367,6 +1367,74 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/Map[Map]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Map/Map[Map()]`
+| `link:{ecma-es6}/#sec-map-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Map/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-map-@@species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/size[size]`
+| `link:{ecma-es6}/#sec-get-map.prototype.size[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Map/@@iterator[[@@iterator\]()]`
+| `link:{ecma-es6}/#sec-map.prototype-@@iterator[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/clear[clear()]`
+| `link:{ecma-es6}/#sec-map.prototype.clear[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/delete[delete()]`
+| `link:{ecma-es6}/#sec-map.prototype.delete[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/entries[entries()]`
+| `link:{ecma-es6}/#sec-map.prototype.entries[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/forEach[forEach()]`
+| `link:{ecma-es6}/#sec-map.prototype.foreach[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/get[get()]`
+| `link:{ecma-es6}/#sec-map.prototype.get[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/groupBy[groupBy()]`
+| `link:https://tc39.es/proposal-array-grouping/#sec-map.groupby[Stage 2]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/has[has()]`
+| `link:{ecma-es6}/#sec-map.prototype.has[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/keys[keys()]`
+| `link:{ecma-es6}/#sec-map.prototype.keys[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/set[set()]`
+| `link:{ecma-es6}/#sec-map.prototype.set[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Map/values[values()]`
+| `link:{ecma-es6}/#sec-map.prototype.values[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Math[Math]`
 
 === `link:{mdn-js-globals}/NaN[NaN]`

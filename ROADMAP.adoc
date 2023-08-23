@@ -1991,6 +1991,36 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 
 === `link:{mdn-js-globals}/WeakMap[WeakMap]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/WeakMap/WeakMap[WeakMap()]`
+| `link:{ecma-es6}/#sec-weakmap-constructor[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/WeakMap/delete[delete()]`
+| `link:{ecma-es6}/#sec-weakmap.prototype.delete[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/WeakMap/get[get()]`
+| `link:{ecma-es6}/#sec-weakmap.prototype.get[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/WeakMap/has[has()]`
+| `link:{ecma-es6}/#sec-weakmap.prototype.has[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/WeakMap/set[set()]`
+| `link:{ecma-es6}/#sec-weakmap.prototype.set[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/WeakRef[WeakRef]`
 
 [cols="~,1,~"]

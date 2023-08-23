@@ -1580,6 +1580,70 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/Reflect[Reflect]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Reflect/apply[apply()]`
+| `link:{ecma-es6}/#sec-reflect.apply[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/construct[construct()]`
+| `link:{ecma-es6}/#sec-reflect.construct[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/defineProperty[defineProperty()]`
+| `link:{ecma-es6}/#sec-reflect.defineproperty[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/deleteProperty[deleteProperty()]`
+| `link:{ecma-es6}/#sec-reflect.deleteproperty[ES6]`
+| *TBD*
+
+| `enumerate()`
+| `link:{ecma-es6}/#sec-reflect.enumerate[ES6]` only
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/get[get()]`
+| `link:{ecma-es6}/#sec-reflect.get[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/getOwnPropertyDescriptor[getOwnPropertyDescriptor()]`
+| `link:{ecma-es6}/#sec-reflect.getownpropertydescriptor[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/getPrototypeOf[getPrototypeOf()]`
+| `link:{ecma-es6}/#sec-reflect.getprototypeof[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/has[has()]`
+| `link:{ecma-es6}/#sec-reflect.has[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/isExtensible[isExtensible()]`
+| `link:{ecma-es6}/#sec-reflect.isextensible[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/ownKeys[ownKeys()]`
+| `link:{ecma-es6}/#sec-reflect.ownkeys[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/preventExtensions[preventExtensions()]`
+| `link:{ecma-es6}/#sec-reflect.preventextensions[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/set[set()]`
+| `link:{ecma-es6}/#sec-reflect.set[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Reflect/setPrototypeOf[setPrototypeOf()]`
+| `link:{ecma-es6}/#sec-reflect.setprototypeof[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/RegExp[RegExp]`
 
 === `link:{mdn-js-globals}/Set[Set]`

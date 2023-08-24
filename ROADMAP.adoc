@@ -1900,6 +1900,130 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/RegExp[RegExp]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/RegExp/RegExp[RegExp()]`
+| `link:{ecma-es6}/#sec-regexp-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/RegExp/@@species[[@@species\]]`
+| `link:{ecma-es6}/#sec-get-regexp-@@species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/dotAll[dotAll]`
+| `link:{ecma-es2018}/#sec-get-regexp.prototype.dotAll[ES2018]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/flags[flags]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.flags[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/global[global]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.global[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/hasIndices[hasIndices]`
+| `link:{ecma-es2022}/#sec-get-regexp.prototype.hasIndices[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/ignoreCase[ignoreCase]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.ignorecase[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/input[input ($_)]`
+| https://github.com/tc39/proposal-regexp-legacy-features/#additional-properties-of-the-regexp-constructor[Legacy]
+| *Prohibited* as deprecated.
+
+| `link:{mdn-js-globals}/RegExp/lastIndex[RegExp: lastIndex]`
+| `link:{ecma-es6}/#sec-lastindex[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/lastMatch[lastMatch ($&)]`
+| https://github.com/tc39/proposal-regexp-legacy-features/#additional-properties-of-the-regexp-constructor[Legacy]
+| *Prohibited* as deprecated.
+
+| `link:{mdn-js-globals}/RegExp/lastParen[lastParen ($+)]`
+| https://github.com/tc39/proposal-regexp-legacy-features/#additional-properties-of-the-regexp-constructor[Legacy]
+| *Prohibited* as deprecated.
+
+| `link:{mdn-js-globals}/RegExp/leftContext[leftContext ($)]`
+| https://github.com/tc39/proposal-regexp-legacy-features/#additional-properties-of-the-regexp-constructor[Legacy]
+| *Prohibited* as deprecated.
+
+| `link:{mdn-js-globals}/RegExp/multiline[multiline]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.multiline[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/n[RegExp.$1, …, RegExp.$9]`
+| https://github.com/tc39/proposal-regexp-legacy-features/#additional-properties-of-the-regexp-constructor[Legacy]
+| *Prohibited* as deprecated.
+
+| `link:{mdn-js-globals}/RegExp/rightContext[RegExp.rightContext ($')]`
+| https://github.com/tc39/proposal-regexp-legacy-features/#additional-properties-of-the-regexp-constructor[Legacy]
+| *Prohibited* as deprecated.
+
+| `link:{mdn-js-globals}/RegExp/source[source]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.source[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/sticky[sticky]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.sticky[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/unicode[unicode]`
+| `link:{ecma-es6}/#sec-get-regexp.prototype.unicode[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/unicodeSets[unicodeSets]`
+| `link:{ecma-esnext}/#sec-get-regexp.prototype.unicodesets[ES2024]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/RegExp/@@match[@@match()]`
+| `link:{ecma-es6}/#sec-regexp.prototype-@@match[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/@@matchAll[@@matchAll()]`
+| `link:{ecma-es2020}/#sec-regexp-prototype-matchall[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/@@replace[@@replace()]`
+| `link:{ecma-es6}/#sec-regexp.prototype-@@replace[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/@@search[@@search()]`
+| `link:{ecma-es6}/#sec-regexp.prototype-@@search[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/@@split[@@split()]`
+| `link:{ecma-es6}/#sec-regexp.prototype-@@split[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/compile[compile()]`
+| `link:{ecma-es6}/#sec-regexp.prototype.compile[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/RegExp/exec[exec()]`
+| `link:{ecma-es6}/#sec-regexp.prototype.exec[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/test[test()]`
+| `link:{ecma-es6}/#sec-regexp.prototype.test[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/RegExp/toString[toString()]`
+| `link:{ecma-es6}/#sec-regexp.prototype.tostring[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Set[Set]`
 
 [cols="~,1,~"]

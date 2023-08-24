@@ -1826,6 +1826,98 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/Symbol[Symbol]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Symbol/Symbol[Symbol()]`
+| `link:{ecma-es6}/#sec-symbol-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/Symbol/asyncIterator[asyncIterator]`
+| `link:{ecma-es2018}/#sec-symbol.asynciterator[ES2018]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/description[description]`
+| `link:{ecma-es6}/#sec-symbol-description[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/hasInstance[hasInstance]`
+| `link:{ecma-es6}/#sec-symbol.hasinstance[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/isConcatSpreadable[isConcatSpreadable]`
+| `link:{ecma-es6}/#sec-symbol.isconcatspreadable[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/iterator[iterator]`
+| `link:{ecma-es6}/#sec-symbol.iterator[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/match[match]`
+| `link:{ecma-es6}/#sec-symbol.match[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/matchAll[matchAll]`
+| `link:{ecma-es2020}/#sec-symbol.matchall[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/replace[replace]`
+| `link:{ecma-es6}/#sec-symbol.replace[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/search[search]`
+| `link:{ecma-es6}/#sec-symbol.search[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/species[species]`
+| `link:{ecma-es6}/#sec-symbol.species[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/split[split]`
+| `link:{ecma-es6}/#sec-symbol.split[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/toPrimitive[toPrimitive]`
+| `link:{ecma-es6}/#sec-symbol.toprimitive[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/toStringTag[toStringTag]`
+| `link:{ecma-es6}/#sec-symbol.tostringtag[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/unscopables[unscopables]`
+| `link:{ecma-es6}/#sec-symbol.unscopables[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Symbol/@@toPrimitive[[@@toPrimitive\]()]`
+| `link:{ecma-es6}/#sec-symbol.prototype-@@toprimitive[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/for[for()]`
+| `link:{ecma-es6}/#sec-symbol.for[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/keyFor[keyFor()]`
+| `link:{ecma-es6}/#sec-symbol.keyfor[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/toString[toString()]`
+| `link:{ecma-es6}/#sec-symbol.prototype.tostring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Symbol/valueOf[valueOf()]`
+| `link:{ecma-es6}/#sec-symbol.prototype.valueof[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/SyntaxError[SyntaxError]`
 
 The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` package provides support for the link:{ecma-es6}/#sec-error-objects[Error Objects].

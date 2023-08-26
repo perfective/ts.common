@@ -1332,6 +1332,34 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 |===
 
+==== `link:{mdn-js-globals}/Intl/Collator[Intl.Collator]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Intl/Collator/Collator[Collator()]`
+| `link:{ecma-intl-2015}/#sec-the-intl-collator-constructor[ES2015]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/Collator/compare[compare()]`
+| `link:{ecma-intl-2015}/#sec-Intl.Collator.prototype.compare[ES2015]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/Collator/resolvedOptions[resolvedOptions()]`
+| `link:{ecma-intl-2015}/#sec-Intl.Collator.prototype.resolvedOptions[ES2015]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/Collator/supportedLocalesOf[supportedLocalesOf()]`
+| `link:{ecma-intl-2015}/#sec-Intl.Collator.supportedLocalesOf[ES2015]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
 [cols="~,1,~"]

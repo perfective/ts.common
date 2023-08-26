@@ -1504,6 +1504,38 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 |===
 
+==== `link:{mdn-js-globals}/Intl/RelativeTimeFormat[Intl.RelativeTimeFormat]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Intl/RelativeTimeFormat/RelativeTimeFormat[RelativeTimeFormat()]`
+| `link:{ecma-intl-2020}/#sec-intl-relativetimeformat-constructor[ES2020]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/RelativeTimeFormat/format[format()]`
+| `link:{ecma-intl-2020}/#sec-Intl.RelativeTimeFormat.prototype.format[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/RelativeTimeFormat/formatToParts[formatToParts()]`
+| `link:{ecma-intl-2020}/#sec-Intl.RelativeTimeFormat.prototype.formatToParts[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/RelativeTimeFormat/resolvedOptions[resolvedOptions()]`
+| `link:{ecma-intl-2020}/#sec-intl.relativetimeformat.prototype.resolvedoptions[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/RelativeTimeFormat/supportedLocalesOf[supportedLocalesOf()]`
+| `link:{ecma-intl-2020}/#sec-Intl.RelativeTimeFormat.supportedLocalesOf[ES2020]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
 [cols="~,1,~"]

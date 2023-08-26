@@ -1400,6 +1400,38 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 |===
 
+==== `link:{mdn-js-globals}/Intl/ListFormat[Intl.ListFormat]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Intl/ListFormat/ListFormat[ListFormat()]`
+| `link:{ecma-intl-2021}/#sec-intl-listformat-constructor[ES2021]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/ListFormat/format[format()]`
+| `link:{ecma-intl-2021}/#sec-Intl.ListFormat.prototype.format[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/ListFormat/formatToParts[formatToParts()]`
+| `link:{ecma-intl-2021}/#sec-Intl.ListFormat.prototype.formatToParts[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/ListFormat/resolvedOptions[resolvedOptions()]`
+| `link:{ecma-intl-2021}/#sec-Intl.ListFormat.prototype.resolvedoptions[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/ListFormat/supportedLocalesOf[supportedLocalesOf()]`
+| `link:{ecma-intl-2021}/#sec-Intl.ListFormat.supportedLocalesOf[ES2021]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
 [cols="~,1,~"]

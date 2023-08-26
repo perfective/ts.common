@@ -1472,6 +1472,38 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 |===
 
+==== `link:{mdn-js-globals}/Intl/PluralRules[Intl.PluralRules]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Intl/PluralRules/PluralRules[PluralRules()]`
+| `link:{ecma-intl-2018}/#sec-intl-pluralrules-constructor[ES2018]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/PluralRules/resolvedOptions[resolvedOptions()]`
+| `link:{ecma-intl-2018}/#sec-intl.pluralrules.prototype.resolvedoptions[ES2018]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/PluralRules/select[select()]`
+| `link:{ecma-intl-2018}/#sec-intl.pluralrules.prototype.select[ES2018]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/PluralRules/selectRange[selectRange()]`
+| `link:{ecma-intl-next}/#sec-intl.pluralrules.prototype.selectrange[Draft]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/PluralRules/supportedLocalesOf[supportedLocalesOf()]`
+| `link:{ecma-intl-2018}/#sec-intl.pluralrules.supportedlocalesof[ES2018]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
 [cols="~,1,~"]

@@ -2692,6 +2692,234 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/String[String]`
 
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/String/String[String()]`
+| `link:{ecma-es6}/#sec-string-constructor[ES6]`
+| *TBD*
+
+3+| *Properties*
+
+| `link:{mdn-js-globals}/String/length[length]`
+| `link:{ecma-es6}/#sec-properties-of-string-instances-length[ES6]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/String/@@iterator[[@@iterator\]()]`
+| `link:{ecma-es6}/#sec-string.prototype-@@iterator[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/anchor[anchor()]`
+| `link:{ecma-es6}/#sec-string.prototype.anchor[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/at[at()]`
+| `link:{ecma-es2022}/#sec-string.prototype.at[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/big[big()]`
+| `link:{ecma-es6}/#sec-string.prototype.big[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/blink[blink()]`
+| `link:{ecma-es6}/#sec-string.prototype.blink[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/bold[bold()]`
+| `link:{ecma-es6}/#sec-string.prototype.bold[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/charAt[charAt()]`
+| `link:{ecma-es6}/#sec-string.prototype.charat[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/charCodeAt[charCodeAt()]`
+| `link:{ecma-es6}/#sec-string.prototype.charcodeat[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/codePointAt[codePointAt()]`
+| `link:{ecma-es6}/#sec-string.prototype.codepointat[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/concat[concat()]`
+| `link:{ecma-es6}/#sec-string.prototype.concat[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/endsWith[endsWith()]`
+| `link:{ecma-es6}/#sec-string.prototype.endswith[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/fixed[fixed()]`
+| `link:{ecma-es6}/#sec-string.prototype.fixed[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/fontcolor[fontcolor()]`
+| `link:{ecma-es6}/#sec-string.prototype.fontcolor[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/fontsize[fontsize()]`
+| `link:{ecma-es6}/#sec-string.prototype.fontsize[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/fromCharCode[fromCharCode()]`
+| `link:{ecma-es6}/#sec-string.fromcharcode[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/fromCodePoint[fromCodePoint()]`
+| `link:{ecma-es6}/#sec-string.fromcodepoint[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/includes[includes()]`
+| `link:{ecma-es6}/#sec-string.prototype.includes[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/indexOf[indexOf()]`
+| `link:{ecma-es6}/#sec-string.prototype.indexof[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/isWellFormed[isWellFormed()]`
+| `link:{ecma-esnext}/#sec-string.prototype.iswellformed[ESNext]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/italics[italics()]`
+| `link:{ecma-es6}/#sec-string.prototype.italics[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/lastIndexOf[lastIndexOf()]`
+| `link:{ecma-es6}/#sec-string.prototype.lastindexof[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/link[link()]`
+| `link:{ecma-es6}/#sec-string.prototype.link[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/localeCompare[localeCompare()]`
+| `link:{ecma-es6}/#sec-string.prototype.localecompare[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/match[match()]`
+| `link:{ecma-es6}/#sec-string.prototype.match[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/matchAll[matchAll()]`
+| `link:{ecma-es2020}/#sec-string.prototype.matchall[ES2020]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/normalize[normalize()]`
+| `link:{ecma-es6}/#sec-string.prototype.normalize[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/padEnd[padEnd()]`
+| `link:{ecma-es6}/#sec-string.prototype.padend[ES]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/padStart[padStart()]`
+| `link:{ecma-es6}/#sec-string.prototype.padstart[ES]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/raw[raw()]`
+| `link:{ecma-es6}/#sec-string.raw[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/repeat[repeat()]`
+| `link:{ecma-es6}/#sec-string.prototype.repeat[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/replace[replace()]`
+| `link:{ecma-es6}/#sec-string.prototype.replace[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/replaceAll[replaceAll()]`
+| `link:{ecma-es2021}/#sec-string.prototype.replaceall[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/search[search()]`
+| `link:{ecma-es6}/#sec-string.prototype.search[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/slice[slice()]`
+| `link:{ecma-es6}/#sec-string.prototype.slice[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/small[small()]`
+| `link:{ecma-es6}/#sec-string.prototype.small[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/split[split()]`
+| `link:{ecma-es6}/#sec-string.prototype.split[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/startsWith[startsWith()]`
+| `link:{ecma-es6}/#sec-string.prototype.startswith[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/strike[strike()]`
+| `link:{ecma-es6}/#sec-string.prototype.strike[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/sub[sub()]`
+| `link:{ecma-es6}/#sec-string.prototype.sub[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/substr[substr()]`
+| `link:{ecma-es6}/#sec-string.prototype.substr[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/substring[substring()]`
+| `link:{ecma-es6}/#sec-string.prototype.substring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/sup[sup()]`
+| `link:{ecma-es6}/#sec-string.prototype.sup[ES6]`
+| *Deprecated*
+
+| `link:{mdn-js-globals}/String/toLocaleLowerCase[toLocaleLowerCase()]`
+| `link:{ecma-es6}/#sec-string.prototype.tolocalelowercase[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/toLocaleUpperCase[toLocaleUpperCase()]`
+| `link:{ecma-es6}/#sec-string.prototype.tolocaleuppercase[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/toLowerCase[toLowerCase()]`
+| `link:{ecma-es6}/#sec-string.prototype.tolowercase[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/toString[toString()]`
+| `link:{ecma-es6}/#sec-string.prototype.tostring[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/toUpperCase[toUpperCase()]`
+| `link:{ecma-es6}/#sec-string.prototype.touppercase[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/toWellFormed[toWellFormed()]`
+| `link:{ecma-esnext}/#sec-string.prototype.towellformed[ESNext]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/trim[trim()]`
+| `link:{ecma-es6}/#sec-string.prototype.trim[ES6]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/trimEnd[trimEnd()]`
+| `link:{ecma-es2019}/#sec-string.prototype.trimend[ES2019]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/trimStart[trimStart()]`
+| `link:{ecma-es2019}/#sec-string.prototype.trimstart[ES2019]`
+| *TBD*
+
+| `link:{mdn-js-globals}/String/valueOf[valueOf()]`
+| `link:{ecma-es6}/#sec-string.prototype.valueof[ES6]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/Symbol[Symbol]`
 
 [cols="~,1,~"]

@@ -1360,6 +1360,46 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 |===
 
+==== `link:{mdn-js-globals}/Intl/DateTimeFormat[Intl.DateTimeFormat]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/DateTimeFormat[DateTimeFormat()]`
+| `link:{ecma-intl-2015}/#sec-intl-datetimeformat-constructor[ES2015]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/format[format()]`
+| `link:{ecma-intl-2015}/#sec-Intl.DateTimeFormat.prototype.format[ES2015]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/formatRange[formatRange()]`
+| `link:{ecma-intl-2021}/#sec-intl.datetimeformat.prototype.formatRange[ES2021]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/formatRangeToParts[formatRangeToParts()]`
+| `link:{ecma-intl-2015}/#sec-Intl.DateTimeFormat.prototype.formatRangeToParts[ES2015]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/formatToParts[formatToParts()]`
+| `link:{ecma-intl-2017}/#sec-Intl.DateTimeFormat.prototype.formatToParts[ES2017]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/resolvedOptions[resolvedOptions()]`
+| `link:{ecma-intl-2015}/#sec-Intl.DateTimeFormat.prototype.resolvedOptions[ES2015]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/DateTimeFormat/supportedLocalesOf[supportedLocalesOf()]`
+| `link:{ecma-intl-2015}/#sec-Intl.DateTimeFormat.supportedLocalesOf[ES2015]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
 [cols="~,1,~"]

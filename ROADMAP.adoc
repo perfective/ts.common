@@ -9,6 +9,15 @@
 :ecma-es2022: https://262.ecma-international.org/13.0
 :ecma-es2023: https://262.ecma-international.org/14.0
 :ecma-esnext: https://tc39.es/ecma262
+:ecma-intl-2015: https://402.ecma-international.org/2.0
+:ecma-intl-2016: https://402.ecma-international.org/3.0
+:ecma-intl-2017: https://402.ecma-international.org/4.0
+:ecma-intl-2018: https://402.ecma-international.org/5.0
+:ecma-intl-2019: https://402.ecma-international.org/6.0
+:ecma-intl-2020: https://402.ecma-international.org/7.0
+:ecma-intl-2021: https://402.ecma-international.org/8.0
+:ecma-intl-2022: https://402.ecma-international.org/9.0
+:ecma-intl-next: https://tc39.es/ecma402
 :eslint-rules: https://eslint.org/docs/latest/rules
 :mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
@@ -1306,6 +1315,22 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 |===
 
 === `link:{mdn-js-globals}/Intl[Intl]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/getCanonicalLocales[getCanonicalLocales()]`
+| `link:{ecma-intl-2016}/#sec-intl.getcanonicallocales[ES2016]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/supportedValuesOf[supportedValuesOf()]`
+| `link:{ecma-es6}/#sec-intl.supportedvaluesof[Draft]`
+| *TBD*
+
+|===
 
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 

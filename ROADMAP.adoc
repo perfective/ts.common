@@ -1536,6 +1536,34 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 |===
 
+==== `link:{mdn-js-globals}/Intl/Segmenter[Intl.Segmenter]`
+
+[cols="~,1,~"]
+|===
+| JavaScript | ECMA | Perfective
+
+3+| *Constructor*
+
+| `link:{mdn-js-globals}/Intl/Segmenter/Segmenter[Segmenter()]`
+| `link:{ecma-intl-2022}/#sec-intl-segmenter-constructor[ES2022]`
+| *TBD*
+
+3+| *Methods*
+
+| `link:{mdn-js-globals}/Intl/Segmenter/resolvedOptions[resolvedOptions()]`
+| `link:{ecma-intl-2022}/#sec-intl.segmenter.prototype.resolvedoptions[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/Segmenter/segment[segment()]`
+| `link:{ecma-intl-2022}/#sec-intl.segmenter.prototype.segment[ES2022]`
+| *TBD*
+
+| `link:{mdn-js-globals}/Intl/Segmenter/supportedLocalesOf[supportedLocalesOf()]`
+| `link:{ecma-intl-2022}/#sec-intl.segmenter.supportedlocalesof[ES2022]`
+| *TBD*
+
+|===
+
 === `link:{mdn-js-globals}/isFinite[isFinite()]`
 
 [cols="~,1,~"]

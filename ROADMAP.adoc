@@ -3399,91 +3399,95 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 |===
 
 | link:{mdn-js-operators}/Addition[Addition] (`+`)
-|
-|
+| `link:{ecma-es6}/#sec-addition-operator-plus[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Addition_assignment[Addition assignment] (`+=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Assignment[Assignment] (`=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/async_function[async function expression]
-|
-|
+| `link:{ecma-es2017}/#sec-async-function-definitions[ES2017]`
+| *TBD*
 
 | link:{mdn-js-operators}/async_function*[async function* expression]
-|
-|
+| `link:{ecma-es2018}/#sec-async-generator-function-definitions[ES2018]`
+| *TBD*
 
 | link:{mdn-js-operators}/await[await]
-|
-|
+| `link:{ecma-es2017}/#sec-async-function-definitions[ES2017]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_AND[Bitwise AND] (`&`)
-|
-|
+| `link:{ecma-es6}/#sec-binary-bitwise-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_AND_assignment[Bitwise AND assignment] (`&=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_NOT[Bitwise NOT] (`~`)
-|
-|
+| `link:{ecma-es6}/#sec-bitwise-not-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_OR[Bitwise OR] (`\|`)
-|
-|
+| `link:{ecma-es6}/#sec-binary-bitwise-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_OR_assignment[Bitwise OR assignment] (`\|=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_XOR[Bitwise XOR] (`^`)
-|
-|
+| `link:{ecma-es6}/#sec-binary-bitwise-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Bitwise_XOR_assignment[Bitwise XOR assignment] (`^=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/class[class expression]
-|
-|
+| `link:{ecma-es6}/#sec-class-definitions[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Comma_operator[Comma operator] (`,`)
-|
-|
+| `link:{ecma-es6}/#sec-comma-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Conditional_operator[Conditional (ternary) operator]
-|
-|
+| `link:{ecma-es6}/#sec-conditional-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Decrement[Decrement] (`--`)
-|
-|
+| `link:{ecma-es6}/#sec-postfix-decrement-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/delete[delete operator]
-|
-|
+| `link:{ecma-es6}/#sec-delete-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Destructuring_assignment[Destructuring assignment]
+| `link:{ecma-es6}/#sec-destructuring-assignment[ES6]`
 |
+
+| link:{mdn-js-operators}/Destructuring_assignment[Destructuring binding patterns]
+| `link:{ecma-es6}/#sec-destructuring-binding-patterns[ES6]`
 |
 
 | link:{mdn-js-operators}/Division[Division] (`/`)
-|
-|
+| `link:{ecma-es6}/#sec-multiplicative-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Division_assignment[Division assignment] (`/=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Equality[Equality] (`==`)
-| ES6
+| `link:{ecma-es6}/#sec-equality-operators[ES6]`
 | *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
 
 The loose equality has obscure behavior:
@@ -3495,221 +3499,221 @@ When you need to coerce multiple types with logic that does not match `isTruthy(
 write an explicit `Predicate`.
 
 | link:{mdn-js-operators}/Exponentiation[Exponentiation] (`**`)
-|
-|
+| `link:{ecma-es2016}/#sec-exp-operator[ES2016]`
+| *TBD*
 
 | link:{mdn-js-operators}/Exponentiation_assignment[Exponentiation assignment] (`**=`)
-|
-|
+| `link:{ecma-es2016}/#sec-assignment-operators[ES2016]`
+| *TBD*
 
 | link:{mdn-js-operators}/function[Function expression]
-|
-|
+| `link:{ecma-es6}/#sec-function-definitions[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/function*[function* expression]
-|
-|
+| `link:{ecma-es6}/#sec-generator-function-definitions[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Greater_than[Greater than] (`>`)
-|
-|
+| `link:{ecma-es6}/#sec-relational-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Greater_than_or_equal[Greater than or equal] (`>=`)
-|
-|
+| `link:{ecma-es6}/#sec-relational-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Grouping[Grouping operator] (`()`)
-|
-|
+| `link:{ecma-es6}/#sec-grouping-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/import.meta[import.meta]
-|
-|
+| `link:{ecma-es2020}/#prod-ImportMeta[ES2020]`
+| *TBD*
 
 | link:{mdn-js-operators}/import[import()]
-|
-|
+| `link:{ecma-es2020}/#prod-ImportCall[ES2020]`
+| *TBD*
 
 | link:{mdn-js-operators}/in[in operator]
-|
-|
+| `link:{ecma-es6}/#sec-relational-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Increment[Increment] (`++`)
-|
-|
+| `link:{ecma-es6}/#sec-postfix-increment-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Inequality[Inequality] (`!=`)
-| ES6
+| `link:{ecma-es6}/#sec-equality-operators[ES6]`
 | *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
 
 | link:{mdn-js-operators}/instanceof[instanceof]
-| ES6
+| `link:{ecma-es6}/#sec-relational-operators[ES6]`
 a|
 * `Instance`, `isInstanceOf()`, `isNotInstanceOf()`
 (from `link:{perfective-common}/value/index.adoc[@perfective/common]`).
 
 | link:{mdn-js-operators}/Left_shift[Left shift] (`<<`)
-|
-|
+| `link:{ecma-es6}/#sec-left-shift-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Left_shift_assignment[Left shift assignment] (`<<=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Less_than[Less than] (`<`)
-|
-|
+| `link:{ecma-es6}/#sec-relational-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Less_than_or_equal[Less than or equal] (`<=`)
-|
-|
+| `link:{ecma-es6}/#sec-relational-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Logical_AND[Logical AND] (`&&`)
-| ES6
+| `link:{ecma-es6}/#sec-binary-logical-operators[ES6]`
 | *Allowed*.
 Use `all()`/`neither()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Logical_AND_assignment[Logical AND assignment] (`&&=`)
-| ES6
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
 | *Discouraged* as it mutates the value.
 
 | link:{mdn-js-operators}/Logical_NOT[Logical NOT] (`!`)
-| ES6
+| `link:{ecma-es6}/#sec-logical-not-operator[ES6]`
 | *Allowed*.
 Use `not()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Logical_NOT#double_not_!![Double NOT] (`!!`)
-| ES6
+| `link:{ecma-es6}/#sec-binary-logical-operators[ES6]`
 | *Disallowed*. Use the `isTruthy()` /`isFalsy()` predicates.
 
 | link:{mdn-js-operators}/Logical_OR[Logical OR] (`\|\|`)
-| ES6
+| `link:{ecma-es6}/#sec-binary-logical-operators[ES6]`
 | *Allowed*.
 Use `either()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Logical_OR_assignment[Logical OR assignment] (`\|\|=`)
-| ES6
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
 | *Discouraged* as it mutates the value.
 
 | link:{mdn-js-operators}/Multiplication[Multiplication] (`*`)
-|
-|
+| `link:{ecma-es6}/#sec-multiplicative-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Multiplication_assignment[Multiplication assignment] (`*=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/new[new operator]
-|
-|
+| `link:{ecma-es6}/#sec-new-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/new.target[new.target]
-|
-|
+| `link:{ecma-es6}/#sec-built-in-function-objects[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/null[null]
-|
-|
+| `link:{ecma-es6}/#sec-null-value[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Nullish_coalescing_assignment[Nullish coalescing assignment] (`??=`)
-|
-|
+| `link:{ecma-es2020}/#sec-assignment-operators[ES2020]`
+| *TBD*
 
 | link:{mdn-js-operators}/Nullish_coalescing[Nullish coalescing operator] (`??`)
-|
-|
+| `link:{ecma-es2020}/#prod-CoalesceExpression[ES2020]`
+| *TBD*
 
 | link:{mdn-js-operators}/Object_initializer[Object initializer]
-|
-|
+| `link:{ecma-es6}/#sec-object-initializer[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Operator_precedence[Operator precedence]
-|
-|
+| `ES6`
+| *TBD*
 
 | link:{mdn-js-operators}/Optional_chaining[Optional chaining] (`?.`)
-|
-|
+| `link:{ecma-es2020}/#prod-OptionalExpression[ES2020]`
+| *TBD*
 
 | link:{mdn-js-operators}/Property_accessors[Property accessors]
-|
-|
+| `link:{ecma-es6}/#sec-property-accessors[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Remainder[Remainder] (`%`)
-|
-|
+| `link:{ecma-es6}/#sec-multiplicative-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Remainder_assignment[Remainder assignment] (`%=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Right_shift[Right shift] (`>>`)
-|
-|
+| `link:{ecma-es6}/#sec-signed-right-shift-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Right_shift_assignment[Right shift assignment] (`>>=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Spread_syntax[Spread syntax]
-|
-|
+| `ES6`
+| *TBD*
 
 | link:{mdn-js-operators}/Strict_equality[Strict equality] (`===`)
-| ES6
+| `link:{ecma-es6}/#sec-equality-operators[ES6]`
 | *Allowed*. Use `is()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Strict_inequality[Strict inequality] (`!==`)
-| ES6
+| `link:{ecma-es6}/#sec-equality-operators[ES6]`
 | *Allowed*. Use `isNot()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Subtraction[Subtraction] (`-`)
-|
-|
+| `link:{ecma-es6}/#sec-subtraction-operator-minus[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Subtraction_assignment[Subtraction assignment] (`-=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/super[super]
-|
-|
+| `link:{ecma-es6}/#sec-super-keyword[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/this[this]
-|
-|
+| `link:{ecma-es6}/#sec-this-keyword[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/typeof[typeof]
-|
-|
+| `link:{ecma-es6}/#sec-typeof-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Unary_negation[Unary negation] (`-`)
-|
-|
+| `link:{ecma-es6}/#sec-unary-minus-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Unary_plus[Unary plus] (`+`)
-|
-|
+| `link:{ecma-es6}/#sec-unary-plus-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Unsigned_right_shift[Unsigned right shift] (`>>>`)
-|
-|
+| `link:{ecma-es6}/#sec-unsigned-right-shift-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/Unsigned_right_shift_assignment[Unsigned right shift assignment] (`>>>=`)
-|
-|
+| `link:{ecma-es6}/#sec-assignment-operators[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/void[void operator]
-|
-|
+| `link:{ecma-es6}/#sec-void-operator[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/yield[yield]
-|
-|
+| `link:{ecma-es6}/#sec-generator-function-definitions[ES6]`
+| *TBD*
 
 | link:{mdn-js-operators}/yield*[yield*]
-|
-|
+| `link:{ecma-es6}/#sec-generator-function-definitions-runtime-semantics-evaluation[ES6]`
+| *TBD*
 
 |===
 

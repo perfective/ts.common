@@ -3721,4 +3721,26 @@ Use `either()` for lazy evaluation and callbacks.
 
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference[MDN JavaScript Reference]
 * https://en.wikipedia.org/wiki/ECMAScript[ECMAScript Wikipedia]
-* https://262.ecma-international.org/6.0/[ECMA Script 2015 Specification]
++
+* ECMA Script Specification
+** link:{ecma-es6}[ECMA Script 2015 (ES6) Specification]
+** link:{ecma-es2016}[ECMA Script 2016 (ES7) Specification]
+** link:{ecma-es2017}[ECMA Script 2017 (ES8) Specification]
+** link:{ecma-es2018}[ECMA Script 2018 (ES9) Specification]
+** link:{ecma-es2019}[ECMA Script 2019 (ES10) Specification]
+** link:{ecma-es2020}[ECMA Script 2020 (ES11) Specification]
+** link:{ecma-es2021}[ECMA Script 2021 (ES12) Specification]
+** link:{ecma-es2022}[ECMA Script 2022 (ES13) Specification]
+** link:{ecma-es2023}[ECMA Script 2023 (ES14) Specification]
+** link:{ecma-esnext}[ECMA Script 2024 (ESNext) Specification]
++
+* ECMAScript Internationalization API Specification
+** link:{ecma-intl-2015}[ECMAScript 2015 Internationalization API Specification]
+** link:{ecma-intl-2016}[ECMAScript 2016 Internationalization API Specification]
+** link:{ecma-intl-2017}[ECMAScript 2017 Internationalization API Specification]
+** link:{ecma-intl-2018}[ECMAScript 2018 Internationalization API Specification]
+** link:{ecma-intl-2019}[ECMAScript 2019 Internationalization API Specification]
+** link:{ecma-intl-2020}[ECMAScript 2020 Internationalization API Specification]
+** link:{ecma-intl-2021}[ECMAScript 2021 Internationalization API Specification]
+** link:{ecma-intl-2022}[ECMAScript 2022 Internationalization API Specification]
+** link:{ecma-intl-next}[ECMAScript Next Internationalization API Specification]

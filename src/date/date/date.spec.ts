@@ -65,7 +65,7 @@ describe(now, () => {
         expect(now()).toStrictEqual(epoch());
         expect(dateNow).toHaveBeenCalledTimes(1);
 
-        dateNow.mockReset();
+        dateNow.mockRestore();
     });
 });
 

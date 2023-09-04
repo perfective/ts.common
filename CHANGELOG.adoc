@@ -1,8 +1,29 @@
 = Changelog
 
+== v0.10.0-beta
+
+=== New `link:https://github.com/perfective/ts.common/blob/main/src/date/index.adoc[@perfective/common/date]` package
+
+* Added functions for the `Date` class:
+** Added `date()`, `now()`, and `epoch()` `Date` constructors.
+** Added `isValid()`/`isInvalid()` `Date` predicates.
++
+* Added `Timestamp` type.
+** Added `timestamp()` constructor.
+
+=== Restructured Roadmap
+
+`link:https://github.com/perfective/ts.common/blob/main/ROADMAP.adoc[ROADMAP.adoc]`
+now contains all built-in objects with their properties and methods.
+Some of the methods and properties already have a matching Perfective function,
+and some are marked as prohibited (e.g. `eval`) or not supported.
+
+The Roadmap will document minimum support to tag `@perfective/common` `v1.0`.
+
+
 == v0.10.0-alpha
 
-=== `@perfective/common/result`
+=== `link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc[@perfective/common/result]`
 
 * Added the `Result.that()` filter method.
 * Added the `Result.which()` type-guard method.

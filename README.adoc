@@ -110,15 +110,21 @@ and `link:{perfective-common}/src/maybe/index.adoc#maybethrough[Maybe.through()]
 
 === Result monad
 
-The `link:{perfective-common}/src/result/index.adoc[@perfective/common/result]` package provides a `Result` monad
-(a concrete case of an Either monad).
-It allows you to treat errors as part of a function result
-and chain processing of such results.
+The `link:{perfective-common}/src/result/index.adoc[@perfective/common/result]` package provides the `Result` monad
+(a concrete case of the Either monad).
+It allows you to treat errors as part of a function result and chain processing of such results,
+instead of throwing and catching errors.
 
-For example,
-consider you are writing a function that loads a backend entity based on the user input.
+`Result` is similar to `Promise`:
+a `Promise` can be resolved or rejected,
+while a `Result` is either a `Success` or a `Failure`.
+But unlike `Promise`, the `Result` computations are synchronous.
+`link:{perfective-common}/src/result/index.adoc[@perfective/common/result]` provides special functions for `Result`/`Promise` interoperability.
 
-.Example of the provided functions and types.
+For example, consider you are writing an HTTP endpoint to return an entity stored in a database.
+The purpose of endpoint is to map a given unsafe `Input` to an `HttpResponse`.
+
+.Given functions and types.
 [source,typescript]
 ----
 interface EntityRequest {

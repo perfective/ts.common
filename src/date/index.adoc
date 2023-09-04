@@ -39,7 +39,7 @@ function maybeTime(input: string): Maybe<Timestamp> { // <.>
 ** `date(date: Date): Date | null;`
 — creates a copy of a given `date`.
 If the given `date` is `Invalid Date`, returns `null`.
-** `date(timestamp: Timestamp): Date`
+** `date(timestamp: Timestamp): Date | null`
 — creates a `Date` for a given `Timestamp`.
 If the given `Timestamp` is invalid, returns `null`.
 ** `date(input: string): Date | null`

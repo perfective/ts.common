@@ -815,7 +815,9 @@ a|
 | `link:{mdn-js-globals}/Date/parse[Date.parse()]`
 | `link:{ecma-es6}/#sec-date.parse[ES6]`
 | *Discouraged*. `Date.parse()` returns `NaN` if the value cannot be parsed.
-Instead, use the `date()` and `timestamp()` functions with `maybe()`.
+Use the `timestamp()` function instead,
+as it returns `null` if the input string cannot be parsed,
+so it can be composed using the `maybe()` monad.
 
 | `link:{mdn-js-globals}/Date/setDate[setDate()]`
 | `link:{ecma-es6}/#sec-date.prototype.setdate[ES6]`
@@ -891,7 +893,7 @@ Instead, use the `date()` and `timestamp()` functions with `maybe()`.
 
 | `link:{mdn-js-globals}/Date/toJSON[toJSON()]`
 | `link:{ecma-es6}/#sec-date.prototype.tojson[ES6]`
-| *TBD*
+| No custom support. Use `JSON.encode()` to JSON conversions.
 
 | `link:{mdn-js-globals}/Date/toLocaleDateString[toLocaleDateString()]`
 | `link:{ecma-es6}/#sec-date.prototype.tolocaledatestring[ES6]`

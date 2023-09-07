@@ -71,3 +71,9 @@ Uses `Date.now()`, so it can be mocked in the tests
 * `timestamp(date: Date): Timestamp | null`
 — returns a `Timestamp` for a given date.
 If the given `Date` is `Invalid Date`, returns `null`.
+* `timestamp(input: string): Timestamp | null`
+— parses a given date/time `input` string as a `Timestamp`.
+If the given `input` is invalid, returns `null`.
++
+Use instead of the `Date.parse()` function,
+as it's easy to compose using `maybe()`.

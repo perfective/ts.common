@@ -6,6 +6,8 @@ import { Timestamp } from './timestamp';
  * If the `date` is invalid, returns `null`.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+ *
+ * @since v0.10.0
  */
 export function date(date: Date): Date | null;
 
@@ -15,6 +17,8 @@ export function date(date: Date): Date | null;
  * If the `timestamp` is invalid, returns `null`.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+ *
+ * @since v0.10.0
  */
 export function date(timestamp: Timestamp): Date | null;
 
@@ -24,6 +28,8 @@ export function date(timestamp: Timestamp): Date | null;
  * If the `input` cannot be parsed, returns `null`.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/Date
+ *
+ * @since v0.10.0
  */
 export function date(input: string): Date | null;
 
@@ -42,6 +48,8 @@ export function date(value: Date | Timestamp | string): Date | null {
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
  * @see https://jestjs.io/docs/mock-function-api#jestspiedsource
+ *
+ * @since v0.10.0
  */
 export function now(): Date {
     return new Date(Date.now());
@@ -51,6 +59,8 @@ export function now(): Date {
  * Creates a {@link Date} of the Unix epoch (i.e., January 1, 1970, 00:00:00 UTC).
  *
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Unix_time
+ *
+ * @since v0.10.0
  */
 export function epoch(): Date {
     return new Date(0);
@@ -60,6 +70,8 @@ export function epoch(): Date {
  * Returns `true` if a given {@link Date} is a valid (not an "Invalid Date").
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date
+ *
+ * @since v0.10.0
  */
 export function isValid(date: Date): boolean {
     return !Number.isNaN(date.valueOf());
@@ -69,6 +81,8 @@ export function isValid(date: Date): boolean {
  * Returns `true` if a given {@link Date} is an "Invalid Date".
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_epoch_timestamps_and_invalid_date
+ *
+ * @since v0.10.0
  */
 export function isInvalid(date: Date): boolean {
     return Number.isNaN(date.valueOf());

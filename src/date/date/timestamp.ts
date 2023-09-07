@@ -2,6 +2,8 @@ import { isString } from '../../string/string/string';
 
 /**
  * An integer value representing the number of milliseconds since January 1, 1970 00:00 UTC.
+ *
+ * @since v0.10.0
  */
 export type Timestamp = number;
 
@@ -11,6 +13,8 @@ export type Timestamp = number;
  * If the given `date` is "Invalid Date", returns `null`.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime
+ *
+ * @since v0.10.0
  */
 export function timestamp(date: Date): Timestamp | null;
 
@@ -26,6 +30,8 @@ export function timestamp(date: Date): Timestamp | null;
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#date_time_string_format
+ *
+ * @since v0.10.0
  */
 export function timestamp(input: string): Timestamp | null;
 

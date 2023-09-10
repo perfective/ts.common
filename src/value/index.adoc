@@ -8,41 +8,53 @@ It also provides functions to work with type and instance definitions.
 
 == Value
 
-* `type Defined<T> = T extends undefined ? never : T`:
+* `type Defined<T> = T extends undefined ? never : T`
+— constructs a type by excluding `undefined` from `T`.
 +
 ** `defined<T>(value: T | undefined): T`
-— Returns a given `value`, if it is defined.
+— returns a given `value`, if it is defined.
 Throws a `TypeError` otherwise.
 +
-** `isDefined<T>(value: T | undefined): value is Defined<T>`;
+** `isDefined<T>(value: T | undefined): value is Defined<T>`
+— a type guard that returns `true`, if a given value is not `undefined`.
 +
-* `type Undefined<T> = T extends undefined ? T : never`:
-** `isUndefined<T>(value: T | undefined): value is undefined`;
+* `type Undefined<T> = T extends undefined ? T : never`
+— constructs a type by excluding defined types from `T`.
+** `isUndefined<T>(value: T | undefined): value is undefined`
+— a type guard that returns `true` if a given `value` is `undefined`.
 +
-* `type NotNull<T> = T extends null ? never : T`:
+* `type NotNull<T> = T extends null ? never : T`
+— constructs a type by excluding `null` from `T`.
 +
 ** `notNull<T>(value: T | null): T`
-— Returns a given `value`, if it is not null.
+— returns a given `value`, if it is not null.
 Throws a `TypeError` otherwise.
 +
-** `isNotNull<T>(value: T | null): value is NotNull<T>`;
+** `isNotNull<T>(value: T | null): value is NotNull<T>`
+— a type guard that returns `true` if a given value is not `null`.
 +
-* `type Null<T> = T extends null ? T : never`:
-** `isNull<T>(value: T | null): value is null`;
+* `type Null<T> = T extends null ? T : never`
+— constructs a type by excluding non-`null` types from `T`.
+** `isNull<T>(value: T | null): value is null`
+— a type guard that returns `true` if a given value is `null`.
 +
 * `type Present<T> = T extends null | undefined ? never : T`
-— same as `NonNullable<T>`,
-added for consistency with the terminology of the package.
+— constructs a type by excluding `null` and `undefined` from `T`.
++
+Same as `NonNullable<T>`, added for consistency with the terminology of the package.
 It is defined as a conditional type (not `T & {}`) to ensure support of TS compiler before v4.9.
 +
 ** `present<T>(value: T | null | undefined): T`
-— Returns a given `value`, if it is defined and is not null.
+— returns a given `value`, if it is defined and is not null.
 Throws a `TypeError` otherwise.
 +
-** `isPresent<T>(value: T | null | undefined): value is Present<T>`;
+** `isPresent<T>(value: T | null | undefined): value is Present<T>`
+— a type guard that returns `true` if a given `value` is defined and is not `null`.
 +
-* `type Absent<T> = T extends null | undefined ? T : never`:
-** `isAbsent<T>(value: T | null | undefined): value is null | undefined`.
+* `type Absent<T> = T extends null | undefined ? T : never`
+— constructs a type by excluding non-`null` and defined types from `T`.
+** `isAbsent<T>(value: T | null | undefined): value is null | undefined`
+— a type guard that return `true` if a given `value` is `null` or `undefined`.
 
 [NOTE]
 ====
@@ -59,9 +71,11 @@ while TS compiler keeps checks `typeof value === 'undefined'` and `value === und
 — a function type to check if the value is of a certain type.
 +
 * `Instance<T, U extends any[] = any[]> = abstract new(...args: U) => T`
-— definition for a type reference:
+— definition for class type reference:
 ** `isInstanceOf<T, U extends any[] = any[], V = unknown>(type: Instance<T, U>): (value: T | V) => value is T`
+— creates a type guard that returns true if a passed argument is an instance of a given `type`.
 ** `isNotInstanceOf<T, U extends any[] = any[], V = unknown>(type: Instance<T, U>): (value: T | V) => value is V`
+— creates a type guard that returns true if a passed argument is not an instance of a given `type`.
 
 [WARNING]
 ====
@@ -129,6 +143,7 @@ Throws a `TypeError` when the value in runtime is not an `EcmaType`.
 (unlike the `as` operator which allows to type cast any string as `TsType`).
 Throws a `TypeError` when the value in runtime is not a `TsType`.
 ** `typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType`.
+— returns the name of a TypeScript type of a given `value`.
 +
 * Type guards:
 ** `isEcmaType(input: string): input is EcmaType`
@@ -137,8 +152,10 @@ Throws a `TypeError` when the value in runtime is not a `TsType`.
 — returns true and narrows the variable type, if the given input string is a `TsType`.
 +
 * Predicates:
-** `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`;
-** `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`.
+** `isTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`
+— creates a predicate that returns `true`, if a passed argument is of a given TypeScript type.
+** `isNotTypeOf<T>(type: TypeOf): (value: T | null | undefined) => boolean`
+— creates a predicate that returns `true`, if a passed argument is not of a given TypeScript type.
 
 
 == Handling `void`

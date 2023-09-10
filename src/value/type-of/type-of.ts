@@ -82,7 +82,11 @@ export function isTsType(input: string): input is TsType {
 }
 
 /**
+ * A conditional type to determine a TypeScript type of a given value.
+ *
  * @see https://www.typescriptlang.org/docs/handbook/2/conditional-types.html
+ *
+ * @since v0.3.0
  */
 export type TypeOf<T> =
 T extends undefined
@@ -110,6 +114,11 @@ T extends undefined
                                         ? 'object'
                                         : 'unknown';
 
+/**
+ * Returns the name of a TypeScript type of a given `value`.
+ *
+ * @since v0.3.0
+ */
 export function typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType {
     if (isNull(value)) {
         return 'null' as TypeOf<T> & TsType;
@@ -120,10 +129,20 @@ export function typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType {
     return typeof value as TypeOf<T> & TsType;
 }
 
+/**
+ * Creates a predicate that returns `true`, if a passed argument is of a given TypeScript type.
+ *
+ * @since v0.3.0
+ */
 export function isTypeOf<T>(type: TsType): (value: T | null | undefined) => boolean {
     return (value: T | null | undefined): boolean => typeOf(value) as TsType === type;
 }
 
+/**
+ * Creates a predicate that returns `true`, if a passed argument is not of a given TypeScript type.
+ *
+ * @since v0.3.0
+ */
 export function isNotTypeOf<T>(type: TsType): (value: T | null | undefined) => boolean {
     return (value: T | null | undefined): boolean => typeOf(value) as TsType !== type;
 }

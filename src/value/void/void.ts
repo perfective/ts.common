@@ -13,6 +13,8 @@ export type Voidable<T> = T | void;
  * Casts a given {@linkcode Voidable} value into an optional nullable type.
  *
  * Use this function only if you have a 3rd-party package that returns `void`.
+ *
+ * @since v0.2.3
  */
 export function voidable<T>(value: Voidable<T>): T | null | undefined {
     // eslint-disable-next-line no-void -- checking for `undefined` to remove `void` from the value type.

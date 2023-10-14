@@ -40,7 +40,7 @@ export function copy<T>(array: T[]): T[] {
 export function concatenated<T>(arrays: T[][]): T[];
 
 /**
- * Concatenates given arrays into one array in order they are given.
+ * Concatenates given arrays in order they are given.
  *
  * @since v0.1.0
  */
@@ -66,27 +66,27 @@ export function intersection<T>(array1: T[], array2: T[]): T[] {
 }
 
 /**
- * Creates a new array of the given value replicated the given number of times.
+ * Creates an array with a given `value` replicated a given `count` of times.
  *
  * @param value - A value to repeat.
- * @param length - A non-negative integer length of a new array.
+ * @param count - A non-negative integer length of a new array.
  *
  * @throws RangeError - An error when the given length is a negative or a real number.
  *
  * @since v0.2.1
  */
-export function replicated<T>(value: T, length: number): T[];
+export function replicated<T>(value: T, count: number): T[];
 
 /**
- * Creates a new function that replicates a given value the given number of times.
+ * Creates a callback that replicates the input `value` a given `count` of times.
  *
- * @param length - A non-negative integer length of a new array.
+ * @param count - A non-negative integer length of a new array.
  *
  * @throws RangeError - An error when the given length is a negative or a real number.
  *
  * @since v0.2.1
  */
-export function replicated<T>(length: number): Unary<T, T[]>;
+export function replicated<T>(count: number): Unary<T, T[]>;
 
 export function replicated<T>(first: T | number, second?: number): T[] | Unary<T, T[]> {
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill#using_fill_to_populate_an_empty_array
@@ -99,7 +99,7 @@ export function replicated<T>(first: T | number, second?: number): T[] | Unary<T
 }
 
 /**
- * Creates a shallow copy of a given array with elements in reversed order.
+ * Creates a shallow copy of a given `array` with elements in reversed order.
  *
  * @since v0.2.0
  */
@@ -108,14 +108,14 @@ export function reversed<T>(array: T[]): T[] {
 }
 
 /**
- * Creates a function to return a shallow copy of a given array with a given `order` callback.
+ * Creates a callback to return a shallow copy of the input array sorted with a given `order` callback.
  *
  * @since v0.2.0
  */
 export function sorted<T>(order?: Compare<T>): Unary<T[], T[]>;
 
 /**
- * Creates a shallow copy of a given `array` sorted with a given `order` callback.
+ * Returns a shallow copy of a given `array` sorted with a given `order` callback.
  *
  * @since v0.2.0
  */
@@ -129,9 +129,9 @@ export function sorted<T>(first?: T[] | Compare<T>, second?: Compare<T>): Unary<
 }
 
 /**
- * Remove all duplicates from a given `array`.
+ * Returns an array with only the first occurrence of each value in a given `array`.
  *
- * @returns An array with only the first occurrence of each value in the `array`.
+ * TODO: Rewrite using `Set`.
  *
  * @since v0.2.0
  */
@@ -140,9 +140,9 @@ export function unique<T>(array: T[]): T[] {
 }
 
 /**
- * If a given `value` is an array, returns the original `value`.
+ * Returns an array that consists only of a given `value`.
  *
- * Otherwise, returns an array with only that `value`.
+ * If a given `value` is an array, returns the original `value`.
  *
  * @since v0.2.1
  */
@@ -153,10 +153,24 @@ export function wrapped<T>(value: T | T[]): T[] {
     return [value];
 }
 
+/**
+ * Returns `true` if a given `value` is an array.
+ *
+ * Otherwise, returns `false`.
+ *
+ * @since v0.2.0
+ */
 export function isArray<T, V = unknown>(value: T[] | V): value is T[] {
     return Array.isArray(value);
 }
 
+/**
+ * Returns `true` if a given `value` is not an array.
+ *
+ * Otherwise, returns `false`.
+ *
+ * @since v0.2.0
+ */
 export function isNotArray<T, V = unknown>(value: T[] | V): value is V {
     return !Array.isArray(value);
 }

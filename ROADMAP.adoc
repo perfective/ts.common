@@ -107,6 +107,7 @@ a|
 | `link:{mdn-js-globals}/Array/concat[concat()]`
 | `link:{ecma-es6}/#sec-array.prototype.concat[ES6]`
 | Use `concat()` to create a callback.
+Use `conactenated()` to concatenate arrays.
 
 | `link:{mdn-js-globals}/Array/copyWithin[copyWithin()]`
 | `link:{ecma-es6}/#sec-array.prototype.copywithin[ES6]`
@@ -229,7 +230,7 @@ a|
 | `link:{ecma-es6}/#sec-array.prototype.shift[ES6]`
 a|
 * Use `shift()` as a mutating callback.
-* Use `head()` to return the first element.
+* Use `head()` to get the first element.
 
 | `link:{mdn-js-globals}/Array/slice[slice()]`
 | `link:{ecma-es6}/#sec-array.prototype.slice[ES6]`

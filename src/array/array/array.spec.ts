@@ -17,7 +17,7 @@ import {
 
 const alphabet: string[] = ['a', 'b', 'c', 'd', 'e', 'f'];
 
-describe('array', () => {
+describe(array, () => {
     it('creates an array of given elements', () => {
         expect(array('a', 'b', 'c'))
             .toStrictEqual(['a', 'b', 'c']);
@@ -52,7 +52,7 @@ describe(elements, () => {
     });
 });
 
-describe('copy', () => {
+describe(copy, () => {
     it('creates a shallow copy of an array', () => {
         expect(copy(alphabet))
             .toStrictEqual(['a', 'b', 'c', 'd', 'e', 'f']);
@@ -87,7 +87,7 @@ describe(concatenated, () => {
     });
 });
 
-describe('intersection', () => {
+describe(intersection, () => {
     it('returns an array of values that included in both arrays', () => {
         expect(intersection(
             [0, 1, 2, 3],
@@ -95,63 +95,73 @@ describe('intersection', () => {
         )).toStrictEqual([3, 2, 1]);
     });
 
-    it('returns an empty array when one of the inputs is empty', () => {
-        expect(intersection(
-            [1, 2, 3],
-            [],
-        )).toStrictEqual([]);
+    describe('when one of the inputs is empty', () => {
+        it('returns an empty array', () => {
+            expect(intersection(
+                [1, 2, 3],
+                [],
+            )).toStrictEqual([]);
+        });
     });
 });
 
-describe('replicated', () => {
-    describe('replicated(value, length)', () => {
-        it('creates an array of the given "length" with each elements equal the given "value"', () => {
+describe(replicated, () => {
+    describe('replicated(value, count)', () => {
+        it('creates an array with a given `count` of elements equal to a given `value`', () => {
             expect(replicated(true, 3))
                 .toStrictEqual([true, true, true]);
             expect(replicated(false, 0))
                 .toStrictEqual([]);
         });
 
-        it('throws a RangeError for a negative "length"', () => {
-            expect(() => replicated(true, -3))
-                .toThrow(RangeError);
-            expect(() => replicated(true, -1))
-                .toThrow('Invalid array length');
+        describe('when given a negative `count`', () => {
+            it('throws a RangeError', () => {
+                expect(() => replicated(true, -3))
+                    .toThrow(RangeError);
+                expect(() => replicated(true, -1))
+                    .toThrow('Invalid array length');
+            });
         });
 
-        it('throws a RangeError for a real "length"', () => {
-            expect(() => replicated(true, 3.14))
-                .toThrow(RangeError);
-            expect(() => replicated(true, 2.71))
-                .toThrow('Invalid array length');
+        describe('when given a float `count`', () => {
+            it('throws a RangeError', () => {
+                expect(() => replicated(true, 3.14))
+                    .toThrow(RangeError);
+                expect(() => replicated(true, 2.71))
+                    .toThrow('Invalid array length');
+            });
         });
     });
 
-    describe('replicated(length)', () => {
-        it('creates an array of the given "length" with each elements equal the given "value"', () => {
+    describe('replicated(count)', () => {
+        it('creates an array with a given `count` of elements equal to a given `value`', () => {
             expect(replicated(3)(false))
                 .toStrictEqual([false, false, false]);
             expect(replicated(0)(null))
                 .toStrictEqual([]);
         });
 
-        it('throws a RangeError for a negative "length"', () => {
-            expect(() => replicated(-3)(3.14))
-                .toThrow(RangeError);
-            expect(() => replicated(-1)(3.14))
-                .toThrow('Invalid array length');
+        describe('when given a negative `count`', () => {
+            it('throws a RangeError', () => {
+                expect(() => replicated(-3)(3.14))
+                    .toThrow(RangeError);
+                expect(() => replicated(-1)(3.14))
+                    .toThrow('Invalid array length');
+            });
         });
 
-        it('throws a RangeError for a real "length"', () => {
-            expect(() => replicated(3.14)(0))
-                .toThrow(RangeError);
-            expect(() => replicated(2.71)(0))
-                .toThrow('Invalid array length');
+        describe('when given a float `count`', () => {
+            it('throws a RangeError', () => {
+                expect(() => replicated(3.14)(0))
+                    .toThrow(RangeError);
+                expect(() => replicated(2.71)(0))
+                    .toThrow('Invalid array length');
+            });
         });
     });
 });
 
-describe('reversed', () => {
+describe(reversed, () => {
     it('creates a reversed shallow copy of an array', () => {
         expect(reversed(alphabet))
             .toStrictEqual(['f', 'e', 'd', 'c', 'b', 'a']);
@@ -160,7 +170,7 @@ describe('reversed', () => {
     });
 });
 
-describe('sorted', () => {
+describe(sorted, () => {
     describe('sorted(array)', () => {
         it('creates a sorted shallow copy of an array', () => {
             expect(sorted(alphabet))
@@ -196,7 +206,7 @@ describe('sorted', () => {
     });
 });
 
-describe('unique', () => {
+describe(unique, () => {
     it('creates an array with all unique elements keeping the order of the first elements', () => {
         expect(unique([]))
             .toStrictEqual([]);
@@ -206,46 +216,58 @@ describe('unique', () => {
             .toStrictEqual(['a', 'b', 'c', 'd']);
     });
 
-    it('filters values with the strict check', () => {
+    it('filters values using a strict equality check', () => {
         expect(unique([{}, {}]))
             .toStrictEqual([{}, {}]);
     });
 });
 
-describe('wrapped', () => {
-    it('returns the original array when the value is an array', () => {
-        expect(wrapped(['a', 'b', 'c']))
-            .toStrictEqual(['a', 'b', 'c']);
+describe(wrapped, () => {
+    describe('when given an array', () => {
+        it('returns the given array', () => {
+            expect(wrapped(['a', 'b', 'c']))
+                .toStrictEqual(['a', 'b', 'c']);
+        });
     });
 
-    it('returns an array with a single element when the value is not an array', () => {
-        expect(wrapped({}))
-            .toStrictEqual([{}]);
-        expect(wrapped(0))
-            .toStrictEqual([0]);
-    });
-});
-
-describe('isArray', () => {
-    it('returns true when value is an array', () => {
-        expect(isArray(['0', 0]))
-            .toBe(true);
-    });
-
-    it('returns false when value is not an array', () => {
-        expect(isArray(0))
-            .toBe(false);
+    describe('when given a non-array value', () => {
+        it('returns an array with the given value as the only element', () => {
+            expect(wrapped({}))
+                .toStrictEqual([{}]);
+            expect(wrapped(0))
+                .toStrictEqual([0]);
+        });
     });
 });
 
-describe('isNotArray', () => {
-    it('returns true when value is not an array', () => {
-        expect(isNotArray('0'))
-            .toBe(true);
+describe(isArray, () => {
+    describe('when given value is an array', () => {
+        it('returns true', () => {
+            expect(isArray(['0', 0]))
+                .toBe(true);
+        });
     });
 
-    it('returns false when value is an array', () => {
-        expect(isNotArray(['0', 0]))
-            .toBe(false);
+    describe('when given value is not an array', () => {
+        it('returns false', () => {
+            expect(isArray(0))
+                .toBe(false);
+        });
+    });
+});
+
+describe(isNotArray, () => {
+    describe('when given value is not an array', () => {
+        it('returns true', () => {
+            expect(isNotArray('0'))
+                .toBe(true);
+        });
+    });
+
+    describe('when given value is an array', () => {
+        it('returns false', () => {
+            expect(isNotArray(['0', 0]))
+                .toBe(false);
+        });
     });
 });

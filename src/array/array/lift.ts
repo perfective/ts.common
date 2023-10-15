@@ -6,12 +6,12 @@ import { isDefined } from '../../value/value';
 export type NumberOrErrorCode = number | -1;
 
 /**
- * Creates a callback that merges given `items` to the input `array`.
+ * Creates a callback that merges given `arrays` to the input `array`.
  *
  * @since v0.1.0
  */
-export function concat<T>(...items: ConcatArray<T>[]): Unary<T[], T[]> {
-    return (array: T[]): T[] => array.concat(...items);
+export function concat<T>(...arrays: ConcatArray<T>[]): Unary<T[], T[]> {
+    return (array: T[]): T[] => array.concat(...arrays);
 }
 
 /**
@@ -209,6 +209,7 @@ export function reduce<T, V>(reducer: Reducer<T, V>, initial: V): Unary<T[], V> 
 
 /**
  * Creates a callback that reduces the input array with a given `reducer` callback without an initial value.
+ * If the input array is empty, the callback throws a {@link TypeError}.
  *
  * @since v0.2.0
  */
@@ -229,6 +230,7 @@ export function reduceRight<T, V>(reducer: Reducer<T, V>, initial: V): Unary<T[]
 /**
  * Creates a callback that reduces the input array with a given `reducer` callback without an initial value
  * starting from te end of the array.
+ * If the input array is empty, the callback throws a {@link TypeError}.
  *
  * @since v0.2.0
  */

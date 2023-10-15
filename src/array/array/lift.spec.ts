@@ -43,16 +43,18 @@ function copyOf(input: number[]): number[] {
     return input.map(same);
 }
 
-describe('concat', () => {
-    it('returns a new array created by merged the given array to the value', () => {
-        expect(concat([2.71, 3.14])([1.41, 1.73, 2.23]))
-            .toStrictEqual([1.41, 1.73, 2.23, 2.71, 3.14]);
-        expect(concat([2.71, 3.14], [1.20, 1.61])([1.41, 1.73, 2.23]))
-            .toStrictEqual([1.41, 1.73, 2.23, 2.71, 3.14, 1.20, 1.61]);
+describe(concat, () => {
+    describe('concat(...arrays)', () => {
+        it('returns a new array created by merging given arrays into the input array', () => {
+            expect(concat([2.71, 3.14])([1.41, 1.73, 2.23]))
+                .toStrictEqual([1.41, 1.73, 2.23, 2.71, 3.14]);
+            expect(concat([2.71, 3.14], [1.20, 1.61])([1.41, 1.73, 2.23]))
+                .toStrictEqual([1.41, 1.73, 2.23, 2.71, 3.14, 1.20, 1.61]);
+        });
     });
 });
 
-describe('copyWithin', () => {
+describe(copyWithin, () => {
     let copy: number[];
 
     beforeEach(() => {
@@ -102,28 +104,32 @@ describe('copyWithin', () => {
     });
 });
 
-describe('entries', () => {
+describe(entries, () => {
     it('returns a new Array Iterator that contains key/value pairs for each index in the input array', () => {
         expect(entries(input).next().value)
             .toStrictEqual([0, 1.20]);
     });
 });
 
-describe('every', () => {
+describe(every, () => {
     describe('every(condition)', () => {
-        it('returns true when every element satisfies the "condition"', () => {
-            expect(every<number>(isGreaterThan(0))(input))
-                .toBe(true);
+        describe('when every element satisfies a given `condition`', () => {
+            it('returns true', () => {
+                expect(every<number>(isGreaterThan(0))(input))
+                    .toBe(true);
+            });
         });
 
-        it('returns false when at least one element does not satisfy the "condition"', () => {
-            expect(every<number>(isLessThan(3))(input))
-                .toBe(false);
+        describe('when at least one element does not satisfy a given `condition`', () => {
+            it('returns false', () => {
+                expect(every<number>(isLessThan(3))(input))
+                    .toBe(false);
+            });
         });
     });
 });
 
-describe('fill', () => {
+describe(fill, () => {
     describe('fill(value)', () => {
         it('replaces all the values in the array with the given value', () => {
             const copy: number[] = input.map(same);
@@ -138,7 +144,7 @@ describe('fill', () => {
     });
 
     describe('fill(value, start)', () => {
-        it('replaces the value in the array with the given array from the "start" index', () => {
+        it('replaces the value in the array with the given array from the `start` index', () => {
             const copy: number[] = input.map(same);
 
             expect(fill<number>(0, 3)([]))
@@ -149,7 +155,7 @@ describe('fill', () => {
     });
 
     describe('fill(value, start, end)', () => {
-        it('replaces the value in the array with the given array from the "start" to the "end" index', () => {
+        it('replaces the value in the array with the given array from the `start` to the `end` index', () => {
             const copy: number[] = input.map(same);
 
             expect(fill<number>(0, 3, 5)([]))
@@ -171,37 +177,45 @@ describe('filter', () => {
     });
 });
 
-describe('find', () => {
+describe(find, () => {
     describe('find(condition)', () => {
-        it('returns the value of the first element in the array that matches the "condition"', () => {
-            expect(find<number>(isGreaterThan(2))(input))
-                .toBe(2.23);
+        describe('when the input array contains an element that matches a given `condition`', () => {
+            it('returns the value of the first element that matches the `condition`', () => {
+                expect(find<number>(isGreaterThan(2))(input))
+                    .toBe(2.23);
+            });
         });
 
-        it('returns undefined if there is no element in the array that matches the "condition"', () => {
-            expect(find<number>(isGreaterThan(4))(input))
-                .toBeUndefined();
+        describe('when the input array does not contain an element that matches a given `condition`', () => {
+            it('returns undefined', () => {
+                expect(find<number>(isGreaterThan(4))(input))
+                    .toBeUndefined();
+            });
         });
     });
 });
 
-describe('findIndex', () => {
+describe(findIndex, () => {
     describe('findIndex(condition)', () => {
-        it('returns the index of the first element in the array that matches the "condition"', () => {
-            expect(findIndex<number>(isGreaterThan(2))(input))
-                .toBe(4);
+        describe('when the input array contains an element that matches a given `condition`', () => {
+            it('returns the index of the first element that matches the "condition"', () => {
+                expect(findIndex<number>(isGreaterThan(2))(input))
+                    .toBe(4);
+            });
         });
 
-        it('returns -1 if there is no element in the array that matches the "condition"', () => {
-            expect(findIndex<number>(isGreaterThan(4))(input))
-                .toBe(-1);
+        describe('when the input array does not contain an element that matches a given `condition`', () => {
+            it('returns -1', () => {
+                expect(findIndex<number>(isGreaterThan(4))(input))
+                    .toBe(-1);
+            });
         });
     });
 });
 
-describe('forEach', () => {
+describe(forEach, () => {
     describe('forEach(procedure)', () => {
-        it('calls the "procedure" for each element of the array', () => {
+        it('calls a given `procedure` for each element of the array', () => {
             const copy: number[] = [];
 
             // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
@@ -213,69 +227,89 @@ describe('forEach', () => {
     });
 });
 
-describe('includes', () => {
-    describe('includes(search)', () => {
-        it('returns true if value is included in the given array', () => {
-            expect(includes(3.14)(input)).toBe(true);
+describe(includes, () => {
+    describe('includes(value)', () => {
+        describe('when a given `value` is present in the input array', () => {
+            it('returns true', () => {
+                expect(includes(3.14)(input)).toBe(true);
+            });
         });
 
-        it('returns false if value is not included in the given array', () => {
-            expect(includes(0)(input)).toBe(false);
-        });
-    });
-
-    describe('includes(search, from)', () => {
-        it('returns true if value is included in the given array starting the "from" index', () => {
-            expect(includes(1.73, 3)(input)).toBe(true);
-        });
-
-        it('returns false if value is not included in the given array starting the "from" index', () => {
-            expect(includes(1.61, 3)(input)).toBe(false);
-        });
-    });
-});
-
-describe('indexOf', () => {
-    describe('indexOf(search)', () => {
-        it('returns the index of the "search" element in the array', () => {
-            expect(indexOf<number>(2.71)(input))
-                .toBe(5);
-        });
-
-        it('returns -1 if the "search" element is not in the array', () => {
-            expect(indexOf<number>(0)(input))
-                .toBe(-1);
+        describe('when a given `value` is absent from the input array', () => {
+            it('returns false', () => {
+                expect(includes(0)(input)).toBe(false);
+            });
         });
     });
 
-    describe('indexOf(search, from)', () => {
-        it('returns the index of the "search" element in the array starting the "from" index', () => {
-            expect(indexOf<number>(2.71, 5)(input))
-                .toBe(5);
+    describe('includes(value, from)', () => {
+        describe('when a given `value` is present after or at the `from` index in the input array', () => {
+            it('returns true', () => {
+                expect(includes(1.73, 3)(input)).toBe(true);
+            });
         });
 
-        it('returns -1 if the "search" element is not in the array starting the "from" index', () => {
-            expect(indexOf<number>(1.41, 5)(input))
-                .toBe(-1);
+        describe('when a given `value` is absent after or at the `from` index in the input array', () => {
+            it('returns false', () => {
+                expect(includes(1.61, 3)(input)).toBe(false);
+            });
         });
     });
 });
 
-describe('join', () => {
+describe(indexOf, () => {
+    describe('indexOf(value)', () => {
+        describe('when a given `value` is present in the input array', () => {
+            it('returns the index of the value', () => {
+                expect(indexOf<number>(2.71)(input))
+                    .toBe(5);
+            });
+        });
+
+        describe('when a given `value` is absent from the input array', () => {
+            it('returns -1', () => {
+                expect(indexOf<number>(0)(input))
+                    .toBe(-1);
+            });
+        });
+    });
+
+    describe('indexOf(value, from)', () => {
+        describe('when a given `value` is present in the input array after or at the `from` index', () => {
+            it('returns the index of the `value`', () => {
+                expect(indexOf<number>(2.71, 5)(input))
+                    .toBe(5);
+            });
+        });
+
+        describe('when a given `value` is not present in the input array after or at the `from` index', () => {
+            it('returns -1', () => {
+                expect(indexOf<number>(1.41, 5)(input))
+                    .toBe(-1);
+            });
+        });
+    });
+});
+
+describe(join, () => {
     describe('join()', () => {
-        it('returns an empty string for an empty array', () => {
-            expect(join()([]))
-                .toBe('');
-        });
-
-        it('replaces undefined and null with an empty string', () => {
-            expect(join()([undefined, null, '', 0, false, true]))
-                .toBe(',,,0,false,true');
-        });
-
         it('returns a string with the elements separated by comma', () => {
             expect(join()(input))
                 .toBe('1.2,1.41,1.61,1.73,2.23,2.71,3.14');
+        });
+
+        describe('when given an empty array', () => {
+            it('returns an empty string', () => {
+                expect(join()([]))
+                    .toBe('');
+            });
+        });
+
+        describe('when given an array with undefined and null elements', () => {
+            it('replaces undefined and null with an empty string', () => {
+                expect(join()([undefined, null, '', 0, false, true]))
+                    .toBe(',,,0,false,true');
+            });
         });
     });
 
@@ -287,178 +321,244 @@ describe('join', () => {
     });
 });
 
-describe('keys', () => {
+describe(keys, () => {
     it('returns a new Array Iterator that contains keys for each index in the array', () => {
-        expect(keys(input).next().value)
+        expect(keys([0]).next().value)
             .toBe(0);
     });
 });
 
-describe('lastIndexOf', () => {
-    describe('lastIndexOf(search)', () => {
-        it('returns the index of the "search" element in the array', () => {
-            expect(lastIndexOf<number>(2.71)(input))
-                .toBe(5);
+describe(lastIndexOf, () => {
+    describe('lastIndexOf(value)', () => {
+        describe('when a given `value` is present in the input array', () => {
+            it('returns the index of a given `value`', () => {
+                expect(lastIndexOf<number>(2.71)(input))
+                    .toBe(5);
+            });
         });
 
-        it('returns -1 if the "search" element is not in the array', () => {
-            expect(lastIndexOf<number>(0)(input))
-                .toBe(-1);
+        describe('when a given `value` is absent from the input array', () => {
+            it('returns -1', () => {
+                expect(lastIndexOf<number>(0)(input))
+                    .toBe(-1);
+            });
         });
     });
 
-    describe('lastIndexOf(search, from)', () => {
-        it('returns the index of the "search" element in the array starting the "from" index', () => {
-            expect(lastIndexOf<number>(2.71, 5)(input.concat(input)))
-                .toBe(5);
+    describe('lastIndexOf(value, from)', () => {
+        describe('when a given `value` is present at or after a given `from` index in the input array', () => {
+            it('returns the index of the value', () => {
+                expect(lastIndexOf<number>(2.71, 5)(input.concat(input)))
+                    .toBe(5);
+            });
         });
 
-        it('returns -1 if the "search" element is not in the array starting the "from" index', () => {
-            expect(lastIndexOf<number>(2.71, 4)(input))
-                .toBe(-1);
+        describe('when a given `value` is not present at or after a given `from` index in the input array', () => {
+            it('returns -1', () => {
+                expect(lastIndexOf<number>(2.71, 4)(input))
+                    .toBe(-1);
+            });
         });
     });
 });
 
-describe('map', () => {
-    describe('map(lift)', () => {
-        it('returns an array of elements mapped with the "lift" function from the original array', () => {
+describe(map, () => {
+    describe('map(callback)', () => {
+        it('returns an array with results of a given `callback` applies to elements of the input array', () => {
             expect(map<number, string>(decimal)(input))
                 .toStrictEqual(['1.2', '1.41', '1.61', '1.73', '2.23', '2.71', '3.14']);
         });
     });
 });
 
-describe('pop', () => {
-    it('returns the last element removed from an array', () => {
-        const copy: number[] = input.map(same);
+describe(pop, () => {
+    describe('when the input array is not empty', () => {
+        it('returns the last element', () => {
+            const copy: number[] = input.map(same);
 
-        expect(copy)
-            .toHaveLength(7);
-        expect(pop(copy))
-            .toBe(3.14);
-        expect(copy)
-            .toHaveLength(6);
+            expect(pop(copy)).toBe(3.14);
+        });
+
+        it('removes the last element from the input array', () => {
+            const copy: number[] = input.map(same);
+
+            expect(copy).toHaveLength(7);
+
+            pop(copy);
+
+            expect(copy).toHaveLength(6);
+        });
     });
 
-    it('returns undefined when array is empty', () => {
-        expect(pop<string>([]))
-            .toBeUndefined();
+    describe('when the input array is empty', () => {
+        it('returns undefined', () => {
+            expect(pop<string>([]))
+                .toBeUndefined();
+        });
     });
 });
 
 describe('push', () => {
     describe('push(...items)', () => {
-        it('returns the new length of the array after pushing items into it', () => {
+        it('adds given items to the end of the input array', () => {
             const copy: number[] = input.map(same);
 
+            push(5, 7, 11)(copy);
+
+            expect(copy)
+                .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14, 5, 7, 11]);
+        });
+
+        it('returns the new length of the array', () => {
+            const copy: number[] = input.map(same);
+
+            expect(copy).toHaveLength(7);
             expect(push(5, 7, 11)(copy))
                 .toBe(10);
-            expect(copy)
-                .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14, 5, 7, 11]);
         });
     });
 });
 
-describe('pushInto', () => {
+describe(pushInto, () => {
     describe('pushInto(array)', () => {
-        it('returns a new length of a given array after pushing items into it', () => {
+        it('adds the input items to the end of a given array', () => {
             const copy: number[] = input.map(same);
 
-            expect(pushInto(copy)(5, 7, 11))
-                .toBe(10);
+            pushInto(copy)(5, 7, 11);
+
             expect(copy)
                 .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14, 5, 7, 11]);
+        });
+
+        it('returns a new length of a given array', () => {
+            const copy: number[] = input.map(same);
+
+            expect(copy).toHaveLength(7);
+            expect(pushInto(copy)(5, 7, 11)).toBe(10);
         });
     });
 });
 
-describe('reduce', () => {
+describe(reduce, () => {
     describe('reduce(reducer, initial)', () => {
-        it('returns the reduction of an array with an initial value', () => {
+        it('folds the input array using a given `reducer` and an `initial` value', () => {
             expect(reduce<number, string>(
                 (result, element, index) => `${result}, ${decimal(index + 1)}:${decimal(element)}`,
                 '0',
             )(input)).toBe('0, 1:1.2, 2:1.41, 3:1.61, 4:1.73, 5:2.23, 6:2.71, 7:3.14');
         });
+
+        describe('when the input array is empty', () => {
+            it('returns the initial value', () => {
+                expect(reduce<number, string>(
+                    (result, element, index) => `${result}, ${decimal(index + 1)}:${decimal(element)}`,
+                    '0',
+                )([])).toBe('0');
+            });
+        });
     });
 });
 
-describe('reduceTo', () => {
+describe(reduceTo, () => {
     describe('reduceTo(reducer)', () => {
-        it('returns the reduction of an array without an initial value', () => {
+        it('folds the input using a given `reducer`', () => {
             expect(reduceTo<number>(sum)([0, 1, 3, 5, 7, 11]))
                 .toBe(27);
         });
 
-        it('throws an error when array is empty', () => {
-            expect(() => reduceTo<number>(sum)([]))
-                .toThrow(TypeError);
-            expect(() => reduceTo<number>(sum)([]))
-                .toThrow('Reduce of empty array with no initial value');
+        describe('when the input array is empty', () => {
+            it('throws a TypeError', () => {
+                expect(() => reduceTo<number>(sum)([]))
+                    .toThrow(TypeError);
+                expect(() => reduceTo<number>(sum)([]))
+                    .toThrow('Reduce of empty array with no initial value');
+            });
         });
     });
 });
 
-describe('reduceRight', () => {
+describe(reduceRight, () => {
     describe('reduceRight(reducer, initial)', () => {
-        it('returns the reduction from the end of an array with an initial value', () => {
+        it('folds the input array from the end using a given `reducer` and an `initial` value', () => {
             expect(reduceRight<number, string>(
                 (result, element, index) => `${result}, ${decimal(index + 1)}:${decimal(element)}`,
                 '0',
             )(input)).toBe('0, 7:3.14, 6:2.71, 5:2.23, 4:1.73, 3:1.61, 2:1.41, 1:1.2');
         });
+
+        describe('when the input array is empty', () => {
+            it('returns the initial value', () => {
+                expect(reduceRight<number, string>(
+                    (result, element, index) => `${result}, ${decimal(index + 1)}:${decimal(element)}`,
+                    '0',
+                )([])).toBe('0');
+            });
+        });
     });
 });
 
-describe('reduceRightTo', () => {
+describe(reduceRightTo, () => {
     describe('reduceRightTo(reducer)', () => {
-        it('returns the reduction from the end of an array without an initial value', () => {
+        it('folds the input array from the end using a given `reducer`', () => {
             expect(reduceRightTo<number>(difference)([0, 1, 3, 5, 7, 11]))
                 .toBe(-5);
         });
 
-        it('throws an error when array is empty', () => {
-            expect(() => reduceRightTo<number>(sum)([]))
-                .toThrow(TypeError);
-            expect(() => reduceRightTo<number>(sum)([]))
-                .toThrow('Reduce of empty array with no initial value');
+        describe('when the input array is empty', () => {
+            it('throws a TypeError', () => {
+                expect(() => reduceRightTo<number>(sum)([]))
+                    .toThrow(TypeError);
+                expect(() => reduceRightTo<number>(sum)([]))
+                    .toThrow('Reduce of empty array with no initial value');
+            });
         });
     });
 });
 
-describe('reverse', () => {
-    it('returns a reversed array', () => {
-        const copy: number[] = input.map(same);
+describe(reverse, () => {
+    it('returns an array with elements of the input array in reverse order', () => {
+        const copy: number[] = [1, 2, 3].map(same);
 
-        expect(reverse(copy))
-            .toStrictEqual([3.14, 2.71, 2.23, 1.73, 1.61, 1.41, 1.20]);
-        expect(reverse(copy))
-            .toBe(copy);
+        expect(reverse(copy)).toStrictEqual([3, 2, 1]);
+    });
+
+    it('reverses the input array in-place', () => {
+        const copy: number[] = [1, 2, 3].map(same);
+
+        expect(reverse(copy)).toBe(copy);
     });
 });
 
-describe('shift', () => {
-    it('returns the first element remove from an array', () => {
-        const copy: number[] = input.map(same);
+describe(shift, () => {
+    describe('shift(array)', () => {
+        describe('when given a non-empty array', () => {
+            it('removes the first element from the input array', () => {
+                const copy: number[] = [1, 2, 3].map(same);
 
-        expect(copy)
-            .toHaveLength(7);
-        expect(shift(copy))
-            .toBe(1.20);
-        expect(copy)
-            .toHaveLength(6);
-    });
+                shift(copy);
 
-    it('returns undefined when array is empty', () => {
-        expect(shift<string>([]))
-            .toBeUndefined();
+                expect(copy).toStrictEqual([2, 3]);
+            });
+
+            it('returns the first element of the input array', () => {
+                const copy: number[] = [1, 2, 3].map(same);
+
+                expect(shift(copy)).toBe(1);
+            });
+        });
+
+        describe('when given an empty array', () => {
+            it('returns undefined when array is empty', () => {
+                expect(shift<string>([]))
+                    .toBeUndefined();
+            });
+        });
     });
 });
 
-describe('slice', () => {
+describe(slice, () => {
     describe('slice()', () => {
-        it('shallow copies elements of the array', () => {
+        it('returns a shallow copy of the input array', () => {
             expect(slice()(input))
                 .toStrictEqual([1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14]);
             expect(slice()(input))
@@ -467,60 +567,76 @@ describe('slice', () => {
     });
 
     describe('slice(start)', () => {
-        it('shallow copies elements of the array starting from the "start" index to the end of the array', () => {
+        it('returns a sub-array of the input array starting from a given `start` index', () => {
             expect(slice(3)(input))
                 .toStrictEqual([1.73, 2.23, 2.71, 3.14]);
         });
 
-        it('shallow copies elements from the end of the array when "start" index is negative', () => {
-            expect(slice(-1)(input))
-                .toStrictEqual([3.14]);
+        describe('when a given `start` is negative`', () => {
+            it('returns a sub-array of the input array starting `start` elements before the end of the array', () => {
+                expect(slice(-1)(input))
+                    .toStrictEqual([3.14]);
+            });
         });
     });
 
     describe('slice(start, end)', () => {
-        it('shallow copies elements from the "start" index to the "end" - 1 index', () => {
+        it('returns a sub-array of the input array starting at a given `start` index and ending at `end` - 1', () => {
             expect(slice(0, 2)(input))
                 .toStrictEqual([1.20, 1.41]);
             expect(slice(1, 3)(input))
                 .toStrictEqual([1.41, 1.61]);
         });
 
-        it('returns an empty array when "start" is negative and "end" is positive', () => {
-            expect(slice(-1, 2)(input))
-                .toStrictEqual([]);
+        describe('when a given `start` is negative and `end` is positive', () => {
+            it('returns an empty array', () => {
+                expect(slice(-1, 2)(input))
+                    .toStrictEqual([]);
+            });
         });
 
-        it('shallow copies elements from the "start" to the "end" index when both indices are negative', () => {
-            expect(slice(-3, -1)(input))
-                .toStrictEqual([2.23, 2.71]);
+        describe('when given `start` and `end` are negative', () => {
+            it('returns a sub-array of the input array from the `start` to the `end` (exclusive) index', () => {
+                expect(slice(-3, -1)(input))
+                    .toStrictEqual([2.23, 2.71]);
+            });
         });
     });
 });
 
-describe('some', () => {
+describe(some, () => {
     describe('some(condition)', () => {
-        it('returns true if at least one element in the array satisfies the "condition"', () => {
-            expect(some(isGreaterThan(3))(input))
-                .toBe(true);
+        describe('when at least one element of the input array satisfies a given `condition`', () => {
+            it('returns true', () => {
+                expect(some(isGreaterThan(3))(input))
+                    .toBe(true);
+            });
         });
 
-        it('returns false if there is no element that satisfied the "condition"', () => {
-            expect(some(isGreaterThan(4))(input))
-                .toBe(false);
+        describe('when none of the input array elements satisfy a given `condition`', () => {
+            it('returns false', () => {
+                expect(some(isGreaterThan(4))(input))
+                    .toBe(false);
+            });
         });
     });
 });
 
-describe('sort', () => {
+describe(sort, () => {
     describe('sort()', () => {
-        it('returns an array sorted ascending after converting elements into strings', () => {
+        it('sort the input array in-place', () => {
+            const copy: number[] = input.map(same);
+            sort()(copy);
+
+            expect(sort()(copy))
+                .toBe(copy);
+        });
+
+        it('returns an array sorted in ascending order (after converting elements into strings)', () => {
             const copy: number[] = input.map(same);
 
             expect(sort()(copy))
                 .toStrictEqual(input);
-            expect(sort()(copy))
-                .toBe(copy);
         });
     });
 
@@ -534,57 +650,80 @@ describe('sort', () => {
     });
 });
 
-describe('splice', () => {
+describe(splice, () => {
     describe('splice(start)', () => {
-        it('returns removed elements before the "start" index', () => {
+        it('removes elements from the input array after a given `start` index', () => {
+            const copy: number[] = input.map(same);
+            splice(3)(copy);
+
+            expect(copy)
+                .toStrictEqual([1.20, 1.41, 1.61]);
+        });
+
+        it('returns an array of elements removed after a given `start` index', () => {
             const copy: number[] = input.map(same);
 
             expect(splice(3)(copy))
                 .toStrictEqual([1.73, 2.23, 2.71, 3.14]);
-            expect(copy)
-                .toStrictEqual([1.20, 1.41, 1.61]);
         });
     });
 
     describe('splice(start, deleteCount)', () => {
-        const copy: number[] = input.map(same);
+        it('removes elements from the input array', () => {
+            const copy: number[] = input.map(same);
+            splice(3, 2)(copy);
 
-        it('returns removed "deleteCount" elements from the "start" index', () => {
-            expect(splice(3, 2)(copy))
-                .toStrictEqual([1.73, 2.23]);
             expect(copy)
                 .toStrictEqual([1.20, 1.41, 1.61, 2.71, 3.14]);
+        });
+
+        it('returns an array of `deleteCount` elements from the input array starting at the "start" index', () => {
+            const copy: number[] = input.map(same);
+
+            expect(splice(3, 2)(copy))
+                .toStrictEqual([1.73, 2.23]);
         });
     });
 });
 
-describe('spliceWith', () => {
+describe(spliceWith, () => {
     describe('spliceWith(start, deleteCount, ...items)', () => {
+        it('removes elements from the input array', () => {
+            const copy: number[] = input.map(same);
+            spliceWith(3, 2, 1.73205, 2.23606)(copy);
+
+            expect(copy)
+                .toStrictEqual([1.20, 1.41, 1.61, 1.73205, 2.23606, 2.71, 3.14]);
+        });
+
         it('returns removed elements', () => {
             const copy: number[] = input.map(same);
 
             expect(spliceWith(3, 2, 1.73205, 2.23606)(copy))
                 .toStrictEqual([1.73, 2.23]);
-            expect(copy)
-                .toStrictEqual([1.20, 1.41, 1.61, 1.73205, 2.23606, 2.71, 3.14]);
         });
     });
 });
 
-describe('unshift', () => {
+describe(unshift, () => {
     describe('unshift(...items)', () => {
-        it('returns the length of an array after adding elements to the beginning of it', () => {
-            const copy: number[] = input.map(same);
+        it('adds given `items` to the beginning of the input array', () => {
+            const copy: number[] = [1, 2, 3].map(same);
 
-            expect(unshift(-1, 0)(copy))
-                .toBe(9);
-            expect(copy)
-                .toStrictEqual([-1, 0, 1.20, 1.41, 1.61, 1.73, 2.23, 2.71, 3.14]);
+            unshift(-1, 0)(copy);
+
+            expect(copy).toStrictEqual([-1, 0, 1, 2, 3]);
+        });
+
+        it('returns the new length of the input array', () => {
+            const copy: number[] = [1, 2, 3].map(same);
+
+            expect(unshift(-1, 0)(copy)).toBe(5);
         });
     });
 });
 
-describe('values', () => {
+describe(values, () => {
     it('returns a new Array Iterator that contains values for each index in the array', () => {
         expect(values(input).next().value)
             .toBe(1.20);

@@ -2,7 +2,7 @@ import { isInteger } from '../../number/number/integer';
 
 import { by, isFirstOccurrence, isLastOccurrence } from './filter';
 
-describe('isFirstOccurrence', () => {
+describe(isFirstOccurrence, () => {
     it('filters an array keeping the first occurrence of each value', () => {
         expect([0, 0, 1, 2.71, 2.71, 3.14].filter(isFirstOccurrence))
             .toStrictEqual([0, 1, 2.71, 3.14]);
@@ -11,7 +11,7 @@ describe('isFirstOccurrence', () => {
     });
 });
 
-describe('isLastOccurrence', () => {
+describe(isLastOccurrence, () => {
     it('filters an array keeping the last occurrence of each value', () => {
         expect([0, 0, 1, 2.71, 2.71, 3.14].filter(isLastOccurrence))
             .toStrictEqual([0, 1, 2.71, 3.14]);
@@ -20,7 +20,7 @@ describe('isLastOccurrence', () => {
     });
 });
 
-describe('by', () => {
+describe(by, () => {
     describe('by(property)', () => {
         interface Example {
             value: number;

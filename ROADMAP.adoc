@@ -2244,38 +2244,39 @@ The `link:{perfective-common}/promise/index.adoc[@perfective/common/promise]` pa
 a|
 * Use `promise()` to create a `Promise`.
 * Use `settlement()` to promisify error-first callback functions.
+* Use `Executor` to define `Promise` constructor arguments.
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/Promise/@@species[[@@species\]]`
 | `link:{ecma-es6}/#sec-get-promise-@@species[ES6]`
-| *TBD*
+| No custom support.
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/Promise/all[all()]`
 | `link:{ecma-es6}/#sec-promise.all[ES6]`
-| *TBD*
+| No custom support.
 
 | `link:{mdn-js-globals}/Promise/allSettled[allSettled()]`
 | `link:{ecma-es2020}/#sec-promise.allsettled[ES2020]`
-| *TBD*
+| No custom support.
 
 | `link:{mdn-js-globals}/Promise/any[any()]`
 | `link:{ecma-es2021}/#sec-promise.any[ES2021]`
-| *TBD*
+| No custom support.
 
 | `link:{mdn-js-globals}/Promise/catch[catch()]`
 | `link:{ecma-es6}/#sec-promise.prototype.catch[ES6]`
-| *TBD*
+| Use `OnRejected` type to define callbacks.
 
 | `link:{mdn-js-globals}/Promise/finally[finally()]`
 | `link:{ecma-es2018}/#sec-promise.prototype.finally[ES2018]`
-| *TBD*
+| No custom support.
 
 | `link:{mdn-js-globals}/Promise/race[race()]`
 | `link:{ecma-es6}/#sec-promise.race[ES6]`
-| *TBD*
+| No custom support.
 
 | `link:{mdn-js-globals}/Promise/reject[reject()]`
 | `link:{ecma-es6}/#sec-promise.reject[ES6]`
@@ -2287,7 +2288,7 @@ a|
 
 | `link:{mdn-js-globals}/Promise/then[then()]`
 | `link:{ecma-es6}/#sec-promise.prototype.then[ES6]`
-| *TBD*
+| Use `OnFulfilled` and `OnRejected` types to define callbacks.
 
 |===
 

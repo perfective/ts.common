@@ -16,14 +16,18 @@ async function isErrorPromise<T>(data: T | Error): Promise<T> {
 }
 
 describe(settlement, () => {
-    it('resolves a Promise when `error` is undefined and a value is defined', async () => isErrorPromise('example')
-        .then(result => expect(result).toBe('example')));
+    describe('when `error` is undefined and a value is defined', () => {
+        it('resolves a Promise', async () => isErrorPromise('example')
+            .then(result => expect(result).toBe('example')));
+    });
 
-    it('rejects a Promise when `error` is defined', async () => {
-        expect.assertions(1);
+    describe('when `error` is defined', () => {
+        it('rejects a Promise', async () => {
+            expect.assertions(1);
 
-        await isErrorPromise(new Error('Fail'))
+            await isErrorPromise(new Error('Fail'))
             // eslint-disable-next-line jest/no-conditional-expect -- approach with "toThrow()" does not work
-            .catch((error: Readonly<Error>) => expect(error).toStrictEqual(new Error('Fail')));
+                .catch((error: Readonly<Error>) => expect(error).toStrictEqual(new Error('Fail')));
+        });
     });
 });

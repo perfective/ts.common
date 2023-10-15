@@ -9,13 +9,13 @@ The `@perfective/common/promise` package provides functions to work with the
 === Types
 
 * `Resolvable<T> = T | PromiseLike<T>`
-— a shortcut for a type of values that can be passed into `Promise.resolve()`.
+— a value that can be passed into `Promise.resolve`.
 +
 * `Resolve<T> = (value: Resolvable<T>) => void`
-— a type of a callback called to resolve a `Promise` value.
+— a function that can called to resolve a `Promise` value.
 +
 * `Reject<E extends Error = Error> = (reason?: E) => void`
-— a type of a callback called to reject a `Promise` with a `reason`.
+— a function called to reject a `Promise` with an optional `reason`.
 +
 [NOTE]
 ====
@@ -24,16 +24,16 @@ as it requires an `Error` as a `reason`.
 ====
 +
 * `Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void`
-— a type of the `executor` callback passed into a `Promise` constructor.
+— a callback passed into the `Promise` constructor.
 +
 * `OnFulfilled<T, U = T> = (value: T) => Resolvable<U>`
-— a type of a callback passed as `onFulfilled` into `Promise.then()`.
+— a `onFulfilled` callback passed into the `Promise.then()` method.
 +
 * `OnRejected<T = never> = (reason: unknown) => Resolvable<T>`
-— a type of a callback passed as `onRejected` into `Promise.then()` or `Promise.catch()`.
+— a `onRejected` passed into the `Promise.then()` or `Promise.catch()` methods.
 +
 * `Callback<T, E extends Error = Error> = (error: E | null | undefined, value: T) => void`
-— a type of the error-first callbacks.
+— an error-first callback.
 
 
 === Constructors
@@ -42,7 +42,8 @@ as it requires an `Error` as a `reason`.
 — creates a new `Promise` with a given `executor` callback.
 +
 * `fulfilled<T>(value: Resolvable<T>): Promise<Awaited<T>>`
-— creates a fulfilled `Promise` (a shortcut for the `Promise.resolve()` function).
+— creates a fulfilled `Promise`
+(a shortcut for the `Promise.resolve()` function).
 +
 [NOTE]
 ====
@@ -51,7 +52,8 @@ and a TS compiler error: `TS2322: Type 'unknown' is not assignable to type 'T'`.
 ====
 +
 * `rejected<T = never>(reason: Error): Promise<Awaited<T>>`
-— creates a rejected `Promise` (a shortcut for the `Promise.rejected()` function).
+— creates a rejected `Promise`
+(a shortcut for the `Promise.rejected()` function).
 +
 [NOTE]
 ====

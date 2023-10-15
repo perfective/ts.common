@@ -3,7 +3,9 @@ import { isPresent } from '../../value/value';
 import { Reject, Resolve } from './promise';
 
 /**
- * An error-first callback type.
+ * An error-first callback.
+ *
+ * @since v0.8.0
  */
 export type Callback<T, E extends Error = Error> = (error: E | null | undefined, value: T) => void;
 

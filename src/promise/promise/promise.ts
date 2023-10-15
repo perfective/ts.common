@@ -1,7 +1,7 @@
 import { BiFold } from '../../function';
 
 /**
- * A shortcut for a type of values that can be passed into Promise.resolve().
+ * A value that can be passed into {@link Promise.resolve}.
  *
  * @see Promise.resolve()
  *
@@ -10,34 +10,38 @@ import { BiFold } from '../../function';
 export type Resolvable<T> = T | PromiseLike<T>;
 
 /**
- * A type of a callback called to resolve a {@linkcode Promise} value.
+ * A function that can called to resolve a {@linkcode Promise} value.
+ *
+ * @since v0.8.0
  */
 export type Resolve<T> = (value: Resolvable<T>) => void;
 
 /**
- * A type of a callback called to reject a {@linkcode Promise} with a reason.
+ * A function called to reject a {@linkcode Promise} with an optional `reason`.
  *
  * This type is stricter than the default type of the reject callback,
  * as it requires an {@linkcode Error} as a `reason`.
+ *
+ * @since v0.8.0
  */
 export type Reject<E extends Error = Error> = (reason?: E) => void;
 
 /**
- * A type of the `executor` callback passed into a {@linkcode Promise} constructor.
+ * A callback passed into the {@linkcode Promise} constructor.
  *
  * @since v0.9.0
  */
 export type Executor<T, E extends Error = Error> = (resolve: Resolve<T>, reject: Reject<E>) => void;
 
 /**
- * A type of a callback passed as `onFulfilled` into {@linkcode Promise.then}.
+ * A `onFulfilled` callback passed into the {@linkcode Promise.then} method.
  *
  * @since v0.9.0
  */
 export type OnFulfilled<T, U = T> = (value: T) => Resolvable<U>;
 
 /**
- * A type of a callback passed as `onRejected` into {@linkcode Promise.then} or {@linkcode Promise.catch}.
+ * A `onRejected` callback passed into the {@linkcode Promise.then} or {@linkcode Promise.catch} methods.
  *
  * @since v0.9.0
  */
@@ -45,6 +49,8 @@ export type OnRejected<T = never> = (reason: unknown) => Resolvable<T>;
 
 /**
  * Creates a new {@linkcode Promise} with a given `executor` callback.
+ *
+ * @since v0.8.0
  */
 export async function promise<T, E extends Error = Error>(executor: Executor<T, E>): Promise<T> {
     return new Promise<T>(executor);

@@ -14,6 +14,8 @@ import { isNull, isPresent, isUndefined, Present } from '../../value/value';
  *
  * @see Just
  * @see Nothing
+ *
+ * @since v0.1.0
  */
 export abstract class Maybe<T> {
     /**
@@ -28,6 +30,8 @@ export abstract class Maybe<T> {
      *
      * If the instance is a {@linkcode Nothing},
      * ignores the `flatMap` callback and returns itself.
+     *
+     * @since 0.3.2
      */
     public abstract onto<U>(
         flatMap: (value: T) => Maybe<Present<U>>,
@@ -40,13 +44,15 @@ export abstract class Maybe<T> {
      *
      * If the instance is a {@linkcode Nothing},
      * ignores the `map` callback and returns itself.
+     *
+     * @since 0.3.2
      */
     public abstract to<U>(
         map: (value: T) => U | null | undefined,
     ): Maybe<U>;
 
     /**
-     * Applies a given `reduce` callback to the {@linkcode Maybe.value}.
+     * Applies a given `reduce` callback to the {@linkcode Just.value}.
      *
      * @returns The result of the `reduce`.
      *
@@ -62,6 +68,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Nothing},
      * ignores the `property` argument and returns itself.
+     *
+     * @since v0.1.0
      */
     // Using Present<T[K]> to exclude null | undefined from the type.
     public abstract pick<K extends keyof T>(property: Value<K>): Maybe<Present<T[K]>>;
@@ -74,6 +82,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Nothing},
      * ignores the `filter` callback and returns itself.
+     *
+     * @since v0.1.0
      */
     public abstract that(filter: Predicate<T>): Maybe<T>;
 
@@ -85,6 +95,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Nothing},
      * ignores the `filter` callback and returns itself.
+     *
+     * @since v0.5.0
      */
     public abstract which<U extends T>(filter: TypeGuard<T, U>): Maybe<U>;
 
@@ -98,6 +110,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Nothing},
      * ignores the `condition` callback and returns itself.
+     *
+     * @since v0.3.0
      */
     public abstract when(condition: Proposition): Maybe<T>;
 
@@ -116,6 +130,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Just},
      * ignores the `fallback` and returns itself.
+     *
+     * @since v0.1.0
      */
     public abstract otherwise(fallback: Value<T | null | undefined>): Maybe<T>;
 
@@ -125,6 +141,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Just},
      * ignores the `fallback` and returns {@linkcode Just.value}.
+     *
+     * @since v0.1.5
      */
     public abstract or(fallback: Value<T>): T;
 
@@ -134,6 +152,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Just},
      * ignores the `fallback` and returns {@linkcode Just.value} as a nullable type.
+     *
+     * @since v0.1.5
      */
     public abstract or(fallback: Value<T | null>): T | null;
 
@@ -143,6 +163,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Just},
      * ignores the `fallback` and returns {@linkcode Just.value} as an optional type.
+     *
+     * @since v0.1.5
      */
     public abstract or(fallback: Value<T | undefined>): T | undefined;
 
@@ -152,6 +174,8 @@ export abstract class Maybe<T> {
      *
      * If an instance is a {@linkcode Just},
      * ignores the `fallback` and returns {@linkcode Just.value} as an optional and nullable type.
+     *
+     * @since v0.1.5
      */
     public abstract or(fallback: Value<T | null | undefined>): T | null | undefined;
 
@@ -172,6 +196,8 @@ export abstract class Maybe<T> {
  * Type {@linkcode Just} represents a defined non-null value of type `T`.
  *
  * @final
+ *
+ * @since v0.3.0
  */
 export class Just<T> extends Maybe<T> {
     /**
@@ -200,6 +226,8 @@ export class Just<T> extends Maybe<T> {
      * Applies a given `flatMap` callback to the {@linkcode Just.value}.
      *
      * @returns The result of the `flatMap`.
+     *
+     * @since v0.3.2
      */
     public onto<U>(
         flatMap: (value: T) => Maybe<Present<U>>,
@@ -216,6 +244,8 @@ export class Just<T> extends Maybe<T> {
      * Applies a given `map` callback to the {@linkcode Just.value}.
      *
      * @returns The result of the `map` wrapped into a {@linkcode Maybe}.
+     *
+     * @since v0.3.2
      */
     public to<U>(map: (value: T) => U | null | undefined): Maybe<U> {
         return maybe<U>(map(this.value));
@@ -238,6 +268,8 @@ export class Just<T> extends Maybe<T> {
 
     /**
      * Returns a value of a given {@linkcode Just.value} `property` wrapped into a {@linkcode Maybe}.
+     *
+     * @since v0.1.0
      */
     public pick<K extends keyof T>(property: Value<K>): Just<T[K]> | Maybe<Present<T[K]>> {
         return this.to(value => value[valueOf(property)]) as unknown as Maybe<Present<T[K]>>;
@@ -248,6 +280,8 @@ export class Just<T> extends Maybe<T> {
      *
      * @returns The original {@linkcode Just} when the `filter` returns true,
      * otherwise returns {@linkcode Nothing}.
+     *
+     * @since v0.1.0
      */
     public that(filter: Predicate<T>): Maybe<T> {
         if (filter(this.value)) {
@@ -261,7 +295,9 @@ export class Just<T> extends Maybe<T> {
      *
      * @returns The original {@linkcode Just} with a narrowed down type of the {@linkcode Just.value},
      * when the `filter` returns true.
-     * Otherwise returns {@linkcode Nothing}.
+     * Otherwise, returns {@linkcode Nothing}.
+     *
+     * @since v0.5.0
      */
     public which<U extends T>(filter: TypeGuard<T, U>): Maybe<U> {
         if (filter(this.value)) {
@@ -278,6 +314,8 @@ export class Just<T> extends Maybe<T> {
      *
      * @returns The original {@linkcode Just} when the `condition` returns true,
      * otherwise returns {@linkcode Nothing}.
+     *
+     * @since v0.3.0
      */
     public when(condition: Proposition): Maybe<T> {
         if (isTrue(condition)) {
@@ -288,6 +326,8 @@ export class Just<T> extends Maybe<T> {
 
     /**
      * Ignores a given `fallback` value and returns itself.
+     *
+     * @since v0.1.0
      */
     public otherwise(fallback: Value<T | null | undefined>): Just<T>;
     public otherwise(): this {
@@ -296,6 +336,8 @@ export class Just<T> extends Maybe<T> {
 
     /**
      * Ignores a given `fallback` value and returns own {@linkcode Just.value}.
+     *
+     * @since v0.1.5
      */
     public or(fallback: Value<T | null | undefined>): T;
     public or(): T {
@@ -319,6 +361,8 @@ export class Just<T> extends Maybe<T> {
  * Type {@linkcode Nothing} represents an undefined or a null value of type `T`.
  *
  * @final
+ *
+ * @since v0.3.0
  */
 export class Nothing<T> extends Maybe<T> {
     /**
@@ -337,6 +381,8 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Ignores a given `flatMap` callback and returns itself.
+     *
+     * @since 0.3.2
      */
     public onto<U>(
         flatMap: (value: T) => Maybe<Present<U>>,
@@ -347,6 +393,8 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Ignores a given `map` callback and returns itself.
+     *
+     * @since 0.3.2
      */
     public to<U>(map: (value: T) => (U | null | undefined)): Nothing<U>;
     public to<U>(): Nothing<U> {
@@ -366,6 +414,8 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Ignores a given `property` and returns itself.
+     *
+     * @since v0.1.0
      */
     public pick<K extends keyof T>(property: Value<K>): Nothing<Present<T[K]>>;
     public pick<K extends keyof T>(): Nothing<Present<T[K]>> {
@@ -374,6 +424,8 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Ignores a given `filter` callback and returns itself.
+     *
+     * @since v0.1.0
      */
     public that(filter: Predicate<T>): Nothing<T>;
     public that(): this {
@@ -383,6 +435,8 @@ export class Nothing<T> extends Maybe<T> {
     /**
      * Ignores a given `filter` callback and returns itself
      * with a narrowed down type of the {@linkcode Maybe.value}.
+     *
+     * @since v0.5.0
      */
     public which<U extends T>(filter: TypeGuard<T, U>): Nothing<U>;
     public which<U extends T>(): Nothing<U> {
@@ -391,6 +445,8 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Ignores a given `condition` callback and returns itself.
+     *
+     * @since v0.3.0
      */
     public when(condition: Proposition): Nothing<T>;
     public when(): this {
@@ -399,16 +455,22 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Returns a given null or undefined `fallback` value as a {@linkcode Nothing}.
+     *
+     * @since v0.1.0
      */
     public otherwise(fallback: Value<null | undefined>): Nothing<T>;
 
     /**
      * Returns a given present `fallback` value as a {@linkcode Just}.
+     *
+     * @since v0.1.0
      */
     public otherwise(fallback: Value<T>): Just<T>;
 
     /**
      * Returns a given `fallback` value as a {@linkcode Maybe}.
+     *
+     * @since v0.1.0
      */
     public otherwise(fallback: Value<T | null | undefined>): Maybe<T>;
 
@@ -418,31 +480,43 @@ export class Nothing<T> extends Maybe<T> {
 
     /**
      * Returns a given null `fallback` value.
+     *
+     * @since v0.1.0
      */
     public or(fallback: Value<null>): null;
 
     /**
      * Returns a given undefined `fallback` value.
+     *
+     * @since v0.1.0
      */
     public or(fallback: Value<undefined>): undefined;
 
     /**
      * Returns a given present `fallback` value.
+     *
+     * @since v0.1.0
      */
     public or(fallback: Value<T>): T;
 
     /**
      * Returns a given nullable `fallback` value.
+     *
+     * @since v0.1.0
      */
     public or(fallback: Value<T | null>): T | null;
 
     /**
      * Returns a given optional `fallback` value.
+     *
+     * @since v0.1.0
      */
     public or(fallback: Value<T | undefined>): T | undefined;
 
     /**
      * Returns a given `fallback` value.
+     *
+     * @since v0.1.0
      */
     public or(fallback: Value<T | null | undefined>): T | null | undefined;
 
@@ -465,12 +539,16 @@ export class Nothing<T> extends Maybe<T> {
 
 /**
  * Creates an instance of {@linkcode Just} with the present `value`.
+ *
+ * @since v0.1.0
  */
 export function maybe<T>(value: Present<T>): Just<T>;
 
 /**
  * Returns a memoized instance of {@linkcode Nothing}
  * with either `null` or `undefined` value.
+ *
+ * @since v0.1.0
  */
 export function maybe<T>(value: null | undefined): Nothing<T>;
 
@@ -478,14 +556,11 @@ export function maybe<T>(value: null | undefined): Nothing<T>;
  * Creates an instance of {@linkcode Just} when the `value` is present
  * or returns a memoized instance of {@linkcode Nothing}
  * with either `null` or `undefined` value.
+ *
+ * @since v0.1.0
  */
 export function maybe<T>(value: T | null | undefined): Maybe<T>;
 
-/**
- * Creates an instance of {@linkcode Just} when the `value` is present
- * or returns a memoized instance of {@linkcode Nothing}
- * with either `null` or `undefined` value.
- */
 export function maybe<T>(value: T | null | undefined): Maybe<T> {
     if (isPresent(value)) {
         return just(value);
@@ -552,6 +627,8 @@ export function maybeFrom<T, U>(
  * Creates an instance of {@linkcode Just} with a given defined non-null `value`.
  *
  * A unit (return) function for the {@linkcode Maybe} monad.
+ *
+ * @since v0.1.0
  */
 export function just<T>(value: Present<T>): Just<T> {
     return new Just<T>(value);
@@ -581,6 +658,8 @@ const memo: Memo = {
 
 /**
  * Returns a memoized instance of {@linkcode Nothing} with an `undefined` value.
+ *
+ * @since v0.1.0
  */
 export function nothing<T>(): Nothing<T> {
     return memo.nothing as Nothing<T>;

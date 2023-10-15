@@ -107,7 +107,7 @@ export function by<T, K extends keyof T>(property: K, order: Compare<T[K]>): Com
  * Returns a type guard that returns true if its argument has a defined `property`
  * and all given `properties`.
  *
- * @since v0.2.0
+ * @since v0.2.3
  */
 export function hasDefinedProperty<T, K extends keyof T>(
     property: K,
@@ -124,7 +124,7 @@ export function hasDefinedProperty<T, K extends keyof T>(
  * Returns a type guard that returns true if its argument has an undefined `property`
  * and all given `properties`.
  *
- * @since v0.2.0
+ * @since v0.2.3
  */
 export function hasUndefinedProperty<T, K extends keyof T>(
     property: K,
@@ -141,7 +141,7 @@ export function hasUndefinedProperty<T, K extends keyof T>(
  * Returns a type guard that returns true if its argument has a non-null `property`
  * and all given `properties`.
  *
- * @since v0.2.0
+ * @since v0.2.3
  */
 export function hasNotNullProperty<T, K extends keyof T>(
     property: K,
@@ -158,7 +158,7 @@ export function hasNotNullProperty<T, K extends keyof T>(
  * Returns a type guard that returns true if its argument has a `null` `property`
  * and all given `properties`.
  *
- * @since v0.2.0
+ * @since v0.2.3
  */
 export function hasNullProperty<T, K extends keyof T>(
     property: K,
@@ -175,7 +175,7 @@ export function hasNullProperty<T, K extends keyof T>(
  * Returns a type guard that returns true if its argument has a present `property`
  * and all given `properties`.
  *
- * @since v0.2.0
+ * @since v0.2.3
  */
 export function hasPresentProperty<T, K extends keyof T>(
     property: K,
@@ -192,7 +192,7 @@ export function hasPresentProperty<T, K extends keyof T>(
  * Returns a type guard that returns true if its argument has an absent `property`
  * and all given `properties`.
  *
- * @since v0.2.0
+ * @since v0.2.3
  */
 export function hasAbsentProperty<T, K extends keyof T>(
     property: K,

@@ -8,9 +8,11 @@ import { Case } from './case';
 /**
  * A builder class for a {@linkcode Case}.
  *
+ * @final
+ *
  * @since v0.1.0
  */
-class When<T> {
+export class When<T> {
     public constructor(
         private readonly condition: Predicate<T>,
     ) {}

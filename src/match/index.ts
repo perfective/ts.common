@@ -8,4 +8,7 @@ export {
     Match,
     match,
 } from './match/match';
-export { when } from './match/when';
+export {
+    When,
+    when,
+} from './match/when';

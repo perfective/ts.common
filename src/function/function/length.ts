@@ -8,7 +8,7 @@ export interface Length {
 }
 
 /**
- * Returns value of the {@linkcode Length.length|length} property of a given `value`.
+ * Returns the {@linkcode Length.length|length} property of a given `value`.
  *
  * @since v0.6.0
  */
@@ -17,7 +17,7 @@ export function length<L extends Length>(value: L): number {
 }
 
 /**
- * Returns a `Predicate` that checks if a value has a given `length`.
+ * Returns a predicate that checks if the input value has a given `length`.
  *
  * @since v0.6.0
  */
@@ -26,7 +26,7 @@ export function hasLength<L extends Length>(length: number): (value: L) => boole
 }
 
 /**
- * Returns true if a given `value` has non-positive length.
+ * Returns `true` if a given `value` has non-positive length.
  *
  * @since v0.6.0
  */
@@ -35,7 +35,7 @@ export function isEmpty<L extends Length>(value: L): boolean {
 }
 
 /**
- * Returns true if a given `value` has length greater than 0.
+ * Returns `true` if a given `value` has length greater than 0.
  *
  * @since v0.6.0
  */

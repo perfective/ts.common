@@ -9,7 +9,11 @@ The functions of higher arity is unlikely to be added to the package.
 == Type Guards
 
 ** `isFunction<T>(value: Function | T): value is Function`
+— returns `true` if a given `value` is a `Function`.
+Otherwise, returns `false`.
 ** `isNotFunction<T>(value: Function | T): value is T`
+— returns `true` if a given `value` is not a `Function`.
+Otherwise, returns `false`.
 
 
 == Nullary functions
@@ -17,10 +21,10 @@ The functions of higher arity is unlikely to be added to the package.
 * `Nullary<T>`
 — a function without arguments:
 ** `isNullary<F extends Function>(f: F): boolean`
-— returns `true` when function accepts no arguments
-(does not count a variadic argument).
+— returns `true` if a given function `f` has length `0` (excluding a variadic argument).
+Otherwise, returns `false`.
 ** `constant<T>(value: T): Nullary<T>`
-— creates a function that returns that same value.
+— creates a nullary function that returns a given `value`.
 +
 * `Void`
 — a procedure without arguments:
@@ -28,10 +32,11 @@ The functions of higher arity is unlikely to be added to the package.
 — an empty function to be passed as a callback when a no-op behavior is required.
 +
 * `Value<T> = T | Nullary<T>`
-— represent a value, or a function that returns a value
+— a value itself or a nullary function that returns a value.
 (e.g. for lazy evaluation).
 ** `valueOf<T>(value: Value<T>): T`
-— evaluates the given value.
+— When given a nullary function, evaluates the function and returns the result.
+Otherwise, returns the given `value`.
 
 
 == Unary functions
@@ -39,10 +44,9 @@ The functions of higher arity is unlikely to be added to the package.
 * `Unary<X, V>`
 — a function with one argument:
 ** `isUnary<F extends Function>(f: F): boolean`
-— returns `true` when function accepts only one argument
-(does not count a variadic argument).
+— returns `true` if a given function `f` has length `1` (excluding a variadic argument).
 ** `same<T>(value: T): T`
-— returns a given value.
+— the `identity` function. Returns a given value.
 +
 * `UnaryVoid<T> = (value: T) => void`
 — a procedure with one argument.
@@ -51,19 +55,19 @@ The functions of higher arity is unlikely to be added to the package.
 == Binary functions
 
 * `Binary<X, Y, V>`
-— a function with two arguments (`X` and `Y`).
+— a function with two arguments.
 ** `isBinary<F extends Function>(f: F): boolean`
-— returns `true` when function accepts exactly two arguments
-(does not count a variadic argument).
+— Returns `true` if a given function `f` has length 2 (excluding a variadic argument).
+Otherwise, returns `false`.
 
 
 == Ternary functions
 
 * `Ternary<X, Y, Z, V>`
-— a function with three arguments (`X`, `Y`, and `Z`).
+— a function with three arguments.
 ** `isTernary<F extends Function>(f: F): boolean`
-— returns `true` when function accepts exactly three arguments
-(does not count a variadic argument).
+— returns `true` if a given function `f` has length `3` (excluding a variadic argument).
+Otherwise, returns `false`.
 
 
 == Length
@@ -80,12 +84,12 @@ interface Length {
 * Functions
 +
 ** `length<L extends Length>(value: L): number`
-— returns value of the `length` property of a given `value`.
+— returns the `length` property of a given `value`.
 +
 * Predicates
 +
 ** `hasLength<L extends Length>(length: number): Predicate<L>`
-— returns a `Predicate` that checks if a value has a given `length`.
+— returns a predicate that checks if the input value has a given `length`.
 +
 ** `isNotEmpty<L extends Length>(value: L): boolean`
 — returns `true` if a given `value` has non-positive length.
@@ -111,10 +115,3 @@ These functions can be used as a callback for `Array.prototype.reduce`.
 +
 * `BiFold<T1, T2, U> = [Unary<T1, U>, Unary<T2, U>]`
 — a pair of unary callbacks to map both arguments `T1` and `T2` of a function into the same type `U`.
-
-
-== Roadmap
-
-* Provide functions for the standard
-`link:{mdn-js-globals}/Function[Function]` object.
-* Add currying and partial application support.

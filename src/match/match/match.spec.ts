@@ -1,4 +1,4 @@
-import { match } from './match';
+import { Match, match } from './match';
 import { when } from './when';
 
 const roots = [
@@ -13,7 +13,7 @@ const powers = [
     when<number>(v => v > 0).to(v => v ** 3),
 ];
 
-describe('Match', () => {
+describe(Match, () => {
     describe('cases', () => {
         it('matches constants values', () => {
             const output = match(1.73).cases(...roots).or(undefined);

@@ -1,6 +1,6 @@
 import { isNegativeInteger, isPositiveInteger } from '../../number/number/integer';
 
-import { fromEntries } from './case';
+import { caseFromEntry, fromEntries } from './case';
 
 function square(x: number): number {
     return x ** 2;
@@ -15,24 +15,6 @@ function isZero(x: number): boolean {
 }
 
 describe(fromEntries, () => {
-    it('creates a statement with constant evaluation from an entry with a constant', () => {
-        const output = fromEntries<number, number>([
-            [isZero, 0],
-        ]);
-
-        expect(output[0].condition).toBe(isZero);
-        expect(output[0].statement(0)).toBe(0);
-    });
-
-    it('creates a statement with evaluation for an entry with an anonymous functions', () => {
-        const output = fromEntries<number, number>([
-            [true, (): number => Number.POSITIVE_INFINITY],
-        ]);
-
-        expect(output[0].condition(0)).toBe(true);
-        expect(output[0].statement(0)).toBe(Number.POSITIVE_INFINITY);
-    });
-
     it('maintains the order of statements', () => {
         const output = fromEntries<number, number>([
             [isNegativeInteger, square],
@@ -43,5 +25,25 @@ describe(fromEntries, () => {
         expect(output[0].statement).toBe(square);
         expect(output[1].condition).toBe(isPositiveInteger);
         expect(output[1].statement).toBe(cube);
+    });
+});
+
+describe(caseFromEntry, () => {
+    describe('when given a statement value', () => {
+        it('creates a statement with constant evaluation', () => {
+            const output = caseFromEntry<number, number>([isZero, 0]);
+
+            expect(output.condition).toBe(isZero);
+            expect(output.statement(0)).toBe(0);
+        });
+    });
+
+    describe('when given a statement function', () => {
+        it('creates a statement with evaluation', () => {
+            const output = caseFromEntry<number, number>([true, (): number => Number.POSITIVE_INFINITY]);
+
+            expect(output.condition(0)).toBe(true);
+            expect(output.statement(0)).toBe(Number.POSITIVE_INFINITY);
+        });
     });
 });

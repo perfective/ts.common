@@ -1,20 +1,32 @@
 import { constant, empty, isNullary, naught, valueOf } from './nullary';
 
-describe('isNullary', () => {
-    it('returns true when the given function accepts three arguments', () => {
-        expect(isNullary(() => null))
-            .toBe(true);
+describe(isNullary, () => {
+    describe('when the given function accepts three arguments', () => {
+        it('returns true', () => {
+            expect(isNullary(() => null))
+                .toBe(true);
+        });
     });
 
-    it('returns false when the given function accepts at least one argument', () => {
-        expect(isNullary((a: number): number => a))
-            .toBe(false);
+    describe('when the given function accepts at least one argument', () => {
+        it('returns false', () => {
+            expect(isNullary((a: number): number => a))
+                .toBe(false);
+        });
+    });
+
+    describe('when the first argument is variadic', () => {
+        it('returns true', () => {
+            expect(isNullary((...a: number[]): number[] => a)).toBe(true);
+        });
     });
 });
 
-describe('constant', () => {
-    it('creates a function that returns a constant value', () => {
-        expect(constant(3.14)()).toBe(3.14);
+describe(constant, () => {
+    describe('constant(value)', () => {
+        it('returns a given value', () => {
+            expect(constant(3.14)()).toBe(3.14);
+        });
     });
 });
 
@@ -34,14 +46,18 @@ describe(naught, () => {
     });
 });
 
-describe('valueOf', () => {
-    it('returns the value when a value is a constant', () => {
-        expect(valueOf(3.14))
-            .toBe(3.14);
+describe(valueOf, () => {
+    describe('when a given value is a constant', () => {
+        it('returns the given value', () => {
+            expect(valueOf(3.14))
+                .toBe(3.14);
+        });
     });
 
-    it('returns the result of a function when value is a function', () => {
-        expect(valueOf(constant(3.14)))
-            .toBe(3.14);
+    describe('when a given value is a function', () => {
+        it('returns the result of the function', () => {
+            expect(valueOf(constant(3.14)))
+                .toBe(3.14);
+        });
     });
 });

@@ -5,6 +5,8 @@ import { constant, Value } from '../../function/function/nullary';
 import { Unary } from '../../function/function/unary';
 
 /**
+ * A named pair of a condition and corresponding function.
+ *
  * @since v0.9.0
  */
 export interface Case<T, U> {
@@ -13,12 +15,14 @@ export interface Case<T, U> {
 }
 
 /**
+ * A pair of a condition and a corresponding function.
+ *
  * @since v0.9.0
  */
 export type CaseEntry<T, U> = [Predicate<T> | Proposition, Unary<T, U> | Value<U>];
 
 /**
- * Creates a list of {@linkcode Case|cases} from a list of {@linkcode CaseEntry|entries}.
+ * Creates a list of {@linkcode Case|cases} from a list of given {@linkcode CaseEntry|entries}.
  *
  * @since v0.9.0
  */

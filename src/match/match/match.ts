@@ -4,8 +4,17 @@ import { Maybe, maybe, nothing } from '../../maybe/maybe/maybe';
 
 import { Case } from './case';
 
+/**
+ * Provides pattern-matching functionality.
+ *
+ * @since v0.1.0
+ */
 export class Match<T> {
     public constructor(
+
+        /**
+         * The value to be matches against different conditions.
+         */
         public readonly value: Value<T>,
     ) {}
 
@@ -45,6 +54,11 @@ function concatenate<T, U>(first: Case<T, U>[] | Case<T, U>, ...rest: Case<T, U>
     return isArray(first) ? first : [first].concat(rest).filter(Boolean);
 }
 
+/**
+ * Creates an object to match a given `value`.
+ *
+ * @since v0.1.0
+ */
 export function match<T>(value: T | Nullary<T>): Match<T> {
     return new Match<T>(value);
 }

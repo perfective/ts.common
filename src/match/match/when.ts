@@ -7,6 +7,8 @@ import { Case } from './case';
 
 /**
  * A builder class for a {@linkcode Case}.
+ *
+ * @since v0.1.0
  */
 class When<T> {
     public constructor(
@@ -26,6 +28,11 @@ class When<T> {
     }
 }
 
+/**
+ * Creates a {@link Case} builder for a given `condition`.
+ *
+ * @since v0.1.0
+ */
 export function when<T>(condition: T | Predicate<T>): When<T> {
     return new When<T>(isFunction(condition) ? condition : is(condition));
 }

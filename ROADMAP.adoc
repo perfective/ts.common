@@ -22,6 +22,7 @@
 :mdn-js-globals: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 :mdn-js-operators: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators
 :perfective-common: https://github.com/perfective/ts.common/blob/main/src
+:github-issues: https://github.com/perfective/ts.common/issues
 
 The primary development focus is to provide convenient functions and detailed documentation in the existing packages.
 
@@ -1169,11 +1170,11 @@ a|
 
 | `link:{mdn-js-globals}/Function/name[name]`
 | `link:{ecma-es6}/#sec-function-instances-name[ES6]`
-| *TBD*
+| link:{github-issues}/10[TODO]
 
 | `link:{mdn-js-globals}/Function/prototype[prototype]`
 | `link:{ecma-es6}/#sec-function-instances-prototype[ES6]`
-| *TBD*
+| link:{github-issues}/11[TODO]
 
 3+| *Methods*
 

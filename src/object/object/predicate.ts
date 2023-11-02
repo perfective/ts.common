@@ -46,7 +46,7 @@ export function isTruthy<T>(value: T): boolean {
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Falsy
  *
  * @since v0.3.0
- * @deprecated Since v0.10.0. Use isTruthy() from @perfective/common/boolean.
+ * @deprecated Since v0.10.0. Use isFalsy() from @perfective/common/boolean.
  */
 export function isFalsy<T>(value: T): boolean {
     // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha

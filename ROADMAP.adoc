@@ -2024,13 +2024,13 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 
 | `link:{mdn-js-globals}/Object/Object[Object()]`
 | `link:{ecma-es6}/#sec-object-constructor[ES6]`
-| *TBD*
+| *Disallowed*. Use the ESLint `link:{eslint-rules}/no-new-object[no-new-object]` rule to enforce.
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/Object/constructor[constructor]`
 | `link:{ecma-es6}/#sec-object.prototype.constructor[ES6]`
-| *TBD*
+| link:{github-issues}/17[TODO]
 
 | `link:{mdn-js-globals}/Object/proto[&#95;&#95;proto&#95;&#95;]`
 | `link:{ecma-es6}/#sec-object.prototype.&#95;&#95;proto&#95;&#95;[ES6]`
@@ -2060,62 +2060,64 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 
 | `link:{mdn-js-globals}/Object/assign[assign()]`
 | `link:{ecma-es6}/#sec-object.assign[ES6]`
-| *TBD*
+| link:{github-issues}/12[TODO]
 
 
 | `link:{mdn-js-globals}/Object/create[create()]`
 | `link:{ecma-es6}/#sec-object.create[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/defineProperties[defineProperties()]`
 | `link:{ecma-es6}/#sec-object.defineproperties[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/defineProperty[defineProperty()]`
 | `link:{ecma-es6}/#sec-object.defineproperty[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/entries[entries()]`
 | `link:{ecma-es2017}/#sec-object.entries[ES2017]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/freeze[freeze()]`
 | `link:{ecma-es6}/#sec-object.freeze[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/fromEntries[fromEntries()]`
 | `link:{ecma-es2019}/#sec-object.fromentries[ES2019]`
-| *TBD*
+a|
+* Use `Object.fromEntries()` directly for ES2019+
+* Use `recordFromEntries` for versions before ES2019.
 
 
 | `link:{mdn-js-globals}/Object/getOwnPropertyDescriptor[getOwnPropertyDescriptor()]`
 | `link:{ecma-es6}/#sec-object.getownpropertydescriptor[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/getOwnPropertyDescriptors[getOwnPropertyDescriptors()]`
 | `link:{ecma-es2017}/#sec-object.getownpropertydescriptors[ES2017]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/getOwnPropertyNames[getOwnPropertyNames()]`
 | `link:{ecma-es6}/#sec-object.getownpropertynames[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/getOwnPropertySymbols[getOwnPropertySymbols()]`
 | `link:{ecma-es6}/#sec-object.getownpropertysymbols[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/getPrototypeOf[getPrototypeOf()]`
 | `link:{ecma-es6}/#sec-object.getprototypeof[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/groupBy[groupBy()]`
@@ -2123,63 +2125,63 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 | *TBD*
 
 | `link:{mdn-js-globals}/Object/hasOwn[hasOwn()]`
-| `link:{ecma-es6}/#sec-object.hasown[ES6]`
-| *TBD*
+| `link:{ecma-es2022}/#sec-object.hasown[ES2022]`
+| link:{github-issues}/13[TODO]
 
 
 | `link:{mdn-js-globals}/Object/hasOwnProperty[hasOwnProperty()]`
 | `link:{ecma-es6}/#sec-object.prototype.hasownproperty[ES6]`
-| *TBD*
+| link:{github-issues}/13[TODO]
 
 
 | `link:{mdn-js-globals}/Object/is[is()]`
 | `link:{ecma-es6}/#sec-object.is[ES6]`
-| *TBD*
+| link:{github-issues}/14[TODO]
 
 
 | `link:{mdn-js-globals}/Object/isExtensible[isExtensible()]`
 | `link:{ecma-es6}/#sec-object.isextensible[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/isFrozen[isFrozen()]`
 | `link:{ecma-es6}/#sec-object.isfrozen[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/isPrototypeOf[isPrototypeOf()]`
 | `link:{ecma-es6}/#sec-object.prototype.isprototypeof[ES6]`
-| *TBD*
+| link:{github-issues}/15[TODO]
 
 
 | `link:{mdn-js-globals}/Object/isSealed[isSealed()]`
 | `link:{ecma-es6}/#sec-object.issealed[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/keys[keys()]`
 | `link:{ecma-es6}/#sec-object.keys[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/preventExtensions[preventExtensions()]`
 | `link:{ecma-es6}/#sec-object.preventextensions[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/propertyIsEnumerable[propertyIsEnumerable()]`
 | `link:{ecma-es6}/#sec-object.prototype.propertyisenumerable[ES6]`
-| *TBD*
+| link:{github-issues}/16[TODO]
 
 
 | `link:{mdn-js-globals}/Object/seal[seal()]`
 | `link:{ecma-es6}/#sec-object.seal[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Object/setPrototypeOf[setPrototypeOf()]`
 | `link:{ecma-es6}/#sec-object.setprototypeof[ES6]`
-| *TBD*
+| *Prohibited*
 
 
 | `link:{mdn-js-globals}/Object/toLocaleString[toLocaleString()]`
@@ -2189,7 +2191,7 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 
 | `link:{mdn-js-globals}/Object/toString[toString()]`
 | `link:{ecma-es6}/#sec-object.prototype.tostring[ES6]`
-| *TBD*
+| Use `String()` as a callback.
 
 
 | `link:{mdn-js-globals}/Object/valueOf[valueOf()]`
@@ -2199,7 +2201,7 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 
 | `link:{mdn-js-globals}/Object/values[values()]`
 | `link:{ecma-es2018}/#sec-object.values[ES2018]`
-| *TBD*
+| Use directly
 
 |===
 

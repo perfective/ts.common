@@ -9,24 +9,28 @@ including the JavaScript
 == Number
 
 * Type guards:
-** `isNumber<T>(value: number | T): value is number`
-— value is a `number` and is not `NaN`.
-** `isNotNumber<T>(value: number | T): value is T`
-— value is of type `T` or `NaN`.
 +
-* Unit functions:
+** `isNumber<T>(value: number | T): value is number`
+— returns `true` if a given `value` is a number and not a `NaN`.
+** `isNotNumber<T>(value: number | T): value is T`
+— returns `true` if a given `value` is not a number or is a `NaN`.
++
+* Functions:
++
 ** `negative(value: number): number`
+— returns the negated value of a given number.
+If the given number is 0, returns 0.
 +
 * `Number` methods:
++
 ** `exponential(fraction: Digits): Unary<number, string>`
-— returns a function that
-returns a number in the exponential notation with the given digits after the decimal point.
+— creates a function that returns the input number in exponential notation
+rounded to a given number of `fraction` digits.
 ** `fixed(fraction: Digits): Unary<number, string>`
-— returns a function that
-returns a number in the fixed-point notation with the given digits after the decimal point.
+— creates a function that returns the input number in fixed-point notation with a given number of `fraction` digits.
 ** `precision(precision: Precision): Unary<number, string>`
-— returns a function that
-returns a number in the exponential or fixed-point notation with the given precision.
+— creates a function that returns the input number in fixed-point or exponential notation
+rounded to a given `precision`.
 +
 [WARNING]
 ====
@@ -37,71 +41,103 @@ So passing digits or precision over 15 requires careful consideration and thorou
 ====
 +
 * Arithmetic functions:
++
 ** `sum(augend: number, addend: number): number`
+— returns the result of addition of the given numbers.
 ** `difference(minuend: number, subtrahend: number): number`
+— returns the result of subtraction of a given `subtrahend` from a given `minuend`.
 ** `product(multiplier: number, multiplicand: number): number`
+— returns the result of multiplication of given numbers.
 ** `quotient(dividend: number, divisor: number): number`
+— returns the result of division of a given `dividend` by a given `divisor`.
 ** `remainder(dividend: number, divisor: number): number`.
+— returns the remainder of division of a given `dividend` by a given `divisor`.
 +
 * Set functions:
++
 ** `maximum(values: readonly number[]): number | null`
-— returns the maximum number if array contains numbers, `null` otherwise.
+— returns the largest of given numbers (ignores `NaN`).
+If the given `values` array is empty or contains only `NaN`, returns `null`.
+Use this function instead of `Math.max`, as it returns `Infinity` or `NaN` for edge cases.
++
 ** `minimum(values: readonly number[]): number | null`
-— returns the minimum number if array contains numbers, `null` otherwise.
+— returns the smallest of given numbers (ignores `NaN`).
+If the given `values` array is empty or contains only `NaN`, returns `null`.
+Use this function instead of `Math.min`, as it returns `Infinity` or `NaN` for edge cases.
 
 
 == Integer
 
 * Nominal types (aliases of `number`):
-** `Integer`;
-** `SafeInteger`;
-** `PositiveInteger`;
-** `NonNegativeInteger`;
-** `NonPositiveInteger`;
+** `Integer`
+— a positive natural number, zero, and negative integer number.
+** `SafeInteger`
+— integers from `-(2^53 - 1)` to `2^53 - 1`, inclusive.
+** `PositiveInteger`
+— an integer that is greater than or equal to 0.
+** `NonNegativeInteger`
+— an integer that is greater than 0.
+** `NonPositiveInteger`
+— an integer that is less than or equal to 0.
 ** `NegativeInteger`.
+— an integer that is less than 0.
 +
 * Predicates:
 ** `isInteger(value: number): value is Integer`
+— returns `true` if a given number is an integer.
 ** `isSafeInteger(value: number): value is SafeInteger`
+— returns `true` if a given number is from `-(2^53 - 1)` to `2^53 - 1`, inclusive.
 ** `isNonNegativeInteger(value: number): value is NonNegativeInteger`
+— returns `true` if a given number is an integer and is greater than or equal to 0.
 ** `isPositiveInteger(value: number): value is PositiveInteger`
+— returns `true` if a given number is an integer and is greater than 0.
 ** `isNonPositiveInteger(value: number): value is NonPositiveInteger`
+— returns `true` if a given number is an integer and is less than or equal to 0.
 ** `isNegativeInteger(value: number): value is NegativeInteger`
+— returns `true` if a given number is an integer and is less than 0.
 
 
 == Natural
 
-`Natural` type is a nominal type based on the `number` type.
-
+* Nominal types (aliases of `number`):
++
+** `Natural`
+— a non-negative integer, according to the ISO 80000-2.
++
 * Type Guards:
++
 ** `isNatural<T>(value: number | T): value is Natural`.
+— returns `true` if a given number is a non-negative integer.
 
 
 == Base (Radix)
 
 The `parseFloat()`, `parseInt()`, and `Number.prototype.toString()` functions are combined
-into polymorphic shortcuts for readability:
+into polymorphic shortcuts for readability and avoiding `NaN`.
 
 * `decimal(value: number): string`
-— returns a decimal representation of a number.
+— returns a string representing a specified number in decimal notation (base 10).
 * `decimal(value: string): number | null`
-— parses a decimal (float) string into a number;
-returns `null` if parsing failed or returned `NaN`.
+— returns a `number` parsed from a given string in decimal notation (base 10).
+If the string cannot be parsed, returns `null`.
++
 * `binary(value: Integer): string`
-— returns a binary representation of an integer.
+— returns a string representing a specified integer in binary notation (base 2).
 * `binary(value: string): Integer | null`
-— parses a binary string into an integer;
-returns `null` if parsing failed or returned `NaN`.
+— Returns an integer `number` parsed from a given string in binary notation (base 2).
+If the string cannot be parsed, returns `null`.
++
 * `octal(value: Integer): string`
-— returns an octal representation of an integer.
+— returns a string representing a specified integer in octal notation (base 8).
 * `octal(value: string): Integer | null`
-— parses an octal string into an integer;
-returns `null` if parsing failed or returned `NaN`.
+— returns an integer `number` parsed from a given string in octal notation (base 8).
+If the string cannot be parsed, returns `null`.
++
 * `hexadecimal(value: Integer): string`
-— returns a hexadecimal representation of an integer.
+— returns a string representing a specified integer in hexadecimal notation (base 16).
 * `hexadecimal(value: string): Integer | null`
-— parses a hexadecimal string into an integer;
-returns `null` if parsing failed or returned `NaN`.
+— returns an integer `number` parsed from a given string in hexadecimal notation (base 16).
+If the string cannot be parsed, returns `null`.
 
 [NOTE]
 ====
@@ -128,82 +164,99 @@ and `to()` method requires a type parameter to compile.
 
 * Predicates:
 ** `isEqualTo(value: number): Predicate<number>`
+— creates a function that returns `true` if the input number is equal to a given `value`.
 ** `isNotEqualTo(value: number): Predicate<number>`
+— creates a function that returns `true` if the input number is not equal to a given `value`.
 ** `isGreaterThan(value: number): Predicate<number>`
+— creates a function that returns `true` if the input number is greater than a given `value`.
 ** `isGreaterThanOrEqualTo(value: number): Predicate<number>`
+— creates a function that returns `true` if the input number is greater than or equal to a given `value`.
 ** `isLessThan(value: number): Predicate<number>`
+— creates a function that returns `true` if the input number is less than a given `value`.
 ** `isLessThanOrEqualTo(value: number): Predicate<number>`
+— creates a function that returns `true` if the input number is less than or equal to a given `value`.
 +
 * Sorting:
 ** `ascending(a: number, b: number): number`
+— returns a negative number if the first argument is less than the second argument.
++
+Can be used as a callback for the `Array.prototype.sort()` method to sort numbers in ascending order.
++
 ** `descending(a: number, b: number): number`
+— Returns a positive number if the first argument is greater than the second argument.
++
+Can be used as a callback for the `Array.prototype.sort()` method to sort numbers in descending order.
 
 
 == Interval
 
-`Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
-
-* Unit functions:
+* Type:
++
+** `Interval` represents a https://en.wikipedia.org/wiki/Interval_(mathematics)[real interval] range.
++
+* Constructors:
++
 ** `interval(min: number, max: number): Interval | null`
-— returns an `Interval` when `min <= max`.
+— creates an `Interval` from given `min` and `max` numbers.
+If `min` is greater than `max`, returns `null`.
 ** `intervalFromPair(pair: readonly [number, number]): Interval | null`
-— returns an `Interval` for an ordered pair.
+— creates an `Interval` from a given pair of numbers, where the first number is `min` and the second is `max`.
+If `min` is greater than `max`, returns `null`.
 ** `intervalFromValues(values: number[]): Interval | null`
-— returns an `Interval` for a non-empty array.
+— creates an `Interval` from the minimum and maximum numbers in a given array of numbers.
+If the given array is empty, returns `null`.
 ** `intervalFromNullable(min: number | null, max: number | null): Interval | null`
-— returns an `Interval` from nullable values, replacing them with `-Infinity` and `Infinity`;
-returns `null` if `min > max`.
+— creates an `Interval` from the given `min` and `max` numbers, which can be null.
+If the `min` is `null`, the interval will have a minimum of -∞.
+If the `max` is `null`, the interval will have a maximum of +∞.
 +
 * Predicates:
++
 ** `isInInterval(interval: Interval): Predicate<number>`
-— returns a predicate to check if a number is in a closed interval.
+— creates a predicate that checks returns `true`
+if the input number is greater than or equal to the given `interval` minimum,
+or is less than or equal the given `interval` maximum.
++
 ** `isInOpenInterval(interval: Interval): Predicate<number>`
-— returns a predicate to check if a number is in an open interval.
+— creates a predicate that checks returns `true`
+if the input number is greater than the given `interval` minimum,
+or is less than the given `interval` maximum.
++
 ** `isInLeftOpenInterval(interval: Interval): Predicate<number>`
-— returns a predicate to check if a number is in a left-open (and right-closed) interval.
+— creates a predicate that checks returns `true`
+if the input number is greater than the given `interval` minimum,
+or is less than or equal the given `interval` maximum.
++
 ** `isInRightOpenInterval(interval: Interval): Predicate<number>`
-— returns a predicate to check if a number is in a right-open (and left-closed) interval.
-
-
-== Enum
-
-* Types:
-** `Enum<T extends number | string>` — a record generated based on the `enum` keyword;
-** `Member<T extends number | string>` — key of an enum.
-* Functions:
-** `members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[]`
-— returns a list of `enum` keys.
+— creates a predicate that checks returns `true`
+if the input number is greater than or equal to the given `interval` minimum,
+or is less than the given `interval` maximum.
 
 
 == Bitmasks
 
 * Types:
-** `Flags<T extends number = number>` — an `enum` with `number` values;
-** `Flag<T extends Flags>` — a key of a `Flags` enum.
-** `Bitmask<T extends Flags | number = number>` — a combination of bits.
-* Unit function:
++
+** `Flags<T extends number = number>`
+— an `enum` object with a list of available bitmask flags.
+** `Flag<T extends Flags>`
+— a bitmask flag defined in a given `Flags` enum.
+** `Bitmask<T extends Flags | number = number>`
+— a bitmask consisting of one or more `Flags`.
++
+* Constructor:
++
 ** `bitmask<T extends Flags | number = number>(flags: Bitmask<T>[]): Bitmask`
-— creates a bitmask by raising all given flags.
+— creates a bitmask with all given flags raised.
++
 * Predicates:
++
 ** `isFlagOn<T extends Flags | number>(bitmask: Bitmask<T>, flag: Bitmask<T>): boolean`
-— returns true when given flags are raised on a bitmask.
+— returns `true` if a given flag is raised on a bitmask.
 ** `hasFlagOn<T extends Flags | number>(flag: Bitmask<T>): Unary<Bitmask<T>, boolean>`
-— creates a curried version of the hasRaised() function.
-* Other:
+— creates a function that returns `true` if a given `flag` is raised in the input bitmask.
++
+* Functions:
++
 ** `raisedFlags<T extends number>(type: object, bitmask: Bitmask<T>): Member<T>[]`
 — returns flags that are raised on the given bitmask.
-
-
-== Roadmap
-
-* Add support for the `link:{mdn-js-globals}/Math[Math]` object.
-* Export the `base()` function to allow generic base values conversions.
-* Research support of the `link:{mdn-js-globals}/BigInt[BigInt]` type.
-* `Interval`:
-** `midpoint()`;
-** `radius()`;
-** `size`;
-** `isSubInterval()`;
-** `isStrictSubInterval()`.
-** verify correct behavior with `Infinity`.
-** consider adding negated functions, like `isNotInInterval()`.

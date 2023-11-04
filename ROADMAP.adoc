@@ -24,7 +24,36 @@
 :perfective-common: https://github.com/perfective/ts.common/blob/main/src
 :github-issues: https://github.com/perfective/ts.common/issues
 
-The primary development focus is to provide convenient functions and detailed documentation in the existing packages.
+The focus of this package is to provide convenient functions and monads to write readable code
+(as close as possible to elementary English language).
+So there are no plans to support low-level interfaces for the v1.0
+(like `DataView` or `ArrayBuffer`).
+
+The primary features are the `Maybe` and `Result` monads,
+and as monads and functors require a unary function parameter,
+this package tries to close the gap between existing ECMAScript functions.
+
+The general approach is the following:
+
+* Static unary functions and methods from JavaScript should be used as is,
+_unless_ they return some odd values for edge cases (e.g. `NaN`, `Infinity`, `-1`).
+In such cases, a corresponding function is added, to return `null` (or `undefined`).
+* Unary instance methods should have a corresponding function that can be used as a callback.
+For example, for the `String.prototype.split()` method, there is a corresponding `split()` function.
+So the code like `.then(v => v.split(';'))` can be just `.then(split(';'))`.
++
+At the moment, most of the functions have the same name as the method,
+but that may change later before v1.0.
++
+* Unary function or method with an optional argument may have a corresponding function (or two)
+with strict parameters.
++
+For example, `new Date()` has a corresponding `now()` function.
++
+* Built-in binary and ternary functions and methods may have one or more corresponding functions
+to create callbacks with partial application of the arguments.
+
+
 
 == Version 1.0
 
@@ -34,6 +63,12 @@ The primary development focus is to provide convenient functions and detailed do
 ** All versions after `ES6` are written in their year-based format (e.g. `ES2016`).
 * May support newer versions of ECMAScript if they have wide browser and TypeScript support.
 * Legacy browsers support may be provided using `@babel`.
+
+== Version 2.0
+
+Version 2.0 will be considered after v1.0 is released, if:
+
+* TypeScript adds support for https://github.com/microsoft/TypeScript/pull/33038[nominal types], partial application, or other features that can improve compile-time strictness of the types.
 
 == link:{mdn-js-globals}[Built-in objects]
 
@@ -289,6 +324,8 @@ a|
 
 === `link:{mdn-js-globals}/ArrayBuffer[ArrayBuffer]`
 
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -297,51 +334,51 @@ a|
 
 | `link:{mdn-js-globals}/ArrayBuffer/ArrayBuffer[ArrayBuffer()]`
 | `link:{ecma-es6}/#sec-arraybuffer-constructor[ES6]`
-| *TBD*
+| N/A
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/ArrayBuffer/@@species[[@@species\]]`
 | `link:{ecma-es6}/#sec-get-arraybuffer-@@species[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/byteLength[byteLength]`
 | `link:{ecma-es6}/#sec-get-arraybuffer.prototype.bytelength[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/detached[detached]`
 | `link:https://tc39.es/proposal-arraybuffer-transfer/#sec-get-arraybuffer.prototype.detached[Stage 3]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/maxByteLength[maxByteLength]`
 | `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-arraybuffer.prototype.maxbytelength[Stage 4]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/resizable[resizable]`
 | `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-arraybuffer.prototype.resizable[Stage 4]`
-| *TBD*
+| N/A
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/ArrayBuffer/isView[isView()]`
 | `link:{ecma-es6}/#sec-arraybuffer.isview[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/resize[resize()]`
 | `link:https://tc39.es/proposal-resizablearraybuffer/#sec-arraybuffer.prototype.resize[Stage 4]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/slice[slice()]`
 | `link:{ecma-es6}/#sec-arraybuffer.prototype.slice[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/transfer[transfer()]`
 | `link:https://tc39.es/proposal-arraybuffer-transfer/#sec-arraybuffer.prototype.transfer[Stage 3]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/ArrayBuffer/transferToFixedLength[transferToFixedLength()]`
 | `link:https://tc39.es/proposal-arraybuffer-transfer/#sec-arraybuffer.prototype.transfertofixedlength[Stage 3]`
-| *TBD*
+| N/A
 
 |===
 
@@ -411,6 +448,8 @@ a|
 
 === `link:{mdn-js-globals}/Atomics[Atomics]`
 
+Not planned for the v1.0 as it is not part of the ES6 standard.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -419,63 +458,65 @@ a|
 
 | `link:{mdn-js-globals}/Atomics/add[add()]`
 | `link:{ecma-es2017}/#sec-atomics.add[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/and[and()]`
 | `link:{ecma-es2017}/#sec-atomics.and[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/compareExchange[compareExchange()]`
 | `link:{ecma-es2017}/#sec-atomics.compareexchange[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/exchange[exchange()]`
 | `link:{ecma-es2017}/#sec-atomics.exchange[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/isLockFree[isLockFree()]`
 | `link:{ecma-es2017}/#sec-atomics.islockfree[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/load[load()]`
 | `link:{ecma-es2017}/#sec-atomics.load[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/notify[notify()]`
 | `link:{ecma-es2017}/#sec-atomics.load[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/or[or()]`
 | `link:{ecma-es2017}/#sec-atomics.or[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/store[store()]`
 | `link:{ecma-es2017}/#sec-atomics.store[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/sub[sub()]`
 | `link:{ecma-es2017}/#sec-atomics.sub[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/wait[wait()]`
 | `link:{ecma-es2017}/#sec-atomics.wait[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/waitAsync[waitAsync()]`
 | `link:{ecma-esnext}/#sec-atomics.waitasync[ESNext]`
-| *TBD*
+| N/A
 
 | `wake()`
 | `link:{ecma-es2018}/#sec-atomics.wake[ES2017]`-`ES2018`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/Atomics/xor[xor()]`
 | `link:{ecma-es2017}/#sec-atomics.xor[ES2017]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/BigInt[BigInt]`
+
+Not planned for the v1.0 as it is not part of the ES6 standard.
 
 [cols="~,1,~"]
 |===
@@ -485,33 +526,35 @@ a|
 
 | `link:{mdn-js-globals}/BigInt/BigInt[BigInt()]`
 | `link:{ecma-es2020}/#sec-bigint-constructor[ES2020]`
-| *TBD*
+| N/A
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/BigInt/asIntN[asIntN()]`
 | `link:{ecma-es2020}/#sec-bigint.asintn[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/BigInt/asUintN[asUintN()]`
 | `link:{ecma-es2020}/#sec-bigint.asuintn[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/BigInt/toLocaleString[toLocaleString()]`
 | `link:{ecma-es2020}/#sec-bigint.prototype.tolocalestring[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/BigInt/toString[toString()]`
 | `link:{ecma-es2020}/#sec-bigint.prototype.tostring[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/BigInt/valueOf[valueOf()]`
 | `link:{ecma-es2020}/#sec-bigint.prototype.valueof[ES2020]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/BigInt64Array[BigInt64Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -521,11 +564,13 @@ a|
 
 | `link:{mdn-js-globals}/BigInt64Array/BigInt64Array[BigInt64Array()]`
 | `link:{ecma-es2020}/#sec-typedarray-objects[ES2020]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/BigUint64Array[BigUint64Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -535,7 +580,7 @@ a|
 
 | `link:{mdn-js-globals}/BigUint64Array/BigUint64Array[BigUint64Array()]`
 | `link:{ecma-es2020}/#sec-typedarray-objects[ES2020]`
-| *TBD*
+| N/A
 
 |===
 
@@ -578,6 +623,8 @@ When a primitive value is expected, JavaScript invokes `valueOf()` automatically
 
 === `link:{mdn-js-globals}/DataView[DataView]`
 
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -586,103 +633,103 @@ When a primitive value is expected, JavaScript invokes `valueOf()` automatically
 
 | `link:{mdn-js-globals}/DataView/DataView[DataView()]`
 | `link:{ecma-es6}/#sec-dataview-constructor[ES6]`
-| *TBD*
+| N/A
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/DataView/buffer[buffer]`
 | `link:{ecma-es6}/#sec-get-dataview.prototype.buffer[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/byteLength[byteLength]`
 | `link:{ecma-es6}/#sec-get-dataview.prototype.bytelength[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/byteOffset[byteOffset]`
 | `link:{ecma-es6}/#sec-get-dataview.prototype.byteoffset[ES6]`
-| *TBD*
+| N/A
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/DataView/getBigInt64[getBigInt64()]`
 | `link:{ecma-es2020}/#sec-dataview.prototype.getbigint64[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getBigUint64[getBigUint64()]`
 | `link:{ecma-es2020}/#sec-dataview.prototype.getbiguint64[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getFloat32[getFloat32()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getfloat32[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getFloat64[getFloat64()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getfloat64[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getInt16[getInt16()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getint16[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getInt32[getInt32()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getint32[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getInt8[getInt8()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getint8[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getUint16[getUint16()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getuint16[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getUint32[getUint32()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getuint32[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/getUint8[getUint8()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.getuint8[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setBigInt64[setBigInt64()]`
 | `link:{ecma-es2020}/#sec-dataview.prototype.setbigint64[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setBigUint64[setBigUint64()]`
 | `link:{ecma-es2020}/#sec-dataview.prototype.setbiguint64[ES2020]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setFloat32[setFloat32()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setfloat32[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setFloat64[setFloat64()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setfloat64[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setInt16[setInt16()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setint16[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setInt32[setInt32()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setint32[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setInt8[setInt8()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setint8[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setUint16[setUint16()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setuint16[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setUint32[setUint32()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setuint32[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/DataView/setUint8[setUint8()]`
 | `link:{ecma-es6}/#sec-dataview.prototype.setuint8[ES6]`
-| *TBD*
+| N/A
 
 |===
 
@@ -1080,6 +1127,8 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/FinalizationRegistry[FinalizationRegistry]`
 
+Not planned for the v1.0 as it is not part of the ES6 standard.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -1088,21 +1137,23 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/FinalizationRegistry/FinalizationRegistry[FinalizationRegistry()]`
 | `link:{ecma-es2021}/#sec-finalization-registry-constructor[ES2021]`
-| *TBD*
+| N/A
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/FinalizationRegistry/register[register()]`
 | `link:{ecma-es2021}/#sec-finalization-registry.prototype.register[ES2021]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/FinalizationRegistry/unregister[unregister()]`
 | `link:{ecma-es2021}/#sec-finalization-registry.prototype.unregister[ES2021]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Float32Array[Float32Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -1112,11 +1163,13 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/Float32Array/Float32Array[Float32Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Float64Array[Float64Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -1126,7 +1179,7 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/Float64Array/Float64Array[Float64Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
@@ -1263,6 +1316,8 @@ a|
 
 === `link:{mdn-js-globals}/Int16Array[Int16Array]`
 
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -1271,11 +1326,13 @@ a|
 
 | `link:{mdn-js-globals}/Int16Array/Int16Array[Int16Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Int32Array[Int32Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -1285,11 +1342,13 @@ a|
 
 | `link:{mdn-js-globals}/Int32Array/Int32Array[Int32Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Int8Array[Int8Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -1299,7 +1358,7 @@ a|
 
 | `link:{mdn-js-globals}/Int8Array/Int8Array[Int8Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
@@ -1781,7 +1840,7 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/clz32[clz32()]`
 | `link:{ecma-es6}/#sec-math.clz32[ES6]`
-| *TBD*
+| N/A as a low-level (binary data) function.
 
 | `link:{mdn-js-globals}/Math/cos[cos()]`
 | `link:{ecma-es6}/#sec-math.cos[ES6]`
@@ -1813,7 +1872,7 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/imul[imul()]`
 | `link:{ecma-es6}/#sec-math.imul[ES6]`
-| *TBD*
+| N/A as a low-level (binary data) function.
 
 | `link:{mdn-js-globals}/Math/log[log()]`
 | `link:{ecma-es6}/#sec-math.log[ES6]`
@@ -2664,6 +2723,8 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/SharedArrayBuffer[SharedArrayBuffer]`
 
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -2672,35 +2733,35 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/SharedArrayBuffer[SharedArrayBuffer()]`
 | `link:{ecma-es2017}/#sec-sharedarraybuffer-constructor[ES2017]`
-| *TBD*
+| N/A
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/@@species[[@@species\]()]`
 | `link:{ecma-es2017}/#sec-sharedarraybuffer-@@species[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/byteLength[byteLength]`
 | `link:{ecma-es2017}/#sec-get-sharedarraybuffer.prototype.bytelength[ES2017]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/growable[growable]`
 | `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-sharedarraybuffer.prototype.growable[Stage 4]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/maxByteLength[maxByteLength]`
 | `link:https://tc39.es/proposal-resizablearraybuffer/#sec-get-sharedarraybuffer.prototype.maxbytelength[Stage 4]`
-| *TBD*
+| N/A
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/grow[grow()]`
 | `link:https://tc39.es/proposal-resizablearraybuffer/#sec-sharedarraybuffer.prototype.grow[Stage 4]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/SharedArrayBuffer/slice[slice()]`
 | `link:{ecma-es2017}/#sec-sharedarraybuffer.prototype.slice[ES2017]`
-| *TBD*
+| N/A
 
 |===
 
@@ -3046,6 +3107,8 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/TypedArray[TypedArray]`
 
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -3054,161 +3117,161 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/TypedArray/@@species[[@@species\]]`
 | `link:{ecma-es6}/#sec-get-%25typedarray%25-@@species[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/buffer[buffer]`
 | `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.buffer[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/byteLength[byteLength]`
 | `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.bytelength[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/byteOffset[byteOffset]`
 | `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.byteoffset[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/BYTES_PER_ELEMENT[BYTES_PER_ELEMENT]`
 | `link:{ecma-es6}/#sec-typedarray.bytes_per_element[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/length[length]`
 | `link:{ecma-es6}/#sec-get-%25typedarray%25.prototype.length[ES6]`
-| *TBD*
+| N/A
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/TypedArray/@@iterator[[@@iterator\]()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype-@@iterator[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/at[at()]`
 | `link:{ecma-es2022}/#sec-%25typedarray%25.prototype.at[ES2022]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/copyWithin[copyWithin()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.copywithin[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/entries[entries()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.entries[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/every[every()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.every[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/fill[fill()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.fill[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/filter[filter()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.filter[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/find[find()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.find[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/findIndex[findIndex()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.findindex[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/findLastIndex[findLastIndex()]`
 | `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.findlastindex[ES2023]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/forEach[forEach()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.foreach[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/from[from()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.from[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/includes[includes()]`
 | `link:{ecma-es2016}/#sec-%25typedarray%25.prototype.includes[ES2016]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/indexOf[indexOf()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.indexof[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/join[join()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.join[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/keys[keys()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.keys[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/lastIndexOf[lastIndexOf()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.lastindexof[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/map[map()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.map[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/of[of()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.of[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/reduce[reduce()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.reduce[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/reduceRight[reduceRight()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.reduceright[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/reverse[reverse()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.reverse[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/set[set()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.set-overloaded-offset[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/slice[slice()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.slice[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/some[some()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.some[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/sort[sort()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.sort[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/subarray[subarray()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.subarray[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/toLocaleString[toLocaleString()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.tolocalestring[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/toReversed[toReversed()]`
 | `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.toreversed[ES2023]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/toSorted[toSorted()]`
 | `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.tosorted[ES2023]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/toString[toString()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.tostring[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/values[values()]`
 | `link:{ecma-es6}/#sec-%25typedarray%25.prototype.values[ES6]`
-| *TBD*
+| N/A
 
 | `link:{mdn-js-globals}/TypedArray/with[with()]`
 | `link:{ecma-es2023}/#sec-%25typedarray%25.prototype.with[ES2023]`
-| *TBD*
+| N/A
 
 |===
 
@@ -3230,6 +3293,8 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 === `link:{mdn-js-globals}/Uint16Array[Uint16Array]`
 
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -3238,11 +3303,13 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/Uint16Array/Uint16Array[Uint16Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Uint32Array[Uint32Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -3252,11 +3319,13 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/Uint32Array/Uint32Array[Uint32Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Uint8Array[Uint8Array]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -3266,11 +3335,13 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/Uint8Array/Uint8Array[Uint8Array()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 
 === `link:{mdn-js-globals}/Uint8ClampedArray[Uint8ClampedArray]`
+
+Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 [cols="~,1,~"]
 |===
@@ -3280,7 +3351,7 @@ The `link:{perfective-common}/error/index.adoc[@perfective/common/error]` packag
 
 | `link:{mdn-js-globals}/Uint8ClampedArray/Uint8ClampedArray[Uint8ClampedArray()]`
 | `link:{ecma-es6}/#sec-typedarray-objects[ES6]`
-| *TBD*
+| N/A
 
 |===
 

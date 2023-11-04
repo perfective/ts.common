@@ -1697,6 +1697,8 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 === `link:{mdn-js-globals}/Math[Math]`
 
+The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` package covers the link:{ecma-es6}/#sec-math-object[ES6 Math object].
+
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
@@ -1705,77 +1707,77 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 | `link:{mdn-js-globals}/Math/E[E]`
 | `link:{ecma-es6}/#sec-math.e[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/LN10[LN10]`
 | `link:{ecma-es6}/#sec-math.ln10[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/LN2[LN2]`
 | `link:{ecma-es6}/#sec-math.ln2[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/LOG10E[LOG10E]`
 | `link:{ecma-es6}/#sec-math.log10e[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/LOG2E[LOG2E]`
 | `link:{ecma-es6}/#sec-math.log2e[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/PI[PI]`
 | `link:{ecma-es6}/#sec-math.pi[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/SQRT1_2[SQRT1_2]`
 | `link:{ecma-es6}/#sec-math.sqrt1_2[ES6]`
-| *TBD*
+| Use directly
 
 | `link:{mdn-js-globals}/Math/SQRT2[SQRT2]`
 | `link:{ecma-es6}/#sec-math.sqrt2[ES6]`
-| *TBD*
+| Use directly
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/Math/abs[abs()]`
 | `link:{ecma-es6}/#sec-math.abs[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/acos[acos()]`
 | `link:{ecma-es6}/#sec-math.acos[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/acosh[acosh()]`
 | `link:{ecma-es6}/#sec-math.acosh[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/asin[asin()]`
 | `link:{ecma-es6}/#sec-math.asin[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/asinh[asinh()]`
 | `link:{ecma-es6}/#sec-math.asinh[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/atan[atan()]`
 | `link:{ecma-es6}/#sec-math.atan[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/atan2[atan2()]`
 | `link:{ecma-es6}/#sec-math.atan2[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/atanh[atanh()]`
 | `link:{ecma-es6}/#sec-math.atanh[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/cbrt[cbrt()]`
 | `link:{ecma-es6}/#sec-math.cbrt[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/ceil[ceil()]`
 | `link:{ecma-es6}/#sec-math.ceil[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/clz32[clz32()]`
 | `link:{ecma-es6}/#sec-math.clz32[ES6]`
@@ -1783,31 +1785,31 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 | `link:{mdn-js-globals}/Math/cos[cos()]`
 | `link:{ecma-es6}/#sec-math.cos[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/cosh[cosh()]`
 | `link:{ecma-es6}/#sec-math.cosh[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/exp[exp()]`
 | `link:{ecma-es6}/#sec-math.exp[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/expm1[expm1()]`
 | `link:{ecma-es6}/#sec-math.expm1[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/floor[floor()]`
 | `link:{ecma-es6}/#sec-math.floor[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/fround[fround()]`
 | `link:{ecma-es6}/#sec-math.fround[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/hypot[hypot()]`
 | `link:{ecma-es6}/#sec-math.hypot[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/imul[imul()]`
 | `link:{ecma-es6}/#sec-math.imul[ES6]`
@@ -1815,67 +1817,67 @@ Use `unicorn/prefer-number-properties` ESLint rule to enforce.
 
 | `link:{mdn-js-globals}/Math/log[log()]`
 | `link:{ecma-es6}/#sec-math.log[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/log10[log10()]`
 | `link:{ecma-es6}/#sec-math.log10[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/log1p[log1p()]`
 | `link:{ecma-es6}/#sec-math.log1p[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/log2[log2()]`
 | `link:{ecma-es6}/#sec-math.log2[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/max[max()]`
 | `link:{ecma-es6}/#sec-math.max[ES6]`
-| *TBD*
+| Prefer `maximum()` to exclude `NaN`.
 
 | `link:{mdn-js-globals}/Math/min[min()]`
 | `link:{ecma-es6}/#sec-math.min[ES6]`
-| *TBD*
+| Prefer `minimum()` to exclude `NaN`.
 
 | `link:{mdn-js-globals}/Math/pow[pow()]`
 | `link:{ecma-es6}/#sec-math.pow[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/random[random()]`
 | `link:{ecma-es6}/#sec-math.random[ES6]`
-| *TBD*
+| link:{github-issues}/24[TODO/24]
 
 | `link:{mdn-js-globals}/Math/round[round()]`
 | `link:{ecma-es6}/#sec-math.round[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/sign[sign()]`
 | `link:{ecma-es6}/#sec-math.sign[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/sin[sin()]`
 | `link:{ecma-es6}/#sec-math.sin[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/sinh[sinh()]`
 | `link:{ecma-es6}/#sec-math.sinh[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/sqrt[sqrt()]`
 | `link:{ecma-es6}/#sec-math.sqrt[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/tan[tan()]`
 | `link:{ecma-es6}/#sec-math.tan[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/tanh[tanh()]`
 | `link:{ecma-es6}/#sec-math.tanh[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 | `link:{mdn-js-globals}/Math/trunc[trunc()]`
 | `link:{ecma-es6}/#sec-math.trunc[ES6]`
-| *TBD*
+| link:{github-issues}/20[TODO/20]
 
 |===
 

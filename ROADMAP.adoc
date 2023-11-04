@@ -1250,15 +1250,14 @@ a|
 
 === `link:{mdn-js-globals}/Infinity[Infinity]`
 
-The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` package provides functions to work with `Infinity`.
-
 [cols="~,1,~"]
 |===
 | JavaScript | ECMA | Perfective
 
 | `link:{mdn-js-globals}/Infinity[Infinity]`
 | `link:{ecma-es6}/#sec-value-properties-of-the-global-object-infinity[ES6]`
-| Use `isEqualTo()`/`isNotEqualTo()` and other predicates to create a callback to check for `Infinity`.
+| *Prohibited*. Prefer `Number.POSITIVE_INFINITY` over `Infinity`
+(Use `unicorn/prefer-number-properties` ESLint rule to enforce).
 
 |===
 
@@ -1904,91 +1903,97 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 3+| *Constructor*
 
+| `link:{mdn-js-globals}/Number/Number[new Number()]`
+| `link:{ecma-es6}/#sec-number-constructor[ES6]`
+| *Prohibited*. Use the `link:{eslint-rules}/no-new-wrappers[no-new-wrappers]` ESLint rule to enforce.
+
 | `link:{mdn-js-globals}/Number/Number[Number()]`
 | `link:{ecma-es6}/#sec-number-constructor[ES6]`
-| *TBD*
+| *Discouraged*. Use explicit conversions (e.g. `decimal()`).
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/Number/EPSILON[EPSILON]`
 | `link:{ecma-es6}/#sec-number.epsilon[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Number/MAX_SAFE_INTEGER[MAX_SAFE_INTEGER]`
 | `link:{ecma-es6}/#sec-number.max_safe_integer[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Number/MAX_VALUE[MAX_VALUE]`
 | `link:{ecma-es6}/#sec-number.max_value[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Number/MIN_SAFE_INTEGER[MIN_SAFE_INTEGER]`
 | `link:{ecma-es6}/#sec-number.min_safe_integer[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Number/MIN_VALUE[MIN_VALUE]`
 | `link:{ecma-es6}/#sec-number.min_value[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Number/NaN[NaN]`
 | `link:{ecma-es6}/#sec-number.nan[ES6]`
-| *TBD*
+a| *Discouraged*
 
+* Use `isNumber()`/`isNotNumber()` as a type guard.
+* Return `null` instead of `NaN` or throw an error in functions.
 
 | `link:{mdn-js-globals}/Number/NEGATIVE_INFINITY[NEGATIVE_INFINITY]`
 | `link:{ecma-es6}/#sec-number.negative_infinity[ES6]`
-| *TBD*
+| Use directly
 
 
 | `link:{mdn-js-globals}/Number/POSITIVE_INFINITY[POSITIVE_INFINITY]`
 | `link:{ecma-es6}/#sec-number.positive_infinity[ES6]`
-| *TBD*
+| Use directly
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/Number/isFinite[isFinite()]`
 | `link:{ecma-es6}/#sec-number.isfinite[ES6]`
-| *TBD*
+| link:{github-issues}/18[TODO]
 
 
 | `link:{mdn-js-globals}/Number/isInteger[isInteger()]`
 | `link:{ecma-es6}/#sec-number.isinteger[ES6]`
-| *TBD*
+| Prefer `isInteger()` as a type guard.
 
 
 | `link:{mdn-js-globals}/Number/isNaN[isNaN()]`
 | `link:{ecma-es6}/#sec-number.isnan[ES6]`
-| *TBD*
+| Prefer `isNumber()`/`isNotNumber()` as a type guard. See link:{github-issues}/19[TODO].
 
 
 | `link:{mdn-js-globals}/Number/isSafeInteger[isSafeInteger()]`
 | `link:{ecma-es6}/#sec-number.issafeinteger[ES6]`
-| *TBD*
+| Prefer `isSafeInteger()` as a type guard.
 
 
 | `link:{mdn-js-globals}/Number/parseFloat[parseFloat()]`
 | `link:{ecma-es6}/#sec-number.parsefloat[ES6]`
-| *TBD*
+| Prefer `decimal()` as it returns `null` instead of `NaN` on failure.
 
 
 | `link:{mdn-js-globals}/Number/parseInt[parseInt()]`
 | `link:{ecma-es6}/#sec-number.parseint[ES6]`
-| *TBD*
+| Prefer `decimal()`/`binary()`/`octal()`/`hexadecimal()` as they return `null` instead of `NaN` on failure.
 
 
 | `link:{mdn-js-globals}/Number/toExponential[toExponential()]`
 | `link:{ecma-es6}/#sec-number.prototype.toexponential[ES6]`
-| *TBD*
+| Use `exponential()` to create a callback.
 
 
 | `link:{mdn-js-globals}/Number/toFixed[toFixed()]`
 | `link:{ecma-es6}/#sec-number.prototype.tofixed[ES6]`
-| *TBD*
+| Use `fixed()` to create a callback.
 
 
 | `link:{mdn-js-globals}/Number/toLocaleString[toLocaleString()]`
@@ -1998,12 +2003,12 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Number/toPrecision[toPrecision()]`
 | `link:{ecma-es6}/#sec-number.prototype.toprecision[ES6]`
-| *TBD*
+| Use `precision()` to create a callback.
 
 
 | `link:{mdn-js-globals}/Number/toString[toString()]`
 | `link:{ecma-es6}/#sec-number.prototype.tostring[ES6]`
-| *TBD*
+| Prefer `decimal()`/`binary()`/`octal()`/`hexadecimal()` for better readability.
 
 
 | `link:{mdn-js-globals}/Number/valueOf[valueOf()]`

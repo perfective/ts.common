@@ -13,6 +13,7 @@ export function isNumber<T>(value: number | T): value is number {
  * @since v0.2.1
  */
 export function isNotNumber<T>(value: number | T): value is T {
+    // TODO: https://github.com/perfective/ts.common/issues/19
     return typeof value !== 'number' || Number.isNaN(value);
 }
 

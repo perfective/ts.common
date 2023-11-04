@@ -1,6 +1,6 @@
 import { difference, product, quotient, remainder, sum } from './arithmetic';
 
-describe('sum', () => {
+describe(sum, () => {
     it('is commutative', () => {
         expect(sum(2, 3))
             .toStrictEqual(sum(3, 2));
@@ -24,14 +24,14 @@ describe('sum', () => {
     });
 });
 
-describe('difference', () => {
+describe(difference, () => {
     it('is anti-commutative', () => {
         expect(difference(5, 3))
             .toStrictEqual(-difference(3, 5));
     });
 });
 
-describe('product', () => {
+describe(product, () => {
     it('is commutative', () => {
         expect(product(3, 5))
             .toStrictEqual(product(5, 3));
@@ -74,8 +74,8 @@ describe('product', () => {
     });
 });
 
-describe('quotient', () => {
-    it('is a real number result of division of dividend by divisor', () => {
+describe(quotient, () => {
+    it('returns a float number result of division of dividend by divisor', () => {
         expect(quotient(5, 2))
             .toBe(2.5);
     });
@@ -88,8 +88,8 @@ describe('quotient', () => {
     });
 });
 
-describe('remainder', () => {
-    it('is an integer remainder of division of dividend by divisor', () => {
+describe(remainder, () => {
+    it('returns an integer remainder of division of dividend by divisor', () => {
         expect(remainder(5, 3))
             .toBe(2);
     });

@@ -1,6 +1,6 @@
 import { exponential, fixed, precision } from './lift';
 
-describe('exponential', () => {
+describe(exponential, () => {
     describe('exponential(n)', () => {
         it('returns a string representation of a number in exponential notation', () => {
             expect(exponential(0)(3.141_592_653_589_793))
@@ -28,7 +28,7 @@ describe('exponential', () => {
     });
 });
 
-describe('fixed', () => {
+describe(fixed, () => {
     describe('fixed(n)', () => {
         it('returns a string representation of a number in fixed-point notation', () => {
             expect(fixed(0)(3.141_592_653_589_793))
@@ -60,7 +60,7 @@ describe('fixed', () => {
     });
 });
 
-describe('precision', () => {
+describe(precision, () => {
     describe('precision(n)', () => {
         it('returns a string representation of a number with a given precision', () => {
             expect(precision(1)(3.141_592_653_589_793))

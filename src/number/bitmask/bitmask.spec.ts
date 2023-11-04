@@ -45,7 +45,7 @@ describe('Bitmask<T>', () => {
     });
 });
 
-describe('bitmask', () => {
+describe(bitmask, () => {
     it('creates a bitmask with the given flags on', () => {
         expect(bitmask([Style.Dotted, Style.Double, Style.Inset]))
             .toBe(0b0100_1001);
@@ -54,47 +54,61 @@ describe('bitmask', () => {
     });
 });
 
-describe('raisedFlags', () => {
+describe(raisedFlags, () => {
     it('returns flags that are raised on the given bitmask', () => {
         expect(raisedFlags(Style, 0b0100_1001))
             .toStrictEqual(['Dotted', 'Double', 'Inset']);
     });
 });
 
-describe('isFlagOn', () => {
-    it('returns true when all of the given flags are raised on the bitmask', () => {
-        expect(isFlagOn(0b0110_0011, 0b0110_0010))
-            .toBe(true);
-        expect(isFlagOn<Style>(0b0100_1001, Style.Dotted))
-            .toBe(true);
+describe(isFlagOn, () => {
+    describe('when all of the given flags are raised on the bitmask', () => {
+        it('returns true', () => {
+            expect(isFlagOn(0b0110_0011, 0b0110_0010))
+                .toBe(true);
+            expect(isFlagOn<Style>(0b0100_1001, Style.Dotted))
+                .toBe(true);
+        });
     });
 
-    it('returns false when any the given flag is not raised on the bitmask', () => {
-        expect(isFlagOn(0b1001_0110, 0b0100_1001))
-            .toBe(false);
+    describe('when any the given flag is not raised on the bitmask', () => {
+        it('returns false', () => {
+            expect(isFlagOn(0b1001_0110, 0b0100_1001))
+                .toBe(false);
+        });
     });
 
-    it('returns false when flag is 0', () => {
-        expect(isFlagOn(BitBool.True, BitBool.False))
-            .toBe(false);
+    describe('when a given flag is 0', () => {
+        it('returns false', () => {
+            expect(isFlagOn(BitBool.True, BitBool.False))
+                .toBe(false);
+        });
     });
 });
 
-describe('hasFlagOn', () => {
-    it('returns true when all of the given flags are raised on the bitmask', () => {
-        expect(hasFlagOn(0b0000_0010)(0b0000_0010))
-            .toBe(true);
-        expect(hasFlagOn(0b0110_0010 as number)(0b0110_0011))
-            .toBe(true);
-    });
+describe(hasFlagOn, () => {
+    describe('hasFlagOn(flag)', () => {
+        describe('when all of the given flags are raised on the bitmask', () => {
+            it('returns true', () => {
+                expect(hasFlagOn(0b0000_0010)(0b0000_0010))
+                    .toBe(true);
+                expect(hasFlagOn(0b0110_0010 as number)(0b0110_0011))
+                    .toBe(true);
+            });
+        });
 
-    it('returns false when any the given flag is not raised on the bitmask', () => {
-        expect(hasFlagOn(0b0000_0010 as number)(0b0000_0001))
-            .toBe(false);
-    });
+        describe('when any the given flag is not raised on the bitmask', () => {
+            it('returns false', () => {
+                expect(hasFlagOn(0b0000_0010 as number)(0b0000_0001))
+                    .toBe(false);
+            });
+        });
 
-    it('returns false when flag is 0', () => {
-        expect(hasFlagOn<BitBool>(BitBool.False)(BitBool.True))
-            .toBe(false);
+        describe('when flag is 0', () => {
+            it('returns false', () => {
+                expect(hasFlagOn<BitBool>(BitBool.False)(BitBool.True))
+                    .toBe(false);
+            });
+        });
     });
 });

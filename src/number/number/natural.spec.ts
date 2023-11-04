@@ -1,52 +1,70 @@
 import { isNatural } from './natural';
 
-describe('isNatural', () => {
-    it('returns true when value is a positive integer', () => {
-        expect(isNatural(1))
-            .toBe(true);
+describe(isNatural, () => {
+    describe('when value is a positive integer', () => {
+        it('returns true', () => {
+            expect(isNatural(1))
+                .toBe(true);
+        });
     });
 
-    it('returns true when value is zero', () => {
-        expect(isNatural(0))
-            .toBe(true);
+    describe('when value is zero', () => {
+        it('returns true', () => {
+            expect(isNatural(0))
+                .toBe(true);
+        });
     });
 
-    it('returns true when value is a maximum safe integer', () => {
-        expect(isNatural(Number.MAX_SAFE_INTEGER))
-            .toBe(true);
+    describe('when value is a maximum safe integer', () => {
+        it('returns true', () => {
+            expect(isNatural(Number.MAX_SAFE_INTEGER))
+                .toBe(true);
+        });
     });
 
-    it('returns true when value is maximum value', () => {
-        expect(isNatural(Number.MAX_VALUE))
-            .toBe(true);
+    describe('when value is maximum value', () => {
+        it('returns true', () => {
+            expect(isNatural(Number.MAX_VALUE))
+                .toBe(true);
+        });
     });
 
-    it('returns false when value is a positive infinity', () => {
-        expect(isNatural(Number.POSITIVE_INFINITY))
-            .toBe(false);
+    describe('when value is a positive infinity', () => {
+        it('returns false', () => {
+            expect(isNatural(Number.POSITIVE_INFINITY))
+                .toBe(false);
+        });
     });
 
-    it('returns false when value is a negative integer', () => {
-        expect(isNatural(-1))
-            .toBe(false);
+    describe('when value is a negative integer', () => {
+        it('returns false', () => {
+            expect(isNatural(-1))
+                .toBe(false);
+        });
     });
 
-    it('returns false when value is a float', () => {
-        expect(isNatural(3.14))
-            .toBe(false);
+    describe('when value is a float', () => {
+        it('returns false', () => {
+            expect(isNatural(3.14))
+                .toBe(false);
+        });
     });
 
-    it('returns false when value is NaN', () => {
-        expect(isNatural(Number.NaN))
-            .toBe(false);
+    describe('when value is NaN', () => {
+        it('returns false', () => {
+            expect(isNatural(Number.NaN))
+                .toBe(false);
+        });
     });
 
-    it('returns false when value is not a number', () => {
-        expect(isNatural('3'))
-            .toBe(false);
-        expect(isNatural(true))
-            .toBe(false);
-        expect(isNatural(false))
-            .toBe(false);
+    describe('when value is not a number', () => {
+        it('returns false', () => {
+            expect(isNatural('3'))
+                .toBe(false);
+            expect(isNatural(true))
+                .toBe(false);
+            expect(isNatural(false))
+                .toBe(false);
+        });
     });
 });

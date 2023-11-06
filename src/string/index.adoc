@@ -7,7 +7,7 @@ It provides the following functions and additional types.
 
 * Unit functions:
 ** `lines(value: string): string[]`
-— creates an array from string split by the newline characters.
+— splits a given string into an array of string based on the line separator (`\n`, `\r\n\`, and `\r`).
 +
 * Type guards:
 ** `isString<T>(value: T | string): value is string`

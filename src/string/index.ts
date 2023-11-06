@@ -47,7 +47,9 @@ export {
     isNotString,
     isString,
     length,
+    /* eslint-disable deprecation/deprecation -- TODO: Delete in v0.11.0-alpha */
     stringFromCharCode,
     stringFromCodePoint,
+    /* eslint-enable deprecation/deprecation */
     Utf16CodeUnit,
 } from './string/string';

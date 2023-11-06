@@ -44,11 +44,9 @@ It provides the following functions and additional types.
 ** `search(search: RegExp): Unary<string, number | -1>`
 +
 * `Utf16CodeUnit`:
-** `stringFromCharCode(...codes: Utf16CodeUnit[]): string`
 ** `charCodeAt(index: number): Unary<string, Utf16CodeUnit>`
 +
 * `CodePoint`:
-** `stringFromCodePoint(...codePoints: CodePoint[]): string`
 ** `codePointAt(position: number): Unary<string, CodePoint | undefined>`
 +
 * `UnicodeNormalizationForm`:

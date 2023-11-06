@@ -115,6 +115,8 @@ describe('length', () => {
     });
 });
 
+/* eslint-disable deprecation/deprecation -- TODO: Delete in v0.11.0-alpha */
+
 describe('stringFromCharCode', () => {
     it('creates a string from the given UTF-16 code units', () => {
         expect(stringFromCharCode(65, 66, 67))
@@ -128,3 +130,5 @@ describe('stringFromCodePoint', () => {
             .toBe('🇺🇸');
     });
 });
+
+/* eslint-enable deprecation/deprecation */

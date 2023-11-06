@@ -1,7 +1,7 @@
 import { Format, format, formatted } from './format';
 import { Tokens } from './tokens';
 
-describe('format', () => {
+describe(format, () => {
     describe('format(string)', () => {
         it('creates a Format record without tokens', () => {
             expect(format('Output string'))
@@ -41,7 +41,7 @@ describe('format', () => {
     });
 });
 
-describe('formatted', () => {
+describe(formatted, () => {
     it('replaces named tokens in the string', () => {
         expect(formatted({
             template: 'Formatted values: {{first}}, {{second}}, {{third}}',

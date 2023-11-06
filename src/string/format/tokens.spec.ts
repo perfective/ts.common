@@ -1,6 +1,6 @@
 import { tokenKey, Tokens, tokens } from './tokens';
 
-describe('tokens', () => {
+describe(tokens, () => {
     describe('tokens(string[])', () => {
         it('creates a Tokens record using array indices', () => {
             expect(tokens(['first', 'second', 'third']))
@@ -25,32 +25,38 @@ describe('tokens', () => {
     });
 });
 
-describe('tokenKey', () => {
-    it('creates a regular expression to find a token by key', () => {
+describe(tokenKey, () => {
+    it('creates a regular expression to find a token', () => {
         const value: RegExp = tokenKey('id');
 
         expect(value).toStrictEqual(/\{\{id\}\}/gu);
         expect(value.test('User ID {{id}}')).toBe(true);
     });
 
-    it('creates a regular expression to find a token when key has a dash', () => {
-        const value: RegExp = tokenKey('user-id');
+    describe('when key has a dash', () => {
+        it('creates a regular expression to find a token', () => {
+            const value: RegExp = tokenKey('user-id');
 
-        expect(value).toStrictEqual(/\{\{user-id\}\}/gu);
-        expect(value.test('User ID {{user-id}}')).toBe(true);
+            expect(value).toStrictEqual(/\{\{user-id\}\}/gu);
+            expect(value.test('User ID {{user-id}}')).toBe(true);
+        });
     });
 
-    it('creates a regular expression to find a token when key has an underscore', () => {
-        const value: RegExp = tokenKey('user_id');
+    describe('when key has an underscore', () => {
+        it('creates a regular expression to find a token', () => {
+            const value: RegExp = tokenKey('user_id');
 
-        expect(value).toStrictEqual(/\{\{user_id\}\}/gu);
-        expect(value.test('User ID {{user_id}}')).toBe(true);
+            expect(value).toStrictEqual(/\{\{user_id\}\}/gu);
+            expect(value.test('User ID {{user_id}}')).toBe(true);
+        });
     });
 
-    it('create a regular expression to find a token when key has a $ symbol', () => {
-        const value: RegExp = tokenKey('id$');
+    describe('when key has a $ symbol', () => {
+        it('create a regular expression to find a token', () => {
+            const value: RegExp = tokenKey('id$');
 
-        expect(value).toStrictEqual(/\{\{id\$\}\}/gu);
-        expect(value.test('User ID {{id$}}')).toBe(true);
+            expect(value).toStrictEqual(/\{\{id\$\}\}/gu);
+            expect(value.test('User ID {{id$}}')).toBe(true);
+        });
     });
 });

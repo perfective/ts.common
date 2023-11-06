@@ -57,15 +57,23 @@ It provides the following functions and additional types.
 
 == Format
 
-* `Format`:
+* `Format`
+— represents a template with tokens that can be turned into a string.
 ** `format(template: string, tokens: Tokens | unknown[] = {}): Format`
-— creates a `Format` record converting positional tokens into named.
+— creates a {@link Format} record with the given `template` and `tokens`.
 ** `formatted(input: Format): string`
-— replaces input tokens in the input template.
+— replaces `Format.tokens` in the `Format.template` and returns the resulting string.
++
+Each token is wrapped in the double curly braces.
+For example, a template with a token `{\{foo}}` will be replaced by the string value of the token `foo`.
 +
 * `Tokens`:
+— a mapping between a token and its string value.
 ** `tokens(tokens: unknown[] | Tokens): Tokens`
-— converts positional tokens (an array of `unknown` values) into named `Tokens`.
+— creates `Tokens` record from a given array of positional tokens,
+where each token is an index of each value in the given array.
++
+If given a `Tokens` object returns the given object.
 
 
 == Roadmap

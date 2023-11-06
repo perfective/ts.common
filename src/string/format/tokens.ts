@@ -1,7 +1,20 @@
+/**
+ * A mapping between a token and its string value.
+ *
+ * @since v0.3.0
+ */
 export interface Tokens
     extends Record<string, string> {
 }
 
+/**
+ * Creates {@link Tokens} record from a given array of positional tokens,
+ * where each token is an index of each value in the given array.
+ *
+ * If given a {@link Tokens} object returns the given object.
+ *
+ * @since v0.3.0
+ */
 export function tokens(tokens: unknown[] | Tokens): Tokens {
     if (Array.isArray(tokens)) {
         return tokens.reduce((tokens: Tokens, value: unknown, i: number): Tokens => {
@@ -16,6 +29,8 @@ export function tokens(tokens: unknown[] | Tokens): Tokens {
  * Creates a token RegExp from a key.
  *
  * @protected
+ *
+ * @since v0.3.0
  */
 export function tokenKey(key: string): RegExp {
     return new RegExp(

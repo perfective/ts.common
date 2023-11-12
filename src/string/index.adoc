@@ -5,52 +5,95 @@ The `@perfective/common/string` package works with the standard JS
 `link:{mdn-js-globals}/String[String]` type.
 It provides the following functions and additional types.
 
-* Unit functions:
-** `lines(value: string): string[]`
-— splits a given string into an array of string based on the line separator (`\n`, `\r\n\`, and `\r`).
-+
 * Type guards:
 ** `isString<T>(value: T | string): value is string`
+— returns `true` if a given value is a `string`.
 ** `isNotString<T>(value: T | string): value is T`
-+
-* Predicates:
-** `isEmpty(value: string): boolean`
-** `isNotEmpty(value: string): boolean`
-** `includes(search: string, position?: number): Unary<string, boolean>`
-** `endsWith(search: string, length?: number): Unary<string, boolean>`
-** `startsWith(search: string, from: number = 0): Unary<string, boolean>`
+— returns `true` if a given value is not a `string`.
 +
 * Properties:
 ** `length(value: string): number`
+— returns the length of a given string.
++
+* Predicates:
+** `isEmpty(value: string): boolean`
+— returns `true` if a given string is empty.
+** `isNotEmpty(value: string): boolean`
+— returns `true` if a given string is not empty.
 +
 * Operators:
-** `charAt(index: number): Unary<string, string>`
-** `concat(...strings: string[]): Unary<string, string>`
-** `concatTo(value: string): Unary<string | string[], string>`
+** `lines(value: string): string[]`
+— splits a given string into an array of string based on the line separator (`\n`, `\r\n`, and `\r`).
 ** `lowerCase(value: string): string`
-** `padEnd(length: number, fill?: string): Unary<string, string>`
-** `padStart(length: number, fill?: string): Unary<string, string>`
-** `repeat(count: number): Unary<string, string>`
-** `replace(search: string | RegExp, replacement: string): Unary<string, string>`
-** `replaceWith(search: string | RegExp, replacement: Replacement): Unary<string, string>`
-** `slice(start: number, end?: number): Unary<string, string>`
-** `split(separator: string | RegExp, limit?: number): Unary<string, string[]>`
-** `trim(value: string): string`
+— converts a given string to lower case.
 ** `upperCase(value: string): string`
+— converts a given string to upper case.
+** `trim(value: string): string`
+— removes whitespace from both ends of a given string.
 +
-* Search functions:
-** `indexOf(search: string, from: number = 0): Unary<string, number>`
-** `lastIndexOf(search: string, from?: number): Unary<string, number>`
+* Curried functions:
+** `charAt(index: number): Unary<string, string>`
+— creates a function that returns a UTF-16 code unit at a given zero-based `index` in the input string.
+** `concat(...strings: string[]): Unary<string, string>`
+— creates a function that returns a string built from the input string and concatenated with given `strings`.
+** `concatTo(value: string): Unary<string | string[], string>`
+— creates a function that returns a string built from the input string(s) concatenated to a given `string`.
+** `endsWith(search: string, endPosition?: number): Unary<string, boolean>`
+— creates a function that returns `true` if a given `search` string is found at a given `endPosition` index
+of the input string.
++
+If `endPosition` is omitted, the input string length is used.
++
+** `includes(search: string, position: number = 0): Unary<string, boolean>`
+— creates a function that returns `true` if a given `search` string is found in the input string
+starting at a given `position` index.
+** `indexOf(search: string, from: number = 0): Unary<string, number | -1>`
+— creates a function that returns the index of the first occurrence of a given `search` string in the input string,
+starting at a given `from` index;
+or returns `-1` if the given `search` string is not found.
+** `lastIndexOf(search: string, from?: number): Unary<string, number | -1>`
+— creates a function that returns the index of the first occurrence of a given `search` string in the input string,
+starting at a given `from` index;
+or returns `-1` if the given `search` string is not found.
+** `padEnd(length: number, fill?: string): Unary<string, string>`
+— creates a function that pads the of end the input string with a given `fill` string up to the target `length`.
+** `padStart(length: number, fill?: string): Unary<string, string>`
+— creates a function that pads the of start the input string with a given `fill` string up to the target `length`.
+** `repeat(count: number): Unary<string, string>`
+— creates a function that creates a string consisting of a given `count` of copies of the input string.
+** `replace(search: string | RegExp, replacement: string): Unary<string, string>`
+— creates a function that replaces given `search` substrings in the input string with a given `replacement`.
+** `replaceWith(search: string | RegExp, replacement: Replacement): Unary<string, string>`
+— creates a function that replaces given `search` substrings in the input string
+with a result of the `replacement` function (invoked on every match).
 ** `search(search: RegExp): Unary<string, number | -1>`
+— creates a function that returns the index of the first occurrence of a given regular expression in the input string;
+or returns `-1` if the given expression is not found.
+** `slice(start: number, end?: number): Unary<string, string>`
+— creates a function that returns a section of the input string from a given `start` index to the end of the string,
+or to a given `end` index (exclusive).
+** `split(separator: string | RegExp, limit?: number): Unary<string, string[]>`
+— creates a function that creates an ordered list of substrings by splitting the input string
+using a given `separator` and up to an optional `limit`.
+** `startsWith(search: string, from: number = 0): Unary<string, boolean>`
+— creates a function that returns `true` if the input string begins with a given `search` substring
+at a given `from` index.
 +
 * `Utf16CodeUnit`:
+— an integer between `0` and `65535` (`0xFFFF`) representing a UTF-16 code unit.
 ** `charCodeAt(index: number): Unary<string, Utf16CodeUnit>`
+— creates a function that returns a UTF-16 code unit value at a given zero-based `index` in the input string.
 +
 * `CodePoint`:
+— an integer between `0` and `0x10FFFF` (inclusive) representing a Unicode code point.
 ** `codePointAt(position: number): Unary<string, CodePoint | undefined>`
+— creates a function that returns a code point value of the character at a given `index` in the input string;
+or returns `undefined` if the given `index` is out of range.
 +
 * `UnicodeNormalizationForm`:
 ** `normalize(form: UnicodeNormalizationForm = 'NFC'): Unary<string, string>`
+— creates a function that returns a string containing the Unicode Normalization Form of the input string
+for a given normalization `form`.
 
 
 == Format

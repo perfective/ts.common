@@ -8,123 +8,161 @@ import {
     stringFromCodePoint,
 } from './string';
 
-describe('isString', () => {
-    it('returns true when the value is a string literal', () => {
-        expect(isString('3.14')).toBe(true);
+describe(isString, () => {
+    describe('when the value is a string literal', () => {
+        it('returns true', () => {
+            expect(isString('3.14')).toBe(true);
+        });
     });
 
-    it('returns true when the value is a String object', () => {
-        expect(isString(String(3.14))).toBe(true);
+    describe('when the value is a String object', () => {
+        it('returns true', () => {
+            expect(isString(String(3.14))).toBe(true);
+        });
     });
 
-    it('returns false when the value is a number', () => {
-        expect(isString(3.14)).toBe(false);
+    describe('when the value is a number', () => {
+        it('returns false', () => {
+            expect(isString(3.14)).toBe(false);
+        });
     });
 
-    it('returns false when the value is a boolean', () => {
-        expect(isString(true)).toBe(false);
-        expect(isString(false)).toBe(false);
+    describe('when the value is a boolean', () => {
+        it('returns false', () => {
+            expect(isString(true)).toBe(false);
+            expect(isString(false)).toBe(false);
+        });
     });
 
-    it('returns false when the value is null', () => {
-        expect(isString(null)).toBe(false);
+    describe('when the value is null', () => {
+        it('returns false', () => {
+            expect(isString(null)).toBe(false);
+        });
     });
 
-    it('returns false when the value is undefined', () => {
-        expect(isString(undefined)).toBe(false);
+    describe('when the value is undefined', () => {
+        it('returns false', () => {
+            expect(isString(undefined)).toBe(false);
+        });
     });
 
-    it('returns false when the value is an array', () => {
-        expect(isString([])).toBe(false);
+    describe('when the value is an array', () => {
+        it('returns false', () => {
+            expect(isString([])).toBe(false);
+        });
     });
 
-    it('returns false when the value is an object', () => {
-        expect(isString({})).toBe(false);
-    });
-});
-
-describe('isNotString', () => {
-    it('returns false when the value is a string literal', () => {
-        expect(isNotString('3.14')).toBe(false);
-    });
-
-    it('returns false when the value is a String object', () => {
-        expect(isNotString(String(3.14))).toBe(false);
-    });
-
-    it('returns true when the value is a number', () => {
-        expect(isNotString(3.14)).toBe(true);
-    });
-
-    it('returns true when the value is a boolean', () => {
-        expect(isNotString(true)).toBe(true);
-        expect(isNotString(false)).toBe(true);
-    });
-
-    it('returns true when the value is null', () => {
-        expect(isNotString(null)).toBe(true);
-    });
-
-    it('returns true when value is undefined', () => {
-        expect(isNotString(undefined)).toBe(true);
-    });
-
-    it('returns true when value is an array', () => {
-        expect(isNotString([])).toBe(true);
-    });
-
-    it('returns true when value is an object', () => {
-        expect(isNotString({})).toBe(true);
+    describe('when the value is an object', () => {
+        it('returns false', () => {
+            expect(isString({})).toBe(false);
+        });
     });
 });
 
-describe('isEmpty', () => {
-    it('returns true when value is an empty string', () => {
-        expect(isEmpty('')).toBe(true);
-        expect(isEmpty(String())).toBe(true);
+describe(isNotString, () => {
+    describe('when the value is a string literal', () => {
+        it('returns false', () => {
+            expect(isNotString('3.14')).toBe(false);
+        });
     });
 
-    it('returns false when value is not an empty string', () => {
-        expect(isEmpty('0')).toBe(false);
-        expect(isEmpty('false')).toBe(false);
-        expect(isEmpty('null')).toBe(false);
-        expect(isEmpty('undefined')).toBe(false);
+    describe('when the value is a String object', () => {
+        it('returns false', () => {
+            expect(isNotString(String(3.14))).toBe(false);
+        });
+    });
+
+    describe('when the value is a number', () => {
+        it('returns true', () => {
+            expect(isNotString(3.14)).toBe(true);
+        });
+    });
+
+    describe('when the value is a boolean', () => {
+        it('returns true', () => {
+            expect(isNotString(true)).toBe(true);
+            expect(isNotString(false)).toBe(true);
+        });
+    });
+
+    describe('when the value is null', () => {
+        it('returns true', () => {
+            expect(isNotString(null)).toBe(true);
+        });
+    });
+
+    describe('when value is undefined', () => {
+        it('returns true', () => {
+            expect(isNotString(undefined)).toBe(true);
+        });
+    });
+
+    describe('when value is an array', () => {
+        it('returns true', () => {
+            expect(isNotString([])).toBe(true);
+        });
+    });
+
+    describe('when value is an object', () => {
+        it('returns true', () => {
+            expect(isNotString({})).toBe(true);
+        });
     });
 });
 
-describe('isNotEmpty', () => {
-    it('returns false when value is an empty string', () => {
-        expect(isNotEmpty('')).toBe(false);
-        expect(isNotEmpty(String())).toBe(false);
+describe(isEmpty, () => {
+    describe('when value is an empty string', () => {
+        it('returns true', () => {
+            expect(isEmpty('')).toBe(true);
+            expect(isEmpty(String())).toBe(true);
+        });
     });
 
-    it('returns true when value is not an empty string', () => {
-        expect(isNotEmpty('0')).toBe(true);
-        expect(isNotEmpty('false')).toBe(true);
-        expect(isNotEmpty('null')).toBe(true);
-        expect(isNotEmpty('undefined')).toBe(true);
+    describe('when value is not an empty string', () => {
+        it('returns false', () => {
+            expect(isEmpty('0')).toBe(false);
+            expect(isEmpty('false')).toBe(false);
+            expect(isEmpty('null')).toBe(false);
+            expect(isEmpty('undefined')).toBe(false);
+        });
     });
 });
 
-describe('length', () => {
-    it('returns a string length', () => {
-        expect(length(''))
-            .toBe(0);
-        expect(length('ABC'))
-            .toBe(3);
+describe(isNotEmpty, () => {
+    describe('when value is an empty string', () => {
+        it('returns false', () => {
+            expect(isNotEmpty('')).toBe(false);
+            expect(isNotEmpty(String())).toBe(false);
+        });
+    });
+
+    describe('when value is not an empty string', () => {
+        it('returns true', () => {
+            expect(isNotEmpty('0')).toBe(true);
+            expect(isNotEmpty('false')).toBe(true);
+            expect(isNotEmpty('null')).toBe(true);
+            expect(isNotEmpty('undefined')).toBe(true);
+        });
+    });
+});
+
+describe(length, () => {
+    it('returns length of the given string', () => {
+        expect(length('')).toBe(0);
+        expect(length('ABC')).toBe(3);
     });
 });
 
 /* eslint-disable deprecation/deprecation -- TODO: Delete in v0.11.0-alpha */
 
-describe('stringFromCharCode', () => {
+describe(stringFromCharCode, () => {
     it('creates a string from the given UTF-16 code units', () => {
         expect(stringFromCharCode(65, 66, 67))
             .toBe('ABC');
     });
 });
 
-describe('stringFromCodePoint', () => {
+describe(stringFromCodePoint, () => {
     it('creates a string from the given code points', () => {
         expect(stringFromCodePoint(0x1F1FA, 0x1F1F8))
             .toBe('🇺🇸');

@@ -2773,21 +2773,25 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 3+| *Constructor*
 
+| `link:{mdn-js-globals}/String/String[new String()]`
+| `link:{ecma-es6}/#sec-string-constructor[ES6]`
+| *Prohibited*. Use the ESLint `link:{eslint-rules}/no-new-wrappers[no-new-wrappers]` rule to enforce.
+
 | `link:{mdn-js-globals}/String/String[String()]`
 | `link:{ecma-es6}/#sec-string-constructor[ES6]`
-| *TBD*
+| Use to cast a value to `string`.
 
 3+| *Properties*
 
 | `link:{mdn-js-globals}/String/length[length]`
 | `link:{ecma-es6}/#sec-properties-of-string-instances-length[ES6]`
-| *TBD*
+| Use the `Length` interface and the `length()` function from the `@perfective/common/function`.
 
 3+| *Methods*
 
 | `link:{mdn-js-globals}/String/@@iterator[[@@iterator\]()]`
 | `link:{ecma-es6}/#sec-string.prototype-@@iterator[ES6]`
-| *TBD*
+| No custom support
 
 | `link:{mdn-js-globals}/String/anchor[anchor()]`
 | `link:{ecma-es6}/#sec-string.prototype.anchor[ES6]`
@@ -2811,23 +2815,23 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/charAt[charAt()]`
 | `link:{ecma-es6}/#sec-string.prototype.charat[ES6]`
-| *TBD*
+| Use `charAt()` to create a callback.
 
 | `link:{mdn-js-globals}/String/charCodeAt[charCodeAt()]`
 | `link:{ecma-es6}/#sec-string.prototype.charcodeat[ES6]`
-| *TBD*
+| Use `charCodeAt()` to create a callback.
 
 | `link:{mdn-js-globals}/String/codePointAt[codePointAt()]`
 | `link:{ecma-es6}/#sec-string.prototype.codepointat[ES6]`
-| *TBD*
+| Use `codePointAt()` to create a callback.
 
 | `link:{mdn-js-globals}/String/concat[concat()]`
 | `link:{ecma-es6}/#sec-string.prototype.concat[ES6]`
-| *TBD*
+| Use `concat()` and `concatTo()` to create a callback.
 
 | `link:{mdn-js-globals}/String/endsWith[endsWith()]`
 | `link:{ecma-es6}/#sec-string.prototype.endswith[ES6]`
-| *TBD*
+| Use `endsWith()` to create a callback.
 
 | `link:{mdn-js-globals}/String/fixed[fixed()]`
 | `link:{ecma-es6}/#sec-string.prototype.fixed[ES6]`
@@ -2843,19 +2847,19 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/fromCharCode[fromCharCode()]`
 | `link:{ecma-es6}/#sec-string.fromcharcode[ES6]`
-| *TBD*
+| Use `String.fromCharCode()` directly.
 
 | `link:{mdn-js-globals}/String/fromCodePoint[fromCodePoint()]`
 | `link:{ecma-es6}/#sec-string.fromcodepoint[ES6]`
-| *TBD*
+| Use `String.fromCodePoint()` directly.
 
 | `link:{mdn-js-globals}/String/includes[includes()]`
 | `link:{ecma-es6}/#sec-string.prototype.includes[ES6]`
-| *TBD*
+| Use `includes()` to create a callback.
 
 | `link:{mdn-js-globals}/String/indexOf[indexOf()]`
 | `link:{ecma-es6}/#sec-string.prototype.indexof[ES6]`
-| *TBD*
+| Use `indexOf()` to create a callback.
 
 | `link:{mdn-js-globals}/String/isWellFormed[isWellFormed()]`
 | `link:{ecma-esnext}/#sec-string.prototype.iswellformed[ESNext]`
@@ -2867,7 +2871,7 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/lastIndexOf[lastIndexOf()]`
 | `link:{ecma-es6}/#sec-string.prototype.lastindexof[ES6]`
-| *TBD*
+| Use `lastIndexOf()` to create a callback.
 
 | `link:{mdn-js-globals}/String/link[link()]`
 | `link:{ecma-es6}/#sec-string.prototype.link[ES6]`
@@ -2887,39 +2891,39 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/normalize[normalize()]`
 | `link:{ecma-es6}/#sec-string.prototype.normalize[ES6]`
-| *TBD*
+| Use `normalize()` to create a callback.
 
 | `link:{mdn-js-globals}/String/padEnd[padEnd()]`
 | `link:{ecma-es6}/#sec-string.prototype.padend[ES]`
-| *TBD*
+| Use `padEnd()` to create a callback.
 
 | `link:{mdn-js-globals}/String/padStart[padStart()]`
 | `link:{ecma-es6}/#sec-string.prototype.padstart[ES]`
-| *TBD*
+| Use `padStart()` to create a callback.
 
 | `link:{mdn-js-globals}/String/raw[raw()]`
 | `link:{ecma-es6}/#sec-string.raw[ES6]`
-| *TBD*
+| Use `String.raw()` directly.
 
 | `link:{mdn-js-globals}/String/repeat[repeat()]`
 | `link:{ecma-es6}/#sec-string.prototype.repeat[ES6]`
-| *TBD*
+| Use `repeat()` to create a callback.
 
 | `link:{mdn-js-globals}/String/replace[replace()]`
 | `link:{ecma-es6}/#sec-string.prototype.replace[ES6]`
-| *TBD*
+| Use `replace()` and `replaceWith()` to create a callback.
 
 | `link:{mdn-js-globals}/String/replaceAll[replaceAll()]`
 | `link:{ecma-es2021}/#sec-string.prototype.replaceall[ES2021]`
-| *TBD*
+| Use `replaceAll()` to create a callback.
 
 | `link:{mdn-js-globals}/String/search[search()]`
 | `link:{ecma-es6}/#sec-string.prototype.search[ES6]`
-| *TBD*
+| Use `search()` to create a callback.
 
 | `link:{mdn-js-globals}/String/slice[slice()]`
 | `link:{ecma-es6}/#sec-string.prototype.slice[ES6]`
-| *TBD*
+| Use `slice()` to create a callback.
 
 | `link:{mdn-js-globals}/String/small[small()]`
 | `link:{ecma-es6}/#sec-string.prototype.small[ES6]`
@@ -2927,15 +2931,15 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/split[split()]`
 | `link:{ecma-es6}/#sec-string.prototype.split[ES6]`
-| *TBD*
+| Use `split()` to create a callback.
 
 | `link:{mdn-js-globals}/String/startsWith[startsWith()]`
 | `link:{ecma-es6}/#sec-string.prototype.startswith[ES6]`
-| *TBD*
+| Use `startsWith()` to create a callback.
 
 | `link:{mdn-js-globals}/String/strike[strike()]`
 | `link:{ecma-es6}/#sec-string.prototype.strike[ES6]`
-| *TBD*
+| *Deprecated*
 
 | `link:{mdn-js-globals}/String/sub[sub()]`
 | `link:{ecma-es6}/#sec-string.prototype.sub[ES6]`
@@ -2947,7 +2951,8 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/substring[substring()]`
 | `link:{ecma-es6}/#sec-string.prototype.substring[ES6]`
-| *TBD*
+| Prefer `String#slice()` over `String#substring()`.
+Use the `unicorn/prefer-string-slice` ESLint rule to enforce.
 
 | `link:{mdn-js-globals}/String/sup[sup()]`
 | `link:{ecma-es6}/#sec-string.prototype.sup[ES6]`
@@ -2963,15 +2968,15 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/toLowerCase[toLowerCase()]`
 | `link:{ecma-es6}/#sec-string.prototype.tolowercase[ES6]`
-| *TBD*
+| Use `lowerCase()` as a callback.
 
 | `link:{mdn-js-globals}/String/toString[toString()]`
 | `link:{ecma-es6}/#sec-string.prototype.tostring[ES6]`
-| *TBD*
+| Use `String()` as a callback.
 
 | `link:{mdn-js-globals}/String/toUpperCase[toUpperCase()]`
 | `link:{ecma-es6}/#sec-string.prototype.touppercase[ES6]`
-| *TBD*
+| Use `upperCase()` as a callback.
 
 | `link:{mdn-js-globals}/String/toWellFormed[toWellFormed()]`
 | `link:{ecma-esnext}/#sec-string.prototype.towellformed[ESNext]`
@@ -2979,7 +2984,7 @@ Not planned for the v1.0 as it is a low-level (binary data) functionality.
 
 | `link:{mdn-js-globals}/String/trim[trim()]`
 | `link:{ecma-es6}/#sec-string.prototype.trim[ES6]`
-| *TBD*
+| Use `trim()` as a callback.
 
 | `link:{mdn-js-globals}/String/trimEnd[trimEnd()]`
 | `link:{ecma-es2019}/#sec-string.prototype.trimend[ES2019]`

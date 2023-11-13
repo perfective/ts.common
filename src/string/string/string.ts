@@ -55,7 +55,7 @@ export type Utf16CodeUnit = number;
 /**
  * @since v0.2.0
  * @deprecated Since v0.10.0. Use {@link String.fromCharCode} directly.
- * TODO: Remove in v0.11.0-alpha.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function stringFromCharCode(...codes: Utf16CodeUnit[]): string {
     // eslint-disable-next-line unicorn/prefer-code-point -- proxy function
@@ -74,7 +74,7 @@ export type CodePoint = number;
 /**
  * @since v0.2.0
  * @deprecated Since v0.10.0. Use {@link String.fromCodePoint} directly.
- * TODO: Remove in v0.11.0-alpha.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function stringFromCodePoint(...codePoints: CodePoint[]): string {
     return String.fromCodePoint(...codePoints);

@@ -30,7 +30,7 @@ describe(constant, () => {
     });
 });
 
-/* eslint-disable deprecation/deprecation -- TODO: Delete in v0.11.0-alpha */
+/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
 describe(empty, () => {
     it('creates an empty function', () => {
         // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return

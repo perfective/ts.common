@@ -131,7 +131,7 @@ export function sorted<T>(first?: T[] | Compare<T>, second?: Compare<T>): Unary<
 /**
  * Returns an array with only the first occurrence of each value in a given `array`.
  *
- * TODO: Rewrite using `Set`.
+ * TODO(https://github.com/perfective/ts.common/issues/25): Rewrite using `Set`.
  *
  * @since v0.2.0
  */

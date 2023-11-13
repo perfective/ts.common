@@ -671,7 +671,7 @@ export function nothing<T>(): Nothing<T> {
  * @since v0.10.0
  */
 export function nil<T>(): Nothing<T> {
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Delete in v0.11.0-alpha.
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     return naught();
 }
 
@@ -679,6 +679,7 @@ export function nil<T>(): Nothing<T> {
  * Returns a memoized instance of {@linkcode Nothing} with a `null` value.
  *
  * @deprecated Since v0.10.0. Use `nil` instead.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function naught<T>(): Nothing<T> {
     return memo.nil as Nothing<T>;

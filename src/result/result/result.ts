@@ -770,6 +770,7 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
  *
  * @since v0.9.0
  * @deprecated Since v0.10.0. Use {@linkcode Result.otherwise} instead.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>> {
     return [success, (): Success<T> => success(valueOf(fallback))];

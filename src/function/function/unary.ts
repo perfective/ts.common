@@ -17,6 +17,8 @@ export type UnaryVoid<T> = (value: T) => void;
 /**
  * Returns `true` if a given function `f` has length `1` (excluding a variadic argument).
  *
+ * TODO(https://github.com/perfective/ts.common/issues/32).
+ *
  * @since v0.6.0
  */
 // eslint-disable-next-line @typescript-eslint/ban-types -- generic predicate

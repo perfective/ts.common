@@ -33,6 +33,7 @@ export function isRecord<T>(value: T): value is (T & Record<string, unknown>) {
  *
  * @since v0.3.0
  * @deprecated Since v0.10.0. Use isTruthy() from @perfective/common/boolean.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- function name increases readability
 export function isTruthy<T>(value: T): boolean {
@@ -47,9 +48,10 @@ export function isTruthy<T>(value: T): boolean {
  *
  * @since v0.3.0
  * @deprecated Since v0.10.0. Use isFalsy() from @perfective/common/boolean.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function isFalsy<T>(value: T): boolean {
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     return !isTruthy(value);
 }
 
@@ -61,7 +63,7 @@ export function isFalsy<T>(value: T): boolean {
  * @since v0.3.0
  */
 export function isEmpty<T>(value: T): boolean {
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Replace with isFalsy() in v0.11.0-alpha
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     return isFalsy(value)
         || isEmptyArray(value)
         || isEmptyRecord(value);

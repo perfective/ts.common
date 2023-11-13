@@ -153,7 +153,7 @@ describe(length, () => {
     });
 });
 
-/* eslint-disable deprecation/deprecation -- TODO: Delete in v0.11.0-alpha */
+/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
 
 describe(stringFromCharCode, () => {
     it('creates a string from the given UTF-16 code units', () => {

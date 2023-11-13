@@ -54,7 +54,7 @@ export {
     isException,
     isNotException,
     unchained,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     unknownError,
 } from './exception/exception';
 export { ExceptionContext } from './exception/exception-context';
@@ -75,7 +75,7 @@ export {
 export {
     Panic,
     panic,
-    /* eslint-disable deprecation/deprecation -- TODO: Remove in v0.11.0 */
+    /* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
     Rethrow,
     rethrow,
     /* eslint-enable deprecation/deprecation */

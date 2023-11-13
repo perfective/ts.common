@@ -47,7 +47,7 @@ export function end<T>(array: T[]): T | undefined {
  *
  * If the `array` is empty, returns an empty array.
  *
- * TODO: Rename into `beginning()` or `beginningOf()`.
+ * TODO(https://github.com/perfective/ts.common/issues/26): Rename into `beginning()` or `beginningOf()`.
  *
  * @since v0.4.0
  */
@@ -88,7 +88,7 @@ export function last<T>(count: number = 1): Unary<T[], T[]> {
 /**
  * Creates a callback that returns a shallow copy of the input `array` with a given `element` added as the last element.
  *
- * TODO: Add support for an array/vararg input.
+ * TODO(https://github.com/perfective/ts.common/issues/27): Add support for an array/vararg input.
  *
  * @since v0.2.0
  */
@@ -103,7 +103,7 @@ export function append<T>(element: T): Unary<T[], T[]> {
  * Creates a callback that returns a shallow copy of the input `array` with a given `element` added as the first
  * element.
  *
- * TODO: Add support for an array/vararg input.
+ * TODO(https://github.com/perfective/ts.common/issues/27): Add support for an array/vararg input.
  *
  * @since v0.2.0
  */
@@ -118,7 +118,7 @@ export function prepend<T>(element: T): Unary<T[], T[]> {
  * Creates a callback that returns a shallow copy of the input `array` with a given `element` inserted
  * at a given `index`.
  *
- * TODO: Add support for an array/vararg input.
+ * TODO(https://github.com/perfective/ts.common/issues/27): Add support for an array/vararg input.
  */
 export function insert<T>(index: number, element: T): Unary<T[], T[]> {
     return (array: T[]): T[] => [

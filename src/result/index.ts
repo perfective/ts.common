@@ -31,7 +31,7 @@ export {
     isNotSuccess,
     isResult,
     isSuccess,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     recovery,
     Result,
     result,

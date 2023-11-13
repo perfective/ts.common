@@ -84,6 +84,8 @@ export function includes(search: string, position: number = 0): Unary<string, bo
  * starting at a given `from` index;
  * or returns `-1` if the given `search` string is not found.
  *
+ * TODO(https://github.com/perfective/ts.common/issues/29): Return undefined instead of -1.
+ *
  * @since v0.2.0
  */
 export function indexOf(search: string, from: number = 0): Unary<string, NumberOrErrorCode> {
@@ -94,6 +96,8 @@ export function indexOf(search: string, from: number = 0): Unary<string, NumberO
  * Creates a function that returns the index of the first occurrence of a given `search` string in the input string,
  * starting at a given `from` index;
  * or returns `-1` if the given `search` string is not found.
+ *
+ * TODO(https://github.com/perfective/ts.common/issues/29): Return undefined instead of -1.
  *
  * @since v0.2.0
  */
@@ -208,6 +212,8 @@ export function replaceWith(search: string | RegExp, replacement: Replacement): 
 /**
  * Creates a function that returns the index of the first occurrence of a given regular expression in the input string;
  * or returns `-1` if the given expression is not found.
+ *
+ * TODO(https://github.com/perfective/ts.common/issues/29): Return undefined instead of -1.
  *
  * @since v0.2.0
  */

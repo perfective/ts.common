@@ -35,7 +35,7 @@ export function isLastOccurrence<T>(value: T, index: number, array: T[]): boolea
  * Creates a filter callback that returns `true`
  * if a given `property` of the input `value` satisfies a given `condition`.
  *
- * TODO: Add support for the index input argument.
+ * TODO(https://github.com/perfective/ts.common/issues/28): Add support for the index input argument.
  *
  * @since v0.3.1
  */

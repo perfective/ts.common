@@ -382,7 +382,7 @@ describe(Success, () => {
     });
 });
 
-/* eslint-disable deprecation/deprecation -- TODO: Remove in v0.11.0 */
+/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
 describe(recovery, () => {
     const [ifSuccess, ifFailure] = recovery(1);
 

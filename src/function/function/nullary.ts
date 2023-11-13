@@ -26,6 +26,8 @@ export type Value<T> = T | Nullary<T>;
  * Returns `true` if a given function `f` has length `0` (excluding a variadic argument).
  * Otherwise, returns `false`.
  *
+ * TODO(https://github.com/perfective/ts.common/issues/32).
+ *
  * @since v0.6.0
  */
 // eslint-disable-next-line @typescript-eslint/ban-types -- generic predicate
@@ -44,6 +46,7 @@ export function constant<T>(value: T): Nullary<T> {
 
 /**
  * @deprecated Since v0.10.0. Use `naught` instead.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function empty(): Void {
     return (): void => undefined;

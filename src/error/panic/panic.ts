@@ -19,6 +19,7 @@ export type Panic = (cause?: unknown) => never;
  *
  * @since v0.2.4
  * @deprecated Since v0.10.0. Use {@linkcode Panic} instead.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export type Rethrow<E extends Error = Error> = (previous: E) => never;
 
@@ -109,6 +110,7 @@ export function rethrows(
  *
  * @since v0.2.0
  * @deprecated Since v0.10.0. Use `panic` instead.
+ * TODO(https://github.com/perfective/ts.common/issues/31).
  */
 export function rethrow(
     message: string,

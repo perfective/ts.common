@@ -76,7 +76,7 @@ export function find<T>(condition: Predicate<T>): Unary<T[], T | undefined> {
  * that satisfies a given `condition`;
  * or returns `-1` if no elements satisfy the `condition`.
  *
- * TODO: Replace callback error code with undefined.
+ * TODO(https://github.com/perfective/ts.common/issues/29): Return undefined instead of -1.
  *
  * @since v0.2.0
  */
@@ -108,7 +108,7 @@ export function includes<T>(value: T, from?: number): Predicate<T[]> {
  * (optionally, starting `from` a given index);
  * or returns `-1` if the `value` is not present.
  *
- * TODO: Replace callback error code with undefined.
+ * TODO(https://github.com/perfective/ts.common/issues/29): Return undefined instead of -1.
  *
  * @since v0.2.0
  */
@@ -138,7 +138,7 @@ export function keys<T>(array: T[]): IterableIterator<number> {
  * Creates a callback that returns the last index of a given `value` in the input array;
  * or returns `-1` if the `value` is not present.
  *
- * TODO: Replace callback error code with undefined.
+ * TODO(https://github.com/perfective/ts.common/issues/29): Return undefined instead of -1.
  *
  * @since v0.2.0
  */
@@ -192,7 +192,7 @@ export function pushInto<T>(array: T[]): (...elements: T[]) => number {
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
  *
- * TODO: Merge with the Reduce type.
+ * TODO(https://github.com/perfective/ts.common/issues/30): Merge with the Reduce type.
  *
  * @since v0.2.0
  */

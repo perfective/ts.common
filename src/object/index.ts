@@ -29,11 +29,11 @@ export {
 } from './object/object';
 export {
     isEmpty,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     isFalsy,
     isObject,
     isRecord,
-    // eslint-disable-next-line deprecation/deprecation -- TODO: Remove in v0.11.0-alpha
+    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     isTruthy,
 } from './object/predicate';
 export {

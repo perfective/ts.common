@@ -269,7 +269,8 @@ describe(causedBy, () => {
     });
 });
 
-/* eslint-disable deprecation/deprecation -- TODO: Replace with caughtError in v0.11.0 */
+/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
+// Replace with caughtError in v0.11.0
 describe(unknownError, () => {
     describe('when a given value is an Error', () => {
         const input: Error = error('Failure');

@@ -33,8 +33,6 @@ export function fromEntries<T, U>(entries: CaseEntry<T, U>[]): Case<T, U>[] {
 /**
  * Creates a {@linkcode Case} from a {@linkcode CaseEntry}.
  *
- * TODO: Add binary function signature.
- *
  * @since v0.9.0
  */
 export function caseFromEntry<T, U>([condition, statement]: CaseEntry<T, U>): Case<T, U> {

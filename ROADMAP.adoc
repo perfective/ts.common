@@ -1223,11 +1223,11 @@ a|
 
 | `link:{mdn-js-globals}/Function/name[name]`
 | `link:{ecma-es6}/#sec-function-instances-name[ES6]`
-| link:{github-issues}/10[TODO]
+| link:{github-issues}/10[TODO #10]
 
 | `link:{mdn-js-globals}/Function/prototype[prototype]`
 | `link:{ecma-es6}/#sec-function-instances-prototype[ES6]`
-| link:{github-issues}/11[TODO]
+| link:{github-issues}/11[TODO #11]
 
 3+| *Methods*
 
@@ -2019,7 +2019,7 @@ a| *Discouraged*
 
 | `link:{mdn-js-globals}/Number/isFinite[isFinite()]`
 | `link:{ecma-es6}/#sec-number.isfinite[ES6]`
-| link:{github-issues}/18[TODO]
+| link:{github-issues}/18[TODO #18]
 
 
 | `link:{mdn-js-globals}/Number/isInteger[isInteger()]`
@@ -2029,7 +2029,7 @@ a| *Discouraged*
 
 | `link:{mdn-js-globals}/Number/isNaN[isNaN()]`
 | `link:{ecma-es6}/#sec-number.isnan[ES6]`
-| Prefer `isNumber()`/`isNotNumber()` as a type guard. See link:{github-issues}/19[TODO].
+| Prefer `isNumber()`/`isNotNumber()` as a type guard. See link:{github-issues}/19[TODO #19].
 
 
 | `link:{mdn-js-globals}/Number/isSafeInteger[isSafeInteger()]`
@@ -2096,7 +2096,7 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 
 | `link:{mdn-js-globals}/Object/constructor[constructor]`
 | `link:{ecma-es6}/#sec-object.prototype.constructor[ES6]`
-| link:{github-issues}/17[TODO]
+| link:{github-issues}/17[TODO #17]
 
 | `link:{mdn-js-globals}/Object/proto[&#95;&#95;proto&#95;&#95;]`
 | `link:{ecma-es6}/#sec-object.prototype.&#95;&#95;proto&#95;&#95;[ES6]`
@@ -2126,7 +2126,7 @@ The `link:{perfective-common}/object/index.adoc[@perfective/common/object]` pack
 
 | `link:{mdn-js-globals}/Object/assign[assign()]`
 | `link:{ecma-es6}/#sec-object.assign[ES6]`
-| link:{github-issues}/12[TODO]
+| link:{github-issues}/12[TODO #12]
 
 
 | `link:{mdn-js-globals}/Object/create[create()]`
@@ -2192,17 +2192,17 @@ a|
 
 | `link:{mdn-js-globals}/Object/hasOwn[hasOwn()]`
 | `link:{ecma-es2022}/#sec-object.hasown[ES2022]`
-| link:{github-issues}/13[TODO]
+| link:{github-issues}/13[TODO #13]
 
 
 | `link:{mdn-js-globals}/Object/hasOwnProperty[hasOwnProperty()]`
 | `link:{ecma-es6}/#sec-object.prototype.hasownproperty[ES6]`
-| link:{github-issues}/13[TODO]
+| link:{github-issues}/13[TODO #13]
 
 
 | `link:{mdn-js-globals}/Object/is[is()]`
 | `link:{ecma-es6}/#sec-object.is[ES6]`
-| link:{github-issues}/14[TODO]
+| link:{github-issues}/14[TODO #14]
 
 
 | `link:{mdn-js-globals}/Object/isExtensible[isExtensible()]`
@@ -2217,7 +2217,7 @@ a|
 
 | `link:{mdn-js-globals}/Object/isPrototypeOf[isPrototypeOf()]`
 | `link:{ecma-es6}/#sec-object.prototype.isprototypeof[ES6]`
-| link:{github-issues}/15[TODO]
+| link:{github-issues}/15[TODO #15]
 
 
 | `link:{mdn-js-globals}/Object/isSealed[isSealed()]`
@@ -2237,7 +2237,7 @@ a|
 
 | `link:{mdn-js-globals}/Object/propertyIsEnumerable[propertyIsEnumerable()]`
 | `link:{ecma-es6}/#sec-object.prototype.propertyisenumerable[ES6]`
-| link:{github-issues}/16[TODO]
+| link:{github-issues}/16[TODO #16]
 
 
 | `link:{mdn-js-globals}/Object/seal[seal()]`
@@ -3490,91 +3490,119 @@ or `isPresent()`/`isAbsent()` to check for `undefined \| null` values.
 
 | link:{mdn-js-operators}/Addition[Addition] (`+`)
 | `link:{ecma-es6}/#sec-addition-operator-plus[ES6]`
-| *TBD*
+| link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Addition_assignment[Addition assignment] (`+=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value (link:{github-issues}/33[TODO #33])
 
 | link:{mdn-js-operators}/Assignment[Assignment] (`=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/async_function[async function expression]
 | `link:{ecma-es2017}/#sec-async-function-definitions[ES2017]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/async_function*[async function* expression]
 | `link:{ecma-es2018}/#sec-async-generator-function-definitions[ES2018]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/await[await]
 | `link:{ecma-es2017}/#sec-async-function-definitions[ES2017]`
-| *TBD*
+| *Discouraged*. Prefer `Promise` chaining.
 
 | link:{mdn-js-operators}/Bitwise_AND[Bitwise AND] (`&`)
 | `link:{ecma-es6}/#sec-binary-bitwise-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
+
+Use link:{perfective-common}/number/index.adoc#bitmasks[Bitmasks]
+from `@perfective/common/number` for bitmask manipulations.
 
 | link:{mdn-js-operators}/Bitwise_AND_assignment[Bitwise AND assignment] (`&=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator and as it mutates the value.
 
 | link:{mdn-js-operators}/Bitwise_NOT[Bitwise NOT] (`~`)
 | `link:{ecma-es6}/#sec-bitwise-not-operator[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
+
+Use link:{perfective-common}/number/index.adoc#bitmasks[Bitmasks]
+from `@perfective/common/number` for bitmask manipulations.
 
 | link:{mdn-js-operators}/Bitwise_OR[Bitwise OR] (`\|`)
 | `link:{ecma-es6}/#sec-binary-bitwise-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
+
+Use link:{perfective-common}/number/index.adoc#bitmasks[Bitmasks]
+from `@perfective/common/number` for bitmask manipulations.
 
 | link:{mdn-js-operators}/Bitwise_OR_assignment[Bitwise OR assignment] (`\|=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator and as it mutates the value.
 
 | link:{mdn-js-operators}/Bitwise_XOR[Bitwise XOR] (`^`)
 | `link:{ecma-es6}/#sec-binary-bitwise-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
+
+Use link:{perfective-common}/number/index.adoc#bitmasks[Bitmasks]
+from `@perfective/common/number` for bitmask manipulations.
 
 | link:{mdn-js-operators}/Bitwise_XOR_assignment[Bitwise XOR assignment] (`^=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator and as it mutates the value.
 
 | link:{mdn-js-operators}/class[class expression]
 | `link:{ecma-es6}/#sec-class-definitions[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/Comma_operator[Comma operator] (`,`)
 | `link:{ecma-es6}/#sec-comma-operator[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/Conditional_operator[Conditional (ternary) operator]
 | `link:{ecma-es6}/#sec-conditional-operator[ES6]`
-| *TBD*
+a|
+* Avoid in trivial functions; prefer:
+[source,typescript]
+----
+if (isX) {
+    return a;
+}
+return b;
+----
+* Use directly for trivial property assignments:
+[source,typescript]
+----
+{
+    a: isX ? a : b,
+}
+----
+* Use `match()` from `@perfective/common/match` for nested cases.
 
 | link:{mdn-js-operators}/Decrement[Decrement] (`--`)
 | `link:{ecma-es6}/#sec-postfix-decrement-operator[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value (link:{github-issues}/33[TODO #33])
 
 | link:{mdn-js-operators}/delete[delete operator]
 | `link:{ecma-es6}/#sec-delete-operator[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value.
 
 | link:{mdn-js-operators}/Destructuring_assignment[Destructuring assignment]
 | `link:{ecma-es6}/#sec-destructuring-assignment[ES6]`
-|
+| Use directly
 
 | link:{mdn-js-operators}/Destructuring_assignment[Destructuring binding patterns]
 | `link:{ecma-es6}/#sec-destructuring-binding-patterns[ES6]`
-|
+| Use directly
 
 | link:{mdn-js-operators}/Division[Division] (`/`)
 | `link:{ecma-es6}/#sec-multiplicative-operators[ES6]`
-| *TBD*
+| link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Division_assignment[Division assignment] (`/=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value (link:{github-issues}/33[TODO #33]).
 
 | link:{mdn-js-operators}/Equality[Equality] (`==`)
 | `link:{ecma-es6}/#sec-equality-operators[ES6]`
@@ -3590,39 +3618,42 @@ write an explicit `Predicate`.
 
 | link:{mdn-js-operators}/Exponentiation[Exponentiation] (`**`)
 | `link:{ecma-es2016}/#sec-exp-operator[ES2016]`
-| *TBD*
+| link:{github-issues}/20[TODO #20], link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Exponentiation_assignment[Exponentiation assignment] (`**=`)
 | `link:{ecma-es2016}/#sec-assignment-operators[ES2016]`
-| *TBD*
+| *Discouraged* as it mutates the value (link:{github-issues}/33[TODO #33])
 
 | link:{mdn-js-operators}/function[Function expression]
 | `link:{ecma-es6}/#sec-function-definitions[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/function*[function* expression]
 | `link:{ecma-es6}/#sec-generator-function-definitions[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/Greater_than[Greater than] (`>`)
 | `link:{ecma-es6}/#sec-relational-operators[ES6]`
-| *TBD*
+| Use `link:{perfective-common}/number/index.adoc#order[isGreaterThan()]`
+from `@perfective/common/number` to create a callback.
+
 
 | link:{mdn-js-operators}/Greater_than_or_equal[Greater than or equal] (`>=`)
 | `link:{ecma-es6}/#sec-relational-operators[ES6]`
-| *TBD*
+| Use `link:{perfective-common}/number/index.adoc#order[isGreaterThanOrEqualTo()]`
+from `@perfective/common/number` to create a callback.
 
 | link:{mdn-js-operators}/Grouping[Grouping operator] (`()`)
 | `link:{ecma-es6}/#sec-grouping-operator[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/import.meta[import.meta]
 | `link:{ecma-es2020}/#prod-ImportMeta[ES2020]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/import[import()]
 | `link:{ecma-es2020}/#prod-ImportCall[ES2020]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/in[in operator]
 | `link:{ecma-es6}/#sec-relational-operators[ES6]`
@@ -3630,33 +3661,37 @@ write an explicit `Predicate`.
 
 | link:{mdn-js-operators}/Increment[Increment] (`++`)
 | `link:{ecma-es6}/#sec-postfix-increment-operator[ES6]`
-| *TBD*
+| link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Inequality[Inequality] (`!=`)
 | `link:{ecma-es6}/#sec-equality-operators[ES6]`
-| *Disallowed*. Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
+| *Disallowed*. Prefer strict inequality `!==`.
+
+Use the ESLint `link:{eslint-rules}/eqeqeq[eqeqeq]` rule to enforce.
 
 | link:{mdn-js-operators}/instanceof[instanceof]
 | `link:{ecma-es6}/#sec-relational-operators[ES6]`
 a|
 * `Instance`, `isInstanceOf()`, `isNotInstanceOf()`
-(from `link:{perfective-common}/value/index.adoc[@perfective/common]`).
+from `link:{perfective-common}/value/index.adoc[@perfective/common]` to create a callback.
 
 | link:{mdn-js-operators}/Left_shift[Left shift] (`<<`)
 | `link:{ecma-es6}/#sec-left-shift-operator[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
 
 | link:{mdn-js-operators}/Left_shift_assignment[Left shift assignment] (`<<=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator and as it mutates the value.
 
 | link:{mdn-js-operators}/Less_than[Less than] (`<`)
 | `link:{ecma-es6}/#sec-relational-operators[ES6]`
-| *TBD*
+| Use `link:{perfective-common}/number/index.adoc#order[isLessThan()]`
+from `@perfective/common/number` to create a callback.
 
 | link:{mdn-js-operators}/Less_than_or_equal[Less than or equal] (`<=`)
 | `link:{ecma-es6}/#sec-relational-operators[ES6]`
-| *TBD*
+| Use `link:{perfective-common}/number/index.adoc#order[isLessThanOrEqualTo()]`
+from `@perfective/common/number` to create a callback.
 
 | link:{mdn-js-operators}/Logical_AND[Logical AND] (`&&`)
 | `link:{ecma-es6}/#sec-binary-logical-operators[ES6]`
@@ -3687,67 +3722,81 @@ Use `either()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Multiplication[Multiplication] (`*`)
 | `link:{ecma-es6}/#sec-multiplicative-operators[ES6]`
-| *TBD*
+| link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Multiplication_assignment[Multiplication assignment] (`*=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value (see link:{github-issues}/33[TODO #33]).
 
 | link:{mdn-js-operators}/new[new operator]
 | `link:{ecma-es6}/#sec-new-operator[ES6]`
-| *TBD*
+| Use directly.
 
 | link:{mdn-js-operators}/new.target[new.target]
 | `link:{ecma-es6}/#sec-built-in-function-objects[ES6]`
-| *TBD*
+| Use directly.
 
 | link:{mdn-js-operators}/null[null]
 | `link:{ecma-es6}/#sec-null-value[ES6]`
-| *TBD*
+| Use directly.
 
 | link:{mdn-js-operators}/Nullish_coalescing_assignment[Nullish coalescing assignment] (`??=`)
 | `link:{ecma-es2020}/#sec-assignment-operators[ES2020]`
-| *TBD*
+| *Discouraged* as it mutates the value.
 
 | link:{mdn-js-operators}/Nullish_coalescing[Nullish coalescing operator] (`??`)
 | `link:{ecma-es2020}/#prod-CoalesceExpression[ES2020]`
-| *TBD*
+a| *Discouraged*. Prefer `Maybe` chaining:
+
+[source,typescript]
+----
+maybe(x).or(y)
+----
+
 
 | link:{mdn-js-operators}/Object_initializer[Object initializer]
 | `link:{ecma-es6}/#sec-object-initializer[ES6]`
-| *TBD*
+| Use directly.
 
 | link:{mdn-js-operators}/Operator_precedence[Operator precedence]
 | `ES6`
-| *TBD*
+| Use directly.
 
 | link:{mdn-js-operators}/Optional_chaining[Optional chaining] (`?.`)
 | `link:{ecma-es2020}/#prod-OptionalExpression[ES2020]`
-| *TBD*
+a| *Discouraged*. Prefer `Maybe` chaining:
+
+[source,typescript]
+----
+maybe(x).pick('y')
+----
 
 | link:{mdn-js-operators}/Property_accessors[Property accessors]
 | `link:{ecma-es6}/#sec-property-accessors[ES6]`
-| *TBD*
+| Use directly.
+
+Use `link:{perfective-common}/object/index.adoc[property()]`
+from `@perfective/common/object` to create a callback.
 
 | link:{mdn-js-operators}/Remainder[Remainder] (`%`)
 | `link:{ecma-es6}/#sec-multiplicative-operators[ES6]`
-| *TBD*
+| link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Remainder_assignment[Remainder assignment] (`%=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value (link:{github-issues}/33[TODO #33])
 
 | link:{mdn-js-operators}/Right_shift[Right shift] (`>>`)
 | `link:{ecma-es6}/#sec-signed-right-shift-operator[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
 
 | link:{mdn-js-operators}/Right_shift_assignment[Right shift assignment] (`>>=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator and as it mutates the value.
 
 | link:{mdn-js-operators}/Spread_syntax[Spread syntax]
 | `ES6`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/Strict_equality[Strict equality] (`===`)
 | `link:{ecma-es6}/#sec-equality-operators[ES6]`
@@ -3759,51 +3808,60 @@ Use `either()` for lazy evaluation and callbacks.
 
 | link:{mdn-js-operators}/Subtraction[Subtraction] (`-`)
 | `link:{ecma-es6}/#sec-subtraction-operator-minus[ES6]`
-| *TBD*
+| link:{github-issues}/33[TODO #33]
 
 | link:{mdn-js-operators}/Subtraction_assignment[Subtraction assignment] (`-=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as it mutates the value (link:{github-issues}/33[TODO #33])
 
 | link:{mdn-js-operators}/super[super]
 | `link:{ecma-es6}/#sec-super-keyword[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/this[this]
 | `link:{ecma-es6}/#sec-this-keyword[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/typeof[typeof]
 | `link:{ecma-es6}/#sec-typeof-operator[ES6]`
-| *TBD*
+| *Allowed*.
+
+Use `isTypeOf()`/`isNotTypeOf()`
+from `link:{perfective-common}/value/index.adoc#ecma-and-typescript-types[@perfective/common]` to create a callback.
 
 | link:{mdn-js-operators}/Unary_negation[Unary negation] (`-`)
 | `link:{ecma-es6}/#sec-unary-minus-operator[ES6]`
-| *TBD*
+| *Allowed*.
+
+Use `negative()` from `link:{perfective-common}/number/index.adoc[@perfective/common/number]` as a callback.
 
 | link:{mdn-js-operators}/Unary_plus[Unary plus] (`+`)
 | `link:{ecma-es6}/#sec-unary-plus-operator[ES6]`
-| *TBD*
+| *Disallowed*.
+
+Use `decimal()` from `link:{perfective-common}/number/index.adoc[@perfective/common/number]` for explicit conversion.
 
 | link:{mdn-js-operators}/Unsigned_right_shift[Unsigned right shift] (`>>>`)
 | `link:{ecma-es6}/#sec-unsigned-right-shift-operator[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator.
 
 | link:{mdn-js-operators}/Unsigned_right_shift_assignment[Unsigned right shift assignment] (`>>>=`)
 | `link:{ecma-es6}/#sec-assignment-operators[ES6]`
-| *TBD*
+| *Discouraged* as a bitwise operator and as it mutates the value.
 
 | link:{mdn-js-operators}/void[void operator]
 | `link:{ecma-es6}/#sec-void-operator[ES6]`
-| *TBD*
+| *Discouraged*.
+
+Use `voidable()` from `link:{perfective-common}/value/index.adoc#handling-void[@perfective/common]` for custom handling.
 
 | link:{mdn-js-operators}/yield[yield]
 | `link:{ecma-es6}/#sec-generator-function-definitions[ES6]`
-| *TBD*
+| Use directly
 
 | link:{mdn-js-operators}/yield*[yield*]
 | `link:{ecma-es6}/#sec-generator-function-definitions-runtime-semantics-evaluation[ES6]`
-| *TBD*
+| Use directly
 
 |===
 

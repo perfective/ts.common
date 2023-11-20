@@ -1,6 +1,6 @@
 {
     "name": "@perfective/common",
-    "version": "0.10.0-beta",
+    "version": "0.10.0-rc",
     "description": "Common types and functions for perfective development in TypeScript",
     "keywords": [
         "es6",
@@ -39,7 +39,7 @@
         "@asciidoctor/gulp-asciidoctor": "^2.2.5",
         "@perfective/build": "~0.10.1",
         "@perfective/eslint-config": "~0.23.0",
-        "@types/jest": "^29.5.5",
+        "@types/jest": "^29.5.8",
         "eslint-plugin-jest": "~27.6.0",
         "eslint-plugin-jest-formatting": "~3.1.0",
         "gulp": "^4.0.2",

@@ -1,5 +1,20 @@
 = Changelog
 
+== v0.10.0-rc
+
+* Added JSDocs for all functions and types.
+* Updated the `link:https://github.com/perfective/ts.common/blob/main/ROADMAP.adoc[ROADMAP.adoc]`
+to cover all existing packages.
++
+* `@perfective/common/date`:
+** Supported string input parsing in the `timestamp()` function.
++
+* `@perfective/common/string`:
+** Fixed `lines()` function: Use correct separator for Mac OS strings.
+** Deprecated the `stringFromCharCode()` and `stringFromCodePoint()` functions.
+Use the `String.fromCharCode()` and `String.fromCodePoint()` functions directly.
+
+
 == v0.10.0-beta
 
 === New `link:https://github.com/perfective/ts.common/blob/main/src/date/index.adoc[@perfective/common/date]` package

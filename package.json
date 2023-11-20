@@ -19,7 +19,7 @@
     "homepage": "https://github.com/perfective/ts.common",
     "repository": {
         "type": "git",
-        "url": "https://github.com/perfective/ts.common.git"
+        "url": "git+https://github.com/perfective/ts.common.git"
     },
     "license": "MIT",
     "sideEffects": false,

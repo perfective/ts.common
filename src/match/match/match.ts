@@ -41,7 +41,7 @@ export class Match<T> {
                 return maybe(caseValue.statement(value));
             }
         }
-        return nothing();
+        return nothing() as Maybe<U>;
     }
 }
 

@@ -287,7 +287,7 @@ export class Just<T> extends Maybe<T> {
         if (filter(this.value)) {
             return this;
         }
-        return nothing<T>();
+        return nothing<T>() as Maybe<T>;
     }
 
     /**
@@ -305,7 +305,7 @@ export class Just<T> extends Maybe<T> {
             // Return it as is instead of passing it through just(this.value).
             return this as unknown as Just<U>;
         }
-        return nothing<U>();
+        return nothing<U>() as Maybe<U>;
     }
 
     /**
@@ -321,7 +321,7 @@ export class Just<T> extends Maybe<T> {
         if (isTrue(condition)) {
             return this;
         }
-        return nothing<T>();
+        return nothing() as Maybe<T>;
     }
 
     /**
@@ -566,9 +566,9 @@ export function maybe<T>(value: T | null | undefined): Maybe<T> {
         return just(value);
     }
     if (isNull(value)) {
-        return nil();
+        return nil() as Maybe<T>;
     }
-    return nothing();
+    return nothing() as Maybe<T>;
 }
 
 /**
@@ -661,8 +661,8 @@ const memo: Memo = {
  *
  * @since v0.1.0
  */
-export function nothing<T>(): Nothing<T> {
-    return memo.nothing as Nothing<T>;
+export function nothing<T>(): Nothing<Present<T>> {
+    return memo.nothing as Nothing<Present<T>>;
 }
 
 /**
@@ -670,7 +670,7 @@ export function nothing<T>(): Nothing<T> {
  *
  * @since v0.10.0
  */
-export function nil<T>(): Nothing<T> {
+export function nil<T>(): Nothing<Present<T>> {
     // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     return naught();
 }
@@ -681,8 +681,8 @@ export function nil<T>(): Nothing<T> {
  * @deprecated Since v0.10.0. Use `nil` instead.
  * TODO(https://github.com/perfective/ts.common/issues/31).
  */
-export function naught<T>(): Nothing<T> {
-    return memo.nil as Nothing<T>;
+export function naught<T>(): Nothing<Present<T>> {
+    return memo.nil as Nothing<Present<T>>;
 }
 
 /**

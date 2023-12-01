@@ -60,8 +60,8 @@ function fullName(name: Name | null | undefined): string | null {
 }
 ```
 
-When using the [`Maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc) monad,
-you can write simpler and more readable functions:
+**Using the [`Maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc) monad,
+you can write simpler and more readable functions**:
 
 ```typescript
 import { panic } from '@perfective/common/error';
@@ -83,7 +83,7 @@ function fullName(name: Name): Maybe<string> {
 ```
 
 1. [`Maybe.pick()`](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybepick)
-   provides a strictly-typed "optional chaining" of the `Maybe.value` properties.
+   provides a strictly typed "optional chaining" of the `Maybe.value` properties.
 2. [`Maybe.onto()`](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeonto)
    (flat) maps a `Maybe.value` to another `Maybe`.
 3. [`Maybe.or()`](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeor)
@@ -102,70 +102,140 @@ the [`Maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.
 [`Maybe.otherwise()`](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybeotherwise),
 and [`Maybe.through()`](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc#maybethrough) methods.
 
+Read more about the `Maybe` monad and other
+[`@perfective/common/maybe`](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc) functions
+in the [package documentation](https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc).
+
 ### Result monad
 
-The [`@perfective/common/result`](https://github.com/perfective/ts.common/blob/main/src/result/index.adoc) package
-provides a `Result` monad
-(a concrete case of an Either monad).
-It allows you to treat errors as part of a function result
-and chain processing of such results.
+The [`@perfective/common/result`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc) package
+provides the `Result` monad implementation
+(as a concrete case of the Either monad).
+It allows developers to increase the reliability of their code by treating errors as valid part of a function output.
 
-For example,
-consider you are writing a function that loads a backend entity based on the user input.
+A `Result` instance can be either a `Success` or a `Failure`.
+If a `Result` is a `Success`, a computation proceeds to the next step.
+In case of a `Failure`, all further computations are skipped until the recovery or exit from the computation.
 
-.Example of the provided functions and types.
+The `Result` monad is similar to the `Maybe` monad,
+but unlike `Maybe`, a `Result` contains a reason for its `Failure`.
+
+The `Result` monad is also similar to the `Promise`
+(as a `Promise` can either be "resolved" or "rejected").
+But, unlike `Promise`, the `Result` chain is synchronous.
+
+For example, consider you have an HTTP endpoint to return user data stored in the database.
+The purpose of the endpoint is to map a given (unsafe) user ID input to a `User`.
+
+_Assume you have the following functions_
 
 ```typescript
-interface EntityRequest {
-    entity: string;
-    id: number;
+export interface User {
+    // User data
 }
 
-interface User {
-    id: number;
-    username: string;
-}
+/** Returns `true` if the active user has admin access. */
+declare function hasAdminAccess(): boolean;
 
-/**
- * @throws {Error} If a given input is empty or is not a number.
- */
-declare function numberInput(input: string): number;
+/** Builds an SQL query to load a user with a given `id`. */
+declare function userByIdQuery(id: number): string;
 
-declare function request(entity: string): (id: number) => EntityRequest;
+/** Sends a given `sql` to the database and returns a User. */
+declare function userQueryResult(sql: string): Promise<User>;
 
-declare function user(request: EntityRequest): User;
+/** Logs a given error */
+declare function logError(error: Error): void;
 ```
 
-Writing an imperative code, you would have:
+If you write regular imperative code you may have something like this:
 
 ```typescript
-function userOutput(input: string): User {
-    let id: number;
-    try {
-        id = numberInput(input);
-    } catch {
-        id = 0;
+/** @throws Error if a given id is invalid. */
+function validUserId(id: unknown): number {
+    if (typeof id !== 'string') {
+        throw new TypeError('Input must be a string');
     }
-    const userRequest = request('user');
-    return user(userRequest(id));
+
+    const userId = decimal(id);
+    if (userId === null) {
+        throw new Error('Failed to parse user id');
+    }
+    if (!Number.isInteger(userId) || userId <= 0) {
+        throw new Error('Invalid user id');
+    }
+    return userId;
+}
+
+async function userResponseById(id: unknown): Promise<User> {
+    try {
+        return userForQuery(
+            userByIdQuery(
+                validUserId(id), // (1)
+            ),
+        );
+    } catch (error: unknown) {
+        logError(error as Error);
+        throw error as Error;
+    }
 }
 ```
 
-Using the `Result` your code would be:
+1. Note that `validUserId()` indicates that it throws an error only as a JSDoc.
+   TypeScript compiler does not check that the code should be wrapped into the `try-catch` block.
+
+**Using the `Result` monad and functions from the `@perfective/common` subpackages you can write the same code as**:
 
 ```typescript
-import { recovery, Result, resultOf } from '@perfective/common/result';
+import { isNotNull } from '@perfective/common';
+import { typeError } from '@perfective/common/error';
+import { naught } from '@perfective/common/function';
+import { decimal, isNonNegativeInteger } from '@perfective/common/number';
+import { rejected } from '@perfective/common/promise';
+import { Result, success } from '@perfective/common/result';
+import { isString } from '@perfective/common/string';
 
-function userOutput(id: string): Result<User> {
-    return resultOf(() => numberInput(id))
-        .into(recovery(0))
-        .to(request('user'))
-        .to(user);
+function validUserId(id: unknown): Result<number> {
+    return success(id)
+        .which(isString, typeError('Input must be a string')) // (1)
+        .to(decimal)
+        .which(isNotNull, 'Failed to parse user ID') // (2)
+        .that(isNonNegativeInteger, 'Invalid user ID'); // (3)
+}
+
+async function userResponseById(id: unknown): Promise<User> {
+    return success(id)
+        .when(hasAdminAccess, 'Access Denied') // (4)
+        .onto(validUserId) // (5)
+        .to(userByIdQuery)
+        .through(naught, logError) // (6)
+        .into(userForQuery, rejected); // (7)
 }
 ```
 
-The `Result` [integrates](https://github.com/perfective/ts.common/blob/main/src/result/index.adoc#using-result-with-promise)
-with the `Promise` using the `promisedResult()` and `settledResult()` functions.
+1. [`Result.which()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultwhich)
+   applies a type guard and narrows the `Result.value` type.
+2. `decimal()` returns `number | null`, so another type guard is required.
+3. [`Result.that()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultthat)
+   checks if the `Success.value` satisfies a given predicate.
+4. [`Result.when()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultwhen)
+   checks an external condition.
+5. [`Result.onto()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultonto)
+   allows a different `Result` object to be returned
+   (in this case, the `Result` of the `validUserId()` function).
+6. [`Result.through()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultthrough)
+   runs a given procedure
+   (a no-op `naught()` function for the `Success`).
+7. [`Result.into()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultinto)
+   allows the completion (folding) of the `Result` chain computation and switch to a different type.
+
+In addition to the methods used in the example above,
+the `Result` monad also provides
+[`Result.or()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultor) and
+[`Result.otherwise()`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc#resultotherwise) methods.
+
+Read more about the `Result` monad and other
+[`@perfective/common/result`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc) functions in the
+[package documentation](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc).
 
 ### Chained Exceptions
 
@@ -179,7 +249,7 @@ or on the frontend with packed code and renamed functions.
 
 The [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc) package
 provides the `Exception` class
-to make logging and debugging of productions code easier.
+to make logging and debugging of production code easier.
 It supports three features:
 
 -   providing a previous error (allows to stack errors);
@@ -259,7 +329,7 @@ It will return a similar chain of messages as above,
 but each message will also contain a stack trace for each error.
 
 Read more about the functions to handle the built-in JS errors and the `Exception` class in the
-[`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc) package docs.
+[`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc) package documentation.
 
 ## Packages
 
@@ -302,6 +372,11 @@ Packages are organized and named around their primary type:
     [strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
 
 The packages have full unit test coverage.
+
+## Roadmap
+
+The [`ROADMAP.adoc`](https://github.com/perfective/ts.common/blob/main/ROADMAP.adoc) file describes
+how built-in JavaScript objects and methods are covered by the `@perfective/common` package.
 
 ## Versioning
 

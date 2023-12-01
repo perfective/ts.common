@@ -1,9 +1,121 @@
 = Changelog
+:perfective-common: https://github.com/perfective/ts.common/tree/main
+
+== v0.10.0
+
+Changes since *v0.9.0*:
+
+=== `link:{perfective-common}/src/result/index.adoc[@perfective/common/result]`
+
+* Added the `Result.that()` filter method.
+* Added the `Result.which()` type-guard method.
+* Added the `Result.when()` filter method.
+* Added the `Result.or()` fold method.
+* Added the `Result.otherwise()` recovery method.
+** Deprecated the `recovery()` function.
++
+* *[Breaking]* Changed the `resultFrom()` to use `try-catch` instead of the `T | Error` union type.
++
+This makes the function behavior safer and allows wider usage.
+
+
+=== New `link:{perfective-common}/src/date/index.adoc[@perfective/common/date]` package
+
+* Added functions for the `Date` class:
+** Added `date()`, `now()`, and `epoch()` `Date` constructors.
+** Added `isValid()`/`isInvalid()` `Date` predicates.
++
+* Added `Timestamp` type.
+** Added `timestamp()` constructor.
+
+
+=== Restructured Roadmap
+
+`link:{perfective-common}/ROADMAP.adoc[ROADMAP.adoc]`
+now contains all built-in objects with their properties and methods.
+Some of the methods and properties already have a matching Perfective function,
+and some are marked as prohibited (e.g. `eval`) or not supported.
+
+The Roadmap will document minimum support to tag `@perfective/common` `v1.0`.
+
+
+=== Breaking changes
+
+* Dropped Node.js v16.x support,
+as it is no longer supported.
++
+* Removed deprecated functions and types:
+** `@perfective/common/array`:
+*** `arrayFromArrayLike()`, `arrayFromIterable()`, `flatten()`.
++
+** `@perfective/common/match`:
+*** `Match.that()`, `Match.to()`;
+*** `Statement`, `StatementEntry`, `statements()`;
+*** `When.then()`.
++
+** `@perfective/common/maybe`:
+*** `Maybe.lift()`/`lift()`, `Maybe.run()`/`run()`;
+*** `Nullable`, `Nil`, `Only`/`Solum`, `nullable()`, `nil()`, `only()`/`solum()`;
+*** `Optional`, `None`, `Some`, `optional()`, `none()`, `some()`.
++
+** `@perfective/common/promise`:
+*** `Run`, `result()`.
++
+** `@perfective/common/string`:
+*** `Output`, `isNotOutput()`, `isOutput()`, `output()`.
+
+
+=== Improvements
+
+* `@perfective/common/boolean`:
+** Added JsDocs for all types and functions.
+** Added ES Coverage documentation for the `Boolean` type.
+** Added the `isBoolean()`/`isNotBoolean()` predicates.
+** Moved the `isTruthy()`/`isFalsy()` functions from `@perfective/common/object`.
++
+* `@perfective/common/error`:
+** Added `Recovery` type.
+** Added JsDocs for all types and functions.
+** Added support for `cause` (previous) error to the `Panic` type and `panic()` function.
++
+* `@perfective/common/maybe`:
+** Changed the `nothing()`/`nil()` functions return type to `Nothing<Present<T>>` for TypeScript v5.3 compatibility.
++
+* `@perfective/common/object`:
+** Added JsDocs for all types and functions.
++
+* `@perfective/common/string`:
+** Fixed `lines()` function: Use correct separator for Mac OS strings.
+** Deprecated the `stringFromCharCode()` and `stringFromCodePoint()` functions.
+Use the `String.fromCharCode()` and `String.fromCodePoint()` functions directly.
+
+
+=== Deprecations
+
+* `@perfective/common/function`:
+** Deprecated the `emtpy()` function.
+Use `naught()` as an empty no-op function instead.
++
+* `@perfective/common/error`:
+** Deprecated the `Rethrow` type. Use `Panic` instead.
+** Deprecated the `rethrow()` function. Use `panic()` instead.
+** Renamed the `unknownError()` function into `caughtError()`.
++
+* `@perfective/common/maybe`:
+** Renamed the `naught()` function into `nil()`.
++
+* `@perfective/common/object`:
+** Moved the `isTruthy()`/`isFalsy()` functions into `@perfective/common/boolean`.
++
+* `@perfective/common/result`:
+** Deprecated the `recovery()` function.
+Use `Result.otherwise()` instead.
+
 
 == v0.10.0-rc
 
 * Added JSDocs for all functions and types.
-* Updated the `link:https://github.com/perfective/ts.common/blob/main/ROADMAP.adoc[ROADMAP.adoc]`
+* Updated the `link:{perfective-common}/ROADMAP.adoc[ROADMAP.adoc]`
 to cover all existing packages.
 +
 * `@perfective/common/date`:
@@ -17,7 +129,7 @@ Use the `String.fromCharCode()` and `String.fromCodePoint()` functions directly.
 
 == v0.10.0-beta
 
-=== New `link:https://github.com/perfective/ts.common/blob/main/src/date/index.adoc[@perfective/common/date]` package
+=== New `link:{perfective-common}/src/date/index.adoc[@perfective/common/date]` package
 
 * Added functions for the `Date` class:
 ** Added `date()`, `now()`, and `epoch()` `Date` constructors.
@@ -28,7 +140,7 @@ Use the `String.fromCharCode()` and `String.fromCodePoint()` functions directly.
 
 === Restructured Roadmap
 
-`link:https://github.com/perfective/ts.common/blob/main/ROADMAP.adoc[ROADMAP.adoc]`
+`link:{perfective-common}/ROADMAP.adoc[ROADMAP.adoc]`
 now contains all built-in objects with their properties and methods.
 Some of the methods and properties already have a matching Perfective function,
 and some are marked as prohibited (e.g. `eval`) or not supported.
@@ -38,7 +150,7 @@ The Roadmap will document minimum support to tag `@perfective/common` `v1.0`.
 
 == v0.10.0-alpha
 
-=== `link:https://github.com/perfective/ts.common/blob/main/src/result/index.adoc[@perfective/common/result]`
+=== `link:{perfective-common}/src/result/index.adoc[@perfective/common/result]`
 
 * Added the `Result.that()` filter method.
 * Added the `Result.which()` type-guard method.
@@ -78,7 +190,7 @@ Use `naught()` as an empty no-op function instead.
 +
 * `@perfective/common/error`:
 ** Deprecated the `Rethrow` type. Use `Panic` instead.
-** Deprecated the `rethrow()` function. Use `rethrow()` instead.
+** Deprecated the `rethrow()` function. Use `panic()` instead.
 ** Renamed the `unknownError()` function into `caughtError()`.
 +
 * `@perfective/common/maybe`:
@@ -434,7 +546,7 @@ The type guard is not yet strict enough, but it is better than just a predicate.
 
 === Fixes
 
-* Update `@perfective/common/maybe` package https://github.com/perfective/ts.common/blob/main/src/maybe/index.adoc[documentation].
+* Update `@perfective/common/maybe` package {perfective-common}/src/maybe/index.adoc[documentation].
 
 
 == v8.0.2

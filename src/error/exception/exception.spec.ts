@@ -13,7 +13,6 @@ import {
     isException,
     isNotException,
     unchained,
-    unknownError,
 } from './exception';
 
 describe(exception, () => {
@@ -268,32 +267,6 @@ describe(causedBy, () => {
         });
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
-// Replace with caughtError in v0.11.0
-describe(unknownError, () => {
-    describe('when a given value is an Error', () => {
-        const input: Error = error('Failure');
-
-        it('returns the given value', () => {
-            expect(unknownError(input)).toBe(input);
-        });
-    });
-
-    describe('when a given value is not an Error', () => {
-        it('returns an Exception with the given value', () => {
-            expect(unknownError('Failure'))
-                .toStrictEqual(exception('Caught `Failure`', {}, {
-                    error: 'Failure',
-                }));
-            expect(unknownError({ code: 404 }))
-                .toStrictEqual(exception('Caught `[object Object]`', {}, {
-                    error: 404,
-                }));
-        });
-    });
-});
-/* eslint-enable deprecation/deprecation */
 
 describe(isException, () => {
     describe('when a given value is an Exception', () => {

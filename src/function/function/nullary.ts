@@ -45,14 +45,6 @@ export function constant<T>(value: T): Nullary<T> {
 }
 
 /**
- * @deprecated Since v0.10.0. Use `naught` instead.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function empty(): Void {
-    return (): void => undefined;
-}
-
-/**
  * An empty function to be passed as a callback when a no-op behavior is required.
  *
  * @since v0.10.0

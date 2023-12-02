@@ -1,3 +1,4 @@
+import { isFalsy } from '../../boolean/predicate/predicate';
 import { isPresent } from '../../value/value';
 
 /**
@@ -26,36 +27,6 @@ export function isRecord<T>(value: T): value is (T & Record<string, unknown>) {
 }
 
 /**
- * Returns true when the value is neither undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero),
- * "" (an empty string), or the `document.all` builtin.
- *
- * @see https://developer.mozilla.org/en-US/docs/Glossary/Truthy
- *
- * @since v0.3.0
- * @deprecated Since v0.10.0. Use isTruthy() from @perfective/common/boolean.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-// eslint-disable-next-line unicorn/prefer-native-coercion-functions -- function name increases readability
-export function isTruthy<T>(value: T): boolean {
-    return Boolean(value);
-}
-
-/**
- * Returns true when the value is undefined, null, false, NaN, 0, -0, 0n (a `BigInt` zero), "" (an empty string),
- * or the `document.all` builtin.
- *
- * @see https://developer.mozilla.org/en-US/docs/Glossary/Falsy
- *
- * @since v0.3.0
- * @deprecated Since v0.10.0. Use isFalsy() from @perfective/common/boolean.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function isFalsy<T>(value: T): boolean {
-    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
-    return !isTruthy(value);
-}
-
-/**
  * Returns true when the value is falsy, an empty array or a {@linkcode Record} without properties.
  *
  * @see isFalsy
@@ -63,7 +34,6 @@ export function isFalsy<T>(value: T): boolean {
  * @since v0.3.0
  */
 export function isEmpty<T>(value: T): boolean {
-    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
     return isFalsy(value)
         || isEmptyArray(value)
         || isEmptyRecord(value);

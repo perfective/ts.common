@@ -760,23 +760,6 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
 }
 
 /**
- * Returns a pair of unary callbacks to fold a given value into a {@linkcode Success}.
- *
- * The first callback returns a given value as a {@linkcode Success}.
- * The second callback ignores a given value
- * and returns a given `fallback` value as a {@linkcode Success}.
- *
- * Use this function with the {@linkcode Result.into} method to recover from a {@linkcode Failure}.
- *
- * @since v0.9.0
- * @deprecated Since v0.10.0. Use {@linkcode Result.otherwise} instead.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function recovery<T>(fallback: Value<T>): BiFoldResult<T, Success<T>> {
-    return [success, (): Success<T> => success(valueOf(fallback))];
-}
-
-/**
  * Returns true if a given value is a {@linkcode Result}.
  *
  * @since v0.9.0

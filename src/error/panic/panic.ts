@@ -13,16 +13,6 @@ import { ExceptionTokens } from '../exception/exception-tokens';
  */
 export type Panic = (cause?: unknown) => never;
 
-/* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
-/**
- * A function that throws an {@linkcode Error} with a given `previous` error.
- *
- * @since v0.2.4
- * @deprecated Since v0.10.0. Use {@linkcode Panic} instead.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export type Rethrow<E extends Error = Error> = (previous: E) => never;
-
 /**
  * Throws an {@linkcode Exception} with a given `message` template with `tokens`
  * and additional `context` data.
@@ -102,23 +92,3 @@ export function rethrows(
 ): never {
     throw new Exception(exceptionMessage(message, tokens), context, previous);
 }
-
-/**
- * Creates a function that throws an {@linkcode Exception} with a given `message`
- * and a passed `previous` {@linkcode Error}.
- * Exception message may contain given `tokens` and additional `context` data.
- *
- * @since v0.2.0
- * @deprecated Since v0.10.0. Use `panic` instead.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function rethrow(
-    message: string,
-    tokens: ExceptionTokens = {},
-    context: ExceptionContext = {},
-): Rethrow {
-    return (previous: Error): never => {
-        throw new Exception(exceptionMessage(message, tokens), context, previous);
-    };
-}
-/* eslint-enable deprecation/deprecation */

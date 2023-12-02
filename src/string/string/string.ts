@@ -53,16 +53,6 @@ export function length(value: string): number {
 export type Utf16CodeUnit = number;
 
 /**
- * @since v0.2.0
- * @deprecated Since v0.10.0. Use {@link String.fromCharCode} directly.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function stringFromCharCode(...codes: Utf16CodeUnit[]): string {
-    // eslint-disable-next-line unicorn/prefer-code-point -- proxy function
-    return String.fromCharCode(...codes);
-}
-
-/**
  * An integer between `0` and `0x10FFFF` (inclusive) representing a Unicode code point.
  *
  * @see https://en.wikipedia.org/wiki/UTF-16
@@ -70,12 +60,3 @@ export function stringFromCharCode(...codes: Utf16CodeUnit[]): string {
  * @since v0.2.0
  */
 export type CodePoint = number;
-
-/**
- * @since v0.2.0
- * @deprecated Since v0.10.0. Use {@link String.fromCodePoint} directly.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function stringFromCodePoint(...codePoints: CodePoint[]): string {
-    return String.fromCodePoint(...codePoints);
-}

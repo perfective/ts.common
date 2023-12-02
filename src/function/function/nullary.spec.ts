@@ -1,4 +1,4 @@
-import { constant, empty, isNullary, naught, valueOf } from './nullary';
+import { constant, isNullary, naught, valueOf } from './nullary';
 
 describe(isNullary, () => {
     describe('when the given function accepts three arguments', () => {
@@ -29,15 +29,6 @@ describe(constant, () => {
         });
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
-describe(empty, () => {
-    it('creates an empty function', () => {
-        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
-        expect(empty()()).toBeUndefined();
-    });
-});
-/* eslint-enable deprecation/deprecation */
 
 describe(naught, () => {
     it('returns undefined', () => {

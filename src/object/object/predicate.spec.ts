@@ -1,4 +1,4 @@
-import { isEmpty, isFalsy, isObject, isRecord, isTruthy } from './predicate';
+import { isEmpty, isObject, isRecord } from './predicate';
 
 describe(isObject, () => {
     describe('when the value is a plain object', () => {
@@ -117,24 +117,6 @@ describe(isRecord, () => {
         });
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
-describe(isTruthy, () => {
-    describe('when the value is true', () => {
-        it('returns false', () => {
-            expect(isTruthy(true)).toBe(true);
-        });
-    });
-});
-
-describe(isFalsy, () => {
-    describe('when the value is false', () => {
-        it('returns true', () => {
-            expect(isFalsy(false)).toBe(true);
-        });
-    });
-});
-/* eslint-enable deprecation/deprecation */
 
 describe(isEmpty, () => {
     describe('when the value is undefined', () => {

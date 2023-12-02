@@ -4,8 +4,6 @@ import {
     isNotString,
     isString,
     length,
-    stringFromCharCode,
-    stringFromCodePoint,
 } from './string';
 
 describe(isString, () => {
@@ -152,21 +150,3 @@ describe(length, () => {
         expect(length('ABC')).toBe(3);
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
-
-describe(stringFromCharCode, () => {
-    it('creates a string from the given UTF-16 code units', () => {
-        expect(stringFromCharCode(65, 66, 67))
-            .toBe('ABC');
-    });
-});
-
-describe(stringFromCodePoint, () => {
-    it('creates a string from the given code points', () => {
-        expect(stringFromCodePoint(0x1F1FA, 0x1F1F8))
-            .toBe('🇺🇸');
-    });
-});
-
-/* eslint-enable deprecation/deprecation */

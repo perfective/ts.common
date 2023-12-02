@@ -10,7 +10,6 @@ import {
     failure,
     isNotSuccess,
     isSuccess,
-    recovery,
     Result,
     Success,
     success,
@@ -381,21 +380,3 @@ describe(Success, () => {
         });
     });
 });
-
-/* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
-describe(recovery, () => {
-    const [ifSuccess, ifFailure] = recovery(1);
-
-    describe('when the first function is given a value argument', () => {
-        it('returns a Success with the given value', () => {
-            expect(ifSuccess(0)).toStrictEqual(success(0));
-        });
-    });
-
-    describe('when the second function is given an Error argument', () => {
-        it('returns a Success with the fallback value', () => {
-            expect(ifFailure(error('Failure'))).toStrictEqual(success(1));
-        });
-    });
-});
-/* eslint-enable deprecation/deprecation */

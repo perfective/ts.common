@@ -139,15 +139,6 @@ export function caughtError(value: unknown): Error | Exception {
 }
 
 /**
- * @since v0.2.1
- * @deprecated Since v0.10.0. Use `caughtError` instead.
- * TODO(https://github.com/perfective/ts.common/issues/31).
- */
-export function unknownError(value: unknown): Error | Exception {
-    return caughtError(value);
-}
-
-/**
  * Returns true and narrows the type if a given `value` is an {@linkcode Exception}.
  *
  * @since v0.2.0

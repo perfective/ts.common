@@ -47,9 +47,5 @@ export {
     isNotString,
     isString,
     length,
-    /* eslint-disable deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31) */
-    stringFromCharCode,
-    stringFromCodePoint,
-    /* eslint-enable deprecation/deprecation */
     Utf16CodeUnit,
 } from './string/string';

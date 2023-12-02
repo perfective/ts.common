@@ -31,8 +31,6 @@ export {
     isNotSuccess,
     isResult,
     isSuccess,
-    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
-    recovery,
     Result,
     result,
     resultFrom,

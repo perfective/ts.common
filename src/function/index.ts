@@ -19,8 +19,6 @@ export {
 } from './function/length';
 export {
     constant,
-    // eslint-disable-next-line deprecation/deprecation -- TODO(https://github.com/perfective/ts.common/issues/31)
-    empty,
     isNullary,
     naught,
     Nullary,

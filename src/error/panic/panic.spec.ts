@@ -4,7 +4,7 @@ import { referenceError } from '../error/reference-error';
 import { typeError } from '../error/type-error';
 import { causedBy, exception } from '../exception/exception';
 
-import { panic, rethrow, rethrows, throws } from './panic';
+import { panic, rethrows, throws } from './panic';
 
 describe(throws, () => {
     describe('throws(String)', () => {
@@ -154,42 +154,3 @@ describe(rethrows, () => {
         });
     });
 });
-
-/* eslint-disable deprecation/deprecation -- remove Rethrow in v0.11.0 */
-describe(rethrow, () => {
-    const previous: ReferenceError = referenceError('reference to undefined property "x"');
-
-    describe('rethrow(String)', () => {
-        it('throws an Exception with the previous error', () => {
-            expect(() => rethrow('Unknown property')(previous))
-                .toThrow(causedBy(previous, 'Unknown property'));
-        });
-    });
-
-    describe('rethrow(String, ExceptionTokens)', () => {
-        it('throws an Exception with a tokenized message', () => {
-            expect(() => rethrow('Unknown property {{key}}', {
-                key: 'x',
-            })(previous))
-                .toThrow(causedBy(previous, 'Unknown property `x`', {
-                    key: 'x',
-                }));
-        });
-    });
-
-    describe('rethrow(String, ExceptionTokens, ExceptionContext)', () => {
-        it('throws an Exception with a tokenized message and additional context', () => {
-            expect(() => rethrow('Unknown property {{key}}', {
-                key: 'x',
-            }, {
-                value: 0,
-            })(previous))
-                .toThrow(causedBy(previous, 'Unknown property `x`', {
-                    key: 'x',
-                }, {
-                    value: 0,
-                }));
-        });
-    });
-});
-/* eslint-enable deprecation/deprecation */

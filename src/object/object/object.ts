@@ -7,6 +7,7 @@ import { Entry, toRecordFromEntries } from './record';
  * Creates a shallow copy of the given value.
  *
  * Do not use: this function may not work as intended and needs to be re-written thoroughly.
+ * TODO(https://github.com/perfective/ts.common/issues/38): Reimplement the function.
  *
  * @since v0.3.0
  */
@@ -34,6 +35,7 @@ export function copy<T>(value: T): T {
  * Creates a clone (deep copy) of the given value.
  *
  * Do not use: this function may not work as intended and needs to be re-written thoroughly.
+ * TODO(https://github.com/perfective/ts.common/issues/39): Reimplement the function.
  *
  * @since v0.3.0
  */

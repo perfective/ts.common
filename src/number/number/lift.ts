@@ -6,7 +6,7 @@ import { Unary } from '../../function/function/unary';
  * @since v0.3.0
  */
 export type Digits = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-| 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+    | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
 
 /**
  * A nominal type (alias) for significant digits precision after decimal point.
@@ -14,7 +14,7 @@ export type Digits = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
  * @since v0.3.0
  */
 export type Precision = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-| 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21;
+    | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21;
 
 /**
  * Creates a function that returns the input number in exponential notation

@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { testCase } from '../../jest';
 import { isGreaterThan, isLessThan } from '../../number/number/order';
 

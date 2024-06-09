@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isBinary } from './binary';
 
 describe(isBinary, () => {

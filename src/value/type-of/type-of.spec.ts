@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { ecmaType, isEcmaType, isNotTypeOf, isTsType, isTypeOf, TsType, tsType, typeOf } from './type-of';
 
 describe(ecmaType, () => {

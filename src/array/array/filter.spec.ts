@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isInteger } from '../../number/number/integer';
 
 import { by, isFirstOccurrence, isLastOccurrence } from './filter';

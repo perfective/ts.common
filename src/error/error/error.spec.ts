@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { error, errorOutput, isError, isNotError, stack } from './error';
 
 describe(error, () => {

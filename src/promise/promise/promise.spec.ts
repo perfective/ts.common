@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { error } from '../../error/error/error';
 
 import { fulfilled, rejected, settled } from './promise';

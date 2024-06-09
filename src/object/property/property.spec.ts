@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { Predicate } from '../../boolean';
 import { Unary } from '../../function';
 import { ascending } from '../../number/number/order';

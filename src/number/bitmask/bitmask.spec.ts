@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { Enum } from '../../object/enum/enum';
 
 import { Bitmask, bitmask, hasFlagOn, isFlagOn, raisedFlags } from './bitmask';

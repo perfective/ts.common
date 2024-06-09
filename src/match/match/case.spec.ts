@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isNegativeInteger, isPositiveInteger } from '../../number/number/integer';
 
 import { caseFromEntry, fromEntries } from './case';

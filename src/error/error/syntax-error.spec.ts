@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isNotSyntaxError, isSyntaxError, syntaxError } from './syntax-error';
 
 describe(syntaxError, () => {

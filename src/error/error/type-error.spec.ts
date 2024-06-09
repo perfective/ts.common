@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isNotTypeError, isTypeError, typeError } from './type-error';
 
 describe(typeError, () => {

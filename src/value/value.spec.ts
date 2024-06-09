@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { defined, isAbsent, isDefined, isNotNull, isNull, isPresent, isUndefined, notNull, present } from './value';
 
 describe(defined, () => {

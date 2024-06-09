@@ -1,3 +1,5 @@
+import { beforeEach, describe, expect, it } from '@jest/globals';
+
 import { constant, Void } from '../../function/function/nullary';
 import { same, Unary } from '../../function/function/unary';
 import { isGreaterThan, isLessThan } from '../../number/number/order';

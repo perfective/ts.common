@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isNotRangeError, isRangeError, rangeError } from './range-error';
 
 describe(rangeError, () => {

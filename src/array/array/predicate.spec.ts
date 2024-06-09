@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { includedIn, isEmpty, isNotEmpty } from './predicate';
 
 describe(isEmpty, () => {

@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { array } from '../../array/array/array';
 import { error } from '../../error/error/error';
 import { typeError } from '../../error/error/type-error';

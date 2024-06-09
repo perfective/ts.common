@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { hasLength, isEmpty, isNotEmpty, Length, length, toLongest, toShortest } from './length';
 
 describe(isEmpty, () => {

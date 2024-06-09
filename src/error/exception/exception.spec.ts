@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { error } from '../error/error';
 import { rangeError } from '../error/range-error';
 import { syntaxError } from '../error/syntax-error';

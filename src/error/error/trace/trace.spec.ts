@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { error } from '../error';
 
 import { stackTrace, Trace, trace } from './trace';

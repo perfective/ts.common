@@ -1,4 +1,6 @@
 // eslint-disable-next-line max-classes-per-file -- provide example classes required for testing
+import { describe, expect, it } from '@jest/globals';
+
 import { TypeGuard } from '../type-guard/type-guard';
 
 import { isInstanceOf, isNotInstanceOf } from './instance';

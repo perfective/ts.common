@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { constant } from '../../function/function/nullary';
 import { decimal } from '../../number/number/base';
 import { isGreaterThan } from '../../number/number/order';

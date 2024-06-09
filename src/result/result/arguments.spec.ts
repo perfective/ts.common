@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { chained } from '../../error/exception/exception';
 import { constant } from '../../function/function/nullary';
 import { same } from '../../function/function/unary';

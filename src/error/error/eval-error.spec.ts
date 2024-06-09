@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { evalError, isEvalError, isNotEvalError } from './eval-error';
 
 describe(evalError, () => {

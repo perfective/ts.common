@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { constant, isNullary, naught, valueOf } from './nullary';
 
 describe(isNullary, () => {

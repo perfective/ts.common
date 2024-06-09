@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isNotReferenceError, isReferenceError, referenceError } from './reference-error';
 
 describe(referenceError, () => {

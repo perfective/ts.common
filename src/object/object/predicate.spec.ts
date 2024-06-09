@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { isEmpty, isObject, isRecord } from './predicate';
 
 describe(isObject, () => {

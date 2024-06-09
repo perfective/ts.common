@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { Member, members } from './enum';
 
 enum NumericDirection {

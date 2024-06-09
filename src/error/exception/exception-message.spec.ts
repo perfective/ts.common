@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { ExceptionMessage, exceptionMessage, exceptionMessageOutput } from './exception-message';
 
 describe(exceptionMessage, () => {

@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals';
+
 import { clone, copy, hasMethod, hasNoMethod } from './object';
 
 describe(copy, () => {

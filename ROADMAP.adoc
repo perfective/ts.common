@@ -1800,7 +1800,7 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/abs[abs()]`
 | `link:{ecma-es6}/#sec-math.abs[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `absolute()` as it checks for `NaN` input.
 
 | `link:{mdn-js-globals}/Math/acos[acos()]`
 | `link:{ecma-es6}/#sec-math.acos[ES6]`

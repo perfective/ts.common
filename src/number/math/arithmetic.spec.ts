@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { difference, product, quotient, remainder, sum } from './arithmetic';
+import { absolute, difference, product, quotient, remainder, sum } from './arithmetic';
 
 describe(sum, () => {
     it('is commutative', () => {
@@ -99,5 +99,37 @@ describe(remainder, () => {
     it('returns NaN when divisor is 0', () => {
         expect(remainder(5, 0))
             .toStrictEqual(Number.NaN);
+    });
+});
+
+describe('absolute', () => {
+    describe('when input is a positive number', () => {
+        it('returns the absolute value', () => {
+            expect(absolute(5)).toBe(5);
+        });
+    });
+
+    describe('when input is a negative number', () => {
+        it('returns the absolute value', () => {
+            expect(absolute(-5)).toBe(5);
+        });
+    });
+
+    describe('when input is 0', () => {
+        it('returns 0', () => {
+            expect(absolute(0)).toBe(0);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns Infinity', () => {
+            expect(absolute(Number.NEGATIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is not a number', () => {
+        it('throws TypeError', () => {
+            expect(() => absolute(Number.NaN)).toThrow(TypeError);
+        });
     });
 });

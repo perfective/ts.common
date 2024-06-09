@@ -1,3 +1,5 @@
+import { isNotNumber } from '../number/number';
+
 /**
  * Returns the result of addition of the given numbers.
  *
@@ -41,4 +43,19 @@ export function quotient(dividend: number, divisor: number): number {
  */
 export function remainder(dividend: number, divisor: number): number {
     return dividend % divisor;
+}
+
+/**
+ * Returns the absolute value of a given number.
+ *
+ * @throws {TypeError} If the given value is not a number.
+ *
+ * @since v0.11.0
+ */
+export function absolute(value: number): number {
+    // Runtime check to avoid NaN and input coercion to a number.
+    if (isNotNumber(value)) {
+        throw new TypeError('Value must be a number.');
+    }
+    return Math.abs(value);
 }

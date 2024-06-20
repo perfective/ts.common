@@ -40,5 +40,6 @@ export function isLastOccurrence<T>(value: T, index: number, array: T[]): boolea
  * @since v0.3.1
  */
 export function by<T, K extends keyof T>(property: K, condition: Predicate<T[K]>): Filter<T, T> {
+    // eslint-disable-next-line security/detect-object-injection -- property checked statically
     return (value: T): value is T => condition(value[property]);
 }

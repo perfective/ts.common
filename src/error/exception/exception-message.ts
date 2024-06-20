@@ -41,6 +41,7 @@ export function exceptionMessage(template: string, tokens: ExceptionTokens = {})
  */
 export function exceptionMessageOutput(message: ExceptionMessage): string {
     return Object.keys(message.tokens).reduce(
+        // eslint-disable-next-line security/detect-object-injection -- reading property only
         (template, key) => template.replace(exceptionToken(key), `\`${message.tokens[key]}\``),
         message.template,
     );

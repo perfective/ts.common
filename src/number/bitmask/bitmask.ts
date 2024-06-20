@@ -48,6 +48,7 @@ export function raisedFlags<T extends number>(
 ): Member<T>[] {
     const flags: Flags<T> = type as unknown as Flags<T>;
     return members(flags)
+        // eslint-disable-next-line security/detect-object-injection -- only reading the property
         .filter(flag => isFlagOn(bitmask, flags[flag] as unknown as Bitmask<T>));
 }
 

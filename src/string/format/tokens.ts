@@ -33,6 +33,7 @@ export function tokens(tokens: unknown[] | Tokens): Tokens {
  * @since v0.3.0
  */
 export function tokenKey(key: string): RegExp {
+    // eslint-disable-next-line security/detect-non-literal-regexp -- TODO(https://github.com/perfective/ts.common/issues/52)
     return new RegExp(
         `\\{\\{${key.replace(/\$/gu, '\\$')}\\}\\}`,
         'gu',

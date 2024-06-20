@@ -13,6 +13,7 @@ export interface ExceptionTokens
  * @since v0.2.0
  */
 export function exceptionToken(token: string): RegExp {
+    // eslint-disable-next-line security/detect-non-literal-regexp -- TODO(https://github.com/perfective/ts.common/issues/52)
     return new RegExp(
         `\\{\\{${token.replace(/\$/gu, '\\$')}\\}\\}`,
         'gu',

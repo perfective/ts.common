@@ -39,7 +39,7 @@
         "@asciidoctor/gulp-asciidoctor": "^2.2.5",
         "@jest/globals": "^29.7.0",
         "@perfective/build": "~0.12.3",
-        "@perfective/eslint-config": "~0.25.1",
+        "@perfective/eslint-config": "~0.26.0",
         "@types/jest": "^29.5.12",
         "eslint-plugin-jest": "~28.6.0",
         "eslint-plugin-jest-formatting": "~3.1.0",

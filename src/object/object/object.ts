@@ -61,6 +61,7 @@ export function clone<T>(value: T): T {
  * @since v0.9.0
  */
 export function hasMethod(value: unknown, method: string): boolean {
+    // eslint-disable-next-line security/detect-object-injection -- only reading the property
     return isPresent(value) && typeof (value as any)[method] === 'function';
 }
 
@@ -71,6 +72,7 @@ export function hasMethod(value: unknown, method: string): boolean {
  * @since v0.9.0
  */
 export function hasNoMethod(value: unknown, method: string): boolean {
+    // eslint-disable-next-line security/detect-object-injection -- only reading the property
     return isAbsent(value) || typeof (value as any)[method] !== 'function';
 }
 

@@ -11,6 +11,7 @@ export function recordFromArray(array: string[]): Record<string, number> {
 }
 
 function indexByValue(record: Record<string, number>, value: string, index: number): Record<string, number> {
+    // eslint-disable-next-line security/detect-object-injection -- array index checked statically
     record[value] = index;
     return record;
 }

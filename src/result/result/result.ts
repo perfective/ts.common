@@ -19,6 +19,7 @@ import { BiFoldResult, BiMapResult, BiVoidResult } from './arguments';
  *
  * @since v0.9.0
  */
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class -- abstract class to allow instance checks
 export abstract class Result<T> {
     /**
      * Either an {@linkcode Error} for a Failure or any other value for Success.

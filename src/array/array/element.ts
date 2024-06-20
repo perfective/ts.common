@@ -64,6 +64,7 @@ export function init<T>(array: T[]): T[] {
  * @since v0.1.0
  */
 export function element<T>(index: number): Unary<T[], T | undefined> {
+    // eslint-disable-next-line security/detect-object-injection -- array index.
     return (array: T[]): T | undefined => array[index];
 }
 

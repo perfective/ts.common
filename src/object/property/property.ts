@@ -89,8 +89,10 @@ export function property<T, K extends keyof T>(
     condition?: Predicate<T[K]>,
 ): Unary<T, T[K]> | Predicate<T> {
     if (isFunction(condition)) {
+        // eslint-disable-next-line security/detect-object-injection -- property checked statically
         return (value: T): boolean => condition(value[property]);
     }
+    // eslint-disable-next-line security/detect-object-injection -- property checked statically
     return (value: T): T[K] => value[property];
 }
 
@@ -100,6 +102,7 @@ export function property<T, K extends keyof T>(
  * @since v0.2.0
  */
 export function by<T, K extends keyof T>(property: K, order: Compare<T[K]>): Compare<T> {
+    // eslint-disable-next-line security/detect-object-injection -- property checked statically
     return (a: T, b: T): number => order(a[property], b[property]);
 }
 
@@ -214,6 +217,7 @@ function hasPropertiesThat<T, K extends keyof T>(
     properties: readonly K[],
 ): boolean {
     return properties
+        // eslint-disable-next-line security/detect-object-injection -- property checked statically
         .map(property => value[property])
         .map(condition)
         .filter(Boolean)

@@ -24,6 +24,7 @@ export {
 
 // ./math
 export {
+    absolute,
     difference,
     product,
     quotient,
@@ -34,6 +35,10 @@ export {
     maximum,
     minimum,
 } from './math/set';
+export {
+    arccosine,
+    Radians,
+} from './math/trigonometry';
 
 // ./number
 export {

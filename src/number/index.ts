@@ -37,6 +37,7 @@ export {
 } from './math/set';
 export {
     arccosine,
+    arcsine,
     Radians,
 } from './math/trigonometry';
 

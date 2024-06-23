@@ -1804,7 +1804,7 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/acos[acos()]`
 | `link:{ecma-es6}/#sec-math.acos[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arccosine()` as it returns `null` instead of `NaN`.
 
 | `link:{mdn-js-globals}/Math/acosh[acosh()]`
 | `link:{ecma-es6}/#sec-math.acosh[ES6]`
@@ -1812,7 +1812,7 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/asin[asin()]`
 | `link:{ecma-es6}/#sec-math.asin[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arcsine()` as it returns `null` instead of `NaN`.
 
 | `link:{mdn-js-globals}/Math/asinh[asinh()]`
 | `link:{ecma-es6}/#sec-math.asinh[ES6]`

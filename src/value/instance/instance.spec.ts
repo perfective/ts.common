@@ -5,7 +5,6 @@ import { TypeGuard } from '../type-guard/type-guard';
 
 import { isInstanceOf, isNotInstanceOf } from './instance';
 
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class -- testing only
 abstract class Abstraction {
     public abstract name(): string;
 }

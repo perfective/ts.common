@@ -17,7 +17,6 @@ import { isNull, isPresent, isUndefined, Present } from '../../value/value';
  *
  * @since v0.1.0
  */
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class -- abstract class to allow instance checks
 export abstract class Maybe<T> {
     /**
      * Either a present value of type `T` or an absent value (null or undefined).

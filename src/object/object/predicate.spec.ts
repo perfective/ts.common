@@ -77,6 +77,7 @@ describe(isRecord, () => {
     describe('when the value is null', () => {
         it('returns false', () => {
             expect(isRecord(null)).toBe(false);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isRecord(Object.create(null))).toBe(false);
         });
     });

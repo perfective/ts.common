@@ -6,7 +6,7 @@ import { isPresent } from '../../value/value';
  *
  * @since v0.3.0
  */
-// eslint-disable-next-line @typescript-eslint/ban-types -- type guard
+// eslint-disable-next-line @typescript-eslint/no-restricted-types -- type guard
 export function isObject<T>(value: T | null): value is T & object {
     return value !== null
         && typeof value === 'object';
@@ -33,30 +33,31 @@ export function isRecord<T>(value: T): value is (T & Record<string, unknown>) {
  *
  * @since v0.3.0
  */
-export function isEmpty<T>(value: T): boolean {
+export function isEmpty(value: unknown): boolean {
     return isFalsy(value)
         || isEmptyArray(value)
         || isEmptyRecord(value);
 }
 
-function isEmptyArray<T>(value: T): boolean {
+function isEmptyArray(value: unknown): boolean {
     return Array.isArray(value)
         && value.length === 0;
 }
 
-function isEmptyRecord<T>(value: T): boolean {
+function isEmptyRecord(value: unknown): boolean {
     return isRecord(value)
         && Object.keys(value).length === 0;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any -- low-level function to work with JS */
-function hasConstructor<T>(name: string): (value: T) => boolean {
-    return (value: T): boolean => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- checked property presence
+function hasConstructor(name: string): (value: unknown) => boolean {
+    return (value: unknown): boolean => {
+        /* eslint-disable @typescript-eslint/no-unsafe-member-access -- check property presence */
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- value may be null or undefined
         if (isPresent((value as any).constructor)) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- property presence is checked
             return (value as any).constructor.name === name;
         }
+        /* eslint-enable @typescript-eslint/no-unsafe-member-access */
         return false;
     };
 }

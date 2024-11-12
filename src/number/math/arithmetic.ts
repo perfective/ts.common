@@ -53,7 +53,7 @@ export function remainder(dividend: number, divisor: number): number {
  * @since v0.11.0
  */
 export function absolute(value: number): number {
-    // Runtime check to avoid NaN and input coercion to a number.
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Runtime check for NaN
     if (isNotNumber(value)) {
         throw new TypeError('Value must be a number.');
     }

@@ -26,6 +26,7 @@ const ecmaTypes: Set<EcmaType> = new Set<EcmaType>([
  * @since v0.9.0
  */
 export function ecmaType(type: EcmaType): EcmaType {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime check
     if (isEcmaType(type)) {
         return type;
     }
@@ -66,6 +67,7 @@ const tsTypes: Set<TsType> = new Set<TsType>([
  * @since v0.9.0
  */
 export function tsType(type: TsType): TsType {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime check
     if (isTsType(type)) {
         return type;
     }
@@ -103,13 +105,13 @@ T extends undefined
                         ? 'string'
                         : T extends symbol
                             ? 'symbol'
-                            // eslint-disable-next-line @typescript-eslint/ban-types -- type check only
+                            // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- type check only
                             : T extends Function
                                 ? 'function'
                                 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- inferring an array
                                 : T extends (infer _U)[]
                                     ? 'array'
-                                    // eslint-disable-next-line @typescript-eslint/ban-types -- type check only
+                                    // eslint-disable-next-line @typescript-eslint/no-restricted-types -- type check
                                     : T extends object
                                         ? 'object'
                                         : 'unknown';
@@ -134,8 +136,8 @@ export function typeOf<T>(value: T | null | undefined): TypeOf<T> & TsType {
  *
  * @since v0.3.0
  */
-export function isTypeOf<T>(type: TsType): (value: T | null | undefined) => boolean {
-    return (value: T | null | undefined): boolean => typeOf(value) as TsType === type;
+export function isTypeOf(type: TsType): (value: unknown) => boolean {
+    return (value: unknown): boolean => typeOf(value) as TsType === type;
 }
 
 /**
@@ -143,6 +145,6 @@ export function isTypeOf<T>(type: TsType): (value: T | null | undefined) => bool
  *
  * @since v0.3.0
  */
-export function isNotTypeOf<T>(type: TsType): (value: T | null | undefined) => boolean {
-    return (value: T | null | undefined): boolean => typeOf(value) as TsType !== type;
+export function isNotTypeOf(type: TsType): (value: unknown) => boolean {
+    return (value: unknown): boolean => typeOf(value) as TsType !== type;
 }

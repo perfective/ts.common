@@ -679,7 +679,7 @@ export function nil<T>(): Nothing<Present<T>> {
  *
  * @since 0.9.0
  */
-export function isMaybe<T, U>(value: Maybe<T> | U): value is Maybe<T> {
+export function isMaybe<T>(value: unknown): value is Maybe<T> {
     return value instanceof Maybe;
 }
 
@@ -697,7 +697,7 @@ export function isNotMaybe<T, U>(value: Maybe<T> | U): value is U {
  *
  * @since 0.9.0
  */
-export function isJust<T, U>(value: Just<T> | U): value is Just<T> {
+export function isJust<T>(value: unknown): value is Just<T> {
     return value instanceof Just;
 }
 
@@ -715,7 +715,7 @@ export function isNotJust<T, U>(value: Just<T> | U): value is U {
  *
  * @since 0.9.0
  */
-export function isNothing<T, U>(value: Nothing<T> | U): value is Nothing<T> {
+export function isNothing<T>(value: unknown): value is Nothing<T> {
     return value instanceof Nothing;
 }
 

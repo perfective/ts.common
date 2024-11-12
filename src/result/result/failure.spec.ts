@@ -46,6 +46,7 @@ describe(failureFrom, () => {
 describe(isFailure, () => {
     describe('when a given `value` is a `Failure`', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isFailure(failure(error('Failure')))).toBe(true);
         });
     });
@@ -61,13 +62,16 @@ describe(isFailure, () => {
 describe(isNotFailure, () => {
     describe('when a given `value` is not a `Failure`', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotFailure(error('Failure'))).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotFailure(success(0))).toBe(true);
         });
     });
 
     describe('when a given `value` is a `Failure`', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotFailure(failure(error('Failure')))).toBe(false);
         });
     });

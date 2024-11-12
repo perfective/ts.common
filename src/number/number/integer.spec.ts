@@ -15,13 +15,16 @@ describe(isInteger, () => {
             expect(isInteger(0)).toBe(true);
             expect(isInteger(1)).toBe(true);
             expect(isInteger(-1)).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.MIN_SAFE_INTEGER)).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.MAX_SAFE_INTEGER)).toBe(true);
         });
     });
 
     describe('when the value is MAX_VALUE', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.MAX_VALUE)).toBe(true);
         });
     });
@@ -30,25 +33,30 @@ describe(isInteger, () => {
         it('returns false', () => {
             expect(isInteger(3.14)).toBe(false);
             expect(isInteger(-2.71)).toBe(false);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.EPSILON)).toBe(false);
         });
     });
 
     describe('when the value is MIN_VALUE', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.MIN_VALUE)).toBe(false);
         });
     });
 
     describe('when the value is NaN', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.NaN)).toBe(false);
         });
     });
 
     describe('when the value is Infinity', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.NEGATIVE_INFINITY)).toBe(false);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isInteger(Number.POSITIVE_INFINITY)).toBe(false);
         });
     });
@@ -64,24 +72,28 @@ describe(isSafeInteger, () => {
 
     describe('when value is an integer that is equal to 2^53-1', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger(2 ** 53 - 1)).toBe(true);
         });
     });
 
     describe('when value is an integer that is equal to -(2^53-1)', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger(-(2 ** 53 - 1))).toBe(true);
         });
     });
 
     describe('when value is an integer that is greater than 2^53-1', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger((2 ** 53 - 1) + 1)).toBe(false);
         });
     });
 
     describe('when value is an integer that is less than -(2^53-1)', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger(-(2 ** 53 - 1) - 1)).toBe(false);
         });
     });
@@ -94,13 +106,16 @@ describe(isSafeInteger, () => {
 
     describe('when value is NaN', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger(Number.NaN)).toBe(false);
         });
     });
 
     describe('when value is Infinity', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger(Number.NEGATIVE_INFINITY)).toBe(false);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSafeInteger(Number.POSITIVE_INFINITY)).toBe(false);
         });
     });

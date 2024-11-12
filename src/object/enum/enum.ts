@@ -22,7 +22,7 @@ export type Member<T extends number | string> = keyof Enum<T>;
  *
  * @since v0.6.0
  */
-export function members<T extends number | string, E extends Enum<T>>(value: E): Member<T>[] {
+export function members<T extends number | string>(value: Enum<T>): Member<T>[] {
     return Object.keys(value)
         .filter(key => decimal(key) === null);
 }

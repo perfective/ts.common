@@ -30,8 +30,8 @@ export type Value<T> = T | Nullary<T>;
  *
  * @since v0.6.0
  */
-// eslint-disable-next-line @typescript-eslint/ban-types -- generic predicate
-export function isNullary<F extends Function>(f: F): boolean {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- generic predicate
+export function isNullary(f: Function): boolean {
     return hasLength(0)(f);
 }
 

@@ -14,7 +14,7 @@ export function error(message: string): Error {
  *
  * @since v0.1.0
  */
-export function isError<T>(value: Error | T): value is Error {
+export function isError(value: unknown): value is Error {
     return value instanceof Error;
 }
 

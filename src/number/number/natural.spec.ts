@@ -19,6 +19,7 @@ describe(isNatural, () => {
 
     describe('when value is a maximum safe integer', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNatural(Number.MAX_SAFE_INTEGER))
                 .toBe(true);
         });
@@ -26,6 +27,7 @@ describe(isNatural, () => {
 
     describe('when value is maximum value', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNatural(Number.MAX_VALUE))
                 .toBe(true);
         });
@@ -33,6 +35,7 @@ describe(isNatural, () => {
 
     describe('when value is a positive infinity', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNatural(Number.POSITIVE_INFINITY))
                 .toBe(false);
         });
@@ -54,6 +57,7 @@ describe(isNatural, () => {
 
     describe('when value is NaN', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNatural(Number.NaN))
                 .toBe(false);
         });

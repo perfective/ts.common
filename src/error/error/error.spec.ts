@@ -12,6 +12,7 @@ describe(error, () => {
 describe(isError, () => {
     describe('when a given value is an Error', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isError(error('Error')))
                 .toBe(true);
         });
@@ -35,6 +36,7 @@ describe(isNotError, () => {
 
     describe('when a given value is an Error', () => {
         it('returns false when value is an Error', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotError(error('Error')))
                 .toBe(false);
         });

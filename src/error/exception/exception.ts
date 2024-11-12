@@ -143,7 +143,7 @@ export function caughtError(value: unknown): Error | Exception {
  *
  * @since v0.2.0
  */
-export function isException<T>(value: Exception | T): value is Exception {
+export function isException(value: unknown): value is Exception {
     return value instanceof Exception;
 }
 

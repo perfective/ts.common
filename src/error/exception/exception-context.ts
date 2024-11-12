@@ -4,5 +4,4 @@
  * @since v0.2.0
  */
 export interface ExceptionContext
-    extends Record<string, unknown> {
-}
+    extends Record<string, unknown> {}

@@ -12,7 +12,7 @@ export function evalError(message: string): EvalError {
  *
  * @since v0.1.0
  */
-export function isEvalError<T>(value: EvalError | T): value is EvalError {
+export function isEvalError(value: unknown): value is EvalError {
     return value instanceof EvalError;
 }
 

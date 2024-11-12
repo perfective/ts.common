@@ -122,13 +122,16 @@ describe(isNotResult, () => {
     describe('when a given `value` is not a `Result`', () => {
         it('returns true', () => {
             expect(isNotResult(0)).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotResult(error('Failure'))).toBe(true);
         });
     });
 
     describe('when a given `value` is a `Result`', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotResult(result(0))).toBe(false);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotResult(result(error('Failure')))).toBe(false);
         });
     });

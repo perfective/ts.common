@@ -15,7 +15,7 @@ export type Ternary<X, Y, Z, V> = (x: X, y: Y, z: Z) => V;
  *
  * @since v0.6.0
  */
-// eslint-disable-next-line @typescript-eslint/ban-types -- generic predicate
-export function isTernary<F extends Function>(f: F): boolean {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- generic predicate
+export function isTernary(f: Function): boolean {
     return hasLength(3)(f);
 }

@@ -12,7 +12,7 @@ export function rangeError(message: string): RangeError {
  *
  * @since v0.1.0
  */
-export function isRangeError<T>(value: RangeError | T): value is RangeError {
+export function isRangeError(value: unknown): value is RangeError {
     return value instanceof RangeError;
 }
 

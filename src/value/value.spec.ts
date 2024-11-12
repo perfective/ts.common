@@ -22,6 +22,7 @@ describe('isDefined', () => {
         expect(isDefined('')).toBe(true);
         expect(isDefined(0)).toBe(true);
         expect(isDefined(false)).toBe(true);
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
         expect(isDefined(null)).toBe(true);
     });
 
@@ -39,6 +40,7 @@ describe('isUndefined', () => {
     });
 
     it('returns true when value is undefined', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
         expect(isUndefined(undefined)).toBe(true);
     });
 });
@@ -64,6 +66,7 @@ describe('isNotNull', () => {
         expect(isNotNull('')).toBe(true);
         expect(isNotNull(0)).toBe(true);
         expect(isNotNull(false)).toBe(true);
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
         expect(isNotNull(undefined)).toBe(true);
     });
 
@@ -81,6 +84,7 @@ describe('isNull', () => {
     });
 
     it('returns true when value is null', () => {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
         expect(isNull(null)).toBe(true);
     });
 });

@@ -4,8 +4,7 @@
  * @since v0.3.0
  */
 export interface Tokens
-    extends Record<string, string> {
-}
+    extends Record<string, string> {}
 
 /**
  * Creates {@link Tokens} record from a given array of positional tokens,

@@ -13,7 +13,7 @@ export type Predicate<T> = (value: T) => boolean;
  *
  * @since v0.10.0
  */
-export function isBoolean<T>(value: T | boolean): value is boolean {
+export function isBoolean(value: unknown): value is boolean {
     return typeof value === 'boolean';
 }
 
@@ -35,7 +35,7 @@ export function isNotBoolean<T>(value: T | boolean): value is T {
  * @since v0.3.0
  */
 // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- function name increases readability
-export function isTruthy<T>(value: T): boolean {
+export function isTruthy(value: unknown): boolean {
     return Boolean(value);
 }
 
@@ -47,7 +47,7 @@ export function isTruthy<T>(value: T): boolean {
  *
  * @since v0.3.0
  */
-export function isFalsy<T>(value: T): boolean {
+export function isFalsy(value: unknown): boolean {
     return !isTruthy(value);
 }
 

@@ -273,6 +273,7 @@ describe(causedBy, () => {
 describe(isException, () => {
     describe('when a given value is an Exception', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isException(exception('User-defined Exception'))).toBe(true);
         });
     });
@@ -288,6 +289,7 @@ describe(isException, () => {
 describe(isNotException, () => {
     describe('when a given value is not an Exception', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotException(error('Previous'))).toBe(true);
             expect(isNotException('Previous')).toBe(true);
         });
@@ -295,6 +297,7 @@ describe(isNotException, () => {
 
     describe('when a given value is an Exception', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotException(exception('User-defined Exception')))
                 .toBe(false);
         });

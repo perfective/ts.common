@@ -12,10 +12,10 @@ export type Instance<T, U extends any[] = any[]> = abstract new(...args: U) => T
  *
  * @since v0.3.0
  */
-export function isInstanceOf<T, U extends any[] = any[], V = unknown>(
+export function isInstanceOf<T, U extends any[] = any[]>(
     type: Instance<T, U>,
-): (value: T | V) => value is T {
-    return (value: T | V): value is T => value instanceof type;
+): (value: unknown) => value is T {
+    return (value: unknown): value is T => value instanceof type;
 }
 
 /**

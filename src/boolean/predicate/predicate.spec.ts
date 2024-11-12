@@ -49,6 +49,7 @@ describe(isNotBoolean, () => {
         testCase('object', {}, true),
     ])('when a given value is $name', ({ input, output }) => {
         it(`returns ${String(output)}`, () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotBoolean(input)).toBe(output);
         });
     });

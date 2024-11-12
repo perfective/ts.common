@@ -88,13 +88,16 @@ describe(isJust, () => {
 describe(isNotJust, () => {
     describe('when given a `Just`', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotJust(just(0))).toBe(false);
         });
     });
 
     describe('when given a `Nothing`', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotJust(nothing())).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotJust(nil())).toBe(true);
         });
     });
@@ -102,7 +105,9 @@ describe(isNotJust, () => {
     describe('when given not a `Maybe`', () => {
         it('returns true', () => {
             expect(isNotJust(0)).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotJust(null)).toBe(true);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotJust(undefined)).toBe(true);
         });
     });

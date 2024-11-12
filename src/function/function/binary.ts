@@ -18,7 +18,7 @@ export type Binary<X, Y, V> = (x: X, y: Y) => V;
  *
  * @since v0.6.0
  */
-// eslint-disable-next-line @typescript-eslint/ban-types -- generic predicate
-export function isBinary<F extends Function>(f: F): boolean {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- generic predicate
+export function isBinary(f: Function): boolean {
     return hasLength(2)(f);
 }

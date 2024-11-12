@@ -29,9 +29,7 @@ export type ObjectWithDefined<T, K extends keyof T> = T & {
  *
  * @since v0.1.0
  */
-export type ObjectWithUndefined<T, K extends keyof T> = T & {
-    [P in K]?: undefined;
-};
+export type ObjectWithUndefined<T, K extends keyof T> = T & Partial<Record<K, undefined>>;
 
 /**
  * An object of type `T` with a non-null value of property `K`.
@@ -47,9 +45,7 @@ export type ObjectWithNotNull<T, K extends keyof T> = T & {
  *
  * @since v0.1.0
  */
-export type ObjectWithNull<T, K extends keyof T> = T & {
-    [P in K]: null;
-};
+export type ObjectWithNull<T, K extends keyof T> = T & Record<K, null>;
 
 /**
  * An object of type `T` with a present value of property `K`.

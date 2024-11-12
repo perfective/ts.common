@@ -160,7 +160,7 @@ export function wrapped<T>(value: T | T[]): T[] {
  *
  * @since v0.2.0
  */
-export function isArray<T, V = unknown>(value: T[] | V): value is T[] {
+export function isArray<T>(value: unknown): value is T[] {
     return Array.isArray(value);
 }
 

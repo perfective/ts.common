@@ -47,6 +47,7 @@ export type NonNegativeInteger = number;
  * @since v0.6.0
  */
 export function isNonNegativeInteger(value: number): value is NonNegativeInteger {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Type guard for nominal type
     return value >= 0 && isInteger(value);
 }
 
@@ -63,6 +64,7 @@ export type PositiveInteger = number;
  * @since v0.6.0
  */
 export function isPositiveInteger(value: number): value is PositiveInteger {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Type guard for nominal type
     return value > 0 && isInteger(value);
 }
 
@@ -79,6 +81,7 @@ export type NonPositiveInteger = number;
  * @since v0.6.0
  */
 export function isNonPositiveInteger(value: number): value is NonPositiveInteger {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Type guard for nominal type
     return value <= 0 && isInteger(value);
 }
 
@@ -95,5 +98,6 @@ export type NegativeInteger = number;
  * @since v0.6.0
  */
 export function isNegativeInteger(value: number): value is NegativeInteger {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Type guard for nominal type
     return value < 0 && isInteger(value);
 }

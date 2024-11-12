@@ -15,7 +15,7 @@ describe(exponential, () => {
                 .toBe('3.1415926535897932e+16');
         });
 
-        /* eslint-disable @typescript-eslint/no-loss-of-precision -- precision failure test */
+        /* eslint-disable no-loss-of-precision -- precision failure test */
         it('only keeps about 17 decimal places of precision', () => {
             expect(exponential(16)(3.141_592_653_589_793_2))
                 .toBe('3.1415926535897931e+0');
@@ -26,7 +26,7 @@ describe(exponential, () => {
             expect(exponential(20)(314_159_265_358_979_323_846))
                 .toBe('3.14159265358979334144e+20');
         });
-        /* eslint-enable @typescript-eslint/no-loss-of-precision */
+        /* eslint-enable no-loss-of-precision */
     });
 });
 
@@ -45,7 +45,7 @@ describe(fixed, () => {
                 .toBe('31415926535897932.00000000000000000000');
         });
 
-        /* eslint-disable @typescript-eslint/no-loss-of-precision -- precision failure test */
+        /* eslint-disable no-loss-of-precision -- precision failure test */
         it('only keeps about 17 decimal places of precision', () => {
             expect(fixed(16)(3.141_592_653_589_793_2))
                 .toBe('3.1415926535897931');
@@ -58,7 +58,7 @@ describe(fixed, () => {
             expect(fixed(20)(314_159_265_358_979_323_846))
                 .toBe('314159265358979334144.00000000000000000000');
         });
-        /* eslint-enable @typescript-eslint/no-loss-of-precision */
+        /* eslint-enable no-loss-of-precision */
     });
 });
 
@@ -73,13 +73,13 @@ describe(precision, () => {
                 .toBe('3.141592653589793');
         });
 
-        /* eslint-disable @typescript-eslint/no-loss-of-precision -- precision failure test */
+        /* eslint-disable no-loss-of-precision -- precision failure test */
         it('only keeps about 17 decimal places of precision', () => {
             expect(precision(17)(3.141_592_653_589_793_2))
                 .toBe('3.1415926535897931');
             expect(precision(21)(3.141_592_653_589_793_238_46))
                 .toBe('3.14159265358979311600');
         });
-        /* eslint-enable @typescript-eslint/no-loss-of-precision */
+        /* eslint-enable no-loss-of-precision */
     });
 });

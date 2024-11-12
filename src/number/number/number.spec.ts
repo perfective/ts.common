@@ -11,6 +11,7 @@ describe(isNumber, () => {
 
     describe('when value is not a number', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNumber(Number.NaN)).toBe(false);
             expect(isNumber('3.14')).toBe(false);
             expect(isNumber(true)).toBe(false);
@@ -27,6 +28,7 @@ describe(isNotNumber, () => {
 
     describe('when value is not a number', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNumber(Number.NaN)).toBe(true);
             expect(isNotNumber('3.14')).toBe(true);
             expect(isNotNumber(false)).toBe(true);

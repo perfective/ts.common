@@ -41,7 +41,7 @@ export type Undefined<T> = T extends undefined ? T : never;
  *
  * @since v0.1.0
  */
-export function isUndefined<T>(value: T | undefined): value is undefined {
+export function isUndefined(value: unknown): value is undefined {
     // eslint-disable-next-line no-void -- the same check as in the compiled JS
     return value === void 0;
 }
@@ -92,7 +92,7 @@ export type Null<T> = T extends null ? T : never;
  *
  * @since v0.1.0
  */
-export function isNull<T>(value: T | null): value is null {
+export function isNull(value: unknown): value is null {
     return value === null;
 }
 
@@ -145,6 +145,6 @@ export type Absent<T> = T extends null | undefined ? T : never;
  *
  * @since v0.1.0
  */
-export function isAbsent<T>(value: T | null | undefined): value is null | undefined {
+export function isAbsent(value: unknown): value is null | undefined {
     return isUndefined(value) || isNull(value);
 }

@@ -33,7 +33,7 @@ export type InputObject<T> = {
  */
 export type Input<T> = (T extends (infer U)[]
     ? InputArray<U>
-    // eslint-disable-next-line @typescript-eslint/ban-types -- conditional type guard
+    // eslint-disable-next-line @typescript-eslint/no-restricted-types -- conditional type guard
     : T extends object
         ? InputObject<T>
         : InputPrimitive<T>) | null | undefined;

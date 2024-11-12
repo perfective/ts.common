@@ -47,7 +47,10 @@ describe(isInstanceOf, () => {
 
         describe('when given an instance of the same class', () => {
             it('returns true', () => {
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
                 expect(isBase(new Base())).toBe(true);
+
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
                 expect(isError(new Error('Error'))).toBe(true);
             });
         });

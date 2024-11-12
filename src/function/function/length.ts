@@ -12,7 +12,7 @@ export interface Length {
  *
  * @since v0.6.0
  */
-export function length<L extends Length>(value: L): number {
+export function length(value: Length): number {
     return value.length;
 }
 
@@ -21,8 +21,8 @@ export function length<L extends Length>(value: L): number {
  *
  * @since v0.6.0
  */
-export function hasLength<L extends Length>(length: number): (value: L) => boolean {
-    return (value: L): boolean => value.length === length;
+export function hasLength(length: number): (value: Length) => boolean {
+    return (value: Length): boolean => value.length === length;
 }
 
 /**
@@ -30,7 +30,7 @@ export function hasLength<L extends Length>(length: number): (value: L) => boole
  *
  * @since v0.6.0
  */
-export function isEmpty<L extends Length>(value: L): boolean {
+export function isEmpty(value: Length): boolean {
     return value.length <= 0;
 }
 
@@ -39,7 +39,7 @@ export function isEmpty<L extends Length>(value: L): boolean {
  *
  * @since v0.6.0
  */
-export function isNotEmpty<L extends Length>(value: L): boolean {
+export function isNotEmpty(value: Length): boolean {
     return value.length > 0;
 }
 

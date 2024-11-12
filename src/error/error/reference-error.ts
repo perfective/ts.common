@@ -12,7 +12,7 @@ export function referenceError(message: string): ReferenceError {
  *
  * @since v0.1.0
  */
-export function isReferenceError<T>(value: ReferenceError | T): value is ReferenceError {
+export function isReferenceError(value: unknown): value is ReferenceError {
     return value instanceof ReferenceError;
 }
 

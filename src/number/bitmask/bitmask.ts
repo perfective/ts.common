@@ -42,7 +42,7 @@ export function bitmask<T extends Flags | number = number>(flags: Bitmask<T>[]):
  */
 export function raisedFlags<T extends number>(
     // TS2345: Argument of type 'typeof Style' is not assignable to parameter of type 'Record<string, number>'.
-    // eslint-disable-next-line @typescript-eslint/ban-types -- TBD: Is it possible to pass Flags<T>?
+    // eslint-disable-next-line @typescript-eslint/no-restricted-types -- TBD: Is it possible to pass Flags<T>?,
     type: object,
     bitmask: Bitmask<T>,
 ): Member<T>[] {
@@ -69,10 +69,8 @@ export function hasFlagOn<T extends Flags | number>(flag: Bitmask<T>): Unary<Bit
  * @since v0.6.0
  */
 export function isFlagOn<T extends Flags | number>(bitmask: Bitmask<T>, flag: Bitmask<T>): boolean {
-    /* eslint-disable @typescript-eslint/tslint/config -- flag is a number */
     return (bitmask & flag) === flag
         && flag !== 0;
-    /* eslint-enable @typescript-eslint/tslint/config */
 }
 
 /* eslint-enable no-bitwise */

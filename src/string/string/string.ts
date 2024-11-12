@@ -3,7 +3,7 @@
  *
  * @since v0.1.0
  */
-export function isString<T>(value: T | string): value is string {
+export function isString(value: unknown): value is string {
     return typeof value === 'string';
 }
 

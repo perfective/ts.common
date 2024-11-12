@@ -12,7 +12,7 @@ export function typeError(message: string): TypeError {
  *
  * @since v0.1.0
  */
-export function isTypeError<T>(value: TypeError | T): value is TypeError {
+export function isTypeError(value: unknown): value is TypeError {
     return value instanceof TypeError;
 }
 

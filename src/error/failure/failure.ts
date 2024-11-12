@@ -27,7 +27,7 @@ export function failure(error: Error): Failure {
     return failureFromError(error);
 }
 
-function failureFromError<E extends Error>(error: E): Failure {
+function failureFromError(error: Error): Failure {
     return {
         name: error.name,
         message: {
@@ -40,7 +40,7 @@ function failureFromError<E extends Error>(error: E): Failure {
     };
 }
 
-function failureFromException<E extends Exception>(exception: E): Failure {
+function failureFromException(exception: Exception): Failure {
     return {
         name: exception.name,
         message: {

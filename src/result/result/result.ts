@@ -461,6 +461,7 @@ export class Failure<T> extends Result<T> {
         public readonly value: Error,
     ) {
         super();
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime type guard
         if (isNotError(this.value)) {
             throw new TypeError('The value of `Failure` must be an instance of an `Error`');
         }
@@ -764,7 +765,7 @@ export function failureFrom<T>(map: (value: T) => Error): Unary<T, Failure<T>> {
  *
  * @since v0.9.0
  */
-export function isResult<T, U>(value: Result<T> | U): value is Result<T> {
+export function isResult<T>(value: unknown): value is Result<T> {
     return value instanceof Result;
 }
 
@@ -782,7 +783,7 @@ export function isNotResult<T, U>(value: Result<T> | U): value is U {
  *
  * @since v0.9.0
  */
-export function isSuccess<T, U>(value: Success<T> | U): value is Success<T> {
+export function isSuccess<T>(value: unknown): value is Success<T> {
     return value instanceof Success;
 }
 
@@ -800,7 +801,7 @@ export function isNotSuccess<T, U>(value: Success<T> | U): value is U {
  *
  * @since v0.9.0
  */
-export function isFailure<T, U>(value: Failure<T> | U): value is Failure<T> {
+export function isFailure<T>(value: unknown): value is Failure<T> {
     return value instanceof Failure;
 }
 

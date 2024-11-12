@@ -3,7 +3,7 @@
  *
  * @since v0.2.1
  */
-export function isNumber<T>(value: number | T): value is number {
+export function isNumber(value: unknown): value is number {
     return typeof value === 'number' && !Number.isNaN(value);
 }
 

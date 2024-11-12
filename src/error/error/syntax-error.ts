@@ -12,7 +12,7 @@ export function syntaxError(message: string): SyntaxError {
  *
  * @since v0.1.0
  */
-export function isSyntaxError<T>(value: SyntaxError | T): value is SyntaxError {
+export function isSyntaxError(value: unknown): value is SyntaxError {
     return value instanceof SyntaxError;
 }
 

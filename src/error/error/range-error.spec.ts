@@ -12,6 +12,7 @@ describe(rangeError, () => {
 describe(isRangeError, () => {
     describe('when a given value is an RangeError', () => {
         it('returns true', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isRangeError(new RangeError('Error')))
                 .toBe(true);
         });
@@ -35,6 +36,7 @@ describe(isNotRangeError, () => {
 
     describe('when a given value is an RangeError', () => {
         it('returns false', () => {
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotRangeError(new RangeError('Error')))
                 .toBe(false);
         });

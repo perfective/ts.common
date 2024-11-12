@@ -4,6 +4,10 @@ module.exports = {
     ],
     overrides: [
         {
+            files: ['*.ts'],
+            rules: {},
+        },
+        {
             files: ['*.@(spec|test).[jt]s?(x)'],
             rules: {
                 'max-nested-callbacks': ['error', 6],

@@ -35,7 +35,7 @@ describe(rejection, () => {
 
     describe('with Promise', () => {
         it('can be passed as `onRejected` argument to `Promise.then`', async () => {
-            const output: Result<number> = await rejected.then(success, rejection);
+            const output: Result<number> = await rejected.then(success).catch(rejection);
 
             expect(output).toStrictEqual(failure(reason));
         });

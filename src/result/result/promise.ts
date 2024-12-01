@@ -28,7 +28,7 @@ export function rejection<T = never>(reason: unknown): Failure<T> {
  * @since v0.9.0
  */
 export async function promisedResult<T>(promise: Promise<T>): Promise<Result<T>> {
-    return promise.then(success, rejection);
+    return promise.then(success).catch(rejection);
 }
 
 /**

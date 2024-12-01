@@ -252,9 +252,9 @@ provides the `Exception` class
 to make logging and debugging of production code easier.
 It supports three features:
 
--   providing a previous error (allows to stack errors);
--   using a message template with string tokens (allows to localize and format messages);
--   storing additional context (simplifies logging and debugging).
+- providing a previous error (allows to stack errors);
+- using a message template with string tokens (allows to localize and format messages);
+- storing additional context (simplifies logging and debugging).
 
 .Using the `Exception` class and its constructors.
 
@@ -335,41 +335,41 @@ Read more about the functions to handle the built-in JS errors and the `Exceptio
 
 Packages are organized and named around their primary type:
 
--   [`@perfective/common`](https://github.com/perfective/ts.common/blob/main/src/value/index.adoc)
-    — functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
--   [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/main/src/array/index.adoc)
-    — functions and types for handling
-    [arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
--   [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc)
-    — functions and types to handle
-    [`boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
--   [`@perfective/common/date`](https://github.com/perfective/ts.common/tree/main/src/date/index.adoc)
-    — functions and types to handle
-    [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) values.
--   [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc)
-    — functions and types to handle
-    [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-    and related classes.
--   [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/main/src/function/index.adoc)
-    — functions and types for functional programming.
--   [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/main/src/match/index.adoc)
-    — functions and types for a functional style `switch-case`.
--   [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc)
-    — a `Maybe` monad ([Option type](https://en.wikipedia.org/wiki/Option_type)) implementation.
--   [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
-    — functions and types to handle
-    [numbers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number).
--   [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/main/src/object/index.adoc)
-    — functions and types for handling the
-    [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
--   [`@perfective/common/promise`](https://github.com/perfective/ts.common/tree/main/src/promise/index.adoc)
-    — functions and types to handle the
-    [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) class.
--   [`@perfective/common/result`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc)
-    — a `Result` monad ([Result type](https://en.wikipedia.org/wiki/Result_type)) implementation.
--   [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/main/src/string/index.adoc)
-    — functions and types to handle
-    [strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
+- [`@perfective/common`](https://github.com/perfective/ts.common/blob/main/src/value/index.adoc)
+  — functions and types to handle types (e.g., `TypeGuard` interface), `null`, `undefined`, and `void` values.
+- [`@perfective/common/array`](https://github.com/perfective/ts.common/tree/main/src/array/index.adoc)
+  — functions and types for handling
+  [arrays](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
+- [`@perfective/common/boolean`](https://github.com/perfective/ts.common/tree/main/src/boolean/index.adoc)
+  — functions and types to handle
+  [`boolean`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean) values.
+- [`@perfective/common/date`](https://github.com/perfective/ts.common/tree/main/src/date/index.adoc)
+  — functions and types to handle
+  [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) values.
+- [`@perfective/common/error`](https://github.com/perfective/ts.common/tree/main/src/error/index.adoc)
+  — functions and types to handle
+  [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  and related classes.
+- [`@perfective/common/function`](https://github.com/perfective/ts.common/tree/main/src/function/index.adoc)
+  — functions and types for functional programming.
+- [`@perfective/common/match`](https://github.com/perfective/ts.common/tree/main/src/match/index.adoc)
+  — functions and types for a functional style `switch-case`.
+- [`@perfective/common/maybe`](https://github.com/perfective/ts.common/tree/main/src/maybe/index.adoc)
+  — a `Maybe` monad ([Option type](https://en.wikipedia.org/wiki/Option_type)) implementation.
+- [`@perfective/common/number`](https://github.com/perfective/ts.common/tree/main/src/number/index.adoc)
+  — functions and types to handle
+  [numbers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number).
+- [`@perfective/common/object`](https://github.com/perfective/ts.common/tree/main/src/object/index.adoc)
+  — functions and types for handling the
+  [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) class.
+- [`@perfective/common/promise`](https://github.com/perfective/ts.common/tree/main/src/promise/index.adoc)
+  — functions and types to handle the
+  [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) class.
+- [`@perfective/common/result`](https://github.com/perfective/ts.common/tree/main/src/result/index.adoc)
+  — a `Result` monad ([Result type](https://en.wikipedia.org/wiki/Result_type)) implementation.
+- [`@perfective/common/string`](https://github.com/perfective/ts.common/tree/main/src/string/index.adoc)
+  — functions and types to handle
+  [strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String).
 
 The packages have full unit test coverage.
 
@@ -383,13 +383,13 @@ how built-in JavaScript objects and methods are covered by the `@perfective/comm
 This package starts its versioning from `0.7.0`,
 as it continues versioning after the deprecated packages:
 
--   `@perfective/array` (`v0.4.0`);
--   `@perfective/error` (`v0.3.0`);
--   `@perfective/fp` (`v0.6.0`);
--   `@perfective/identity` (`v0.2.0`);
--   `@perfective/match` (`v0.3.0`);
--   `@perfective/maybe` (`v0.6.0`);
--   `@perfective/object` (`v0.4.0`);
--   `@perfective/real` (`v0.6.0`);
--   `@perfective/string` (`v0.3.0`);
--   `@perfective/value` (`v0.3.0`).
+- `@perfective/array` (`v0.4.0`);
+- `@perfective/error` (`v0.3.0`);
+- `@perfective/fp` (`v0.6.0`);
+- `@perfective/identity` (`v0.2.0`);
+- `@perfective/match` (`v0.3.0`);
+- `@perfective/maybe` (`v0.6.0`);
+- `@perfective/object` (`v0.4.0`);
+- `@perfective/real` (`v0.6.0`);
+- `@perfective/string` (`v0.3.0`);
+- `@perfective/value` (`v0.3.0`).

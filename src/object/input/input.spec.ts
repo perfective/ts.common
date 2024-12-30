@@ -33,6 +33,7 @@ interface Example {
 
 describe(input, () => {
     describe('when given a value', () => {
+        // eslint-disable-next-line complexity -- complexity is 1
         it('casts it to a given Input<T> type', () => {
             const unknownInput: unknown = {
                 params: {

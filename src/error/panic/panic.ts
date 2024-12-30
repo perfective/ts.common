@@ -29,6 +29,7 @@ export function throws(message: string, tokens?: ExceptionTokens, context?: Exce
  */
 export function throws<E extends Error>(error: Value<E>): never;
 
+// eslint-disable-next-line complexity -- complexity is 2.
 export function throws<E extends Error>(
     first: Value<E> | string,
     second: ExceptionTokens = {},

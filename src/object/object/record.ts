@@ -129,7 +129,7 @@ export function assigned<T, V = Partial<T>>(value: T, ...overrides: (V | Partial
             ...result,
             ...current,
         }),
-        // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter -- TSC errors without type casting.
+
         value as T & V,
     );
 }

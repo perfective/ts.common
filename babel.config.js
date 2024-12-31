@@ -1,8 +1,12 @@
-const perfective = require('@perfective/build/babel');
+// eslint-disable-next-line n/no-unpublished-import -- dev-only
+import { babelPluginRequireExtension } from '@perfective/build/babel';
 
-module.exports = {
+const babelConfig = {
     presets: [],
     plugins: [
-        perfective.babelPluginRequireExtension,
+        babelPluginRequireExtension,
     ],
 };
+
+// eslint-disable-next-line import/no-default-export -- required for configuration
+export default babelConfig;

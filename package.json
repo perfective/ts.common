@@ -22,6 +22,7 @@
         "url": "git+https://github.com/perfective/ts.common.git"
     },
     "license": "MIT",
+    "type": "module",
     "sideEffects": false,
     "scripts": {
         "clean": "gulp clean",
@@ -38,13 +39,13 @@
     "devDependencies": {
         "@asciidoctor/gulp-asciidoctor": "^2.2.5",
         "@jest/globals": "^29.7.0",
-        "@perfective/build": "~0.15.0",
+        "@perfective/build": "~0.16.0",
         "@perfective/eslint-config": "0.29.2",
         "@types/jest": "^29.5.14",
         "eslint-plugin-jest": "~28.10.0",
         "gulp": "^5.0.0",
         "jest": "^29.7.0",
-        "prettier": "~3.4.1",
+        "prettier": "~3.4.2",
         "ts-jest": "^29.2.5",
         "typescript": "~5.7.2"
     }

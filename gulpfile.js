@@ -1,11 +1,14 @@
-const gulp = require('gulp');
+/* eslint-disable n/no-unpublished-import -- dev-only */
+import gulp from 'gulp';
 
-const build = require('@perfective/build/gulp');
+import * as build from '@perfective/build/gulp';
 
-exports.clean = build.clean(['./dist']);
-exports.docs = build.asciidoctor();
-exports.default = gulp.series(
-    exports.clean,
+/* eslint-enable n/no-unpublished-import */
+
+export const clean = build.clean(['./dist']);
+export const docs = build.asciidoctor();
+const full = gulp.series(
+    clean,
     build.typescript.esmBuild(),
     build.typescript.cjsBuild(),
     build.typescript.tsDeclarations(),
@@ -16,5 +19,8 @@ exports.default = gulp.series(
         './CHANGELOG*',
         './README*',
     ], './dist'),
-    exports.docs,
+    docs,
 );
+
+// eslint-disable-next-line import/no-default-export -- required for configuration
+export default full;

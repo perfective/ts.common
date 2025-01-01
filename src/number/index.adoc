@@ -8,6 +8,16 @@ including the JavaScript
 
 == Number
 
+* Nominal types:
+** `PositiveNumber`
+— a number that is greater than 0.
+** `NonNegativeNumber`
+– a number that is greater than or equal to 0.
+** `NegativeNumber`
+— a number that is less than 0.
+** `NonPositiveNumber`
+— a number that is less than or equal to 0.
++
 * Type guards:
 +
 ** `isNumber<T>(value: number | T): value is number`

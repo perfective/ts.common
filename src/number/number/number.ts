@@ -1,4 +1,32 @@
 /**
+ * A number that is greater than 0.
+ *
+ * @since v0.11.0
+ */
+export type PositiveNumber = number;
+
+/**
+ * A number that is less than or equal to 0.
+ *
+ * @since v0.11.0
+ */
+export type NonPositiveNumer = number;
+
+/**
+ * A number that is less than 0.
+ *
+ * @since v0.11.0
+ */
+export type NegativeNumber = number;
+
+/**
+ * A number that is greater than or equal to 0.
+ *
+ * @since v0.11.0
+ */
+export type NonNegativeNumber = number;
+
+/**
  * Returns `true` if a given `value` is a number and not a {@link NaN}.
  *
  * @since v0.2.1

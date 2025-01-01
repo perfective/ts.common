@@ -12,7 +12,9 @@ const full = gulp.series(
     build.typescript.esmBuild(),
     build.typescript.cjsBuild(),
     build.typescript.tsDeclarations(),
-    build.packageJson.subPackageJson('@perfective/common'),
+    build.packageJson.subPackageJson('@perfective/common', {
+        type: 'module',
+    }),
     build.packageJson.packageJson(),
     build.copy([
         './LICENSE*',

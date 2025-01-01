@@ -1,10 +1,11 @@
 // eslint-disable-next-line n/no-unpublished-import -- dev-only
-import { babelPluginRequireExtension } from '@perfective/build/babel';
+import { babelPluginImportExtension, babelPluginRequireExtension } from '@perfective/build/babel';
 
 const babelConfig = {
     presets: [],
     plugins: [
         babelPluginRequireExtension,
+        babelPluginImportExtension('js'),
     ],
 };
 

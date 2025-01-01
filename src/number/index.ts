@@ -49,6 +49,13 @@ export {
     octal,
 } from './number/base';
 export {
+    Infinity,
+    isInfinity,
+    isNotInfinity,
+    NegativeInfinity,
+    PositiveInfinity,
+} from './number/infinity';
+export {
     Integer,
     isInteger,
     isNegativeInteger,

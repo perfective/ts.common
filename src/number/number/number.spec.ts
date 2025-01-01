@@ -9,10 +9,24 @@ describe(isNumber, () => {
         });
     });
 
-    describe('when value is not a number', () => {
+    describe('when value is Infinity', () => {
+        it('returns true', () => {
+            /* eslint-disable @typescript-eslint/no-unnecessary-condition -- type guard testing */
+            expect(isNumber(Number.POSITIVE_INFINITY)).toBe(true);
+            expect(isNumber(Number.NEGATIVE_INFINITY)).toBe(true);
+            /* eslint-enable @typescript-eslint/no-unnecessary-condition */
+        });
+    });
+
+    describe('when value is NaN', () => {
         it('returns false', () => {
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNumber(Number.NaN)).toBe(false);
+        });
+    });
+
+    describe('when value is not a number', () => {
+        it('returns false', () => {
             expect(isNumber('3.14')).toBe(false);
             expect(isNumber(true)).toBe(false);
         });
@@ -26,10 +40,24 @@ describe(isNotNumber, () => {
         });
     });
 
-    describe('when value is not a number', () => {
+    describe('when value is Infinity', () => {
+        it('returns false', () => {
+            /* eslint-disable @typescript-eslint/no-unnecessary-condition -- type guard testing */
+            expect(isNotNumber(Number.POSITIVE_INFINITY)).toBe(false);
+            expect(isNotNumber(Number.NEGATIVE_INFINITY)).toBe(false);
+            /* eslint-enable @typescript-eslint/no-unnecessary-condition */
+        });
+    });
+
+    describe('when value is NaN', () => {
         it('returns true', () => {
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNumber(Number.NaN)).toBe(true);
+        });
+    });
+
+    describe('when value is not a number', () => {
+        it('returns true', () => {
             expect(isNotNumber('3.14')).toBe(true);
             expect(isNotNumber(false)).toBe(true);
         });

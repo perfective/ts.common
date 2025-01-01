@@ -124,6 +124,25 @@ Use this function instead of `Math.min`, as it returns `Infinity` or `NaN` for e
 — returns `true` if a given number is a non-negative integer.
 
 
+== Infinity
+
+* Nominal types:
++
+** `Infinity`
+— either a `PositiveInfinity` or `NegativeInfinity`.
+** `PositiveInfinity`
+— an alias for a `number` signifying `Number.POSITIVE_INFINITY`.
+** `NegativeInfinity`
+— an alias for a `number` signifying `Number.NEGATIVE_INFINITY`.
++
+* Predicates:
++
+** `isInfinity(value: number): boolean`
+— returns `true` if the given value is an `Infinity`.
+** `isNotInfinity(value: number): boolean`
+— returns `true` if the given value is not an `Infinity`.
+
+
 == Base (Radix)
 
 The `parseFloat()`, `parseInt()`, and `Number.prototype.toString()` functions are combined

@@ -36,6 +36,7 @@ export {
     minimum,
 } from './math/set';
 export {
+    arccosh,
     arccosine,
     arcsine,
     Radians,

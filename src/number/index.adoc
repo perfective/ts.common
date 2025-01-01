@@ -76,6 +76,9 @@ Returns `null`, if the given cosine is less than `-1` or greater than `1`.
 ** `arcsine(sine: number): Radians | null`
 — returns the inverse sine of the given sine value (between `-1` and `1`, inclusive).
 Returns `null`, if the given sine is less than `-1` or greater than `1`.
+** `arccosh(value: number): NonNegativeNumber | null`
+— returns the inverse hyperbolic cosine [0, +∞) of a given number from [1, +∞)
+Returns `null` if the given number is less than 1.
 +
 * Set functions:
 +

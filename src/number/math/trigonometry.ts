@@ -1,3 +1,5 @@
+import { NonNegativeNumber } from '../number/number';
+
 /**
  * A nominal type for radians.
  */
@@ -27,4 +29,19 @@ export function arcsine(sine: number): Radians | null {
         return null;
     }
     return arcsin;
+}
+
+/**
+ * Returns the inverse hyperbolic cosine [0, +∞) of a given number from [1, +∞).
+ *
+ * Returns `null` if the given number is less than 1.
+ *
+ * @since v0.11.0
+ */
+export function arccosh(value: number): NonNegativeNumber | null {
+    const result = Math.acosh(value);
+    if (Number.isNaN(result)) {
+        return null;
+    }
+    return result;
 }

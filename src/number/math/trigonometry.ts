@@ -6,11 +6,11 @@ import { NonNegativeNumber } from '../number/number';
 export type Radians = number;
 
 /**
- * Returns the inverse cosine of the given cosine value (between -1 and 1, inclusive).
+ * Returns the inverse cosine [0, π] of the given cosine value [-1, 1].
  *
  * Returns `null`, if the given cosine is less than -1 or greater than 1.
  */
-export function arccosine(cosine: number): Radians | null {
+export function arccos(cosine: number): Radians | null {
     const arccos = Math.acos(cosine);
     if (Number.isNaN(arccos)) {
         return null;

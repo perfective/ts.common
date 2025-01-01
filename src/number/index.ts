@@ -36,8 +36,8 @@ export {
     minimum,
 } from './math/set';
 export {
+    arccos,
     arccosh,
-    arccosine,
     arcsine,
     Radians,
 } from './math/trigonometry';

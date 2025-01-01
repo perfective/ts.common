@@ -19,19 +19,6 @@ export function arccos(cosine: number): Radians | null {
 }
 
 /**
- * Returns the inverse sine of the given sine value (between -1 and 1, inclusive).
- *
- * Returns `null`, if the given sine is less than -1 or greater than 1.
- */
-export function arcsine(sine: number): Radians | null {
-    const arcsin = Math.asin(sine);
-    if (Number.isNaN(arcsin)) {
-        return null;
-    }
-    return arcsin;
-}
-
-/**
  * Returns the inverse hyperbolic cosine [0, +∞) of a given number from [1, +∞).
  *
  * Returns `null` if the given number is less than 1.
@@ -44,4 +31,17 @@ export function arccosh(value: number): NonNegativeNumber | null {
         return null;
     }
     return result;
+}
+
+/**
+ * Returns the inverse sine [-π/2, π/2] of the given sine value [-1, 1].
+ *
+ * Returns `null`, if the given sine is less than -1 or greater than 1.
+ */
+export function arcsin(sine: number): Radians | null {
+    const arcsin = Math.asin(sine);
+    if (Number.isNaN(arcsin)) {
+        return null;
+    }
+    return arcsin;
 }

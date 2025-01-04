@@ -4,14 +4,23 @@ import { arccos, arccosh, arcsin } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
-        it('returns null', () => {
-            expect(arccos(-1.1)).toBeNull();
+        it('throws an exception', () => {
+            expect(() => arccos(-1.1))
+                .toThrow('Argument `cosine` must be `[-1, 1]`, but was `-1.1`');
         });
     });
 
     describe('when cosine is greater than 1', () => {
-        it('returns null', () => {
-            expect(arccos(1.1)).toBeNull();
+        it('throws an exception', () => {
+            expect(() => arccos(1.1))
+                .toThrow('Argument `cosine` must be `[-1, 1]`, but was `1.1`');
+        });
+    });
+
+    describe('when cosine is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arccos(Number.NaN))
+                .toThrow('Argument `cosine` must be `[-1, 1]`, but was `NaN`');
         });
     });
 
@@ -27,14 +36,20 @@ describe(arccos, () => {
 
 describe(arcsin, () => {
     describe('when sine is less than -1', () => {
-        it('returns null', () => {
-            expect(arcsin(-1.1)).toBeNull();
+        it('throws an exception', () => {
+            expect(() => arcsin(-1.1)).toThrow('Argument `sine` must be `[-1, 1]`, but was `-1.1`');
         });
     });
 
     describe('when sine is greater than 1', () => {
-        it('returns null', () => {
-            expect(arcsin(1.1)).toBeNull();
+        it('throws an exception', () => {
+            expect(() => arcsin(1.1)).toThrow('Argument `sine` must be `[-1, 1]`, but was `1.1`');
+        });
+    });
+
+    describe('when sine is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arcsin(Number.NaN)).toThrow('Argument `sine` must be `[-1, 1]`, but was `NaN`');
         });
     });
 
@@ -50,8 +65,14 @@ describe(arcsin, () => {
 
 describe(arccosh, () => {
     describe('when input is less than 1', () => {
-        it('returns null', () => {
-            expect(arccosh(0)).toBeNull();
+        it('throws an exception', () => {
+            expect(() => arccosh(0)).toThrow('Argument `value` must be `[1, +∞)`, but was `0`');
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arccosh(Number.NaN)).toThrow('Argument `value` must be `[1, +∞)`, but was `NaN`');
         });
     });
 

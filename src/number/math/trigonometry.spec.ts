@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2 } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -126,6 +126,50 @@ describe(arctan, () => {
             expect(arctan(0)).toBe(0);
             expect(arctan(1)).toBeCloseTo(0.785_398_163_397_448_3);
             expect(arctan(Number.POSITIVE_INFINITY)).toBe(Math.PI / 2);
+        });
+    });
+});
+
+describe(arctan2, () => {
+    describe('when y is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arctan2(Number.NaN, 1))
+                .toThrow('Argument `y` must be `(-∞, +∞)`, but was `NaN`');
+        });
+    });
+
+    describe('when x is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arctan2(1, Number.NaN))
+                .toThrow('Argument `x` must be `(-∞, +∞)`, but was `NaN`');
+        });
+    });
+
+    describe('when both x or y are 0', () => {
+        it('returns 0', () => {
+            expect(arctan2(0, 0)).toBe(0);
+        });
+    });
+
+    describe('when either x or y are an Infinity', () => {
+        it('returns the arctangent of y / x', () => {
+            expect(arctan2(Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY)).toBe(Math.PI / 4);
+            expect(arctan2(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY)).toBe(-Math.PI / 4);
+            expect(arctan2(Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY)).toBe(3 * Math.PI / 4);
+            expect(arctan2(Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY)).toBe(-3 * Math.PI / 4);
+        });
+    });
+
+    describe('when both x and y are valid numbers', () => {
+        it.each([
+            [0, 1, 0],
+            [1, 0, Math.PI / 2],
+            [0, -1, Math.PI],
+            [-1, 0, -Math.PI / 2],
+            [1, 1, Math.PI / 4],
+            [-1, -1, -3 * Math.PI / 4],
+        ])('returns the arctangent of y / x', (y, x, expected) => {
+            expect(arctan2(y, x)).toBe(expected);
         });
     });
 });

@@ -77,3 +77,22 @@ export function arctan(value: number): Radians {
     }
     return Math.atan(value);
 }
+
+/**
+ * Returns the angle in radians [-π, π] between the positive x-axis and the ray from (0, 0) to the point (x, y).
+ *
+ * Note that `arctan2(y, x)` is not the same as `arctan(y / x)`.
+ *
+ * @throws Exception - if either `y` or `x` is `NaN`.
+ *
+ * @since v0.11.0
+ */
+export function arctan2(y: number, x: number): Radians {
+    if (Number.isNaN(y)) {
+        throw invalidArgumentException('y', '(-∞, +∞)', String(y));
+    }
+    if (Number.isNaN(x)) {
+        throw invalidArgumentException('x', '(-∞, +∞)', String(x));
+    }
+    return Math.atan2(y, x);
+}

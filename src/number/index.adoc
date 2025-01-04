@@ -85,6 +85,9 @@ Throws `Exception` if the given number is `NaN`.
 ** `arctan(value: number): Radians`
 — returns the inverse tangent [-π/2, π/2] of a given number from (-∞, +∞).
 Throws `Exception` if the given number is `NaN`.
+** `arctan2(y: number, x: number): Radians`
+— returns the angle in radians [-π, π] between the positive x-axis and the ray from (0, 0) to the point (x, y).
+Throws `Exception` if either `y` or `x` is `NaN`.
 +
 * Set functions:
 +

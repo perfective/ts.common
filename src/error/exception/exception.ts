@@ -157,6 +157,23 @@ export function isNotException<T>(value: Exception | T): value is T {
 }
 
 /**
+ * Creates an exception with the message about an invalid argument.
+ *
+ * @param argument - Name of the argument.
+ * @param expected - Excepted value of the argument.
+ * @param actual - Actual value of the argument.
+ *
+ * @since v0.11.0
+ */
+export function invalidArgumentException(argument: string, expected: string, actual: string): Exception {
+    return exception(`Argument {{argument}} must be {{expected}}, but was {{actual}}`, {
+        argument,
+        expected,
+        actual,
+    });
+}
+
+/**
  * Unwraps all chained errors and returns a user-readable stack of errors.
  *
  * @since v0.2.0

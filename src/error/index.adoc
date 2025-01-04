@@ -50,6 +50,12 @@ The `Exception.message` starts with `Caught` and contains the caught `value` coe
 +
 If given an `Error`, returns it as is.
 
+=== Custom exceptions
+
+* `invalidArgumentException(argument: string, expected: string, actual: string): Exception`
+— creates an exception with the message about an invalid argument.
+
+
 === Usage
 
 [source,typescript]

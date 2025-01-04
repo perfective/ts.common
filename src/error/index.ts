@@ -51,6 +51,7 @@ export {
     Exception,
     exception,
     fault,
+    invalidArgumentException,
     isException,
     isNotException,
     unchained,

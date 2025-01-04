@@ -11,7 +11,7 @@ import {
     chainStack,
     Exception,
     exception,
-    fault,
+    fault, invalidArgumentException,
     isException,
     isNotException,
     unchained,
@@ -105,6 +105,43 @@ describe(exception, () => {
                 expect(error.toString()).toBe('Exception: User `42` not found');
             });
         });
+    });
+});
+
+describe(invalidArgumentException, () => {
+    const exception: Exception = invalidArgumentException('id', 'string', 'number');
+
+    it('creates an instance of Exception', () => {
+        expect(exception).toBeInstanceOf(Exception);
+        expect(exception.name).toBe('Exception');
+    });
+
+    it('has a properly formatted message', () => {
+        const errorMessage = 'Argument `id` must be `string`, but was `number`';
+
+        expect(exception.message).toBe(errorMessage);
+    });
+
+    it('has the correct template', () => {
+        const template = 'Argument {{argument}} must be {{expected}}, but was {{actual}}';
+
+        expect(exception.template).toBe(template);
+    });
+
+    it('has correct tokens', () => {
+        expect(exception.tokens).toStrictEqual({
+            argument: 'id',
+            expected: 'string',
+            actual: 'number',
+        });
+    });
+
+    it('has correct context', () => {
+        expect(exception.context).toStrictEqual({});
+    });
+
+    it('does not have a previous error', () => {
+        expect(exception.previous).toBeNull();
     });
 });
 

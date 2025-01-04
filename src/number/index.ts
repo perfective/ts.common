@@ -39,6 +39,7 @@ export {
     arccos,
     arccosh,
     arcsin,
+    arcsinh,
     Radians,
 } from './math/trigonometry';
 

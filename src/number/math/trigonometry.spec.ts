@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -88,6 +88,25 @@ describe(arccosh, () => {
             // eslint-disable-next-line unicorn/prefer-number-properties -- test values
             expect(arccosh(Infinity)).toBe(Infinity);
             expect(arccosh(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+});
+
+describe(arcsinh, () => {
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arcsinh(Number.NaN))
+                .toThrow('Argument `value` must be `(-∞, +∞)`, but was `NaN`');
+        });
+    });
+
+    describe('when value is a number', () => {
+        it('returns the inverse hyperbolic sine of the given value', () => {
+            expect(arcsinh(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+            expect(arcsinh(-1)).toBe(-0.881_373_587_019_543);
+            expect(arcsinh(0)).toBe(0);
+            expect(arcsinh(1)).toBe(0.881_373_587_019_543);
+            expect(arcsinh(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
         });
     });
 });

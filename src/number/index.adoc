@@ -79,6 +79,9 @@ Throws `Exception` if the given number is less than 1 or is `NaN`.
 ** `arcsin(sine: number): Radians | null`
 — returns the inverse sine [-π/2, π/2] of the given sine value [-1, 1].
 Throws `Exception` if the given sine is less than `-1`, greater than `1` or is `NaN`.
+** `arcsinh(value: number): number`
+— returns the inverse hyperbolic sine (-∞, +∞) of a given number from (-∞, +∞).
+Throws `Exception` if the given number is `NaN`.
 +
 * Set functions:
 +

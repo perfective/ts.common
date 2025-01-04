@@ -49,3 +49,17 @@ export function arcsin(sine: number): Radians | null {
     }
     return Math.asin(sine);
 }
+
+/**
+ * Returns the inverse hyperbolic sine (-∞, +∞) of a given number from (-∞, +∞).
+ *
+ * @throws Exception - if the given number is NaN.
+ *
+ * @since v0.11.0
+ */
+export function arcsinh(value: number): number {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', '(-∞, +∞)', String(value));
+    }
+    return Math.asinh(value);
+}

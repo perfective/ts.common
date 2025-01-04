@@ -87,12 +87,28 @@ export function arctan(value: number): Radians {
  *
  * @since v0.11.0
  */
-export function arctan2(y: number, x: number): Radians {
+export function arctan2(y: number, x: number): Radians;
+
+/**
+ * Returns the angle in radians [-π, π] between the positive x-axis and the ray from (0, 0) to the point (x, y).
+ *
+ * @param point - A tuple of [y, x] coordinates.
+ *
+ * @throws Exception - if either `y` or `x` is `NaN`.
+ *
+ * @since v0.11.0
+ */
+export function arctan2(point: [number, number]): Radians;
+
+// eslint-disable-next-line complexity -- supports multiple signatures
+export function arctan2(arg1: number | [number, number], arg2?: number): Radians {
+    const [y, x] = Array.isArray(arg1) ? arg1 : [arg1, arg2];
     if (Number.isNaN(y)) {
         throw invalidArgumentException('y', '(-∞, +∞)', String(y));
     }
     if (Number.isNaN(x)) {
         throw invalidArgumentException('x', '(-∞, +∞)', String(x));
     }
-    return Math.atan2(y, x);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- arg2 is required when arg1 is a number.
+    return Math.atan2(y, x!);
 }

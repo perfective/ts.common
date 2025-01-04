@@ -63,3 +63,17 @@ export function arcsinh(value: number): number {
     }
     return Math.asinh(value);
 }
+
+/**
+ * Returns the inverse tangent [-π/2, π/2] of a given number from (-∞, +∞).
+ *
+ * @throws Exception - if the given number is NaN.
+ *
+ * @since v0.11.0
+ */
+export function arctan(value: number): Radians {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', '(-∞, +∞)', String(value));
+    }
+    return Math.atan(value);
+}

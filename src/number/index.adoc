@@ -82,6 +82,9 @@ Throws `Exception` if the given sine is less than `-1`, greater than `1` or is `
 ** `arcsinh(value: number): number`
 — returns the inverse hyperbolic sine (-∞, +∞) of a given number from (-∞, +∞).
 Throws `Exception` if the given number is `NaN`.
+** `arctan(value: number): Radians`
+— returns the inverse tangent [-π/2, π/2] of a given number from (-∞, +∞).
+Throws `Exception` if the given number is `NaN`.
 +
 * Set functions:
 +

@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -107,6 +107,25 @@ describe(arcsinh, () => {
             expect(arcsinh(0)).toBe(0);
             expect(arcsinh(1)).toBe(0.881_373_587_019_543);
             expect(arcsinh(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+});
+
+describe(arctan, () => {
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arctan(Number.NaN))
+                .toThrow('Argument `value` must be `(-∞, +∞)`, but was `NaN`');
+        });
+    });
+
+    describe('when input is a number', () => {
+        it('returns the inverse tangent (in radians) of the given value', () => {
+            expect(arctan(Number.NEGATIVE_INFINITY)).toBe(-Math.PI / 2);
+            expect(arctan(-1)).toBeCloseTo(-0.785_398_163_397_448_3);
+            expect(arctan(0)).toBe(0);
+            expect(arctan(1)).toBeCloseTo(0.785_398_163_397_448_3);
+            expect(arctan(Number.POSITIVE_INFINITY)).toBe(Math.PI / 2);
         });
     });
 });

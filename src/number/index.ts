@@ -40,6 +40,7 @@ export {
     arccosh,
     arcsin,
     arcsinh,
+    arctan,
     Radians,
 } from './math/trigonometry';
 

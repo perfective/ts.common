@@ -101,6 +101,11 @@ Throws `Exception` if either `y` or `x` is `NaN`.
 +
 Throws `Exception` if the given value is less than or equal to -1, greater than or equal to 1, or is `NaN`.
 +
+** `cos(angle: Radians): number`
+— returns the cosine [-1, 1] of a given angle in radians.
++
+Throws `Exception` if the given angle is `NaN` or `Infinity`.
++
 * Set functions:
 +
 ** `maximum(values: readonly number[]): number | null`

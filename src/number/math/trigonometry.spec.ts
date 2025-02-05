@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -216,6 +216,37 @@ describe(arctanh, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => arctanh(Number.NaN)).toThrow('Argument `value` must be `(-1, 1)`, but was `NaN`');
+        });
+    });
+});
+
+describe(cos, () => {
+    describe('when input is a valid angle in radians', () => {
+        it('returns the cosine of the given angle', () => {
+            expect(cos(0)).toBe(1);
+            expect(cos(Math.PI / 2)).toBeCloseTo(0);
+            expect(cos(Math.PI)).toBe(-1);
+            expect(cos((3 * Math.PI) / 2)).toBeCloseTo(0);
+            expect(cos(2 * Math.PI)).toBe(1);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('throws an exception', () => {
+            expect(() => cos(Number.POSITIVE_INFINITY))
+                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+            expect(() => cos(Number.NEGATIVE_INFINITY))
+                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+            // eslint-disable-next-line unicorn/prefer-number-properties -- testing
+            expect(() => cos(Infinity))
+                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => cos(Number.NaN))
+                .toThrow('Argument `angle` must be `number`, but was `NaN`');
         });
     });
 });

@@ -1,4 +1,5 @@
 import { invalidArgumentException } from '../../error/exception/exception';
+import { isInfinity } from '../number/infinity';
 import { NonNegativeNumber } from '../number/number';
 
 /**
@@ -126,4 +127,19 @@ export function arctanh(value: number): number {
         throw invalidArgumentException('value', '(-1, 1)', String(value));
     }
     return Math.atanh(value);
+}
+
+/**
+ * Returns the cosine [-1, 1] of a given angle in radians.
+ *
+ * @throws Exception - if the given angle is NaN or Infinity.
+ *
+ * @since v0.11.0
+ */
+export function cos(angle: Radians): number {
+    // Math.cos() returns NaN for Infinity.
+    if (Number.isNaN(angle) || isInfinity(angle)) {
+        throw invalidArgumentException('angle', 'number', String(angle));
+    }
+    return Math.cos(angle);
 }

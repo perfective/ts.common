@@ -42,6 +42,7 @@ export {
     arcsinh,
     arctan,
     arctan2,
+    arctanh,
     Radians,
 } from './math/trigonometry';
 

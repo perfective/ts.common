@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2 } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -186,6 +186,36 @@ describe(arctan2, () => {
             it.each(testCases)('returns the arctangent of y / x', (y, x, expected) => {
                 expect(arctan2([y, x])).toBe(expected);
             });
+        });
+    });
+});
+
+describe(arctanh, () => {
+    describe('when input is between -1 and 1', () => {
+        it('returns the inverse hyperbolic tangent of the given value', () => {
+            expect(arctanh(-0.5)).toBe(-0.549_306_144_334_054_8);
+            expect(arctanh(0)).toBe(0);
+            expect(arctanh(0.5)).toBe(0.549_306_144_334_054_8);
+        });
+    });
+
+    describe('when input is less than or equal to -1', () => {
+        it('throws an exception', () => {
+            expect(() => arctanh(-1)).toThrow('Argument `value` must be `(-1, 1)`, but was `-1`');
+            expect(() => arctanh(-1.1)).toThrow('Argument `value` must be `(-1, 1)`, but was `-1.1`');
+        });
+    });
+
+    describe('when input is greater than or equal to 1', () => {
+        it('throws an exception', () => {
+            expect(() => arctanh(1)).toThrow('Argument `value` must be `(-1, 1)`, but was `1`');
+            expect(() => arctanh(1.1)).toThrow('Argument `value` must be `(-1, 1)`, but was `1.1`');
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => arctanh(Number.NaN)).toThrow('Argument `value` must be `(-1, 1)`, but was `NaN`');
         });
     });
 });

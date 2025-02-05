@@ -77,24 +77,29 @@ Throws `Exception` if the given cosine is less than `-1`, greater than `1`, or i
 ** `arccosh(value: number): NonNegativeNumber | null`
 — returns the inverse hyperbolic cosine [0, +∞) of a given number from [1, +∞).
 +
-Throws `Exception` if the given number is less than 1 or is `NaN`.
+Throws `Exception` if the given value is less than 1 or is `NaN`.
 ** `arcsin(sine: number): Radians | null`
 — returns the inverse sine [-π/2, π/2] of the given sine value [-1, 1].
 +
 Throws `Exception` if the given sine is less than `-1`, greater than `1` or is `NaN`.
 ** `arcsinh(value: number): number`
 — returns the inverse hyperbolic sine (-∞, +∞) of a given number from (-∞, +∞).
-Throws `Exception` if the given number is `NaN`.
+Throws `Exception` if the given value is `NaN`.
 ** `arctan(value: number): Radians`
-— returns the inverse tangent [-π/2, π/2] of a given number from (-∞, +∞).
+— returns the inverse tangent [-π/2, π/2] of a given value from (-∞, +∞).
 +
-Throws `Exception` if the given number is `NaN`.
+Throws `Exception` if the given value is `NaN`.
 ** `arctan2(y: number, x: number): Radians`
 +
 `arctan2([y, x]: [number, number]): Radians`
 — returns the angle in radians [-π, π] between the positive x-axis and the ray from (0, 0) to the point (x, y).
 +
 Throws `Exception` if either `y` or `x` is `NaN`.
++
+** `arctanh(value: number): number`
+— returns the inverse hyperbolic tangent (-∞, +∞) of a given number from (-1, 1).
++
+Throws `Exception` if the given value is less than or equal to -1, greater than or equal to 1, or is `NaN`.
 +
 * Set functions:
 +

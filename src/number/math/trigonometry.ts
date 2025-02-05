@@ -24,7 +24,7 @@ export function arccos(cosine: number): Radians | null {
 /**
  * Returns the inverse hyperbolic cosine [0, +∞) of a given number from [1, +∞).
  *
- * @throws Exception - if the given number is less than 1 or is NaN.
+ * @throws Exception - if the given value is less than 1 or is NaN.
  *
  * @since v0.11.0
  */
@@ -38,7 +38,7 @@ export function arccosh(value: number): NonNegativeNumber | null {
 /**
  * Returns the inverse sine [-π/2, π/2] of the given sine value [-1, 1].
  *
- * @throws Exception - if the given number is less than -1, greater than 1, or is NaN.
+ * @throws Exception - if the given value is less than -1, greater than 1, or is NaN.
  *
  * @since v0.11.0
  */
@@ -53,7 +53,7 @@ export function arcsin(sine: number): Radians | null {
 /**
  * Returns the inverse hyperbolic sine (-∞, +∞) of a given number from (-∞, +∞).
  *
- * @throws Exception - if the given number is NaN.
+ * @throws Exception - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -67,7 +67,7 @@ export function arcsinh(value: number): number {
 /**
  * Returns the inverse tangent [-π/2, π/2] of a given number from (-∞, +∞).
  *
- * @throws Exception - if the given number is NaN.
+ * @throws Exception - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -111,4 +111,19 @@ export function arctan2(arg1: number | [number, number], arg2?: number): Radians
     }
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- arg2 is required when arg1 is a number.
     return Math.atan2(y, x!);
+}
+
+/**
+ * Returns the inverse hyperbolic tangent (-∞, +∞) of a given number from (-1, 1).
+ *
+ * @throws Exception - if the given value is less than or equal -1, greater than or equal 1, or is NaN.
+ *
+ * @since v0.11.0
+ */
+// eslint-disable-next-line complexity -- assertions
+export function arctanh(value: number): number {
+    if (Number.isNaN(value) || value <= -1 || value >= 1) {
+        throw invalidArgumentException('value', '(-1, 1)', String(value));
+    }
+    return Math.atanh(value);
 }

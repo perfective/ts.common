@@ -143,3 +143,17 @@ export function cos(angle: Radians): number {
     }
     return Math.cos(angle);
 }
+
+/**
+ * Returns the hyperbolic cosine [1, +∞) of a given number.
+ *
+ * @throws Exception - if the given value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function cosh(value: number): number {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
+    }
+    return Math.cosh(value);
+}

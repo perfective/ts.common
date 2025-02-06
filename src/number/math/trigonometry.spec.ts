@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -247,6 +247,37 @@ describe(cos, () => {
         it('throws an exception', () => {
             expect(() => cos(Number.NaN))
                 .toThrow('Argument `angle` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(cosh, () => {
+    describe('when input is 1 or more', () => {
+        it('returns the hyperbolic cosine of the given value', () => {
+            expect(cosh(1)).toBe(1.543_080_634_815_243_7);
+            expect(cosh(Math.PI)).toBe(11.591_953_275_521_519);
+            expect(cosh(0)).toBe(1);
+        });
+    });
+
+    describe('when input is a positive infinity', () => {
+        it('returns Infinity', () => {
+            expect(cosh(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+            // eslint-disable-next-line unicorn/prefer-number-properties -- testing
+            expect(cosh(Infinity)).toBe(Infinity);
+        });
+    });
+
+    describe('when input is a negative infinity', () => {
+        it('returns Infinity', () => {
+            expect(cosh(Number.NEGATIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => cosh(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });
 });

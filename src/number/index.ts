@@ -44,6 +44,7 @@ export {
     arctan2,
     arctanh,
     cos,
+    cosh,
     Radians,
 } from './math/trigonometry';
 

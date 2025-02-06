@@ -64,7 +64,8 @@ So passing digits or precision over 15 requires careful consideration and thorou
 — returns the remainder of division of a given `dividend` by a given `divisor`.
 ** `absolute(value: number): number`
 — returns the absolute value of a given number.
-Throws an error if the given value is `NaN`.
++
+Throws `Exception` if the given value is `NaN`.
 +
 * Trigonometry types and functions:
 +

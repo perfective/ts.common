@@ -1,4 +1,4 @@
-import { isNotNumber } from '../number/number';
+import { invalidArgumentException } from '../../error/exception/exception';
 
 /**
  * Returns the result of addition of the given numbers.
@@ -48,14 +48,13 @@ export function remainder(dividend: number, divisor: number): number {
 /**
  * Returns the absolute value of a given number.
  *
- * @throws {TypeError} If the given value is not a number.
+ * @throws Exception - If the given value is not a number.
  *
  * @since v0.11.0
  */
 export function absolute(value: number): number {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Runtime check for NaN
-    if (isNotNumber(value)) {
-        throw new TypeError('Value must be a number.');
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
     }
     return Math.abs(value);
 }

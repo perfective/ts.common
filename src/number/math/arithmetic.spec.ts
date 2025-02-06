@@ -102,7 +102,7 @@ describe(remainder, () => {
     });
 });
 
-describe('absolute', () => {
+describe(absolute, () => {
     describe('when input is a positive number', () => {
         it('returns the absolute value', () => {
             expect(absolute(5)).toBe(5);
@@ -118,6 +118,7 @@ describe('absolute', () => {
     describe('when input is 0', () => {
         it('returns 0', () => {
             expect(absolute(0)).toBe(0);
+            expect(absolute(-0)).toBe(0);
         });
     });
 
@@ -129,7 +130,8 @@ describe('absolute', () => {
 
     describe('when input is not a number', () => {
         it('throws TypeError', () => {
-            expect(() => absolute(Number.NaN)).toThrow(TypeError);
+            expect(() => absolute(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });
 });

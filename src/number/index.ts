@@ -49,6 +49,7 @@ export {
     sin,
     sinh,
     tan,
+    tanh,
 } from './math/trigonometry';
 
 // ./number

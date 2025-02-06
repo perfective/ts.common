@@ -1,6 +1,20 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh, sin, sinh, tan } from './trigonometry';
+import {
+    arccos,
+    arccosh,
+    arcsin,
+    arcsinh,
+    arctan,
+    arctan2,
+    arctanh,
+    cos,
+    cosh,
+    sin,
+    sinh,
+    tan,
+    tanh,
+} from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -376,6 +390,36 @@ describe(tan, () => {
         it('throws an exception', () => {
             expect(() => tan(Number.NaN))
                 .toThrow('Argument `angle` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(tanh, () => {
+    describe('when input is a valid number', () => {
+        it('returns the hyperbolic tangent of the given value', () => {
+            expect(tanh(0)).toBe(0);
+            expect(tanh(1)).toBeCloseTo(0.761_594_155_955_764_9);
+            expect(tanh(-1)).toBeCloseTo(-0.761_594_155_955_764_9);
+            expect(tanh(Math.PI)).toBeCloseTo(0.996_272_076_220_75);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns 1', () => {
+            expect(tanh(Number.POSITIVE_INFINITY)).toBe(1);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns -1', () => {
+            expect(tanh(Number.NEGATIVE_INFINITY)).toBe(-1);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => tanh(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });
 });

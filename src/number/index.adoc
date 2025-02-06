@@ -126,6 +126,15 @@ Throws `Exception` if the given value is `NaN`.
 +
 Throws `Exception` if the given angle is `NaN` or `Infinity`.
 +
+** `tanh(value: number): number`
+— returns the hyperbolic tangent (-1, 1) of a given number.
++
+Returns 1 if the given value is `Infinity`.
++
+Returns -1 if the given value is `-Infinity`.
++
+Throws `Exception` if the given value is `NaN`.
++
 * Set functions:
 +
 ** `maximum(values: readonly number[]): number | null`

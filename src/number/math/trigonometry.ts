@@ -201,3 +201,19 @@ export function tan(angle: number): number {
     }
     return Math.tan(angle);
 }
+
+/**
+ * Returns the hyperbolic tangent (-1, 1) of a given number.
+ * Returns 1 if a given value is Infinity.
+ * Returns -1 if a given value is -Infinity.
+ *
+ * @throws Exception - if the given value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function tanh(value: number): number {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
+    }
+    return Math.tanh(value);
+}

@@ -116,6 +116,11 @@ Throws `Exception` if the given value is `NaN`.
 +
 Throws `Exception` if the given angle is `NaN` or `Infinity`.
 +
+** `sinh(value: number): number`
+— returns the hyperbolic sine (-∞, +∞) of a given number.
++
+Throws `Exception` if the given value is `NaN`.
++
 * Set functions:
 +
 ** `maximum(values: readonly number[]): number | null`

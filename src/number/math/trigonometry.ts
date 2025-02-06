@@ -171,3 +171,17 @@ export function sin(angle: Radians): number {
     }
     return Math.sin(angle);
 }
+
+/**
+ * Returns the hyperbolic sine (-∞, +∞) of a given number.
+ *
+ * @throws Exception - if the given value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function sinh(value: number): number {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
+    }
+    return Math.sinh(value);
+}

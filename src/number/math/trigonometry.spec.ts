@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh, sin } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh, sin, sinh } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -312,6 +312,36 @@ describe(sin, () => {
         it('throws an exception', () => {
             expect(() => sin(Number.NaN))
                 .toThrow('Argument `angle` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(sinh, () => {
+    describe('when input is a valid number', () => {
+        it('returns the hyperbolic sine of the given value', () => {
+            expect(sinh(0)).toBe(0);
+            expect(sinh(1)).toBe(1.175_201_193_643_801_4);
+            expect(sinh(-1)).toBe(-1.175_201_193_643_801_4);
+            expect(sinh(Math.PI)).toBe(11.548_739_357_257_748);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns Infinity', () => {
+            expect(sinh(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns -Infinity', () => {
+            expect(sinh(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => sinh(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });
 });

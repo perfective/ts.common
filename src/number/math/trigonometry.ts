@@ -185,3 +185,19 @@ export function sinh(value: number): number {
     }
     return Math.sinh(value);
 }
+
+/**
+ * Returns the tangent (-∞, +∞) of a given angle in radians.
+ *
+ * @throws Exception - if the given angle is NaN or Infinity.
+ *
+ * NOTE: For Math.PI / 2 the result is a finite number due to floating point precision issues.
+ *
+ * @since v0.11.0
+ */
+export function tan(angle: number): number {
+    if (Number.isNaN(angle) || isInfinity(angle)) {
+        throw invalidArgumentException('angle', 'number', String(angle));
+    }
+    return Math.tan(angle);
+}

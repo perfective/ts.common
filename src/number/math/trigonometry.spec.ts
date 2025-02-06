@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh, sin, sinh } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh, sin, sinh, tan } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -342,6 +342,40 @@ describe(sinh, () => {
         it('throws an exception', () => {
             expect(() => sinh(Number.NaN))
                 .toThrow('Argument `value` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(tan, () => {
+    describe('when input is a valid angle in radians', () => {
+        it('returns the tangent of the given angle', () => {
+            expect(tan(0)).toBe(0);
+            expect(tan(Math.PI / 4)).toBeCloseTo(1);
+            expect(tan(Math.PI)).toBeCloseTo(0);
+            expect(tan((3 * Math.PI) / 4)).toBeCloseTo(-1);
+        });
+    });
+
+    describe('when input is Math.PI / 2', () => {
+        it('returns a finite number', () => {
+            // Due to floating point precision issues
+            expect(tan(Math.PI / 2)).toBeCloseTo(16_331_239_353_195_370);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('throws an exception', () => {
+            expect(() => tan(Number.POSITIVE_INFINITY))
+                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+            expect(() => tan(Number.NEGATIVE_INFINITY))
+                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => tan(Number.NaN))
+                .toThrow('Argument `angle` must be `number`, but was `NaN`');
         });
     });
 });

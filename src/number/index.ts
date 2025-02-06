@@ -48,6 +48,7 @@ export {
     Radians,
     sin,
     sinh,
+    tan,
 } from './math/trigonometry';
 
 // ./number

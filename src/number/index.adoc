@@ -121,6 +121,11 @@ Throws `Exception` if the given angle is `NaN` or `Infinity`.
 +
 Throws `Exception` if the given value is `NaN`.
 +
+** `tan(angle: number): number`
+— returns the tangent (-∞, +∞) of a given angle in radians.
++
+Throws `Exception` if the given angle is `NaN` or `Infinity`.
++
 * Set functions:
 +
 ** `maximum(values: readonly number[]): number | null`

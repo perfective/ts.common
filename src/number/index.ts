@@ -35,6 +35,7 @@ export {
     ceil,
     floatRound,
     floor,
+    round,
 } from './math/rounding';
 export {
     maximum,

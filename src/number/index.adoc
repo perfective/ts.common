@@ -75,14 +75,20 @@ Returns `Infinity` if the given value is `Infinity`.
 Returns `-Infinity` if the given value is `-Infinity`.
 Throws `Exception` if the given value is `NaN`.
 +
+** `floatRound(value: number): number`
+— returns the nearest 32-bit single precision float representation of a given number.
+Throws `Exception` if the given value is `NaN`.
++
 ** `floor(value: number): number`
 — returns the largest integer less than or equal to a given number.
 Returns `Infinity` if the given value is `Infinity`.
 Returns `-Infinity` if the given value is `-Infinity`.
 Throws `Exception` if the given value is `NaN`.
 +
-** `floatRound(value: number): number`
-— returns the nearest 32-bit single precision float representation of a given number.
+** `round(value: number): number`
+— rounds a floating-point number to the nearest integer.
+Returns `Infinity` if the given value is `Infinity`.
+Returns `-Infinity` if the given value is `-Infinity`.
 Throws `Exception` if the given value is `NaN`.
 +
 * Trigonometry types and functions:

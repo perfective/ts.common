@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { ceil, floatRound, floor } from './rounding';
+import { ceil, floatRound, floor, round } from './rounding';
 
 describe(ceil, () => {
     describe('when input is a valid number', () => {
@@ -59,6 +59,37 @@ describe(floor, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => floor(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(round, () => {
+    describe('when input is a valid number', () => {
+        it('returns the nearest integer to the given value', () => {
+            expect(round(0)).toBe(0);
+            expect(round(1.49)).toBe(1);
+            expect(round(1.50)).toBe(2);
+            expect(round(-1.50)).toBe(-1);
+            expect(round(-1.51)).toBe(-2);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns Infinity', () => {
+            expect(round(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns -Infinity', () => {
+            expect(round(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => round(Number.NaN))
                 .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });

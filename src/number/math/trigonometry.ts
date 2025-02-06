@@ -157,3 +157,17 @@ export function cosh(value: number): number {
     }
     return Math.cosh(value);
 }
+
+/**
+ * Returns the sine [-1, 1] of a given angle in radians.
+ *
+ * @throws Exception - if the given angle is NaN or Infinity.
+ *
+ * @since v0.11.0
+ */
+export function sin(angle: Radians): number {
+    if (Number.isNaN(angle) || isInfinity(angle)) {
+        throw invalidArgumentException('angle', 'number', String(angle));
+    }
+    return Math.sin(angle);
+}

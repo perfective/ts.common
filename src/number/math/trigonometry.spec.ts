@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh } from './trigonometry';
+import { arccos, arccosh, arcsin, arcsinh, arctan, arctan2, arctanh, cos, cosh, sin } from './trigonometry';
 
 describe(arccos, () => {
     describe('when cosine is less than -1', () => {
@@ -278,6 +278,40 @@ describe(cosh, () => {
         it('throws an exception', () => {
             expect(() => cosh(Number.NaN))
                 .toThrow('Argument `value` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(sin, () => {
+    describe('when input is a valid angle in radians', () => {
+        it('returns the sine of the given angle', () => {
+            expect(sin(0)).toBe(0);
+            expect(sin(Math.PI / 2)).toBe(1);
+            expect(sin(Math.PI)).toBeCloseTo(0);
+            expect(sin((3 * Math.PI) / 2)).toBe(-1);
+            expect(sin(2 * Math.PI)).toBeCloseTo(0);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('throws an exception', () => {
+            expect(() => sin(Number.POSITIVE_INFINITY))
+                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+            expect(() => sin(Number.NEGATIVE_INFINITY))
+                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+            // eslint-disable-next-line unicorn/prefer-number-properties -- testing
+            expect(() => sin(Infinity))
+                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+            // eslint-disable-next-line unicorn/prefer-number-properties -- testing
+            expect(() => sin(-Infinity))
+                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => sin(Number.NaN))
+                .toThrow('Argument `angle` must be `number`, but was `NaN`');
         });
     });
 });

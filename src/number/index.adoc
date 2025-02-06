@@ -111,6 +111,11 @@ Throws `Exception` if the given angle is `NaN` or `Infinity`.
 +
 Throws `Exception` if the given value is `NaN`.
 +
+** `sin(angle: Radians): number`
+— returns the sine [-1, 1] of a given angle in radians.
++
+Throws `Exception` if the given angle is `NaN` or `Infinity`.
++
 * Set functions:
 +
 ** `maximum(values: readonly number[]): number | null`

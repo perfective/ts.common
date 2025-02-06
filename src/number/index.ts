@@ -46,6 +46,7 @@ export {
     cos,
     cosh,
     Radians,
+    sin,
 } from './math/trigonometry';
 
 // ./number

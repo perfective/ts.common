@@ -31,7 +31,10 @@ export {
     remainder,
     sum,
 } from './math/arithmetic';
-export { ceil } from './math/rounding';
+export {
+    ceil,
+    floor,
+} from './math/rounding';
 export {
     maximum,
     minimum,

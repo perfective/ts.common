@@ -106,6 +106,8 @@ export {
     NonNegativeNumber,
     NonPositiveNumer,
     PositiveNumber,
+    Sign,
+    sign,
 } from './number/number';
 export {
     ascending,

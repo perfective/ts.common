@@ -17,6 +17,10 @@ including the JavaScript
 — a number that is less than 0.
 ** `NonPositiveNumber`
 — a number that is less than or equal to 0.
+** `Sign`
+— indicator of the sign of the number.
+-1 for negative numbers.
+1 for positive numbers.
 +
 * Type guards:
 +
@@ -30,6 +34,11 @@ including the JavaScript
 ** `negative(value: number): number`
 — returns the negated value of a given number.
 If the given number is 0, returns 0.
++
+** `sign(value: number): Sign | null`
+— returns 1 if given a positive number, -1 if given a negative number.
+Returns `null` if given 0 or -0.
+Throws `Exception` if the given value is `NaN`.
 +
 * `Number` methods:
 +

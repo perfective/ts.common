@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { isNotNumber, isNumber, negative } from './number';
+import { isNotNumber, isNumber, negative, sign } from './number';
 
 describe(isNumber, () => {
     describe('when value is a number', () => {
@@ -100,6 +100,46 @@ describe(negative, () => {
     describe('when given NaN', () => {
         it('returns NaN', () => {
             expect(negative(Number.NaN)).toBe(Number.NaN);
+        });
+    });
+});
+
+describe(sign, () => {
+    describe('when input is a positive number', () => {
+        it('returns 1', () => {
+            expect(sign(3.14)).toBe(1);
+        });
+    });
+
+    describe('when input is a negative number', () => {
+        it('returns -1', () => {
+            expect(sign(-3.14)).toBe(-1);
+        });
+    });
+
+    describe('when input is zero', () => {
+        it('returns 0', () => {
+            expect(sign(0)).toBeNull();
+            expect(sign(-0)).toBeNull();
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns 1', () => {
+            expect(sign(Number.POSITIVE_INFINITY)).toBe(1);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns -1', () => {
+            expect(sign(Number.NEGATIVE_INFINITY)).toBe(-1);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => sign(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });
 });

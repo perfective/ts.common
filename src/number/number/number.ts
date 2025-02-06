@@ -1,3 +1,5 @@
+import { invalidArgumentException } from '../../error/exception/exception';
+
 /**
  * A number that is greater than 0.
  *
@@ -56,4 +58,31 @@ export function negative(value: number): number {
         return 0;
     }
     return -value;
+}
+
+/**
+ * Indicator of the sign of the number.
+ * -1 for negative numbers.
+ * 1 for positive numbers.
+ *
+ * @since v0.11.0
+ */
+export type Sign = -1 | 1;
+
+/**
+ * Returns 1 if given a positive number, -1 if given a negative number.
+ * Returns `null` if given 0 or -0.
+ *
+ * @throws Exception - if the given value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function sign(value: number): Sign | null {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
+    }
+    if (value === 0) {
+        return null;
+    }
+    return Math.sign(value) as Sign;
 }

@@ -33,6 +33,7 @@ export {
 } from './math/arithmetic';
 export {
     ceil,
+    floatRound,
     floor,
 } from './math/rounding';
 export {

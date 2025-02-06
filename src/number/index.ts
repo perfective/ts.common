@@ -36,6 +36,7 @@ export {
     floatRound,
     floor,
     round,
+    truncated,
 } from './math/rounding';
 export {
     maximum,

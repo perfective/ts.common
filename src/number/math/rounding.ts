@@ -61,3 +61,17 @@ export function floatRound(value: number): number {
     }
     return Math.fround(value);
 }
+
+/**
+ * Returns a floating-point number truncated to its integer part.
+ *
+ * @throws Exception - if the given value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function truncated(value: number): number {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
+    }
+    return Math.trunc(value);
+}

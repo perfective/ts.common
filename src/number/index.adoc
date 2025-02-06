@@ -91,6 +91,10 @@ Returns `Infinity` if the given value is `Infinity`.
 Returns `-Infinity` if the given value is `-Infinity`.
 Throws `Exception` if the given value is `NaN`.
 +
+** `truncated(value: number): number`
+— returns the integer part of a floating-point number.
+Throws `Exception` if the given value is `NaN`.
++
 * Trigonometry types and functions:
 +
 ** `Radians` is a nominal type for a radians value (`number`).

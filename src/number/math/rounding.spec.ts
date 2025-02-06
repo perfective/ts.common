@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { ceil, floatRound, floor, round } from './rounding';
+import { ceil, floatRound, floor, round, truncated } from './rounding';
 
 describe(ceil, () => {
     describe('when input is a valid number', () => {
@@ -120,6 +120,37 @@ describe(floatRound, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => floatRound(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(truncated, () => {
+    describe('when input is a valid number', () => {
+        it('returns the integer part of the given value', () => {
+            expect(truncated(0)).toBe(0);
+            expect(truncated(1.9)).toBe(1);
+            expect(truncated(-1.9)).toBe(-1);
+            expect(truncated(2.5)).toBe(2);
+            expect(truncated(-2.5)).toBe(-2);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns Infinity', () => {
+            expect(truncated(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns -Infinity', () => {
+            expect(truncated(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => truncated(Number.NaN))
                 .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });

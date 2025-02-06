@@ -67,6 +67,14 @@ So passing digits or precision over 15 requires careful consideration and thorou
 +
 Throws `Exception` if the given value is `NaN`.
 +
+* Rounding functions:
++
+** `ceil(value: number): number`
+— returns the smallest integer greater than or equal to a given number.
+Returns `Infinity` if the given value is `Infinity`.
+Returns `-Infinity` if the given value is `-Infinity`.
+Throws `Exception` if the given value is `NaN`.
++
 * Trigonometry types and functions:
 +
 ** `Radians` is a nominal type for a radians value (`number`).

@@ -31,7 +31,10 @@ export {
     remainder,
     sum,
 } from './math/arithmetic';
-export { cubeRoot } from './math/root';
+export {
+    cubeRoot,
+    squareRoot,
+} from './math/root';
 export {
     ceil,
     floatRound,

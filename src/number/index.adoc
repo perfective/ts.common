@@ -82,6 +82,10 @@ Throws `Exception` if the given value is `NaN`.
 — returns the cube root of a given number.
 Throws `Exception` if the given value is `NaN`.
 +
+** `squareRoot(value: PositiveNumber): number`
+— returns the square root of a given non-negative number.
+Throws `Exception` if the given value is `NaN` or a negative number.
++
 * Rounding functions:
 +
 ** `ceil(value: number): number`

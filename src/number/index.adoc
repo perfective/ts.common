@@ -76,6 +76,12 @@ So passing digits or precision over 15 requires careful consideration and thorou
 +
 Throws `Exception` if the given value is `NaN`.
 +
+* Root functions:
++
+** `cubeRoot(value: number): number`
+— returns the cube root of a given number.
+Throws `Exception` if the given value is `NaN`.
++
 * Rounding functions:
 +
 ** `ceil(value: number): number`

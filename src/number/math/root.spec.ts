@@ -46,27 +46,55 @@ describe(cubeRoot, () => {
 });
 
 describe(l2norm, () => {
-    describe('when input contains valid numbers', () => {
-        it('returns the L2 norm of the given values', () => {
-            expect(l2norm(3, 4)).toBe(5);
-            expect(l2norm(1, 2, 2)).toBe(3);
-            expect(l2norm(0, 0, 0)).toBe(0);
+    describe('l2norm(...values)', () => {
+        describe('when input contains valid numbers', () => {
+            it('returns the L2 norm of the given values', () => {
+                expect(l2norm(3, 4)).toBe(5);
+                expect(l2norm(1, 2, 2)).toBe(3);
+                expect(l2norm(0, 0, 0)).toBe(0);
+            });
+        });
+
+        describe('when input contains Infinity', () => {
+            it('returns Infinity', () => {
+                expect(l2norm(Number.POSITIVE_INFINITY, 1)).toBe(Number.POSITIVE_INFINITY);
+                expect(l2norm(1, Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+            });
+        });
+
+        describe('when input contains NaN', () => {
+            it('throws an exception', () => {
+                expect(() => l2norm(Number.NaN, 1))
+                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+                expect(() => l2norm(1, Number.NaN))
+                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+            });
         });
     });
 
-    describe('when input contains Infinity', () => {
-        it('returns Infinity', () => {
-            expect(l2norm(Number.POSITIVE_INFINITY, 1)).toBe(Number.POSITIVE_INFINITY);
-            expect(l2norm(1, Number.NEGATIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+    describe('l2norm(values)', () => {
+        describe('when input contains valid numbers', () => {
+            it('returns the L2 norm of the given values', () => {
+                expect(l2norm([3, 4])).toBe(5);
+                expect(l2norm([1, 2, 2])).toBe(3);
+                expect(l2norm([0, 0, 0])).toBe(0);
+            });
         });
-    });
 
-    describe('when input contains NaN', () => {
-        it('throws an exception', () => {
-            expect(() => l2norm(Number.NaN, 1))
-                .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
-            expect(() => l2norm(1, 2, Number.NaN))
-                .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+        describe('when input contains Infinity', () => {
+            it('returns Infinity', () => {
+                expect(l2norm([Number.POSITIVE_INFINITY, 1])).toBe(Number.POSITIVE_INFINITY);
+                expect(l2norm([1, Number.POSITIVE_INFINITY])).toBe(Number.POSITIVE_INFINITY);
+            });
+        });
+
+        describe('when input contains NaN', () => {
+            it('throws an exception', () => {
+                expect(() => l2norm([Number.NaN, 1]))
+                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+                expect(() => l2norm([1, Number.NaN]))
+                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+            });
         });
     });
 });

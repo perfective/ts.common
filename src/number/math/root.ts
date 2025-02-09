@@ -22,7 +22,19 @@ export function cubeRoot(value: number): number {
  *
  * @since v0.11.0
  */
-export function l2norm(...values: number[]): number {
+export function l2norm(...values: number[]): number;
+
+/**
+ * Returns the L2 norm (Euclidean norm) of given numbers.
+ *
+ * @throws Exception - if any of the given values is NaN.
+ *
+ * @since v0.11.0
+ */
+export function l2norm(values: number[]): number;
+
+export function l2norm(arg1: number[] | number, ...arg2: number[]): number {
+    const values = Array.isArray(arg1) ? arg1 : [arg1, ...arg2];
     if (values.some(Number.isNaN)) {
         throw exception('Argument `values` must be `number[]`, but contains `NaN`');
     }

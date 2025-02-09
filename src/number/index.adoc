@@ -83,6 +83,9 @@ Throws `Exception` if the given value is `NaN`.
 Throws `Exception` if the given value is `NaN`.
 +
 ** `l2norm(...values: number[]): number`
++
+`l2norm(values: number[]): number`
++
 — returns the L2 norm (Euclidean norm) of a list of numbers.
 Throws `Exception` if any of the given values is `NaN`.
 +

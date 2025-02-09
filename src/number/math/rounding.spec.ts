@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { floatRound, round, roundedDown, roundedUp, truncated } from './rounding';
+import { floatRound, rounded, roundedDown, roundedUp, truncated } from './rounding';
 
 describe(roundedDown, () => {
     describe('when input is a valid number', () => {
@@ -33,6 +33,37 @@ describe(roundedDown, () => {
     });
 });
 
+describe(rounded, () => {
+    describe('when input is a valid number', () => {
+        it('returns the nearest integer to the given value', () => {
+            expect(rounded(0)).toBe(0);
+            expect(rounded(1.49)).toBe(1);
+            expect(rounded(1.50)).toBe(2);
+            expect(rounded(-1.50)).toBe(-1);
+            expect(rounded(-1.51)).toBe(-2);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns Infinity', () => {
+            expect(rounded(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is -Infinity', () => {
+        it('returns -Infinity', () => {
+            expect(rounded(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => rounded(Number.NaN))
+                .toThrow('Argument `value` must be `number`, but was `NaN`');
+        });
+    });
+});
+
 describe(roundedUp, () => {
     describe('when input is a valid number', () => {
         it('returns the smallest integer greater than or equal to the given value', () => {
@@ -59,37 +90,6 @@ describe(roundedUp, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => roundedUp(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
-        });
-    });
-});
-
-describe(round, () => {
-    describe('when input is a valid number', () => {
-        it('returns the nearest integer to the given value', () => {
-            expect(round(0)).toBe(0);
-            expect(round(1.49)).toBe(1);
-            expect(round(1.50)).toBe(2);
-            expect(round(-1.50)).toBe(-1);
-            expect(round(-1.51)).toBe(-2);
-        });
-    });
-
-    describe('when input is Infinity', () => {
-        it('returns Infinity', () => {
-            expect(round(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
-        });
-    });
-
-    describe('when input is -Infinity', () => {
-        it('returns -Infinity', () => {
-            expect(round(Number.NEGATIVE_INFINITY)).toBe(Number.NEGATIVE_INFINITY);
-        });
-    });
-
-    describe('when input is NaN', () => {
-        it('throws an exception', () => {
-            expect(() => round(Number.NaN))
                 .toThrow('Argument `value` must be `number`, but was `NaN`');
         });
     });

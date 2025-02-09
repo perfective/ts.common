@@ -73,6 +73,9 @@ Throws `Exception` if the given value is `NaN`.
 Throws `Exception` if any of the given values is `NaN`.
 +
 ** `power(base: number, exponent: number): number`
++
+`power(base: number): (exponent: number) => number`
++
 — returns the result of raising a base to a given exponent.
 Returns -1 or 1 if the base is -1 or 1 and exponent is Infinity
 (overrides the default `Math.pow()` behavior to match IEEE 754).

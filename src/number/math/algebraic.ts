@@ -1,4 +1,6 @@
 import { exception, invalidArgumentException } from '../../error/exception/exception';
+import { Unary } from '../../function/function/unary';
+import { isDefined } from '../../value/value';
 import { isInfinity } from '../number/infinity';
 import { PositiveNumber } from '../number/number';
 
@@ -51,20 +53,40 @@ export function l2norm(arg1: number[] | number, ...arg2: number[]): number {
  *
  * @since v0.11.0
  */
-// eslint-disable-next-line complexity -- assertions
-export function power(base: number, exponent: number): number {
+export function power(base: number, exponent: number): number;
+
+/**
+ * Returns a function that raises the base to the given exponent.
+ *
+ * @throws Exception - if the base is NaN.
+ *
+ * @since v0.11.0
+ */
+export function power(base: number): (exponent: number) => number;
+
+export function power(base: number, exponent?: number): number | Unary<number, number> {
     if (Number.isNaN(base)) {
         throw invalidArgumentException('base', 'number', String(base));
     }
-    if (Number.isNaN(exponent)) {
-        throw invalidArgumentException('exponent', 'number', String(exponent));
+
+    // eslint-disable-next-line complexity, prefer-arrow/prefer-arrow-functions -- assertions, conflicts with func-style
+    function powerOf(exponent: number): number {
+        if (Number.isNaN(exponent)) {
+            throw invalidArgumentException('exponent', 'number', String(exponent));
+        }
+
+        // Override the default behavior to match IEEE 754.
+        if (isInfinity(exponent)
+            && (base === 1 || base === -1)) {
+            return base;
+        }
+        return base ** exponent;
     }
-    // Override the default behavior to match IEEE 754.
-    if (isInfinity(exponent)
-        && (base === 1 || base === -1)) {
-        return base;
+
+    if (isDefined(exponent)) {
+        return powerOf(exponent);
     }
-    return base ** exponent;
+    return powerOf;
 }
 
 /**

@@ -114,6 +114,10 @@ Throws `Exception` if the given value is `NaN`.
 — returns Euler's number `e` raised to the power of the given number.
 Throws `Exception` if the given value is `NaN`.
 +
+** `expm1(value: number): number`
+— returns Euler's number `e` raised to the power of the given number minus 1.
+Throws `Exception` if the given value is `NaN`.
++
 * Rounding functions:
 +
 ** `ceil(value: number): number`

@@ -14,3 +14,17 @@ export function exp(value: number): NonNegativeNumber {
     }
     return Math.exp(value);
 }
+
+/**
+ * Returns Euler's number `e` raised to the power of the given number minus 1.
+ *
+ * @throws Exception - if the given value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function expm1(value: number): number {
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException('value', 'number', String(value));
+    }
+    return Math.expm1(value);
+}

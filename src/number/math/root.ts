@@ -1,4 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
+import { exception, invalidArgumentException } from '../../error/exception/exception';
 import { PositiveNumber } from '../number/number';
 
 /**
@@ -13,6 +13,20 @@ export function cubeRoot(value: number): number {
         throw invalidArgumentException('value', 'number', String(value));
     }
     return Math.cbrt(value);
+}
+
+/**
+ * Returns the L2 norm (Euclidean norm) of given numbers.
+ *
+ * @throws Exception - if any of the given values is NaN.
+ *
+ * @since v0.11.0
+ */
+export function l2norm(...values: number[]): number {
+    if (values.some(Number.isNaN)) {
+        throw exception('Argument `values` must be `number[]`, but contains `NaN`');
+    }
+    return Math.hypot(...values);
 }
 
 /**

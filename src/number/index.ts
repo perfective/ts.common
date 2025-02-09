@@ -33,6 +33,7 @@ export {
 } from './math/arithmetic';
 export {
     cubeRoot,
+    l2norm,
     squareRoot,
 } from './math/root';
 export {

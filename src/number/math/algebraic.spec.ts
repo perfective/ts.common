@@ -151,6 +151,38 @@ describe(power, () => {
         });
     });
 
+    describe('power([base, exponent])', () => {
+        describe('when base and exponent are valid numbers', () => {
+            it('returns the result of raising the base to the given exponent', () => {
+                expect(power([2, 3])).toBe(8);
+                expect(power([5, 0])).toBe(1);
+                expect(power([2, -2])).toBe(0.25);
+                expect(power([1, 0])).toBe(1);
+                expect(power([1, 5])).toBe(1);
+            });
+        });
+
+        describe('when exponent is Infinity', () => {
+            it.each(infinityTests)('returns the base for base %d and exponent %d', (base, exponent, expected) => {
+                expect(power([base, exponent])).toBe(expected);
+            });
+        });
+
+        describe('when base is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => power([Number.NaN, 2]))
+                    .toThrow('Argument `base` must be `number`, but was `NaN`');
+            });
+        });
+
+        describe('when exponent is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => power([2, Number.NaN]))
+                    .toThrow('Argument `exponent` must be `number`, but was `NaN`');
+            });
+        });
+    });
+
     describe('power(base)(exponent)', () => {
         describe('when base and exponent are valid numbers', () => {
             it('returns the result of raising the base to the given exponent', () => {

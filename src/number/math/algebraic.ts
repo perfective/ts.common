@@ -56,6 +56,17 @@ export function l2norm(arg1: number[] | number, ...arg2: number[]): number {
 export function power(base: number, exponent: number): number;
 
 /**
+ * Returns the result of raising a base to a given exponent.
+ * Returns -1 or 1 if the base is -1 or 1 and exponent is Infinity
+ * (overrides the default behavior to match IEEE 754).
+ *
+ * @throws Exception - if the base or exponent is NaN.
+ *
+ * @since v0.11.0
+ */
+export function power([base, exponent]: [number, number]): number;
+
+/**
  * Returns a function that raises the base to the given exponent.
  *
  * @throws Exception - if the base is NaN.
@@ -64,7 +75,10 @@ export function power(base: number, exponent: number): number;
  */
 export function power(base: number): (exponent: number) => number;
 
-export function power(base: number, exponent?: number): number | Unary<number, number> {
+// eslint-disable-next-line complexity -- polymorphism
+export function power(arg1: number | [number, number], arg2?: number): number | Unary<number, number> {
+    const [base, exponent] = Array.isArray(arg1) ? arg1 : [arg1, arg2];
+
     if (Number.isNaN(base)) {
         throw invalidArgumentException('base', 'number', String(base));
     }

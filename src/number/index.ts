@@ -50,8 +50,8 @@ export {
 } from './math/logarithm';
 export {
     floatRound,
-    floor,
     round,
+    roundedDown,
     roundedUp,
     truncated,
 } from './math/rounding';

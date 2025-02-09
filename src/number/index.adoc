@@ -108,6 +108,12 @@ Throws `Exception` if the given value is `NaN` or a negative number.
 +
 Throws `Exception` if the given value is `NaN`.
 +
+* Exponential functions:
++
+** `exp(value: number): NonNegativeNumber`
+— returns Euler's number `e` raised to the power of the given number.
+Throws `Exception` if the given value is `NaN`.
++
 * Rounding functions:
 +
 ** `ceil(value: number): number`

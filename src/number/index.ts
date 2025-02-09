@@ -38,6 +38,7 @@ export {
     remainder,
     sum,
 } from './math/arithmetic';
+export { exp } from './math/exponent';
 export {
     ceil,
     floatRound,

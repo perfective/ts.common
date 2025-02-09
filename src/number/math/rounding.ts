@@ -55,7 +55,7 @@ export function roundedUp(value: number): number {
  *
  * @since v0.11.0
  */
-export function floatRound(value: number): number {
+export function roundedToFloat32(value: number): number {
     if (Number.isNaN(value)) {
         throw invalidArgumentException('value', 'number', String(value));
     }

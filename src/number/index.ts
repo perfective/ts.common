@@ -49,9 +49,9 @@ export {
     log10,
 } from './math/logarithm';
 export {
-    floatRound,
     rounded,
     roundedDown,
+    roundedToFloat32,
     roundedUp,
     truncated,
 } from './math/rounding';

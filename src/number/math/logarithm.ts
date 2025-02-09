@@ -27,3 +27,17 @@ export function log10(value: number): number {
     }
     return Math.log10(value);
 }
+
+/**
+ * Returns the natural logarithm (base e) of 1 plus a given number.
+ *
+ * @throws Exception - if the given value is NaN or less than -1.
+ *
+ * @since v0.11.0
+ */
+export function log1p(value: number): number {
+    if (Number.isNaN(value) || value < -1) {
+        throw invalidArgumentException('value', '[-1, +∞)', String(value));
+    }
+    return Math.log1p(value);
+}

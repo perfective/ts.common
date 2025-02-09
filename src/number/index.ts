@@ -44,6 +44,7 @@ export {
 } from './math/exponent';
 export {
     log,
+    log1p,
     log10,
 } from './math/logarithm';
 export {

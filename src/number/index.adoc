@@ -128,6 +128,10 @@ Throws `Exception` if the given value is `NaN` or less than zero.
 — returns the common (base 10) logarithm of a given non-negative number.
 Throws `Exception` if the given value is `NaN` or less than zero.
 +
+** `log1p(value: number): number`
+— returns the natural logarithm (base e) of 1 plus a given number.
+Throws `Exception` if the given value is `NaN` or less than `-1`.
++
 * Rounding functions:
 +
 ** `ceil(value: number): number`

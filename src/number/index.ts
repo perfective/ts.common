@@ -42,7 +42,10 @@ export {
     exp,
     expm1,
 } from './math/exponent';
-export { log } from './math/logarithm';
+export {
+    log,
+    log10,
+} from './math/logarithm';
 export {
     ceil,
     floatRound,

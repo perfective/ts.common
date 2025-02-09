@@ -24,6 +24,11 @@ export {
 
 // ./math
 export {
+    cubeRoot,
+    l2norm,
+    squareRoot,
+} from './math/algebraic';
+export {
     absolute,
     difference,
     product,
@@ -31,11 +36,6 @@ export {
     remainder,
     sum,
 } from './math/arithmetic';
-export {
-    cubeRoot,
-    l2norm,
-    squareRoot,
-} from './math/root';
 export {
     ceil,
     floatRound,

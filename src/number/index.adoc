@@ -59,6 +59,23 @@ and `Precision` is an integer from `1` to `21`.
 So passing digits or precision over 15 requires careful consideration and thorough testing.
 ====
 +
+* Algebraic functions:
++
+** `cubeRoot(value: number): number`
+— returns the cube root of a given number.
+Throws `Exception` if the given value is `NaN`.
++
+** `l2norm(...values: number[]): number`
++
+`l2norm(values: number[]): number`
++
+— returns the L2 norm (Euclidean norm) of a list of numbers.
+Throws `Exception` if any of the given values is `NaN`.
++
+** `squareRoot(value: PositiveNumber): number`
+— returns the square root of a given non-negative number.
+Throws `Exception` if the given value is `NaN` or a negative number.
++
 * Arithmetic functions:
 +
 ** `sum(augend: number, addend: number): number`
@@ -75,23 +92,6 @@ So passing digits or precision over 15 requires careful consideration and thorou
 — returns the absolute value of a given number.
 +
 Throws `Exception` if the given value is `NaN`.
-+
-* Root functions:
-+
-** `cubeRoot(value: number): number`
-— returns the cube root of a given number.
-Throws `Exception` if the given value is `NaN`.
-+
-** `l2norm(...values: number[]): number`
-+
-`l2norm(values: number[]): number`
-+
-— returns the L2 norm (Euclidean norm) of a list of numbers.
-Throws `Exception` if any of the given values is `NaN`.
-+
-** `squareRoot(value: PositiveNumber): number`
-— returns the square root of a given non-negative number.
-Throws `Exception` if the given value is `NaN` or a negative number.
 +
 * Rounding functions:
 +

@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { cubeRoot, l2norm, squareRoot } from './root';
+import { cubeRoot, l2norm, squareRoot } from './algebraic';
 
 describe(cubeRoot, () => {
     describe('when input is a positive number', () => {

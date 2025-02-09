@@ -132,6 +132,10 @@ Throws `Exception` if the given value is `NaN` or less than zero.
 — returns the natural logarithm (base e) of 1 plus a given number.
 Throws `Exception` if the given value is `NaN` or less than `-1`.
 +
+** `log2(value: number): number`
+— returns the binary (base 2) logarithm of a given non-negative number.
+Throws `Exception` if the given value is `NaN` or less than zero.
++
 * Rounding functions:
 +
 ** `ceil(value: number): number`

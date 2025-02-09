@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { log, log1p, log10 } from './logarithm';
+import { log, log1p, log2, log10 } from './logarithm';
 
 describe(log, () => {
     describe('when input is a positive number', () => {
@@ -105,6 +105,41 @@ describe(log1p, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => log1p(Number.NaN)).toThrow('Argument `value` must be `[-1, +∞)`, but was `NaN`');
+        });
+    });
+});
+
+describe(log2, () => {
+    describe('when input is a positive number', () => {
+        it('returns the binary logarithm of the given value', () => {
+            expect(log2(1)).toBe(0);
+            expect(log2(2)).toBe(1);
+            expect(log2(4)).toBe(2);
+            expect(log2(8)).toBe(3);
+        });
+    });
+
+    describe('when input is zero', () => {
+        it('returns -Infinity', () => {
+            expect(log2(0)).toBe(Number.NEGATIVE_INFINITY);
+        });
+    });
+
+    describe('when input is Infinity', () => {
+        it('returns Infinity', () => {
+            expect(log2(Number.POSITIVE_INFINITY)).toBe(Number.POSITIVE_INFINITY);
+        });
+    });
+
+    describe('when input is a negative number', () => {
+        it('throws an exception', () => {
+            expect(() => log2(-1)).toThrow('Argument `value` must be `[0, +∞)`, but was `-1`');
+        });
+    });
+
+    describe('when input is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => log2(Number.NaN)).toThrow('Argument `value` must be `[0, +∞)`, but was `NaN`');
         });
     });
 });

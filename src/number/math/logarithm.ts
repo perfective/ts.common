@@ -41,3 +41,17 @@ export function log1p(value: number): number {
     }
     return Math.log1p(value);
 }
+
+/**
+ * Returns the binary (base 2) logarithm of a given non-negative number.
+ *
+ * @throws Exception - if the given value is NaN or less than zero.
+ *
+ * @since v0.11.0
+ */
+export function log2(value: number): number {
+    if (Number.isNaN(value) || value < 0) {
+        throw invalidArgumentException('value', '[0, +∞)', String(value));
+    }
+    return Math.log2(value);
+}

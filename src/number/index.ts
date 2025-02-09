@@ -45,6 +45,7 @@ export {
 export {
     log,
     log1p,
+    log2,
     log10,
 } from './math/logarithm';
 export {

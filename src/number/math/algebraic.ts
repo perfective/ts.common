@@ -68,6 +68,20 @@ export function power(base: number, exponent: number): number {
 }
 
 /**
+ * Returns a function that raises a given base to the specified exponent.
+ *
+ * @throws Exception - if the base or exponent is NaN.
+ *
+ * @since v0.11.0
+ */
+export function powerOf(exponent: number): (base: number) => number {
+    if (Number.isNaN(exponent)) {
+        throw invalidArgumentException('exponent', 'number', String(exponent));
+    }
+    return (base: number) => power(base, exponent);
+}
+
+/**
  * Returns the square root of a given non-negative number.
  *
  * @throws Exception - if the given value is NaN or a negative number.

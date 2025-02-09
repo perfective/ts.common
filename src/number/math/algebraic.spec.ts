@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { cubeRoot, l2norm, power, squareRoot } from './algebraic';
+import { cubeRoot, l2norm, power, powerOf, squareRoot } from './algebraic';
 
 describe(cubeRoot, () => {
     describe('when input is a positive number', () => {
@@ -143,6 +143,30 @@ describe(power, () => {
     describe('when exponent is NaN', () => {
         it('throws an exception', () => {
             expect(() => power(2, Number.NaN))
+                .toThrow('Argument `exponent` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(powerOf, () => {
+    describe('when exponent is a valid number', () => {
+        it('returns a function that raises the base to the given exponent', () => {
+            expect(powerOf(2)(3)).toBe(9);
+            expect(powerOf(0)(3)).toBe(1);
+            expect(powerOf(-1)(2)).toBe(0.5);
+        });
+    });
+
+    describe('when base is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => powerOf(2)(Number.NaN))
+                .toThrow('Argument `base` must be `number`, but was `NaN`');
+        });
+    });
+
+    describe('when exponent is NaN', () => {
+        it('throws an exception', () => {
+            expect(() => powerOf(Number.NaN))
                 .toThrow('Argument `exponent` must be `number`, but was `NaN`');
         });
     });

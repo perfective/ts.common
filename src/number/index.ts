@@ -27,6 +27,7 @@ export {
     cubeRoot,
     l2norm,
     power,
+    powerOf,
     squareRoot,
 } from './math/algebraic';
 export {

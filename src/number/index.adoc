@@ -78,6 +78,10 @@ Returns -1 or 1 if the base is -1 or 1 and exponent is Infinity
 (overrides the default `Math.pow()` behavior to match IEEE 754).
 Throws `Exception` if the base or exponent is `NaN`.
 +
+** `powerOf(exponent: number): (base: number) => number`
+— returns a function that raises a given base to the specified exponent.
+Throws `Exception` if the exponent is `NaN`.
++
 ** `squareRoot(value: PositiveNumber): number`
 — returns the square root of a given non-negative number.
 Throws `Exception` if the given value is `NaN` or a negative number.

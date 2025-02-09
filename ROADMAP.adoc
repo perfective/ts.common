@@ -1800,43 +1800,43 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/abs[abs()]`
 | `link:{ecma-es6}/#sec-math.abs[ES6]`
-| Use `absolute()` as it checks for `NaN` input.
+| Use `absolute()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/acos[acos()]`
 | `link:{ecma-es6}/#sec-math.acos[ES6]`
-| Use `arccosine()` as it returns `null` instead of `NaN`.
+| Use `arccos()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/acosh[acosh()]`
 | `link:{ecma-es6}/#sec-math.acosh[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arccosh()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/asin[asin()]`
 | `link:{ecma-es6}/#sec-math.asin[ES6]`
-| Use `arcsine()` as it returns `null` instead of `NaN`.
+| Use `arcsin()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/asinh[asinh()]`
 | `link:{ecma-es6}/#sec-math.asinh[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arcsinh()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/atan[atan()]`
 | `link:{ecma-es6}/#sec-math.atan[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arctan()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/atan2[atan2()]`
 | `link:{ecma-es6}/#sec-math.atan2[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arctan2()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/atanh[atanh()]`
 | `link:{ecma-es6}/#sec-math.atanh[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arctanh()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/cbrt[cbrt()]`
 | `link:{ecma-es6}/#sec-math.cbrt[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `cubeRoot()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/ceil[ceil()]`
 | `link:{ecma-es6}/#sec-math.ceil[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `roundedUp()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/clz32[clz32()]`
 | `link:{ecma-es6}/#sec-math.clz32[ES6]`
@@ -1844,31 +1844,31 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/cos[cos()]`
 | `link:{ecma-es6}/#sec-math.cos[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `cos()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/cosh[cosh()]`
 | `link:{ecma-es6}/#sec-math.cosh[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `arccosh()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/exp[exp()]`
 | `link:{ecma-es6}/#sec-math.exp[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `exp()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/expm1[expm1()]`
 | `link:{ecma-es6}/#sec-math.expm1[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `expm1()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/floor[floor()]`
 | `link:{ecma-es6}/#sec-math.floor[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `roundedDown()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/fround[fround()]`
 | `link:{ecma-es6}/#sec-math.fround[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `roundedToFloat32()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/hypot[hypot()]`
 | `link:{ecma-es6}/#sec-math.hypot[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `l2norm()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/imul[imul()]`
 | `link:{ecma-es6}/#sec-math.imul[ES6]`
@@ -1876,19 +1876,19 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/log[log()]`
 | `link:{ecma-es6}/#sec-math.log[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `log()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/log10[log10()]`
 | `link:{ecma-es6}/#sec-math.log10[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `log10()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/log1p[log1p()]`
 | `link:{ecma-es6}/#sec-math.log1p[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `log1p()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/log2[log2()]`
 | `link:{ecma-es6}/#sec-math.log2[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `log2()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/max[max()]`
 | `link:{ecma-es6}/#sec-math.max[ES6]`
@@ -1900,43 +1900,45 @@ The `link:{perfective-common}/number/index.adoc[@perfective/common/number]` pack
 
 | `link:{mdn-js-globals}/Math/pow[pow()]`
 | `link:{ecma-es6}/#sec-math.pow[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `power()` to assert correct input and avoid `NaN` output.
+`power()` supports curried and tuple inputs.
+Use `powerOf(exponent)` for curried input of the second argument.
 
 | `link:{mdn-js-globals}/Math/random[random()]`
 | `link:{ecma-es6}/#sec-math.random[ES6]`
-| link:{github-issues}/24[TODO/24]
+| link:{github-issues}/24[TODO #24]
 
 | `link:{mdn-js-globals}/Math/round[round()]`
 | `link:{ecma-es6}/#sec-math.round[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `rounded()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/sign[sign()]`
 | `link:{ecma-es6}/#sec-math.sign[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `sign()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/sin[sin()]`
 | `link:{ecma-es6}/#sec-math.sin[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `sin()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/sinh[sinh()]`
 | `link:{ecma-es6}/#sec-math.sinh[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `sinh()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/sqrt[sqrt()]`
 | `link:{ecma-es6}/#sec-math.sqrt[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `squareRoot()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/tan[tan()]`
 | `link:{ecma-es6}/#sec-math.tan[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `tan()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/tanh[tanh()]`
 | `link:{ecma-es6}/#sec-math.tanh[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `tanh()` to assert correct input and avoid `NaN` output.
 
 | `link:{mdn-js-globals}/Math/trunc[trunc()]`
 | `link:{ecma-es6}/#sec-math.trunc[ES6]`
-| link:{github-issues}/20[TODO/20]
+| Use `truncated()` to assert correct input and avoid `NaN` output.
 
 |===
 

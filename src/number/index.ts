@@ -49,10 +49,10 @@ export {
     log10,
 } from './math/logarithm';
 export {
-    ceil,
     floatRound,
     floor,
     round,
+    roundedUp,
     truncated,
 } from './math/rounding';
 export {

@@ -138,7 +138,7 @@ Throws `Exception` if the given value is `NaN` or less than zero.
 +
 * Rounding functions:
 +
-** `ceil(value: number): number`
+** `roundedUp(value: number): number`
 — returns the smallest integer greater than or equal to a given number.
 Returns `Infinity` if the given value is `Infinity`.
 Returns `-Infinity` if the given value is `-Infinity`.

@@ -9,7 +9,7 @@ import { invalidArgumentException } from '../../error/exception/exception';
  *
  * @since v0.11.0
  */
-export function ceil(value: number): number {
+export function roundedUp(value: number): number {
     if (Number.isNaN(value)) {
         throw invalidArgumentException('value', 'number', String(value));
     }

@@ -86,3 +86,54 @@ export function sign(value: number): Sign | null {
     }
     return Math.sign(value) as Sign;
 }
+
+/**
+ * Asserts that the given number value is not NaN.
+ *
+ * @throws Exception - if the given number value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function assertIsNotNaN(value: number): asserts value is number;
+
+/**
+ * Asserts that the given number value is not NaN.
+ *
+ * @throws Exception - if the given number value is NaN.
+ *
+ * @since v0.11.0
+ */
+// eslint-disable-next-line @typescript-eslint/unified-signatures -- docs and readability
+export function assertIsNotNaN(value: number, expected: string): asserts value is number;
+
+/**
+ * Asserts that the given number value is not NaN.
+ *
+ * @throws Exception - if the given number value is NaN.
+ *
+ * @since v0.11.0
+ */
+export function assertIsNotNaN(argument: string, value: number): asserts value is number;
+
+/**
+ * Asserts that the given number value is not NaN.
+ *
+ * @throws Exception - if the given number value is NaN.
+ *
+ * @since v0.11.0
+ */
+// eslint-disable-next-line @typescript-eslint/unified-signatures -- docs and readability
+export function assertIsNotNaN(argument: string, value: number, expected: string): asserts value is number;
+
+// eslint-disable-next-line complexity -- polymorphism
+export function assertIsNotNaN(arg1: string | number, arg2: number | string = 'number', arg3?: string): void {
+    const [argument, value, expected] = [
+        typeof arg1 === 'string' ? arg1 : 'value',
+        typeof arg1 === 'number' ? arg1 : arg2,
+        // eslint-disable-next-line no-nested-ternary -- arguments mapping
+        typeof arg3 === 'string' ? arg3 : typeof arg2 === 'string' ? arg2 : 'number',
+    ];
+    if (Number.isNaN(value)) {
+        throw invalidArgumentException(argument, expected, 'NaN');
+    }
+}

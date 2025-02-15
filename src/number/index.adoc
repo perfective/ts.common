@@ -29,6 +29,17 @@ including the JavaScript
 ** `isNotNumber<T>(value: number | T): value is T`
 — returns `true` if a given `value` is not a number or is a `NaN`.
 +
+* Assertions:
+** `assertIsNotNaN(value: number): asserts value is number`
++
+`assertIsNotNaN(value: number, expected: string): asserts value is number`
++
+`assertIsNotNaN(argument: string, value: number): asserts value is number`
++
+`assertIsNotNaN(argument: string, value: number, expected: string): asserts value is number`
+— asserts that the given number value is not `NaN`.
+Throws `Exception` if the given number value is `NaN`.
++
 * Functions:
 +
 ** `negative(value: number): number`

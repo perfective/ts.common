@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { isNotNumber, isNumber, negative, sign } from './number';
+import { assertIsNotNaN, isNotNumber, isNumber, negative, sign } from './number';
 
 describe(isNumber, () => {
     describe('when value is a number', () => {
@@ -134,6 +134,68 @@ describe(sign, () => {
         it('throws an exception', () => {
             expect(() => sign(Number.NaN))
                 .toThrow('Argument `value` must be `number`, but was `NaN`');
+        });
+    });
+});
+
+describe(assertIsNotNaN, () => {
+    describe('assertIsNotNaN(value)', () => {
+        describe('when value is a number', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNotNaN(3.14)).not.toThrow();
+            });
+        });
+
+        describe('when value is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNotNaN(Number.NaN))
+                    .toThrow('Argument `value` must be `number`, but was `NaN`');
+            });
+        });
+    });
+
+    describe('assertIsNotNaN(value, expected)', () => {
+        describe('when value is a number', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNotNaN(3.14, 'number')).not.toThrow();
+            });
+        });
+
+        describe('when value is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNotNaN(Number.NaN, 'number'))
+                    .toThrow('Argument `value` must be `number`, but was `NaN`');
+            });
+        });
+    });
+
+    describe('assertIsNotNaN(argument, value)', () => {
+        describe('when value is a number', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNotNaN('argument', 3.14)).not.toThrow();
+            });
+        });
+
+        describe('when value is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNotNaN('argument', Number.NaN))
+                    .toThrow('Argument `argument` must be `number`, but was `NaN`');
+            });
+        });
+    });
+
+    describe('assertIsNotNaN(argument, value, expected)', () => {
+        describe('when value is a number', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNotNaN('argument', 3.14, '(-∞, +∞)')).not.toThrow();
+            });
+        });
+
+        describe('when value is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNotNaN('argument', Number.NaN, '(-∞, +∞)'))
+                    .toThrow('Argument `argument` must be `(-∞, +∞)`, but was `NaN`');
+            });
         });
     });
 });

@@ -17,7 +17,6 @@ export type Natural = number;
  */
 export function isNatural(value: unknown): value is Natural {
     if (isNumber(value)) {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard for nominal type
         return isNonNegativeInteger(value);
     }
     return false;

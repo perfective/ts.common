@@ -22,7 +22,6 @@ export function decimal(value: string): number | null;
 export function decimal(value: number | string): string | number | null {
     if (typeof value === 'string') {
         const float: number = Number.parseFloat(value);
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Runtime check for NaN
         return isNumber(float) ? float : null;
     }
     return value.toString(10);
@@ -105,7 +104,6 @@ type Base = 2 | 8 | 16;
 function base(base: Base, value: Integer | string): string | Integer | null {
     if (typeof value === 'string') {
         const integer: number = Number.parseInt(value, base);
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Runtime check for NaN
         return isNumber(integer) ? integer : null;
     }
     return Math.floor(value).toString(base);

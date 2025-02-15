@@ -461,7 +461,6 @@ export class Failure<T> extends Result<T> {
         public readonly value: Error,
     ) {
         super();
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime type guard
         if (isNotError(this.value)) {
             throw new TypeError('The value of `Failure` must be an instance of an `Error`');
         }

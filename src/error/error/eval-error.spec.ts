@@ -12,7 +12,6 @@ describe(evalError, () => {
 describe(isEvalError, () => {
     describe('when a given value is an EvalError', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isEvalError(new EvalError('Error')))
                 .toBe(true);
         });
@@ -36,7 +35,6 @@ describe(isNotEvalError, () => {
 
     describe('when a given value is an EvalError', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotEvalError(new EvalError('Error')))
                 .toBe(false);
         });

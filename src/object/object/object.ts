@@ -61,10 +61,8 @@ export function clone<T>(value: T): T {
  * @since v0.9.0
  */
 export function hasMethod(value: unknown, method: string): boolean {
-    /* eslint-disable @typescript-eslint/no-unnecessary-condition -- value is unknown and may be null or undefined */
     // eslint-disable-next-line security/detect-object-injection -- only reading the property
     return isPresent(value) && typeof (value as any)[method] === 'function';
-    /* eslint-enable @typescript-eslint/no-unnecessary-condition */
 }
 
 /**

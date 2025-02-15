@@ -56,9 +56,8 @@ describe(isNothing, () => {
 
     describe('when given a `Nothing`', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNothing(nothing())).toBe(true);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
+
             expect(isNothing(nil())).toBe(true);
         });
     });
@@ -75,16 +74,13 @@ describe(isNothing, () => {
 describe(isNotNothing, () => {
     describe('when given a `Just`', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNothing(just(0))).toBe(true);
         });
     });
 
     describe('when given a `Nothing`', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNothing(nothing())).toBe(false);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNothing(nil())).toBe(false);
         });
     });
@@ -92,9 +88,7 @@ describe(isNotNothing, () => {
     describe('when given not a `Maybe`', () => {
         it('returns true', () => {
             expect(isNotNothing(0)).toBe(true);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNothing(null)).toBe(true);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNothing(undefined)).toBe(true);
         });
     });

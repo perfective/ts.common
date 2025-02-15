@@ -38,7 +38,6 @@ export function successFailure(value: number | Error): Failure<string> {
  * Returns result as a {@linkcode Failure} otherwise.
  */
 export function resultDecimal(input: number): Result<string> {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing for nominal type
     if (isInteger(input)) {
         return successDecimal(input);
     }

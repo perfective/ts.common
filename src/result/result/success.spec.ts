@@ -102,18 +102,14 @@ describe(isNotSuccess, () => {
     describe('when a given `value` is not a `Success`', () => {
         it('returns true', () => {
             expect(isNotSuccess(0)).toBe(true);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotSuccess(error('Failure'))).toBe(true);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotSuccess(failure(error('Failure')))).toBe(true);
         });
     });
 
     describe('when a given `value` is a `Success`', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotSuccess(success(0))).toBe(false);
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotSuccess(success(error('Failure')))).toBe(false);
         });
     });

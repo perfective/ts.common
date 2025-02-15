@@ -26,7 +26,6 @@ const ecmaTypes: Set<EcmaType> = new Set<EcmaType>([
  * @since v0.9.0
  */
 export function ecmaType(type: EcmaType): EcmaType {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime check
     if (isEcmaType(type)) {
         return type;
     }
@@ -67,7 +66,6 @@ const tsTypes: Set<TsType> = new Set<TsType>([
  * @since v0.9.0
  */
 export function tsType(type: TsType): TsType {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime check
     if (isTsType(type)) {
         return type;
     }

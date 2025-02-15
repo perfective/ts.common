@@ -53,7 +53,6 @@ function isEmptyRecord(value: unknown): boolean {
 function hasConstructor(name: string): (value: unknown) => boolean {
     return (value: unknown): boolean => {
         /* eslint-disable @typescript-eslint/no-unsafe-member-access -- check property presence */
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- value may be null or undefined
         if (isPresent((value as any).constructor)) {
             return (value as any).constructor.name === name;
         }

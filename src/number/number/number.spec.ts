@@ -11,16 +11,13 @@ describe(isNumber, () => {
 
     describe('when value is Infinity', () => {
         it('returns true', () => {
-            /* eslint-disable @typescript-eslint/no-unnecessary-condition -- type guard testing */
             expect(isNumber(Number.POSITIVE_INFINITY)).toBe(true);
             expect(isNumber(Number.NEGATIVE_INFINITY)).toBe(true);
-            /* eslint-enable @typescript-eslint/no-unnecessary-condition */
         });
     });
 
     describe('when value is NaN', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNumber(Number.NaN)).toBe(false);
         });
     });
@@ -42,16 +39,13 @@ describe(isNotNumber, () => {
 
     describe('when value is Infinity', () => {
         it('returns false', () => {
-            /* eslint-disable @typescript-eslint/no-unnecessary-condition -- type guard testing */
             expect(isNotNumber(Number.POSITIVE_INFINITY)).toBe(false);
             expect(isNotNumber(Number.NEGATIVE_INFINITY)).toBe(false);
-            /* eslint-enable @typescript-eslint/no-unnecessary-condition */
         });
     });
 
     describe('when value is NaN', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotNumber(Number.NaN)).toBe(true);
         });
     });

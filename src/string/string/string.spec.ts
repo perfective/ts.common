@@ -17,7 +17,6 @@ describe(isString, () => {
 
     describe('when the value is a String object', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isString(String(3.14))).toBe(true);
         });
     });
@@ -69,7 +68,6 @@ describe(isNotString, () => {
 
     describe('when the value is a String object', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotString(String(3.14))).toBe(false);
         });
     });
@@ -89,14 +87,12 @@ describe(isNotString, () => {
 
     describe('when the value is null', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotString(null)).toBe(true);
         });
     });
 
     describe('when value is undefined', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotString(undefined)).toBe(true);
         });
     });

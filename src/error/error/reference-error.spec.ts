@@ -12,7 +12,6 @@ describe(referenceError, () => {
 describe(isReferenceError, () => {
     describe('when a given value is an ReferenceError', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isReferenceError(new ReferenceError('Error')))
                 .toBe(true);
         });
@@ -36,7 +35,6 @@ describe(isNotReferenceError, () => {
 
     describe('when a given value is an ReferenceError', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotReferenceError(new ReferenceError('Error')))
                 .toBe(false);
         });

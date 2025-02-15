@@ -72,7 +72,6 @@ export function panic<E extends Error>(
         throw new Exception(
             exceptionMessage(error, second),
             third,
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- cause is unknown and optional
             isDefined(cause) ? caughtError(cause) : null,
         );
     };

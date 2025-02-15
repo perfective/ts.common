@@ -12,7 +12,6 @@ describe(syntaxError, () => {
 describe(isSyntaxError, () => {
     describe('when a given value is an SyntaxError', () => {
         it('returns true', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isSyntaxError(new SyntaxError('Error')))
                 .toBe(true);
         });
@@ -36,7 +35,6 @@ describe(isNotSyntaxError, () => {
 
     describe('when a given value is an SyntaxError', () => {
         it('returns false', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- type guard testing
             expect(isNotSyntaxError(new SyntaxError('Error')))
                 .toBe(false);
         });

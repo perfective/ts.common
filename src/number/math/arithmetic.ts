@@ -1,4 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
+import { assertIsNotNaN } from '../number/number';
 
 /**
  * Returns the result of addition of the given numbers.
@@ -53,8 +53,6 @@ export function remainder(dividend: number, divisor: number): number {
  * @since v0.11.0
  */
 export function absolute(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.abs(value);
 }

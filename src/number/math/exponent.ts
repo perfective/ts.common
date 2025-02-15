@@ -1,5 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
-import { NonNegativeNumber } from '../number/number';
+import { assertIsNotNaN, NonNegativeNumber } from '../number/number';
 
 /**
  * Returns Euler's number `e` raised to the power of the given number.
@@ -9,9 +8,7 @@ import { NonNegativeNumber } from '../number/number';
  * @since v0.11.0
  */
 export function exp(value: number): NonNegativeNumber {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.exp(value);
 }
 
@@ -23,8 +20,6 @@ export function exp(value: number): NonNegativeNumber {
  * @since v0.11.0
  */
 export function expm1(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.expm1(value);
 }

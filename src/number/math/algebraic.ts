@@ -2,7 +2,7 @@ import { exception, invalidArgumentException } from '../../error/exception/excep
 import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 import { isInfinity } from '../number/infinity';
-import { PositiveNumber } from '../number/number';
+import { assertIsNotNaN, PositiveNumber } from '../number/number';
 
 /**
  * Returns the cube root of a given number.
@@ -12,9 +12,7 @@ import { PositiveNumber } from '../number/number';
  * @since v0.11.0
  */
 export function cubeRoot(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.cbrt(value);
 }
 
@@ -75,19 +73,14 @@ export function power([base, exponent]: [number, number]): number;
  */
 export function power(base: number): (exponent: number) => number;
 
-// eslint-disable-next-line complexity -- polymorphism
 export function power(arg1: number | [number, number], arg2?: number): number | Unary<number, number> {
     const [base, exponent] = Array.isArray(arg1) ? arg1 : [arg1, arg2];
 
-    if (Number.isNaN(base)) {
-        throw invalidArgumentException('base', 'number', String(base));
-    }
+    assertIsNotNaN('base', base);
 
     // eslint-disable-next-line complexity, prefer-arrow/prefer-arrow-functions -- assertions, conflicts with func-style
     function powerOf(exponent: number): number {
-        if (Number.isNaN(exponent)) {
-            throw invalidArgumentException('exponent', 'number', String(exponent));
-        }
+        assertIsNotNaN('exponent', exponent);
 
         // Override the default behavior to match IEEE 754.
         if (isInfinity(exponent)
@@ -111,9 +104,7 @@ export function power(arg1: number | [number, number], arg2?: number): number | 
  * @since v0.11.0
  */
 export function powerOf(exponent: number): (base: number) => number {
-    if (Number.isNaN(exponent)) {
-        throw invalidArgumentException('exponent', 'number', String(exponent));
-    }
+    assertIsNotNaN('exponent', exponent);
     return (base: number) => power(base, exponent);
 }
 
@@ -125,7 +116,8 @@ export function powerOf(exponent: number): (base: number) => number {
  * @since v0.11.0
  */
 export function squareRoot(value: PositiveNumber): number {
-    if (Number.isNaN(value) || value < 0) {
+    assertIsNotNaN(value, '[0, +∞)');
+    if (value < 0) {
         throw invalidArgumentException('value', '[0, +∞)', String(value));
     }
     return Math.sqrt(value);

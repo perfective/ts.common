@@ -78,9 +78,7 @@ export type Sign = -1 | 1;
  * @since v0.11.0
  */
 export function sign(value: number): Sign | null {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     if (value === 0) {
         return null;
     }

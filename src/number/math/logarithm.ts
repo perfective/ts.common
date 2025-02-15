@@ -1,4 +1,5 @@
 import { invalidArgumentException } from '../../error/exception/exception';
+import { assertIsNotNaN } from '../number/number';
 
 /**
  * Returns the natural logarithm (base e) of a given non-negative number.
@@ -8,7 +9,8 @@ import { invalidArgumentException } from '../../error/exception/exception';
  * @since v0.11.0
  */
 export function log(value: number): number {
-    if (Number.isNaN(value) || value < 0) {
+    assertIsNotNaN(value, '[0, +∞)');
+    if (value < 0) {
         throw invalidArgumentException('value', '[0, +∞)', String(value));
     }
     return Math.log(value);
@@ -22,7 +24,8 @@ export function log(value: number): number {
  * @since v0.11.0
  */
 export function log10(value: number): number {
-    if (Number.isNaN(value) || value < 0) {
+    assertIsNotNaN(value, '[0, +∞)');
+    if (value < 0) {
         throw invalidArgumentException('value', '[0, +∞)', String(value));
     }
     return Math.log10(value);
@@ -36,7 +39,8 @@ export function log10(value: number): number {
  * @since v0.11.0
  */
 export function log1p(value: number): number {
-    if (Number.isNaN(value) || value < -1) {
+    assertIsNotNaN(value, '[-1, +∞)');
+    if (value < -1) {
         throw invalidArgumentException('value', '[-1, +∞)', String(value));
     }
     return Math.log1p(value);
@@ -50,7 +54,8 @@ export function log1p(value: number): number {
  * @since v0.11.0
  */
 export function log2(value: number): number {
-    if (Number.isNaN(value) || value < 0) {
+    assertIsNotNaN(value, '[0, +∞)');
+    if (value < 0) {
         throw invalidArgumentException('value', '[0, +∞)', String(value));
     }
     return Math.log2(value);

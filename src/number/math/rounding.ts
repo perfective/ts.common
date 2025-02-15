@@ -1,4 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
+import { assertIsNotNaN } from '../number/number';
 
 /**
  * Returns the integer nearest to a given number.
@@ -10,9 +10,7 @@ import { invalidArgumentException } from '../../error/exception/exception';
  * @since v0.11.0
  */
 export function rounded(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.round(value);
 }
 
@@ -26,9 +24,7 @@ export function rounded(value: number): number {
  * @since v0.11.0
  */
 export function roundedDown(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.floor(value);
 }
 
@@ -42,9 +38,7 @@ export function roundedDown(value: number): number {
  * @since v0.11.0
  */
 export function roundedUp(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.ceil(value);
 }
 
@@ -56,9 +50,7 @@ export function roundedUp(value: number): number {
  * @since v0.11.0
  */
 export function roundedToFloat32(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.fround(value);
 }
 
@@ -70,8 +62,6 @@ export function roundedToFloat32(value: number): number {
  * @since v0.11.0
  */
 export function truncated(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.trunc(value);
 }

@@ -1,6 +1,6 @@
 import { invalidArgumentException } from '../../error/exception/exception';
 import { isInfinity } from '../number/infinity';
-import { NonNegativeNumber } from '../number/number';
+import { assertIsNotNaN, NonNegativeNumber } from '../number/number';
 
 /**
  * A nominal type for radians.
@@ -14,9 +14,10 @@ export type Radians = number;
  *
  * @since v0.11.0
  */
-// eslint-disable-next-line complexity -- assertions
+
 export function arccos(cosine: number): Radians | null {
-    if (Number.isNaN(cosine) || cosine < -1 || cosine > 1) {
+    assertIsNotNaN('cosine', cosine, '[-1, 1]');
+    if (cosine < -1 || cosine > 1) {
         throw invalidArgumentException('cosine', '[-1, 1]', String(cosine));
     }
     return Math.acos(cosine);
@@ -30,7 +31,8 @@ export function arccos(cosine: number): Radians | null {
  * @since v0.11.0
  */
 export function arccosh(value: number): NonNegativeNumber | null {
-    if (Number.isNaN(value) || value < 1) {
+    assertIsNotNaN(value, '[1, +∞)');
+    if (value < 1) {
         throw invalidArgumentException('value', '[1, +∞)', String(value));
     }
     return Math.acosh(value);
@@ -43,9 +45,10 @@ export function arccosh(value: number): NonNegativeNumber | null {
  *
  * @since v0.11.0
  */
-// eslint-disable-next-line complexity -- assertions
+
 export function arcsin(sine: number): Radians | null {
-    if (Number.isNaN(sine) || sine < -1 || sine > 1) {
+    assertIsNotNaN('sine', sine, '[-1, 1]');
+    if (sine < -1 || sine > 1) {
         throw invalidArgumentException('sine', '[-1, 1]', String(sine));
     }
     return Math.asin(sine);
@@ -59,9 +62,7 @@ export function arcsin(sine: number): Radians | null {
  * @since v0.11.0
  */
 export function arcsinh(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', '(-∞, +∞)', String(value));
-    }
+    assertIsNotNaN(value, '(-∞, +∞)');
     return Math.asinh(value);
 }
 
@@ -73,9 +74,7 @@ export function arcsinh(value: number): number {
  * @since v0.11.0
  */
 export function arctan(value: number): Radians {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', '(-∞, +∞)', String(value));
-    }
+    assertIsNotNaN(value, '(-∞, +∞)');
     return Math.atan(value);
 }
 
@@ -101,17 +100,12 @@ export function arctan2(y: number, x: number): Radians;
  */
 export function arctan2(point: [number, number]): Radians;
 
-// eslint-disable-next-line complexity -- supports multiple signatures
 export function arctan2(arg1: number | [number, number], arg2?: number): Radians {
-    const [y, x] = Array.isArray(arg1) ? arg1 : [arg1, arg2];
-    if (Number.isNaN(y)) {
-        throw invalidArgumentException('y', '(-∞, +∞)', String(y));
-    }
-    if (Number.isNaN(x)) {
-        throw invalidArgumentException('x', '(-∞, +∞)', String(x));
-    }
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- arg2 is required when arg1 is a number.
-    return Math.atan2(y, x!);
+    const [y, x] = Array.isArray(arg1) ? arg1 : [arg1, arg2!];
+    assertIsNotNaN('y', y, '(-∞, +∞)');
+    assertIsNotNaN('x', x, '(-∞, +∞)');
+    return Math.atan2(y, x);
 }
 
 /**
@@ -121,9 +115,10 @@ export function arctan2(arg1: number | [number, number], arg2?: number): Radians
  *
  * @since v0.11.0
  */
-// eslint-disable-next-line complexity -- assertions
+
 export function arctanh(value: number): number {
-    if (Number.isNaN(value) || value <= -1 || value >= 1) {
+    assertIsNotNaN(value, '(-1, 1)');
+    if (value <= -1 || value >= 1) {
         throw invalidArgumentException('value', '(-1, 1)', String(value));
     }
     return Math.atanh(value);
@@ -138,7 +133,8 @@ export function arctanh(value: number): number {
  */
 export function cos(angle: Radians): number {
     // Math.cos() returns NaN for Infinity.
-    if (Number.isNaN(angle) || isInfinity(angle)) {
+    assertIsNotNaN('angle', angle);
+    if (isInfinity(angle)) {
         throw invalidArgumentException('angle', 'number', String(angle));
     }
     return Math.cos(angle);
@@ -152,9 +148,7 @@ export function cos(angle: Radians): number {
  * @since v0.11.0
  */
 export function cosh(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.cosh(value);
 }
 
@@ -166,7 +160,8 @@ export function cosh(value: number): number {
  * @since v0.11.0
  */
 export function sin(angle: Radians): number {
-    if (Number.isNaN(angle) || isInfinity(angle)) {
+    assertIsNotNaN('angle', angle);
+    if (isInfinity(angle)) {
         throw invalidArgumentException('angle', 'number', String(angle));
     }
     return Math.sin(angle);
@@ -180,9 +175,7 @@ export function sin(angle: Radians): number {
  * @since v0.11.0
  */
 export function sinh(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.sinh(value);
 }
 
@@ -196,7 +189,8 @@ export function sinh(value: number): number {
  * @since v0.11.0
  */
 export function tan(angle: number): number {
-    if (Number.isNaN(angle) || isInfinity(angle)) {
+    assertIsNotNaN('angle', angle);
+    if (isInfinity(angle)) {
         throw invalidArgumentException('angle', 'number', String(angle));
     }
     return Math.tan(angle);
@@ -212,8 +206,6 @@ export function tan(angle: number): number {
  * @since v0.11.0
  */
 export function tanh(value: number): number {
-    if (Number.isNaN(value)) {
-        throw invalidArgumentException('value', 'number', String(value));
-    }
+    assertIsNotNaN(value);
     return Math.tanh(value);
 }

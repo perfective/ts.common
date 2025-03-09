@@ -40,7 +40,7 @@ describe(cubeRoot, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => cubeRoot(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -65,9 +65,9 @@ describe(l2norm, () => {
         describe('when input contains NaN', () => {
             it('throws an exception', () => {
                 expect(() => l2norm(Number.NaN, 1))
-                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+                    .toThrow('`values` must be `number[]`, but contains `NaN`');
                 expect(() => l2norm(1, Number.NaN))
-                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+                    .toThrow('`values` must be `number[]`, but contains `NaN`');
             });
         });
     });
@@ -91,9 +91,9 @@ describe(l2norm, () => {
         describe('when input contains NaN', () => {
             it('throws an exception', () => {
                 expect(() => l2norm([Number.NaN, 1]))
-                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+                    .toThrow('`values` must be `number[]`, but contains `NaN`');
                 expect(() => l2norm([1, Number.NaN]))
-                    .toThrow('Argument `values` must be `number[]`, but contains `NaN`');
+                    .toThrow('`values` must be `number[]`, but contains `NaN`');
             });
         });
     });
@@ -139,14 +139,14 @@ describe(power, () => {
         describe('when base is NaN', () => {
             it('throws an exception', () => {
                 expect(() => power(Number.NaN, 2))
-                    .toThrow('Argument `base` must be `number`, but was `NaN`');
+                    .toThrow('`base` must be `number`, but was `NaN`');
             });
         });
 
         describe('when exponent is NaN', () => {
             it('throws an exception', () => {
                 expect(() => power(2, Number.NaN))
-                    .toThrow('Argument `exponent` must be `number`, but was `NaN`');
+                    .toThrow('`exponent` must be `number`, but was `NaN`');
             });
         });
     });
@@ -171,14 +171,14 @@ describe(power, () => {
         describe('when base is NaN', () => {
             it('throws an exception', () => {
                 expect(() => power([Number.NaN, 2]))
-                    .toThrow('Argument `base` must be `number`, but was `NaN`');
+                    .toThrow('`base` must be `number`, but was `NaN`');
             });
         });
 
         describe('when exponent is NaN', () => {
             it('throws an exception', () => {
                 expect(() => power([2, Number.NaN]))
-                    .toThrow('Argument `exponent` must be `number`, but was `NaN`');
+                    .toThrow('`exponent` must be `number`, but was `NaN`');
             });
         });
     });
@@ -203,14 +203,14 @@ describe(power, () => {
         describe('when base is NaN', () => {
             it('throws an exception', () => {
                 expect(() => power(Number.NaN)(2))
-                    .toThrow('Argument `base` must be `number`, but was `NaN`');
+                    .toThrow('`base` must be `number`, but was `NaN`');
             });
         });
 
         describe('when exponent is NaN', () => {
             it('throws an exception', () => {
                 expect(() => power(2)(Number.NaN))
-                    .toThrow('Argument `exponent` must be `number`, but was `NaN`');
+                    .toThrow('`exponent` must be `number`, but was `NaN`');
             });
         });
     });
@@ -228,14 +228,14 @@ describe(powerOf, () => {
     describe('when base is NaN', () => {
         it('throws an exception', () => {
             expect(() => powerOf(2)(Number.NaN))
-                .toThrow('Argument `base` must be `number`, but was `NaN`');
+                .toThrow('`base` must be `number`, but was `NaN`');
         });
     });
 
     describe('when exponent is NaN', () => {
         it('throws an exception', () => {
             expect(() => powerOf(Number.NaN))
-                .toThrow('Argument `exponent` must be `number`, but was `NaN`');
+                .toThrow('`exponent` must be `number`, but was `NaN`');
         });
     });
 });
@@ -264,14 +264,14 @@ describe(squareRoot, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => squareRoot(Number.NaN))
-                .toThrow('Argument `value` must be `[0, +∞)`, but was `NaN`');
+                .toThrow('`value` must be `[0, +∞)`, but was `NaN`');
         });
     });
 
     describe('when input is a negative number', () => {
         it('throws an exception', () => {
             expect(() => squareRoot(-1))
-                .toThrow('Argument `value` must be `[0, +∞)`, but was `-1`');
+                .toThrow('`value` must be `[0, +∞)`, but was `-1`');
         });
     });
 });

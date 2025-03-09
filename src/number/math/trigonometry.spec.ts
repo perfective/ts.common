@@ -20,21 +20,21 @@ describe(arccos, () => {
     describe('when cosine is less than -1', () => {
         it('throws an exception', () => {
             expect(() => arccos(-1.1))
-                .toThrow('Argument `cosine` must be `[-1, 1]`, but was `-1.1`');
+                .toThrow('`cosine` must be `[-1, 1]`, but was `-1.1`');
         });
     });
 
     describe('when cosine is greater than 1', () => {
         it('throws an exception', () => {
             expect(() => arccos(1.1))
-                .toThrow('Argument `cosine` must be `[-1, 1]`, but was `1.1`');
+                .toThrow('`cosine` must be `[-1, 1]`, but was `1.1`');
         });
     });
 
     describe('when cosine is NaN', () => {
         it('throws an exception', () => {
             expect(() => arccos(Number.NaN))
-                .toThrow('Argument `cosine` must be `[-1, 1]`, but was `NaN`');
+                .toThrow('`cosine` must be `[-1, 1]`, but was `NaN`');
         });
     });
 
@@ -51,19 +51,19 @@ describe(arccos, () => {
 describe(arcsin, () => {
     describe('when sine is less than -1', () => {
         it('throws an exception', () => {
-            expect(() => arcsin(-1.1)).toThrow('Argument `sine` must be `[-1, 1]`, but was `-1.1`');
+            expect(() => arcsin(-1.1)).toThrow('`sine` must be `[-1, 1]`, but was `-1.1`');
         });
     });
 
     describe('when sine is greater than 1', () => {
         it('throws an exception', () => {
-            expect(() => arcsin(1.1)).toThrow('Argument `sine` must be `[-1, 1]`, but was `1.1`');
+            expect(() => arcsin(1.1)).toThrow('`sine` must be `[-1, 1]`, but was `1.1`');
         });
     });
 
     describe('when sine is NaN', () => {
         it('throws an exception', () => {
-            expect(() => arcsin(Number.NaN)).toThrow('Argument `sine` must be `[-1, 1]`, but was `NaN`');
+            expect(() => arcsin(Number.NaN)).toThrow('`sine` must be `[-1, 1]`, but was `NaN`');
         });
     });
 
@@ -80,13 +80,13 @@ describe(arcsin, () => {
 describe(arccosh, () => {
     describe('when input is less than 1', () => {
         it('throws an exception', () => {
-            expect(() => arccosh(0)).toThrow('Argument `value` must be `[1, +∞)`, but was `0`');
+            expect(() => arccosh(0)).toThrow('`value` must be `[1, +∞)`, but was `0`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => arccosh(Number.NaN)).toThrow('Argument `value` must be `[1, +∞)`, but was `NaN`');
+            expect(() => arccosh(Number.NaN)).toThrow('`value` must be `[1, +∞)`, but was `NaN`');
         });
     });
 
@@ -110,7 +110,7 @@ describe(arcsinh, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => arcsinh(Number.NaN))
-                .toThrow('Argument `value` must be `(-∞, +∞)`, but was `NaN`');
+                .toThrow('`value` must be `(-∞, +∞)`, but was `NaN`');
         });
     });
 
@@ -129,7 +129,7 @@ describe(arctan, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => arctan(Number.NaN))
-                .toThrow('Argument `value` must be `(-∞, +∞)`, but was `NaN`');
+                .toThrow('`value` must be `(-∞, +∞)`, but was `NaN`');
         });
     });
 
@@ -163,14 +163,14 @@ describe(arctan2, () => {
         describe('when y is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2(Number.NaN, 1))
-                    .toThrow('Argument `y` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`y` must be `(-∞, +∞)`, but was `NaN`');
             });
         });
 
         describe('when x is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2(1, Number.NaN))
-                    .toThrow('Argument `x` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`x` must be `(-∞, +∞)`, but was `NaN`');
             });
         });
 
@@ -185,14 +185,14 @@ describe(arctan2, () => {
         describe('when y is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2([Number.NaN, 1]))
-                    .toThrow('Argument `y` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`y` must be `(-∞, +∞)`, but was `NaN`');
             });
         });
 
         describe('when x is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2([1, Number.NaN]))
-                    .toThrow('Argument `x` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`x` must be `(-∞, +∞)`, but was `NaN`');
             });
         });
 
@@ -215,21 +215,21 @@ describe(arctanh, () => {
 
     describe('when input is less than or equal to -1', () => {
         it('throws an exception', () => {
-            expect(() => arctanh(-1)).toThrow('Argument `value` must be `(-1, 1)`, but was `-1`');
-            expect(() => arctanh(-1.1)).toThrow('Argument `value` must be `(-1, 1)`, but was `-1.1`');
+            expect(() => arctanh(-1)).toThrow('`value` must be `(-1, 1)`, but was `-1`');
+            expect(() => arctanh(-1.1)).toThrow('`value` must be `(-1, 1)`, but was `-1.1`');
         });
     });
 
     describe('when input is greater than or equal to 1', () => {
         it('throws an exception', () => {
-            expect(() => arctanh(1)).toThrow('Argument `value` must be `(-1, 1)`, but was `1`');
-            expect(() => arctanh(1.1)).toThrow('Argument `value` must be `(-1, 1)`, but was `1.1`');
+            expect(() => arctanh(1)).toThrow('`value` must be `(-1, 1)`, but was `1`');
+            expect(() => arctanh(1.1)).toThrow('`value` must be `(-1, 1)`, but was `1.1`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => arctanh(Number.NaN)).toThrow('Argument `value` must be `(-1, 1)`, but was `NaN`');
+            expect(() => arctanh(Number.NaN)).toThrow('`value` must be `(-1, 1)`, but was `NaN`');
         });
     });
 });
@@ -248,19 +248,19 @@ describe(cos, () => {
     describe('when input is Infinity', () => {
         it('throws an exception', () => {
             expect(() => cos(Number.POSITIVE_INFINITY))
-                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `number`, but was `Infinity`');
             expect(() => cos(Number.NEGATIVE_INFINITY))
-                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `number`, but was `-Infinity`');
             // eslint-disable-next-line unicorn/prefer-number-properties -- testing
             expect(() => cos(Infinity))
-                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `number`, but was `Infinity`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => cos(Number.NaN))
-                .toThrow('Argument `angle` must be `number`, but was `NaN`');
+                .toThrow('`angle` must be `number`, but was `NaN`');
         });
     });
 });
@@ -291,7 +291,7 @@ describe(cosh, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => cosh(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -310,22 +310,22 @@ describe(sin, () => {
     describe('when input is Infinity', () => {
         it('throws an exception', () => {
             expect(() => sin(Number.POSITIVE_INFINITY))
-                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `number`, but was `Infinity`');
             expect(() => sin(Number.NEGATIVE_INFINITY))
-                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `number`, but was `-Infinity`');
             // eslint-disable-next-line unicorn/prefer-number-properties -- testing
             expect(() => sin(Infinity))
-                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `number`, but was `Infinity`');
             // eslint-disable-next-line unicorn/prefer-number-properties -- testing
             expect(() => sin(-Infinity))
-                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `number`, but was `-Infinity`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => sin(Number.NaN))
-                .toThrow('Argument `angle` must be `number`, but was `NaN`');
+                .toThrow('`angle` must be `number`, but was `NaN`');
         });
     });
 });
@@ -355,7 +355,7 @@ describe(sinh, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => sinh(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -380,16 +380,16 @@ describe(tan, () => {
     describe('when input is Infinity', () => {
         it('throws an exception', () => {
             expect(() => tan(Number.POSITIVE_INFINITY))
-                .toThrow('Argument `angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `number`, but was `Infinity`');
             expect(() => tan(Number.NEGATIVE_INFINITY))
-                .toThrow('Argument `angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `number`, but was `-Infinity`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => tan(Number.NaN))
-                .toThrow('Argument `angle` must be `number`, but was `NaN`');
+                .toThrow('`angle` must be `number`, but was `NaN`');
         });
     });
 });
@@ -419,7 +419,7 @@ describe(tanh, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => tanh(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });

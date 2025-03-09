@@ -1,4 +1,4 @@
-import { exception, invalidArgumentException } from '../../error/exception/exception';
+import { exception, typeException } from '../../error/exception/exception';
 import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 import { isInfinity } from '../number/infinity';
@@ -118,7 +118,7 @@ export function powerOf(exponent: number): (base: number) => number {
 export function squareRoot(value: PositiveNumber): number {
     assertIsNotNaN(value, '[0, +∞)');
     if (value < 0) {
-        throw invalidArgumentException('value', '[0, +∞)', String(value));
+        throw typeException('value', '[0, +∞)', String(value));
     }
     return Math.sqrt(value);
 }

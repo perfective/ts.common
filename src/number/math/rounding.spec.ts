@@ -28,7 +28,7 @@ describe(roundedDown, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => roundedDown(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -59,7 +59,7 @@ describe(rounded, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => rounded(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -90,7 +90,7 @@ describe(roundedUp, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => roundedUp(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -120,7 +120,7 @@ describe(roundedToFloat32, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => roundedToFloat32(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -151,7 +151,7 @@ describe(truncated, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => truncated(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });

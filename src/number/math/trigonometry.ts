@@ -1,4 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
+import { typeException } from '../../error/exception/exception';
 import { isInfinity } from '../number/infinity';
 import { assertIsNotNaN, NonNegativeNumber } from '../number/number';
 
@@ -18,7 +18,7 @@ export type Radians = number;
 export function arccos(cosine: number): Radians | null {
     assertIsNotNaN('cosine', cosine, '[-1, 1]');
     if (cosine < -1 || cosine > 1) {
-        throw invalidArgumentException('cosine', '[-1, 1]', String(cosine));
+        throw typeException('cosine', '[-1, 1]', String(cosine));
     }
     return Math.acos(cosine);
 }
@@ -33,7 +33,7 @@ export function arccos(cosine: number): Radians | null {
 export function arccosh(value: number): NonNegativeNumber | null {
     assertIsNotNaN(value, '[1, +∞)');
     if (value < 1) {
-        throw invalidArgumentException('value', '[1, +∞)', String(value));
+        throw typeException('value', '[1, +∞)', String(value));
     }
     return Math.acosh(value);
 }
@@ -49,7 +49,7 @@ export function arccosh(value: number): NonNegativeNumber | null {
 export function arcsin(sine: number): Radians | null {
     assertIsNotNaN('sine', sine, '[-1, 1]');
     if (sine < -1 || sine > 1) {
-        throw invalidArgumentException('sine', '[-1, 1]', String(sine));
+        throw typeException('sine', '[-1, 1]', String(sine));
     }
     return Math.asin(sine);
 }
@@ -119,7 +119,7 @@ export function arctan2(arg1: number | [number, number], arg2?: number): Radians
 export function arctanh(value: number): number {
     assertIsNotNaN(value, '(-1, 1)');
     if (value <= -1 || value >= 1) {
-        throw invalidArgumentException('value', '(-1, 1)', String(value));
+        throw typeException('value', '(-1, 1)', String(value));
     }
     return Math.atanh(value);
 }
@@ -135,7 +135,7 @@ export function cos(angle: Radians): number {
     // Math.cos() returns NaN for Infinity.
     assertIsNotNaN('angle', angle);
     if (isInfinity(angle)) {
-        throw invalidArgumentException('angle', 'number', String(angle));
+        throw typeException('angle', 'number', String(angle));
     }
     return Math.cos(angle);
 }
@@ -162,7 +162,7 @@ export function cosh(value: number): number {
 export function sin(angle: Radians): number {
     assertIsNotNaN('angle', angle);
     if (isInfinity(angle)) {
-        throw invalidArgumentException('angle', 'number', String(angle));
+        throw typeException('angle', 'number', String(angle));
     }
     return Math.sin(angle);
 }
@@ -191,7 +191,7 @@ export function sinh(value: number): number {
 export function tan(angle: number): number {
     assertIsNotNaN('angle', angle);
     if (isInfinity(angle)) {
-        throw invalidArgumentException('angle', 'number', String(angle));
+        throw typeException('angle', 'number', String(angle));
     }
     return Math.tan(angle);
 }

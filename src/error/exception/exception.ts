@@ -157,17 +157,17 @@ export function isNotException<T>(value: Exception | T): value is T {
 }
 
 /**
- * Creates an exception with the message about an invalid argument.
+ * Creates an exception with the message about a type mismatch.
  *
- * @param argument - Name of the argument.
- * @param expected - Excepted value of the argument.
- * @param actual - Actual value of the argument.
+ * @param name - Name of the value.
+ * @param expected - Excepted value.
+ * @param actual - Actual value.
  *
  * @since v0.11.0
  */
-export function invalidArgumentException(argument: string, expected: string, actual: string): Exception {
-    return exception(`Argument {{argument}} must be {{expected}}, but was {{actual}}`, {
-        argument,
+export function typeException(name: string, expected: string, actual: string): Exception {
+    return exception(`{{name}} must be {{expected}}, but was {{actual}}`, {
+        name,
         expected,
         actual,
     });

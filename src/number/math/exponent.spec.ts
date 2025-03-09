@@ -16,7 +16,7 @@ describe(exp, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => exp(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -41,7 +41,7 @@ describe(expm1, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => expm1(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });

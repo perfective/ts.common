@@ -133,7 +133,7 @@ describe(sign, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => sign(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });
@@ -149,7 +149,7 @@ describe(assertIsNotNaN, () => {
         describe('when value is NaN', () => {
             it('throws an exception', () => {
                 expect(() => assertIsNotNaN(Number.NaN))
-                    .toThrow('Argument `value` must be `number`, but was `NaN`');
+                    .toThrow('`value` must be `number`, but was `NaN`');
             });
         });
     });
@@ -164,7 +164,7 @@ describe(assertIsNotNaN, () => {
         describe('when value is NaN', () => {
             it('throws an exception', () => {
                 expect(() => assertIsNotNaN(Number.NaN, 'number'))
-                    .toThrow('Argument `value` must be `number`, but was `NaN`');
+                    .toThrow('`value` must be `number`, but was `NaN`');
             });
         });
     });
@@ -179,7 +179,7 @@ describe(assertIsNotNaN, () => {
         describe('when value is NaN', () => {
             it('throws an exception', () => {
                 expect(() => assertIsNotNaN('argument', Number.NaN))
-                    .toThrow('Argument `argument` must be `number`, but was `NaN`');
+                    .toThrow('`argument` must be `number`, but was `NaN`');
             });
         });
     });
@@ -194,7 +194,7 @@ describe(assertIsNotNaN, () => {
         describe('when value is NaN', () => {
             it('throws an exception', () => {
                 expect(() => assertIsNotNaN('argument', Number.NaN, '(-∞, +∞)'))
-                    .toThrow('Argument `argument` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`argument` must be `(-∞, +∞)`, but was `NaN`');
             });
         });
     });

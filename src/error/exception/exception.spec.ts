@@ -11,9 +11,10 @@ import {
     chainStack,
     Exception,
     exception,
-    fault, invalidArgumentException,
+    fault,
     isException,
     isNotException,
+    typeException,
     unchained,
 } from './exception';
 
@@ -108,8 +109,8 @@ describe(exception, () => {
     });
 });
 
-describe(invalidArgumentException, () => {
-    const exception: Exception = invalidArgumentException('id', 'string', 'number');
+describe(typeException, () => {
+    const exception: Exception = typeException('id', 'string', 'number');
 
     it('creates an instance of Exception', () => {
         expect(exception).toBeInstanceOf(Exception);
@@ -117,20 +118,20 @@ describe(invalidArgumentException, () => {
     });
 
     it('has a properly formatted message', () => {
-        const errorMessage = 'Argument `id` must be `string`, but was `number`';
+        const errorMessage = '`id` must be `string`, but was `number`';
 
         expect(exception.message).toBe(errorMessage);
     });
 
     it('has the correct template', () => {
-        const template = 'Argument {{argument}} must be {{expected}}, but was {{actual}}';
+        const template = '{{name}} must be {{expected}}, but was {{actual}}';
 
         expect(exception.template).toBe(template);
     });
 
     it('has correct tokens', () => {
         expect(exception.tokens).toStrictEqual({
-            argument: 'id',
+            name: 'id',
             expected: 'string',
             actual: 'number',
         });

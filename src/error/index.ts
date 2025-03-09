@@ -51,9 +51,9 @@ export {
     Exception,
     exception,
     fault,
-    invalidArgumentException,
     isException,
     isNotException,
+    typeException,
     unchained,
 } from './exception/exception';
 export { ExceptionContext } from './exception/exception-context';

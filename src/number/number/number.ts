@@ -1,4 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
+import { typeException } from '../../error/exception/exception';
 
 /**
  * A number that is greater than 0.
@@ -132,6 +132,6 @@ export function assertIsNotNaN(arg1: string | number, arg2: number | string = 'n
         typeof arg3 === 'string' ? arg3 : typeof arg2 === 'string' ? arg2 : 'number',
     ];
     if (Number.isNaN(value)) {
-        throw invalidArgumentException(argument, expected, 'NaN');
+        throw typeException(argument, expected, 'NaN');
     }
 }

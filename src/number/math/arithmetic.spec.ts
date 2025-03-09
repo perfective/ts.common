@@ -131,7 +131,7 @@ describe(absolute, () => {
     describe('when input is not a number', () => {
         it('throws TypeError', () => {
             expect(() => absolute(Number.NaN))
-                .toThrow('Argument `value` must be `number`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 });

@@ -1,4 +1,4 @@
-import { invalidArgumentException } from '../../error/exception/exception';
+import { typeException } from '../../error/exception/exception';
 import { assertIsNotNaN } from '../number/number';
 
 /**
@@ -11,7 +11,7 @@ import { assertIsNotNaN } from '../number/number';
 export function log(value: number): number {
     assertIsNotNaN(value, '[0, +∞)');
     if (value < 0) {
-        throw invalidArgumentException('value', '[0, +∞)', String(value));
+        throw typeException('value', '[0, +∞)', String(value));
     }
     return Math.log(value);
 }
@@ -26,7 +26,7 @@ export function log(value: number): number {
 export function log10(value: number): number {
     assertIsNotNaN(value, '[0, +∞)');
     if (value < 0) {
-        throw invalidArgumentException('value', '[0, +∞)', String(value));
+        throw typeException('value', '[0, +∞)', String(value));
     }
     return Math.log10(value);
 }
@@ -41,7 +41,7 @@ export function log10(value: number): number {
 export function log1p(value: number): number {
     assertIsNotNaN(value, '[-1, +∞)');
     if (value < -1) {
-        throw invalidArgumentException('value', '[-1, +∞)', String(value));
+        throw typeException('value', '[-1, +∞)', String(value));
     }
     return Math.log1p(value);
 }
@@ -56,7 +56,7 @@ export function log1p(value: number): number {
 export function log2(value: number): number {
     assertIsNotNaN(value, '[0, +∞)');
     if (value < 0) {
-        throw invalidArgumentException('value', '[0, +∞)', String(value));
+        throw typeException('value', '[0, +∞)', String(value));
     }
     return Math.log2(value);
 }

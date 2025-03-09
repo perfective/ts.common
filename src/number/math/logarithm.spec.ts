@@ -25,13 +25,13 @@ describe(log, () => {
 
     describe('when input is a negative number', () => {
         it('throws an exception', () => {
-            expect(() => log(-1)).toThrow('Argument `value` must be `[0, +∞)`, but was `-1`');
+            expect(() => log(-1)).toThrow('`value` must be `[0, +∞)`, but was `-1`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => log(Number.NaN)).toThrow('Argument `value` must be `[0, +∞)`, but was `NaN`');
+            expect(() => log(Number.NaN)).toThrow('`value` must be `[0, +∞)`, but was `NaN`');
         });
     });
 });
@@ -59,13 +59,13 @@ describe(log10, () => {
 
     describe('when input is a negative number', () => {
         it('throws an exception', () => {
-            expect(() => log10(-1)).toThrow('Argument `value` must be `[0, +∞)`, but was `-1`');
+            expect(() => log10(-1)).toThrow('`value` must be `[0, +∞)`, but was `-1`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => log10(Number.NaN)).toThrow('Argument `value` must be `[0, +∞)`, but was `NaN`');
+            expect(() => log10(Number.NaN)).toThrow('`value` must be `[0, +∞)`, but was `NaN`');
         });
     });
 });
@@ -98,13 +98,13 @@ describe(log1p, () => {
 
     describe('when input is less than -1', () => {
         it('throws an exception', () => {
-            expect(() => log1p(-1.1)).toThrow('Argument `value` must be `[-1, +∞)`, but was `-1.1`');
+            expect(() => log1p(-1.1)).toThrow('`value` must be `[-1, +∞)`, but was `-1.1`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => log1p(Number.NaN)).toThrow('Argument `value` must be `[-1, +∞)`, but was `NaN`');
+            expect(() => log1p(Number.NaN)).toThrow('`value` must be `[-1, +∞)`, but was `NaN`');
         });
     });
 });
@@ -133,13 +133,13 @@ describe(log2, () => {
 
     describe('when input is a negative number', () => {
         it('throws an exception', () => {
-            expect(() => log2(-1)).toThrow('Argument `value` must be `[0, +∞)`, but was `-1`');
+            expect(() => log2(-1)).toThrow('`value` must be `[0, +∞)`, but was `-1`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => log2(Number.NaN)).toThrow('Argument `value` must be `[0, +∞)`, but was `NaN`');
+            expect(() => log2(Number.NaN)).toThrow('`value` must be `[0, +∞)`, but was `NaN`');
         });
     });
 });

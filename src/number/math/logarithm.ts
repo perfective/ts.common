@@ -33,9 +33,9 @@ export function log10(value: NonNegativeNumber): number {
  * @since v0.11.0
  */
 export function log1p(value: number): number {
-    assertIsNotNaN(value, '[-1, +∞)');
+    assertIsNotNaN(value, '>= -1');
     if (value < -1) {
-        throw typeException('value', '[-1, +∞)', String(value));
+        throw typeException('value', '>= -1', String(value));
     }
     return Math.log1p(value);
 }

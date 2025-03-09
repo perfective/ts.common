@@ -31,9 +31,9 @@ export function arccos(cosine: number): Radians | null {
  * @since v0.11.0
  */
 export function arccosh(value: number): NonNegativeNumber | null {
-    assertIsNotNaN(value, '[1, +∞)');
+    assertIsNotNaN(value, '>= 1');
     if (value < 1) {
-        throw typeException('value', '[1, +∞)', String(value));
+        throw typeException('value', '>= 1', String(value));
     }
     return Math.acosh(value);
 }
@@ -62,7 +62,7 @@ export function arcsin(sine: number): Radians | null {
  * @since v0.11.0
  */
 export function arcsinh(value: number): number {
-    assertIsNotNaN(value, '(-∞, +∞)');
+    assertIsNotNaN(value);
     return Math.asinh(value);
 }
 
@@ -74,7 +74,7 @@ export function arcsinh(value: number): number {
  * @since v0.11.0
  */
 export function arctan(value: number): Radians {
-    assertIsNotNaN(value, '(-∞, +∞)');
+    assertIsNotNaN(value);
     return Math.atan(value);
 }
 
@@ -103,8 +103,8 @@ export function arctan2(point: [number, number]): Radians;
 export function arctan2(arg1: number | [number, number], arg2?: number): Radians {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- arg2 is required when arg1 is a number.
     const [y, x] = Array.isArray(arg1) ? arg1 : [arg1, arg2!];
-    assertIsNotNaN('y', y, '(-∞, +∞)');
-    assertIsNotNaN('x', x, '(-∞, +∞)');
+    assertIsNotNaN('y', y);
+    assertIsNotNaN('x', x);
     return Math.atan2(y, x);
 }
 
@@ -125,16 +125,16 @@ export function arctanh(value: number): number {
 }
 
 /**
- * Returns the cosine [-1, 1] of a given angle in radians.
+ * Returns the cosine [-1, 1] of a given finite angle in radians.
  *
  * @throws Exception - if the given angle is NaN or Infinity.
  *
  * @since v0.11.0
  */
 export function cos(angle: Radians): number {
-    // Math.cos() returns NaN for Infinity.
     assertIsNotNaN('angle', angle);
     if (isInfinity(angle)) {
+        // Math.cos() returns NaN for Infinity.
         throw typeException('angle', 'number', String(angle));
     }
     return Math.cos(angle);
@@ -153,7 +153,7 @@ export function cosh(value: number): number {
 }
 
 /**
- * Returns the sine [-1, 1] of a given angle in radians.
+ * Returns the sine [-1, 1] of a given finite angle in radians.
  *
  * @throws Exception - if the given angle is NaN or Infinity.
  *
@@ -162,6 +162,7 @@ export function cosh(value: number): number {
 export function sin(angle: Radians): number {
     assertIsNotNaN('angle', angle);
     if (isInfinity(angle)) {
+        // Math.sin() returns NaN for Infinity.
         throw typeException('angle', 'number', String(angle));
     }
     return Math.sin(angle);
@@ -180,7 +181,7 @@ export function sinh(value: number): number {
 }
 
 /**
- * Returns the tangent (-∞, +∞) of a given angle in radians.
+ * Returns the tangent (-∞, +∞) of a given finite angle in radians.
  *
  * @throws Exception - if the given angle is NaN or Infinity.
  *
@@ -191,6 +192,7 @@ export function sinh(value: number): number {
 export function tan(angle: number): number {
     assertIsNotNaN('angle', angle);
     if (isInfinity(angle)) {
+        // Math.tan() returns NaN for Infinity.
         throw typeException('angle', 'number', String(angle));
     }
     return Math.tan(angle);

@@ -80,13 +80,13 @@ describe(arcsin, () => {
 describe(arccosh, () => {
     describe('when input is less than 1', () => {
         it('throws an exception', () => {
-            expect(() => arccosh(0)).toThrow('`value` must be `[1, +∞)`, but was `0`');
+            expect(() => arccosh(0)).toThrow('`value` must be `>= 1`, but was `0`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => arccosh(Number.NaN)).toThrow('`value` must be `[1, +∞)`, but was `NaN`');
+            expect(() => arccosh(Number.NaN)).toThrow('`value` must be `>= 1`, but was `NaN`');
         });
     });
 
@@ -110,7 +110,7 @@ describe(arcsinh, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => arcsinh(Number.NaN))
-                .toThrow('`value` must be `(-∞, +∞)`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 
@@ -129,7 +129,7 @@ describe(arctan, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => arctan(Number.NaN))
-                .toThrow('`value` must be `(-∞, +∞)`, but was `NaN`');
+                .toThrow('`value` must be `number`, but was `NaN`');
         });
     });
 
@@ -163,14 +163,14 @@ describe(arctan2, () => {
         describe('when y is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2(Number.NaN, 1))
-                    .toThrow('`y` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`y` must be `number`, but was `NaN`');
             });
         });
 
         describe('when x is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2(1, Number.NaN))
-                    .toThrow('`x` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`x` must be `number`, but was `NaN`');
             });
         });
 
@@ -185,14 +185,14 @@ describe(arctan2, () => {
         describe('when y is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2([Number.NaN, 1]))
-                    .toThrow('`y` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`y` must be `number`, but was `NaN`');
             });
         });
 
         describe('when x is NaN', () => {
             it('throws an exception', () => {
                 expect(() => arctan2([1, Number.NaN]))
-                    .toThrow('`x` must be `(-∞, +∞)`, but was `NaN`');
+                    .toThrow('`x` must be `number`, but was `NaN`');
             });
         });
 

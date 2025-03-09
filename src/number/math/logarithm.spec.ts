@@ -98,13 +98,13 @@ describe(log1p, () => {
 
     describe('when input is less than -1', () => {
         it('throws an exception', () => {
-            expect(() => log1p(-1.1)).toThrow('`value` must be `[-1, +∞)`, but was `-1.1`');
+            expect(() => log1p(-1.1)).toThrow('`value` must be `>= -1`, but was `-1.1`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
-            expect(() => log1p(Number.NaN)).toThrow('`value` must be `[-1, +∞)`, but was `NaN`');
+            expect(() => log1p(Number.NaN)).toThrow('`value` must be `>= -1`, but was `NaN`');
         });
     });
 });

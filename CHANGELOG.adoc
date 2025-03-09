@@ -1,5 +1,65 @@
 = Changelog
 :perfective-common: https://github.com/perfective/ts.common/tree/main
+:github-issues: https://github.com/perfective/ts.common/issues
+
+== v0.11.0
+
+* *Fixed ES modules imports*.
++
+`@perfective/common` can now be imported from regular `.js`/`.mjs` ESM files.
++
+* *Added wrappers for most of the `Math` functions* (link:{github-issues}/20[#20])
++
+Unlike the standard `Math` functions,
+the following functions throw an `Exception` for invalid inputs:
++
+** `absolute()`;
+** `arccos()`, `arccosh()`;
+** `arcsin()`, `arcsinh()`;
+** `arctan()`, `arctan2()`, `arctanh()`;
+** `cos()`, `cosh()`;
+** `sin()`, `sinh()`;
+** `tan()`, `tanh()`;
+** `rounded()`, `roundedUp()`, `roundedDown()`, `roundedToFloat32()`, `truncated()`;
+** `power()`, `powerOf()`;
+** `squareRoot()`, `cubeRoot()`, `l2norm()`;
+** `exp()`, `expm1()`;
+** `log()`, `log10()`, `log1p()`, `log2()`;
+** `sign()` with `Sign` nominal type.
++
+Replacing `NaN` with `null` is a redundant idea,
+because it’s trivial to do use library functions with `Maybe` instead:
++
+[source,typescript]
+----
+maybe(x).to(Math.acos).that(isNumber)
+----
++
+Meanwhile, throwing an exception gives library users an option to track invalid inputs.
+In this case, the `Result` monad can be used:
++
+[source,typescript]
+----
+result(x).onto(resultFrom(arccos))
+----
++
+* *Added more nominal types for numbers*:
++
+** Added `Infinity`, `PositiveInfinity`, and `NegativeInfinity` nominal types
+with the `isInfinity()` type guard.
++
+** Added `FiniteNumber` nominal type
+with the `isFinite() type guard (link:{github-issues}/18[#18])
+and `assertIsFinite()` assertion.
++
+** Added the `PositiveNumber`, `NonPositiveNumber`, `NegativeNumber`, `NonNegativeNumber` nominal types.
+** Added `assertIsNonNegativeNumber()` type guard.
++
+* *Introduced assertion function*  (link:{github-issues}/53[#53]):
++
+** Added the `assertIsNotNaN()` and `assertIsNonNegativeNumber()` functions.
+** Added the `typeException()` function.
+
 
 == v0.10.0
 

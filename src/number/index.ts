@@ -84,9 +84,10 @@ export {
     octal,
 } from './number/base';
 export {
+    FiniteNumber,
     Infinity,
+    isFinite,
     isInfinity,
-    isNotInfinity,
     NegativeInfinity,
     PositiveInfinity,
 } from './number/infinity';

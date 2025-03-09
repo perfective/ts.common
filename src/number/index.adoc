@@ -322,13 +322,15 @@ Use this function instead of `Math.min`, as it returns `Infinity` or `NaN` for e
 — an alias for a `number` signifying `Number.POSITIVE_INFINITY`.
 ** `NegativeInfinity`
 — an alias for a `number` signifying `Number.NEGATIVE_INFINITY`.
+** `FiniteNumber`
+— a number that is not `Infinity`, nor `NaN`.
 +
-* Predicates:
+* Type guards:
 +
-** `isInfinity(value: number): boolean`
+** `isInfinity(value: number): value is Infinity`
 — returns `true` if the given value is an `Infinity`.
-** `isNotInfinity(value: number): boolean`
-— returns `true` if the given value is not an `Infinity`.
+** `isFinite(value: number): value is FiniteNumber`
+— returns `true` if the given value is not `Infinity` and is not `NaN`.
 
 
 == Base (Radix)

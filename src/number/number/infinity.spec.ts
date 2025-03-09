@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { isInfinity, isNotInfinity } from './infinity';
+import { isFinite, isInfinity } from './infinity';
 
 describe(isInfinity, () => {
     describe('when given a positive infinity', () => {
@@ -32,32 +32,32 @@ describe(isInfinity, () => {
     });
 });
 
-describe(isNotInfinity, () => {
+describe(isFinite, () => {
     describe('when given a positive infinity', () => {
         it('returns false', () => {
             // eslint-disable-next-line unicorn/prefer-number-properties -- test value
-            expect(isNotInfinity(Infinity)).toBe(false);
-            expect(isNotInfinity(Number.POSITIVE_INFINITY)).toBe(false);
+            expect(isFinite(Infinity)).toBe(false);
+            expect(isFinite(Number.POSITIVE_INFINITY)).toBe(false);
         });
     });
 
     describe('when given a negative infinity', () => {
         it('returns false', () => {
             // eslint-disable-next-line unicorn/prefer-number-properties -- test value
-            expect(isNotInfinity(-Infinity)).toBe(false);
-            expect(isNotInfinity(Number.NEGATIVE_INFINITY)).toBe(false);
+            expect(isFinite(-Infinity)).toBe(false);
+            expect(isFinite(Number.NEGATIVE_INFINITY)).toBe(false);
         });
     });
 
     describe('when given NaN', () => {
         it('returns true', () => {
-            expect(isNotInfinity(Number.NaN)).toBe(true);
+            expect(isFinite(Number.NaN)).toBe(false);
         });
     });
 
-    describe('when given a number', () => {
+    describe('when given a finite number', () => {
         it('returns true', () => {
-            expect(isNotInfinity(3.14)).toBe(true);
+            expect(isFinite(3.14)).toBe(true);
         });
     });
 });

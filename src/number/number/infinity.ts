@@ -26,7 +26,7 @@ export type Infinity = PositiveInfinity | NegativeInfinity;
  * @since v0.11.0
  */
 // eslint-disable-next-line complexity -- checking all possible values.
-export function isInfinity(value: number): boolean {
+export function isInfinity(value: number): value is Infinity {
     return value === Number.POSITIVE_INFINITY
         || value === Number.NEGATIVE_INFINITY
         // eslint-disable-next-line unicorn/prefer-number-properties -- specific value
@@ -36,10 +36,15 @@ export function isInfinity(value: number): boolean {
 }
 
 /**
- * Returns `true` if the given value is a positive or negative {@link Infinity}.
+ * Nominal type for a non-Infinity number.
+ */
+export type FiniteNumber = number;
+
+/**
+ * Returns `true` if a given value is not positive or negative {@link Infinity} and is not `NaN`.
  *
  * @since v0.11.0
  */
-export function isNotInfinity(value: number): boolean {
-    return !isInfinity(value);
+export function isFinite(value: number): value is FiniteNumber {
+    return Number.isFinite(value);
 }

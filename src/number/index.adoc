@@ -331,6 +331,16 @@ Use this function instead of `Math.min`, as it returns `Infinity` or `NaN` for e
 — returns `true` if the given value is an `Infinity`.
 ** `isFinite(value: number): value is FiniteNumber`
 — returns `true` if the given value is not `Infinity` and is not `NaN`.
++
+* Assertions:
++
+** `assertIsFinite(value: number): asserts value is FiniteNumber`
++
+`assertIsFinite(name: string, value: number): asserts value is FiniteNumber`
++
+— asserts that the given value is a finite number (not `NaN` and not `Infinity`).
++
+Throws `Exception` if the given value is `NaN` or positive/negative `Infinity`.
 
 
 == Base (Radix)

@@ -2021,7 +2021,7 @@ a| *Discouraged*
 
 | `link:{mdn-js-globals}/Number/isFinite[isFinite()]`
 | `link:{ecma-es6}/#sec-number.isfinite[ES6]`
-| link:{github-issues}/18[TODO #18]
+| Prefer `isFinite()` as a type guard and `assertIsFinite()` for assertions.
 
 
 | `link:{mdn-js-globals}/Number/isInteger[isInteger()]`

@@ -84,6 +84,7 @@ export {
     octal,
 } from './number/base';
 export {
+    assertIsFinite,
     FiniteNumber,
     Infinity,
     isFinite,

@@ -248,19 +248,22 @@ describe(cos, () => {
     describe('when input is Infinity', () => {
         it('throws an exception', () => {
             expect(() => cos(Number.POSITIVE_INFINITY))
-                .toThrow('`angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `Infinity`');
             expect(() => cos(Number.NEGATIVE_INFINITY))
-                .toThrow('`angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `-Infinity`');
             // eslint-disable-next-line unicorn/prefer-number-properties -- testing
             expect(() => cos(Infinity))
-                .toThrow('`angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `Infinity`');
+            // eslint-disable-next-line unicorn/prefer-number-properties -- testing
+            expect(() => cos(-Infinity))
+                .toThrow('`angle` must be `FiniteNumber`, but was `-Infinity`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => cos(Number.NaN))
-                .toThrow('`angle` must be `number`, but was `NaN`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `NaN`');
         });
     });
 });
@@ -310,22 +313,22 @@ describe(sin, () => {
     describe('when input is Infinity', () => {
         it('throws an exception', () => {
             expect(() => sin(Number.POSITIVE_INFINITY))
-                .toThrow('`angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `Infinity`');
             expect(() => sin(Number.NEGATIVE_INFINITY))
-                .toThrow('`angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `-Infinity`');
             // eslint-disable-next-line unicorn/prefer-number-properties -- testing
             expect(() => sin(Infinity))
-                .toThrow('`angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `Infinity`');
             // eslint-disable-next-line unicorn/prefer-number-properties -- testing
             expect(() => sin(-Infinity))
-                .toThrow('`angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `-Infinity`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => sin(Number.NaN))
-                .toThrow('`angle` must be `number`, but was `NaN`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `NaN`');
         });
     });
 });
@@ -380,16 +383,16 @@ describe(tan, () => {
     describe('when input is Infinity', () => {
         it('throws an exception', () => {
             expect(() => tan(Number.POSITIVE_INFINITY))
-                .toThrow('`angle` must be `number`, but was `Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `Infinity`');
             expect(() => tan(Number.NEGATIVE_INFINITY))
-                .toThrow('`angle` must be `number`, but was `-Infinity`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `-Infinity`');
         });
     });
 
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => tan(Number.NaN))
-                .toThrow('`angle` must be `number`, but was `NaN`');
+                .toThrow('`angle` must be `FiniteNumber`, but was `NaN`');
         });
     });
 });

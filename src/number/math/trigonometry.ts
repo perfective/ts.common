@@ -1,5 +1,5 @@
 import { typeException } from '../../error/exception/exception';
-import { isInfinity } from '../number/infinity';
+import { assertIsFinite } from '../number/infinity';
 import { assertIsNotNaN, NonNegativeNumber } from '../number/number';
 
 /**
@@ -132,11 +132,7 @@ export function arctanh(value: number): number {
  * @since v0.11.0
  */
 export function cos(angle: Radians): number {
-    assertIsNotNaN('angle', angle);
-    if (isInfinity(angle)) {
-        // Math.cos() returns NaN for Infinity.
-        throw typeException('angle', 'number', String(angle));
-    }
+    assertIsFinite('angle', angle);
     return Math.cos(angle);
 }
 
@@ -160,11 +156,7 @@ export function cosh(value: number): number {
  * @since v0.11.0
  */
 export function sin(angle: Radians): number {
-    assertIsNotNaN('angle', angle);
-    if (isInfinity(angle)) {
-        // Math.sin() returns NaN for Infinity.
-        throw typeException('angle', 'number', String(angle));
-    }
+    assertIsFinite('angle', angle);
     return Math.sin(angle);
 }
 
@@ -190,11 +182,7 @@ export function sinh(value: number): number {
  * @since v0.11.0
  */
 export function tan(angle: number): number {
-    assertIsNotNaN('angle', angle);
-    if (isInfinity(angle)) {
-        // Math.tan() returns NaN for Infinity.
-        throw typeException('angle', 'number', String(angle));
-    }
+    assertIsFinite('angle', angle);
     return Math.tan(angle);
 }
 

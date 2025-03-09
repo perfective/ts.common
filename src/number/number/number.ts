@@ -111,7 +111,7 @@ export function assertIsNotNaN(value: number, expected: string): asserts value i
  *
  * @since v0.11.0
  */
-export function assertIsNotNaN(argument: string, value: number): asserts value is number;
+export function assertIsNotNaN(name: string, value: number): asserts value is number;
 
 /**
  * Asserts that the given number value is not NaN.
@@ -121,17 +121,57 @@ export function assertIsNotNaN(argument: string, value: number): asserts value i
  * @since v0.11.0
  */
 // eslint-disable-next-line @typescript-eslint/unified-signatures -- docs and readability
-export function assertIsNotNaN(argument: string, value: number, expected: string): asserts value is number;
+export function assertIsNotNaN(name: string, value: number, expected: string): asserts value is number;
 
 // eslint-disable-next-line complexity -- polymorphism
 export function assertIsNotNaN(arg1: string | number, arg2: number | string = 'number', arg3?: string): void {
-    const [argument, value, expected] = [
+    const [name, value, expected] = [
         typeof arg1 === 'string' ? arg1 : 'value',
         typeof arg1 === 'number' ? arg1 : arg2,
         // eslint-disable-next-line no-nested-ternary -- arguments mapping
         typeof arg3 === 'string' ? arg3 : typeof arg2 === 'string' ? arg2 : 'number',
     ];
     if (Number.isNaN(value)) {
-        throw typeException(argument, expected, 'NaN');
+        throw typeException(name, expected, 'NaN');
+    }
+}
+
+/**
+ * Returns `true` if the given `value` is a greater than or equal to 0.
+ *
+ * @since v0.11.0
+ */
+export function isNonNegativeNumber(value: number): value is NonNegativeNumber {
+    return isNumber(value) && value >= 0;
+}
+
+/**
+ * Asserts that a given `value` is greater than or equal to 0.
+ *
+ * @throws Exception if a given `value` is less than 0 or is `NaN`.
+ *
+ * @since v0.11.0
+ */
+export function assertIsNonNegativeNumber(value: number): asserts value is NonNegativeNumber;
+
+/**
+ * Asserts that a given `value` is greater than or equal to 0.
+ *
+ * @throws Exception if a given `value` is less than 0 or is `NaN`.
+ *
+ * @since v0.11.0
+ */
+export function assertIsNonNegativeNumber(name: string, value: number): asserts value is NonNegativeNumber;
+
+// eslint-disable-next-line complexity -- polymorphism
+export function assertIsNonNegativeNumber(arg1: string | number, arg2?: number): void {
+    const [name, value]: [string, number] = [
+        typeof arg1 === 'string' ? arg1 : 'value',
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- if arg1 is string, arg2 is defined.
+        typeof arg1 === 'number' ? arg1 : arg2!,
+    ];
+    assertIsNotNaN(name, value, '>= 0');
+    if (value < 0) {
+        throw typeException(name, '>= 0', String(value));
     }
 }

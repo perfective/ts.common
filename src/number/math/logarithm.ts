@@ -1,5 +1,5 @@
 import { typeException } from '../../error/exception/exception';
-import { assertIsNotNaN } from '../number/number';
+import { assertIsNonNegativeNumber, assertIsNotNaN, NonNegativeNumber } from '../number/number';
 
 /**
  * Returns the natural logarithm (base e) of a given non-negative number.
@@ -8,11 +8,8 @@ import { assertIsNotNaN } from '../number/number';
  *
  * @since v0.11.0
  */
-export function log(value: number): number {
-    assertIsNotNaN(value, '[0, +∞)');
-    if (value < 0) {
-        throw typeException('value', '[0, +∞)', String(value));
-    }
+export function log(value: NonNegativeNumber): number {
+    assertIsNonNegativeNumber(value);
     return Math.log(value);
 }
 
@@ -23,11 +20,8 @@ export function log(value: number): number {
  *
  * @since v0.11.0
  */
-export function log10(value: number): number {
-    assertIsNotNaN(value, '[0, +∞)');
-    if (value < 0) {
-        throw typeException('value', '[0, +∞)', String(value));
-    }
+export function log10(value: NonNegativeNumber): number {
+    assertIsNonNegativeNumber(value);
     return Math.log10(value);
 }
 
@@ -53,10 +47,7 @@ export function log1p(value: number): number {
  *
  * @since v0.11.0
  */
-export function log2(value: number): number {
-    assertIsNotNaN(value, '[0, +∞)');
-    if (value < 0) {
-        throw typeException('value', '[0, +∞)', String(value));
-    }
+export function log2(value: NonNegativeNumber): number {
+    assertIsNonNegativeNumber(value);
     return Math.log2(value);
 }

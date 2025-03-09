@@ -116,7 +116,9 @@ export {
     Natural,
 } from './number/natural';
 export {
+    assertIsNonNegativeNumber,
     assertIsNotNaN,
+    isNonNegativeNumber,
     isNotNumber,
     isNumber,
     negative,

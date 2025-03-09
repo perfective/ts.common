@@ -1,8 +1,8 @@
-import { exception, typeException } from '../../error/exception/exception';
+import { exception } from '../../error/exception/exception';
 import { Unary } from '../../function/function/unary';
 import { isDefined } from '../../value/value';
 import { isInfinity } from '../number/infinity';
-import { assertIsNotNaN, PositiveNumber } from '../number/number';
+import { assertIsNonNegativeNumber, assertIsNotNaN, NonNegativeNumber } from '../number/number';
 
 /**
  * Returns the cube root of a given number.
@@ -115,10 +115,7 @@ export function powerOf(exponent: number): (base: number) => number {
  *
  * @since v0.11.0
  */
-export function squareRoot(value: PositiveNumber): number {
-    assertIsNotNaN(value, '[0, +∞)');
-    if (value < 0) {
-        throw typeException('value', '[0, +∞)', String(value));
-    }
+export function squareRoot(value: NonNegativeNumber): number {
+    assertIsNonNegativeNumber(value);
     return Math.sqrt(value);
 }

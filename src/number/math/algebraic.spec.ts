@@ -264,14 +264,14 @@ describe(squareRoot, () => {
     describe('when input is NaN', () => {
         it('throws an exception', () => {
             expect(() => squareRoot(Number.NaN))
-                .toThrow('`value` must be `[0, +∞)`, but was `NaN`');
+                .toThrow('`value` must be `>= 0`, but was `NaN`');
         });
     });
 
     describe('when input is a negative number', () => {
         it('throws an exception', () => {
             expect(() => squareRoot(-1))
-                .toThrow('`value` must be `[0, +∞)`, but was `-1`');
+                .toThrow('`value` must be `>= 0`, but was `-1`');
         });
     });
 });

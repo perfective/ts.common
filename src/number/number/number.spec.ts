@@ -1,6 +1,14 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { assertIsNotNaN, isNotNumber, isNumber, negative, sign } from './number';
+import {
+    assertIsNonNegativeNumber,
+    assertIsNotNaN,
+    isNonNegativeNumber,
+    isNotNumber,
+    isNumber,
+    negative,
+    sign,
+} from './number';
 
 describe(isNumber, () => {
     describe('when value is a number', () => {
@@ -195,6 +203,95 @@ describe(assertIsNotNaN, () => {
             it('throws an exception', () => {
                 expect(() => assertIsNotNaN('argument', Number.NaN, '(-∞, +∞)'))
                     .toThrow('`argument` must be `(-∞, +∞)`, but was `NaN`');
+            });
+        });
+    });
+});
+
+describe(isNonNegativeNumber, () => {
+    describe('when value is a equal to 0', () => {
+        it('returns true', () => {
+            expect(isNonNegativeNumber(0)).toBe(true);
+        });
+    });
+
+    describe('when value is a greater than 0', () => {
+        it('returns true', () => {
+            expect(isNonNegativeNumber(3.14)).toBe(true);
+        });
+    });
+
+    describe('when value is a less than 0', () => {
+        it('returns false', () => {
+            expect(isNonNegativeNumber(-1)).toBe(false);
+            expect(isNonNegativeNumber(-3.14)).toBe(false);
+        });
+    });
+
+    describe('when value is NaN', () => {
+        it('returns false', () => {
+            expect(isNonNegativeNumber(Number.NaN)).toBe(false);
+        });
+    });
+});
+
+describe(assertIsNonNegativeNumber, () => {
+    describe('assertIsNonNegativeNumber(value)', () => {
+        describe('when value is a equal to 0', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNonNegativeNumber(0)).not.toThrow();
+            });
+        });
+
+        describe('when value is a greater than 0', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNonNegativeNumber(3.14)).not.toThrow();
+            });
+        });
+
+        describe('when value is a less than 0', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNonNegativeNumber(-1))
+                    .toThrow('`value` must be `>= 0`, but was `-1`');
+                expect(() => assertIsNonNegativeNumber(-3.14))
+                    .toThrow('`value` must be `>= 0`, but was `-3.14`');
+            });
+        });
+
+        describe('when value is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNonNegativeNumber(Number.NaN))
+                    .toThrow('`value` must be `>= 0`, but was `NaN`');
+            });
+        });
+    });
+
+    describe('assertIsNonNegativeNumber(argument, value)', () => {
+        describe('when value is a equal to 0', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNonNegativeNumber('argument', 0)).not.toThrow();
+            });
+        });
+
+        describe('when value is a greater than 0', () => {
+            it('does not throw an exception', () => {
+                expect(() => assertIsNonNegativeNumber('argument', 3.14)).not.toThrow();
+            });
+        });
+
+        describe('when value is a less than 0', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNonNegativeNumber('argument', -1))
+                    .toThrow('`argument` must be `>= 0`, but was `-1`');
+                expect(() => assertIsNonNegativeNumber('argument', -3.14))
+                    .toThrow('`argument` must be `>= 0`, but was `-3.14`');
+            });
+        });
+
+        describe('when value is NaN', () => {
+            it('throws an exception', () => {
+                expect(() => assertIsNonNegativeNumber('argument', Number.NaN))
+                    .toThrow('`argument` must be `>= 0`, but was `NaN`');
             });
         });
     });

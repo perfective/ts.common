@@ -171,6 +171,6 @@ export function isArray<T>(value: unknown): value is T[] {
  *
  * @since v0.2.0
  */
-export function isNotArray<T, V = unknown>(value: T[] | V): value is V {
+export function isNotArray<V = unknown>(value: unknown[] | V): value is V {
     return !Array.isArray(value);
 }

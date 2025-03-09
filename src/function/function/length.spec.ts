@@ -120,11 +120,14 @@ describe(toLongest, () => {
     });
 
     it('reduces an empty array to the given initial value', () => {
-        expect(([] as number[][]).reduce(toLongest, []))
+        const numbers: number[][] = [];
+        const strings: string[] = [];
+
+        expect(numbers.reduce(toLongest, []))
             .toStrictEqual([]);
-        expect(([] as number[][]).reduce(toLongest, [0]))
+        expect(numbers.reduce(toLongest, [0]))
             .toStrictEqual([0]);
-        expect(([] as string[]).reduce(toLongest, ''))
+        expect(strings.reduce(toLongest, ''))
             .toBe('');
     });
 });
@@ -147,9 +150,11 @@ describe(toShortest, () => {
     });
 
     it('reduces an empty array to the given initial value', () => {
-        expect(([] as number[][]).reduce(toShortest, []))
+        const numbers: number[][] = [];
+
+        expect(numbers.reduce(toShortest, []))
             .toStrictEqual([]);
-        expect(([] as number[][]).reduce(toShortest, [0]))
+        expect(numbers.reduce(toShortest, [0]))
             .toStrictEqual([0]);
     });
 });

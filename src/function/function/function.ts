@@ -6,7 +6,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- generic type guard
 export function isFunction(value: unknown): value is Function {
-    return value instanceof Function;
+    return typeof value === 'function';
 }
 
 /**

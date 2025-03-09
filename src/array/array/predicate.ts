@@ -16,7 +16,7 @@ export function includedIn<T>(array: T[], from?: number): Predicate<T> {
  *
  * @since v0.2.0
  */
-export function isEmpty<T>(array: T[]): boolean {
+export function isEmpty(array: unknown[]): boolean {
     return array.length <= 0;
 }
 
@@ -26,6 +26,6 @@ export function isEmpty<T>(array: T[]): boolean {
  *
  * @since v0.2.0
  */
-export function isNotEmpty<T>(value: T[]): boolean {
+export function isNotEmpty(value: unknown[]): boolean {
     return value.length > 0;
 }

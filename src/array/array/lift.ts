@@ -130,7 +130,7 @@ export function join<T>(separator: string = ','): Unary<T[], string> {
  *
  * @since v0.2.0
  */
-export function keys<T>(array: T[]): IterableIterator<number> {
+export function keys(array: unknown[]): IterableIterator<number> {
     return array.keys();
 }
 

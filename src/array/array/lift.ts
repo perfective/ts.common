@@ -122,6 +122,7 @@ export function indexOf<T>(value: T, from?: number): Unary<T[], NumberOrErrorCod
  * @since v0.2.0
  */
 export function join<T>(separator: string = ','): Unary<T[], string> {
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string -- generic function
     return (array: T[]): string => array.join(separator);
 }
 

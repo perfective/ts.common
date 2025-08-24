@@ -17,6 +17,7 @@ export interface Tokens
 export function tokens(tokens: unknown[] | Tokens): Tokens {
     if (Array.isArray(tokens)) {
         return tokens.reduce((tokens: Tokens, value: unknown, i: number): Tokens => {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string -- generic function
             tokens[i.toString(10)] = String(value);
             return tokens;
         }, {});

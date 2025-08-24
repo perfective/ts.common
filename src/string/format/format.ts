@@ -34,6 +34,6 @@ export function formatted(input: Format): string {
     return Object.entries(input.tokens)
         .reduce((formatted, [key, value]) => formatted.replace(
             tokenKey(key),
-            String(value),
+            value,
         ), input.template);
 }

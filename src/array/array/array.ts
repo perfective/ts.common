@@ -88,6 +88,9 @@ export function replicated<T>(value: T, count: number): T[];
  */
 export function replicated<T>(count: number): Unary<T, T[]>;
 
+/**
+ * Creates an array or a callback.
+ */
 export function replicated<T>(first: T | number, second?: number): T[] | Unary<T, T[]> {
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill#using_fill_to_populate_an_empty_array
     /* eslint-disable unicorn/new-for-builtins -- populate an empty array */

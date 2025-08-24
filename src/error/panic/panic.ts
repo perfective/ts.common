@@ -17,6 +17,8 @@ export type Panic = (cause?: unknown) => never;
  * Throws an {@linkcode Exception} with a given `message` template with `tokens`
  * and additional `context` data.
  *
+ * @throws {Exception}
+ *
  * @since v0.2.0
  */
 export function throws(message: string, tokens?: ExceptionTokens, context?: ExceptionContext): never;
@@ -25,10 +27,17 @@ export function throws(message: string, tokens?: ExceptionTokens, context?: Exce
  * Throws a given {@linkcode Error}.
  * If given a callback, throws an {@linkcode Error} returned by the callback.
  *
+ * @throws {Error}
+ *
  * @since v0.1.0
  */
 export function throws<E extends Error>(error: Value<E>): never;
 
+/**
+ * Throws a given error.
+ *
+ * @throws {Error}
+ */
 // eslint-disable-next-line complexity -- complexity is 2.
 export function throws<E extends Error>(
     first: Value<E> | string,

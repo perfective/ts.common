@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+import { afterEach, beforeEach, describe, expect, it } from '@jest/globals';
 
 import { dateNowMock } from '../../jest';
 
@@ -61,13 +61,19 @@ describe(date, () => {
 });
 
 describe(now, () => {
-    it('returns a Date for the current moment', () => {
-        const dateNow = dateNowMock(epoch());
+    let dateNow: jest.Spied<typeof Date.now>;
 
+    beforeEach(() => {
+        dateNow = dateNowMock(epoch());
+    });
+
+    afterEach(() => {
+        dateNow.mockRestore();
+    });
+
+    it('returns a Date for the current moment', () => {
         expect(now()).toStrictEqual(epoch());
         expect(dateNow).toHaveBeenCalledTimes(1);
-
-        dateNow.mockRestore();
     });
 });
 

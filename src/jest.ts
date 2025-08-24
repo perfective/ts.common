@@ -31,6 +31,7 @@ export function testCase<T, U>(name: string, input: T, output: U): TestCase<T, U
 export function testCase<T, U>(first: string | T, second: T | U, third?: U): TestCase<T, U> {
     if (isUndefined(third)) {
         return {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string -- generic function
             name: String(first),
             input: first as T,
             output: second as U,

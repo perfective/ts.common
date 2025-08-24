@@ -134,6 +134,7 @@ export function caughtError(value: unknown): Error | Exception {
         return value;
     }
     return exception('Caught {{error}}', {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string -- generic function
         error: String(value),
     }, { error: value });
 }

@@ -35,6 +35,9 @@ export function timestamp(date: Date): Timestamp | null;
  */
 export function timestamp(input: string): Timestamp | null;
 
+/**
+ * Returns a {@link Timestamp} or null if the date is invalid.
+ */
 export function timestamp(value: Date | string): Timestamp | null {
     const output = isString(value) ? Date.parse(value) : value.getTime();
     if (Number.isNaN(output)) {

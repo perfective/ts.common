@@ -396,7 +396,7 @@ export class Nothing<T> extends Maybe<T> {
      *
      * @since 0.3.2
      */
-    public to<U>(map: (value: T) => (U | null | undefined)): Nothing<U>;
+    public to<U>(map: (value: T) => U | null | undefined): Nothing<U>;
     public to<U>(): Nothing<U> {
         return this as unknown as Nothing<U>;
     }
@@ -408,7 +408,7 @@ export class Nothing<T> extends Maybe<T> {
      *
      * @since 0.9.0
      */
-    public into<U>(reduce: (value: (null | undefined)) => U): U {
+    public into<U>(reduce: (value: null | undefined) => U): U {
         return reduce(this.value);
     }
 

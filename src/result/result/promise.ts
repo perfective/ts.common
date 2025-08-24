@@ -5,7 +5,7 @@
 import { caughtError } from '../../error/exception/exception';
 import { fulfilled, rejected } from '../../promise/promise/promise';
 
-import { Failure, failure, Result, Success, success } from './result';
+import { Failure, failure, Result, success } from './result';
 
 /**
  * Creates a {@linkcode Failure} from an `unknown` `reason`.

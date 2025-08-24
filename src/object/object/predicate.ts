@@ -21,7 +21,7 @@ export function isObject<T>(value: T | null): value is T & object {
  *
  *  @since v0.3.0
  */
-export function isRecord<T>(value: T): value is (T & Record<string, unknown>) {
+export function isRecord<T>(value: T): value is T & Record<string, unknown> {
     return isObject(value)
         && hasConstructor(Object.name)(value);
 }

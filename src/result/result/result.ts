@@ -3,7 +3,7 @@ import { Predicate } from '../../boolean/predicate/predicate';
 import { Proposition } from '../../boolean/proposition/proposition';
 import { isError, isNotError } from '../../error/error/error';
 import { Recovery } from '../../error/error/recovery/recovery';
-import { caughtError, Exception, exception } from '../../error/exception/exception';
+import { caughtError, exception } from '../../error/exception/exception';
 import { Nullary, Value, valueOf } from '../../function/function/nullary';
 import { Unary, UnaryVoid } from '../../function/function/unary';
 import { TypeGuard } from '../../value/type-guard/type-guard';
@@ -328,6 +328,7 @@ export class Success<T> extends Result<T> {
             return failure(error);
         }
         return failure(exception(error, {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string -- generic value
             value: String(this.value),
         }, {
             value: this.value,
@@ -364,6 +365,7 @@ export class Success<T> extends Result<T> {
             return failure(error);
         }
         return failure(exception(error, {
+            // eslint-disable-next-line @typescript-eslint/no-base-to-string -- generic value
             value: String(this.value),
         }, {
             value: this.value,

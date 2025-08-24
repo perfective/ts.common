@@ -88,8 +88,7 @@ export function isTsType(input: string): input is TsType {
  *
  * @since v0.3.0
  */
-export type TypeOf<T> =
-T extends undefined
+export type TypeOf<T> = T extends undefined
     ? 'undefined'
     : T extends null
         ? 'null'

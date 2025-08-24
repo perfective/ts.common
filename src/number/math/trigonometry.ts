@@ -100,6 +100,9 @@ export function arctan2(y: number, x: number): Radians;
  */
 export function arctan2(point: [number, number]): Radians;
 
+/**
+ * Returns the angle in radians [-π, π] between the positive x-axis and the ray from (0, 0) to the point (x, y).
+ */
 export function arctan2(arg1: number | [number, number], arg2?: number): Radians {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- arg2 is required when arg1 is a number.
     const [y, x] = Array.isArray(arg1) ? arg1 : [arg1, arg2!];

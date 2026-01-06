@@ -1,7 +1,11 @@
-name: Pre-release
+name: Publish
 on:
     release:
-        types: [prereleased]
+        types: [prereleased, released]
+
+permissions:
+    id-token: write # Required for OIDC
+    contents: read
 
 jobs:
     npm:
@@ -30,6 +34,4 @@ jobs:
               run: npm run dist
 
             - name: Publish package
-              run: npm publish --tag next ./dist
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npm publish ${{ github.event.action == 'prereleased' && '--tag next' || '' }} ./dist

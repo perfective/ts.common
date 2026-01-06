@@ -20,24 +20,13 @@ async function isErrorPromise<T>(data: T | Error): Promise<T> {
 describe(settlement, () => {
     describe('when `error` is undefined and a value is defined', () => {
         it('resolves a Promise', async () => {
-            const result = await isErrorPromise('example');
-
-            expect(result).toBe('example');
+            await expect(isErrorPromise('example')).resolves.toBe('example');
         });
     });
 
     describe('when `error` is defined', () => {
-        // eslint-disable-next-line jest/prefer-ending-with-an-expect -- testing try-catch error.
         it('rejects a Promise', async () => {
-            expect.assertions(1);
-
-            try {
-                await isErrorPromise(new Error('Fail'));
-            }
-            catch (error: unknown) {
-                // eslint-disable-next-line jest/no-conditional-expect -- approach with "toThrow()" does not work
-                expect(error).toStrictEqual(new Error('Fail'));
-            }
+            await expect(isErrorPromise(new Error('Fail'))).rejects.toThrow(new Error('Fail'));
         });
     });
 });

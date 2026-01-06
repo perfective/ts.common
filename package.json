@@ -38,15 +38,15 @@
     },
     "devDependencies": {
         "@asciidoctor/gulp-asciidoctor": "^2.2.5",
-        "@jest/globals": "^30.0.5",
-        "@perfective/build": "~0.20.0",
+        "@jest/globals": "^30.2.0",
+        "@perfective/build": "~0.22.0",
         "@perfective/eslint-config": "~0.32.0",
         "@types/jest": "^30.0.0",
         "eslint-plugin-jest": "~29.0.1",
         "gulp": "^5.0.1",
-        "jest": "^30.0.5",
-        "prettier": "~3.6.2",
-        "ts-jest": "^29.3.2",
-        "typescript": "~5.8.3"
+        "jest": "^30.2.0",
+        "prettier": "~3.7.4",
+        "ts-jest": "^29.4.6",
+        "typescript": "~5.9.3"
     }
 }

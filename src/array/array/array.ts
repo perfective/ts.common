@@ -71,7 +71,7 @@ export function intersection<T>(array1: T[], array2: T[]): T[] {
  * @param value - A value to repeat.
  * @param count - A non-negative integer length of a new array.
  *
- * @throws RangeError - An error when the given length is a negative or a real number.
+ * @throws {RangeError} - An error when the given length is a negative or a real number.
  *
  * @since v0.2.1
  */
@@ -82,7 +82,7 @@ export function replicated<T>(value: T, count: number): T[];
  *
  * @param count - A non-negative integer length of a new array.
  *
- * @throws RangeError - An error when the given length is a negative or a real number.
+ * @throws {RangeError} - An error when the given length is a negative or a real number.
  *
  * @since v0.2.1
  */

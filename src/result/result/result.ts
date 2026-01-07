@@ -162,7 +162,7 @@ export abstract class Result<T> {
      * When the instance is a {@linkcode Success}, returns itself.
      *
      * When the instance is a {@linkcode Failure},
-     * returns a {@linkcode Success} with the result of a given {@llinkcode recovery} callback
+     * returns a {@linkcode Success} with the result of a given `recovery` callback
      * applied to the {@linkcode Failure.value}.
      *
      * @since v0.10.0

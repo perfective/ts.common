@@ -4,7 +4,7 @@ import { assertIsNonNegativeNumber, assertIsNotNaN, NonNegativeNumber } from '..
 /**
  * Returns the natural logarithm (base e) of a given non-negative number.
  *
- * @throws Exception - if the given value is NaN or less than zero.
+ * @throws {Exception} - if the given value is NaN or less than zero.
  *
  * @since v0.11.0
  */
@@ -16,7 +16,7 @@ export function log(value: NonNegativeNumber): number {
 /**
  * Returns the common (base 10) logarithm of a given non-negative number.
  *
- * @throws Exception - if the given value is NaN or less than zero.
+ * @throws {Exception} - if the given value is NaN or less than zero.
  *
  * @since v0.11.0
  */
@@ -28,7 +28,7 @@ export function log10(value: NonNegativeNumber): number {
 /**
  * Returns the natural logarithm (base e) of 1 plus a given number.
  *
- * @throws Exception - if the given value is NaN or less than -1.
+ * @throws {Exception} - if the given value is NaN or less than -1.
  *
  * @since v0.11.0
  */
@@ -43,7 +43,7 @@ export function log1p(value: number): number {
 /**
  * Returns the binary (base 2) logarithm of a given non-negative number.
  *
- * @throws Exception - if the given value is NaN or less than zero.
+ * @throws {Exception} - if the given value is NaN or less than zero.
  *
  * @since v0.11.0
  */

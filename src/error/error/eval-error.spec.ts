@@ -4,6 +4,7 @@ import { evalError, isEvalError, isNotEvalError } from './eval-error';
 
 describe(evalError, () => {
     it('creates an EvalError with a given message', () => {
+        // eslint-disable-next-line jest/no-error-equal -- testing error constructor
         expect(evalError('Exception'))
             .toStrictEqual(new EvalError('Exception'));
     });

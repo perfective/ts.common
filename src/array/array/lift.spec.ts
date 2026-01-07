@@ -220,7 +220,8 @@ describe(forEach, () => {
         it('calls a given `procedure` for each element of the array', () => {
             const copy: number[] = [];
 
-            // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
+            // eslint-disable-next-line @stylistic/max-len -- eslint statement
+            // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression,jest/no-unnecessary-assertion -- testing void return
             expect(forEach<number>(value => copy.push(value))(input))
                 .toBeUndefined();
             expect(copy)

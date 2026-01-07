@@ -5,7 +5,7 @@ import { assertIsNotNaN } from '../number/number';
  * Returns `Infinity` if the given value is `Infinity`.
  * Returns `-Infinity` if the given value is `-Infinity`.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -19,7 +19,7 @@ export function rounded(value: number): number {
  * Returns `Infinity` if the given value is `Infinity`.
  * Returns `-Infinity` if the given value is `-Infinity`.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -33,7 +33,7 @@ export function roundedDown(value: number): number {
  * Returns `Infinity` if the given value is `Infinity`.
  * Returns `-Infinity` if the given value is `-Infinity`.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -45,7 +45,7 @@ export function roundedUp(value: number): number {
 /**
  * Returns the nearest 32-bit single precision float representation of a number.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -57,7 +57,7 @@ export function roundedToFloat32(value: number): number {
 /**
  * Returns a floating-point number truncated to its integer part.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */

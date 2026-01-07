@@ -14,6 +14,8 @@ export type Callback<T, E extends Error = Error> = (error: E | null | undefined,
  * with given `resolve` and `reject` callbacks from an executor.
  *
  * @since v0.9.0
+ *
+ * @rejects {Error}
  */
 export function settlement<T, E extends Error = Error>(
     resolve: Resolve<T>,

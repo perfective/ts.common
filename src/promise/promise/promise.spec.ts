@@ -42,6 +42,7 @@ describe(settled, () => {
         const second = settled()[1];
         const reason = error('Rejected');
 
+        // eslint-disable-next-line jest/valid-expect-with-promise -- the `second()` function returns a Promise.
         await expect(() => second(reason)).rejects.toBe(reason);
     });
 });

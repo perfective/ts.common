@@ -940,6 +940,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | null' is not assignable to type 'number'.
                 const output: number = maybe(unsafeNumber(undefined)).or(null);
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeNull();
             });
 
@@ -953,6 +954,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | null' is not assignable to type 'number | undefined'.
                 const output: number | undefined = maybe(unsafeNumber(undefined)).or(null);
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeNull();
             });
         });
@@ -962,6 +964,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | null' is not assignable to type 'number'.
                 const output: number = maybe(unsafeNumber(undefined)).or(constant(null));
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeNull();
             });
 
@@ -975,6 +978,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | null' is not assignable to type 'number | undefined'.
                 const output: number | undefined = maybe(unsafeNumber(undefined)).or(constant(null));
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeNull();
             });
         });
@@ -1030,6 +1034,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number'.
                 const output: number = maybe(unsafeNumber(null)).or(undefined);
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeUndefined();
             });
 
@@ -1037,6 +1042,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
                 const output: number | null = maybe(unsafeNumber(null)).or(undefined);
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeUndefined();
             });
 
@@ -1052,6 +1058,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number'.
                 const output: number = maybe(unsafeNumber(null)).or(constant(undefined));
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeUndefined();
             });
 
@@ -1059,6 +1066,7 @@ describe(Maybe, () => {
                 // @ts-expect-error -- TS2322: Type 'number | undefined' is not assignable to type 'number | null'.
                 const output: number | null = maybe(unsafeNumber(null)).or(constant(undefined));
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeUndefined();
             });
 

@@ -10,7 +10,7 @@ export type Radians = number;
 /**
  * Returns the inverse cosine [0, π] of the given cosine value [-1, 1].
  *
- * @throws Exception - if the given cosine is less than -1, greater than 1, or is NaN.
+ * @throws {Exception} - if the given cosine is less than -1, greater than 1, or is NaN.
  *
  * @since v0.11.0
  */
@@ -26,7 +26,7 @@ export function arccos(cosine: number): Radians | null {
 /**
  * Returns the inverse hyperbolic cosine [0, +∞) of a given number from [1, +∞).
  *
- * @throws Exception - if the given value is less than 1 or is NaN.
+ * @throws {Exception} - if the given value is less than 1 or is NaN.
  *
  * @since v0.11.0
  */
@@ -41,7 +41,7 @@ export function arccosh(value: number): NonNegativeNumber | null {
 /**
  * Returns the inverse sine [-π/2, π/2] of the given sine value [-1, 1].
  *
- * @throws Exception - if the given value is less than -1, greater than 1, or is NaN.
+ * @throws {Exception} - if the given value is less than -1, greater than 1, or is NaN.
  *
  * @since v0.11.0
  */
@@ -57,7 +57,7 @@ export function arcsin(sine: number): Radians | null {
 /**
  * Returns the inverse hyperbolic sine (-∞, +∞) of a given number from (-∞, +∞).
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -69,7 +69,7 @@ export function arcsinh(value: number): number {
 /**
  * Returns the inverse tangent [-π/2, π/2] of a given number from (-∞, +∞).
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -83,7 +83,7 @@ export function arctan(value: number): Radians {
  *
  * Note that `arctan2(y, x)` is not the same as `arctan(y / x)`.
  *
- * @throws Exception - if either `y` or `x` is `NaN`.
+ * @throws {Exception} - if either `y` or `x` is `NaN`.
  *
  * @since v0.11.0
  */
@@ -94,7 +94,7 @@ export function arctan2(y: number, x: number): Radians;
  *
  * @param point - A tuple of [y, x] coordinates.
  *
- * @throws Exception - if either `y` or `x` is `NaN`.
+ * @throws {Exception} - if either `y` or `x` is `NaN`.
  *
  * @since v0.11.0
  */
@@ -114,7 +114,7 @@ export function arctan2(arg1: number | [number, number], arg2?: number): Radians
 /**
  * Returns the inverse hyperbolic tangent (-∞, +∞) of a given number from (-1, 1).
  *
- * @throws Exception - if the given value is less than or equal -1, greater than or equal 1, or is NaN.
+ * @throws {Exception} - if the given value is less than or equal -1, greater than or equal 1, or is NaN.
  *
  * @since v0.11.0
  */
@@ -130,7 +130,7 @@ export function arctanh(value: number): number {
 /**
  * Returns the cosine [-1, 1] of a given finite angle in radians.
  *
- * @throws Exception - if the given angle is NaN or Infinity.
+ * @throws {Exception} - if the given angle is NaN or Infinity.
  *
  * @since v0.11.0
  */
@@ -142,7 +142,7 @@ export function cos(angle: Radians): number {
 /**
  * Returns the hyperbolic cosine [1, +∞) of a given number.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -154,7 +154,7 @@ export function cosh(value: number): number {
 /**
  * Returns the sine [-1, 1] of a given finite angle in radians.
  *
- * @throws Exception - if the given angle is NaN or Infinity.
+ * @throws {Exception} - if the given angle is NaN or Infinity.
  *
  * @since v0.11.0
  */
@@ -166,7 +166,7 @@ export function sin(angle: Radians): number {
 /**
  * Returns the hyperbolic sine (-∞, +∞) of a given number.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -178,7 +178,7 @@ export function sinh(value: number): number {
 /**
  * Returns the tangent (-∞, +∞) of a given finite angle in radians.
  *
- * @throws Exception - if the given angle is NaN or Infinity.
+ * @throws {Exception} - if the given angle is NaN or Infinity.
  *
  * NOTE: For Math.PI / 2 the result is a finite number due to floating point precision issues.
  *
@@ -194,7 +194,7 @@ export function tan(angle: number): number {
  * Returns 1 if a given value is Infinity.
  * Returns -1 if a given value is -Infinity.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */

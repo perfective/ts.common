@@ -106,6 +106,7 @@ describe(Nothing, () => {
             // @ts-expect-error -- TS2322: Type 'null | undefined' is not assignable to type 'number'.
             const value: number = nothing().value;
 
+            // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
             expect(value).toBeUndefined();
         });
 
@@ -113,6 +114,7 @@ describe(Nothing, () => {
             // @ts-expect-error -- TS2322: Type 'null | undefined' is not assignable to type 'number'.
             const value: number = nil().value;
 
+            // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
             expect(value).toBeNull();
         });
     });
@@ -735,6 +737,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- TS2322: Type 'null' is not assignable to type 'string'.
                 const output: string = nothing<string>().or(null);
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeNull();
             });
         });
@@ -750,6 +753,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- TS2322: Type 'null' is not assignable to type 'string'.
                 const output: string = nothing<string>().or(constant(null));
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeNull();
             });
         });
@@ -781,6 +785,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- TS2322: Type 'undefined' is not assignable to type 'string'.
                 const output: string = nil<string>().or(undefined);
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeUndefined();
             });
         });
@@ -796,6 +801,7 @@ describe(Nothing, () => {
                 // @ts-expect-error -- TS2322: Type 'undefined' is not assignable to type 'string'.
                 const output: string = nil<string>().or(constant(undefined));
 
+                // eslint-disable-next-line jest/no-unnecessary-assertion -- testing correct types detection
                 expect(output).toBeUndefined();
             });
         });

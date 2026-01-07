@@ -54,14 +54,14 @@ export function isFinite(value: number): value is FiniteNumber {
 /**
  * Asserts if a given value is a finite number.
  *
- * @throws Exception if the given value is `NaN` or is positive or negative infinity.
+ * @throws {Exception} If the given value is `NaN` or is positive or negative infinity.
  */
 export function assertIsFinite(value: number): asserts value is FiniteNumber;
 
 /**
  * Asserts if a given value is a finite number.
  *
- * @throws Exception if the given value is `NaN` or is positive or negative infinity.
+ * @throws {Exception} If the given value is `NaN` or is positive or negative infinity.
  */
 export function assertIsFinite(name: string, value: number): asserts value is FiniteNumber;
 

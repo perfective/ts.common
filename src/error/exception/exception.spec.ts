@@ -367,6 +367,7 @@ describe(fault, () => {
 
     describe('when given an error without a previous error', () => {
         it('returns the error itself', () => {
+            // eslint-disable-next-line jest/no-error-equal -- testing error constructor
             expect(fault(cause)).toStrictEqual(cause);
         });
     });
@@ -375,6 +376,7 @@ describe(fault, () => {
         const input = causedBy(cause, 'Build failed');
 
         it('returns the original cause error', () => {
+            // eslint-disable-next-line jest/no-error-equal -- testing error constructor
             expect(fault(input)).toStrictEqual(cause);
         });
     });

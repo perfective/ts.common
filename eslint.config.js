@@ -6,6 +6,8 @@ const eslintConfig = perfectiveEslintConfig([
     {
         rules: {
             'jsdoc/no-undefined-types': 'off',
+            // ES target is before ES2020
+            'unicorn/prefer-bigint-literals': 'off',
         },
     },
 ]);

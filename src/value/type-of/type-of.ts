@@ -21,7 +21,7 @@ const ecmaTypes: Set<EcmaType> = new Set<EcmaType>([
  * Type guards an EcmaType value in compile time
  * (unlike the `as` operator which allows to type cast any string as EcmaType).
  *
- * @throws TypeError - when the value in runtime is not an EcmaType.
+ * @throws {TypeError} - when the value in runtime is not an EcmaType.
  *
  * @since v0.9.0
  */
@@ -61,7 +61,7 @@ const tsTypes: Set<TsType> = new Set<TsType>([
  * Type guards a TsType value in compile time
  * (unlike the `as` operator which allows to type cast any string as TsType).
  *
- * @throws TypeError - when the value in runtime is not a TsType.
+ * @throws {TypeError} - when the value in runtime is not a TsType.
  *
  * @since v0.9.0
  */

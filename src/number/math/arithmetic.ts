@@ -48,7 +48,7 @@ export function remainder(dividend: number, divisor: number): number {
 /**
  * Returns the absolute value of a given number.
  *
- * @throws Exception - If the given value is not a number.
+ * @throws {Exception} - If the given value is not a number.
  *
  * @since v0.11.0
  */

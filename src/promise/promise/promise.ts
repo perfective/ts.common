@@ -85,6 +85,8 @@ export async function fulfilled<T>(value: Resolvable<T>): Promise<Awaited<T>> {
  * @see https://typescript-eslint.io/rules/unbound-method/
  *
  * @since v0.9.0
+ *
+ * @rejects {Error} - with the given `reason`.
  */
 export async function rejected<T = never>(reason: Error): Promise<Awaited<T>> {
     // With "throw reason" failing on "require-await": Async function 'rejected' has no 'await' expression.

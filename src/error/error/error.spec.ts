@@ -4,6 +4,7 @@ import { error, errorOutput, isError, isNotError, stack } from './error';
 
 describe(error, () => {
     it('creates an Error with a given message', () => {
+        // eslint-disable-next-line jest/no-error-equal -- testing error constructor
         expect(error('Exception'))
             .toStrictEqual(new Error('Exception'));
     });

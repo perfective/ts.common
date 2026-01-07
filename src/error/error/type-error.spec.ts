@@ -4,6 +4,7 @@ import { isNotTypeError, isTypeError, typeError } from './type-error';
 
 describe(typeError, () => {
     it('creates a TypeError with a given message', () => {
+        // eslint-disable-next-line jest/no-error-equal -- testing error constructor
         expect(typeError('Exception'))
             .toStrictEqual(new TypeError('Exception'));
     });

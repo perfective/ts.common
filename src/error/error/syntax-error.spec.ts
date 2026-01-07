@@ -4,6 +4,7 @@ import { isNotSyntaxError, isSyntaxError, syntaxError } from './syntax-error';
 
 describe(syntaxError, () => {
     it('creates a SyntaxError with a given message', () => {
+        // eslint-disable-next-line jest/no-error-equal -- testing error constructor
         expect(syntaxError('Exception'))
             .toStrictEqual(new SyntaxError('Exception'));
     });

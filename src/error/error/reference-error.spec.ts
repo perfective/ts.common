@@ -4,6 +4,7 @@ import { isNotReferenceError, isReferenceError, referenceError } from './referen
 
 describe(referenceError, () => {
     it('creates a ReferenceError with a given message', () => {
+        // eslint-disable-next-line jest/no-error-equal -- testing error constructor
         expect(referenceError('Exception'))
             .toStrictEqual(new ReferenceError('Exception'));
     });

@@ -34,7 +34,8 @@ describe(constant, () => {
 
 describe(naught, () => {
     it('returns undefined', () => {
-        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression -- testing void return
+        // eslint-disable-next-line @stylistic/max-len -- eslint statement
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression,jest/no-unnecessary-assertion -- testing void return
         expect(naught()).toBeUndefined();
     });
 });

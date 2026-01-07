@@ -17,7 +17,7 @@ export type Panic = (cause?: unknown) => never;
  * Throws an {@linkcode Exception} with a given `message` template with `tokens`
  * and additional `context` data.
  *
- * @throws {Exception}
+ * @throws {Exception} - created with given parameters.
  *
  * @since v0.2.0
  */
@@ -27,7 +27,7 @@ export function throws(message: string, tokens?: ExceptionTokens, context?: Exce
  * Throws a given {@linkcode Error}.
  * If given a callback, throws an {@linkcode Error} returned by the callback.
  *
- * @throws {Error}
+ * @throws {Error} - created with given parameters.
  *
  * @since v0.1.0
  */
@@ -36,7 +36,7 @@ export function throws<E extends Error>(error: Value<E>): never;
 /**
  * Throws a given error.
  *
- * @throws {Error}
+ * @throws {Error} - created with given parameters.
  */
 // eslint-disable-next-line complexity -- complexity is 2.
 export function throws<E extends Error>(
@@ -90,7 +90,7 @@ export function panic<E extends Error>(
  * Throws an {@linkcode Exception} with a given `message` caused by a `previous` {@linkcode Error}.
  * Exception message may contain given `tokens` and additional `context` data.
  *
- * @throws Exception - created with given parameters.
+ * @throws {Exception} - created with given parameters.
  *
  * @since v0.2.0
  */

@@ -73,7 +73,7 @@ export type Sign = -1 | 1;
  * Returns 1 if given a positive number, -1 if given a negative number.
  * Returns `null` if given 0 or -0.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -88,7 +88,7 @@ export function sign(value: number): Sign | null {
 /**
  * Asserts that the given number value is not NaN.
  *
- * @throws Exception - if the given number value is NaN.
+ * @throws {Exception} - if the given number value is NaN.
  *
  * @since v0.11.0
  */
@@ -97,7 +97,7 @@ export function assertIsNotNaN(value: number): asserts value is number;
 /**
  * Asserts that the given number value is not NaN.
  *
- * @throws Exception - if the given number value is NaN.
+ * @throws {Exception} - if the given number value is NaN.
  *
  * @since v0.11.0
  */
@@ -107,7 +107,7 @@ export function assertIsNotNaN(value: number, expected: string): asserts value i
 /**
  * Asserts that the given number value is not NaN.
  *
- * @throws Exception - if the given number value is NaN.
+ * @throws {Exception} - if the given number value is NaN.
  *
  * @since v0.11.0
  */
@@ -116,7 +116,7 @@ export function assertIsNotNaN(name: string, value: number): asserts value is nu
 /**
  * Asserts that the given number value is not NaN.
  *
- * @throws Exception - if the given number value is NaN.
+ * @throws {Exception} - if the given number value is NaN.
  *
  * @since v0.11.0
  */
@@ -148,7 +148,7 @@ export function isNonNegativeNumber(value: number): value is NonNegativeNumber {
 /**
  * Asserts that a given `value` is greater than or equal to 0.
  *
- * @throws Exception if a given `value` is less than 0 or is `NaN`.
+ * @throws {Exception} If a given `value` is less than 0 or is `NaN`.
  *
  * @since v0.11.0
  */
@@ -157,7 +157,7 @@ export function assertIsNonNegativeNumber(value: number): asserts value is NonNe
 /**
  * Asserts that a given `value` is greater than or equal to 0.
  *
- * @throws Exception if a given `value` is less than 0 or is `NaN`.
+ * @throws {Exception} If a given `value` is less than 0 or is `NaN`.
  *
  * @since v0.11.0
  */

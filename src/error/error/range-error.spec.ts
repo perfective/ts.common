@@ -4,6 +4,7 @@ import { isNotRangeError, isRangeError, rangeError } from './range-error';
 
 describe(rangeError, () => {
     it('creates a RangeError with a given message', () => {
+        // eslint-disable-next-line jest/no-error-equal -- testing error constructor
         expect(rangeError('Exception'))
             .toStrictEqual(new RangeError('Exception'));
     });

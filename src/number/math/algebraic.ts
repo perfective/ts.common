@@ -7,7 +7,7 @@ import { assertIsNonNegativeNumber, assertIsNotNaN, NonNegativeNumber } from '..
 /**
  * Returns the cube root of a given number.
  *
- * @throws Exception - if the given value is NaN.
+ * @throws {Exception} - if the given value is NaN.
  *
  * @since v0.11.0
  */
@@ -19,7 +19,7 @@ export function cubeRoot(value: number): number {
 /**
  * Returns the L2 norm (Euclidean norm) of given numbers.
  *
- * @throws Exception - if any of the given values is NaN.
+ * @throws {Exception} - if any of the given values is NaN.
  *
  * @since v0.11.0
  */
@@ -28,7 +28,7 @@ export function l2norm(...values: number[]): number;
 /**
  * Returns the L2 norm (Euclidean norm) of given numbers.
  *
- * @throws Exception - if any of the given values is NaN.
+ * @throws {Exception} - if any of the given values is NaN.
  *
  * @since v0.11.0
  */
@@ -47,7 +47,7 @@ export function l2norm(arg1: number[] | number, ...arg2: number[]): number {
  * Returns -1 or 1 if the base is -1 or 1 and exponent is Infinity
  * (overrides the default behavior to match IEEE 754).
  *
- * @throws Exception - if the base or exponent is NaN.
+ * @throws {Exception} - if the base or exponent is NaN.
  *
  * @since v0.11.0
  */
@@ -58,7 +58,7 @@ export function power(base: number, exponent: number): number;
  * Returns -1 or 1 if the base is -1 or 1 and exponent is Infinity
  * (overrides the default behavior to match IEEE 754).
  *
- * @throws Exception - if the base or exponent is NaN.
+ * @throws {Exception} - if the base or exponent is NaN.
  *
  * @since v0.11.0
  */
@@ -67,7 +67,7 @@ export function power([base, exponent]: [number, number]): number;
 /**
  * Returns a function that raises the base to the given exponent.
  *
- * @throws Exception - if the base is NaN.
+ * @throws {Exception} - if the base is NaN.
  *
  * @since v0.11.0
  */
@@ -99,7 +99,7 @@ export function power(arg1: number | [number, number], arg2?: number): number | 
 /**
  * Returns a function that raises a given base to the specified exponent.
  *
- * @throws Exception - if the base or exponent is NaN.
+ * @throws {Exception} - if the base or exponent is NaN.
  *
  * @since v0.11.0
  */
@@ -111,7 +111,7 @@ export function powerOf(exponent: number): (base: number) => number {
 /**
  * Returns the square root of a given non-negative number.
  *
- * @throws Exception - if the given value is NaN or a negative number.
+ * @throws {Exception} - if the given value is NaN or a negative number.
  *
  * @since v0.11.0
  */

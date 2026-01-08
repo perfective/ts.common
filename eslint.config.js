@@ -1,8 +1,9 @@
 import { perfectiveEslintConfig } from '@perfective/eslint-config';
-import { jestConfig } from '@perfective/eslint-config/jest';
+import { jestConfig, jestTypescriptConfig } from '@perfective/eslint-config/jest';
 
 const eslintConfig = perfectiveEslintConfig([
     jestConfig,
+    jestTypescriptConfig,
     {
         rules: {
             'jsdoc/no-undefined-types': 'off',

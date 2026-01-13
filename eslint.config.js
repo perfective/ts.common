@@ -1,7 +1,7 @@
 import { perfectiveEslintConfig } from '@perfective/eslint-config';
 import { jestConfig, jestTypescriptConfig } from '@perfective/eslint-config/jest';
 
-const eslintConfig = perfectiveEslintConfig([
+export default perfectiveEslintConfig([
     jestConfig,
     jestTypescriptConfig,
     {
@@ -12,5 +12,3 @@ const eslintConfig = perfectiveEslintConfig([
         },
     },
 ]);
-
-export default eslintConfig;
